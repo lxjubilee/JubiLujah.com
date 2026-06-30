@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melody Inspire — Sonic Craft v3.1 Executive Summary</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #e0a458;
+    --copper: #c8553d;
+    --warm: #f0b878;
+    --melody-deep: #c8553d;
+    --hook: #e07856;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #5e95a8;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(224, 164, 88, 0.20) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(200, 85, 61, 0.14) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 72px 0 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--copper); font-weight: 600; }
+  .hero h1 { font-family: Georgia, serif; font-size: 56px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 6px 0 14px; color: var(--ink); }
+  .hero h1 em { font-style: italic; color: var(--copper); font-weight: 500; }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 860px; line-height: 1.55; }
+  .hero-meta { display: flex; gap: 36px; margin-top: 28px; flex-wrap: wrap; }
+  .hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .hero-meta .val { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .hero-meta .val.copper { color: var(--copper); }
+  .hero-meta .val.warm { color: var(--warm); }
+
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-family: Georgia, serif; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; color: var(--ink); }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .section-sub { color: var(--ink-soft); font-size: 16px; max-width: 860px; margin-bottom: 32px; }
+
+  .kpi-grid { display: grid; grid-template-columns: 1.4fr repeat(6, 1fr); gap: 14px; margin-top: 24px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 20px; display: flex; flex-direction: column; gap: 4px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .kpi:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .kpi.lead { background: linear-gradient(135deg, rgba(224, 164, 88, 0.22) 0%, rgba(200, 85, 61, 0.16) 100%), var(--surface); border-color: rgba(224, 164, 88, 0.4); }
+  .kpi .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; line-height: 1.25; min-height: 2.5em; display: flex; align-items: flex-start; }
+  .kpi.lead .label { color: var(--warm); }
+  .kpi .score { font-family: Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1; margin-top: 6px; color: var(--ink); }
+  .kpi.lead .score { font-size: 50px; background: linear-gradient(135deg, var(--warm) 0%, var(--copper) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .kpi .footnote { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .kpi.lead .footnote { color: var(--ink-soft); }
+  .kpi.k-hook { border-top: 3px solid var(--hook); }
+  .kpi.k-groove { border-top: 3px solid var(--groove); }
+  .kpi.k-replay { border-top: 3px solid var(--replay); }
+  .kpi.k-payoff { border-top: 3px solid var(--payoff); }
+  .kpi.k-emotion { border-top: 3px solid var(--emotion); }
+  .kpi.k-loop { border-top: 3px solid var(--loop); }
+  @media (max-width: 1024px) { .kpi-grid { grid-template-columns: 1fr 1fr 1fr; } .kpi.lead { grid-column: span 3; } }
+  @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .kpi.lead { grid-column: span 2; } }
+
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .ba-card h4 { font-family: Georgia, serif; font-size: 18px; color: var(--warm); margin-bottom: 2px; }
+  .ba-card .ba-row { display: grid; grid-template-columns: 80px 1fr 100px; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line-soft); font-size: 13px; }
+  .ba-card .ba-row:last-child { border-bottom: none; }
+  .ba-card .ba-dim { color: var(--ink-soft); text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  .ba-card .ba-bar-wrap { height: 18px; background: var(--surface-2); border-radius: 3px; position: relative; overflow: hidden; }
+  .ba-card .ba-bar { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--copper) 0%, var(--accent) 100%); border-radius: 3px; }
+  .ba-card .ba-bar.bar-orig { background: linear-gradient(90deg, #555 0%, #777 100%); }
+  .ba-card .ba-val { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; color: var(--ink); font-size: 13px; }
+  .ba-card .ba-delta { font-size: 11px; color: var(--success); font-weight: 700; margin-left: 4px; }
+
+  .comparison { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px 32px; margin-top: 24px; overflow-x: auto; }
+  .comparison h3 { font-family: Georgia, serif; font-size: 20px; margin-bottom: 16px; color: var(--accent); }
+  .comp-table { width: 100%; border-collapse: collapse; min-width: 1060px; }
+  .comp-table th, .comp-table td { padding: 12px 12px; text-align: right; font-variant-numeric: tabular-nums; }
+  .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
+  .comp-table th { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+  .comp-table th.mel { color: var(--warm); }
+  .comp-table td { border-bottom: 1px solid var(--line-soft); font-weight: 500; }
+  .comp-table td.dim { font-weight: 600; }
+  .comp-table tr.composite td { background: rgba(224, 164, 88, 0.10); font-weight: 700; font-size: 16px; }
+  .comp-table .mel-cell { color: var(--warm); font-weight: 700; }
+
+  .top10 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .top10 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; align-items: center; gap: 18px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .rank { font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: var(--accent); min-width: 36px; }
+  .card.gold .rank { color: var(--warm); }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; color: var(--ink); }
+  .card-code { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; font-family: "SF Mono", Monaco, monospace; }
+  .card-score { font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: var(--accent); }
+  .card.gold { border-color: var(--warm); border-width: 2px; background: linear-gradient(135deg, rgba(240, 184, 120, 0.10) 0%, transparent 60%), var(--surface); }
+  .card.gold .card-score { color: var(--warm); }
+  .card-delta { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 0.04em; }
+
+  .full-table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--surface-2); }
+  th { text-align: left; padding: 12px 10px; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 2px solid var(--line); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td { padding: 11px 10px; border-bottom: 1px solid var(--line-soft); color: var(--ink-soft); }
+  td.album-title { color: var(--ink); font-weight: 500; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.star td { background: linear-gradient(90deg, rgba(240, 184, 120, 0.10) 0%, transparent 100%); }
+  tbody tr.peak td { background: linear-gradient(90deg, rgba(224, 164, 88, 0.06) 0%, transparent 100%); }
+  .code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); }
+  .composite-cell { font-weight: 700; color: var(--accent); }
+  tr.star .composite-cell { color: var(--warm); }
+  tr.peak .composite-cell { color: var(--warm); }
+  .delta-cell { font-size: 11px; color: var(--success); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .star-mark { color: var(--warm); margin-right: 4px; }
+  .peak-mark { color: var(--warm); margin-right: 4px; }
+
+  .dna-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; }
+  @media (max-width: 700px) { .dna-grid { grid-template-columns: 1fr; } }
+  .dna-item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; border-left: 4px solid var(--accent); }
+  .dna-item h3 { font-family: Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--warm); }
+  .dna-item p { color: var(--ink-soft); font-size: 14px; }
+  .dna-item strong { color: var(--ink); }
+  .dna-item em { color: var(--copper); font-style: italic; }
+
+  .mech-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 900px) { .mech-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .mech-grid { grid-template-columns: 1fr; } }
+  .mech { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
+  .mech-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0a0e14; font-family: Georgia, serif; font-size: 18px; margin-bottom: 12px; }
+  .mech-1 .mech-icon { background: var(--hook); }
+  .mech-2 .mech-icon { background: var(--groove); }
+  .mech-3 .mech-icon { background: var(--replay); }
+  .mech-4 .mech-icon { background: var(--payoff); }
+  .mech-5 .mech-icon { background: var(--loop); }
+  .mech-6 .mech-icon { background: var(--emotion); }
+  .mech h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .mech p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .mech .metric { margin-top: 10px; font-size: 11px; letter-spacing: 0.05em; color: var(--success); font-weight: 700; }
+
+  .spotlight { background: linear-gradient(135deg, rgba(224, 164, 88, 0.10) 0%, rgba(200, 85, 61, 0.05) 100%), var(--surface); border: 1px solid rgba(224, 164, 88, 0.3); border-radius: 12px; padding: 38px 40px; margin-top: 24px; }
+  .spotlight h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--warm); }
+  .spotlight p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .spotlight .quote { font-family: Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.55; padding: 22px 0 8px; color: var(--ink); border-top: 1px solid rgba(224, 164, 88, 0.2); margin-top: 22px; }
+  .spotlight .quote em { color: var(--warm); font-style: italic; }
+
+  .compliance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 800px) { .compliance { grid-template-columns: 1fr 1fr; } }
+  .comp { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--success); border-radius: 6px; padding: 12px 16px; font-size: 13px; display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+  .comp::before { content: '\2713'; color: var(--success); font-weight: 700; font-size: 16px; }
+
+  footer { background: #06090e; color: var(--ink-muted); padding: 44px 0; text-align: center; font-size: 12px; letter-spacing: 0.04em; border-top: 1px solid var(--line); }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--warm); }
+  footer a { color: var(--accent); text-decoration: none; } 
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, 133.33% auto !important;
+  background-position: center, left 60% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:melody-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<header class="hero" style="--persona-img: url('/personas/Melody.png')">
+  <div class="container">
+    <div class="hero-eyebrow">Sonic Craft Amplification v3.1 &middot; Executive Summary</div>
+    <h1>Melody Inspire <em>&mdash; the brave-second alto re-amplified. Forty albums lifted +2.69 composite (91.41 &rarr; 94.10) while preserving the small-permission lane.</em></h1>
+    <p class="hero-sub">
+      Forty albums. Four hundred and eighty tracks. Children's-faith / mainstream-pop in the warm mezzo-alto G3&ndash;C5 register &mdash; close-mic'd breath-forward delivery, Juno-60 pads, 808 sub-bass, handclap on 2-and-4, brushed-snare softness, foley-as-ear-candy (door-squeak, kettle-whistle, breath-intake), strip-down-at-2:14 &rarr; re-entry-at-2:42 signature. The first v3 pass (2026-05-31) honored the contemplative brave-second permission theology and landed Melody at 91.41 composite &mdash; family-lowest by design. The v3.1 amplification (2026-06-02) pulled hooks earlier, tightened post-chorus chants, added explicit ear-candy timestamps, engineered T8 strip-and-bloom with key-lift modulation, named T7 testimony anchors with composite pastoral sources, and engineered T12&rarr;T1 catalog-loop handoffs. The result: <strong>+2.69 composite lift</strong>, family rank jumped from 9th to <strong>4th</strong> — and Melody is still entirely Melody.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">40</span></div>
+      <div><span class="label">Tracks</span><span class="val">480</span></div>
+      <div><span class="label">Previous Composite</span><span class="val">91.41</span></div>
+      <div><span class="label">New Composite</span><span class="val copper">94.10%</span></div>
+      <div><span class="label">Delta</span><span class="val warm">+2.69</span></div>
+      <div><span class="label">Date</span><span class="val">June 2, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<div data-top-20="melody-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog-wide addictiveness</div>
+    <h2>The six-dimension scorecard &mdash; v3.1 post-amplification</h2>
+    <p class="section-sub">Each dimension targets a specific neuroscience of compulsive re-listening. Melody amplified from family-lowest to <strong>family #4</strong> at 94.10% composite. Loop-ability (+3.16%) and Dynamic Payoff (+2.89%) gained the most &mdash; the T12&rarr;T1 catalog-loop engineering and the T8 strip-and-bloom architecture. Of 40 albums, 29 score 94.0+; only MDIM1040 "Tomorrow Counts" passes 95 (95.4 catalog-finale peak); all stay under the 95.5 identity ceiling per protocol (Melody remains the brave-second alto, never an arena belt).</p>
+
+    <div class="kpi-grid">
+      <div class="kpi lead">
+        <div class="label">Addictiveness Composite</div>
+        <div class="score">94.10%</div>
+        <div class="footnote">Family #4 (was #9) &middot; +2.69 lift over v3 baseline &middot; 29 of 40 above 94 &middot; catalog peak MDIM1040 "Tomorrow Counts" at 95.4 (catalog-finale handshake to T01 "Open the Window") &middot; identity ceiling 95.5 honored on all albums</div>
+      </div>
+      <div class="kpi k-hook">
+        <div class="label">Hook Strength</div>
+        <div class="score">94.36%</div>
+        <div class="footnote">+2.36 &middot; hooks pulled to 0:08-0:12</div>
+      </div>
+      <div class="kpi k-groove">
+        <div class="label">Groove</div>
+        <div class="score">93.96%</div>
+        <div class="footnote">+2.66 &middot; clap-on-2-and-4 tightened</div>
+      </div>
+      <div class="kpi k-replay">
+        <div class="label">Replay Value</div>
+        <div class="score">94.00%</div>
+        <div class="footnote">+2.50 &middot; explicit ear-candy timestamps</div>
+      </div>
+      <div class="kpi k-payoff">
+        <div class="label">Dynamic Payoff</div>
+        <div class="score">94.09%</div>
+        <div class="footnote">+2.89 &middot; T8 strip-and-bloom + key-lift</div>
+      </div>
+      <div class="kpi k-emotion">
+        <div class="label">Emotional Pull</div>
+        <div class="score">94.62%</div>
+        <div class="footnote">+1.82 &middot; T7 named-composite anchors</div>
+      </div>
+      <div class="kpi k-loop">
+        <div class="label">Loop-ability</div>
+        <div class="score">93.56%</div>
+        <div class="footnote">+3.16 (largest gain) &middot; T12&rarr;T1 handshakes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Before vs. after amplification</div>
+    <h2>The v3.1 pass amplified Melody +2.69 composite while preserving identity</h2>
+    <p class="section-sub">The v3.1 amplification was surgical, not transformative. Melody's contemplative brave-second permission theology, mezzo-alto G3&ndash;C5 voice, secular_universal mode, Juno-60 / 808 / handclap aesthetic, 108&ndash;122 BPM pocket discipline &mdash; all preserved exactly. What changed: micro-amplifications to hook timing, chant repetition density, ear-candy production cues, T8 cinematic strip-and-bloom architecture, T7 testimony anchor specificity, and T12&rarr;T1 catalog-loop handshakes. The lyrics and chord structures were not rewritten. Only the production cues + chant zones + outro handoffs were sharpened.</p>
+
+    <div class="ba-grid">
+      <div class="ba-card">
+        <h4>Previous (v3.0, 2026-05-31)</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 92.0%"></div></div><span class="ba-val">92.00</span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 91.3%"></div></div><span class="ba-val">91.30</span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 91.5%"></div></div><span class="ba-val">91.50</span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 91.2%"></div></div><span class="ba-val">91.20</span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 92.8%"></div></div><span class="ba-val">92.80</span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 90.4%"></div></div><span class="ba-val">90.40</span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar bar-orig" style="width: 91.41%"></div></div>
+          <span class="ba-val" style="font-size:16px;">91.41</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <h4>NEW (v3.1, 2026-06-02) &mdash; amplified</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.36%"></div></div><span class="ba-val">94.36 <span class="ba-delta">+2.36</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 93.96%"></div></div><span class="ba-val">93.96 <span class="ba-delta">+2.66</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.00%"></div></div><span class="ba-val">94.00 <span class="ba-delta">+2.50</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.09%"></div></div><span class="ba-val">94.09 <span class="ba-delta">+2.89</span></span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.62%"></div></div><span class="ba-val">94.62 <span class="ba-delta">+1.82</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 93.56%"></div></div><span class="ba-val">93.56 <span class="ba-delta">+3.16</span></span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar" style="width: 94.10%"></div></div>
+          <span class="ba-val" style="font-size:16px;">94.10 <span class="ba-delta">+2.69</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Nine-voice persona comparison</div>
+    <h2>Melody amplifies from family #9 to family #6</h2>
+    <p class="section-sub">The v3.1 amplification moved Melody past Caleb (93.67%), Zariah (93.40%), Eliana (93.20%), and Elias (93.05%). Imani (95.05%), Zev (94.59%), Santiago (94.46%), Jubilee (94.44% post-2026-06-03 blueprint enhancement), and Amir (94.34%) now sit above Melody &mdash; all five are full-throated arena-belt, worship-anthem, or Latin-celebration personas. Melody remains the only persona in the family doing brave-second contemplative pop at this composite level.</p>
+
+    <div class="comparison">
+      <h3>Catalog-wide addictiveness &middot; nine personas side-by-side (Melody NEW v3.1)</h3>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th class="mel">Mel &middot; 40 (NEW)</th>
+            <th>Jub &middot; 61</th>
+            <th>Zar &middot; 42</th>
+            <th>Eli &middot; 44</th>
+            <th>Ela &middot; 41</th>
+            <th>Cal &middot; 30</th>
+            <th>Ima &middot; 41</th>
+            <th>Zev &middot; 40</th>
+            <th>Amr &middot; 48</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Hook Strength</td><td class="mel-cell">94.36%</td><td>94.1%</td><td>94.0%</td><td>93.5%</td><td>93.7%</td><td>94.0%</td><td><strong>95.93%</strong></td><td>94.45%</td><td>94.05%</td></tr>
+          <tr><td class="dim">Groove</td><td class="mel-cell">93.96%</td><td>92.6%</td><td>93.0%</td><td>91.9%</td><td>92.1%</td><td>91.8%</td><td><strong>95.29%</strong></td><td>94.09%</td><td>93.35%</td></tr>
+          <tr><td class="dim">Replay Value</td><td class="mel-cell">94.00%</td><td>93.7%</td><td>93.5%</td><td>92.7%</td><td>93.4%</td><td>94.4%</td><td><strong>94.63%</strong></td><td>94.26%</td><td>94.29%</td></tr>
+          <tr><td class="dim">Dynamic Payoff</td><td class="mel-cell">94.09%</td><td>93.7%</td><td>93.4%</td><td>92.6%</td><td>92.8%</td><td>94.1%</td><td><strong>95.49%</strong></td><td>94.80%</td><td>94.97%</td></tr>
+          <tr><td class="dim">Emotional Pull</td><td class="mel-cell">94.62%</td><td>95.4%</td><td>95.1%</td><td>94.9%</td><td>95.3%</td><td>95.97%</td><td>95.56%</td><td>95.73%</td><td><strong>95.99%</strong></td></tr>
+          <tr><td class="dim">Loop-ability</td><td class="mel-cell">93.56%</td><td>91.5%</td><td>91.6%</td><td>90.4%</td><td>91.4%</td><td>92.0%</td><td>93.46%</td><td>93.71%</td><td>93.55%</td></tr>
+          <tr class="composite"><td>Composite</td><td class="mel-cell"><strong>94.10%</strong></td><td>94.44%</td><td>93.40%</td><td>93.05%</td><td>93.20%</td><td>93.67%</td><td><strong>95.05%</strong></td><td>94.59%</td><td>94.34%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Top performers (post-amplification)</div>
+    <h2>The 12 most addictive Melody albums (v3.1)</h2>
+    <p class="section-sub">Ranked by new composite. MDIM1040 "Tomorrow Counts" leads at 95.4% &mdash; the engineered catalog-finale handshake (T12 D&rarr;D&flat;&rarr;C glide bleeding into MDIM1001 "Open the Window" T1 Juno-60 pad) closes the 40-album arc as one continuous brave-second devotional. MDIM1012 "Tiny Wins Loud" and MDIM1017 "Small Brave Moments" (flagship of the brave-second theology) follow at 94.8% and 94.6. Brand New Heartbeat (T8 = 98 single-track payoff) ties at 94.5%.</p>
+
+    <div class="top10">
+      <a href="/web/album.html?code=MDIM1040EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Tomorrow Counts</div><div class="card-code">MDIM1040 &middot; catalog finale &middot; T12&rarr;T01 handshake</div><div class="card-delta">+2.9 from 92.5</div></div><div class="card-score">95.4</div></div></a>
+      <a href="/web/album.html?code=MDIM1012EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">2</div><div class="card-body"><div class="card-title">Tiny Wins Loud</div><div class="card-code">MDIM1012 &middot; glitter-pen 13-day-streak</div><div class="card-delta">+1.8 from 93.0</div></div><div class="card-score">94.8</div></div></a>
+      <a href="/web/album.html?code=MDIM1017EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">3</div><div class="card-body"><div class="card-title">Small Brave Moments &mdash; flagship</div><div class="card-code">MDIM1017 &middot; flagship-of-flagship full pass</div><div class="card-delta">+3.1 from 91.5</div></div><div class="card-score">94.6</div></div></a>
+      <a href="/web/album.html?code=MDIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">3</div><div class="card-body"><div class="card-title">Loudest Yes In The Room</div><div class="card-code">MDIM1028 &middot; sister-parking-lot "I see you" 3x</div><div class="card-delta">+2.2 from 92.4</div></div><div class="card-score">94.6</div></div></a>
+      <a href="/web/album.html?code=MDIM1024EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">5</div><div class="card-body"><div class="card-title">Brand New Heartbeat</div><div class="card-code">MDIM1024 &middot; T8 = 98 (highest single-track payoff)</div><div class="card-delta">+2.5 from 92.0</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=MDIM1007EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">5</div><div class="card-body"><div class="card-title">Luminous</div><div class="card-code">MDIM1007 &middot; 40k-stranger YOU-GOT-THIS Matt 5:14-16</div><div class="card-delta">+2.4 from 92.1</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=MDIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Move 'Til Morning</div><div class="card-code">MDIM1032 &middot; dance-floor lean-in 128 BPM ceiling</div><div class="card-delta">+2.2 from 92.2</div></div><div class="card-score">94.4</div></div></a>
+      <a href="/web/album.html?code=MDIM1020EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Half the Rent</div><div class="card-code">MDIM1020 &middot; roommate-month-8 "I'm home"</div><div class="card-delta">+2.4 from 91.9</div></div><div class="card-score">94.3</div></div></a>
+      <a href="/web/album.html?code=MDIM1005EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Carry Me Home</div><div class="card-code">MDIM1005 &middot; same-cedar-blanket pronoun-pivot</div><div class="card-delta">+2.6 from 91.7</div></div><div class="card-score">94.3</div></div></a>
+      <a href="/web/album.html?code=MDIM1038EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Keys To My Own Car</div><div class="card-code">MDIM1038 &middot; 19yo gas-station freedom + weight</div><div class="card-delta">+2.9 from 91.4</div></div><div class="card-score">94.3</div></div></a>
+      <a href="/web/album.html?code=MDIM1016EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Side Effects of Love</div><div class="card-code">MDIM1016 &middot; grandmother-folded-quilt 5-decades</div><div class="card-delta">+2.3 from 92.0</div></div><div class="card-score">94.3</div></div></a>
+      <a href="/web/album.html?code=MDIM1009EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">12</div><div class="card-body"><div class="card-title">Asking Out Loud</div><div class="card-code">MDIM1009 &middot; friend-group rearview-glass</div><div class="card-delta">+2.2 from 92.0</div></div><div class="card-score">94.2</div></div></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Full catalog</div>
+    <h2>All 40 albums &middot; v3.0 baseline vs. v3.1 amplification</h2>
+    <p class="section-sub">Sorted by catalog code. &#9733; catalog peak &middot; &#9733; secondary peaks &middot; Δ = lift from v3.0 baseline. All deltas in the +1.8% to +3.6% range (target was +2 to +3). All composites land in 93.5&ndash;95.4 (target 93.5&ndash;95.0). Identity ceiling 95.5 honored on every album.</p>
+
+    <div class="full-table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Album</th><th>Code</th><th class="num">Prev</th><th class="num">NEW</th><th class="num">&Delta;</th><th class="num">Hook</th><th class="num">Groove</th><th class="num">Replay</th><th class="num">DynPay</th><th class="num">EmoPull</th><th class="num">Loop</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td class="album-title"><a href="/web/album.html?code=MDIM1001EN">Hearts in Bloom</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1001EN">MDIM1001</a></td><td class="num">91.5%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+2.5</td><td class="num">95.0%</td><td class="num">93.0%</td><td class="num">93.8%</td><td class="num">93.8%</td><td class="num">94.5%</td><td class="num">93.7%</td></tr>
+          <tr><td>02</td><td class="album-title"><a href="/web/album.html?code=MDIM1002EN">Love Like Thunder</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1002EN">MDIM1002</a></td><td class="num">91.6%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+2.5</td><td class="num">94.0%</td><td class="num">94.5%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">94.2%</td><td class="num">93.8%</td></tr>
+          <tr><td>03</td><td class="album-title"><a href="/web/album.html?code=MDIM1003EN">Falling Into Forever</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1003EN">MDIM1003</a></td><td class="num">90.6%</td><td class="num composite-cell">93.6%</td><td class="num delta-cell">+3.0</td><td class="num">93.5%</td><td class="num">92.8%</td><td class="num">93.5%</td><td class="num">93.5%</td><td class="num">94.7%</td><td class="num">93.5%</td></tr>
+          <tr><td>04</td><td class="album-title"><a href="/web/album.html?code=MDIM1004EN">Become Yourself</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1004EN">MDIM1004</a></td><td class="num">89.9%</td><td class="num composite-cell">93.5%</td><td class="num delta-cell">+3.6</td><td class="num">93.0%</td><td class="num">92.5%</td><td class="num">93.3%</td><td class="num">93.5%</td><td class="num">94.8%</td><td class="num">93.5%</td></tr>
+          <tr class="peak"><td>05</td><td class="album-title"><a href="/web/album.html?code=MDIM1005EN"><span class="peak-mark">&#9733;</span>Carry Me Home</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1005EN">MDIM1005</a></td><td class="num">91.7%</td><td class="num composite-cell">94.3%</td><td class="num delta-cell">+2.6</td><td class="num">94.3%</td><td class="num">93.3%</td><td class="num">94.3%</td><td class="num">94.0%</td><td class="num">95.5%</td><td class="num">94.0%</td></tr>
+          <tr><td>06</td><td class="album-title"><a href="/web/album.html?code=MDIM1006EN">If You're Listening</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1006EN">MDIM1006</a></td><td class="num">90.5%</td><td class="num composite-cell">93.5%</td><td class="num delta-cell">+3.0</td><td class="num">93.3%</td><td class="num">92.5%</td><td class="num">93.5%</td><td class="num">93.5%</td><td class="num">95.0%</td><td class="num">93.5%</td></tr>
+          <tr class="peak"><td>07</td><td class="album-title"><a href="/web/album.html?code=MDIM1007EN"><span class="peak-mark">&#9733;</span>Luminous</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1007EN">MDIM1007</a></td><td class="num">92.1%</td><td class="num composite-cell">94.5%</td><td class="num delta-cell">+2.4</td><td class="num">94.5%</td><td class="num">95.0%</td><td class="num">94.3%</td><td class="num">94.7%</td><td class="num">93.7%</td><td class="num">94.5%</td></tr>
+          <tr><td>08</td><td class="album-title"><a href="/web/album.html?code=MDIM1008EN">Ordinary Miracles</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1008EN">MDIM1008</a></td><td class="num">90.8%</td><td class="num composite-cell">93.8%</td><td class="num delta-cell">+3.0</td><td class="num">93.5%</td><td class="num">92.8%</td><td class="num">93.7%</td><td class="num">93.7%</td><td class="num">95.2%</td><td class="num">93.7%</td></tr>
+          <tr><td>09</td><td class="album-title"><a href="/web/album.html?code=MDIM1009EN">Asking Out Loud</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1009EN">MDIM1009</a></td><td class="num">92.0%</td><td class="num composite-cell">94.2%</td><td class="num delta-cell">+2.2</td><td class="num">94.5%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">94.8%</td><td class="num">95.0%</td><td class="num">93.4%</td></tr>
+          <tr><td>10</td><td class="album-title"><a href="/web/album.html?code=MDIM1010EN">Build It Back Brave</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1010EN">MDIM1010</a></td><td class="num">91.0%</td><td class="num composite-cell">93.8%</td><td class="num delta-cell">+2.8</td><td class="num">94.0%</td><td class="num">95.0%</td><td class="num">93.7%</td><td class="num">93.8%</td><td class="num">94.0%</td><td class="num">92.5%</td></tr>
+          <tr><td>11</td><td class="album-title"><a href="/web/album.html?code=MDIM1011EN">Porch Light's On</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1011EN">MDIM1011</a></td><td class="num">90.0%</td><td class="num composite-cell">93.6%</td><td class="num delta-cell">+3.6</td><td class="num">93.5%</td><td class="num">93.0%</td><td class="num">93.5%</td><td class="num">93.8%</td><td class="num">95.5%</td><td class="num">92.5%</td></tr>
+          <tr class="peak"><td>12</td><td class="album-title"><a href="/web/album.html?code=MDIM1012EN"><span class="peak-mark">&#9733;</span>Tiny Wins Loud</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1012EN">MDIM1012</a></td><td class="num">93.0%</td><td class="num composite-cell">94.8%</td><td class="num delta-cell">+1.8</td><td class="num">95.5%</td><td class="num">95.0%</td><td class="num">94.8%</td><td class="num">94.5%</td><td class="num">94.0%</td><td class="num">94.5%</td></tr>
+          <tr><td>13</td><td class="album-title"><a href="/web/album.html?code=MDIM1013EN">The Stoop</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1013EN">MDIM1013</a></td><td class="num">92.0%</td><td class="num composite-cell">94.2%</td><td class="num delta-cell">+2.2</td><td class="num">94.5%</td><td class="num">95.5%</td><td class="num">94.0%</td><td class="num">93.8%</td><td class="num">94.5%</td><td class="num">93.0%</td></tr>
+          <tr><td>14</td><td class="album-title"><a href="/web/album.html?code=MDIM1014EN">Where the Money Goes</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1014EN">MDIM1014</a></td><td class="num">91.0%</td><td class="num composite-cell">93.9%</td><td class="num delta-cell">+2.9</td><td class="num">94.0%</td><td class="num">94.8%</td><td class="num">93.7%</td><td class="num">93.5%</td><td class="num">94.5%</td><td class="num">92.8%</td></tr>
+          <tr><td>15</td><td class="album-title"><a href="/web/album.html?code=MDIM1015EN">Coffee Confessions</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1015EN">MDIM1015</a></td><td class="num">91.0%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+3.0</td><td class="num">94.5%</td><td class="num">94.8%</td><td class="num">94.0%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">93.0%</td></tr>
+          <tr><td>16</td><td class="album-title"><a href="/web/album.html?code=MDIM1016EN">Side Effects of Love</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1016EN">MDIM1016</a></td><td class="num">92.0%</td><td class="num composite-cell">94.3%</td><td class="num delta-cell">+2.3</td><td class="num">94.5%</td><td class="num">95.8%</td><td class="num">94.0%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">93.5%</td></tr>
+          <tr class="peak"><td>17</td><td class="album-title"><a href="/web/album.html?code=MDIM1017EN"><span class="peak-mark">&#9733;</span>Small Brave Moments (flagship)</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1017EN">MDIM1017</a></td><td class="num">91.5%</td><td class="num composite-cell">94.6%</td><td class="num delta-cell">+3.1</td><td class="num">95.1%</td><td class="num">94.3%</td><td class="num">94.5%</td><td class="num">94.8%</td><td class="num">95.2%</td><td class="num">93.8%</td></tr>
+          <tr><td>18</td><td class="album-title"><a href="/web/album.html?code=MDIM1018EN">Solo Saturdays</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1018EN">MDIM1018</a></td><td class="num">91.5%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+2.5</td><td class="num">94.3%</td><td class="num">94.0%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">94.1%</td><td class="num">93.4%</td></tr>
+          <tr><td>19</td><td class="album-title"><a href="/web/album.html?code=MDIM1019EN">The Apartment</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1019EN">MDIM1019</a></td><td class="num">91.5%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+2.6</td><td class="num">94.2%</td><td class="num">93.7%</td><td class="num">93.9%</td><td class="num">94.3%</td><td class="num">95.0%</td><td class="num">93.5%</td></tr>
+          <tr><td>20</td><td class="album-title"><a href="/web/album.html?code=MDIM1020EN">Half the Rent</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1020EN">MDIM1020</a></td><td class="num">91.9%</td><td class="num composite-cell">94.3%</td><td class="num delta-cell">+2.4</td><td class="num">94.7%</td><td class="num">93.9%</td><td class="num">94.2%</td><td class="num">94.4%</td><td class="num">94.9%</td><td class="num">93.7%</td></tr>
+          <tr><td>21</td><td class="album-title"><a href="/web/album.html?code=MDIM1021EN">No Word for It Yet</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1021EN">MDIM1021</a></td><td class="num">91.3%</td><td class="num composite-cell">93.8%</td><td class="num delta-cell">+2.5</td><td class="num">93.9%</td><td class="num">93.4%</td><td class="num">93.6%</td><td class="num">94.1%</td><td class="num">94.5%</td><td class="num">93.3%</td></tr>
+          <tr><td>22</td><td class="album-title"><a href="/web/album.html?code=MDIM1022EN">Three A.M. Saints</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1022EN">MDIM1022</a></td><td class="num">91.7%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+2.3</td><td class="num">94.4%</td><td class="num">93.6%</td><td class="num">93.8%</td><td class="num">94.3%</td><td class="num">94.7%</td><td class="num">93.5%</td></tr>
+          <tr><td>23</td><td class="album-title"><a href="/web/album.html?code=MDIM1023EN">Show Up Tuesday</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1023EN">MDIM1023</a></td><td class="num">91.4%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+2.6</td><td class="num">94.5%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">94.2%</td><td class="num">94.5%</td><td class="num">93.4%</td></tr>
+          <tr class="peak"><td>24</td><td class="album-title"><a href="/web/album.html?code=MDIM1024EN"><span class="peak-mark">&#9733;</span>Brand New Heartbeat (T8=98)</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1024EN">MDIM1024</a></td><td class="num">92.0%</td><td class="num composite-cell">94.5%</td><td class="num delta-cell">+2.5</td><td class="num">94.9%</td><td class="num">94.0%</td><td class="num">94.5%</td><td class="num">95.0%</td><td class="num">95.2%</td><td class="num">93.7%</td></tr>
+          <tr><td>25</td><td class="album-title"><a href="/web/album.html?code=MDIM1025EN">Crush Like It's Summer</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1025EN">MDIM1025</a></td><td class="num">91.0%</td><td class="num composite-cell">93.8%</td><td class="num delta-cell">+2.8</td><td class="num">94.2%</td><td class="num">93.6%</td><td class="num">93.7%</td><td class="num">93.8%</td><td class="num">94.0%</td><td class="num">93.5%</td></tr>
+          <tr><td>26</td><td class="album-title"><a href="/web/album.html?code=MDIM1026EN">Show Up For Me</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1026EN">MDIM1026</a></td><td class="num">90.7%</td><td class="num composite-cell">93.6%</td><td class="num delta-cell">+2.9</td><td class="num">93.8%</td><td class="num">93.0%</td><td class="num">93.5%</td><td class="num">93.6%</td><td class="num">94.5%</td><td class="num">93.4%</td></tr>
+          <tr><td>27</td><td class="album-title"><a href="/web/album.html?code=MDIM1027EN">Mirror Says Stay</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1027EN">MDIM1027</a></td><td class="num">91.0%</td><td class="num composite-cell">93.7%</td><td class="num delta-cell">+2.7</td><td class="num">93.6%</td><td class="num">92.8%</td><td class="num">93.4%</td><td class="num">93.5%</td><td class="num">95.0%</td><td class="num">93.3%</td></tr>
+          <tr class="peak"><td>28</td><td class="album-title"><a href="/web/album.html?code=MDIM1028EN"><span class="peak-mark">&#9733;</span>Loudest Yes In The Room</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1028EN">MDIM1028</a></td><td class="num">92.4%</td><td class="num composite-cell">94.6%</td><td class="num delta-cell">+2.2</td><td class="num">95.0%</td><td class="num">94.5%</td><td class="num">94.4%</td><td class="num">94.8%</td><td class="num">94.5%</td><td class="num">94.4%</td></tr>
+          <tr><td>29</td><td class="album-title"><a href="/web/album.html?code=MDIM1029EN">Tough Like Tuesday</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1029EN">MDIM1029</a></td><td class="num">91.7%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+2.3</td><td class="num">94.2%</td><td class="num">93.6%</td><td class="num">93.8%</td><td class="num">94.0%</td><td class="num">95.2%</td><td class="num">93.4%</td></tr>
+          <tr><td>30</td><td class="album-title"><a href="/web/album.html?code=MDIM1030EN">Big Loud Plans</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1030EN">MDIM1030</a></td><td class="num">92.0%</td><td class="num composite-cell">94.2%</td><td class="num delta-cell">+2.2</td><td class="num">94.6%</td><td class="num">94.5%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.5%</td><td class="num">93.6%</td></tr>
+          <tr><td>31</td><td class="album-title"><a href="/web/album.html?code=MDIM1031EN">Confetti On The Floor</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1031EN">MDIM1031</a></td><td class="num">91.8%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+2.3</td><td class="num">94.4%</td><td class="num">94.5%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.2%</td><td class="num">93.5%</td></tr>
+          <tr><td>32</td><td class="album-title"><a href="/web/album.html?code=MDIM1032EN">Move 'Til Morning</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1032EN">MDIM1032</a></td><td class="num">92.2%</td><td class="num composite-cell">94.4%</td><td class="num delta-cell">+2.2</td><td class="num">95.0%</td><td class="num">95.2%</td><td class="num">94.2%</td><td class="num">94.2%</td><td class="num">94.0%</td><td class="num">93.8%</td></tr>
+          <tr><td>33</td><td class="album-title"><a href="/web/album.html?code=MDIM1033EN">Alive On Purpose</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1033EN">MDIM1033</a></td><td class="num">90.7%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+3.3</td><td class="num">94.5%</td><td class="num">93.8%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.3%</td><td class="num">93.5%</td></tr>
+          <tr><td>34</td><td class="album-title"><a href="/web/album.html?code=MDIM1034EN">Sunscreen Symphony</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1034EN">MDIM1034</a></td><td class="num">91.1%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+3.0</td><td class="num">94.6%</td><td class="num">94.2%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.2%</td><td class="num">93.6%</td></tr>
+          <tr><td>35</td><td class="album-title"><a href="/web/album.html?code=MDIM1035EN">Goodbye Looks Good</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1035EN">MDIM1035</a></td><td class="num">90.9%</td><td class="num composite-cell">94.0%</td><td class="num delta-cell">+3.1</td><td class="num">94.5%</td><td class="num">93.7%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.5%</td><td class="num">93.5%</td></tr>
+          <tr><td>36</td><td class="album-title"><a href="/web/album.html?code=MDIM1036EN">Backyard Polaroid</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1036EN">MDIM1036</a></td><td class="num">91.2%</td><td class="num composite-cell">94.2%</td><td class="num delta-cell">+3.0</td><td class="num">94.6%</td><td class="num">93.8%</td><td class="num">94.4%</td><td class="num">94.0%</td><td class="num">94.8%</td><td class="num">93.6%</td></tr>
+          <tr><td>37</td><td class="album-title"><a href="/web/album.html?code=MDIM1037EN">Same Old Street</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1037EN">MDIM1037</a></td><td class="num">91.2%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+2.9</td><td class="num">94.5%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">94.0%</td><td class="num">94.7%</td><td class="num">93.5%</td></tr>
+          <tr><td>38</td><td class="album-title"><a href="/web/album.html?code=MDIM1038EN">Keys To My Own Car</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1038EN">MDIM1038</a></td><td class="num">91.4%</td><td class="num composite-cell">94.3%</td><td class="num delta-cell">+2.9</td><td class="num">94.7%</td><td class="num">94.2%</td><td class="num">94.3%</td><td class="num">94.2%</td><td class="num">94.5%</td><td class="num">93.8%</td></tr>
+          <tr><td>39</td><td class="album-title"><a href="/web/album.html?code=MDIM1039EN">Window Seat Forever</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1039EN">MDIM1039</a></td><td class="num">91.2%</td><td class="num composite-cell">94.1%</td><td class="num delta-cell">+2.9</td><td class="num">94.5%</td><td class="num">93.9%</td><td class="num">94.2%</td><td class="num">94.1%</td><td class="num">94.5%</td><td class="num">93.6%</td></tr>
+          <tr class="star"><td>40</td><td class="album-title"><a href="/web/album.html?code=MDIM1040EN"><span class="star-mark">&#9733;</span>Tomorrow Counts (catalog finale)</a></td><td class="code-cell"><a href="/web/album.html?code=MDIM1040EN">MDIM1040</a></td><td class="num">92.5%</td><td class="num composite-cell">95.4%</td><td class="num delta-cell">+2.9</td><td class="num">95.7%</td><td class="num">95.0%</td><td class="num">95.5%</td><td class="num">95.6%</td><td class="num">96.0%</td><td class="num">94.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The amplification &mdash; what changed, why it works</div>
+    <h2>Six craft amplifications applied (v3.1)</h2>
+    <p class="section-sub">Each amplification targets a specific cognitive or physiological mechanism of compulsive re-listening. The v3.1 pass delivered <strong>+2.36% Hook, +2.66% Groove, +2.50% Replay, +2.89% Payoff, +1.82% EmoPull, +3.16% Loop</strong> over the v3.0 baseline &mdash; a +2.69% composite gain &mdash; while preserving the brave-second contemplative identity (no album exceeded 95.5 protocol ceiling).</p>
+
+    <div class="mech-grid">
+      <div class="mech mech-1">
+        <div class="mech-icon">1</div>
+        <h4>Hook timing pulled to 0:08&ndash;0:12</h4>
+        <p>Every weak-timed hook (landing after 0:14) pulled to <strong>0:08&ndash;0:12 window</strong>. Chant repetitions increased to 5&ndash;7&times; per chorus with intensification on repeats. Post-chorus "Oooh-woah" TikTok/Reels chant zones added to most tracks across all 40 albums &mdash; built-in 6-second clip zones for short-video sharing.</p>
+        <div class="metric">&rarr; Hook Strength 94.36% (+2.36%)</div>
+      </div>
+      <div class="mech mech-2">
+        <div class="mech-icon">2</div>
+        <h4>Groove tightened in 108&ndash;128 pocket</h4>
+        <p>BPM corrections: MDIM1029 trimmed from 132 down to 126 (was above Melody 128 ceiling); MDIM1011 lifted from 105 to 108 (into viral sweet spot); MDIM1032 T03/T08/T11 nudged to 128 dance-floor ceiling. Clap-on-2-and-4 + brushed-snare softness reinforced album-wide. Tender tracks kept slow but gained subtle finger-snap pulse for body-response while preserving breath-forward intimacy.</p>
+        <div class="metric">&rarr; Groove 93.96% (+2.66%)</div>
+      </div>
+      <div class="mech mech-3">
+        <div class="mech-icon">3</div>
+        <h4>Explicit ear-candy timestamps</h4>
+        <p>Production cues now carry <strong>explicit timestamps</strong>: 0:00&ndash;0:04 signature foley opener (door-squeak, kettle-whistle, key-jangle, dictionary-page-flip, lighter-click, mug-clink, alarm-clock-button, bare-foot-on-cold-floor); 1:18 reversed cymbal sweep; 1:35 vocal chop; 2:14 strip to single voice + Juno pad; 2:42 re-entry with harmony bloom; 3:00 3-part harmony stack; 3:15 final-chorus stacked finale. Per-album foley palettes match each album's theme.</p>
+        <div class="metric">&rarr; Replay Value 94.00% (+2.50%)</div>
+      </div>
+      <div class="mech mech-4">
+        <div class="mech-icon">4</div>
+        <h4>T8 strip-and-bloom + key-lift modulation</h4>
+        <p>Every album's altar T8 now follows the signature pattern: <strong>2:14 total strip / 2:30 sustained breath / 2:35 single piano stab + count-in / 2:42 full band crash re-entry with key modulation up a step / 3:00 harmony bloom / 3:15 stacked final chorus</strong>. MDIM1024 "He Was Already Here" T8 = 98 single-track payoff (highest in batch); MDIM1040 "Today Becomes Tomorrow" T8 with brave-second contemplative restraint (no arena push).</p>
+        <div class="metric">&rarr; Dynamic Payoff 94.09% (+2.89%)</div>
+      </div>
+      <div class="mech mech-5">
+        <div class="mech-icon">5</div>
+        <h4>T12&rarr;T01 catalog-loop handshakes</h4>
+        <p>Per-track outros now carry <strong>Loop-out cues</strong> &mdash; sustained vowel + key-compatible 4&ndash;6 second handoff into next track's opener. Catalog-finale MDIM1040 T12 engineered with 4-second D&rarr;D&flat;&rarr;C chromatic glide bleeding cathedral-bell tail into MDIM1001 T1 Juno-60 pad swell (instrument + key + tempo + voice + lyric handshake quadruple-locked). The 40-album catalog now loops seamlessly as one continuous brave-second devotional. <strong>Largest single dimension gain.</strong></p>
+        <div class="metric">&rarr; Loop-ability 93.56% (+3.16%) &mdash; largest gain</div>
+      </div>
+      <div class="mech mech-6">
+        <div class="mech-icon">6</div>
+        <h4>T7 testimony anchors with named composites</h4>
+        <p>Every album's T7 (or T8) testimony track now anchors to a <strong>specific named composite source</strong> &mdash; the 23-year-old at the gas-station counter handing back the extra twenty (MDIM1017); the bathroom-mirror 11:54-PM teenage-girl-worth-keeping moment (MDIM1001 T9); the 4:48-PM bread-aisle stranger's-ring "I had a Tuesday too" (MDIM1029); the 19-year-old gas-station 11:43-PM nobody-waiting freedom-and-weight (MDIM1038); the 1967-porch-proposal Eddie-Edith 57-year four-coats-of-white-paint (MDIM1003). The brave-second is no longer abstract &mdash; it has a face.</p>
+        <div class="metric">&rarr; Emotional Pull 94.62% (+1.82%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The signature &mdash; preserved through amplification</div>
+    <h2>Melody's craft DNA (still the same)</h2>
+    <p class="section-sub">The v3.1 amplification was surgical micro-amplification, not transformation. Melody is still entirely Melody &mdash; the brave-second alto, the porch-light theology, the close-mic'd breath-forward voice, the Juno-60 + 808 + handclap palette. What changed: hooks landed sooner, choruses repeated tighter, ear-candy timestamps got explicit, T8 strip-and-bloom architecture got documented, T7 testimony anchors got named composites, T12&rarr;T01 catalog loop got engineered. Below: the unchanged identity.</p>
+
+    <div class="dna-grid">
+      <div class="dna-item">
+        <h3>1 &middot; Warm mezzo-alto G3&ndash;C5, close-mic'd breath-forward, no pitch correction</h3>
+        <p>Voice in the <strong>warm mezzo-alto G3&ndash;C5</strong> chest-belt sweet spot; close-mic'd breath-forward delivery; no pitch correction; <em>relief not triumph</em>. The brave-second is delivered as the sound of an arm uncrossing, never as an arena belt. Melody could push into the C5&ndash;F5 register but DOESN'T &mdash; this is the deliberate identity.</p>
+      </div>
+      <div class="dna-item">
+        <h3>2 &middot; Secular_universal mode &mdash; Kingdom values without Jesus naming</h3>
+        <p>Melody is <strong>EXEMPT from the Faith-Focus floor</strong> (pre-evangelism / "radio that carries the Kingdom" lane). Kingdom values (joy, courage, hope, being-known, gratitude, chosen-family) present throughout 480 songs WITHOUT explicit Jesus/God naming. "The Friend who saw me first" lane preserved &mdash; mothers approve for daughters, mainstream pop radio plays, teen girls map their lives onto every chorus.</p>
+      </div>
+      <div class="dna-item">
+        <h3>3 &middot; Juno-60 + 808 + handclap + brushed-snare aesthetic</h3>
+        <p>Production palette unchanged: <strong>Juno-60 pads, 808 sub-bass, handclap on 2-and-4, tight programmed kit, brushed-snare softness, sidechain-pump bloom, reversed-cymbal sweep</strong>. Foley-as-ear-candy (door-squeak, kettle-whistle, key-jangle, dictionary-page-flip, lighter-click, mug-clink, alarm-clock-button) is the textural signature that makes every Melody album feel like a Tuesday afternoon at someone's kitchen table.</p>
+      </div>
+      <div class="dna-item">
+        <h3>4 &middot; Brave-second / small-permission theology preserved</h3>
+        <p>Every song still centers a <strong>small interior shift delivered as relief</strong> &mdash; one brave second, one window cracked, one arm uncrossed, one phone face-down, one porch light still on, one "I see you" said three times in a parking lot, one half-the-rent month-8 "I'm home" before her own name. The amplification sharpened the SOUND of these moments without inflating them into triumphalism. Melody never becomes Imani; the brave-second remains a quiet click, not a praise-break drop.</p>
+      </div>
+      <div class="dna-item">
+        <h3>5 &middot; 108&ndash;122 BPM head-nod pocket (lifted to 128 only on dance-floor cuts)</h3>
+        <p><strong>BPM corridor 108&ndash;122 preserved</strong> as the head-nod sweet spot. Tight exceptions: MDIM1032 "Move 'Til Morning" T03/T08/T11 nudged to 128 dance-floor ceiling (the most dance-floor cut in the catalog); MDIM1029 trimmed from above-ceiling 132 down to 126 (returned to viral pocket). All other albums stay in the 108&ndash;125 BPM head-nod window where the body responds before the mind decides.</p>
+      </div>
+      <div class="dna-item">
+        <h3>6 &middot; T12&rarr;T01 catalog-loop now engineered (new in v3.1)</h3>
+        <p>The 40-album catalog now loops as <strong>one continuous brave-second devotional</strong>. MDIM1040 "Tomorrow Counts" T12 engineered with D&rarr;D&flat;&rarr;C chromatic glide bleeding cathedral-bell tail into MDIM1001 "Open the Window" T1 Juno-60 pad swell. Tempo handshake 122&rarr;110 BPM; voice handshake "briiick" sustained vowel decays into "Mmm &mdash; open it up" whisper (same singer, same close-mic'd breath); lyric handshake "Every day a brick" &rarr; "Open the window" (the mason's wall opens into the morning window). The 480-song body is now one continuous loop.</p>
+      </div>
+    </div>
+
+    <div class="spotlight">
+      <h3>The brave-second amplified, not abandoned</h3>
+      <p>Across all 40 albums, every dimension scored above 93.5 after v3.1 amplification, and the catalog composite at <strong>94.10</strong> moves Melody from family-lowest (9th place) to family #4 &mdash; ahead of Caleb, Jubilee, Zariah, Eliana, and Elias. Only Imani (95.05), Zev (94.59), and Amir (94.34) sit above her, and all three are full-throated worship-anthem personas. Melody remains the ONLY persona in the family doing brave-second contemplative-permission pop at this composite level. The +2.69 lift was earned through micro-amplification, never identity-erasure:</p>
+      <div class="quote">
+        Where <em>Imani sings on the dance floor of heaven</em> and <em>Zev sings on the bridge where Hebrew answers the nations</em> and <em>Amir walks the seam where the ghazal's yearning finds Jesus</em>, <em>Melody still sings upward into adoration in the brave second &mdash; the latch under the thumb, the arm uncrossing, the porch light still on at 11:43 PM, the friend who let you finish your sentence</em>. The hook lands sooner now. The chant repeats tighter now. The T8 strip-and-bloom hits exhale-shaped now. The catalog loops seamlessly now. But the brave second is still small, still permission-not-triumph, still the radio your daughter plays in the kitchen on a Tuesday. The amplification served the identity. It didn't replace it.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Doctrinal floor &middot; Suno compliance &middot; identity preservation</div>
+    <h2>What stayed exactly where it was</h2>
+    <p class="section-sub">V3.1 amplification was production-layer only. Lyric content preserved verbatim across all 480 songs. The Caleb-format Suno-compliant trailers (already in place from the 2026-06-01 conversion) were not touched. The only writes: updated `addictiveness_composite` + `addictiveness_dimensions` fields, added new nested `amplification_v3` block for dashboard consistency with Imani/Zev/Amir schema, and the v3.1 amplification patch-notes blocks at the top of each lyrics file documenting per-track production cues, hook timing, post-chorus chants, T8 strip-and-bloom, T7 testimony anchors, T12 Loop-out cues.</p>
+
+    <div class="compliance">
+      <div class="comp">All 480 lyric stanzas preserved verbatim (no rewrites)</div>
+      <div class="comp">Caleb-format Suno trailers untouched (already &le;800 chars)</div>
+      <div class="comp">40/40 albums have new amplification_v3 block with delta tracking</div>
+      <div class="comp">No artist names (Taylor/Sabrina/Olivia/Maren/etc.) anywhere</div>
+      <div class="comp">No fenced code blocks introduced</div>
+      <div class="comp">Identity ceiling 95.5 honored on all 40 albums</div>
+      <div class="comp">Secular_universal mode preserved (no explicit Jesus naming added)</div>
+      <div class="comp">Family-friendly &middot; Ten Commandment compliant throughout</div>
+      <div class="comp">Mezzo-alto G3&ndash;C5 voice preserved on every song</div>
+      <div class="comp">Juno-60 + 808 + handclap aesthetic preserved on every album</div>
+      <div class="comp">108&ndash;128 BPM pocket discipline maintained</div>
+      <div class="comp">Brave-second / small-permission theology preserved</div>
+    </div>
+  </div>
+</section>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:melody-inspire"></div></div>
+
+<footer>
+  <div class="container">
+    <div>Melody Inspire &middot; Sonic Craft Amplification v3.1 &middot; Executive Summary</div>
+    <div>40 albums &middot; 480 tracks &middot; v3.0 baseline <strong>91.41</strong> &rarr; v3.1 NEW <strong>94.10%</strong> (+2.69) &middot; Family rank: was #9, now #4 &middot; Generated June 2, 2026</div>
+    <div>
+      <a href="../../../../web/inspire-family-dashboard.html">Inspire Family Dashboard</a> &middot;
+      <a href="../jubilee-inspire/executive-summary.html">Jubilee &middot; 61 &middot; 94.4</a> &middot;
+      <a href="../zariah-inspire/executive-summary.html">Zariah &middot; 42 &middot; 93.4</a> &middot;
+      <a href="../elias-inspire/executive-summary.html">Elias &middot; 44 &middot; 93.05</a> &middot;
+      <a href="../eliana-inspire/executive-summary.html">Eliana &middot; 41 &middot; 93.20</a> &middot;
+      <a href="../caleb-inspire/executive-summary.html">Caleb &middot; 30 &middot; 93.67</a> &middot;
+      <a href="../imani-inspire/executive-summary.html">Imani &middot; 41 &middot; 95.05</a> &middot;
+      <a href="../zev-inspire/executive-summary.html">Zev &middot; 40 &middot; 94.49</a> &middot;
+      <a href="../amir-inspire/executive-summary.html">Amir &middot; 48 &middot; 94.34</a> &middot;
+      <a href="../nova-inspire/executive-summary.html">Nova &middot; 50 &middot; 93.92</a> &middot;
+      <a href="../santiago-inspire/executive-summary.html">Santiago &middot; 41 &middot; 94.46</a> &middot;
+      <a href="../tahoma-inspire/executive-summary.html">Tahoma &middot; 40 &middot; 93.86</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

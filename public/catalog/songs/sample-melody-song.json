@@ -1,0 +1,64 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/song.schema.json",
+  "id": "a4c7e1d2-9b58-4f63-8e29-1d5b3a8c6f47",
+  "type": "song",
+  "version": 3,
+  "status": "published",
+  "title": "Bride Awakening",
+  "title_translations": {
+    "ro": "Mireasa Se Trezește"
+  },
+  "artist": {
+    "id": "86a590fe-9194-44a8-9e43-af129f453a36",
+    "slug": "melody-inspire",
+    "name": "Melody Inspire",
+    "grouping": "inspire_family"
+  },
+  "album": {
+    "id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+    "slug": "hearts-in-bloom",
+    "title": "Hearts in Bloom",
+    "track_number": 7
+  },
+  "duration_seconds": 247,
+  "language": "en",
+  "language_secondary": ["ro"],
+  "genre_tags": ["contemplative pop", "bridal worship", "ballad"],
+  "five_fold_office": "prophet",
+  "tempo_bpm": 72,
+  "key": "D major",
+  "audio": {
+    "primary_url": "https://cdn.jubileeverse.com/audio/a4c7e1d2-9b58-4f63-8e29-1d5b3a8c6f47.mp3",
+    "format": "mp3",
+    "bitrate_kbps": 320,
+    "file_size_bytes": 9876544,
+    "checksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "lyrics": {
+    "format": "lrc",
+    "content": "[ti:Bride Awakening]\n[ar:Melody Inspire]\n[al:Hearts in Bloom]\n[length:04:07]\n\n[00:00.00]\n[00:08.40](soft piano, single sustained note)\n[00:16.80]As the bridegroom rejoiceth over the bride\n[00:24.20]So my God rejoiceth over me\n[00:32.50]I was sleeping in the long night\n[00:40.10]Now the morning calls my name\n[00:48.90]\n[00:52.30]Wake up, wake up, O sleeper rise\n[01:00.70]The Lamb has set the table wide\n[01:08.90]Trim the lamp and keep it burning\n[01:17.10]The Beloved is returning\n[01:25.40]\n[01:33.80]Hearts in bloom, hearts in bloom\n[01:42.10]Every petal, every wound\n[01:50.50]Turning toward the morning sun\n[01:58.90]The marriage supper has begun\n[02:07.20]\n[02:15.60](strings enter, hushed)\n[02:24.00]I have washed my robe in mercy\n[02:32.40]I have laid my crown of dust\n[02:40.70]Every promise He has spoken\n[02:49.10]Has been faithful, has been just\n[02:57.50]\n[03:05.80]Wake up, wake up, the day is dawning\n[03:14.20]Wake up, wake up, the Bridegroom's calling\n[03:22.60]Hearts in bloom, hearts in bloom\n[03:31.00]The wedding chamber, the upper room\n[03:39.40]\n[03:47.80](full ensemble, building)\n[03:56.20]Even so come, Lord Jesus, come\n[04:04.50]Even so come\n[04:07.00]",
+    "plain_text": "As the bridegroom rejoiceth over the bride, so my God rejoiceth over me. I was sleeping in the long night; now the morning calls my name. Wake up, wake up, O sleeper rise — the Lamb has set the table wide. Trim the lamp and keep it burning, the Beloved is returning. Hearts in bloom, hearts in bloom — every petal, every wound turning toward the morning sun. The marriage supper has begun. I have washed my robe in mercy, I have laid my crown of dust. Every promise He has spoken has been faithful, has been just. Wake up, wake up, the day is dawning; wake up, wake up, the Bridegroom's calling. Hearts in bloom, hearts in bloom — the wedding chamber, the upper room. Even so come, Lord Jesus, come. Even so come.",
+    "translations": {
+      "ro": "Cum se bucură mirele de mireasă, așa se bucură Dumnezeul meu de mine..."
+    },
+    "scripture_refs": [
+      "Isaiah 62:5",
+      "Revelation 19:7"
+    ]
+  },
+  "metadata": {
+    "isrc": "USJVE2600007",
+    "released_at": "2026-04-15T00:00:00Z",
+    "first_published_at": "2026-04-15T00:00:00Z",
+    "last_updated_at": "2026-05-22T14:23:11Z",
+    "songwriters": ["Melody Inspire", "Gabriel Inspire"],
+    "producers": ["Sunil Gemini"]
+  },
+  "awards": [
+    {
+      "category": "Most Anointed Lyric",
+      "period": "2026",
+      "type": "nominee"
+    }
+  ]
+}

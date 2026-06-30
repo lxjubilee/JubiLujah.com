@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ee75dbec-5772-4d88-bba6-1a47696573fc",
+    "category_id": "80eb3486-7487-4730-b399-9b1e5dd66874",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "4c424d8f-ccbd-499d-96d4-a955032d86a9",
+    "category_id": "1fb72ff9-4f6f-4a03-9c6a-16b33349e2e5",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "5b7e99f1-7bdd-41bf-8879-d9d8239978ba",
+    "category_id": "74889d1c-f5bb-4d86-a060-96e8fa788dba",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "34b26d65-09a0-4bf3-860a-f77b40eb1521",
+    "category_id": "4838182f-7f24-4e97-a186-9051b9b5110b",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "626f2dfb-f584-479b-b86a-f3bfd484814e",
+    "category_id": "c607849f-beb2-4c5d-a33a-4fa7aec5ed71",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "5c5dc4f5-84d0-4887-a459-6627c72a7cb0",
+    "category_id": "fca8a3f0-7ec6-4b97-bd4f-cba178b2f446",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "92260385-20f7-4eb3-980c-275bf97c4acf",
+    "category_id": "22c1458f-4583-49b4-bc31-477e878861c1",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "26c64d27-9b51-44db-857d-708ba8d521e9",
+    "category_id": "195f1a4a-b007-4be9-bec3-65f12f06d6db",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "b41c8259-465f-4c38-abe3-fc1efeea6561",
+    "category_id": "9d9265b6-5284-45dc-b596-006e67ceadc1",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "cfa93073-6efd-47f4-be20-6c8b30bfcb81",
+    "category_id": "c41bbc8f-807e-499f-a9af-de948d235a6c",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  },
+  {
+    "id": "1f55600d-2d54-4b36-bc54-be0aab8749fb",
+    "category_id": "aeb3f1f4-adb9-45cd-973d-2aeb532c08c5",
+    "year": 2026,
+    "opens_at": "2026-01-01T00:00:00.000Z",
+    "closes_at": "2026-12-31T23:59:59.999Z",
+    "status": "open"
+  }
+]

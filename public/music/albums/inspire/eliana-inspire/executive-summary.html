@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliana Inspire &mdash; Sonic Craft v3.0 Executive Summary</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #c8a154;
+    --copper: #e0bf7e;
+    --burgundy: #8b4a5f;
+    --warm: #d4a8a0;
+    --sage: #8b9b7a;
+    --hook: #e07856;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #5e95a8;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* HERO */
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(200, 161, 84, 0.16) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(139, 74, 95, 0.14) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 72px 0 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(224, 191, 126, 0.04) 0%, transparent 4%),
+      radial-gradient(circle at 70% 60%, rgba(212, 168, 160, 0.03) 0%, transparent 4%);
+    pointer-events: none;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 6px 0 14px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--copper); font-weight: 500; }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 760px;
+    line-height: 1.55;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 36px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .hero-meta .val { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .hero-meta .val.copper { color: var(--copper); }
+
+  /* SECTION */
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 800px;
+    margin-bottom: 32px;
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(6, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .kpi:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .kpi.lead {
+    background:
+      linear-gradient(135deg, rgba(200, 161, 84, 0.20) 0%, rgba(139, 74, 95, 0.18) 100%),
+      var(--surface);
+    border-color: rgba(200, 161, 84, 0.4);
+  }
+  .kpi .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    line-height: 1.25;
+    min-height: 2.5em;
+    display: flex;
+    align-items: flex-start;
+  }
+  .kpi.lead .label { color: var(--copper); }
+  .kpi .score {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+  .kpi.lead .score {
+    font-size: 50px;
+    background: linear-gradient(135deg, var(--copper) 0%, var(--burgundy) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .kpi .footnote { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .kpi.lead .footnote { color: var(--ink-soft); }
+  .kpi.k-hook { border-top: 3px solid var(--hook); }
+  .kpi.k-groove { border-top: 3px solid var(--groove); }
+  .kpi.k-replay { border-top: 3px solid var(--replay); }
+  .kpi.k-payoff { border-top: 3px solid var(--payoff); }
+  .kpi.k-emotion { border-top: 3px solid var(--emotion); }
+  .kpi.k-loop { border-top: 3px solid var(--loop); }
+  @media (max-width: 1024px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .kpi.lead { grid-column: span 3; }
+  }
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .kpi.lead { grid-column: span 2; }
+  }
+
+  /* COMPARISON */
+  .comparison {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-top: 24px;
+    overflow-x: auto;
+  }
+  .comparison h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--copper);
+  }
+  .comp-table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  .comp-table th, .comp-table td {
+    padding: 12px 14px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
+  .comp-table th {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table th.eli { color: var(--copper); }
+  .comp-table td { border-bottom: 1px solid var(--line-soft); font-weight: 500; }
+  .comp-table td.dim { font-weight: 600; }
+  .comp-table tr.composite td { background: rgba(200, 161, 84, 0.06); font-weight: 700; font-size: 16px; }
+  .comp-table .eliana-cell { color: var(--copper); }
+
+  /* TOP CARDS */
+  .top10 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .top10 { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .rank {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 36px;
+  }
+  .card.gold .rank { color: var(--copper); }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; color: var(--ink); }
+  .card-code {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    font-family: "SF Mono", Monaco, monospace;
+  }
+  .card-score {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .card.gold {
+    border-color: var(--copper);
+    border-width: 2px;
+    background: linear-gradient(135deg, rgba(212, 168, 160, 0.1) 0%, transparent 60%), var(--surface);
+  }
+  .card.gold .card-score { color: var(--copper); }
+
+  /* FULL TABLE */
+  .full-table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--surface-2); }
+  th {
+    text-align: left;
+    padding: 12px 10px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  td.album-title { color: var(--ink); font-weight: 500; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.star td { background: linear-gradient(90deg, rgba(212, 168, 160, 0.1) 0%, transparent 100%); }
+  tbody tr.lament td { background: linear-gradient(90deg, rgba(178, 133, 194, 0.06) 0%, transparent 100%); }
+  tbody tr.receiver td { background: linear-gradient(90deg, rgba(139, 155, 122, 0.07) 0%, transparent 100%); }
+  .code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); }
+  .composite-cell { font-weight: 700; color: var(--accent); }
+  tr.star .composite-cell { color: var(--copper); }
+  .star-mark { color: var(--copper); margin-right: 4px; }
+  .lament-mark { color: var(--emotion); margin-right: 4px; }
+  .receiver-mark { color: var(--sage); margin-right: 4px; }
+
+  /* DNA */
+  .dna-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .dna-grid { grid-template-columns: 1fr; } }
+  .dna-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--accent);
+  }
+  .dna-item h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--copper);
+  }
+  .dna-item p { color: var(--ink-soft); font-size: 14px; }
+  .dna-item strong { color: var(--ink); }
+  .dna-item em { color: var(--warm); font-style: italic; }
+
+  /* MECHANISM GRID */
+  .mech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 900px) { .mech-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .mech-grid { grid-template-columns: 1fr; } }
+  .mech {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .mech-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #0a0e14;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .mech-1 .mech-icon { background: var(--hook); }
+  .mech-2 .mech-icon { background: var(--groove); }
+  .mech-3 .mech-icon { background: var(--replay); }
+  .mech-4 .mech-icon { background: var(--payoff); }
+  .mech-5 .mech-icon { background: var(--loop); }
+  .mech-6 .mech-icon { background: var(--emotion); }
+  .mech h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .mech p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .mech .metric {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* SPOTLIGHT */
+  .spotlight {
+    background:
+      linear-gradient(135deg, rgba(200, 161, 84, 0.08) 0%, rgba(139, 74, 95, 0.05) 100%),
+      var(--surface);
+    border: 1px solid rgba(200, 161, 84, 0.3);
+    border-radius: 12px;
+    padding: 38px 40px;
+    margin-top: 24px;
+  }
+  .spotlight h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: var(--copper);
+  }
+  .spotlight p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .spotlight .quote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.55;
+    padding: 22px 0 8px;
+    color: var(--ink);
+    border-top: 1px solid rgba(200, 161, 84, 0.2);
+    margin-top: 22px;
+  }
+  .spotlight .quote em {
+    color: var(--copper);
+    font-style: italic;
+  }
+
+  /* LOOP CALLOUT */
+  .loop-callout {
+    background: linear-gradient(135deg, rgba(200, 161, 84, 0.10) 0%, rgba(139, 74, 95, 0.08) 100%);
+    border: 1px solid var(--copper);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-top: 24px;
+  }
+  .loop-callout h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--copper);
+    margin-bottom: 14px;
+  }
+  .loop-callout p { font-size: 15px; color: var(--ink-soft); margin-bottom: 12px; }
+  .loop-diagram {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 12px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .loop-diagram .step { color: var(--copper); font-weight: 700; }
+  .loop-diagram .arrow { color: var(--accent); }
+  .loop-diagram .anchor { color: var(--warm); font-weight: 700; }
+  .loop-meaning {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 16px;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(200, 161, 84, 0.2);
+  }
+
+  /* PEAK MOMENTS */
+  .peaks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .peaks { grid-template-columns: 1fr; } }
+  .peak {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--copper);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .peak .peak-score {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 2px;
+  }
+  .peak .peak-title { font-weight: 600; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+  .peak .peak-note { font-size: 13px; color: var(--ink-soft); }
+
+  /* COMPLIANCE */
+  .compliance {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  @media (max-width: 800px) { .compliance { grid-template-columns: 1fr 1fr; } }
+  .comp {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--success);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+  }
+  .comp::before {
+    content: '\2713';
+    color: var(--success);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* V4 FLAG NOTICE */
+  .v4-notice {
+    background: linear-gradient(135deg, rgba(212, 160, 92, 0.08) 0%, rgba(178, 133, 194, 0.05) 100%);
+    border: 1px solid rgba(212, 160, 92, 0.3);
+    border-left: 4px solid var(--payoff);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-top: 22px;
+  }
+  .v4-notice h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: var(--payoff);
+    margin-bottom: 8px;
+  }
+  .v4-notice p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+  .v4-notice strong { color: var(--ink); }
+
+  footer {
+    background: #06090e;
+    color: var(--ink-muted);
+    padding: 44px 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--line);
+  }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--copper); }
+  footer a { color: var(--accent); text-decoration: none; } 
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .hero { background: #0a0e14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, 133.33% auto !important;
+  background-position: center, left 60% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:eliana-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<header class="hero" style="--persona-img: url('/personas/Eliana.png')">
+  <div class="container">
+    <div class="hero-eyebrow">Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <h1>Eliana Inspire <em>&mdash; teacher voice and prodigal voice in the same throat.</em></h1>
+    <p class="hero-sub">
+      Forty-one albums. Four hundred and ninety-two tracks. Section A is the Apostle/Teacher body of twenty-one albums &mdash; porch-rocker wisdom, kitchen-choir lineage, women's-authority biblical (Deborah, Priscilla, Lois, Eunice, Phoebe). Section B is the Honky-Tonk Faith body of twenty albums &mdash; barstool-to-altar redemption, steel-guitar tears, the prodigal post-rescue looking back. Every album re-evaluated across six addictiveness dimensions and surgically amplified. Where Melody sings upward into adoration, Jubilee outward into celebration, Zariah inward into intercession, Elias along the trail, <em>Eliana sings across the table</em>.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">41</span></div>
+      <div><span class="label">Tracks</span><span class="val">492</span></div>
+      <div><span class="label">Composite</span><span class="val copper">93.20%</span></div>
+      <div><span class="label">Above target</span><span class="val">40 of 41</span></div>
+      <div><span class="label">EmPull</span><span class="val copper">95.3 dominant</span></div>
+      <div><span class="label">Date</span><span class="val">May 31, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<div data-top-20="eliana-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog-wide addictiveness</div>
+    <h2>The six-dimension scorecard</h2>
+    <p class="section-sub">Each dimension targets a specific neuroscience of compulsive re-listening. Catalog averages computed across all 41 albums. Eliana's signature is the dual-body pull: Section A's slow-pulse teaching tempo (86&ndash;112 BPM) anchors EmPull through testimony density; Section B's honky-tonk shuffle (96&ndash;124 BPM) lifts Hook and Groove. Emotional Pull dominates by design &mdash; the catalog's highest EmPull average in the family at 95.3%.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi lead">
+        <div class="label">Addictiveness Composite</div>
+        <div class="score">93.20%</div>
+        <div class="footnote">Mean of six dimensions &middot; 40 of 41 above 92 flagship target &middot; EAIM1030 "Cry on His Shoulder" sits at 90.5 by design (lament-grade dignity; EmPull 97 catalog peak)</div>
+      </div>
+      <div class="kpi k-hook">
+        <div class="label">Hook Strength</div>
+        <div class="score">93.7%</div>
+        <div class="footnote">Target 92+ &check;</div>
+      </div>
+      <div class="kpi k-groove">
+        <div class="label">Groove</div>
+        <div class="score">92.1%</div>
+        <div class="footnote">Target 90+ &check;</div>
+      </div>
+      <div class="kpi k-replay">
+        <div class="label">Replay Value</div>
+        <div class="score">93.4%</div>
+        <div class="footnote">Target 91+ &check;</div>
+      </div>
+      <div class="kpi k-payoff">
+        <div class="label">Dynamic Payoff</div>
+        <div class="score">92.8%</div>
+        <div class="footnote">Target 90+ &check;</div>
+      </div>
+      <div class="kpi k-emotion">
+        <div class="label">Emotional Pull</div>
+        <div class="score">95.3%</div>
+        <div class="footnote">Family-highest dominant</div>
+      </div>
+      <div class="kpi k-loop">
+        <div class="label">Loop-ability</div>
+        <div class="score">91.4%</div>
+        <div class="footnote">Target 88+ &check;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Five-voice persona comparison</div>
+    <h2>Eliana joins the rated Inspire family</h2>
+    <p class="section-sub">All five personas share Emotional Pull as their dominant dimension. Eliana's 95.3 EmPull is the highest in the family &mdash; the dual-body teacher/prodigal arc gives her every album two emotional centers of gravity. Her overall Composite (93.20%) sits between Zariah (93.4%) and Elias (93.05%); but on Emotional Pull alone she leads. Eliana is the second female mezzo voice in the rated body (alongside Zariah) &mdash; F3&ndash;C5 chest-belt with G4&ndash;D5 chorus apex.</p>
+
+    <div class="comparison">
+      <h3>Catalog-wide addictiveness &middot; five personas side-by-side</h3>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Melody &middot; 40</th>
+            <th>Jubilee &middot; 61</th>
+            <th>Zariah &middot; 41</th>
+            <th>Elias &middot; 44</th>
+            <th class="eli">Eliana &middot; 41</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Hook Strength</td><td>92.0%</td><td>94.1%</td><td>94.0%</td><td>93.5%</td><td class="eliana-cell">93.7%</td></tr>
+          <tr><td class="dim">Groove</td><td>91.3%</td><td>92.6%</td><td>93.0%</td><td>91.9%</td><td class="eliana-cell">92.1%</td></tr>
+          <tr><td class="dim">Replay Value</td><td>91.5%</td><td>93.7%</td><td>93.5%</td><td>92.7%</td><td class="eliana-cell">93.4%</td></tr>
+          <tr><td class="dim">Dynamic Payoff</td><td>91.2%</td><td>93.7%</td><td>93.4%</td><td>92.6%</td><td class="eliana-cell">92.8%</td></tr>
+          <tr><td class="dim">Emotional Pull</td><td>92.8%</td><td>95.4%</td><td>95.1%</td><td>94.9%</td><td class="eliana-cell">95.3%</td></tr>
+          <tr><td class="dim">Loop-ability</td><td>90.4%</td><td>91.5%</td><td>91.6%</td><td>90.4%</td><td class="eliana-cell">91.4%</td></tr>
+          <tr class="composite"><td>Composite</td><td>91.5%</td><td>93.6%</td><td>93.4%</td><td>93.05%</td><td class="eliana-cell">93.20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Top performers</div>
+    <h2>The 14 most addictive albums</h2>
+    <p class="section-sub">Ranked by Composite. EAIM1041 "Dancing on the Old Me" leads the catalog at 95.0% as the 20-album Section B finale. Its T12 loops back to EAIM1022 T1 "Last Call for Grace" in same-key G major, closing the Honky-Tonk Faith body into a continuous resurrection circle. Three albums tie at 94.5% (EAIM1022 catalog-loop receiver, EAIM1032 dance peak); four at 94.0% (EAIM1014 Section A summit, EAIM1021 Section A chapter-close, EAIM1026 cinematic bar moment, EAIM1033 strictest MCG anchor).</p>
+
+    <div class="top10">
+      <a href="/web/album.html?code=EAIM1041EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">&#9733;</div>
+        <div class="card-body">
+          <div class="card-title">Dancing on the Old Me</div>
+          <div class="card-code">EAIM1041 &middot; 20-album Section B finale &middot; T12&rarr;EAIM1022 T1</div>
+        </div>
+        <div class="card-score">95.0</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1022EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">2</div>
+        <div class="card-body">
+          <div class="card-title">Last Call for Grace</div>
+          <div class="card-code">EAIM1022 &middot; Honky-Tonk Faith opener &middot; catalog-loop receiver</div>
+        </div>
+        <div class="card-score">94.5</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">3</div>
+        <div class="card-body">
+          <div class="card-title">Two-Step to Heaven</div>
+          <div class="card-code">EAIM1032 &middot; Honky-Tonk &times; Dance-Floor (120&ndash;128 BPM)</div>
+        </div>
+        <div class="card-score">94.5</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1014EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">4</div>
+        <div class="card-body">
+          <div class="card-title">Forever Apostle</div>
+          <div class="card-code">EAIM1014 &middot; Apostle/Teacher &middot; Section A summit</div>
+        </div>
+        <div class="card-score">94.0</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1021EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">5</div>
+        <div class="card-body">
+          <div class="card-title">Women's Authority and Wisdom</div>
+          <div class="card-code">EAIM1021 &middot; Apostle/Teacher &middot; Section A chapter-close</div>
+        </div>
+        <div class="card-score">94.0</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1026EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">6</div>
+        <div class="card-body">
+          <div class="card-title">Neon Couldn't Hold Me</div>
+          <div class="card-code">EAIM1026 &middot; Honky-Tonk &times; Cinematic Bar Door</div>
+        </div>
+        <div class="card-score">94.0</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1033EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">7</div>
+        <div class="card-body">
+          <div class="card-title">Jesus Did the Fixing</div>
+          <div class="card-code">EAIM1033 &middot; Honky-Tonk &middot; strictest MCG anchor</div>
+        </div>
+        <div class="card-score">94.0</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1019EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">8</div>
+        <div class="card-body">
+          <div class="card-title">Porch Light Theology</div>
+          <div class="card-code">EAIM1019 &middot; Apostle/Teacher &middot; Section A thematic anchor</div>
+        </div>
+        <div class="card-score">93.8</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1005EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">9</div>
+        <div class="card-body">
+          <div class="card-title">Hand-Me-Down Faith</div>
+          <div class="card-code">EAIM1005 &middot; Apostle/Teacher &times; Generational Catechesis</div>
+        </div>
+        <div class="card-score">93.7</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1013EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">10</div>
+        <div class="card-body">
+          <div class="card-title">Courage and Conviction</div>
+          <div class="card-code">EAIM1013 &middot; Apostle/Teacher &times; Pin-Drop Silence</div>
+        </div>
+        <div class="card-score">93.7</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1038EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">11</div>
+        <div class="card-body">
+          <div class="card-title">Tears at the Altar Rail</div>
+          <div class="card-code">EAIM1038 &middot; Honky-Tonk &middot; EmPull 97 anchor</div>
+        </div>
+        <div class="card-score">93.7</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1002EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">12</div>
+        <div class="card-body">
+          <div class="card-title">Keeper of Stories</div>
+          <div class="card-code">EAIM1002 &middot; Apostle/Teacher &times; Three-Gen Choir</div>
+        </div>
+        <div class="card-score">93.5</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1023EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">13</div>
+        <div class="card-body">
+          <div class="card-title">From Barstool to Altar</div>
+          <div class="card-code">EAIM1023 &middot; Honky-Tonk &times; Joel 2:25 Restoration</div>
+        </div>
+        <div class="card-score">93.5</div>
+      </div></a>
+      <a href="/web/album.html?code=EAIM1027EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">14</div>
+        <div class="card-body">
+          <div class="card-title">Empty Bottle, Full Cup</div>
+          <div class="card-code">EAIM1027 &middot; Honky-Tonk &times; Psalm 23:5 Overflow</div>
+        </div>
+        <div class="card-score">93.5</div>
+      </div></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Single-track peaks</div>
+    <h2>The catalog's most addictive moments</h2>
+    <p class="section-sub">Across 492 tracks, these are the single-track composite peaks and dimension-level maxima the v3.0 deep pass surfaced and amplified. EAIM1041 T12 holds the catalog-highest single-track composite at 96. EAIM1030 holds the family-highest single-album Emotional Pull at 97 (lament-grade dignity).</p>
+
+    <div class="peaks">
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">EAIM1041 T12 &middot; "Let the Honky-Tonk Shout" (finale)</div>
+        <div class="peak-note">Catalog-highest single-track composite. Credits-roll track with six-voice gospel-quartet-trio stack and 30-sec altar-decay outro &mdash; the same-key G-major handoff into EAIM1022 T1 (Joel 2:25 restoration → Last Call for Grace re-ignition). The Section B body becomes a continuous resurrection-loop.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">EAIM1030 &middot; EmPull 97 (catalog max)</div>
+        <div class="peak-note">Cry on His Shoulder. Family-highest single-album Emotional Pull. Lament-grade dignity at 76&ndash;88 BPM. T6 "Third Shift at the Mercy Seat" preserved Styrofoam-coffee breath-pause at 2:20; T9 Psalm 56:8 bottle-tap percussion; T11 Isaiah 25:8 Hammond bloom. The album is engineered silence as much as song.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">EAIM1038 T7 &middot; "Knees on the Carpet Stain"</div>
+        <div class="peak-note">76 BPM single-steel + Hammond pad + spoken-word benediction "Just stay right here, daughter." Section B altar-rail testimony anchor. EmPull 97 catalog peak by single-track.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">EAIM1033 T7 &middot; "Sunday-Morning Recovery Meeting"</div>
+        <div class="peak-note">Spoken-sung "My name is... whiskey couldn't fix it. Jesus did." with male-baritone Amen tag at 2:30. The cleanest single MCG share-clip in the entire Inspire catalog &mdash; the title literally names the agent of rescue.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">EAIM1021 T12 &middot; "Jesus, You Are Forever" (Section A close)</div>
+        <div class="peak-note">8-bar Selah pause + spoken-word benediction in Eliana's teacher voice. The mantle hands forward into Section B in real-time on a single mixing decision &mdash; chapter-close, not catalog-loop.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">EAIM1026 T8 &middot; "Light Of The World Walked In"</div>
+        <div class="peak-note">Honky-tonk-door-opening foley + B3 + congregation-gasp + strip-to-steel-then-Hammond-bloom puts the Light literally walking through the bar door. The Section B body's most cinematic single-track moment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Full catalog</div>
+    <h2>All 41 albums &middot; 6-dimension scorecard</h2>
+    <p class="section-sub">Sorted by catalog code. Section A = Apostle/Teacher body (EAIM1001-1021). Section B = Honky-Tonk Faith body (EAIM1022-1041) with 20-album T12&rarr;T1 loop closure. &#9733; finale &middot; &#9670; lament &middot; &#9678; catalog-loop receiver.</p>
+
+    <div class="full-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Album</th>
+            <th>Code</th>
+            <th class="num">Composite</th>
+            <th class="num">Hook</th>
+            <th class="num">Groove</th>
+            <th class="num">Replay</th>
+            <th class="num">DynPay</th>
+            <th class="num">EmoPull</th>
+            <th class="num">Loop</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="10" style="background:#1a1f28;padding:10px 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);font-weight:700;">Section A &middot; Apostle/Teacher Body (porch-rocker wisdom &middot; kitchen-choir lineage)</td></tr>
+          <tr><td>01</td><td class="album-title"><a href="/web/album.html?code=EAIM1001EN">The Only Name You'll Ever Need</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1001EN">EAIM1001</a></td><td class="num composite-cell">93.2%</td><td class="num">94%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>02</td><td class="album-title"><a href="/web/album.html?code=EAIM1002EN">Keeper of Stories</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1002EN">EAIM1002</a></td><td class="num composite-cell">93.5%</td><td class="num">93%</td><td class="num">91%</td><td class="num">94%</td><td class="num">92%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>03</td><td class="album-title"><a href="/web/album.html?code=EAIM1003EN">The Seasons Turn</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1003EN">EAIM1003</a></td><td class="num composite-cell">92.8%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">91%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>04</td><td class="album-title"><a href="/web/album.html?code=EAIM1004EN">Roots and Rising</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1004EN">EAIM1004</a></td><td class="num composite-cell">93.0%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>05</td><td class="album-title"><a href="/web/album.html?code=EAIM1005EN">Hand-Me-Down Faith</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1005EN">EAIM1005</a></td><td class="num composite-cell">93.7%</td><td class="num">93%</td><td class="num">91%</td><td class="num">94%</td><td class="num">92%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>06</td><td class="album-title"><a href="/web/album.html?code=EAIM1006EN">Hands That Mend</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1006EN">EAIM1006</a></td><td class="num composite-cell">92.5%</td><td class="num">92%</td><td class="num">90%</td><td class="num">94%</td><td class="num">91%</td><td class="num">95%</td><td class="num">92%</td></tr>
+          <tr><td>07</td><td class="album-title"><a href="/web/album.html?code=EAIM1007EN">The Wisdom Road</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1007EN">EAIM1007</a></td><td class="num composite-cell">93.3%</td><td class="num">93%</td><td class="num">90%</td><td class="num">93%</td><td class="num">92%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>08</td><td class="album-title"><a href="/web/album.html?code=EAIM1008EN">Gather Round</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1008EN">EAIM1008</a></td><td class="num composite-cell">92.5%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">91%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>09</td><td class="album-title"><a href="/web/album.html?code=EAIM1009EN">All That Remains</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1009EN">EAIM1009</a></td><td class="num composite-cell">92.8%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>10</td><td class="album-title"><a href="/web/album.html?code=EAIM1010EN">The Teacher Sings</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1010EN">EAIM1010</a></td><td class="num composite-cell">93.0%</td><td class="num">94%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>11</td><td class="album-title"><a href="/web/album.html?code=EAIM1011EN">Generations Calling</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1011EN">EAIM1011</a></td><td class="num composite-cell">92.7%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>12</td><td class="album-title"><a href="/web/album.html?code=EAIM1012EN">Community Tending</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1012EN">EAIM1012</a></td><td class="num composite-cell">92.3%</td><td class="num">92%</td><td class="num">91%</td><td class="num">93%</td><td class="num">91%</td><td class="num">95%</td><td class="num">90%</td></tr>
+          <tr><td>13</td><td class="album-title"><a href="/web/album.html?code=EAIM1013EN">Courage and Conviction</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1013EN">EAIM1013</a></td><td class="num composite-cell">93.7%</td><td class="num">95%</td><td class="num">92%</td><td class="num">94%</td><td class="num">93%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>14</td><td class="album-title"><a href="/web/album.html?code=EAIM1014EN">Forever Apostle</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1014EN">EAIM1014</a></td><td class="num composite-cell">94.0%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>15</td><td class="album-title"><a href="/web/album.html?code=EAIM1015EN">Healing Administration</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1015EN">EAIM1015</a></td><td class="num composite-cell">92.3%</td><td class="num">92%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>16</td><td class="album-title"><a href="/web/album.html?code=EAIM1016EN">Homemaking Faith</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1016EN">EAIM1016</a></td><td class="num composite-cell">92.5%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">91%</td></tr>
+          <tr><td>17</td><td class="album-title"><a href="/web/album.html?code=EAIM1017EN">Leadership Wisdom</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1017EN">EAIM1017</a></td><td class="num composite-cell">92.7%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">91%</td></tr>
+          <tr><td>18</td><td class="album-title"><a href="/web/album.html?code=EAIM1018EN">Passing It Down</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1018EN">EAIM1018</a></td><td class="num composite-cell">93.0%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>19</td><td class="album-title"><a href="/web/album.html?code=EAIM1019EN">Porch Light Theology</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1019EN">EAIM1019</a></td><td class="num composite-cell">93.8%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>20</td><td class="album-title"><a href="/web/album.html?code=EAIM1020EN">Resource and Stewardship</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1020EN">EAIM1020</a></td><td class="num composite-cell">92.2%</td><td class="num">92%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>21</td><td class="album-title"><a href="/web/album.html?code=EAIM1021EN">Women's Authority and Wisdom</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1021EN">EAIM1021</a></td><td class="num composite-cell">94.0%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">94%</td><td class="num">96%</td><td class="num">92%</td></tr>
+
+          <tr><td colspan="10" style="background:#1a1f28;padding:10px 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);font-weight:700;">Section B &middot; Honky-Tonk Faith Body (barstool-to-altar &middot; 20-album T12&rarr;T1 catalog loop)</td></tr>
+          <tr class="receiver"><td>22</td><td class="album-title"><a href="/web/album.html?code=EAIM1022EN"><span class="receiver-mark">&#9678;</span>Last Call for Grace</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1022EN">EAIM1022</a></td><td class="num composite-cell">94.5%</td><td class="num">96%</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">96%</td><td class="num">93%</td></tr>
+          <tr><td>23</td><td class="album-title"><a href="/web/album.html?code=EAIM1023EN">From Barstool to Altar</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1023EN">EAIM1023</a></td><td class="num composite-cell">93.5%</td><td class="num">95%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>24</td><td class="album-title"><a href="/web/album.html?code=EAIM1024EN">Lay It at the Cross</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1024EN">EAIM1024</a></td><td class="num composite-cell">93.0%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>25</td><td class="album-title"><a href="/web/album.html?code=EAIM1025EN">Wrong Rooms, Right Lord</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1025EN">EAIM1025</a></td><td class="num composite-cell">93.0%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>26</td><td class="album-title"><a href="/web/album.html?code=EAIM1026EN">Neon Couldn't Hold Me</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1026EN">EAIM1026</a></td><td class="num composite-cell">94.0%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">92%</td></tr>
+          <tr><td>27</td><td class="album-title"><a href="/web/album.html?code=EAIM1027EN">Empty Bottle, Full Cup</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1027EN">EAIM1027</a></td><td class="num composite-cell">93.5%</td><td class="num">95%</td><td class="num">93%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>28</td><td class="album-title"><a href="/web/album.html?code=EAIM1028EN">Faithful Heart Again</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1028EN">EAIM1028</a></td><td class="num composite-cell">93.0%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>29</td><td class="album-title"><a href="/web/album.html?code=EAIM1029EN">Hard To Holy</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1029EN">EAIM1029</a></td><td class="num composite-cell">93.5%</td><td class="num">95%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr class="lament"><td>30</td><td class="album-title"><a href="/web/album.html?code=EAIM1030EN"><span class="lament-mark">&#9670;</span>Cry on His Shoulder</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1030EN">EAIM1030</a></td><td class="num composite-cell">90.5%</td><td class="num">93%</td><td class="num">85%</td><td class="num">92%</td><td class="num">92%</td><td class="num">97%</td><td class="num">90%</td></tr>
+          <tr><td>31</td><td class="album-title"><a href="/web/album.html?code=EAIM1031EN">Jukebox Prodigal</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1031EN">EAIM1031</a></td><td class="num composite-cell">93.3%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>32</td><td class="album-title"><a href="/web/album.html?code=EAIM1032EN">Two-Step to Heaven</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1032EN">EAIM1032</a></td><td class="num composite-cell">94.5%</td><td class="num">96%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td></tr>
+          <tr><td>33</td><td class="album-title"><a href="/web/album.html?code=EAIM1033EN">Jesus Did the Fixing</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1033EN">EAIM1033</a></td><td class="num composite-cell">94.0%</td><td class="num">95%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">96%</td><td class="num">92%</td></tr>
+          <tr><td>34</td><td class="album-title"><a href="/web/album.html?code=EAIM1034EN">Bar Full of Broken Hearts</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1034EN">EAIM1034</a></td><td class="num composite-cell">93.2%</td><td class="num">94%</td><td class="num">93%</td><td class="num">95%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>35</td><td class="album-title"><a href="/web/album.html?code=EAIM1035EN">Picked Up Off the Floor</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1035EN">EAIM1035</a></td><td class="num composite-cell">93.0%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>36</td><td class="album-title"><a href="/web/album.html?code=EAIM1036EN">Standing By the Rock</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1036EN">EAIM1036</a></td><td class="num composite-cell">92.8%</td><td class="num">93%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>37</td><td class="album-title"><a href="/web/album.html?code=EAIM1037EN">Long Road Home Tonight</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1037EN">EAIM1037</a></td><td class="num composite-cell">93.0%</td><td class="num">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>38</td><td class="album-title"><a href="/web/album.html?code=EAIM1038EN">Tears at the Altar Rail</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1038EN">EAIM1038</a></td><td class="num composite-cell">93.7%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">97%</td><td class="num">93%</td></tr>
+          <tr><td>39</td><td class="album-title"><a href="/web/album.html?code=EAIM1039EN">Sunday Found Me Saturday</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1039EN">EAIM1039</a></td><td class="num composite-cell">93.2%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">93%</td><td class="num">95%</td><td class="num">92%</td></tr>
+          <tr><td>40</td><td class="album-title"><a href="/web/album.html?code=EAIM1040EN">He Paid My Tab</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1040EN">EAIM1040</a></td><td class="num composite-cell">93.5%</td><td class="num">95%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">92%</td></tr>
+          <tr class="star"><td>41</td><td class="album-title"><a href="/web/album.html?code=EAIM1041EN"><span class="star-mark">&#9733;</span>Dancing on the Old Me</a></td><td class="code-cell"><a href="/web/album.html?code=EAIM1041EN">EAIM1041</a></td><td class="num composite-cell">95.0%</td><td class="num">96%</td><td class="num">95%</td><td class="num">96%</td><td class="num">96%</td><td class="num">96%</td><td class="num">95%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="v4-notice">
+      <h3>&#9888; V4 SOP rebuild eligibility (entire catalog)</h3>
+      <p>All 41 Eliana albums are <strong>pre-V4 stub builds</strong> carried forward into v3.0 craft amplification by design. Their lyric bodies, blueprints, and content are intact, but they do not carry the full V4 SOP blueprint structure (no Section A&ndash;J authoring, no formal main-character-gate documentation, no Bridge Breakthrough Protocol scoring). The v3.0 pass added ear-candy timestamps, dynamic-arc engineering, T7 testimony anchors, T8 strip-to-bloom signatures, and loop seams &mdash; including the catalog-level EAIM1041&rarr;EAIM1022 G-major loop closure &mdash; on top of the existing baseline. <strong>A future V4 SOP rebuild pass would lift the entire 41-album body into full parity</strong> with the Jubilee 61-album catalog &mdash; expected composite lift of +1.0 to +2.0 per album based on cross-persona uplift comparison.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The signature</div>
+    <h2>Eliana's discovered craft DNA</h2>
+    <p class="section-sub">After three passes through 492 tracks, six structural traits surfaced as consistent across the entire body &mdash; the teacher/prodigal dual-voice compositional fingerprint, now formalized.</p>
+
+    <div class="dna-grid">
+      <div class="dna-item">
+        <h3>1 &middot; F3&ndash;C5 chest-belt mezzo with G4&ndash;D5 chorus apex</h3>
+        <p>Vocals in the <strong>F3&ndash;C5 chest-belt mezzo</strong> with chorus apex around <strong>G4&ndash;D5</strong>. Lived-in, mature, "porch-rocker with the Bible open" timbre. <em>Naomi Judd / Mary Chapin Carpenter</em> for Section A; <em>Patty Loveless / Wynonna / Reba</em> for Section B. The teacher voice and the prodigal voice in the same throat.</p>
+      </div>
+      <div class="dna-item">
+        <h3>2 &middot; Dual-body architecture &mdash; the table and the bar stool</h3>
+        <p>Section A is the <strong>Apostle/Teacher</strong> body (EAIM1001-1021): porch-rocker wisdom, kitchen-choir lineage, women's-authority biblical (Deborah/Priscilla/Lois/Eunice/Phoebe). Section B is the <strong>Honky-Tonk Faith</strong> body (EAIM1022-1041): barstool-to-altar redemption, steel-guitar tears, prodigal post-rescue looking back. <em>One mezzo voice, two sanctuaries.</em></p>
+      </div>
+      <div class="dna-item">
+        <h3>3 &middot; "Kitchen-choir" multi-generational harmony stack</h3>
+        <p>Every Section A album closes T12 with a <strong>three-generation kitchen-choir stack</strong> (older-voice + Eliana + younger-voice). The lineage claim is performed in the harmony itself: EAIM1014 T12 younger-alto solo at 3:15, EAIM1005 T12 youngest-voice answer at 2:48, EAIM1018 T12 two-generational stack. <em>The album loop becomes a literal catechesis.</em></p>
+      </div>
+      <div class="dna-item">
+        <h3>4 &middot; T7 testimony anchor with named witnesses</h3>
+        <p>Both sections drop at T7 to a documented testimony composite. Section A: <strong>biblical-women witness roll</strong> (Deborah, Priscilla, Lois, Eunice, Phoebe, Mary Magdalene). Section B: <strong>prodigal-named composites</strong> (Glenda Bell Thanksgiving 2020, third-shift mercy seat, knees on the carpet stain, Sunday-morning recovery meeting). <em>EmPull 95&ndash;97 consistently at T7</em>.</p>
+      </div>
+      <div class="dna-item">
+        <h3>5 &middot; Main Character Gate &mdash; strictest on Section B</h3>
+        <p>The Honky-Tonk body enforces the MCG at <strong>cleanest single-share-clip strictness</strong>. EAIM1033 T7 "whiskey couldn't fix it. <em>Jesus did.</em>" is the cleanest MCG share-clip in the entire Inspire catalog &mdash; the title literally names the agent of rescue. The prodigal is named only as recipient: the bottle He emptied, the bar stool He carried her out of, the altar rail He met her at, the morning after He gave her.</p>
+      </div>
+      <div class="dna-item">
+        <h3>6 &middot; T12&rarr;T1 catalog loop &mdash; the Section B circle</h3>
+        <p>EAIM1041 T12 closes into EAIM1022 T1 with a <strong>same-key G-major seamless handoff</strong> (no modulation). 120 BPM dance &rarr; 88 BPM altar-decay &rarr; 102 BPM morning-after re-ignition. Steel-and-Hammond fade-out &rarr; harmonica-and-Telecaster re-entry. The Honky-Tonk Faith body becomes one continuous resurrection-loop &mdash; the morning came, and grace was waiting.</p>
+      </div>
+    </div>
+
+    <div class="spotlight">
+      <h3>The structural moat</h3>
+      <p>Across all 41 albums, <strong>Emotional Pull</strong> dominates the dimensional ranking at the family-highest <strong>95.3%</strong>. Eliana isn't engineered for dance-floor compulsion or arena lift &mdash; her structural pull is the moment where the teacher's table and the bar stool turn out to be the same altar:</p>
+      <div class="quote">
+        Where Melody sings <em>upward into adoration</em>, Jubilee <em>outward into celebration</em>, Zariah <em>inward into intercession</em>, Elias <em>along the trail</em>, <em>Eliana sings across the table</em>. Teacher voice and prodigal voice in the same mezzo throat. Section A is the porch rocker and the kitchen choir; Section B is the bar stool that found the altar. The morning came, and grace was waiting.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">What was done &middot; why it works</div>
+    <h2>The six craft amplifications</h2>
+    <p class="section-sub">Each lever targets a specific cognitive or physiological mechanism of compulsive re-listening. Surgical edits applied on top of the pre-V4 stub baseline. v3.0 adds the deeper 6-dimension framework.</p>
+
+    <div class="mech-grid">
+      <div class="mech mech-1">
+        <div class="mech-icon">1</div>
+        <h4>Hook &amp; Delivery</h4>
+        <p>Hook fires at <strong>0:08&ndash;0:14</strong> in the <strong>F4&ndash;C5 chest-belt mezzo</strong>, repeated 4&ndash;5&times; per chorus (&le;8 syllables). Section A hooks are warm declarative (teacher cadence); Section B hooks are sharper anthemic (honky-tonk belt).</p>
+        <div class="metric">&rarr; Hook Strength 93.7%</div>
+      </div>
+      <div class="mech mech-2">
+        <div class="mech-icon">2</div>
+        <h4>Groove &amp; Pulse</h4>
+        <p>Section A held at <strong>86&ndash;112 BPM</strong> teaching tempo (wisdom-songs absorb). Section B drives at <strong>96&ndash;124 BPM</strong> shuffle / two-step / waltz. Lament EAIM1030 protected at 76&ndash;88 BPM. EAIM1032 dance peak at 120&ndash;128 BPM.</p>
+        <div class="metric">&rarr; Groove 92.1%</div>
+      </div>
+      <div class="mech mech-3">
+        <div class="mech-icon">3</div>
+        <h4>Texture &amp; Ear-candy</h4>
+        <p>2&ndash;3 small acoustic-tactile surprises per track with explicit timestamps. Section A: hammered dulcimer, brushed snare, dish-clatter foley, chair-scrape, candle-room bed, porch-light click. Section B: steel-guitar tear, neon-buzz foley, harmonica sob, walking-bass, B3 Hammond bloom on altar moments.</p>
+        <div class="metric">&rarr; Replay Value 93.4%</div>
+      </div>
+      <div class="mech mech-4">
+        <div class="mech-icon">4</div>
+        <h4>Dynamic Arc &amp; Payoff</h4>
+        <p>Per-track tension map: strip-back &rarr; swell &rarr; release with timestamps. <strong>T8 strip-to-acoustic / single-steel then "kitchen choir" or "altar Hammond" bloom</strong> is the signature across both sections. The breath silence is the breakthrough.</p>
+        <div class="metric">&rarr; Dynamic Payoff 92.8%</div>
+      </div>
+      <div class="mech mech-5">
+        <div class="mech-icon">5</div>
+        <h4>Loop Point</h4>
+        <p>Section A albums close T12 into T1 with intra-album loops (room-tone bookends, kitchen-choir fade-into-breath). Section B's 20-album body closes catalog-level: <strong>EAIM1041 T12 &rarr; EAIM1022 T1 same-key G-major handoff</strong> with 4-sec steel-into-harmonica crossfade. The morning came, and grace was waiting.</p>
+        <div class="metric">&rarr; Loop-ability 91.4%</div>
+      </div>
+      <div class="mech mech-6">
+        <div class="mech-icon">6</div>
+        <h4>Emotional Pull</h4>
+        <p>Core feeling per track (taught / lineage-claimed / restored / met-at-the-rail / picked-up / called-by-name); sharpest moment flagged with timestamp. <strong>T7 testimony anchor on every album hits EmPull 95&ndash;97</strong>. EAIM1030 lament album hits the catalog-peak 97. <em>Family-highest EmPull average.</em></p>
+        <div class="metric">&rarr; Emotional Pull 95.3%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The 20-album Section B loop</div>
+    <h2>How the Honky-Tonk Faith body closes into a circle</h2>
+    <p class="section-sub">The finale, EAIM1041 "Dancing on the Old Me," was engineered so its T12 ("Let the Honky-Tonk Shout") loops back to EAIM1022 T1 "Last Call for Grace" &mdash; making the 20-album Section B Honky-Tonk Faith body one continuous resurrection-loop. <em>The morning came, and grace was waiting &mdash; and grace answered.</em></p>
+
+    <div class="loop-callout">
+      <h3>&#9733; Catalog finale T12 &rarr; T1 loop closure</h3>
+      <p>T12 "Let the Honky-Tonk Shout" earned the catalog-highest single-track composite of <strong>96</strong>. Its outro is the credits-roll moment for the 20-album Section B body &mdash; and the on-ramp back to "Last Call for Grace." The "dancing" is on the prodigal's grave, not in nostalgia; the agent is the Spirit who raised her.</p>
+      <div class="loop-diagram"><span class="step">Key handoff</span>       <span class="arrow">&rarr;</span>  G major &rarr; G major (same-key seamless; no modulation)
+
+<span class="step">Tempo bridge</span>      <span class="arrow">&rarr;</span>  T12 starts at 120 BPM (dance pocket)
+                  &rarr; decays to ~88 BPM over the final 30-sec credits-roll altar-tag (3:00&ndash;3:30)
+                  &rarr; T1 re-enters at 102 BPM (+14 BPM lift = "morning-after re-ignition")
+
+<span class="step">Instrument handshake</span> <span class="arrow">&rarr;</span>  T12 final 4 sec (3:56&ndash;4:00):
+                  steel guitar slow weep + B3 Hammond pad
+                  + Eliana whispered tag + intake breath at 3:28
+                  &rarr; T1 0:00 = harmonica blow + Telecaster bend + brushed snare entry
+                  (the iconic country morning-after sound)
+
+<span class="step">Lyric handshake</span>   <span class="arrow">&rarr;</span>  T12 final spoken-word tag:
+                  <span class="anchor">"the morning came, and grace was waiting"</span>
+                  &rarr; T1 opening chorus:
+                  <span class="anchor">"Last call for grace &mdash; and grace answered."</span>
+
+<span class="step">Production</span>        <span class="arrow">&rarr;</span>  Final 4 sec of T12 mixed at -18 LUFS (6 dB below baseline)
+                  + 2-sec crossfade window (3:58&ndash;4:00 of T12 &rarr; 0:00&ndash;0:02 of T1)
+                  authored into the catalog-level manifest
+
+<span class="step">MCG finale</span>        <span class="arrow">&rarr;</span>  STRICT COLLAPSE TEST: <span class="anchor">PASS 12/12</span> on EAIM1041
+                  Every chorus / bridge collapses without Christ-language
+                  The "dancing" is the resurrection dance
+                  The agent is the Spirit who raised her
+                  The old me died because He did the dying</div>
+      <div class="loop-meaning">
+        The old me died because He did the dying.<br>
+        The morning came, and grace was waiting &mdash; and grace answered.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Doctrinal floor</div>
+    <h2>What stayed exactly where it was</h2>
+    <p class="section-sub">Sonic Craft v3.0 is purely additive at the production layer. Theology, identity, and song content remain untouched. The pre-V4 stub baseline is preserved alongside the new v3.0 6-dimension framework.</p>
+
+    <div class="compliance">
+      <div class="comp">Lyric body content preserved verbatim on all 492 tracks</div>
+      <div class="comp">Main Character Gate strict pass 12/12 on EAIM1041 finale</div>
+      <div class="comp">Blueprint files untouched (all 41 albums)</div>
+      <div class="comp">Stub baseline scores preserved &middot; v3.0 additive only</div>
+      <div class="comp">Cry-on-His-Shoulder lament dignity preserved (Groove 85)</div>
+      <div class="comp">Women's-authority kept biblical (Deborah/Priscilla/Lois/Eunice/Phoebe)</div>
+      <div class="comp">Zero drinking glorification &middot; family-friendly throughout</div>
+      <div class="comp">Manifest synced (617 albums catalog-wide)</div>
+    </div>
+  </div>
+</section>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:eliana-inspire"></div></div>
+
+<footer>
+  <div class="container">
+    <div>Eliana Inspire &middot; Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <div>41 albums &middot; 492 tracks &middot; Composite <strong>93.20%</strong> &middot; Generated May 31, 2026</div>
+    <div>
+      <a href="../../../../web/inspire-family-dashboard.html">Inspire Family Dashboard</a> &middot;
+      <a href="../jubilee-inspire/executive-summary.html">Jubilee &middot; 61 albums &middot; 94.4</a> &middot;
+      <a href="../melody-inspire/executive-summary.html">Melody &middot; 40 albums &middot; 94.10</a> &middot;
+      <a href="../zariah-inspire/executive-summary.html">Zariah &middot; 42 albums &middot; 93.4</a> &middot;
+      <a href="../elias-inspire/executive-summary.html">Elias &middot; 44 albums &middot; 93.05</a> &middot;
+      <a href="../caleb-inspire/executive-summary.html">Caleb &middot; 30 albums &middot; 93.67</a> &middot;
+      <a href="../imani-inspire/executive-summary.html">Imani &middot; 41 albums &middot; 95.05</a> &middot;
+      <a href="../zev-inspire/executive-summary.html">Zev &middot; 40 albums &middot; 94.49</a> &middot;
+      <a href="../amir-inspire/executive-summary.html">Amir &middot; 48 albums &middot; 94.34</a> &middot;
+      <a href="../nova-inspire/executive-summary.html">Nova &middot; 50 albums &middot; 93.92</a> &middot;
+      <a href="../santiago-inspire/executive-summary.html">Santiago &middot; 41 albums &middot; 94.46</a> &middot;
+      <a href="../tahoma-inspire/executive-summary.html">Tahoma &middot; 40 albums &middot; 93.86</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* ============================================================================
+   Manage Music admin module. Namespaced `mm-` so nothing collides with the
+   rest of the admin console. Reuses the global design tokens (--surface,
+   --accent, --ink, …) from site.css.
+   ========================================================================== */
+
+.mm-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.mm-tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+.mm-tab {
+  padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent;
+  color: var(--ink-soft); border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0;
+}
+.mm-tab:hover { color: var(--ink); }
+.mm-tab.active { color: var(--accent-gold); border-bottom-color: var(--accent); }
+
+/* Summary cards */
+.mm-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.mm-card {
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+  cursor: pointer; transition: border-color .15s, transform .1s; text-align: left;
+}
+.mm-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.mm-card .v { font-size: 26px; font-weight: 800; color: var(--accent-gold); line-height: 1.1; }
+.mm-card .l { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+.mm-card.warn .v { color: var(--accent-peach); }
+
+/* Buttons */
+.mm-btn {
+  background: var(--surface-3); border: 1px solid var(--line); color: var(--ink); border-radius: 8px;
+  padding: 7px 13px; font-weight: 600; font-size: 13px; cursor: pointer;
+}
+.mm-btn:hover { border-color: var(--accent); }
+.mm-btn:disabled { opacity: .5; cursor: not-allowed; }
+.mm-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.mm-btn.sm { padding: 4px 8px; font-size: 12px; }
+.mm-btn-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+/* Filters */
+.mm-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.mm-input, .mm-select {
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+  border-radius: 8px; padding: 7px 10px; font-size: 13px;
+}
+.mm-input { min-width: 220px; }
+
+/* Table */
+.mm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mm-table th, .mm-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+.mm-table th { color: var(--ink-soft); font-weight: 700; font-size: 12px; cursor: pointer; white-space: nowrap; }
+.mm-table tbody tr:hover { background: var(--surface); }
+.mm-thumb { width: 38px; height: 38px; border-radius: 6px; object-fit: cover; background: var(--surface-3); display: block; }
+.mm-thumb.empty { display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+/* Status badges / indicators */
+.mm-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.mm-badge.published { background: rgba(95,179,113,.18); color: #7ed098; }
+.mm-badge.hidden    { background: rgba(233,69,96,.18); color: #ff8198; }
+.mm-badge.draft     { background: rgba(176,180,204,.15); color: var(--ink-soft); }
+.mm-dot { font-size: 12px; }
+
+.mm-check.pass { color: #7ed098; }
+.mm-check.fail { color: #ff8198; }
+
+/* Pagination */
+.mm-pager { display: flex; gap: 10px; align-items: center; justify-content: flex-end; margin-top: 14px; font-size: 13px; color: var(--ink-soft); }
+
+/* Drawer (album detail) */
+.mm-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 2000; }
+.mm-drawer {
+  position: fixed; top: 0; right: 0; height: 100vh; width: min(640px, 96vw); z-index: 2001;
+  background: var(--bg); border-left: 1px solid var(--line); box-shadow: -8px 0 40px rgba(0,0,0,.4);
+  overflow-y: auto; padding: 22px 24px;
+}
+.mm-drawer h3 { margin: 0 0 4px; }
+.mm-drawer-close { position: absolute; top: 16px; right: 18px; background: none; border: none; color: var(--ink-soft); font-size: 22px; cursor: pointer; }
+.mm-kv { display: grid; grid-template-columns: 150px 1fr; gap: 6px 12px; font-size: 13px; margin: 12px 0; }
+.mm-kv dt { color: var(--ink-soft); }
+.mm-kv dd { margin: 0; word-break: break-all; }
+
+.mm-section-h { font-size: 13px; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: .04em; margin: 18px 0 8px; }
+
+.mm-bulkbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 12px; margin-bottom: 12px;
+  background: var(--surface-2); border: 1px solid var(--accent); border-radius: 8px; font-size: 13px;
+}
+.mm-muted { color: var(--ink-muted); }
+.mm-note { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); font-size: 13px; margin-bottom: 14px; }
+.mm-note.ok { border-color: var(--success); }
+.mm-note.err { border-color: var(--accent); }
+.mm-log { font-family: ui-monospace, monospace; font-size: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px; max-height: 240px; overflow: auto; white-space: pre-wrap; }

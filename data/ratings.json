@@ -1,0 +1,12 @@
+[
+  {
+    "id": "16165dd0-7529-4443-acf8-5c34d560049c",
+    "rateable_type": "song",
+    "rateable_id": "test-uuid-1",
+    "user_id": "00000000-0000-0000-0000-000000000001",
+    "stars": 4,
+    "note": "smoke test",
+    "created_at": "2026-06-03T23:59:34.977Z",
+    "updated_at": "2026-06-03T23:59:34.977Z"
+  }
+]

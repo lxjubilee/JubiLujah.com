@@ -1,0 +1,58 @@
+# Jubilujah.com — local development stack
+# Usage:
+#   cp .env.example .env
+#   docker compose up -d        # starts Postgres (schema+seed auto-loaded) + mock-oidc
+#   npm install                 # install workspace deps
+#   npm run dev                 # run api (:4000) + web (:3000) + (oidc runs in compose)
+#
+# Postgres auto-initializes from db/migrations + db/seed on first boot only
+# (the named volume must be removed to re-init: `docker compose down -v`).
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: jubilujah-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jubilee
+      POSTGRES_PASSWORD: jubilee_dev_pw
+      POSTGRES_DB: jubilujah
+    ports:
+      - "5432:5432"
+    volumes:
+      - jubilee_pgdata:/var/lib/postgresql/data
+      # Files run in lexical order; all migrations (000X_ sort before 0X_ seeds), then seeds.
+      - ./db/migrations/0001_init.sql:/docker-entrypoint-initdb.d/0001_init.sql:ro
+      - ./db/migrations/0002_credentials.sql:/docker-entrypoint-initdb.d/0002_credentials.sql:ro
+      - ./db/migrations/0003_user_playlists.sql:/docker-entrypoint-initdb.d/0003_user_playlists.sql:ro
+      - ./db/migrations/0004_password_resets.sql:/docker-entrypoint-initdb.d/0004_password_resets.sql:ro
+      - ./db/migrations/0005_login_security.sql:/docker-entrypoint-initdb.d/0005_login_security.sql:ro
+      - ./db/migrations/0006_signup_verifications.sql:/docker-entrypoint-initdb.d/0006_signup_verifications.sql:ro
+      - ./db/migrations/0007_service_idempotency.sql:/docker-entrypoint-initdb.d/0007_service_idempotency.sql:ro
+      - ./db/migrations/0008_refresh_tokens.sql:/docker-entrypoint-initdb.d/0008_refresh_tokens.sql:ro
+      - ./db/migrations/0009_account_deletion_fks.sql:/docker-entrypoint-initdb.d/0009_account_deletion_fks.sql:ro
+      - ./db/seed/01_award_periods.sql:/docker-entrypoint-initdb.d/01_award_periods.sql:ro
+      - ./db/seed/02_stations.sql:/docker-entrypoint-initdb.d/02_stations.sql:ro
+      - ./db/seed/03_demo_editorial.sql:/docker-entrypoint-initdb.d/03_demo_editorial.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jubilee -d jubilujah"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mock-oidc:
+    build:
+      context: ./mock-oidc
+    container_name: jubilujah-mock-oidc
+    restart: unless-stopped
+    environment:
+      MOCK_OIDC_PORT: "4010"
+      MOCK_OIDC_ISSUER: "http://localhost:4010"
+      OIDC_CLIENT_ID: "jubilujah-web"
+      OIDC_CLIENT_SECRET: "jubilujah-dev-secret"
+      OIDC_REDIRECT_URI: "http://localhost:4000/api/auth/callback"
+    ports:
+      - "4010:4010"
+
+volumes:
+  jubilee_pgdata:

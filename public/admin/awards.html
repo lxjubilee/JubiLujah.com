@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awards Review &middot; Jubilujah Admin</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<link rel="stylesheet" href="/_assets/widgets/rating-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/comment-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/trophy-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/player-widget.css">
+<script src="/_assets/widgets/rating-widget.js" defer></script>
+<script src="/_assets/widgets/comment-widget.js" defer></script>
+<script src="/_assets/widgets/trophy-widget.js" defer></script>
+<script src="/_assets/widgets/player-widget.js" defer></script>
+<style>
+  /* ==================== ADMIN-SHARED ==================== */
+  .admin-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .admin-notice {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.12) 0%, rgba(254, 202, 87, 0.06) 100%), var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-notice strong { color: var(--accent-peach); letter-spacing: 0.04em; }
+
+  .admin-subnav {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-subnav a {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--line);
+    transition: background 0.15s, color 0.15s;
+  }
+  .admin-subnav a:last-child { border-right: none; }
+  .admin-subnav a:hover { background: var(--surface-2); color: var(--ink); }
+  .admin-subnav a.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+
+  /* ==================== TWO-COLUMN ==================== */
+  .awards-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 28px;
+  }
+  @media (max-width: 980px) { .awards-layout { grid-template-columns: 1fr; } }
+
+  /* ==================== PERIOD SELECTOR ==================== */
+  .period-bar {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .period-bar label {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .period-bar select {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 140px;
+  }
+  .period-bar select:focus { outline: none; border-color: var(--accent); }
+  .period-bar .status-pill {
+    background: rgba(95, 179, 113, 0.12);
+    border: 1px solid rgba(95, 179, 113, 0.4);
+    color: #7fc28e;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ==================== CATEGORY ACCORDION ==================== */
+  .category {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .category.open { border-color: var(--accent); }
+  .cat-head {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .cat-head:hover { background: var(--surface-2); }
+  .cat-head .name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .cat-head .count {
+    background: var(--bg-1);
+    color: var(--accent-gold);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-left: 10px;
+  }
+  .cat-head .scope {
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-left: 8px;
+  }
+  .cat-head .chev {
+    color: var(--accent);
+    font-size: 18px;
+    transition: transform 0.18s;
+  }
+  .category.open .cat-head .chev { transform: rotate(90deg); }
+  .cat-body {
+    display: none;
+    padding: 6px 16px 18px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-1);
+  }
+  .category.open .cat-body { display: block; }
+
+  /* ==================== NOMINEE CARD ==================== */
+  .nominee {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 12px;
+  }
+  .nominee-head {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .nominee-cover {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+  .nominee-cover.c1 { background: linear-gradient(135deg, #e94560 0%, #c2304c 100%); }
+  .nominee-cover.c2 { background: linear-gradient(135deg, #feca57 0%, #c89c4a 100%); }
+  .nominee-cover.c3 { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%); }
+  .nominee-cover.c4 { background: linear-gradient(135deg, #4ab1c4 0%, #1e617a 100%); }
+  .nominee-cover.c5 { background: linear-gradient(135deg, #ff8c4a 0%, #c25a1e 100%); }
+  .nominee-cover.c6 { background: linear-gradient(135deg, #4a8c2d 0%, #2d5a1e 100%); }
+  .nominee-meta .title { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .nominee-meta .artist { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+  .nominee-meta .stats {
+    margin-top: 6px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .nominee-meta .stars { color: var(--accent-gold); font-weight: 700; letter-spacing: 0.05em; }
+  .nominee-meta .noms { color: var(--accent-peach); font-weight: 700; letter-spacing: 0.05em; }
+  .nominee-meta .type-chip {
+    background: var(--surface-2);
+    color: var(--ink-muted);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .nominators-block {
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .nominators-block .h {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .nominator {
+    background: var(--bg-1);
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--accent-gold);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+  .nominator .who {
+    font-size: 12px;
+    color: var(--accent-peach);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .nominator .who .chars {
+    color: var(--ink-muted);
+    font-weight: 500;
+    margin-left: 8px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .nominator .reason {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .nominee-actions {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .nominee-actions button {
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .nominee-actions .winner {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #c89c4a 100%);
+    color: #2c1f1a;
+    border-color: var(--accent-gold);
+  }
+  .nominee-actions .winner:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .nominee-actions .honorable {
+    background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%);
+    color: #fff;
+    border-color: #8c6fcf;
+  }
+  .nominee-actions .honorable:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .nominee-actions .set-aside:hover {
+    background: rgba(233, 69, 96, 0.12);
+    border-color: var(--accent);
+    color: var(--accent-peach);
+  }
+
+  /* ==================== SIDEBAR ==================== */
+  .sidebar {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    align-self: start;
+    position: sticky;
+    top: 110px;
+  }
+  .sidebar h3 {
+    font-size: 14px;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .period-row {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13px;
+  }
+  .period-row:last-child { border-bottom: none; }
+  .period-row .y {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .period-row .cats {
+    color: var(--ink-muted);
+    font-size: 11px;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .period-row .closes {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--accent-peach);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span class="admin-badge">Admin Mode</span>
+        <a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="#login" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Admin Dashboard</div>
+    <h1>Awards <em>review</em></h1>
+    <p class="lead">
+      Nominees Review for the open period. Admins hand-select winners after Dec 31 of the period year; nomination counts are editorial signal only, not a vote.
+    </p>
+  </div>
+</section>
+
+<section class="standard">
+  <div class="container">
+
+    <div class="admin-notice">
+      <strong>ADMIN MODE</strong>
+      <span>This section is gated to the <strong>admin</strong> role per Build Spec &sect;5. Per &sect;11, every justification is &ge; 250 chars; winners are hand-picked, not auto-tallied.</span>
+    </div>
+
+    <nav class="admin-subnav">
+      <a href="/admin/index.html">Overview</a>
+      <a href="/admin/pipeline.html">Pipeline Kanban</a>
+      <a href="/admin/awards.html" class="active">Awards Review</a>
+      <a href="/admin/users.html">Users &amp; Roles</a>
+    </nav>
+
+    <div class="awards-layout">
+      <div>
+        <div class="period-bar">
+          <label>Period</label>
+          <select id="periodSelect">
+            <option>2026</option>
+            <option>2025 (closed)</option>
+            <option>2024 (awarded)</option>
+          </select>
+          <span class="status-pill">Open</span>
+        </div>
+
+        <div id="categories"></div>
+      </div>
+
+      <aside class="sidebar">
+        <h3>Current Open Periods</h3>
+        <div class="period-row">
+          <div class="y">2026 &mdash; All categories</div>
+          <div class="cats">11 categories &middot; 47 nominations</div>
+          <div class="closes">Closes Dec 31, 2026</div>
+        </div>
+        <div class="period-row">
+          <div class="y">2026 &mdash; Children's Special</div>
+          <div class="cats">2 categories &middot; 8 nominations</div>
+          <div class="closes">Closes Dec 31, 2026</div>
+        </div>
+        <div class="period-row">
+          <div class="y">2025 &mdash; Awarded</div>
+          <div class="cats">11 categories &middot; 9 winners named</div>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><strong>Jubilujah.com Admin</strong> &middot; Awards review</div>
+    <span class="jubilee-badge">A Jubilee Enterprise</span>
+    <div>&copy; 2026 Jubilee Software, Inc.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   AWARDS REVIEW — MOCK DATA (Build Spec §11 + §14)
+   Per category accordion; nominees sorted by count desc.
+   ============================================================ */
+
+const CATEGORIES = [
+  { name: 'Song of the Year',                            scope: 'song' },
+  { name: 'Album of the Year',                           scope: 'album' },
+  { name: 'Most Anointed Lyric',                         scope: 'song' },
+  { name: 'Best Worship Anthem',                         scope: 'song' },
+  { name: 'Best Prophetic Song',                         scope: 'song' },
+  { name: 'Best Declaration Song',                       scope: 'song' },
+  { name: "Best Children's Song",                        scope: 'song' },
+  { name: "Best Children's Album",                       scope: 'album' },
+  { name: 'Best Bilingual or Multilingual Production',   scope: 'song' },
+  { name: 'Best Cinematic Production',                   scope: 'song' },
+  { name: 'Breakthrough Album of the Year',              scope: 'album' },
+];
+
+/* Reusable nominee pool — actual sort happens per category */
+const NOMINEES_POOL = {
+  'Song of the Year': [
+    { ttl: 'Breakthrough',     artist: 'Caleb Inspire',     stars: 4.8, c: 'c1', nominators: [
+      { who: 'Melody Inspire', reason: 'The way the bridge breaks into the chorus is the single most moving moment in the entire Inspire Family catalog this cycle. Caleb has captured a stewardship-of-grace lyric without flinching from the cost, and his vocal restraint in verse 2 sets up the explosion later that feels earned rather than manufactured.' },
+      { who: 'Gabriel Ungureanu', reason: 'A clean lyrical line from first verse through final chorus, theologically grounded without ever feeling like a sermon, and a production that breathes. The drop into the a cappella moment at 3:14 is the kind of editorial decision that elevates a good song into a great one. Nominated without hesitation.' },
+      { who: 'Tahoma Inspire',   reason: 'QA notes were unusually short for this track because there was almost nothing to fix. The mix sits beautifully, the vocal layering is tasteful, and the song never overstays its welcome. I would put this in front of any audience and trust it to land. Strong Song of the Year contender from the production-quality side.' },
+    ]},
+    { ttl: 'Mountains Move',   artist: 'Imani Inspire',     stars: 4.6, c: 'c2', nominators: [
+      { who: 'Sunil Gemini',   reason: 'Imani delivers a declaration vocal that is genuinely arresting. The percussion arrangement under the bridge gives the song a heartbeat that lifts it above the surrounding tracks in the album. I have listened to this six times in two days and the lyric "mountains move when My people pray" continues to land each time.' },
+      { who: 'Eliana Inspire', reason: 'A worship-declaration hybrid that does not feel like it is straddling. The harmony stack from 2:40 forward is the kind of thing that makes me wish I had thought of it. Strong nomination for Song of the Year from someone whose own song is also in the running.' },
+    ]},
+    { ttl: 'River of Healing', artist: 'Eliana Inspire',    stars: 4.5, c: 'c4', nominators: [
+      { who: 'Melody Inspire', reason: 'Few songs in this cycle have the emotional honesty of "River of Healing." Eliana writes from the inside of grief without leaving the listener there; the resolution feels like a hand extended rather than a finger pointed. The string arrangement under the final chorus does the same work as the lyric.' },
+    ]},
+  ],
+  'Album of the Year': [
+    { ttl: 'Caleb-Inspire-Breakthrough',  artist: 'Caleb Inspire',   stars: 4.7, c: 'c1', nominators: [
+      { who: 'Gabriel Ungureanu', reason: 'Twelve songs that hold together as a single statement. The narrative arc from "Quiet River" through "Awake, Awake" tracks a believer\'s journey from doubt into proclamation without any of the songs feeling like filler. Caleb\'s Identity DNA is now fully formed; this is the album that establishes it.' },
+      { who: 'Sunil Gemini',      reason: 'Album-level cohesion is the hardest thing to achieve in this catalog. Most of our 12-song albums have two or three throwaway tracks. This one does not. Every track earns its place, and the sequencing has been thought through carefully. A strong Album of the Year contender.' },
+    ]},
+    { ttl: 'Highlands & Hymns',           artist: 'Elias Inspire',   stars: 4.4, c: 'c3', nominators: [
+      { who: 'Melody Inspire', reason: 'Elias has built a coyote-bone-flute palette here that nobody else in the catalog occupies. The use of Lakota phrasing alongside English hymn fragments creates a layered prayer the entire album sustains. This is the kind of album that justifies the Inspire Family\'s polyphonic mandate.' },
+    ]},
+  ],
+  'Most Anointed Lyric': [
+    { ttl: 'Send Me, Lord',    artist: 'Gabriel Inspire',   stars: 4.9, c: 'c6', nominators: [
+      { who: 'Sunil Gemini',     reason: 'The lyric "send me to the place You cannot un-see" is the most theologically weighty single line written for any song this cycle. It refuses easy missions sentiment and locks the listener into the cost of obedience. The surrounding lyric supports without crowding it. Most Anointed Lyric, full stop.' },
+      { who: 'Tahoma Inspire',  reason: 'Anointing in lyric is not measured by cleverness but by the way a line keeps preaching to you when the song is over. This lyric does that. I have caught myself praying it out loud three times this week. A strong nomination for Most Anointed Lyric.' },
+    ]},
+  ],
+  'Best Worship Anthem': [
+    { ttl: 'Praise Him Loud',  artist: 'Zev Inspire',       stars: 4.7, c: 'c2', nominators: [
+      { who: 'Gabriel Ungureanu', reason: 'Zev has finally cracked the corporate-worship anthem without sacrificing his percussion-driven Identity DNA. The chorus is congregation-friendly without being cloying, the bridge gives a worship leader a place to land a dynamic, and the lyric stays high-Christology throughout. Best Worship Anthem.' },
+    ]},
+    { ttl: 'King of My Heart', artist: 'Kingdom Pulse',     stars: 4.5, c: 'c1', nominators: [
+      { who: 'Melody Inspire', reason: 'Kingdom Pulse continues to deliver worship anthems that translate from the bedroom listener to the stadium worship set without losing their pulse. This one in particular has a singable chorus the church will own within a single Sunday. Strong nomination for Best Worship Anthem from the partner-artist side.' },
+    ]},
+  ],
+  'Best Prophetic Song': [
+    { ttl: 'Awake, Awake',     artist: 'Jubilee Inspire',   stars: 4.6, c: 'c4', nominators: [
+      { who: 'Gabriel Ungureanu', reason: 'A genuine prophetic song does the work of waking the listener, not entertaining them. "Awake, Awake" carries an Isaiah 52 undertow without being a transcription, and the way Jubilee lets the music drop out under the second-to-last "awake" is the most exposed moment on the album. Best Prophetic Song nomination.' },
+    ]},
+  ],
+  'Best Declaration Song': [
+    { ttl: 'Mountains Move',   artist: 'Imani Inspire',     stars: 4.6, c: 'c2', nominators: [
+      { who: 'Eliana Inspire', reason: 'Declaration is a hard genre because it can collapse into shouting. Imani gives us a declaration that builds rather than starts at the top, and the percussion arrangement under "mountains move when My people pray" makes the line feel inevitable. A strong Best Declaration Song nomination from inside the family.' },
+    ]},
+  ],
+  "Best Children's Song": [
+    { ttl: 'Daisy Says Dance', artist: 'Party Giggles',     stars: 4.4, c: 'c2', nominators: [
+      { who: 'Melody Inspire', reason: 'Children\'s songs live or die by whether a four-year-old asks for them by name. "Daisy Says Dance" has been requested by three of the test-listener families more than any other track this cycle. The animal-callout structure makes it a perfect dance-party opener, and the lyric still slips in a "thank You, Lord" without preaching at kids.' },
+    ]},
+  ],
+  "Best Children's Album": [
+    { ttl: 'Bedtime in the Barn (album)',  artist: 'Tiny Tiggles',   stars: 4.3, c: 'c5', nominators: [
+      { who: 'Gabriel Ungureanu', reason: 'A lullaby album that earns its slot in the bedtime rotation. The pacing across 14 tracks is genuinely soothing without becoming monotonous, and the inclusion of two narrated Bible-story tracks among the songs gives parents permission to use the album as a wind-down ritual. Strong Best Children\'s Album candidate.' },
+    ]},
+  ],
+  'Best Bilingual or Multilingual Production': [
+    { ttl: 'Tierra de Promesa', artist: 'Santiago Inspire', stars: 4.6, c: 'c5', nominators: [
+      { who: 'Gabriel Ungureanu', reason: 'Santiago has stopped writing English songs with Spanish translations bolted on and started writing genuinely bilingual songs where the two languages do different lyrical work. "Tierra de Promesa" carries a verse in Spanish and a chorus in English that complete each other, and the production weaves the languages instead of separating them.' },
+    ]},
+  ],
+  'Best Cinematic Production': [
+    { ttl: 'Coyote Moon',      artist: 'Elias Inspire',     stars: 4.5, c: 'c3', nominators: [
+      { who: 'Melody Inspire', reason: 'A song that conjures a place. From the first measure you can see the desert at moonrise, and the song never breaks that spell. The orchestration choices are restrained where many would over-arrange, and the result is the most cinematic single track in the catalog this year. Best Cinematic Production nomination.' },
+    ]},
+  ],
+  'Breakthrough Album of the Year': [
+    { ttl: 'Caleb-Inspire-Breakthrough', artist: 'Caleb Inspire', stars: 4.7, c: 'c1', nominators: [
+      { who: 'Sunil Gemini', reason: 'This is the album that takes Caleb from "Inspire Family rookie" to "Inspire Family voice." Every artistic choice across the twelve tracks is a step forward from his prior work, and the album has the kind of internal coherence that signals an artist who has found their lane. Strong nomination for Breakthrough Album of the Year.' },
+    ]},
+  ],
+};
+
+function renderNominee(n) {
+  const noms = n.nominators.map(x => `
+    <div class="nominator">
+      <div class="who">${x.who}<span class="chars">${x.reason.length} chars</span></div>
+      <div class="reason">"${x.reason}"</div>
+    </div>
+  `).join('');
+  return `
+    <div class="nominee">
+      <div class="nominee-head">
+        <div class="nominee-cover ${n.c}">${n.ttl.charAt(0)}</div>
+        <div class="nominee-meta">
+          <div class="title">${n.ttl}</div>
+          <div class="artist">${n.artist}</div>
+          <div class="stats">
+            <span class="stars">&#9733; ${n.stars.toFixed(1)}</span>
+            <span class="noms">${n.nominators.length} nomination${n.nominators.length === 1 ? '' : 's'}</span>
+          </div>
+        </div>
+        <span class="type-chip">${n.artist.includes('album') ? 'album' : 'song'}</span>
+      </div>
+      <div class="nominators-block">
+        <div class="h">Justifications</div>
+        ${noms}
+      </div>
+      <div class="nominee-actions">
+        <button class="winner"   onclick="alert('Mock: Award Winner action — will require citation per spec §11')">&#127942; Award Winner</button>
+        <button class="honorable" onclick="alert('Mock: Honorable Mention — distinct runner-up entry per spec §11')">Honorable Mention</button>
+        <button class="set-aside" onclick="alert('Mock: Set Aside — drops nominee from review queue')">Set Aside</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderCategories() {
+  const root = document.getElementById('categories');
+  root.innerHTML = CATEGORIES.map((cat, idx) => {
+    const pool = (NOMINEES_POOL[cat.name] || []).slice().sort((a, b) => b.nominators.length - a.nominators.length);
+    const isOpen = idx === 0 ? 'open' : '';
+    return `
+      <div class="category ${isOpen}" data-cat="${cat.name}">
+        <div class="cat-head" onclick="this.parentElement.classList.toggle('open')">
+          <div>
+            <span class="name">${cat.name}</span>
+            <span class="count">${pool.length} nominee${pool.length === 1 ? '' : 's'}</span>
+            <span class="scope">${cat.scope}</span>
+          </div>
+          <span class="chev">&rsaquo;</span>
+        </div>
+        <div class="cat-body">
+          ${pool.length ? pool.map(renderNominee).join('') : '<div style="padding:18px 4px;color:var(--ink-muted);font-style:italic;font-size:13px;">No nominees yet for this category in the open period.</div>'}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+renderCategories();
+</script>
+
+</body>
+</html>

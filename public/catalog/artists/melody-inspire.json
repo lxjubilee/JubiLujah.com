@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/artist.schema.json",
+  "id": "86a590fe-9194-44a8-9e43-af129f453a36",
+  "type": "artist",
+  "version": 4,
+  "status": "published",
+  "slug": "melody-inspire",
+  "name": "Melody Inspire",
+  "display_name": "Melody Inspire",
+  "grouping": "inspire_family",
+  "five_fold_office": "prophet",
+  "genre_anchor": "contemplative pop",
+  "vocal_gender": "female",
+  "bio_short": "Contemplative pop balladeer of the Inspire Family — the prophet voice who turns quiet revelation into anthems for the bride.",
+  "bio_long": "Melody Inspire is the contemplative pop voice of the Inspire Family, carrying the prophet office with a soprano that reads more like a journal entry than a sermon. Her songs trace the slow bloom of a heart learning to be loved by God — bridal hope in minor keys, mercy spoken at 3 a.m., the prophetic word that arrives as a whisper before it arrives as a wave. Where Jubilee Inspire commands the arena and Nova Inspire runs the dance floor, Melody sits at the kitchen window with a cup of tea and tells the truth about who Jesus is to a soul that is still becoming. Her catalog spans forty albums of small brave moments, porch-light vigils, and bridal anticipation rooted in Isaiah 62 and Revelation 19 — the Bridegroom rejoicing over His bride, the marriage supper drawing near. Co-signed by Gabriel Inspire as apostolic covering, Melody's work anchors the Inspire Family's contemplative wing and serves as the front-porch invitation to the wider Jubileeverse.",
+  "visual_identity": {
+    "avatar_url": "https://cdn.jubileeverse.com/art/artists/melody-inspire/avatar-512.webp",
+    "avatar_url_large": "https://cdn.jubileeverse.com/art/artists/melody-inspire/avatar-1024.webp",
+    "banner_url": "https://cdn.jubileeverse.com/art/artists/melody-inspire/banner-1600.webp",
+    "color_primary": "#d4a5c4",
+    "color_secondary": "#f5e6f0"
+  },
+  "languages_primary": ["en"],
+  "languages_secondary": ["ro"],
+  "album_count": 40,
+  "song_count": 480,
+  "metadata": {
+    "first_published_at": "2024-09-12T00:00:00Z",
+    "last_updated_at": "2026-05-28T11:14:22Z"
+  }
+}

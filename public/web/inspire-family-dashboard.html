@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspire Family &middot; Sonic Craft Dashboard</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --melody: #e0a458;
+    --melody-warm: #f0b878;
+    --melody-deep: #c8553d;
+    --jubilee: #d4a93b;
+    --jubilee-warm: #e8c66d;
+    --jubilee-deep: #b73d4f;
+    --zariah: #c46b3a;
+    --zariah-warm: #e89556;
+    --zariah-deep: #a83e3b;
+    --elias: #c89149;
+    --elias-warm: #e3a96b;
+    --elias-deep: #6b8b5a;
+    --eliana: #c8a154;
+    --eliana-warm: #e0bf7e;
+    --eliana-deep: #8b4a5f;
+    --caleb: #4a7a8c;
+    --caleb-warm: #6ba0b8;
+    --caleb-deep: #8b3a52;
+    --imani: #c84a3a;
+    --imani-warm: #e89540;
+    --imani-deep: #7a2f3a;
+    --zev: #5a6ba8;
+    --zev-warm: #8295c8;
+    --zev-deep: #c89540;
+    --amir: #c89048;
+    --amir-warm: #e8b870;
+    --amir-deep: #4a8c6b;
+    --nova: #8c5fbf;
+    --nova-warm: #c08aef;
+    --nova-deep: #4a8cb8;
+    --santiago: #d4622d;
+    --santiago-warm: #e8854a;
+    --santiago-deep: #8b2a3e;
+    --tahoma: #b85a3c;
+    --tahoma-warm: #e09454;
+    --tahoma-deep: #2d4632;
+    --tahoma-pacific: #4a9d92;
+    --hook: #e07856;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #5e95a8;
+    --success: #5fb371;
+    --inactive: #4a5260;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(700px 400px at 5% -10%, rgba(224, 164, 88, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 20% 110%, rgba(212, 169, 59, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 35% -10%, rgba(196, 107, 58, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 50% 110%, rgba(200, 145, 73, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 65% -10%, rgba(200, 161, 84, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 70% 110%, rgba(74, 122, 140, 0.10) 0%, transparent 50%),
+      radial-gradient(700px 400px at 85% -10%, rgba(200, 74, 58, 0.12) 0%, transparent 50%),
+      radial-gradient(700px 400px at 100% 110%, rgba(90, 107, 168, 0.12) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 88px 0 72px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--melody) 0%, var(--jubilee) 9%, var(--zariah) 18%, var(--elias) 27%, var(--eliana) 36%, var(--caleb) 45%, var(--imani) 54%, var(--zev) 64%, var(--amir) 73%, var(--nova) 82%, var(--santiago) 91%, var(--tahoma) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+    margin: 8px 0 18px;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(90deg, var(--melody-warm) 0%, var(--jubilee-warm) 9%, var(--zariah-warm) 18%, var(--elias-warm) 27%, var(--eliana-warm) 36%, var(--caleb-warm) 45%, var(--imani-warm) 54%, var(--zev-warm) 64%, var(--amir-warm) 73%, var(--nova-warm) 82%, var(--santiago-warm) 91%, var(--tahoma-warm) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 1080px;
+    line-height: 1.55;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 36px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  @media (max-width: 800px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
+  .hero-stat {
+    padding: 22px 24px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat .label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .hero-stat .val {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat .val.gradient {
+    background: linear-gradient(90deg, var(--melody) 0%, var(--jubilee) 9%, var(--zariah) 18%, var(--elias) 27%, var(--eliana) 36%, var(--caleb) 45%, var(--imani) 54%, var(--zev) 64%, var(--amir) 73%, var(--nova) 82%, var(--santiago) 91%, var(--tahoma) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section.tight { padding: 44px 0; }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 1080px;
+    margin-bottom: 36px;
+  }
+
+  /* 7-card grid: 4 cols (4 + 3) desktop · 3 cols (3 + 3 + 1) large · 2 cols medium · 1 col small */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  @media (max-width: 1400px) { .persona-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 1100px) { .persona-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 700px) { .persona-grid { grid-template-columns: 1fr; } }
+
+  .persona {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .persona:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -16px rgba(0,0,0,0.5);
+  }
+  .persona.melody:hover { border-color: var(--melody); }
+  .persona.jubilee:hover { border-color: var(--jubilee); }
+  .persona.zariah:hover { border-color: var(--zariah); }
+  .persona.elias:hover { border-color: var(--elias); }
+  .persona.eliana:hover { border-color: var(--eliana); }
+  .persona.caleb:hover { border-color: var(--caleb); }
+  .persona.imani:hover { border-color: var(--imani); }
+  .persona.zev:hover { border-color: var(--zev); }
+  .persona.amir:hover { border-color: var(--amir); }
+  .persona.nova:hover { border-color: var(--nova); }
+  .persona.santiago:hover { border-color: var(--santiago); }
+
+  .persona-head {
+    padding: 26px 26px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .persona.melody .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(224, 164, 88, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--melody);
+  }
+  .persona.jubilee .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(212, 169, 59, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--jubilee);
+  }
+  .persona.zariah .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(196, 107, 58, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--zariah);
+  }
+  .persona.elias .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(200, 145, 73, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--elias);
+  }
+  .persona.eliana .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(200, 161, 84, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--eliana);
+  }
+  .persona.caleb .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(74, 122, 140, 0.18) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--caleb);
+  }
+  .persona.imani .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(200, 74, 58, 0.20) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--imani);
+  }
+  .persona.imani {
+    box-shadow: 0 0 0 1px rgba(200, 74, 58, 0.20) inset;
+  }
+  .persona.imani::before {
+    content: 'FAMILY HIGH';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--imani) 0%, var(--imani-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.imani { position: relative; }
+  .persona.zev .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(90, 107, 168, 0.20) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--zev);
+  }
+  .persona.zev {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(90, 107, 168, 0.18) inset;
+  }
+  .persona.zev::before {
+    content: 'FAMILY #2 \00B7 EMPULL HIGH';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--zev) 0%, var(--zev-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.amir .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(200, 144, 72, 0.20) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--amir);
+  }
+  .persona.amir {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(200, 144, 72, 0.18) inset;
+  }
+  .persona.amir::before {
+    content: 'LARGEST CATALOG \00B7 EMPULL HIGH';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--amir) 0%, var(--amir-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.nova .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(140, 95, 191, 0.22) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--nova);
+  }
+  .persona.nova {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(140, 95, 191, 0.18) inset;
+  }
+  .persona.nova::before {
+    content: 'WIDEST TONAL RANGE \00B7 50 ALBUMS';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--nova) 0%, var(--nova-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.nova .persona-role { color: var(--nova-warm); }
+  .persona.nova .persona-composite .num {
+    background: linear-gradient(135deg, var(--nova-warm) 0%, var(--nova-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.nova .persona-cta { color: var(--nova-warm); border: 1px solid rgba(140, 95, 191, 0.3); }
+  .persona.nova .persona-cta:hover { background: rgba(140, 95, 191, 0.12); border-color: var(--nova); }
+  td.nova-cell { color: var(--nova-warm); font-weight: 700; }
+  th.nova-col { color: var(--nova-warm); }
+  tr.composite-row td.nova-cell { color: var(--nova-warm); }
+  .character-quote .quote em.nova { color: var(--nova-warm); font-style: italic; }
+  .character-quote .quote em.santiago { color: var(--santiago-warm); font-style: italic; }
+  .persona.santiago .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(212, 98, 45, 0.22) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--santiago);
+  }
+  .persona.santiago {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(212, 98, 45, 0.18) inset;
+  }
+  .persona.santiago::before {
+    content: 'BILINGUAL LATIN \00B7 20 STYLES';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--santiago) 0%, var(--santiago-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.santiago .persona-role { color: var(--santiago-warm); }
+  .persona.santiago .persona-composite .num {
+    background: linear-gradient(135deg, var(--santiago-warm) 0%, var(--santiago-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.santiago .persona-cta { color: var(--santiago-warm); border: 1px solid rgba(212, 98, 45, 0.3); }
+  .persona.santiago .persona-cta:hover { background: rgba(212, 98, 45, 0.12); border-color: var(--santiago); }
+  td.santiago-cell { color: var(--santiago-warm); font-weight: 700; }
+  th.santiago-col { color: var(--santiago-warm); }
+  tr.composite-row td.santiago-cell { color: var(--santiago-warm); }
+
+  .persona.tahoma:hover { border-color: var(--tahoma); }
+  .persona.tahoma .persona-head {
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(184, 90, 60, 0.22) 0%, transparent 60%),
+      radial-gradient(300px 150px at 0% 100%, rgba(74, 157, 146, 0.14) 0%, transparent 60%),
+      var(--surface);
+    border-top: 3px solid var(--tahoma);
+  }
+  .persona.tahoma {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(184, 90, 60, 0.18) inset;
+  }
+  .persona.tahoma::before {
+    content: 'INDIGENOUS + PACIFIC \00B7 20 STYLES';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--tahoma) 0%, var(--tahoma-deep) 100%);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .persona.tahoma .persona-role { color: var(--tahoma-warm); }
+  .persona.tahoma .persona-composite .num {
+    background: linear-gradient(135deg, var(--tahoma-warm) 0%, var(--tahoma-pacific) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.tahoma .persona-cta { color: var(--tahoma-warm); border: 1px solid rgba(184, 90, 60, 0.3); }
+  .persona.tahoma .persona-cta:hover { background: rgba(184, 90, 60, 0.12); border-color: var(--tahoma); }
+  td.tahoma-cell { color: var(--tahoma-warm); font-weight: 700; }
+  th.tahoma-col { color: var(--tahoma-warm); }
+  tr.composite-row td.tahoma-cell { color: var(--tahoma-warm); }
+  .character-quote .quote em.tahoma { color: var(--tahoma-warm); font-style: italic; }
+
+  .persona-role {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .persona.melody .persona-role { color: var(--melody-warm); }
+  .persona.jubilee .persona-role { color: var(--jubilee-warm); }
+  .persona.zariah .persona-role { color: var(--zariah-warm); }
+  .persona.elias .persona-role { color: var(--elias-warm); }
+  .persona.eliana .persona-role { color: var(--eliana-warm); }
+  .persona.caleb .persona-role { color: var(--caleb-warm); }
+  .persona.imani .persona-role { color: var(--imani-warm); }
+  .persona.zev .persona-role { color: var(--zev-warm); }
+  .persona.amir .persona-role { color: var(--amir-warm); }
+
+  .persona-name {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .persona-tagline {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    line-height: 1.45;
+    margin-bottom: 16px;
+  }
+
+  .persona-composite {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .persona-composite .num {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .persona.melody .persona-composite .num {
+    background: linear-gradient(135deg, var(--melody-warm) 0%, var(--melody-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.jubilee .persona-composite .num {
+    background: linear-gradient(135deg, var(--jubilee-warm) 0%, var(--jubilee-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.zariah .persona-composite .num {
+    background: linear-gradient(135deg, var(--zariah-warm) 0%, var(--zariah-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.elias .persona-composite .num {
+    background: linear-gradient(135deg, var(--elias-warm) 0%, var(--elias-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.eliana .persona-composite .num {
+    background: linear-gradient(135deg, var(--eliana-warm) 0%, var(--eliana-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.caleb .persona-composite .num {
+    background: linear-gradient(135deg, var(--caleb-warm) 0%, var(--caleb-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.imani .persona-composite .num {
+    background: linear-gradient(135deg, var(--imani-warm) 0%, var(--imani-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.zev .persona-composite .num {
+    background: linear-gradient(135deg, var(--zev-warm) 0%, var(--zev-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona.amir .persona-composite .num {
+    background: linear-gradient(135deg, var(--amir-warm) 0%, var(--amir-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .persona-composite .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+
+  .persona-body {
+    padding: 20px 26px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .persona-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .persona-stat {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 11px 13px;
+  }
+  .persona-stat .label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .persona-stat .val {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .persona-dims {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .dim {
+    text-align: center;
+    padding: 6px 2px;
+  }
+  .dim .dim-num {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .dim .dim-label {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+  .dim.k-hook { border-top: 2px solid var(--hook); }
+  .dim.k-groove { border-top: 2px solid var(--groove); }
+  .dim.k-replay { border-top: 2px solid var(--replay); }
+  .dim.k-payoff { border-top: 2px solid var(--payoff); }
+  .dim.k-emotion { border-top: 2px solid var(--emotion); }
+  .dim.k-loop { border-top: 2px solid var(--loop); }
+
+  .persona-signature {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .persona-signature strong { color: var(--ink); }
+
+  .persona-cta {
+    margin-top: auto;
+    padding: 13px 16px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: 0.04em;
+    transition: background 0.15s ease;
+    display: block;
+  }
+  .persona.melody .persona-cta { color: var(--melody-warm); border: 1px solid rgba(224, 164, 88, 0.3); }
+  .persona.melody .persona-cta:hover { background: rgba(224, 164, 88, 0.12); border-color: var(--melody); }
+  .persona.jubilee .persona-cta { color: var(--jubilee-warm); border: 1px solid rgba(212, 169, 59, 0.3); }
+  .persona.jubilee .persona-cta:hover { background: rgba(212, 169, 59, 0.12); border-color: var(--jubilee); }
+  .persona.zariah .persona-cta { color: var(--zariah-warm); border: 1px solid rgba(196, 107, 58, 0.3); }
+  .persona.zariah .persona-cta:hover { background: rgba(196, 107, 58, 0.12); border-color: var(--zariah); }
+  .persona.elias .persona-cta { color: var(--elias-warm); border: 1px solid rgba(200, 145, 73, 0.3); }
+  .persona.elias .persona-cta:hover { background: rgba(200, 145, 73, 0.12); border-color: var(--elias); }
+  .persona.eliana .persona-cta { color: var(--eliana-warm); border: 1px solid rgba(200, 161, 84, 0.3); }
+  .persona.eliana .persona-cta:hover { background: rgba(200, 161, 84, 0.12); border-color: var(--eliana); }
+  .persona.caleb .persona-cta { color: var(--caleb-warm); border: 1px solid rgba(74, 122, 140, 0.3); }
+  .persona.caleb .persona-cta:hover { background: rgba(74, 122, 140, 0.12); border-color: var(--caleb); }
+  .persona.imani .persona-cta { color: var(--imani-warm); border: 1px solid rgba(200, 74, 58, 0.3); }
+  .persona.imani .persona-cta:hover { background: rgba(200, 74, 58, 0.12); border-color: var(--imani); }
+  .persona.zev .persona-cta { color: var(--zev-warm); border: 1px solid rgba(90, 107, 168, 0.3); }
+  .persona.zev .persona-cta:hover { background: rgba(90, 107, 168, 0.12); border-color: var(--zev); }
+  .persona.amir .persona-cta { color: var(--amir-warm); border: 1px solid rgba(200, 144, 72, 0.3); }
+  .persona.amir .persona-cta:hover { background: rgba(200, 144, 72, 0.12); border-color: var(--amir); }
+
+  .agg-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow-x: auto;
+    margin-top: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 980px; }
+  thead { background: var(--surface-2); }
+  th {
+    text-align: left;
+    padding: 14px 14px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  td.dim-name { color: var(--ink); font-weight: 600; }
+  td.persona-name-cell { font-family: Georgia, serif; font-weight: 700; font-size: 15px; }
+  td.melody-cell { color: var(--melody-warm); }
+  td.jubilee-cell { color: var(--jubilee-warm); }
+  td.zariah-cell { color: var(--zariah-warm); }
+  td.elias-cell { color: var(--elias-warm); }
+  td.eliana-cell { color: var(--eliana-warm); }
+  td.caleb-cell { color: var(--caleb-warm); }
+  td.imani-cell { color: var(--imani-warm); font-weight: 700; }
+  th.imani-col { color: var(--imani-warm); }
+  td.zev-cell { color: var(--zev-warm); font-weight: 700; }
+  th.zev-col { color: var(--zev-warm); }
+  td.amir-cell { color: var(--amir-warm); font-weight: 700; }
+  th.amir-col { color: var(--amir-warm); }
+  tr.composite-row td {
+    background: var(--surface-2);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    border-top: 2px solid var(--line);
+  }
+  tr.composite-row td.imani-cell { color: var(--imani-warm); }
+  tr.composite-row td.zev-cell { color: var(--zev-warm); }
+  tr.composite-row td.amir-cell { color: var(--amir-warm); }
+
+  .framework-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 900px) { .framework-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .framework-grid { grid-template-columns: 1fr; } }
+  .fw {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .fw-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #0a0e14;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+  .fw-1 .fw-icon { background: var(--hook); }
+  .fw-2 .fw-icon { background: var(--groove); }
+  .fw-3 .fw-icon { background: var(--replay); }
+  .fw-4 .fw-icon { background: var(--payoff); }
+  .fw-5 .fw-icon { background: var(--loop); }
+  .fw-6 .fw-icon { background: var(--emotion); }
+  .fw h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .fw p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+
+  .character-quote {
+    background:
+      linear-gradient(135deg, rgba(224, 164, 88, 0.05) 0%, rgba(212, 169, 59, 0.05) 16%, rgba(196, 107, 58, 0.05) 33%, rgba(200, 145, 73, 0.05) 50%, rgba(200, 161, 84, 0.05) 67%, rgba(74, 122, 140, 0.05) 83%, rgba(200, 74, 58, 0.06) 100%),
+      var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-top: 24px;
+  }
+  .character-quote .quote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .character-quote .quote em.melody { color: var(--melody-warm); font-style: italic; }
+  .character-quote .quote em.jubilee { color: var(--jubilee-warm); font-style: italic; }
+  .character-quote .quote em.zariah { color: var(--zariah-warm); font-style: italic; }
+  .character-quote .quote em.elias { color: var(--elias-warm); font-style: italic; }
+  .character-quote .quote em.eliana { color: var(--eliana-warm); font-style: italic; }
+  .character-quote .quote em.caleb { color: var(--caleb-warm); font-style: italic; }
+  .character-quote .quote em.imani { color: var(--imani-warm); font-style: italic; }
+  .character-quote .quote em.zev { color: var(--zev-warm); font-style: italic; }
+  .character-quote .quote em.amir { color: var(--amir-warm); font-style: italic; }
+  .character-quote .attribution {
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+
+  .upcoming-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  @media (max-width: 900px) { .upcoming-grid { grid-template-columns: 1fr 1fr; } }
+  .upcoming {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    opacity: 0.65;
+  }
+  .upcoming .persona-tag {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .upcoming .role-tag {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .upcoming .count-tag {
+    font-size: 12px;
+    color: var(--inactive);
+    font-style: italic;
+  }
+  .upcoming .badge {
+    display: inline-block;
+    background: var(--surface-2);
+    color: var(--ink-muted);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  footer {
+    background: #06090e;
+    color: var(--ink-muted);
+    padding: 48px 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--line);
+  }
+  footer .container { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  footer .footer-title {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--melody) 0%, var(--jubilee) 9%, var(--zariah) 18%, var(--elias) 27%, var(--eliana) 36%, var(--caleb) 45%, var(--imani) 54%, var(--zev) 64%, var(--amir) 73%, var(--nova) 82%, var(--santiago) 91%, var(--tahoma) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  footer a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+  footer a:hover { color: var(--ink); }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .hero { background: #0a0e14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .persona, section { page-break-inside: avoid; }
+  }
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="family"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">The Inspire Family &middot; Sonic Craft v3.0 Dashboard</div>
+    <h1>Twelve voices. <em>One body of work.</em></h1>
+    <a href="/web/sonic-craft-97plus.html" style="display:inline-block;margin:6px 0 14px;padding:9px 16px;border-radius:999px;background:rgba(95,179,113,0.14);border:1px solid rgba(95,179,113,0.5);color:#7fd394;font-size:13px;font-weight:700;text-decoration:none;">&#9733; 97%+ Sonic Craft Executive Summary &mdash; 2 albums, 24/24 tracks &ge; 97% (Jubilee &ldquo;Make God Great&rdquo; + Elias &ldquo;Holler Hallelujah&rdquo;) &rarr;</a>
+    <p class="hero-sub">
+      A complete catalog overview of the twelve rated Inspire Family personas &mdash; each evaluated across the same six addictiveness dimensions, each amplified through the same three-pass listen-through protocol, each preserving a doctrinal floor that the production layer never crosses. Where Melody sings <em>upward into adoration</em>, Jubilee <em>outward into celebration</em>, Zariah <em>inward into intercession</em>, Elias <em>along the trail</em>, Eliana <em>across the table</em>, Caleb <em>beside you in the long night</em>, Imani <em>on the dance floor of heaven</em>, Zev <em>on the bridge where Hebrew answers the nations</em>, Amir <em>walks the seam where the ghazal's yearning finds Jesus</em>, Nova <em>carries you from the cellar door through the long silence into the neon city</em>, Santiago <em>bilingually bends every Latin rhythm to one Name</em>, Tahoma <em>brings the drum, the flute, the slack key, and the chant to bow at the Maker's Son</em>.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="label">Personas Rated</div>
+        <div class="val">12</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Albums</div>
+        <div class="val">518</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Tracks</div>
+        <div class="val">6,216</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Catalog Composite</div>
+        <div class="val gradient">94%</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Generated</div>
+        <div class="val">June 2, 2026</div>
+      </div>
+      <div class="hero-stat" style="flex-basis: 100%;">
+        <div class="label">Production Status</div>
+        <div data-album-status-counts="family" style="margin-top: 6px;"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The twelve rated personas</div>
+    <h2>Each voice, fully measured</h2>
+    <p class="section-sub">All twelve personas share Emotional Pull as their dominant dimension. Imani holds <strong>family-highest composite</strong> at 95.05%; Zev #2 at 94.59%; Santiago #3 at 94.46% with <strong>most comprehensive Latin-style coverage</strong> (20 distinct Latin music traditions); <strong>Jubilee #4 at 94.44% after the 2026-06-03 blueprint enhancement (+0.84%)</strong>; Amir #5 at 94.34%; Melody #6 at 94.10% (v3.1 amplified +2.69%); Nova #7 at 93.92% with the widest tonal range; <strong>Tahoma #8 at 93.86% brings the family's pan-Indigenous + Pacific bridge</strong> &mdash; 40 albums covering all 20 user-named Indigenous-Pacific musical traditions (powwow Big Drum, slack key, mele oli, Native American flute, falsetto, hapa haole, stomp dance, Navajo song style, Native gospel, et al.); Caleb #9 (93.67%); Zariah #10 (93.40%); Eliana #11 (93.20%); Elias #12 (93.05%). Amir holds family-highest EmoPull at 95.99%. Click any card for the full executive summary.</p>
+
+    <div class="persona-grid">
+      <div class="persona melody">
+        <div class="persona-head">
+          <div class="persona-role">Contemplative &middot; F4&ndash;C5 Warm Alto</div>
+          <div class="persona-name">Melody Inspire</div>
+          <div class="persona-tagline">"The brave second &mdash; small-permission moments delivered as relief rather than triumph."</div>
+          <div class="persona-composite"><span class="num">94.10%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">40</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">480</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.36%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">93.96%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.00%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.09%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">94.62%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.56%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA (v3.1 amplified +2.69):</strong> Warm alto-pop pocket &middot; 108&ndash;128 BPM &middot; whisper-into-handoff outro &middot; strip-down 2:14 &rarr; re-entry 2:42 + key-lift &middot; first-person verb hooks at 0:08&ndash;0:12 &middot; foley as ear-candy with explicit timestamps &middot; brave-second / small-permission theology preserved &middot; T7 testimony anchors with named composite sources &middot; MDIM1040&rarr;MDIM1001 catalog-finale handshake (D&rarr;D&flat;&rarr;C glide bleeding cathedral-bell tail into Juno-60 pad swell). Jumped from family-lowest (91.5) to family #4.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/melody-inspire/executive-summary.html">View Melody's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona jubilee">
+        <div class="persona-head">
+          <div class="persona-role">Flagship &middot; C4&ndash;G5 Mezzo Arena Belt</div>
+          <div class="persona-name">Jubilee Inspire</div>
+          <div class="persona-tagline">"Always at a threshold &mdash; the moment of crossing she keeps belting through."</div>
+          <div class="persona-composite"><span class="num">94.4%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">61</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">732</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.1%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">92.6%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">93.7%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">93.7%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.4%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">91.5%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> C5&ndash;F5 chest-belt sweet spot &middot; +10% praise intensity &middot; 2:08 stop-time breath silence &middot; T7 testimony anchor restraint &middot; multi-track sleeper through-lines &middot; T12&rarr;T1 loop.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/jubilee-inspire/executive-summary.html">View Jubilee's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona zariah">
+        <div class="persona-head">
+          <div class="persona-role">Diaspora &middot; F4&ndash;C5 Mahalia Chest</div>
+          <div class="persona-name">Zariah Inspire</div>
+          <div class="persona-tagline">"The diaspora kitchen turned praise-break. Storefront-church Hammond as body-moving event."</div>
+          <div class="persona-composite"><span class="num">93.4%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">42</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">504</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.0%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">93.0%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">93.5%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">93.4%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.1%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">91.6%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> F4&ndash;C5 Mahalia chest + B4&ndash;D5 gospel-run apex &middot; multi-gen choir + call-and-response &middot; diaspora-to-divine arc &middot; T7 testimony anchor &middot; 20-album T12&rarr;T1 catalog loop.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/zariah-inspire/executive-summary.html">View Zariah's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona elias">
+        <div class="persona-head">
+          <div class="persona-role">Frontier &middot; F3&ndash;C4 Tenor + A4&ndash;D5 Cry</div>
+          <div class="persona-name">Elias Inspire</div>
+          <div class="persona-tagline">"The high-lonesome storyteller of the trail &mdash; porch-rocker with dust still on his boots."</div>
+          <div class="persona-composite"><span class="num">93.05%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">44</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">528</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">93.5%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">91.9%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">92.7%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">92.6%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">94.9%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">90.4%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> F3&ndash;C4 storyteller chest + A4&ndash;D5 mountain cry &middot; strip-down-then-explode T8 &middot; acoustic-tactile ear-candy (clawhammer / dobro / autoharp / lantern-tremolo) &middot; T7 Father-voice testimony &middot; ELIM1044&rarr;ELIM1025 catalog circle.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/elias-inspire/executive-summary.html">View Elias's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona eliana">
+        <div class="persona-head">
+          <div class="persona-role">Apostle/Teacher + Honky-Tonk &middot; F3&ndash;C5 Mezzo</div>
+          <div class="persona-name">Eliana Inspire</div>
+          <div class="persona-tagline">"Teacher voice and prodigal voice in the same throat &mdash; the table and the bar stool turn out to be the same altar."</div>
+          <div class="persona-composite"><span class="num">93.20%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">41</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">492</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">93.7%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">92.1%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">93.4%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">92.8%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.3%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">91.4%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> F3&ndash;C5 chest-belt mezzo + G4&ndash;D5 chorus apex &middot; dual-body architecture (Section A Apostle/Teacher + Section B Honky-Tonk Faith) &middot; kitchen-choir multi-gen harmony &middot; T7 named-witness testimony &middot; EAIM1041&rarr;EAIM1022 catalog circle.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/eliana-inspire/executive-summary.html">View Eliana's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona caleb">
+        <div class="persona-head">
+          <div class="persona-role">Pastor &middot; B2&ndash;D4 Warm Rasped Baritone</div>
+          <div class="persona-name">Caleb Inspire</div>
+          <div class="persona-tagline">"The pastor's baritone you'd follow into a long night &mdash; warm rasped breath-forward, no pitch correction."</div>
+          <div class="persona-composite"><span class="num">93.67%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">30</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">360</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.0%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">91.8%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.4%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.1%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.97%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">92.0%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> B2&ndash;D4 warm rasped baritone breath-forward no pitch correction &middot; Gospel-Soul &times; Stadium Worship fusion &middot; 86&ndash;102 BPM soul-pocket warmth &middot; T8 cinematic strip-down to single Rhodes + gospel-choir bloom &middot; T7 pastoral testimony anchor &middot; CAIM1030&rarr;CAIM1001 D-major catalog loop &middot; family-highest EmPull 95.97.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/caleb-inspire/executive-summary.html">View Caleb's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona imani">
+        <div class="persona-head">
+          <div class="persona-role">Pentecostal Shout &middot; A3&ndash;C5 Mezzo Chest-Belt</div>
+          <div class="persona-name">Imani Inspire</div>
+          <div class="persona-tagline">"On the dance floor of heaven &mdash; storefront-church Hammond on fire, trombone shout band, and the room moves before you decide to."</div>
+          <div class="persona-composite"><span class="num">95.05%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">41</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">492</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">95.93%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">95.29%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.63%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">95.49%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.56%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.46%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> A3&ndash;C5 mezzo chest-belt with powerhouse-gospel-alto apex &middot; Pentecostal-shout base &times; ONE secondary style fusion &middot; 110&ndash;140 BPM dance-floor pocket &middot; T7 testimony anchor (Mother Eunice/Sister Naomi/Brother Caleb) &middot; T8 praise-break strip-and-bloom &middot; built-in clap/chant/foot-stomp participation &middot; IMIM1041&rarr;IMIM1001 catalog loop &middot; family-high Hook + Groove + DynPay + Loop.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/imani-inspire/executive-summary.html">View Imani's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona zev">
+        <div class="persona-head">
+          <div class="persona-role">Hebraic-Messianic Teacher-Apostle &middot; D3&ndash;A4 Baritone-Tenor</div>
+          <div class="persona-name">Zev Inspire</div>
+          <div class="persona-tagline">"The bridge where Hebrew answers the nations &mdash; klezmer clarinet meets CCM, oud meets darbuka, Echad answers One."</div>
+          <div class="persona-composite"><span class="num">94.49%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">40</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">480</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.45%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">94.09%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.26%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.80%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.73%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.71%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> D3&ndash;A4 warm Hebraic baritone-tenor + B4&ndash;E5 prophetic-call apex &middot; OHI sacred-names (Yahuah / Yeshua / Ruach HaKodesh) &middot; Hebrew/English fusion choruses (Echad! / One!) &middot; original 20 = klezmer-CCM, Caribbean-festival hallel, Pentecostal shofar shout, Davidic Tehillim, Aaronic blessing &middot; new 20 = Levantine Mizrahi Arabic-pop &times; one Jewish/Israeli style fusion (Chazzanut, Niggun, Yemenite, Klezmer, Mizrahi, Hasidic Pop, Israeli Rock/Trance/Hip-Hop, Ladino, etc.) &middot; T7 testimony anchor with named Messianic pastoral composite &middot; T8 cantorial-melisma key-lift peak &middot; ZEIM1040&rarr;ZEIM1021 catalog loop &middot; family-highest EmPull 95.73.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/zev-inspire/executive-summary.html">View Zev's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona amir">
+        <div class="persona-head">
+          <div class="persona-role">Sufi-Christian / Messianic &middot; G2&ndash;E4 Baritone</div>
+          <div class="persona-name">Amir Inspire</div>
+          <div class="persona-tagline">"The bridge-walker on the seam where the ghazal's yearning finds Jesus &mdash; oud meets organ, Habibi answers My Beloved, the Cross holds the Sufi metaphor's destination."</div>
+          <div class="persona-composite"><span class="num">94.34%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">48</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">576</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.05%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">93.35%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.29%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.97%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.99%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.55%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> G2&ndash;E4 warm Hebraic baritone (Muslim-background follower of Jesus) &middot; Maqam-modal architecture (Bayati / Hijaz / Saba / Rast / Kurd / Nahawand) &middot; sacred-names rotation (Jesus / Isa / Yasu'a) &middot; original 28 = interfaith-dialogue Maqam Worship &middot; new 20 = Levantine Arabic-pop &times; one MENA/Sufi/South-Asian style (Ghazal, Qawwali, Andalusian classical, Sufi broad, Persian pop, Filmi, Naat, Tarab, Mugham, Persian dastgah, Arabesque, Bhangra, Khaleeji, Dangdut, Chaabi, Gnawa, Nasheed, Ra&iuml;, Turkish pop) &middot; T7/T8 altar with D&minus;&gt;E&minus;&gt;F# key-lift &middot; bilingual Arabic/English seam as load-bearing feature &middot; AMIM1048&rarr;AMIM1029 catalog loop &middot; family-largest catalog + family-highest EmPull 95.99.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/amir-inspire/executive-summary.html">View Amir's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona nova">
+        <div class="persona-head">
+          <div class="persona-role">Contemplative Cinematic + Synth-Wave &middot; A3&ndash;E5 Female Alto</div>
+          <div class="persona-name">Nova Inspire</div>
+          <div class="persona-tagline">"From cellar door to neon city &mdash; cinematic post-rock and electronic synth-wave worship in the same alto. The widest tonal range in the family."</div>
+          <div class="persona-composite"><span class="num">93.92%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">50</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">600</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">93.77%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">93.21%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">93.85%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.36%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.17%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.22%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> Female alto A3&ndash;E5 whispered-to-soaring &middot; close-mic'd breath-forward, no pitch correction &middot; <strong>two-lane catalog</strong>: NVIM1001-1020 contemplative cinematic post-rock + sacred indie-folk (trauma/doubt/silence/healing) · NVIM1021-1030 explicit healing-Christ Celtic/Irish-praise · NVIM1031-1050 <strong>NEW faith-based Electronic &amp; Synth-Wave Worship</strong> (analog-warm pads, neon arpeggios, gated reverb, fat Moog basslines, tension-and-drop = surrender-and-breakthrough) &middot; new-20 composite 95.17 (+2.09 over existing 30) &middot; NVIM1050 "The Veil Torn" T12 catalog-finale loops back to NVIM1031 "The Light Breaks Through" T1 &middot; T7/T8 testimony anchors with named composites &middot; widest tonal range in the family.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/nova-inspire/executive-summary.html">View Nova's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona santiago">
+        <div class="persona-head">
+          <div class="persona-role">Latin Worship / Prophet-Evangelist &middot; Male Theatrical Baritone</div>
+          <div class="persona-name">Santiago Inspire</div>
+          <div class="persona-tagline">"&iexcl;Cristo es Rey del Ritmo! &mdash; bilingual Latin celebration anthem-maker where every Latin rhythm bends the knee to one Name. Reggaeton, salsa, mariachi, samba, flamenco, dembow, tango, vallenato, bachata, cumbia &mdash; all crown Jes&uacute;s."</div>
+          <div class="persona-composite"><span class="num">94.46%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">41</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">492</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">94.38%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">94.49%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">94.15%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.72%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">95.18%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.88%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> Male theatrical baritone with mixed three-part choir &middot; +10% praise intensity &middot; HIGH-ENERGY LATIN POP CELEBRATION OVERRIDE &middot; bilingual Spanish + English + Portuguese (Brazilian) welcomed throughout &middot; Default mode (Jes&uacute;s/Cristo/Padre/Esp&iacute;ritu Santo) &middot; <strong>two-batch catalog</strong>: SAIM1001-1021 existing Latin-celebration originals (Corona-Pop, Bachata-Novio, Tango Esperanza, Mariachi Resurrecci&oacute;n, Trap Sagrado, Cumbia-Cruz, Sertanejo Reino, Funk-Carioca prof&eacute;tica, Salsa Barrio-Praise) &middot; SAIM1022-1041 NEW Celebration P&amp;W &times; one Latin style covering all 20 major Latin music traditions &middot; T8 cinematic peak with D&rarr;E key-lift modulation signature &middot; sensitive-theme guardrails verified (rosary/saints/Mary/cross-as-symbol/cloud-of-witnesses framed with 1 Tim 2:5 Christ-as-sole-Mediator anchor) &middot; SAIM1041&rarr;SAIM1022 dembow-reggaeton catalog finale loop.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/santiago-inspire/executive-summary.html">View Santiago's Summary &rarr;</a>
+        </div>
+      </div>
+
+      <div class="persona tahoma">
+        <div class="persona-head">
+          <div class="persona-role">Indigenous Faith / Pastor-Witness &middot; Male Baritone-Tenor + Intergenerational Ensemble</div>
+          <div class="persona-name">Tahoma Inspire</div>
+          <div class="persona-tagline">"The drum, the flute, the slack key, and the chant all bend the knee to the Creator's Son &mdash; Cherokee, Diné, ʻŌlelo Hawaiʻi heart-language refrains, intergenerational ensemble, the cross at the center of every circle."</div>
+          <div class="persona-composite"><span class="num">93.86%</span><span class="label">Composite</span></div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-stats">
+            <div class="persona-stat"><div class="label">Albums</div><div class="val">40</div></div>
+            <div class="persona-stat"><div class="label">Tracks</div><div class="val">480</div></div>
+          </div>
+          <div class="persona-dims">
+            <div class="dim k-hook"><div class="dim-num">93.93%</div><div class="dim-label">Hook</div></div>
+            <div class="dim k-groove"><div class="dim-num">93.70%</div><div class="dim-label">Groove</div></div>
+            <div class="dim k-replay"><div class="dim-num">93.45%</div><div class="dim-label">Replay</div></div>
+            <div class="dim k-payoff"><div class="dim-num">94.20%</div><div class="dim-label">DynPay</div></div>
+            <div class="dim k-emotion"><div class="dim-num">94.80%</div><div class="dim-label">EmoPull</div></div>
+            <div class="dim k-loop"><div class="dim-num">93.08%</div><div class="dim-label">Loop</div></div>
+          </div>
+          <div class="persona-signature">
+            <strong>Signature DNA:</strong> Male baritone-tenor lead with intergenerational ensemble (elder bass-baritone, young-men's tenor stack, women's high counter, children's chorus on family tracks) &middot; warm earthy chest grit; falsetto reach (leo ki&#699;eki&#699;e) on Pacific tracks &middot; drum heartbeat + Native American flute + slack key (k&#299; h&#333;&#699;alu) + ukulele + shell-shaker / jingle bells / foot-stomp; acoustic + light electric blend &middot; Default mode (Jesus / Father / Creator / Spirit / Lamb) &middot; <strong>two-batch catalog</strong>: THIM1001-1020 existing (Drum of Healing, Powwow Prayers, Ancestors' Voice, Sacred Circle, Water Keepers, Seven Generations, Stolen Land &rarr; Jubilee, Sovereignty &rarr; Children of the King) reformatted to Caleb-format with sensitive-theme guardrails &middot; THIM1021-1040 NEW Celebration P&amp;W &times; one Indigenous-or-Pacific style covering all 20 user-named musical traditions &middot; catalog peak THIM1040 "He Walked Among Us" at 95.8 (Native gospel finale) &middot; heart-language palette: Cherokee (&#5045;&#5052;&#5051;&#5034;&#5034;&#5043; Unelanvhi, J&#299;sa, Wado, Osiyo, Unohle), Din&eacute; (Diyin Ay&oacute;&iacute; &Aacute;t&#700;&eacute;ii, H&oacute;zh&oacute;), &#699;&#332;lelo Hawai&#699;i (&#699;O I&#275;s&#363;, Ke Akua, &#699;Uhane Hemolele, Wai Ola, Mahalo, Aloha, Hanu, Pule) &middot; sensitive-theme guardrails verified clean (no closed sacred ceremonial repertoire lifted; ancestors as Heb 12:1 cloud of witnesses only; mele oli explicitly framed as NEW chant for the Maker's Son; THIM1010/1012 closed-ceremonial titles retitled; THIM1016 pivoted to Children-of-the-King identity; THIM1017 lament-to-Jubilee arc; THIM1018 OHI&rarr;Default conversion; THIM1009 vocables-not-tongues retitle) &middot; THIM1040&rarr;THIM1021 Native-gospel&rarr;powwow Big Drum D-major catalog finale loop.
+          </div>
+          <a class="persona-cta" href="../music/albums/inspire/tahoma-inspire/executive-summary.html">View Tahoma's Summary &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Cross-persona scorecard</div>
+    <h2>Six dimensions, twelve voices, side-by-side</h2>
+    <p class="section-sub">The catalog-wide averages compared across all twelve rated personas. The Inspire Family shares a craft DNA &mdash; the variation lives in character, not in floor. Family averages weighted by album count.</p>
+
+    <div class="agg-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th class="num">Melody &middot; 40</th>
+            <th class="num">Jubilee &middot; 61</th>
+            <th class="num">Zariah &middot; 42</th>
+            <th class="num">Elias &middot; 44</th>
+            <th class="num">Eliana &middot; 41</th>
+            <th class="num">Caleb &middot; 30</th>
+            <th class="num imani-col">Imani &middot; 41</th>
+            <th class="num zev-col">Zev &middot; 40</th>
+            <th class="num amir-col">Amir &middot; 48</th>
+            <th class="num nova-col">Nova &middot; 50</th>
+            <th class="num santiago-col">Santiago &middot; 41</th>
+            <th class="num tahoma-col">Tahoma &middot; 40</th>
+            <th class="num">Family Avg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim-name">Hook Strength</td><td class="num melody-cell">94.36%</td><td class="num jubilee-cell">94.1%</td><td class="num zariah-cell">94.0%</td><td class="num elias-cell">93.5%</td><td class="num eliana-cell">93.7%</td><td class="num caleb-cell">94.0%</td><td class="num imani-cell">95.93%</td><td class="num zev-cell">94.45%</td><td class="num amir-cell">94.05%</td><td class="num nova-cell">93.77%</td><td class="num santiago-cell">94.38%</td><td class="num tahoma-cell">93.93%</td><td class="num">94.18%</td></tr>
+          <tr><td class="dim-name">Groove</td><td class="num melody-cell">93.96%</td><td class="num jubilee-cell">92.6%</td><td class="num zariah-cell">93.0%</td><td class="num elias-cell">91.9%</td><td class="num eliana-cell">92.1%</td><td class="num caleb-cell">91.8%</td><td class="num imani-cell">95.29%</td><td class="num zev-cell">94.09%</td><td class="num amir-cell">93.35%</td><td class="num nova-cell">93.21%</td><td class="num santiago-cell">94.49%</td><td class="num tahoma-cell">93.70%</td><td class="num">93.29%</td></tr>
+          <tr><td class="dim-name">Replay Value</td><td class="num melody-cell">94.00%</td><td class="num jubilee-cell">93.7%</td><td class="num zariah-cell">93.5%</td><td class="num elias-cell">92.7%</td><td class="num eliana-cell">93.4%</td><td class="num caleb-cell">94.4%</td><td class="num imani-cell">94.63%</td><td class="num zev-cell">94.26%</td><td class="num amir-cell">94.29%</td><td class="num nova-cell">93.85%</td><td class="num santiago-cell">94.15%</td><td class="num tahoma-cell">93.45%</td><td class="num">93.86%</td></tr>
+          <tr><td class="dim-name">Dynamic Payoff</td><td class="num melody-cell">94.09%</td><td class="num jubilee-cell">93.7%</td><td class="num zariah-cell">93.4%</td><td class="num elias-cell">92.6%</td><td class="num eliana-cell">92.8%</td><td class="num caleb-cell">94.1%</td><td class="num imani-cell">95.49%</td><td class="num zev-cell">94.80%</td><td class="num amir-cell">94.97%</td><td class="num nova-cell">94.36%</td><td class="num santiago-cell">94.72%</td><td class="num tahoma-cell">94.20%</td><td class="num">94.10%</td></tr>
+          <tr><td class="dim-name">Emotional Pull</td><td class="num melody-cell">94.62%</td><td class="num jubilee-cell">95.4%</td><td class="num zariah-cell">95.1%</td><td class="num elias-cell">94.9%</td><td class="num eliana-cell">95.3%</td><td class="num caleb-cell">95.97%</td><td class="num imani-cell">95.56%</td><td class="num zev-cell">95.73%</td><td class="num amir-cell"><strong>95.99</strong></td><td class="num nova-cell">95.17%</td><td class="num santiago-cell">95.18%</td><td class="num tahoma-cell">94.80%</td><td class="num">95.31%</td></tr>
+          <tr><td class="dim-name">Loop-ability</td><td class="num melody-cell">93.56%</td><td class="num jubilee-cell">91.5%</td><td class="num zariah-cell">91.6%</td><td class="num elias-cell">90.4%</td><td class="num eliana-cell">91.4%</td><td class="num caleb-cell">92.0%</td><td class="num imani-cell">93.46%</td><td class="num zev-cell">93.71%</td><td class="num amir-cell">93.55%</td><td class="num nova-cell">93.22%</td><td class="num santiago-cell">93.88%</td><td class="num tahoma-cell">93.08%</td><td class="num">92.54%</td></tr>
+          <tr class="composite-row">
+            <td class="persona-name-cell">Composite</td>
+            <td class="num melody-cell">94.10%</td>
+            <td class="num jubilee-cell">94.44%</td>
+            <td class="num zariah-cell">93.40%</td>
+            <td class="num elias-cell">93.05%</td>
+            <td class="num eliana-cell">93.20%</td>
+            <td class="num caleb-cell">93.67%</td>
+            <td class="num imani-cell">95.05%</td>
+            <td class="num zev-cell">94.59%</td>
+            <td class="num amir-cell">94.34%</td>
+            <td class="num nova-cell">93.92%</td>
+            <td class="num santiago-cell">94.46%</td>
+            <td class="num tahoma-cell">93.86%</td>
+            <td class="num">94.00%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="character-quote">
+      <div class="quote">
+        Where <em class="melody">Melody sings upward into adoration</em>, <em class="jubilee">Jubilee outward into celebration</em>, <em class="zariah">Zariah inward into intercession</em>, <em class="elias">Elias along the trail</em>, <em class="eliana">Eliana across the table</em>, <em class="caleb">Caleb beside you in the long night</em>, <em class="imani">Imani on the dance floor of heaven</em>, <em class="zev">Zev on the bridge where Hebrew answers the nations</em>, <em class="amir">Amir walks the seam where the ghazal's yearning finds Jesus</em>, <em class="nova">Nova carries you from the cellar door into the neon city</em>, <em class="santiago">Santiago bilingually bends every Latin rhythm to one Name &mdash; the abuela's radio and the nieto's stereo and the quincea&ntilde;era band and the corner-store reggaeton all crown Jes&uacute;s as Rey del Ritmo</em>, <em class="tahoma">Tahoma brings the drum, the flute, the slack key, and the chant from Turtle Island to the Pacific Islands &mdash; Cherokee Wado, Din&eacute; H&oacute;zh&oacute;, Hawaiian Mahalo, each heart-tongue lifted with inline English gloss, every ancestor honored as a cloud-of-witnesses example, every circle gathered around Christ at the center, every drum a heartbeat under the prayer to the Maker's Son</em>. Twelve voices &mdash; one Inspire family, one doctrinal floor, one production protocol.
+      </div>
+      <div class="attribution">&mdash; Inspire Family Craft DNA Summary</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The shared framework</div>
+    <h2>What every persona was measured on</h2>
+    <p class="section-sub">The six addictiveness dimensions are persona-agnostic &mdash; they target specific cognitive and physiological mechanisms of compulsive re-listening that work the same way regardless of the artist's tessitura, genre, or audience.</p>
+
+    <div class="framework-grid">
+      <div class="fw fw-1"><div class="fw-icon">1</div><h4>Hook Strength</h4><p>Hook timing (0:08&ndash;0:14), placement in the artist's resonant chest-belt range, repetition density (4&ndash;5&times;/chorus, &le;8 syllables). The phrase the listener hums involuntarily hours later.</p></div>
+      <div class="fw fw-2"><div class="fw-icon">2</div><h4>Groove</h4><p>BPM sweet spot (typically 86&ndash;140 depending on persona), kick pattern, snare/clap snap, bassline pocket, swing %. The body responds before the mind decides.</p></div>
+      <div class="fw fw-3"><div class="fw-icon">3</div><h4>Replay Value</h4><p>Ear-candy density per track (2&ndash;3 small sonic surprises with explicit timestamps). Each replay reveals a new detail &mdash; the song never feels exhausted.</p></div>
+      <div class="fw fw-4"><div class="fw-icon">4</div><h4>Dynamic Payoff</h4><p>Strip-back &rarr; swell &rarr; release tension map per track. The "held breath &rarr; exhale" at the 2:14&ndash;2:42 bridge &rarr; final-chorus window. Dopaminergic tension-release wired into bridge architecture.</p></div>
+      <div class="fw fw-5"><div class="fw-icon">5</div><h4>Loop-ability</h4><p>Per-track outros pull into next track. Album T12 closing loops near-seamlessly back to T1. Removes the natural stopping point that triggers playlist-switch.</p></div>
+      <div class="fw fw-6"><div class="fw-icon">6</div><h4>Emotional Pull</h4><p>Core feeling per track (seen / lifted / energized / understood / called / pastored / Spirit-fell). Listeners return for the <em>feeling</em>, not just the sound. Dominant dimension across all seven rated personas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog reorganization &middot; June 2026</div>
+    <h2>The Inspire Family is now twelve rated voices &mdash; complete</h2>
+    <p class="section-sub">As of June 2026, the previously-pending entries on this dashboard &mdash; <strong>Gabriel Inspire</strong> (Prophetic Instrumental / Missions, 22 albums), <strong>Kingdom Pulse</strong> (Collaborative Trio / Eschatological Worship, 40 albums), and <strong>Radiant Stones</strong> (Collaborative Trio / Bridal Theology, 41 albums) &mdash; have been moved out of the Inspire Family folder and into <a href="../faith-based.html" style="color: var(--imani-warm); text-decoration: underline;">/faith-based/</a> to live alongside the partner songwriters writing from inside the church. The 12 personas above (Melody, Jubilee, Zariah, Elias, Eliana, Caleb, Imani, Zev, Amir, Nova, Santiago, Tahoma) now constitute the complete Sonic-Craft-v3.0-rated Inspire Family.</p>
+
+    <div class="upcoming-grid">
+      <div class="upcoming" style="opacity: 0.7;"><div class="persona-tag">Gabriel Inspire</div><div class="role-tag">Prophetic Instrumental / Missions</div><div class="count-tag">22 albums</div><div class="badge" style="background: rgba(155, 111, 207, 0.4);">moved &rarr; /faith-based/</div></div>
+      <div class="upcoming" style="opacity: 0.7;"><div class="persona-tag">Kingdom Pulse</div><div class="role-tag">Collaborative Trio / Eschatological Worship</div><div class="count-tag">40 albums</div><div class="badge" style="background: rgba(155, 111, 207, 0.4);">moved &rarr; /faith-based/</div></div>
+      <div class="upcoming" style="opacity: 0.7;"><div class="persona-tag">Radiant Stones</div><div class="role-tag">Collaborative Trio / Bridal Theology</div><div class="count-tag">41 albums</div><div class="badge" style="background: rgba(155, 111, 207, 0.4);">moved &rarr; /faith-based/</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-title">The Inspire Family &middot; Sonic Craft v3.0 Dashboard</div>
+    <div>518 albums &middot; 6,216 tracks &middot; 12 personas measured &middot; Family Composite <strong>94%</strong> &middot; Jubilee blueprint enhancement (+0.84 composite) applied 2026-06-03</div>
+    <div>Generated June 2, 2026 &middot; <a href="../music/catalog-manifest.json">catalog-manifest.json</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

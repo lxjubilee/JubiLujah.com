@@ -1,0 +1,120 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/index.schema.json",
+  "version": 1,
+  "generated_at": "2026-06-03T18:00:00Z",
+  "artists": [
+    {
+      "id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "slug": "melody-inspire",
+      "name": "Melody Inspire",
+      "grouping": "inspire_family",
+      "album_count": 3
+    },
+    {
+      "id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+      "slug": "santiago-inspire",
+      "name": "Santiago Inspire",
+      "grouping": "inspire_family",
+      "album_count": 2
+    },
+    {
+      "id": "2f8b9c45-6d18-4a73-9e51-c3a7b2d8f491",
+      "slug": "tahoma-inspire",
+      "name": "Tahoma Inspire",
+      "grouping": "inspire_family",
+      "album_count": 2
+    },
+    {
+      "id": "d51a7e92-8b34-4c67-a489-1f2d6b5e3c08",
+      "slug": "caleb-inspire",
+      "name": "Caleb Inspire",
+      "grouping": "inspire_family",
+      "album_count": 2
+    }
+  ],
+  "albums": [
+    {
+      "id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "slug": "hearts-in-bloom",
+      "title": "Hearts in Bloom",
+      "track_count": 12,
+      "released_at": "2026-04-15T00:00:00Z"
+    },
+    {
+      "id": "9f8e2d1c-5b47-4a93-8c61-7d3e5f2a8b94",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "slug": "luminous",
+      "title": "Luminous",
+      "track_count": 12,
+      "released_at": "2026-03-01T00:00:00Z"
+    },
+    {
+      "id": "4a6c8e2b-9d51-4f73-b285-3c7a1e9d6f48",
+      "artist_id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+      "slug": "solo-tu-jesus",
+      "title": "Solo Tú, Jesús",
+      "track_count": 12,
+      "released_at": "2026-05-10T00:00:00Z"
+    },
+    {
+      "id": "5d9b1f7e-3a82-4c64-9e17-8b4d2c5a6f93",
+      "artist_id": "2f8b9c45-6d18-4a73-9e51-c3a7b2d8f491",
+      "slug": "the-makers-breath",
+      "title": "The Maker's Breath",
+      "track_count": 12,
+      "released_at": "2026-02-20T00:00:00Z"
+    }
+  ],
+  "songs": [
+    {
+      "id": "e1c8a4d6-7f23-4b85-9d31-2a8f6e4c9b15",
+      "album_id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "title": "Bloom Where You're Planted",
+      "duration_seconds": 224
+    },
+    {
+      "id": "f2d9b5e7-8a34-4c96-b482-3d6a7f5c8e21",
+      "album_id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "title": "Heart Garden",
+      "duration_seconds": 198
+    },
+    {
+      "id": "a4c7e1d2-9b58-4f63-8e29-1d5b3a8c6f47",
+      "album_id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "title": "Bride Awakening",
+      "duration_seconds": 247
+    },
+    {
+      "id": "c8b2f6a1-4d73-4e95-9c18-6f3e2b5a8d49",
+      "album_id": "9f8e2d1c-5b47-4a93-8c61-7d3e5f2a8b94",
+      "artist_id": "86a590fe-9194-44a8-9e43-af129f453a36",
+      "title": "Luminous Hour",
+      "duration_seconds": 263
+    },
+    {
+      "id": "b7e3a9d4-2c81-4f56-9b73-5a8d6f2c4e91",
+      "album_id": "4a6c8e2b-9d51-4f73-b285-3c7a1e9d6f48",
+      "artist_id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+      "title": "Solo Tú, Jesús",
+      "duration_seconds": 218
+    },
+    {
+      "id": "d6f4c2b8-7a19-4e35-8d94-1c5b3a7f6e28",
+      "album_id": "4a6c8e2b-9d51-4f73-b285-3c7a1e9d6f48",
+      "artist_id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+      "title": "Eres Mi Refugio",
+      "duration_seconds": 232
+    },
+    {
+      "id": "e9a1b5c7-3d62-4f48-9b71-8c4d2e6a3f95",
+      "album_id": "5d9b1f7e-3a82-4c64-9e17-8b4d2c5a6f93",
+      "artist_id": "2f8b9c45-6d18-4a73-9e51-c3a7b2d8f491",
+      "title": "Breath of the Maker",
+      "duration_seconds": 312
+    }
+  ]
+}

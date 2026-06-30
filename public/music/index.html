@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JubileeVerse Music</title>
+<style>
+  :root{--bg:#0d1024;--bg2:#141a3a;--card:#1a2150;--card2:#222a63;--accent:#feca57;--accent2:#e94560;--ink:#eef0ff;--muted:#9aa0c8;--line:#2a3170;--ok:#4ad991;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{font-family:'Segoe UI',Tahoma,sans-serif;background:linear-gradient(160deg,#0d1024,#16213e 55%,#0f3460);color:var(--ink);padding-bottom:96px;min-height:100vh;}
+  a{color:inherit;}
+  header{position:sticky;top:0;z-index:20;background:rgba(13,16,36,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:.85rem 1.25rem;}
+  .htop{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+  .logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#e94560,#ff6b6b 50%,#feca57);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;}
+  .search{flex:1;min-width:180px;}
+  .search input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:.55rem .9rem;font-size:.95rem;}
+  .search input::placeholder{color:var(--muted);}
+  .stat{color:var(--muted);font-size:.8rem;white-space:nowrap;}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem;align-items:center;}
+  .chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:.3rem .8rem;font-size:.82rem;cursor:pointer;user-select:none;}
+  .chip.active{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+  .toggle{margin-left:auto;display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.82rem;cursor:pointer;}
+  .wrap{max-width:1200px;margin:0 auto;padding:1.25rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;}
+  .album{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .12s,border-color .12s;}
+  .album:hover{transform:translateY(-3px);border-color:var(--accent);}
+  .cover{aspect-ratio:1/1;display:flex;align-items:flex-end;padding:.7rem;font-weight:800;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5);position:relative;}
+  .cover .badge{position:absolute;top:.5rem;right:.5rem;font-size:.68rem;font-weight:600;background:rgba(0,0,0,.45);padding:.15rem .45rem;border-radius:6px;text-shadow:none;}
+  .cover .badge.lyr{background:rgba(0,0,0,.55);color:var(--muted);}
+  .ameta{padding:.6rem .75rem .8rem;}
+  .ameta .at{font-size:.9rem;font-weight:600;line-height:1.25;}
+  .ameta .ar{font-size:.78rem;color:var(--muted);margin-top:.15rem;}
+  .ameta .code{font-size:.68rem;color:var(--muted);font-family:Consolas,monospace;margin-top:.2rem;}
+  .catlabel{margin:1.6rem 0 .6rem;font-size:1.15rem;color:#fff;border-left:4px solid var(--accent2);padding-left:.55rem;}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;display:none;}
+  .scrim.open{display:block;}
+  .panel{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:var(--bg2);border-left:1px solid var(--line);z-index:40;transform:translateX(100%);transition:transform .22s;display:flex;flex-direction:column;}
+  .panel.open{transform:translateX(0);}
+  .phead{padding:1.1rem 1.25rem;border-bottom:1px solid var(--line);display:flex;gap:1rem;align-items:flex-end;}
+  .phead .pc{width:96px;height:96px;border-radius:10px;flex-shrink:0;display:flex;align-items:flex-end;padding:.4rem;font-weight:800;color:#fff;font-size:.8rem;}
+  .phead h2{font-size:1.3rem;}
+  .phead .sub{color:var(--muted);font-size:.85rem;margin-top:.2rem;}
+  .phead .code{color:var(--muted);font-family:Consolas,monospace;font-size:.72rem;margin-top:.25rem;}
+  .pclose{position:absolute;top:.8rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.6rem;cursor:pointer;line-height:1;z-index:41;}
+  .pactions{padding:.8rem 1.25rem;border-bottom:1px solid var(--line);}
+  .playall{background:var(--accent2);border:none;color:#fff;font-weight:700;padding:.6rem 1.1rem;border-radius:10px;cursor:pointer;font-size:.92rem;}
+  .playall:disabled{background:var(--card);color:var(--muted);cursor:not-allowed;}
+  .tracks{flex:1;overflow:auto;padding:.4rem 0 1rem;}
+  .trk{display:flex;align-items:center;gap:.8rem;padding:.55rem 1.25rem;border-bottom:1px solid rgba(42,49,112,.5);}
+  .trk:hover{background:rgba(34,42,99,.5);}
+  .trk.playing{background:rgba(254,202,87,.12);}
+  .trk .pb{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;flex-shrink:0;font-size:.8rem;}
+  .trk .pb:disabled{opacity:.35;cursor:not-allowed;}
+  .trk .tn{color:var(--muted);font-size:.78rem;width:20px;text-align:right;flex-shrink:0;}
+  .trk .tt{flex:1;font-size:.9rem;}
+  .trk .tt small{display:block;color:var(--muted);font-size:.72rem;}
+  footer{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(20,26,58,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:.6rem 1rem;display:none;}
+  footer.show{display:block;}
+  .pf{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1rem;}
+  .pf .nc{width:48px;height:48px;border-radius:8px;flex-shrink:0;}
+  .pf .ninfo{min-width:0;flex-shrink:1;width:200px;}
+  .pf .ninfo .nt{font-size:.88rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pf .ninfo .na{font-size:.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pf .ctrls{display:flex;align-items:center;gap:.5rem;}
+  .pf .ctrls button{background:none;border:none;color:var(--ink);cursor:pointer;font-size:1.1rem;width:34px;height:34px;border-radius:50%;}
+  .pf .ctrls .main{background:var(--accent);color:#0d1024;font-size:1.05rem;width:42px;height:42px;font-weight:800;}
+  .pf .seekwrap{flex:1;display:flex;align-items:center;gap:.6rem;min-width:120px;}
+  .pf .time{color:var(--muted);font-size:.72rem;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .pf input[type=range]{width:100%;accent-color:var(--accent);height:4px;cursor:pointer;}
+  .pf .vol{width:90px;display:flex;align-items:center;gap:.4rem;}
+  .empty{color:var(--muted);text-align:center;padding:3rem 1rem;}
+  @media(max-width:640px){ .pf .ninfo{width:120px;} .pf .vol{display:none;} .pf .nc{display:none;} }
+</style>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="htop">
+    <div class="logo">JubileeVerse Music</div>
+    <div class="search"><input id="q" type="search" placeholder="Search albums, artists, songs..."></div>
+    <div class="stat" id="stat">loading…</div>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<div class="wrap" id="main"><div class="empty">Loading catalog…</div></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel">
+  <button class="pclose" id="pclose" aria-label="Close">&times;</button>
+  <div class="phead" id="phead"></div>
+  <div class="pactions"><button class="playall" id="playall">&#9654;&nbsp; Play All</button></div>
+  <div class="tracks" id="tracks"></div>
+</aside>
+
+<footer id="footer">
+  <div class="pf">
+    <div class="nc" id="nc"></div>
+    <div class="ninfo"><div class="nt" id="nt">&mdash;</div><div class="na" id="na"></div></div>
+    <div class="ctrls">
+      <button id="prev" title="Previous">&#9198;</button>
+      <button id="toggle" class="main" title="Play/Pause">&#9654;</button>
+      <button id="next" title="Next">&#9197;</button>
+    </div>
+    <div class="seekwrap">
+      <span class="time" id="cur">0:00</span>
+      <input type="range" id="seek" value="0" min="0" max="100" step="0.1">
+      <span class="time" id="dur">0:00</span>
+    </div>
+    <div class="vol">&#128266;<input type="range" id="vol" min="0" max="1" step="0.01" value="1"></div>
+  </div>
+</footer>
+
+<audio id="audio"></audio>
+<script>
+const $=s=>document.querySelector(s);
+const audio=$('#audio');
+let DATA=null, FLAT=[], queue=[], qi=-1, filterCat='all', playableOnly=true, search='';
+
+function colorFor(code){ let h=0; for(const c of String(code))h=(h*31+c.charCodeAt(0))%360; return [h,(h+40)%360]; }
+function coverStyle(code){ const [a,b]=colorFor(code); return `background:linear-gradient(135deg,hsl(${a} 55% 32%),hsl(${b} 60% 22%))`; }
+function fmt(s){ if(!isFinite(s))return'0:00'; s=Math.floor(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+fetch('catalog-manifest.json').then(r=>r.json()).then(m=>{
+  DATA=m;
+  for(const c of m.categories) for(const ar of c.artists) for(const al of ar.albums)
+    FLAT.push({cat:c.key,catLabel:c.label,artist:ar.name,role:ar.role,...al});
+  $('#stat').textContent=`${m.totalArtists} artists · ${m.totalAlbums} albums · ${m.totalPlayableTracks.toLocaleString()} playable tracks`;
+  const chips=[['all','All']].concat(m.categories.map(c=>[c.key,c.label]));
+  $('#chips').innerHTML=chips.map(([k,l])=>`<span class="chip${k==='all'?' active':''}" data-c="${k}">${esc(l)}</span>`).join('')
+    +`<label class="toggle"><input type="checkbox" id="pchk" checked> Playable only</label>`;
+  $('#chips').querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{filterCat=ch.dataset.c;$('#chips').querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x===ch));render();});
+  $('#pchk').onchange=e=>{playableOnly=e.target.checked;render();};
+  $('#q').oninput=e=>{search=e.target.value.toLowerCase().trim();render();};
+  render();
+}).catch(()=>{ $('#main').innerHTML='<div class="empty">Could not load <code>catalog-manifest.json</code> &mdash; serve this page from the <code>music/</code> root.</div>'; });
+
+function render(){
+  let list=FLAT.filter(a=>(filterCat==='all'||a.cat===filterCat)&&(!playableOnly||a.playable>0));
+  if(search){ list=list.filter(a=> (a.title+' '+a.artist+' '+a.code).toLowerCase().includes(search)
+      || a.tracks.some(t=>t.title.toLowerCase().includes(search)) ); }
+  if(!list.length){ $('#main').innerHTML='<div class="empty">No albums match.</div>'; return; }
+  const byCat={}; list.forEach(a=>{(byCat[a.catLabel]=byCat[a.catLabel]||[]).push(a);});
+  let html='';
+  for(const cl of Object.keys(byCat)){
+    html+=`<div class="catlabel">${esc(cl)} <span style="font-size:.8rem;color:var(--muted)">(${byCat[cl].length})</span></div><div class="grid">`;
+    for(const a of byCat[cl]){
+      const idx=FLAT.indexOf(a);
+      const badge=a.playable>0?`<span class="badge">&#9654; ${a.playable}</span>`:`<span class="badge lyr">lyrics</span>`;
+      html+=`<div class="album" data-i="${idx}"><div class="cover" style="${coverStyle(a.code)}">${badge}<span>${esc(a.title)}</span></div>
+        <div class="ameta"><div class="at">${esc(a.title)}</div><div class="ar">${esc(a.artist)}</div><div class="code">${esc(a.code)} · ${a.trackCount} tracks</div></div></div>`;
+    }
+    html+=`</div>`;
+  }
+  $('#main').innerHTML=html;
+  $('#main').querySelectorAll('.album').forEach(el=>el.onclick=()=>openAlbum(FLAT[+el.dataset.i]));
+}
+
+function openAlbum(a){
+  $('#phead').innerHTML=`<div class="pc" style="${coverStyle(a.code)}">${esc(a.code)}</div>
+    <div><h2>${esc(a.title)}</h2><div class="sub">${esc(a.artist)}${a.role?' · '+esc(a.role):''}</div>
+    <div class="sub">${esc(a.catLabel)}</div><div class="code">${esc(a.path)}</div></div>`;
+  const playable=a.tracks.filter(t=>t.audio);
+  $('#playall').disabled=!playable.length;
+  $('#playall').onclick=()=>{ if(playable.length){ queue=playable.map(t=>({title:t.title,artist:a.artist,album:a.title,code:a.code,url:t.url})); play(0);} };
+  $('#tracks').innerHTML=a.tracks.map(t=>`<div class="trk" data-url="${t.audio?t.url:''}">
+      <button class="pb" ${t.audio?'':'disabled'}>&#9654;</button>
+      <span class="tn">${t.n}</span><span class="tt">${esc(t.title)}${t.audio?'':'<small>audio coming soon</small>'}</span></div>`).join('');
+  const rows=[...$('#tracks').querySelectorAll('.trk')];
+  rows.forEach(row=>{ const url=row.dataset.url; const b=row.querySelector('.pb'); if(!b.disabled) b.onclick=()=>{
+      queue=playable.map(t=>({title:t.title,artist:a.artist,album:a.title,code:a.code,url:t.url}));
+      const si=queue.findIndex(q=>q.url===url); play(si<0?0:si);
+  };});
+  window._rows=rows;
+  $('#scrim').classList.add('open'); $('#panel').classList.add('open');
+}
+function closePanel(){ $('#scrim').classList.remove('open'); $('#panel').classList.remove('open'); }
+$('#pclose').onclick=closePanel; $('#scrim').onclick=closePanel;
+
+function highlight(){ if(!window._rows)return; const u=queue[qi]&&queue[qi].url; window._rows.forEach(r=>r.classList.toggle('playing',r.dataset.url===u)); }
+function play(i){ if(i<0||i>=queue.length)return; qi=i; const t=queue[i];
+  audio.src=t.url; audio.play().catch(()=>{});
+  $('#nt').textContent=t.title; $('#na').textContent=t.artist+' · '+t.album;
+  $('#nc').style.cssText='width:48px;height:48px;border-radius:8px;flex-shrink:0;'+coverStyle(t.code);
+  $('#footer').classList.add('show'); document.title=t.title+' · JubileeVerse Music'; highlight();
+}
+$('#toggle').onclick=()=>{ if(!queue.length)return; if(audio.paused)audio.play();else audio.pause(); };
+$('#prev').onclick=()=>{ if(audio.currentTime>3)audio.currentTime=0; else play(qi-1); };
+$('#next').onclick=()=>play(qi+1);
+audio.onplay=()=>$('#toggle').innerHTML='&#10073;&#10073;';
+audio.onpause=()=>$('#toggle').innerHTML='&#9654;';
+audio.onended=()=>{ if(qi+1<queue.length)play(qi+1); };
+audio.ontimeupdate=()=>{ $('#cur').textContent=fmt(audio.currentTime); if(audio.duration)$('#seek').value=(audio.currentTime/audio.duration)*100; };
+audio.onloadedmetadata=()=>$('#dur').textContent=fmt(audio.duration);
+$('#seek').oninput=e=>{ if(audio.duration)audio.currentTime=(e.target.value/100)*audio.duration; };
+$('#vol').oninput=e=>audio.volume=e.target.value;
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.code==='Space'){e.preventDefault();$('#toggle').click();} if(e.key==='Escape')closePanel(); });
+</script>
+</body>
+</html>

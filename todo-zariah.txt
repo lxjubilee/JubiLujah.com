@@ -1,0 +1,66 @@
+========================================================================
+ RUN ON ZARIAH'S COMPUTER -> Remove Gabriel Inspire (GBIM) from the CDN (R2)
+ Created 2026-06-26 by Claude — "remove Gabriel Inspire albums from CDN R2 + refresh"
+========================================================================
+
+WHY this runs on zariah (not melody):
+  Per PUBLISH.md, the Cloudflare R2 credentials + @aws-sdk + tooling live at
+  c:\Websites\jubileeverse.com\  — that folder exists on THIS (zariah) box, not
+  on melody. You type NO credentials; the script reads the existing .env here.
+  (The standard publish flow is upload-only and never deletes, so Claude wrote a
+   one-off delete script. It lives on the shared J: drive that this box can see.)
+
+WHAT IT DOES:
+  Deletes every object under  music/albums/faith-based/gabriel-inspire/
+  (22 albums GBIM1001EN..GBIM1022EN — audio, covers, previews) from R2 bucket
+  jubileeverse-cdn, then purges those URLs from Cloudflare (cdn.jubileeverse.com).
+
+------------------------------------------------------------------------
+ STEP 1 — open PowerShell on zariah and go to the CDN project (has .env + node_modules):
+
+     cd C:\Websites\jubileeverse.com
+
+------------------------------------------------------------------------
+ STEP 2 — DRY RUN first (lists what would be deleted, deletes NOTHING):
+
+     node J:\music\_ops\r2-delete-gabriel.js
+
+   EXPECT: "Objects: N  ... across 22 albums" listing GBIM1001EN..GBIM1022EN.
+   If it says "Nothing under prefix — already gone", the CDN is already clean — skip to STEP 4.
+
+------------------------------------------------------------------------
+ STEP 3 — DELETE + REFRESH (only after the dry run looks right):
+
+     node J:\music\_ops\r2-delete-gabriel.js --apply --purge
+
+   --apply = delete the objects from R2 ;  --purge = purge them from Cloudflare.
+   If --purge says "no CLOUDFLARE_API_TOKEN or CLOUDFLARE_GLOBAL_API_KEY", the
+   DELETE still succeeded — just purge manually: Cloudflare dashboard -> the
+   jubileeverse.com / cdn.jubileeverse.com zone -> Caching -> Purge Everything.
+
+------------------------------------------------------------------------
+ STEP 4 — VERIFY a Gabriel file is gone (should be HTTP 404):
+
+     curl.exe -I "https://cdn.jubileeverse.com/music/albums/faith-based/gabriel-inspire/GBIM1001EN-chased-by-blessings/tracks/01_heaven-keeps-the-books.mp3"
+
+------------------------------------------------------------------------
+ STEP 5 — DONE: come back to Claude (on melody) and say "R2 done".
+   Claude will then verify and finish the site side.
+========================================================================
+
+ALREADY DONE on melody (no action needed):
+  - De-listed Gabriel from catalog-manifest.json / album-genres.json /
+    album-themes.json (all 3 copies; backups *.bak-gabriel). 854 -> 832 albums,
+    34 -> 33 artists. Zero GBIM/gabriel references remain.
+  - Confirmed there are NO Gabriel album FOLDERS on the J: drive (nothing to
+    delete there; only persona images + radio jingles exist, which are not albums).
+
+STILL PENDING — SITE DEPLOY (so Gabriel vanishes from www.jubilujah.com/inspire):
+  Claude can run this from melody the moment you approve ssh/scp to the VPS,
+  OR run it yourself (key already on melody):
+    $K="$env:USERPROFILE\.ssh\id_ed25519_jubilee_prod"
+    scp -i $K W:\JubiLujah.com\app\web\public\music\catalog-manifest.json root@94.72.120.231:/var/www/jubilujah.com/web/public/music/catalog-manifest.json
+    scp -i $K W:\JubiLujah.com\app\web\public\music\album-genres.json    root@94.72.120.231:/var/www/jubilujah.com/web/public/music/album-genres.json
+    scp -i $K W:\JubiLujah.com\app\web\public\music\album-themes.json    root@94.72.120.231:/var/www/jubilujah.com/web/public/music/album-themes.json
+    ssh -i $K root@94.72.120.231 "cd /var/www/jubilujah.com && rm -rf web/.next && npm run build && pm2 restart jubilujah-web"
+========================================================================

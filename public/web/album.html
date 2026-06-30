@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Album &middot; Jubilujah</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<link rel="stylesheet" href="/web/_assets/player.css">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #c8954a;
+    --accent-warm: #e8b870;
+    --success: #5fb371;
+    --warn: #d4a05c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .album-crumbs-bar {
+    padding: 18px 0 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .album-crumbs-bar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .crumbs {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .crumbs a {
+    color: var(--accent-warm);
+    text-decoration: none;
+  } 
+  .crumbs .sep { color: var(--ink-muted); margin: 0 8px; }
+
+  .album-header {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 700px) {
+    .album-header { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  .album-art {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #1c232d 0%, #0a0e14 100%);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .album-art .art-placeholder {
+    font-family: Georgia, serif;
+    color: var(--ink-muted);
+    text-align: center;
+    padding: 24px;
+  }
+  .album-art .art-placeholder .code {
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .album-art .art-placeholder .title {
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink-soft);
+  }
+
+  .album-info { min-width: 0; }
+  .album-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .album-title {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .album-artist {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .album-artist a {
+    color: var(--accent-warm);
+    text-decoration: none;
+  } 
+  .album-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .album-stats .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .album-stats .stat .label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .album-stats .stat .val {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .album-stats .stat .val.score { color: var(--accent-warm); }
+
+  .album-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .btn {
+    background: var(--accent);
+    color: #0a0e14;
+    border: none;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .btn:hover { background: var(--accent-warm); transform: translateY(-1px); }
+  .btn:disabled { background: var(--ink-muted); cursor: not-allowed; }
+  .btn.secondary {
+    background: transparent;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent);
+  }
+  .btn.secondary:hover { background: rgba(200, 149, 74, 0.12); }
+
+  .album-meta-text {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .album-meta-text strong { color: var(--ink); }
+  .album-meta-text .row { display: flex; gap: 10px; padding: 4px 0; }
+  .album-meta-text .row .k { color: var(--ink-muted); min-width: 110px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 3px; }
+  .album-meta-text .row .v { flex: 1; }
+
+  .tracks-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .tracks-header {
+    display: grid;
+    grid-template-columns: 50px 1fr 80px 70px;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+  .tracks-header .col-time, .tracks-header .col-actions { text-align: right; }
+  .track-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 80px 70px;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background 0.12s ease;
+    cursor: pointer;
+  }
+  .track-row:last-child { border-bottom: none; }
+  .track-row:hover { background: var(--surface-2); }
+  .track-row.current {
+    background: linear-gradient(90deg, rgba(200, 149, 74, 0.10) 0%, transparent 100%);
+    border-left: 3px solid var(--accent);
+    padding-left: 17px;
+  }
+  .track-row.unavailable {
+    cursor: default;
+    opacity: 0.55;
+  }
+  .track-row.unavailable:hover { background: transparent; }
+  .track-num {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+  .track-row.current .track-num { color: var(--accent-warm); }
+  .track-title {
+    color: var(--ink);
+    font-weight: 500;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .track-row.unavailable .track-title { color: var(--ink-soft); font-style: italic; }
+  .track-time {
+    text-align: right;
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .track-actions { text-align: right; font-size: 11px; color: var(--ink-muted); }
+  .track-status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .track-status.audio { background: rgba(95, 179, 113, 0.15); color: var(--success); }
+  .track-status.lyrics { background: rgba(200, 149, 74, 0.15); color: var(--warn); }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-soft);
+  }
+  .empty-state h2 {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .empty-state .code {
+    font-family: 'SF Mono', Monaco, monospace;
+    background: var(--surface);
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: var(--accent-warm);
+  }
+
+  .loader {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+</style>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="all"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<div class="album-crumbs-bar">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/web/inspire-family-dashboard.html">Inspire Family</a>
+      <span class="sep">/</span>
+      <a id="crumb-artist" href="#">Artist</a>
+      <span class="sep">/</span>
+      <span id="crumb-album">Album</span>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+  <div id="content">
+    <div class="loader">Loading album…</div>
+  </div>
+</main>
+
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/player.js" defer></script>
+<script>
+(function () {
+  'use strict';
+
+  const MANIFEST_URL = '/music/catalog-manifest.json';
+  const MUSIC_BASE = '/music/';
+
+  function qs(name) {
+    return new URLSearchParams(location.search).get(name);
+  }
+
+  function el(tag, attrs, ...children) {
+    const e = document.createElement(tag);
+    if (attrs) for (const k in attrs) {
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'html') e.innerHTML = attrs[k];
+      else if (k.startsWith('on') && typeof attrs[k] === 'function') e.addEventListener(k.slice(2), attrs[k]);
+      else e.setAttribute(k, attrs[k]);
+    }
+    for (const c of children) {
+      if (c == null) continue;
+      e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    }
+    return e;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  async function loadManifest() {
+    const cached = sessionStorage.getItem('jv_manifest_v1');
+    if (cached) {
+      try {
+        const obj = JSON.parse(cached);
+        if (obj._ts && Date.now() - obj._ts < 5 * 60 * 1000) return obj.data;
+      } catch (e) { /* ignore */ }
+    }
+    const r = await fetch(MANIFEST_URL);
+    if (!r.ok) throw new Error('manifest ' + r.status);
+    const data = await r.json();
+    try { sessionStorage.setItem('jv_manifest_v1', JSON.stringify({ _ts: Date.now(), data })); } catch (e) {}
+    return data;
+  }
+
+  function findAlbum(manifest, code) {
+    if (!manifest || !manifest.categories) return null;
+    for (const cat of manifest.categories) {
+      for (const art of (cat.artists || [])) {
+        for (const alb of (art.albums || [])) {
+          if (alb.code === code || alb.code === code + 'EN') {
+            return { category: cat, artist: art, album: alb };
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  async function fetchAlbumMeta(albumPath) {
+    try {
+      const r = await fetch(MUSIC_BASE + albumPath + '/album.meta.json');
+      if (r.ok) return await r.json();
+    } catch (e) { /* ignore */ }
+    return null;
+  }
+
+  async function findArtworkUrl(albumPath) {
+    const candidates = ['cover.jpg', 'cover.png', 'cover.webp', 'cover-source.jpg', 'cover-source.png', 'cover-source.webp'];
+    for (const name of candidates) {
+      const url = MUSIC_BASE + albumPath + '/artwork/' + name;
+      try {
+        const r = await fetch(url, { method: 'HEAD' });
+        if (r.ok) return url;
+      } catch (e) { /* ignore */ }
+    }
+    return null;
+  }
+
+  function render(found, meta, artworkUrl) {
+    const { category, artist, album } = found;
+    const content = document.getElementById('content');
+    content.innerHTML = '';
+
+    // breadcrumbs
+    document.getElementById('crumb-artist').textContent = artist.name;
+    document.getElementById('crumb-artist').href = `/music/albums/${category.key}/${artist.slug}/executive-summary.html`;
+    document.getElementById('crumb-album').textContent = album.title;
+    document.title = `${album.title} — ${artist.name} · Jubilujah`;
+
+    // Re-scope the header Ready pill to this album's artist so the visitor
+    // sees the persona-level "X/Y Ready (Z%)" instead of the catalog-wide stat.
+    if (window.jvAlbumStatus && typeof window.jvAlbumStatus.setHeaderScope === 'function') {
+      window.jvAlbumStatus.setHeaderScope('artist:' + artist.slug);
+    }
+
+    // header
+    const art = el('div', { class: 'album-art' });
+    if (artworkUrl) {
+      art.style.backgroundImage = `url("${artworkUrl}")`;
+    } else {
+      const ph = el('div', { class: 'art-placeholder' });
+      ph.appendChild(el('div', { class: 'code' }, album.code));
+      ph.appendChild(el('div', { class: 'title' }, album.title));
+      art.appendChild(ph);
+    }
+
+    const info = el('div', { class: 'album-info' });
+    const eyebrow = el('div', { class: 'album-eyebrow' }, `${category.label} · ${artist.role || 'Album'} `);
+    // Ready / Studio status badge based on whether any track has audio
+    const albumReady = (album.playable || 0) > 0;
+    const statusBadge = el('span', { class: 'jv-status-badge large ' + (albumReady ? 'ready' : 'studio') }, albumReady ? 'Ready' : 'Studio');
+    statusBadge.title = (album.playable || 0) + ' of ' + (album.trackCount || (album.tracks || []).length) + ' tracks have audio';
+    eyebrow.appendChild(statusBadge);
+    info.appendChild(eyebrow);
+    info.appendChild(el('h1', { class: 'album-title' }, album.title));
+    const artistLine = el('div', { class: 'album-artist' });
+    artistLine.innerHTML = `by <a href="/music/albums/${category.key}/${artist.slug}/executive-summary.html">${escapeHtml(artist.name)}</a>`;
+    info.appendChild(artistLine);
+
+    const stats = el('div', { class: 'album-stats' });
+    stats.appendChild(statBlock('Tracks', String(album.trackCount || (album.tracks || []).length)));
+    stats.appendChild(statBlock('Playable', String(album.playable || 0)));
+    if (meta && meta.amplification_v3 && meta.amplification_v3.composite) {
+      const s = statBlock('Composite', meta.amplification_v3.composite.toFixed(1) + '%');
+      s.querySelector('.val').classList.add('score');
+      stats.appendChild(s);
+    }
+    stats.appendChild(statBlock('Code', album.code));
+    info.appendChild(stats);
+
+    // actions
+    const actions = el('div', { class: 'album-actions' });
+    const playableCount = (album.tracks || []).filter(t => t.audio).length;
+    const playBtn = el('button', { class: 'btn' }, playableCount > 0 ? '▶ Play Album' : '▶ No audio yet');
+    playBtn.disabled = playableCount === 0;
+    playBtn.addEventListener('click', () => {
+      if (window.jvPlayer) window.jvPlayer.play(album.code, 1);
+    });
+    actions.appendChild(playBtn);
+    const dashLink = el('a', { class: 'btn secondary', href: `/music/albums/${category.key}/${artist.slug}/executive-summary.html` }, 'Artist summary →');
+    actions.appendChild(dashLink);
+    info.appendChild(actions);
+
+    // optional meta block
+    if (meta) {
+      const mt = el('div', { class: 'album-meta-text' });
+      if (meta.themes && meta.themes.length) mt.appendChild(metaRow('Themes', meta.themes.join(' · ')));
+      if (meta.style_fusion) {
+        const sf = meta.style_fusion.base + (meta.style_fusion.secondary ? ' × ' + meta.style_fusion.secondary : '');
+        mt.appendChild(metaRow('Style', sf));
+      }
+      if (meta.amplification_v3 && meta.amplification_v3.dimensions) {
+        const d = meta.amplification_v3.dimensions;
+        const parts = [
+          'Hook ' + (d.hook_strength || d.hook).toFixed(1),
+          'Groove ' + d.groove.toFixed(1),
+          'Replay ' + (d.replay_value || d.replay).toFixed(1),
+          'Payoff ' + (d.dynamic_payoff || d.payoff).toFixed(1),
+          'EmPull ' + (d.emotional_pull || d.emotion).toFixed(1),
+          'Loop ' + (d.loop_ability || d.loop).toFixed(1)
+        ];
+        mt.appendChild(metaRow('Dimensions', parts.join(' · ')));
+      }
+      if (mt.children.length > 0) info.appendChild(mt);
+    }
+
+    const header = el('div', { class: 'album-header' }, art, info);
+    content.appendChild(header);
+
+    // track list
+    const tracks = album.tracks || (meta && meta.tracks) || [];
+    if (tracks.length === 0) {
+      content.appendChild(el('div', { class: 'empty-state' },
+        el('h2', null, 'No tracks listed'),
+        el('p', null, 'This album exists in the catalog but has no track data yet.')
+      ));
+      return;
+    }
+
+    const tw = el('div', { class: 'tracks-wrap' });
+    tw.appendChild(el('div', { class: 'tracks-header' },
+      el('div', null, '#'),
+      el('div', null, 'Title'),
+      el('div', { class: 'col-time' }, ''),
+      el('div', { class: 'col-actions' }, 'Status')
+    ));
+    tracks.forEach(tr => {
+      const playable = !!tr.audio;
+      const row = el('div', { class: 'track-row' + (playable ? '' : ' unavailable') });
+      row.dataset.trackNum = tr.n || tr.track_number;
+      row.appendChild(el('div', { class: 'track-num' }, String(tr.n || tr.track_number || '')));
+      const title = tr.title || tr.track_title || '(untitled)';
+      row.appendChild(el('div', { class: 'track-title' }, title));
+      row.appendChild(el('div', { class: 'track-time' }, ''));
+      row.appendChild(el('div', { class: 'track-actions' },
+        el('span', { class: 'track-status ' + (playable ? 'audio' : 'lyrics') }, playable ? 'Audio' : 'Lyrics only')
+      ));
+      if (playable) {
+        row.addEventListener('click', () => {
+          if (window.jvPlayer) window.jvPlayer.play(album.code, tr.n || tr.track_number);
+          document.querySelectorAll('.track-row.current').forEach(r => r.classList.remove('current'));
+          row.classList.add('current');
+        });
+      }
+      tw.appendChild(row);
+    });
+    content.appendChild(tw);
+
+    // mark current track if player has one for this album
+    setTimeout(() => {
+      if (window.jvPlayer) {
+        const cur = window.jvPlayer.getCurrent();
+        if (cur && cur.albumCode === album.code) {
+          const row = document.querySelector(`.track-row[data-track-num="${cur.trackNum}"]`);
+          if (row) row.classList.add('current');
+        }
+      }
+    }, 300);
+  }
+
+  function statBlock(label, val) {
+    const s = el('div', { class: 'stat' });
+    s.appendChild(el('div', { class: 'label' }, label));
+    s.appendChild(el('div', { class: 'val' }, val));
+    return s;
+  }
+
+  function metaRow(k, v) {
+    const r = el('div', { class: 'row' });
+    r.appendChild(el('div', { class: 'k' }, k));
+    r.appendChild(el('div', { class: 'v' }, v));
+    return r;
+  }
+
+  function renderError(code, msg) {
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state">
+        <h2>Album not found</h2>
+        <p>No album with code <span class="code">${escapeHtml(code || '(none)')}</span> was found in the catalog.</p>
+        <p style="margin-top:20px;"><a href="/web/inspire-family-dashboard.html" style="color:var(--accent-warm);">← Back to Inspire Family Dashboard</a></p>
+        ${msg ? `<p style="margin-top:14px;color:var(--ink-muted);font-size:12px;">${escapeHtml(msg)}</p>` : ''}
+      </div>`;
+  }
+
+  async function init() {
+    const code = qs('code');
+    if (!code) { renderError(null, 'No ?code=ALBUMCODE in URL.'); return; }
+    try {
+      const manifest = await loadManifest();
+      const found = findAlbum(manifest, code);
+      if (!found) { renderError(code); return; }
+      const [meta, artwork] = await Promise.all([
+        fetchAlbumMeta(found.album.path),
+        findArtworkUrl(found.album.path)
+      ]);
+      render(found, meta, artwork);
+    } catch (e) {
+      console.error(e);
+      renderError(code, e.message);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

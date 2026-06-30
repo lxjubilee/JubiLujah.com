@@ -1,0 +1,75 @@
+{
+  "id": "stable-animals-story",
+  "title": "Stable Animals Story",
+  "category": "children",
+  "category_label": "Children Music",
+  "description": "The Party Giggles stable-series — fourteen little friends who lived (or might have lived) near a quiet manger one starry night. Nala the Donkey, Zahara the Camel, Shiloh the Shepherd Pup, Libi the Little Lamb, Sheva the Stable Dove, Aurora the Arctic Fox. The Christmas story told through the eyes of the smallest witnesses.",
+  "theme": "Nativity, stable, Christmas, wonder, witness",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-children",
+  "albums": [
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Nala the Donkey",
+      "album_code": "IX430",
+      "album_slug": "IX430EN-nala-the-donkey",
+      "category_path": "children/party-giggles",
+      "why_included": "The donkey who carried Mary — patient, steady, faithful all the way to Bethlehem."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Zahara the Camel",
+      "album_code": "IX431",
+      "album_slug": "IX431EN-zahara-the-camel",
+      "category_path": "children/party-giggles",
+      "why_included": "The camel from the East who carried wisdom to the manger door."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Shiloh the Shepherd Pup",
+      "album_code": "IX432",
+      "album_slug": "IX432EN-shiloh-the-shepherd-pup",
+      "category_path": "children/party-giggles",
+      "why_included": "The pup who heard the angels first and led the shepherds to the King."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Libi the Little Lamb",
+      "album_code": "IX435",
+      "album_slug": "IX435EN-libi-the-little-lamb",
+      "category_path": "children/party-giggles",
+      "why_included": "The lamb in the field who knew, somehow, the Lamb was being born."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Sheva the Stable Dove",
+      "album_code": "IX436",
+      "album_slug": "IX436EN-sheva-the-stable-dove",
+      "category_path": "children/party-giggles",
+      "why_included": "The dove in the rafters who sang the very first cradle-song over Him."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Sheba the Little Lamb",
+      "album_code": "IX442",
+      "album_slug": "IX442EN-sheba-the-little-lamb",
+      "category_path": "children/party-giggles",
+      "why_included": "Another little lamb — because the Lamb of God is for every little lamb."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Aurora the Arctic Fox",
+      "album_code": "IX443",
+      "album_slug": "IX443EN-aurora-the-arctic-fox",
+      "category_path": "children/party-giggles",
+      "why_included": "The fox who watched the star rise over the snow at the top of the world."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "animal-friends-party",
+  "title": "Animal Friends Dance Party",
+  "category": "children",
+  "category_label": "Children Music",
+  "description": "The biggest Party Giggles dance-party playlist — Rudy Rooster, Elephant, Monkey, Gorilla, Flamingo, Moose, and friends. Bluegrass-gospel barn-jams, jungle parades, banana bashes, and birthday celebrations. Crank it up, push the furniture back, let the wiggle-and-shout crowd take over.",
+  "theme": "Dance, celebration, animal friends, fun, movement",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-children",
+  "albums": [
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Rooster's Jamboree",
+      "album_code": "IX401",
+      "album_slug": "IX401EN-rooster-s-jamboree",
+      "category_path": "children/party-giggles",
+      "why_included": "Bluegrass-gospel barn-jam opener with the wake-up cluckin' and the moutaintop crow."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Elephant's Jungle Jamboree",
+      "album_code": "IX404",
+      "album_slug": "IX404EN-elephant-s-jungle-jamboree",
+      "category_path": "children/party-giggles",
+      "why_included": "Stomp-stomp jungle parade with the big-friend dance moves."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Monkey's Banana Bash",
+      "album_code": "IX411",
+      "album_slug": "IX411EN-monkey-s-banana-bash",
+      "category_path": "children/party-giggles",
+      "why_included": "Banana-peel slide grooves and the funniest chants in the jungle."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Gorilla Groove Jam",
+      "album_code": "IX419",
+      "album_slug": "IX419EN-gorilla-groove-jam",
+      "category_path": "children/party-giggles",
+      "why_included": "Chest-thump beats and the strongest-friend dance breakdown."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Flamingo Fiesta",
+      "album_code": "IX420",
+      "album_slug": "IX420EN-flamingo-fiesta",
+      "category_path": "children/party-giggles",
+      "why_included": "Pink-feather fiesta with the one-leg balance challenge and the salsa shake."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Bella's Birthday Bash",
+      "album_code": "IX423",
+      "album_slug": "IX423EN-bella-s-birthday-bash",
+      "category_path": "children/party-giggles",
+      "why_included": "The birthday-bash everyone wants their candle in — cake, confetti, and clap-along."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Pixie's Praise Party",
+      "album_code": "IX424",
+      "album_slug": "IX424EN-pixie-s-praise-party",
+      "category_path": "children/party-giggles",
+      "why_included": "Sparkle-dust praise-party with the giggles-and-glory chorus."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Moose Mambo",
+      "album_code": "IX428",
+      "album_slug": "IX428EN-moose-mambo",
+      "category_path": "children/party-giggles",
+      "why_included": "Moose-antlers mambo with the big-feet stomp pattern."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Kangaroo's Boomerang Bash",
+      "album_code": "IX409",
+      "album_slug": "IX409EN-kangaroo-s-boomerang-bash",
+      "category_path": "children/party-giggles",
+      "why_included": "Hop-hop-hop boomerang bash with the down-under dance crew."
+    },
+    {
+      "artist_name": "Party Giggles",
+      "artist_slug": "party-giggles",
+      "album_title": "Tiki's Pirate Fiesta",
+      "album_code": "IX406",
+      "album_slug": "IX406EN-tiki-s-pirate-fiesta",
+      "category_path": "children/party-giggles",
+      "why_included": "Aye-aye captain treasure-hunt fiesta with the pirate clap-along."
+    }
+  ]
+}

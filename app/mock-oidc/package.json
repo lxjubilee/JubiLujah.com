@@ -1,0 +1,16 @@
+{
+  "name": "jubilujah-mock-oidc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local dev OIDC provider emulating JubileeInspire SSO. NOT for production.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "jose": "^5.6.3"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jubileeverse.com/schemas/v1/artist.schema.json",
+  "title": "Artist Manifest",
+  "description": "Canonical published JSON manifest for an artist / brand persona in the Jubilujah catalog (Build Spec sections 6, 7, 16). One record per persona or branded act regardless of grouping.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "slug",
+    "name",
+    "grouping",
+    "ohi_default"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional self-link to this schema document."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable RFC 4122 UUID. Matches catalog.artists.id."
+    },
+    "type": {
+      "type": "string",
+      "const": "artist",
+      "description": "Discriminator. Always the literal string 'artist'."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing publish version."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "URL-safe artist slug. Also used as the manifest filename: /catalog/artists/{slug}.json."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Human-readable display name."
+    },
+    "grouping": {
+      "type": "string",
+      "enum": [
+        "inspire_family",
+        "affiliated",
+        "children",
+        "other_initiatives"
+      ],
+      "description": "Taxonomy bucket per Build Spec section 6. Drives the 12-song lock on albums, the catalog browse ordering, and downstream consumer treatments."
+    },
+    "bio": {
+      "type": "object",
+      "description": "Multilingual biography content.",
+      "additionalProperties": false,
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000,
+          "description": "Biography body in the persona's primary language."
+        },
+        "primary_language": {
+          "type": "string",
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "description": "ISO 639-1 code identifying which language 'primary' is written in."
+        },
+        "translations": {
+          "type": "object",
+          "description": "Map of ISO 639-1 codes to translated biography bodies.",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 10000
+          }
+        }
+      }
+    },
+    "visual_identity": {
+      "type": "object",
+      "description": "References to visual identity assets on the CDN (avatars, color palette, typography hints).",
+      "additionalProperties": false,
+      "properties": {
+        "avatar_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://cdn\\.jubileeverse\\.com/art/artists/.+",
+          "description": "Absolute URL of the largest delivered avatar rendition."
+        },
+        "avatar_renditions": {
+          "type": "object",
+          "description": "Map of size keys (e.g. '128', '256', '512') to absolute URLs of size-specific WebP renditions.",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[0-9]{2,4}$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "primary_color": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Hex color (with leading #) used as the dominant brand accent."
+        },
+        "secondary_color": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Hex color used as the supporting brand accent."
+        },
+        "wordmark_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional logotype / wordmark asset URL on the CDN."
+        }
+      }
+    },
+    "five_fold_office": {
+      "type": "object",
+      "description": "Five-Fold ministry dual-office assignment. Required for Inspire Family personas; optional for other groupings. The 'secondary' role represents the secondary anointing in the dual-office model.",
+      "additionalProperties": false,
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "enum": [
+            "apostle",
+            "prophet",
+            "evangelist",
+            "pastor",
+            "teacher"
+          ]
+        },
+        "secondary": {
+          "type": "string",
+          "enum": [
+            "apostle",
+            "prophet",
+            "evangelist",
+            "pastor",
+            "teacher"
+          ]
+        }
+      }
+    },
+    "genre_anchor": {
+      "type": "array",
+      "description": "Primary genre / sonic anchor tags for the persona. Drives station persona_affinity in Jubilee Radio.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "minLength": 1,
+        "maxLength": 60
+      },
+      "uniqueItems": true,
+      "maxItems": 12
+    },
+    "ohi_default": {
+      "type": "boolean",
+      "description": "Whether OHI is this persona's default content mode. CCI override is internal-only and never serialized to public JSON (Build Spec sections 7, 20). Public consumers should always treat this as true unless explicitly told otherwise; this field exists for completeness of the published artist record."
+    },
+    "languages": {
+      "type": "array",
+      "description": "Languages this persona records in.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      },
+      "uniqueItems": true,
+      "maxItems": 12
+    },
+    "album_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Convenience count of published albums for this artist. Recomputed on every publish."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "first_published_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

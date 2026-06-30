@@ -1,0 +1,57 @@
+{
+  "id": "story-and-heritage",
+  "title": "Story & Heritage",
+  "category": "general",
+  "category_label": "Other Artists",
+  "description": "Story-songs and heritage-anthems from the partner-artist roster. Allan Hassan's two-album Failure-to-Atone cycle (the album cut and the broadway-stage cut), Gage Darron's American-Anthem heritage record, Gage Darron's self-titled introduction, and Daisy Wylder's debut singer-songwriter set. Folk, Americana, broadway, the long ballad.",
+  "theme": "Story, heritage, anthem, Americana, folk, ballad",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-general",
+  "albums": [
+    {
+      "artist_name": "Allan Hassan",
+      "artist_slug": "allan-hassan",
+      "album_title": "Failure to Atone (Album)",
+      "album_code": "IMX503ah",
+      "album_slug": "IMX503ah-failure-to-atone-album",
+      "category_path": "general/allan-hassan",
+      "why_included": "The album cut of the Failure-to-Atone cycle — conscience-search and the long honest reckoning."
+    },
+    {
+      "artist_name": "Allan Hassan",
+      "artist_slug": "allan-hassan",
+      "album_title": "Failure to Atone (Broadway)",
+      "album_code": "IMX504ah",
+      "album_slug": "IMX504ah-failure-to-atone-broadway",
+      "category_path": "general/allan-hassan",
+      "why_included": "The broadway-stage cut of the same cycle — lifted, theatrical, room-filling."
+    },
+    {
+      "artist_name": "Gage Darron",
+      "artist_slug": "gage-darron",
+      "album_title": "American Anthem (Gage Darron)",
+      "album_code": "IX500",
+      "album_slug": "IX500EN-american-anthem-gage-darron",
+      "category_path": "general/gage-darron",
+      "why_included": "Flag-and-faith heritage anthem cycle — the long love-letter to the country."
+    },
+    {
+      "artist_name": "Gage Darron",
+      "artist_slug": "gage-darron",
+      "album_title": "Gage Darron",
+      "album_code": "IX502",
+      "album_slug": "IX502EN-gage-darron",
+      "category_path": "general/gage-darron",
+      "why_included": "Self-titled introduction — the singer-songwriter at the kitchen table."
+    },
+    {
+      "artist_name": "Daisy Wylder",
+      "artist_slug": "daisy-wylder",
+      "album_title": "Daisy Wylder",
+      "album_code": "IMX506",
+      "album_slug": "IMX506-daisy-wylder",
+      "category_path": "general/daisy-wylder",
+      "why_included": "Debut singer-songwriter set — warm-acoustic story-song heart-mark."
+    }
+  ]
+}

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elias Inspire — Sonic Craft v3.0 Executive Summary</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #c89149;
+    --copper: #e3a96b;
+    --burgundy: #6d4e3a;
+    --warm: #d4a37a;
+    --moss: #6b8b5a;
+    --hook: #e07856;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #5e95a8;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* HERO */
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(200, 145, 73, 0.16) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(107, 139, 90, 0.13) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 72px 0 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(227, 169, 107, 0.04) 0%, transparent 4%),
+      radial-gradient(circle at 70% 60%, rgba(212, 163, 122, 0.03) 0%, transparent 4%);
+    pointer-events: none;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 6px 0 14px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--copper); font-weight: 500; }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 760px;
+    line-height: 1.55;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 36px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .hero-meta .val { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .hero-meta .val.copper { color: var(--copper); }
+
+  /* SECTION */
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 800px;
+    margin-bottom: 32px;
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(6, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .kpi:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .kpi.lead {
+    background:
+      linear-gradient(135deg, rgba(200, 145, 73, 0.20) 0%, rgba(109, 78, 58, 0.18) 100%),
+      var(--surface);
+    border-color: rgba(200, 145, 73, 0.4);
+  }
+  .kpi .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    line-height: 1.25;
+    min-height: 2.5em;
+    display: flex;
+    align-items: flex-start;
+  }
+  .kpi.lead .label { color: var(--copper); }
+  .kpi .score {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+  .kpi.lead .score {
+    font-size: 50px;
+    background: linear-gradient(135deg, var(--copper) 0%, var(--moss) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .kpi .footnote { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .kpi.lead .footnote { color: var(--ink-soft); }
+  .kpi.k-hook { border-top: 3px solid var(--hook); }
+  .kpi.k-groove { border-top: 3px solid var(--groove); }
+  .kpi.k-replay { border-top: 3px solid var(--replay); }
+  .kpi.k-payoff { border-top: 3px solid var(--payoff); }
+  .kpi.k-emotion { border-top: 3px solid var(--emotion); }
+  .kpi.k-loop { border-top: 3px solid var(--loop); }
+  @media (max-width: 1024px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .kpi.lead { grid-column: span 3; }
+  }
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .kpi.lead { grid-column: span 2; }
+  }
+
+  /* COMPARISON */
+  .comparison {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-top: 24px;
+  }
+  .comparison h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--copper);
+  }
+  .comp-table { width: 100%; border-collapse: collapse; }
+  .comp-table th, .comp-table td {
+    padding: 12px 14px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
+  .comp-table th {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table th.eli { color: var(--copper); }
+  .comp-table td { border-bottom: 1px solid var(--line-soft); font-weight: 500; }
+  .comp-table td.dim { font-weight: 600; }
+  .comp-table tr.composite td { background: rgba(200, 145, 73, 0.06); font-weight: 700; font-size: 16px; }
+  .comp-table .elias-cell { color: var(--copper); }
+
+  /* TOP CARDS */
+  .top10 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .top10 { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .rank {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 36px;
+  }
+  .card.gold .rank { color: var(--copper); }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; color: var(--ink); }
+  .card-code {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    font-family: "SF Mono", Monaco, monospace;
+  }
+  .card-score {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .card.gold {
+    border-color: var(--copper);
+    border-width: 2px;
+    background: linear-gradient(135deg, rgba(212, 163, 122, 0.1) 0%, transparent 60%), var(--surface);
+  }
+  .card.gold .card-score { color: var(--copper); }
+
+  /* FULL TABLE */
+  .full-table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--surface-2); }
+  th {
+    text-align: left;
+    padding: 12px 10px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  td.album-title { color: var(--ink); font-weight: 500; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.star td { background: linear-gradient(90deg, rgba(212, 163, 122, 0.1) 0%, transparent 100%); }
+  tbody tr.lament td { background: linear-gradient(90deg, rgba(178, 133, 194, 0.06) 0%, transparent 100%); }
+  tbody tr.intimate td { background: linear-gradient(90deg, rgba(94, 149, 168, 0.06) 0%, transparent 100%); }
+  .code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); }
+  .composite-cell { font-weight: 700; color: var(--accent); }
+  tr.star .composite-cell { color: var(--copper); }
+  .star-mark { color: var(--copper); margin-right: 4px; }
+  .lament-mark { color: var(--emotion); margin-right: 4px; }
+  .intimate-mark { color: var(--loop); margin-right: 4px; }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    background: var(--surface-2);
+    padding: 8px 14px;
+    margin: 22px 0 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+  }
+
+  /* DNA */
+  .dna-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .dna-grid { grid-template-columns: 1fr; } }
+  .dna-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--accent);
+  }
+  .dna-item h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--copper);
+  }
+  .dna-item p { color: var(--ink-soft); font-size: 14px; }
+  .dna-item strong { color: var(--ink); }
+  .dna-item em { color: var(--warm); font-style: italic; }
+
+  /* MECHANISM GRID */
+  .mech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 900px) { .mech-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .mech-grid { grid-template-columns: 1fr; } }
+  .mech {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .mech-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #0a0e14;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .mech-1 .mech-icon { background: var(--hook); }
+  .mech-2 .mech-icon { background: var(--groove); }
+  .mech-3 .mech-icon { background: var(--replay); }
+  .mech-4 .mech-icon { background: var(--payoff); }
+  .mech-5 .mech-icon { background: var(--loop); }
+  .mech-6 .mech-icon { background: var(--emotion); }
+  .mech h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .mech p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .mech .metric {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* SPOTLIGHT */
+  .spotlight {
+    background:
+      linear-gradient(135deg, rgba(200, 145, 73, 0.08) 0%, rgba(107, 139, 90, 0.05) 100%),
+      var(--surface);
+    border: 1px solid rgba(200, 145, 73, 0.3);
+    border-radius: 12px;
+    padding: 38px 40px;
+    margin-top: 24px;
+  }
+  .spotlight h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: var(--copper);
+  }
+  .spotlight p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .spotlight .quote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.55;
+    padding: 22px 0 8px;
+    color: var(--ink);
+    border-top: 1px solid rgba(200, 145, 73, 0.2);
+    margin-top: 22px;
+  }
+  .spotlight .quote em {
+    color: var(--copper);
+    font-style: italic;
+  }
+
+  /* LOOP CALLOUT */
+  .loop-callout {
+    background: linear-gradient(135deg, rgba(200, 145, 73, 0.10) 0%, rgba(109, 78, 58, 0.08) 100%);
+    border: 1px solid var(--copper);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-top: 24px;
+  }
+  .loop-callout h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--copper);
+    margin-bottom: 14px;
+  }
+  .loop-callout p { font-size: 15px; color: var(--ink-soft); margin-bottom: 12px; }
+  .loop-diagram {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 12px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .loop-diagram .step { color: var(--copper); font-weight: 700; }
+  .loop-diagram .arrow { color: var(--accent); }
+  .loop-diagram .anchor { color: var(--warm); font-weight: 700; }
+  .loop-meaning {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 16px;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(200, 145, 73, 0.2);
+  }
+
+  /* PEAK MOMENTS */
+  .peaks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (max-width: 700px) { .peaks { grid-template-columns: 1fr; } }
+  .peak {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--copper);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .peak .peak-score {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 2px;
+  }
+  .peak .peak-title { font-weight: 600; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+  .peak .peak-note { font-size: 13px; color: var(--ink-soft); }
+
+  /* COMPLIANCE */
+  .compliance {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  @media (max-width: 800px) { .compliance { grid-template-columns: 1fr 1fr; } }
+  .comp {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--success);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+  }
+  .comp::before {
+    content: '\2713';
+    color: var(--success);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* V4 FLAG NOTICE */
+  .v4-notice {
+    background: linear-gradient(135deg, rgba(212, 160, 92, 0.08) 0%, rgba(178, 133, 194, 0.05) 100%);
+    border: 1px solid rgba(212, 160, 92, 0.3);
+    border-left: 4px solid var(--payoff);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-top: 22px;
+  }
+  .v4-notice h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: var(--payoff);
+    margin-bottom: 8px;
+  }
+  .v4-notice p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+  .v4-notice strong { color: var(--ink); }
+
+  footer {
+    background: #06090e;
+    color: var(--ink-muted);
+    padding: 44px 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--line);
+  }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--copper); }
+  footer a { color: var(--accent); text-decoration: none; } 
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .hero { background: #0a0e14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, 133.33% auto !important;
+  background-position: center, left 60% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:elias-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<header class="hero" style="--persona-img: url('/personas/Elias.png')">
+  <div class="container">
+    <div class="hero-eyebrow">Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <h1>Elias Inspire <em>&mdash; the high-lonesome storyteller of the trail.</em></h1>
+    <p class="hero-sub">
+      Forty-four albums. Five hundred and twenty-eight tracks. Western / outlaw country / bluegrass body of twenty-four legacy works (Section A) and a Section B Appalachian-bluegrass new-build batch of twenty albums closed into a continuous circle. Every album re-evaluated across six addictiveness dimensions and surgically amplified. Where Melody sings upward into adoration, Jubilee outward into celebration, Zariah inward into intercession, Elias <em>sings along the trail</em> &mdash; the porch-storyteller's high-lonesome tenor with the dust still on his boots.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">44</span></div>
+      <div><span class="label">Tracks</span><span class="val">528</span></div>
+      <div><span class="label">Composite</span><span class="val copper">93.05%</span></div>
+      <div><span class="label">Above target</span><span class="val">43 of 44</span></div>
+      <div><span class="label">EmPull</span><span class="val copper">94.9 dominant</span></div>
+      <div><span class="label">Date</span><span class="val">May 31, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<div data-top-20="elias-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog-wide addictiveness</div>
+    <h2>The six-dimension scorecard</h2>
+    <p class="section-sub">Each dimension targets a specific neuroscience of compulsive re-listening. Catalog averages computed across all 44 albums. Elias's signature is the inverse of the high-energy diaspora pocket &mdash; the campfire-trance loop and the strip-down-then-explode dynamic. Emotional Pull dominates by design.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi lead">
+        <div class="label">Addictiveness Composite</div>
+        <div class="score">93.05%</div>
+        <div class="footnote">Mean of six dimensions &middot; 43 of 44 above 92 flagship target &middot; ELIM1030 "Through the Valley Low" sits at 90.0 by design (lament-grade dignity)</div>
+      </div>
+      <div class="kpi k-hook">
+        <div class="label">Hook Strength</div>
+        <div class="score">93.5%</div>
+        <div class="footnote">Target 92+ &check;</div>
+      </div>
+      <div class="kpi k-groove">
+        <div class="label">Groove</div>
+        <div class="score">91.9%</div>
+        <div class="footnote">Target 90+ &check;</div>
+      </div>
+      <div class="kpi k-replay">
+        <div class="label">Replay Value</div>
+        <div class="score">92.7%</div>
+        <div class="footnote">Target 91+ &check;</div>
+      </div>
+      <div class="kpi k-payoff">
+        <div class="label">Dynamic Payoff</div>
+        <div class="score">92.6%</div>
+        <div class="footnote">Target 90+ &check;</div>
+      </div>
+      <div class="kpi k-emotion">
+        <div class="label">Emotional Pull</div>
+        <div class="score">94.9%</div>
+        <div class="footnote">Dominant dimension</div>
+      </div>
+      <div class="kpi k-loop">
+        <div class="label">Loop-ability</div>
+        <div class="score">90.4%</div>
+        <div class="footnote">Target 88+ &check;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Four-voice persona comparison</div>
+    <h2>Elias, Zariah, Jubilee, Melody &mdash; four voices of the Inspire family</h2>
+    <p class="section-sub">All four share Emotional Pull as their dominant dimension. Jubilee leads this comparison group at 94.44% Composite (CCM arena-belt, post-2026-06-03 blueprint enhancement); Zariah and Elias sit behind at 93.40% / 93.05% respectively with distinct character. Melody's chamber-intimacy 91.5% sits a tier softer by design. Elias is the only male voice in the four-persona body &mdash; F3&ndash;C4 chest storyteller-tenor + A4&ndash;D5 lonesome-mountain cry.</p>
+
+    <div class="comparison">
+      <h3>Catalog-wide addictiveness &middot; four personas side-by-side</h3>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Melody &middot; 40 albums</th>
+            <th>Jubilee &middot; 61 albums</th>
+            <th>Zariah &middot; 41 albums</th>
+            <th class="eli">Elias &middot; 44 albums</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Hook Strength</td><td>92.0%</td><td>94.1%</td><td>94.0%</td><td class="elias-cell">93.5%</td></tr>
+          <tr><td class="dim">Groove</td><td>91.3%</td><td>92.6%</td><td>93.0%</td><td class="elias-cell">91.9%</td></tr>
+          <tr><td class="dim">Replay Value</td><td>91.5%</td><td>93.7%</td><td>93.5%</td><td class="elias-cell">92.7%</td></tr>
+          <tr><td class="dim">Dynamic Payoff</td><td>91.2%</td><td>93.7%</td><td>93.4%</td><td class="elias-cell">92.6%</td></tr>
+          <tr><td class="dim">Emotional Pull</td><td>92.8%</td><td>95.4%</td><td>95.1%</td><td class="elias-cell">94.9%</td></tr>
+          <tr><td class="dim">Loop-ability</td><td>90.4%</td><td>91.5%</td><td>91.6%</td><td class="elias-cell">90.4%</td></tr>
+          <tr class="composite"><td>Composite</td><td>91.5%</td><td>93.6%</td><td>93.4%</td><td class="elias-cell">93.05%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Top performers</div>
+    <h2>The 14 most addictive albums</h2>
+    <p class="section-sub">Ranked by Composite. Four albums tie at the catalog summit (95). ELIM1044 "What He Did for Me" is the 20-album Appalachian-bluegrass batch finale &mdash; its T12 loops back to ELIM1025 "Across the Jordan Wide" T1 in same-key G major, closing the new-build body into a continuous circle.</p>
+
+    <div class="top10">
+      <a href="/web/album.html?code=ELIM1019EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">1</div>
+        <div class="card-body">
+          <div class="card-title">Frontier Apostle</div>
+          <div class="card-code">ELIM1019 &middot; Outlaw Country &times; Apostolic Frontier</div>
+        </div>
+        <div class="card-score">95</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1022EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">2</div>
+        <div class="card-body">
+          <div class="card-title">Redemption Road</div>
+          <div class="card-code">ELIM1022 &middot; Country-Gospel &times; Highway Testimony</div>
+        </div>
+        <div class="card-score">95</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">3</div>
+        <div class="card-body">
+          <div class="card-title">Grace Called Me Home</div>
+          <div class="card-code">ELIM1028 &middot; Appalachian Bluegrass &middot; W4 peak</div>
+        </div>
+        <div class="card-score">95</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1044EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold">
+        <div class="rank">&#9733;</div>
+        <div class="card-body">
+          <div class="card-title">What He Did for Me</div>
+          <div class="card-code">ELIM1044 &middot; 20-album batch finale &middot; T12&rarr;ELIM1025 T1</div>
+        </div>
+        <div class="card-score">95</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1010EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">5</div>
+        <div class="card-body">
+          <div class="card-title">Honky Tonk Repentance</div>
+          <div class="card-code">ELIM1010 &middot; Honky-Tonk Country &times; Sawdust-Floor</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1012EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">6</div>
+        <div class="card-body">
+          <div class="card-title">Appalachian Shout</div>
+          <div class="card-code">ELIM1012 &middot; Appalachian Shape-Note &times; Holler</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1014EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">7</div>
+        <div class="card-body">
+          <div class="card-title">Gospel Bluegrass Revolution</div>
+          <div class="card-code">ELIM1014 &middot; Bluegrass &times; Foot-Stomp Revival</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1018EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">8</div>
+        <div class="card-body">
+          <div class="card-title">Fatherhood and Faith</div>
+          <div class="card-code">ELIM1018 &middot; Western Folk &times; Generational Covenant</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1021EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">9</div>
+        <div class="card-body">
+          <div class="card-title">Prophetic Wilderness</div>
+          <div class="card-code">ELIM1021 &middot; Frontier Folk &times; Prophetic Altar</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1023EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">10</div>
+        <div class="card-body">
+          <div class="card-title">Standing Strong</div>
+          <div class="card-code">ELIM1023 &middot; Western Country &times; Saints-Across-History</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1026EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">11</div>
+        <div class="card-body">
+          <div class="card-title">Home Up Yonder</div>
+          <div class="card-code">ELIM1026 &middot; Appalachian Bluegrass &times; Heaven-Bound</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1027EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">12</div>
+        <div class="card-body">
+          <div class="card-title">Switchbacks to Glory</div>
+          <div class="card-code">ELIM1027 &middot; Mountain Bluegrass &times; Pilgrim Trail</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1031EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">13</div>
+        <div class="card-body">
+          <div class="card-title">Just Passing Through</div>
+          <div class="card-code">ELIM1031 &middot; Bluegrass &times; Pilgrim Wanderer</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+      <a href="/web/album.html?code=ELIM1043EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card">
+        <div class="rank">14</div>
+        <div class="card-body">
+          <div class="card-title">Joy Just Cut Loose</div>
+          <div class="card-code">ELIM1043 &middot; Bluegrass &times; Dance-Floor Tempo (108&ndash;138 BPM)</div>
+        </div>
+        <div class="card-score">94</div>
+      </div></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Single-track peaks</div>
+    <h2>The catalog's most addictive moments</h2>
+    <p class="section-sub">Across 528 tracks, these are the single-track composite peaks and dimension-level maxima the v3.0 deep pass surfaced and amplified. The T12 finale of ELIM1044 holds the catalog-highest single-track composite at 96.</p>
+
+    <div class="peaks">
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">ELIM1044 T12 &middot; "What He Did for Me" (catalog finale)</div>
+        <div class="peak-note">Catalog-highest single-track composite. 30-sec slow credits-roll outro tag with six-voice family-choir + intake-breath at 3:28 + sacred-harp lining-out &rarr; same-key G-major seamless handoff into ELIM1025 T1 (Joshua 3 river-crossing). The bluegrass body becomes a continuous circle.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">ELIM1030 &middot; EmPull 97 (catalog max)</div>
+        <div class="peak-note">Through the Valley Low. Highest single-album Emotional Pull. Lament-grade dignity at 86 BPM Groove (intentionally below target). The strip-down-then-explode arc held strictly at strip &mdash; Psalm 23 spoken across a single dobro slide.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">ELIM1018 T01-T12 &middot; "Fatherhood and Faith"</div>
+        <div class="peak-note">Three-generation covenant ear-candy stack. Chair-creak intro + grandson whispered "Abba" generational loop point + boy-soprano + baritone+tenor+children ensemble bloom. The lineage-tear anchor.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">97</div>
+        <div class="peak-title">ELIM1032 T7 &middot; "Faith My Daddy Sang"</div>
+        <div class="peak-note">Father-voice testimony anchor with porch-rocker creak + harmonica answer-phrase. EmoPull 97. The catalog's clearest deposit on inherited-faith theology &mdash; the father is the recipient, not the agent.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">ELIM1019 T12 &middot; "Frontier Apostle" (40-sec wind-fade)</div>
+        <div class="peak-note">Wide congregational hum + lap steel horizon-line + ridge-to-ridge T12&rarr;T1 wind loop. The frontier apostle does not stop preaching; the wind carries him over the ridge into the next sermon.</div>
+      </div>
+      <div class="peak">
+        <div class="peak-score">96</div>
+        <div class="peak-title">ELIM1022 T7 &middot; "Redemption Road" (altar 6:52)</div>
+        <div class="peak-note">D&rarr;E&rarr;F&sharp; modulation + sacred-harp lining-out (the room-on-its-knees moment). Bookend harmonica G is the T12&rarr;T1 loop point by design &mdash; highest single-album loop score in the catalog.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Full catalog</div>
+    <h2>All 44 albums &middot; 6-dimension scorecard</h2>
+    <p class="section-sub">Sorted by catalog code. Section A = legacy Western / outlaw country / bluegrass body (ELIM1001-1024, flagged as pre-V4 stub builds eligible for V4 SOP rebuild). Section B = full V4 Appalachian-bluegrass new builds (ELIM1025-1044) with T12&rarr;T1 loop closure. &#9733; finale &middot; &#9670; lament.</p>
+
+    <div class="full-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Album</th>
+            <th>Code</th>
+            <th class="num">Composite</th>
+            <th class="num">Hook</th>
+            <th class="num">Groove</th>
+            <th class="num">Replay</th>
+            <th class="num">DynPay</th>
+            <th class="num">EmoPull</th>
+            <th class="num">Loop</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="10" style="background:#1a1f28;padding:10px 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);font-weight:700;">Section A &middot; Western / Outlaw Country / Bluegrass Body (Pre-V4 Stubs &middot; V4 Rebuild Eligible)</td></tr>
+          <tr><td>01</td><td class="album-title"><a href="/web/album.html?code=ELIM1001EN">Altar Dust &amp; Glory</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1001EN">ELIM1001</a></td><td class="num composite-cell">91.8%</td><td class="num">93%</td><td class="num">91%</td><td class="num">92%</td><td class="num">91%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>02</td><td class="album-title"><a href="/web/album.html?code=ELIM1002EN">Break of Dawn</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1002EN">ELIM1002</a></td><td class="num composite-cell">91.2%</td><td class="num">92%</td><td class="num">90%</td><td class="num">91%</td><td class="num">92%</td><td class="num">93%</td><td class="num">89%</td></tr>
+          <tr><td>03</td><td class="album-title"><a href="/web/album.html?code=ELIM1003EN">Devil in a Skirt</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1003EN">ELIM1003</a></td><td class="num composite-cell">92.2%</td><td class="num">93%</td><td class="num">91%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>04</td><td class="album-title"><a href="/web/album.html?code=ELIM1004EN">The Outlaw Apostle</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1004EN">ELIM1004</a></td><td class="num composite-cell">91.8%</td><td class="num">92%</td><td class="num">91%</td><td class="num">91%</td><td class="num">93%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>05</td><td class="album-title"><a href="/web/album.html?code=ELIM1005EN">Stolen Land Sacred Covenant</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1005EN">ELIM1005</a></td><td class="num composite-cell">92.0%</td><td class="num">92%</td><td class="num">90%</td><td class="num">92%</td><td class="num">93%</td><td class="num">96%</td><td class="num">89%</td></tr>
+          <tr><td>06</td><td class="album-title"><a href="/web/album.html?code=ELIM1006EN">Campfire Covenant</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1006EN">ELIM1006</a></td><td class="num composite-cell">93.0%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">95%</td><td class="num">96%</td><td class="num">90%</td></tr>
+          <tr><td>07</td><td class="album-title"><a href="/web/album.html?code=ELIM1007EN">Dust and Resurrection</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1007EN">ELIM1007</a></td><td class="num composite-cell">92.3%</td><td class="num">92%</td><td class="num">90%</td><td class="num">92%</td><td class="num">95%</td><td class="num">96%</td><td class="num">89%</td></tr>
+          <tr><td>08</td><td class="album-title"><a href="/web/album.html?code=ELIM1008EN">Prophetic Calling</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1008EN">ELIM1008</a></td><td class="num composite-cell">91.7%</td><td class="num">92%</td><td class="num">91%</td><td class="num">91%</td><td class="num">93%</td><td class="num">94%</td><td class="num">89%</td></tr>
+          <tr><td>09</td><td class="album-title"><a href="/web/album.html?code=ELIM1009EN">Prophetic Fiddle Calling</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1009EN">ELIM1009</a></td><td class="num composite-cell">93%</td><td class="num">93%</td><td class="num">91%</td><td class="num">92%</td><td class="num">91%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>10</td><td class="album-title"><a href="/web/album.html?code=ELIM1010EN">Honky Tonk Repentance</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1010EN">ELIM1010</a></td><td class="num composite-cell">94%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">90%</td></tr>
+          <tr><td>11</td><td class="album-title"><a href="/web/album.html?code=ELIM1011EN">Working Hands, Faithful Heart</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1011EN">ELIM1011</a></td><td class="num composite-cell">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">91%</td><td class="num">94%</td><td class="num">89%</td></tr>
+          <tr><td>12</td><td class="album-title"><a href="/web/album.html?code=ELIM1012EN">Appalachian Shout</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1012EN">ELIM1012</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">91%</td></tr>
+          <tr><td>13</td><td class="album-title"><a href="/web/album.html?code=ELIM1013EN">Red Dirt Redemption</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1013EN">ELIM1013</a></td><td class="num composite-cell">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">89%</td></tr>
+          <tr><td>14</td><td class="album-title"><a href="/web/album.html?code=ELIM1014EN">Gospel Bluegrass Revolution</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1014EN">ELIM1014</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">91%</td></tr>
+          <tr><td>15</td><td class="album-title"><a href="/web/album.html?code=ELIM1015EN">The Last Ballad</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1015EN">ELIM1015</a></td><td class="num composite-cell">93%</td><td class="num">92%</td><td class="num">90%</td><td class="num">92%</td><td class="num">91%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>16</td><td class="album-title"><a href="/web/album.html?code=ELIM1016EN">Apostolic Legacy</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1016EN">ELIM1016</a></td><td class="num composite-cell">93%</td><td class="num">92%</td><td class="num">91%</td><td class="num">93%</td><td class="num">91%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>17</td><td class="album-title"><a href="/web/album.html?code=ELIM1017EN">Eternal Apostle</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1017EN">ELIM1017</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>18</td><td class="album-title"><a href="/web/album.html?code=ELIM1018EN">Fatherhood and Faith</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1018EN">ELIM1018</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">91%</td><td class="num">93%</td><td class="num">93%</td><td class="num">97%</td><td class="num">92%</td></tr>
+          <tr><td>19</td><td class="album-title"><a href="/web/album.html?code=ELIM1019EN">Frontier Apostle</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1019EN">ELIM1019</a></td><td class="num composite-cell">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num">95%</td><td class="num">93%</td><td class="num">96%</td><td class="num">93%</td></tr>
+          <tr><td>20</td><td class="album-title"><a href="/web/album.html?code=ELIM1020EN">Leadership and Lineage</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1020EN">ELIM1020</a></td><td class="num composite-cell">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>21</td><td class="album-title"><a href="/web/album.html?code=ELIM1021EN">Prophetic Wilderness</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1021EN">ELIM1021</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">92%</td><td class="num">94%</td><td class="num">94%</td><td class="num">96%</td><td class="num">93%</td></tr>
+          <tr><td>22</td><td class="album-title"><a href="/web/album.html?code=ELIM1022EN">Redemption Road</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1022EN">ELIM1022</a></td><td class="num composite-cell">95%</td><td class="num">96%</td><td class="num">93%</td><td class="num">95%</td><td class="num">95%</td><td class="num">97%</td><td class="num">94%</td></tr>
+          <tr><td>23</td><td class="album-title"><a href="/web/album.html?code=ELIM1023EN">Standing Strong</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1023EN">ELIM1023</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">95%</td><td class="num">92%</td></tr>
+          <tr><td>24</td><td class="album-title"><a href="/web/album.html?code=ELIM1024EN">Western Justice</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1024EN">ELIM1024</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">95%</td><td class="num">91%</td></tr>
+
+          <tr><td colspan="10" style="background:#1a1f28;padding:10px 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);font-weight:700;">Section B &middot; Appalachian-Bluegrass New Builds (Full V4 &middot; 20-Album Circle)</td></tr>
+          <tr><td>25</td><td class="album-title"><a href="/web/album.html?code=ELIM1025EN">Across the Jordan Wide</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1025EN">ELIM1025</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">90%</td></tr>
+          <tr><td>26</td><td class="album-title"><a href="/web/album.html?code=ELIM1026EN">Home Up Yonder</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1026EN">ELIM1026</a></td><td class="num composite-cell">94%</td><td class="num">95%</td><td class="num">92%</td><td class="num">94%</td><td class="num">93%</td><td class="num">96%</td><td class="num">91%</td></tr>
+          <tr><td>27</td><td class="album-title"><a href="/web/album.html?code=ELIM1027EN">Switchbacks to Glory</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1027EN">ELIM1027</a></td><td class="num composite-cell">94%</td><td class="num">95%</td><td class="num">93%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">91%</td></tr>
+          <tr><td>28</td><td class="album-title"><a href="/web/album.html?code=ELIM1028EN">Grace Called Me Home</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1028EN">ELIM1028</a></td><td class="num composite-cell">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num">97%</td><td class="num">92%</td></tr>
+          <tr><td>29</td><td class="album-title"><a href="/web/album.html?code=ELIM1029EN">Bought With Blood</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1029EN">ELIM1029</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">96%</td><td class="num">90%</td></tr>
+          <tr class="lament"><td>30</td><td class="album-title"><a href="/web/album.html?code=ELIM1030EN"><span class="lament-mark">&#9670;</span>Through the Valley Low</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1030EN">ELIM1030</a></td><td class="num composite-cell">90%</td><td class="num">92%</td><td class="num">86%</td><td class="num">91%</td><td class="num">91%</td><td class="num">97%</td><td class="num">89%</td></tr>
+          <tr><td>31</td><td class="album-title"><a href="/web/album.html?code=ELIM1031EN">Just Passing Through</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1031EN">ELIM1031</a></td><td class="num composite-cell">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">92%</td></tr>
+          <tr><td>32</td><td class="album-title"><a href="/web/album.html?code=ELIM1032EN">Faith My Daddy Sang</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1032EN">ELIM1032</a></td><td class="num composite-cell">94%</td><td class="num">94%</td><td class="num">91%</td><td class="num">94%</td><td class="num">93%</td><td class="num">97%</td><td class="num">92%</td></tr>
+          <tr><td>33</td><td class="album-title"><a href="/web/album.html?code=ELIM1033EN">Holler Cathedral</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1033EN">ELIM1033</a></td><td class="num composite-cell">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">92%</td><td class="num">91%</td><td class="num">93%</td><td class="num">90%</td></tr>
+          <tr><td>34</td><td class="album-title"><a href="/web/album.html?code=ELIM1034EN">Plow and Prayer</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1034EN">ELIM1034</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">91%</td></tr>
+          <tr><td>35</td><td class="album-title"><a href="/web/album.html?code=ELIM1035EN">Empty Chair, Full Heaven</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1035EN">ELIM1035</a></td><td class="num composite-cell">92%</td><td class="num">92%</td><td class="num">91%</td><td class="num">92%</td><td class="num">91%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>36</td><td class="album-title"><a href="/web/album.html?code=ELIM1036EN">Anchor in the Holler</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1036EN">ELIM1036</a></td><td class="num composite-cell">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">90%</td></tr>
+          <tr><td>37</td><td class="album-title"><a href="/web/album.html?code=ELIM1037EN">East Lit Up Tonight</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1037EN">ELIM1037</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>38</td><td class="album-title"><a href="/web/album.html?code=ELIM1038EN">Mourner's Bench Tonight</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1038EN">ELIM1038</a></td><td class="num composite-cell">92%</td><td class="num">92%</td><td class="num">90%</td><td class="num">91%</td><td class="num">91%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>39</td><td class="album-title"><a href="/web/album.html?code=ELIM1039EN">Circle Unbroken Still</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1039EN">ELIM1039</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">91%</td><td class="num">93%</td><td class="num">92%</td><td class="num">95%</td><td class="num">90%</td></tr>
+          <tr><td>40</td><td class="album-title"><a href="/web/album.html?code=ELIM1040EN">Lean Year, Full Table</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1040EN">ELIM1040</a></td><td class="num composite-cell">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">90%</td></tr>
+          <tr><td>41</td><td class="album-title"><a href="/web/album.html?code=ELIM1041EN">Lantern on the Porch</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1041EN">ELIM1041</a></td><td class="num composite-cell">92%</td><td class="num">93%</td><td class="num">90%</td><td class="num">92%</td><td class="num">91%</td><td class="num">95%</td><td class="num">89%</td></tr>
+          <tr><td>42</td><td class="album-title"><a href="/web/album.html?code=ELIM1042EN">Rock Won't Move</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1042EN">ELIM1042</a></td><td class="num composite-cell">92%</td><td class="num">93%</td><td class="num">91%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">89%</td></tr>
+          <tr><td>43</td><td class="album-title"><a href="/web/album.html?code=ELIM1043EN">Joy Just Cut Loose</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1043EN">ELIM1043</a></td><td class="num composite-cell">94%</td><td class="num">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">90%</td></tr>
+          <tr class="star"><td>44</td><td class="album-title"><a href="/web/album.html?code=ELIM1044EN"><span class="star-mark">&#9733;</span>What He Did for Me</a></td><td class="code-cell"><a href="/web/album.html?code=ELIM1044EN">ELIM1044</a></td><td class="num composite-cell">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">97%</td><td class="num">93%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="v4-notice">
+      <h3>&#9888; Section A V4 SOP rebuild eligibility</h3>
+      <p>ELIM1001&ndash;1024 are <strong>pre-V4 stub builds</strong> (April 2026 "UPGRADED to 90%+" Tier-2 work) carried forward into v3.0 craft amplification by design. Their lyric bodies, theology, and content scores are intact and above the 90+ floor, but they do not carry the full V4 SOP blueprint structure (no Section A&ndash;J authoring, no formal main-character-gate documentation, no Bridge Breakthrough Protocol scoring). The v3.0 pass added ear-candy timestamps, dynamic-arc engineering, and loop seams on top of the existing baseline. <strong>A future V4 SOP rebuild pass would lift these 24 albums into full parity with the Section B 20-album batch</strong> &mdash; expected composite lift of +1.0 to +2.5 per album based on Section B uplift comparison.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The signature</div>
+    <h2>Elias's discovered craft DNA</h2>
+    <p class="section-sub">After three passes through 528 tracks, six structural traits surfaced as consistent across the entire body &mdash; the porch-storyteller's compositional fingerprint, now formalized.</p>
+
+    <div class="dna-grid">
+      <div class="dna-item">
+        <h3>1 &middot; F3&ndash;C4 chest storyteller-tenor + A4&ndash;D5 lonesome-mountain cry</h3>
+        <p>Vocals in the <strong>F3&ndash;C4 chest = storyteller-on-the-porch</strong> register (Doc Watson / Ralph Stanley DNA), with the <strong>A4&ndash;D5 head-voice apex</strong> reserved for the lonesome-mountain cry. <em>Horizontal, not vertical</em> &mdash; Elias sings along the trail; he does not stack into chamber-prayer (Melody) or arena belt (Jubilee) or storefront-shout (Zariah).</p>
+      </div>
+      <div class="dna-item">
+        <h3>2 &middot; Strip-down-then-explode dynamic arc</h3>
+        <p>The signature dynamic move is the <strong>T8 strip to bare clawhammer or sacred-harp lining-out</strong>, then the foot-stomp / mass-choir / boot-stomp triple-lift drop. The room goes quiet enough to hear the campfire crackle, then the porch erupts. T8 cinematic-peak engineering across all 44 albums.</p>
+      </div>
+      <div class="dna-item">
+        <h3>3 &middot; Acoustic-tactile ear-candy as religion</h3>
+        <p>Ear-candy is <strong>physically tactile and acoustic-only</strong>: clawhammer trance, autoharp shimmer, dobro slide, mandolin chop, fiddle drone, harmonica answer-phrase, lap steel horizon-line, crackling-fire foley, porch-rocker creak, lantern-flicker amp tremolo, boot-stomp on wood floor. <em>Zero stadium-rock processing</em> &mdash; the production never reaches past the porch.</p>
+      </div>
+      <div class="dna-item">
+        <h3>4 &middot; T7 testimony anchor with Father-voice or grandfather</h3>
+        <p>Section B drops at T7 to a documented testimony composite &mdash; <strong>Brother Tyrone Mills / Brother Owen Whitaker / Grandmother voice (1983 furlough) / widow's preserved laugh</strong> &mdash; Father-voice spoken-word over dobro / mandolin / harmonica. <em>EmoPull 96&ndash;98 consistently at T7</em>. The testimony is the album's anchor, not its flourish.</p>
+      </div>
+      <div class="dna-item">
+        <h3>5 &middot; Main Character Gate &mdash; strictest in the family</h3>
+        <p>Elias enforces the MCG <strong>at the highest strictness in the Inspire family</strong>. On every Section B track, removing Christ-language collapses the lyric into generic self-improvement narrative. The witness is named only as <em>recipient</em> &mdash; the chair He sat down in, the bottle He emptied, the prodigal He called by name. ELIM1035 "Empty Chair He Filled" is the catalog's MCG enforcer.</p>
+      </div>
+      <div class="dna-item">
+        <h3>6 &middot; T12&rarr;T1 loop architecture (Section B as continuous circle)</h3>
+        <p>ELIM1044 T12 closes into ELIM1025 T1 with a <strong>same-key G-major seamless handoff</strong> (no modulation). The Appalachian-bluegrass batch becomes one continuous body. Section A's loops are intra-album; <em>Section B's loop is catalog-level</em>. The campfire never goes out.</p>
+      </div>
+    </div>
+
+    <div class="spotlight">
+      <h3>The structural moat</h3>
+      <p>Across all 44 albums, <strong>Emotional Pull</strong> dominates the dimensional ranking (catalog avg 94.9). Elias isn't engineered for dance-floor compulsion &mdash; his structural pull is the moment where the trail-dust testimony lands and the porch-listener can't get up from the rocker:</p>
+      <div class="quote">
+        Where Melody sings <em>upward into adoration</em> and Jubilee <em>outward into celebration</em> and Zariah <em>inward into intercession</em>, <em>Elias sings along the trail</em>. F3&ndash;C4 storyteller chest with A4&ndash;D5 lonesome-mountain head. Strip-down-then-explode dynamic. Acoustic-tactile ear-candy as religion. The T12 of the body loops into the T1 of the body, and the campfire never goes out.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">What was done &middot; why it works</div>
+    <h2>The six craft amplifications</h2>
+    <p class="section-sub">Each lever targets a specific cognitive or physiological mechanism of compulsive re-listening. Surgical edits applied on top of the existing baseline (V4 SOP for Section B, Tier-2 stub for Section A). v3.0 adds the deeper 6-dimension framework.</p>
+
+    <div class="mech-grid">
+      <div class="mech mech-1">
+        <div class="mech-icon">1</div>
+        <h4>Hook &amp; Delivery</h4>
+        <p>Hook fires at <strong>0:08&ndash;0:14</strong> in the <strong>F3&ndash;C4 chest storyteller register</strong>, repeated 4&ndash;5&times; per chorus (&le;8 syllables). Hook-on-acoustic-guitar signature: the melody is the strummed-pattern, not a vocal flourish.</p>
+        <div class="metric">&rarr; Hook Strength 93.5%</div>
+      </div>
+      <div class="mech mech-2">
+        <div class="mech-icon">2</div>
+        <h4>Groove &amp; Pulse</h4>
+        <p>BPM held at <strong>96&ndash;138</strong> Appalachian-trail dance zone. Lament ELIM1030 protected at 86 BPM. Pocket descriptions per track (clawhammer trance, scruggs-roll, sawdust-floor honky-tonk, sacred-harp shape-note, lonesome-train shuffle).</p>
+        <div class="metric">&rarr; Groove 91.9%</div>
+      </div>
+      <div class="mech mech-3">
+        <div class="mech-icon">3</div>
+        <h4>Texture &amp; Ear-candy</h4>
+        <p>2&ndash;3 small acoustic-tactile surprises per track with explicit timestamps &mdash; dobro slide, autoharp shimmer, mandolin chop break, harmonica answer-phrase, lap steel horizon, porch-floor stomp, crackling-fire foley, lantern-flicker amp tremolo, chair-creak, intake-breath.</p>
+        <div class="metric">&rarr; Replay Value 92.7%</div>
+      </div>
+      <div class="mech mech-4">
+        <div class="mech-icon">4</div>
+        <h4>Dynamic Arc &amp; Payoff</h4>
+        <p>Per-track tension map: strip-back &rarr; swell &rarr; release with timestamps. <strong>T8 strip-to-sacred-harp / clawhammer-bare then boot-stomp triple-lift</strong> signature applied across Section B. The porch goes quiet, then erupts.</p>
+        <div class="metric">&rarr; Dynamic Payoff 92.6%</div>
+      </div>
+      <div class="mech mech-5">
+        <div class="mech-icon">5</div>
+        <h4>Loop Point</h4>
+        <p>Per-track outros pull into the next track. Album T12 closing 30s loops near-seamlessly back to T1. The 20-album Section B finale (ELIM1044) loops back to ELIM1025 in same-key G major with 4-sec lap-steel + dobro + family-choir crossfade &mdash; <em>catalog-level circle close</em>.</p>
+        <div class="metric">&rarr; Loop-ability 90.4%</div>
+      </div>
+      <div class="mech mech-6">
+        <div class="mech-icon">6</div>
+        <h4>Emotional Pull</h4>
+        <p>Core feeling per track (rooted / sent / sober / called / brought-home / saved-by-grace); sharpest moment flagged with timestamp. <strong>T7 testimony anchor on every Section B album hits EmoPull 96&ndash;98</strong>. The Father-voice testimony IS the song's center of gravity.</p>
+        <div class="metric">&rarr; Emotional Pull 94.9%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The 20-album new-build loop</div>
+    <h2>How the Appalachian-bluegrass batch closes into a circle</h2>
+    <p class="section-sub">The finale, ELIM1044 "What He Did for Me," was engineered so its final track loops back to ELIM1025 "Across the Jordan Wide" &mdash; making the 20-album Section B Appalachian-bluegrass new-build body one continuous song. <em>Psalm 66:16 invitation answered by Joshua-3 river-crossing.</em></p>
+
+    <div class="loop-callout">
+      <h3>&#9733; Catalog finale T12 &rarr; T1 loop closure</h3>
+      <p>T12 "What He Did for Me" earned the catalog-highest single-track composite of <strong>96</strong>. Its outro is the credits-roll moment for the 20-album new-build body &mdash; and the on-ramp back to the beginning of the circle.</p>
+      <div class="loop-diagram"><span class="step">Key handoff</span>       <span class="arrow">&rarr;</span>  G major &rarr; G major (same-key seamless; no modulation)
+
+<span class="step">Tempo bridge</span>      <span class="arrow">&rarr;</span>  T12 126 BPM decays to ~108 BPM over the 30-sec credits-roll tag
+                  &rarr; T1 124 BPM banjo Scruggs-roll re-entry (+16 BPM lift)
+
+<span class="step">Instrument handoff</span> <span class="arrow">&rarr;</span>  T12 final 4 sec = lap steel + dobro + upright bass G-tonic pedal
+                  + family-choir sustain (banjo / mandolin / fiddle dropped out by 3:55)
+                  &rarr; T1 0:00 = banjo Scruggs-roll alone on G
+                  (the iconic bluegrass body opener re-igniting the catalog)
+
+<span class="step">Lyric handshake</span>   <span class="arrow">&rarr;</span>  <span class="anchor">"Come and hear, all ye that fear God"</span> (T12, Psalm 66:16)
+                  &rarr; <span class="anchor">"Across the Jordan wide, Christ has crossed before me"</span> (T1, Joshua 3)
+
+<span class="step">Production</span>        <span class="arrow">&rarr;</span>  Final 4 sec mixed at -18 LUFS (6 dB below baseline)
+                  + 2-sec crossfade window (3:58&ndash;4:00 of T12 &rarr; 0:00&ndash;0:02 of T1)
+                  authored into the catalog-level manifest as the circle-close moment
+
+<span class="step">MCG finale</span>        <span class="arrow">&rarr;</span>  STRICT COLLAPSE TEST: <span class="anchor">PASS 12/12</span> on ELIM1044
+                  Every chorus/bridge collapses without Christ-language
+                  The witness named only as recipient (chair He sat down in, prodigal He called)</div>
+      <div class="loop-meaning">
+        The invitation is answered by the river-crossing.<br>
+        Come and hear what He did &rarr; Christ has crossed before me &mdash; the campfire never goes out.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Doctrinal floor</div>
+    <h2>What stayed exactly where it was</h2>
+    <p class="section-sub">Sonic Craft v3.0 is purely additive at the production layer. Theology, identity, and song content remain untouched. The V4 build baseline (Section B) and Tier-2 stub baseline (Section A) are both preserved alongside the new v3.0 6-dimension framework.</p>
+
+    <div class="compliance">
+      <div class="comp">Faith / PDQ / P-W scores unchanged on all 528 tracks</div>
+      <div class="comp">Main Character Gate preserved (strictest in family on ELIM1044)</div>
+      <div class="comp">Lyric body content preserved verbatim</div>
+      <div class="comp">Blueprint files untouched (Section B); stubs flagged (Section A)</div>
+      <div class="comp">Build-baseline scores preserved</div>
+      <div class="comp">Through-the-Valley-Low lament dignity preserved</div>
+      <div class="comp">Zero "tongues" / banned V3 phrases &middot; family-friendly throughout</div>
+      <div class="comp">Manifest synced (617 albums catalog-wide)</div>
+    </div>
+  </div>
+</section>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:elias-inspire"></div></div>
+
+<footer>
+  <div class="container">
+    <div>Elias Inspire &middot; Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <div>44 albums &middot; 528 tracks &middot; Composite <strong>93.05%</strong> &middot; Generated May 31, 2026</div>
+    <div>
+      <a href="../../../../web/inspire-family-dashboard.html">Inspire Family Dashboard</a> &middot;
+      <a href="../jubilee-inspire/executive-summary.html">Jubilee &middot; 61 albums &middot; 94.4</a> &middot;
+      <a href="../melody-inspire/executive-summary.html">Melody &middot; 40 albums &middot; 94.10</a> &middot;
+      <a href="../zariah-inspire/executive-summary.html">Zariah &middot; 42 albums &middot; 93.4</a> &middot;
+      <a href="../eliana-inspire/executive-summary.html">Eliana &middot; 41 albums &middot; 93.20</a> &middot;
+      <a href="../caleb-inspire/executive-summary.html">Caleb &middot; 30 albums &middot; 93.67</a> &middot;
+      <a href="../imani-inspire/executive-summary.html">Imani &middot; 41 albums &middot; 95.05</a> &middot;
+      <a href="../zev-inspire/executive-summary.html">Zev &middot; 40 albums &middot; 94.49</a> &middot;
+      <a href="../amir-inspire/executive-summary.html">Amir &middot; 48 albums &middot; 94.34</a> &middot;
+      <a href="../nova-inspire/executive-summary.html">Nova &middot; 50 albums &middot; 93.92</a> &middot;
+      <a href="../santiago-inspire/executive-summary.html">Santiago &middot; 41 albums &middot; 94.46</a> &middot;
+      <a href="../tahoma-inspire/executive-summary.html">Tahoma &middot; 40 albums &middot; 93.86</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

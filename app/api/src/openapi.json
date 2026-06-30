@@ -1,0 +1,74 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Jubilujah.com API",
+    "version": "1.0.0",
+    "description": "Node.js backend for Jubilujah. Catalog reads are manifest-backed and public; editorial/identity routes are Postgres-backed and require a Bearer access token (stateless HS256 JWT). No cookies, no CSRF."
+  },
+  "servers": [{ "url": "http://localhost:4000" }],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
+    },
+    "parameters": {
+      "RateableType": { "name": "type", "in": "path", "required": true, "schema": { "type": "string", "enum": ["song", "album", "artist", "playlist", "program"] } },
+      "RateableId": { "name": "id", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+    }
+  },
+  "paths": {
+    "/health": { "get": { "summary": "Service + DB health", "responses": { "200": { "description": "healthy" }, "503": { "description": "degraded" } } } },
+
+    "/api/auth/signin": { "post": { "summary": "Email/password sign-in (Turnstile + optional 2FA; JI-delegated in prod). Returns { success, user, tokens, trustToken }", "responses": { "200": { "description": "signed in or 2FA required" }, "401": { "description": "invalid credentials" } } } },
+    "/api/auth/refresh": { "post": { "summary": "Redeem a refresh token for a fresh access JWT", "responses": { "200": { "description": "tokens" }, "401": { "description": "invalid/expired refresh token" } } } },
+    "/api/auth/logout": { "post": { "summary": "Revoke the caller's refresh token", "responses": { "200": { "description": "ok" } } } },
+    "/api/auth/me": { "get": { "summary": "Current user + roles", "responses": { "200": { "description": "auth state" } } } },
+
+    "/api/categories": { "get": { "summary": "List catalog categories with counts", "responses": { "200": { "description": "categories" } } } },
+    "/api/artists": { "get": { "summary": "List artists (filter by ?category)", "responses": { "200": { "description": "artists" } } } },
+    "/api/artists/{slug}": { "get": { "summary": "Artist + albums", "parameters": [{ "name": "slug", "in": "path", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "artist" }, "404": { "description": "not found" } } } },
+    "/api/albums/{code}": { "get": { "summary": "Album by catalog code (with tracks + CDN URLs)", "parameters": [{ "name": "code", "in": "path", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "album" } } } },
+    "/api/album": { "get": { "summary": "Album by ?code= or ?path= (legacy alias)", "responses": { "200": { "description": "album" } } } },
+    "/api/status-counts": { "get": { "summary": "Ready/Studio rollup counts for a ?scope", "responses": { "200": { "description": "counts" } } } },
+    "/api/cdn-probe": { "get": { "summary": "HEAD-check a CDN audio URL", "parameters": [{ "name": "url", "in": "query", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "probe result" } } } },
+
+    "/api/ratings/{type}/{id}": {
+      "parameters": [{ "$ref": "#/components/parameters/RateableType" }, { "$ref": "#/components/parameters/RateableId" }],
+      "get": { "summary": "Aggregate + distribution (+ caller's rating)", "responses": { "200": { "description": "aggregate" } } },
+      "put": { "summary": "Upsert caller rating (content_editor)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "aggregate" } } },
+      "delete": { "summary": "Remove caller rating (content_editor)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "aggregate" } } }
+    },
+
+    "/api/comments/{type}/{id}": {
+      "parameters": [{ "$ref": "#/components/parameters/RateableType" }, { "$ref": "#/components/parameters/RateableId" }],
+      "get": { "summary": "List comments", "responses": { "200": { "description": "comments" } } },
+      "post": { "summary": "Add comment/reply (content_editor)", "security": [{ "bearerAuth": [] }], "responses": { "201": { "description": "created" } } }
+    },
+    "/api/comments/{commentId}": {
+      "patch": { "summary": "Edit own comment", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "updated" } } },
+      "delete": { "summary": "Soft-delete own comment", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "deleted" } } }
+    },
+
+    "/api/awards/categories": { "get": { "summary": "List award categories (?active=true)", "responses": { "200": { "description": "categories" } } } },
+    "/api/awards/periods/{year}": { "get": { "summary": "Periods for a year", "parameters": [{ "name": "year", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "periods" } } } },
+    "/api/awards/nominations": {
+      "get": { "summary": "List nominations (?period&category&type&id)", "responses": { "200": { "description": "nominations" } } },
+      "post": { "summary": "Nominate (content_editor; 250-char reason)", "security": [{ "bearerAuth": [] }], "responses": { "201": { "description": "created" }, "422": { "description": "reason too short" } } }
+    },
+
+    "/api/pipeline": { "get": { "summary": "Pipeline state + stage counts (content_editor)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "pipeline" } } } },
+    "/api/pipeline/{type}/{id}/transition": { "post": { "summary": "Transition stage (production_manager)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "transitioned" } } } },
+
+    "/api/stations": { "get": { "summary": "Radio stations", "responses": { "200": { "description": "stations" } } } },
+    "/api/programs": { "get": { "summary": "Radio programs", "responses": { "200": { "description": "programs" } } } },
+    "/api/playlists": {
+      "get": { "summary": "Playlists", "responses": { "200": { "description": "playlists" } } },
+      "post": { "summary": "Create playlist (radio_producer)", "security": [{ "bearerAuth": [] }], "responses": { "201": { "description": "created" } } }
+    },
+    "/api/playlists/{id}/items": { "patch": { "summary": "Reorder/replace items (radio_producer)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "ok" } } } },
+
+    "/api/admin/users": { "get": { "summary": "List users + roles (admin)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "users" } } } },
+    "/api/admin/users/{id}/roles": { "patch": { "summary": "Set user roles (admin)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "ok" } } } },
+    "/api/admin/audit": { "get": { "summary": "Audit log (admin)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "audit" } } } },
+    "/api/admin/publish/{type}/{id}": { "post": { "summary": "Publish manifest version + advance pipeline (admin)", "security": [{ "bearerAuth": [] }], "responses": { "200": { "description": "published" } } } }
+  }
+}

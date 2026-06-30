@@ -1,0 +1,75 @@
+{
+  "id": "healing-restoration",
+  "title": "Healing & Restoration",
+  "category": "inspire",
+  "category_label": "Inspire Family",
+  "description": "Albums that name the wound and celebrate Christ's restoring hand. Tahoma's drum-of-healing reclamation, Stolen-Land-to-Jubilee, Strong-Heart-Walking endurance; Jubilee's Clay-Turns-to-Crown Potter-House; Caleb's beside-you-in-the-long-night pastoral folk; Santiago's mercy-without-end bachata.",
+  "theme": "Healing, deliverance, restoration, perseverance, Jubilee",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-inspire",
+  "albums": [
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Drum of Healing",
+      "album_code": "THIM1005",
+      "album_slug": "THIM1005EN-drum-of-healing",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Powwow + native gospel reclamation — the drum sung back into the hands of the people of Jesus."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Circle of Healing",
+      "album_code": "THIM1004",
+      "album_slug": "THIM1004EN-circle-of-healing",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Round dance + powwow drum healing-circle gathering with Christ at the center."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Stolen Land (Jubilee in His Name)",
+      "album_code": "THIM1017",
+      "album_slug": "THIM1017EN-stolen-land",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Lament-to-Jubilee restoration arc anchored in Lev 25 / Lk 4:18-19 / Rev 21 (all things new)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Chains Off, Hands Up",
+      "album_code": "THIM1029",
+      "album_slug": "THIM1029EN-chains-off-hands-up",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Native reggae freedom anthem — chains broken by the blood of the Lamb."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Strong Heart Walking",
+      "album_code": "THIM1032",
+      "album_slug": "THIM1032EN-strong-heart-walking",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Northern traditional drum-song endurance anthem — by His strength I keep walking (2 Cor 12:9-10)."
+    },
+    {
+      "artist_name": "Jubilee Inspire",
+      "artist_slug": "jubilee-inspire",
+      "album_title": "Clay Turns to Crown",
+      "album_code": "JEIM1007",
+      "album_slug": "JEIM1007EN-clay-turns-to-crown",
+      "category_path": "inspire/jubilee-inspire",
+      "why_included": "Potter-House gospel sanctification celebration — the Father shaping clay into crown."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Misericordia Sin Final",
+      "album_code": "SAIM1027",
+      "album_slug": "SAIM1027EN-misericordia-sin-final",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Bachata of mercy that never runs dry — grace for the hardest seasons."
+    }
+  ]
+}

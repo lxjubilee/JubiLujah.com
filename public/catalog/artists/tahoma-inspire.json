@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/artist.schema.json",
+  "id": "2f8b9c45-6d18-4a73-9e51-c3a7b2d8f491",
+  "type": "artist",
+  "version": 5,
+  "status": "published",
+  "slug": "tahoma-inspire",
+  "name": "Tahoma Inspire",
+  "display_name": "Tahoma Inspire",
+  "grouping": "inspire_family",
+  "five_fold_office": "pastor",
+  "genre_anchor": "indigenous pacific worship",
+  "vocal_gender": "male",
+  "bio_short": "Native American and Pacific worship pastor of the Inspire Family — flute meditations, Hawaiian chant, and reggae warmth carrying the Creator who became flesh.",
+  "bio_long": "Tahoma Inspire is the indigenous Pacific worship voice of the Inspire Family, carrying the pastor office with a baritone that moves like a tide and a Native American flute that hushes a room. His catalog gathers two musical worlds the Western church often overlooks — the high-desert, mountain, and plains traditions of the First Peoples of Turtle Island, and the chant, slack-key, and reggae traditions of the Hawaiian islands — and offers them both back to the Creator who became flesh in Jesus. Tahoma writes for the soul that needs to slow down and breathe again: every track is a long exhale, a permission slip to be still and know. His Hawaiian chant work on Wai Ola (Living Water) and the Native flute meditation of The Maker's Breath have become anchor tracks for the family's contemplative and healing wing. As the in-house QA voice for the Inspire production pipeline, Tahoma also brings a pastoral discernment to every release — the steady hand making sure each song actually carries what it claims to carry. Co-signed by Gabriel Inspire under apostolic covering.",
+  "visual_identity": {
+    "avatar_url": "https://cdn.jubileeverse.com/art/artists/tahoma-inspire/avatar-512.webp",
+    "avatar_url_large": "https://cdn.jubileeverse.com/art/artists/tahoma-inspire/avatar-1024.webp",
+    "banner_url": "https://cdn.jubileeverse.com/art/artists/tahoma-inspire/banner-1600.webp",
+    "color_primary": "#3a5a4a",
+    "color_secondary": "#c4a47c"
+  },
+  "languages_primary": ["en"],
+  "languages_secondary": ["haw"],
+  "album_count": 32,
+  "song_count": 384,
+  "metadata": {
+    "first_published_at": "2024-10-21T00:00:00Z",
+    "last_updated_at": "2026-05-31T16:08:55Z"
+  }
+}

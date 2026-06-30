@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users &amp; Roles &middot; Jubilujah Admin</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<link rel="stylesheet" href="/_assets/widgets/rating-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/comment-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/trophy-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/player-widget.css">
+<script src="/_assets/widgets/rating-widget.js" defer></script>
+<script src="/_assets/widgets/comment-widget.js" defer></script>
+<script src="/_assets/widgets/trophy-widget.js" defer></script>
+<script src="/_assets/widgets/player-widget.js" defer></script>
+<style>
+  /* ==================== ADMIN-SHARED ==================== */
+  .admin-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .admin-notice {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.12) 0%, rgba(254, 202, 87, 0.06) 100%), var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-notice strong { color: var(--accent-peach); letter-spacing: 0.04em; }
+
+  .admin-subnav {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-subnav a {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--line);
+    transition: background 0.15s, color 0.15s;
+  }
+  .admin-subnav a:last-child { border-right: none; }
+  .admin-subnav a:hover { background: var(--surface-2); color: var(--ink); }
+  .admin-subnav a.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+
+  /* ==================== USERS TABLE ==================== */
+  .users-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .users-card h3 {
+    padding: 18px 22px;
+    color: var(--ink);
+    font-size: 17px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .users-card h3 .count {
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .users-table th,
+  .users-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+  }
+  .users-table th {
+    background: var(--bg-1);
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .users-table tr:last-child td { border-bottom: none; }
+  .users-table tr:hover td { background: var(--surface-2); }
+
+  .u-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .u-name {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .u-email {
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-family: 'Segoe UI', monospace;
+    letter-spacing: -0.01em;
+  }
+
+  .role-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .chip {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .chip.active.role-viewer            { background: rgba(108, 116, 148, 0.20); color: #a5acc4; border-color: #6c7494; }
+  .chip.active.role-content_editor    { background: rgba(74, 177, 196, 0.18); color: #6ed1e0; border-color: #4ab1c4; }
+  .chip.active.role-radio_producer    { background: rgba(140, 111, 207, 0.18); color: #b89ce0; border-color: #8c6fcf; }
+  .chip.active.role-production_manager{ background: rgba(254, 202, 87, 0.18); color: var(--accent-gold); border-color: var(--accent-gold); }
+  .chip.active.role-admin             { background: rgba(233, 69, 96, 0.18); color: var(--accent-peach); border-color: var(--accent); }
+  .chip:hover { border-color: var(--accent-peach); color: var(--ink); }
+
+  .u-activity {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .u-activity strong { color: var(--ink-soft); font-weight: 500; }
+
+  .edit-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .edit-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .edit-btn.editing { background: var(--accent-gold); color: #2c1f1a; border-color: var(--accent-gold); }
+
+  tr.editing .chip { cursor: pointer; opacity: 0.7; }
+  tr.editing .chip:hover { opacity: 1; transform: scale(1.05); }
+  tr.editing .chip.active { opacity: 1; }
+
+  /* ==================== AUDIT LOG ==================== */
+  .audit-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+    margin-top: 32px;
+  }
+  .audit-card h3 {
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .audit-card .sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+  }
+  .audit-row {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: center;
+    font-size: 13px;
+  }
+  .audit-row:last-child { border-bottom: none; }
+  .audit-row .when {
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .audit-row .what { color: var(--ink-soft); line-height: 1.5; }
+  .audit-row .what strong { color: var(--ink); }
+  .audit-row .what .actor { color: var(--accent-peach); font-weight: 700; }
+  .audit-row .what .role-added { color: var(--accent-gold); font-weight: 700; }
+  .audit-row .what .role-removed { color: var(--ink-muted); text-decoration: line-through; }
+  .audit-row .by {
+    font-size: 11px;
+    color: var(--ink-muted);
+    background: var(--bg-1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span class="admin-badge">Admin Mode</span>
+        <a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="#login" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Admin Dashboard</div>
+    <h1>Users &amp; <em>role management</em></h1>
+    <p class="lead">
+      Users sync from JubileeInspire SSO; admin assigns one or more of the five roles per user. Every role change is audited and logged below.
+    </p>
+  </div>
+</section>
+
+<section class="standard">
+  <div class="container">
+
+    <div class="admin-notice">
+      <strong>ADMIN MODE</strong>
+      <span>This section is gated to the <strong>admin</strong> role per Build Spec &sect;5. Role changes are recorded in the <code>identity.role_audit</code> table and surface in the log below.</span>
+    </div>
+
+    <nav class="admin-subnav">
+      <a href="/admin/index.html">Overview</a>
+      <a href="/admin/pipeline.html">Pipeline Kanban</a>
+      <a href="/admin/awards.html">Awards Review</a>
+      <a href="/admin/users.html" class="active">Users &amp; Roles</a>
+    </nav>
+
+    <div class="users-card">
+      <h3>Users <span class="count" id="userCount">&mdash;</span></h3>
+      <div style="overflow-x:auto;">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Roles</th>
+              <th>Last activity</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="audit-card">
+      <h3>Audit log &mdash; role changes</h3>
+      <div class="sub">Last 12 role-management events. All entries are append-only.</div>
+      <div id="auditBody"></div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><strong>Jubilujah.com Admin</strong> &middot; Users &amp; roles</div>
+    <span class="jubilee-badge">A Jubilee Enterprise</span>
+    <div>&copy; 2026 Jubilee Software, Inc.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   USER & ROLE MANAGEMENT — MOCK DATA (Build Spec §5 + §14)
+   ============================================================ */
+
+const ROLES = ['viewer', 'content_editor', 'radio_producer', 'production_manager', 'admin'];
+
+/* avatar gradient palette */
+const AVATARS = [
+  'linear-gradient(135deg, #e94560 0%, #c2304c 100%)',
+  'linear-gradient(135deg, #feca57 0%, #c89c4a 100%)',
+  'linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%)',
+  'linear-gradient(135deg, #4ab1c4 0%, #1e617a 100%)',
+  'linear-gradient(135deg, #ff8c4a 0%, #c25a1e 100%)',
+  'linear-gradient(135deg, #4a8c2d 0%, #2d5a1e 100%)',
+  'linear-gradient(135deg, #4a7ac4 0%, #1d4080 100%)',
+  'linear-gradient(135deg, #c285a4 0%, #6e3c5e 100%)',
+  'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)',
+  'linear-gradient(135deg, #8c6fcf 0%, #7ac24a 100%)',
+];
+
+const USERS = [
+  { name: 'Gabriel Ungureanu', email: 'gabriel@jubileeverse.com',  roles: ['admin', 'production_manager', 'content_editor'], last: '4m ago' },
+  { name: 'Melody Inspire',    email: 'melody@jubileeverse.com',   roles: ['content_editor', 'production_manager'],          last: '12m ago' },
+  { name: 'Tahoma Inspire',    email: 'tahoma@jubileeverse.com',   roles: ['content_editor', 'production_manager'],          last: '38m ago' },
+  { name: 'Sunil Gemini',      email: 'sunil@jubileeverse.com',    roles: ['admin', 'content_editor'],                        last: '1h ago' },
+  { name: 'Eliana Inspire',    email: 'eliana@jubileeverse.com',   roles: ['content_editor', 'radio_producer'],               last: '2h ago' },
+  { name: 'Caleb Inspire',     email: 'caleb@jubileeverse.com',    roles: ['content_editor'],                                 last: '3h ago' },
+  { name: 'Imani Inspire',     email: 'imani@jubileeverse.com',    roles: ['content_editor'],                                 last: '5h ago' },
+  { name: 'Santiago Inspire',  email: 'santiago@jubileeverse.com', roles: ['content_editor', 'radio_producer'],               last: '8h ago' },
+  { name: 'Allan Hassan',      email: 'allan@partners.jubileeverse.com',   roles: ['viewer'],                                 last: '2d ago' },
+  { name: 'Daisy Wylder',      email: 'daisy@partners.jubileeverse.com',   roles: ['viewer', 'content_editor'],               last: '3d ago' },
+  { name: 'Ruthie Bolton',     email: 'ruthie@partners.jubileeverse.com',  roles: ['viewer'],                                 last: '5d ago' },
+  { name: 'Cornell Kay',       email: 'cornell@partners.jubileeverse.com', roles: ['viewer'],                                 last: '11d ago' },
+];
+
+function initials(name) {
+  return name.split(' ').slice(0, 2).map(s => s[0]).join('').toUpperCase();
+}
+
+function renderUsers() {
+  const body = document.getElementById('usersBody');
+  body.innerHTML = USERS.map((u, idx) => {
+    const chips = ROLES.map(r => {
+      const active = u.roles.includes(r) ? 'active role-' + r : '';
+      return `<span class="chip ${active}" data-role="${r}" onclick="toggleChip(this, ${idx})">${r.replace('_', ' ')}</span>`;
+    }).join('');
+    return `
+      <tr data-idx="${idx}">
+        <td>
+          <span class="u-avatar" style="background:${AVATARS[idx % AVATARS.length]}">${initials(u.name)}</span>
+          <span class="u-name">${u.name}</span>
+        </td>
+        <td><span class="u-email">${u.email}</span></td>
+        <td><div class="role-chips">${chips}</div></td>
+        <td><span class="u-activity"><strong>${u.last}</strong></span></td>
+        <td><button class="edit-btn" onclick="toggleEdit(${idx}, this)">Edit</button></td>
+      </tr>
+    `;
+  }).join('');
+  document.getElementById('userCount').textContent = `${USERS.length} total`;
+}
+
+function toggleEdit(idx, btn) {
+  const row = document.querySelector(`tr[data-idx="${idx}"]`);
+  const editing = row.classList.toggle('editing');
+  btn.classList.toggle('editing', editing);
+  btn.textContent = editing ? 'Save' : 'Edit';
+}
+
+function toggleChip(el, idx) {
+  const row = el.closest('tr');
+  if (!row.classList.contains('editing')) return;
+  const role = el.dataset.role;
+  if (el.classList.contains('active')) {
+    el.className = 'chip';
+    USERS[idx].roles = USERS[idx].roles.filter(r => r !== role);
+  } else {
+    el.className = 'chip active role-' + role;
+    USERS[idx].roles.push(role);
+  }
+}
+
+/* ---- Audit log ---- */
+const AUDIT = [
+  { when: '2m ago',   actor: 'Gabriel Ungureanu', target: 'Daisy Wylder',     added: 'content_editor',     removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '34m ago',  actor: 'Sunil Gemini',      target: 'Caleb Inspire',    added: null,                 removed: 'radio_producer', by: 'Sunil Gemini' },
+  { when: '2h ago',   actor: 'Gabriel Ungureanu', target: 'Eliana Inspire',   added: 'radio_producer',     removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '5h ago',   actor: 'Gabriel Ungureanu', target: 'Santiago Inspire', added: 'radio_producer',     removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '1d ago',   actor: 'Sunil Gemini',      target: 'Tahoma Inspire',   added: 'production_manager', removed: null,         by: 'Sunil Gemini' },
+  { when: '2d ago',   actor: 'Gabriel Ungureanu', target: 'Allan Hassan',     added: 'viewer',             removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '3d ago',   actor: 'Gabriel Ungureanu', target: 'Ruthie Bolton',    added: 'viewer',             removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '4d ago',   actor: 'Gabriel Ungureanu', target: 'Cornell Kay',      added: 'viewer',             removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '6d ago',   actor: 'Gabriel Ungureanu', target: 'Melody Inspire',   added: 'production_manager', removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '10d ago',  actor: 'Gabriel Ungureanu', target: 'Sunil Gemini',     added: 'admin',              removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '14d ago',  actor: 'Gabriel Ungureanu', target: 'Imani Inspire',    added: 'content_editor',     removed: null,         by: 'Gabriel Ungureanu' },
+  { when: '21d ago',  actor: 'System (SSO sync)', target: 'Caleb Inspire',    added: 'content_editor',     removed: null,         by: 'System' },
+];
+
+function renderAudit() {
+  const root = document.getElementById('auditBody');
+  root.innerHTML = AUDIT.map(a => {
+    let action = '';
+    if (a.added && a.removed) {
+      action = `Role <span class="role-added">+${a.added}</span> added, <span class="role-removed">${a.removed}</span> removed on <strong>${a.target}</strong>`;
+    } else if (a.added) {
+      action = `Granted role <span class="role-added">+${a.added}</span> to <strong>${a.target}</strong>`;
+    } else if (a.removed) {
+      action = `Revoked role <span class="role-removed">${a.removed}</span> from <strong>${a.target}</strong>`;
+    }
+    return `
+      <div class="audit-row">
+        <div class="when">${a.when}</div>
+        <div class="what">${action}</div>
+        <div class="by">by ${a.by}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+renderUsers();
+renderAudit();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "jubilujah-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jubilujah.com — Next.js + Node.js + PostgreSQL migration",
+  "workspaces": [
+    "web",
+    "api",
+    "mock-oidc"
+  ],
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:api dev:web dev:oidc",
+    "dev:web": "npm --workspace web run dev",
+    "dev:api": "npm --workspace api run dev",
+    "dev:oidc": "npm --workspace mock-oidc run dev",
+    "build": "npm --workspace web run build",
+    "db:migrate": "node db/run-migrations.js",
+    "db:import": "node db/import-catalog.js",
+    "db:seed": "node db/run-migrations.js --seed",
+    "smoke": "node api/scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

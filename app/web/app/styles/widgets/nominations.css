@@ -1,0 +1,256 @@
+/* Jubilujah — Trophy Nominations widget styles
+   Build Spec §11. Uses the JV navy/red/peach/gold palette from site.css. */
+
+/* ------------------------------------------------------------ trophy button */
+
+.jv-trophy-btn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-family: inherit;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+.jv-trophy-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(254, 202, 87, 0.3);
+}
+.jv-trophy-btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+.jv-trophy-btn .icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+.jv-trophy-btn .label {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.jv-trophy-btn .count {
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-variant-numeric: tabular-nums;
+  padding-left: 4px;
+  border-left: 1px solid var(--line);
+  margin-left: 2px;
+}
+
+/* ------------------------------------------------------------ modal shell */
+
+.jv-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 20, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: jv-nom-fade 0.18s ease-out;
+}
+@keyframes jv-nom-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.jv-modal {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 32px;
+  max-width: 540px;
+  width: 90vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+  animation: jv-nom-rise 0.22s ease-out;
+}
+@keyframes jv-nom-rise {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.jv-modal-titlerow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.jv-modal h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.jv-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.jv-modal-close:hover { color: var(--accent); background: var(--surface-2); }
+.jv-modal-close:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
+
+.jv-modal-subtitle {
+  color: var(--ink-muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+/* ------------------------------------------------------------ form fields */
+
+.jv-modal label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 16px 0 6px;
+  font-weight: 600;
+}
+.jv-modal select,
+.jv-modal textarea,
+.jv-modal input[type="text"] {
+  width: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.jv-modal select:focus,
+.jv-modal textarea:focus,
+.jv-modal input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(254, 202, 87, 0.18);
+}
+.jv-modal input[type="text"][readonly] {
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  cursor: default;
+}
+.jv-modal textarea {
+  min-height: 160px;
+  resize: vertical;
+  line-height: 1.5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ------------------------------------------------------------ live counter */
+
+.jv-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.jv-counter-text { font-variant-numeric: tabular-nums; font-weight: 600; }
+.jv-counter-hint { font-style: italic; letter-spacing: 0.02em; }
+.jv-counter-bar {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.jv-counter-bar .fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.2s, background 0.2s;
+}
+
+/* ------------------------------------------------------------ actions row */
+
+.jv-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+.jv-modal-actions button {
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 9px 22px;
+  transition: filter 0.15s, opacity 0.15s, background 0.15s, color 0.15s, border-color 0.15s;
+}
+.jv-modal-actions .secondary {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+.jv-modal-actions .secondary:hover { color: var(--ink); border-color: var(--accent-peach); }
+.jv-modal-actions .primary {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent));
+  color: var(--bg);
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.jv-modal-actions .primary:hover:not(:disabled) { filter: brightness(1.08); }
+.jv-modal-actions .primary:disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(0.3); }
+.jv-modal-actions .primary:focus-visible,
+.jv-modal-actions .secondary:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------ toast */
+
+.jv-toast {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  z-index: 300;
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+  animation: jv-nom-toast-in 0.28s ease-out;
+}
+@keyframes jv-nom-toast-in {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to   { transform: translate(-50%, 0);    opacity: 1; }
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 600px) {
+  .jv-modal { padding: 22px 20px; width: 94vw; }
+  .jv-modal h3 { font-size: 20px; }
+  .jv-modal-actions { flex-direction: column-reverse; }
+  .jv-modal-actions button { width: 100%; }
+  .jv-toast { bottom: 80px; width: calc(100vw - 32px); text-align: center; }
+}

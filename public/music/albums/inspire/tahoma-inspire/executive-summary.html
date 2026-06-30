@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tahoma Inspire &mdash; Sonic Craft v3.0 Executive Summary</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e0d;
+    --surface: #141c18;
+    --surface-2: #1c2620;
+    --surface-3: #232f28;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a342d;
+    --line-soft: #1f2722;
+    --accent: #b85a3c;
+    --copper: #c8924a;
+    --warm: #e09454;
+    --tahoma-deep: #2d4632;
+    --cedar: #5a7547;
+    --pacific: #4a9d92;
+    --hook: #d4633c;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #4a9d92;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(184, 90, 60, 0.22) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(74, 157, 146, 0.14) 0%, transparent 50%),
+      radial-gradient(600px 300px at 50% 50%, rgba(90, 117, 71, 0.10) 0%, transparent 60%),
+      linear-gradient(180deg, #0a0e0d 0%, #141c18 100%);
+    padding: 72px 0 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--warm); font-weight: 600; }
+  .hero h1 { font-family: Georgia, serif; font-size: 56px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 6px 0 14px; color: var(--ink); }
+  .hero h1 em { font-style: italic; color: var(--warm); font-weight: 500; }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 860px; line-height: 1.55; }
+  .hero-meta { display: flex; gap: 36px; margin-top: 28px; flex-wrap: wrap; }
+  .hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .hero-meta .val { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .hero-meta .val.copper { color: var(--copper); }
+  .hero-meta .val.warm { color: var(--warm); }
+  .hero-meta .val.pacific { color: var(--pacific); }
+
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-family: Georgia, serif; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; color: var(--ink); }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .section-sub { color: var(--ink-soft); font-size: 16px; max-width: 860px; margin-bottom: 32px; }
+
+  .kpi-grid { display: grid; grid-template-columns: 1.4fr repeat(6, 1fr); gap: 14px; margin-top: 24px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 20px; display: flex; flex-direction: column; gap: 4px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .kpi:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .kpi.lead { background: linear-gradient(135deg, rgba(184, 90, 60, 0.25) 0%, rgba(90, 117, 71, 0.16) 100%), var(--surface); border-color: rgba(184, 90, 60, 0.4); }
+  .kpi .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; line-height: 1.25; min-height: 2.5em; display: flex; align-items: flex-start; }
+  .kpi.lead .label { color: var(--warm); }
+  .kpi .score { font-family: Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1; margin-top: 6px; color: var(--ink); }
+  .kpi.lead .score { font-size: 50px; background: linear-gradient(135deg, var(--warm) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .kpi .footnote { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .kpi.lead .footnote { color: var(--ink-soft); }
+  .kpi.k-hook { border-top: 3px solid var(--hook); }
+  .kpi.k-groove { border-top: 3px solid var(--groove); }
+  .kpi.k-replay { border-top: 3px solid var(--replay); }
+  .kpi.k-payoff { border-top: 3px solid var(--payoff); }
+  .kpi.k-emotion { border-top: 3px solid var(--emotion); }
+  .kpi.k-loop { border-top: 3px solid var(--loop); }
+  @media (max-width: 1024px) { .kpi-grid { grid-template-columns: 1fr 1fr 1fr; } .kpi.lead { grid-column: span 3; } }
+  @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .kpi.lead { grid-column: span 2; } }
+
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .ba-card h4 { font-family: Georgia, serif; font-size: 18px; color: var(--warm); margin-bottom: 2px; }
+  .ba-card .ba-row { display: grid; grid-template-columns: 80px 1fr 100px; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line-soft); font-size: 13px; }
+  .ba-card .ba-row:last-child { border-bottom: none; }
+  .ba-card .ba-dim { color: var(--ink-soft); text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  .ba-card .ba-bar-wrap { height: 18px; background: var(--surface-2); border-radius: 3px; position: relative; overflow: hidden; }
+  .ba-card .ba-bar { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--copper) 0%, var(--warm) 100%); border-radius: 3px; }
+  .ba-card .ba-bar.bar-orig { background: linear-gradient(90deg, #555 0%, #777 100%); }
+  .ba-card .ba-val { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; color: var(--ink); font-size: 13px; }
+  .ba-card .ba-delta { font-size: 11px; color: var(--success); font-weight: 700; margin-left: 4px; }
+
+  .comparison { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px 32px; margin-top: 24px; overflow-x: auto; }
+  .comparison h3 { font-family: Georgia, serif; font-size: 20px; margin-bottom: 16px; color: var(--accent); }
+  .comp-table { width: 100%; border-collapse: collapse; min-width: 1320px; }
+  .comp-table th, .comp-table td { padding: 12px 8px; text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
+  .comp-table th { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+  .comp-table th.tah { color: var(--warm); }
+  .comp-table td { border-bottom: 1px solid var(--line-soft); font-weight: 500; }
+  .comp-table td.dim { font-weight: 600; }
+  .comp-table tr.composite td { background: rgba(184, 90, 60, 0.12); font-weight: 700; font-size: 16px; }
+  .comp-table .tah-cell { color: var(--warm); font-weight: 700; }
+
+  .top10 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .top10 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; align-items: center; gap: 18px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .rank { font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: var(--accent); min-width: 36px; }
+  .card.gold .rank { color: var(--warm); }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; color: var(--ink); }
+  .card-code { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; font-family: "SF Mono", Monaco, monospace; }
+  .card-score { font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: var(--accent); }
+  .card.gold { border-color: var(--warm); border-width: 2px; background: linear-gradient(135deg, rgba(224, 148, 84, 0.10) 0%, transparent 60%), var(--surface); }
+  .card.gold .card-score { color: var(--warm); }
+
+  .style-fusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .style-fusion-grid { grid-template-columns: 1fr; } }
+  .fusion-card { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 8px; padding: 14px 18px; }
+  .fusion-card.pacific { border-left-color: var(--pacific); }
+  .fusion-card.cedar { border-left-color: var(--cedar); }
+  .fusion-card .fusion-code { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; }
+  .fusion-card .fusion-title { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 2px; margin-bottom: 4px; }
+  .fusion-card .fusion-meta { font-size: 12px; color: var(--ink-soft); }
+  .fusion-card .fusion-meta strong { color: var(--copper); }
+  .fusion-card.pacific .fusion-meta strong { color: var(--pacific); }
+  .fusion-card .fusion-score { font-family: Georgia, serif; font-size: 18px; color: var(--warm); font-weight: 700; float: right; }
+
+  .full-table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--surface-2); }
+  th { text-align: left; padding: 12px 10px; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 2px solid var(--line); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td { padding: 11px 10px; border-bottom: 1px solid var(--line-soft); color: var(--ink-soft); }
+  td.album-title { color: var(--ink); font-weight: 500; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.star td { background: linear-gradient(90deg, rgba(224, 148, 84, 0.12) 0%, transparent 100%); }
+  tbody tr.peak td { background: linear-gradient(90deg, rgba(184, 90, 60, 0.06) 0%, transparent 100%); }
+  tbody tr.guard td { background: linear-gradient(90deg, rgba(200, 146, 74, 0.07) 0%, transparent 100%); }
+  .code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); }
+  .composite-cell { font-weight: 700; color: var(--accent); }
+  tr.star .composite-cell { color: var(--warm); }
+  tr.peak .composite-cell { color: var(--warm); }
+  tr.guard .composite-cell { color: var(--copper); }
+  .star-mark { color: var(--warm); margin-right: 4px; }
+  .peak-mark { color: var(--warm); margin-right: 4px; }
+  .guard-mark { color: var(--copper); margin-right: 4px; }
+
+  .dna-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; }
+  @media (max-width: 700px) { .dna-grid { grid-template-columns: 1fr; } }
+  .dna-item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; border-left: 4px solid var(--accent); }
+  .dna-item h3 { font-family: Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--warm); }
+  .dna-item p { color: var(--ink-soft); font-size: 14px; }
+  .dna-item strong { color: var(--ink); }
+  .dna-item em { color: var(--copper); font-style: italic; }
+
+  .mech-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 900px) { .mech-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .mech-grid { grid-template-columns: 1fr; } }
+  .mech { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
+  .mech-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0a0e0d; font-family: Georgia, serif; font-size: 18px; margin-bottom: 12px; }
+  .mech-1 .mech-icon { background: var(--hook); }
+  .mech-2 .mech-icon { background: var(--groove); }
+  .mech-3 .mech-icon { background: var(--replay); }
+  .mech-4 .mech-icon { background: var(--payoff); }
+  .mech-5 .mech-icon { background: var(--loop); }
+  .mech-6 .mech-icon { background: var(--emotion); }
+  .mech h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .mech p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .mech .metric { margin-top: 10px; font-size: 11px; letter-spacing: 0.05em; color: var(--success); font-weight: 700; }
+
+  .guard-section { background: linear-gradient(135deg, rgba(200, 146, 74, 0.12) 0%, rgba(45, 70, 50, 0.20) 100%), var(--surface); border: 1px solid rgba(200, 146, 74, 0.3); border-radius: 12px; padding: 28px 32px; margin-top: 24px; }
+  .guard-section h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--copper); }
+  .guard-section p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; margin-bottom: 14px; }
+  .guard-section strong { color: var(--ink); }
+  .guard-section em { color: var(--copper); font-style: italic; }
+  .guard-section ul { padding-left: 22px; color: var(--ink-soft); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+
+  .respect-banner { background: linear-gradient(135deg, rgba(74, 157, 146, 0.12) 0%, rgba(90, 117, 71, 0.10) 100%), var(--surface); border: 1px solid rgba(74, 157, 146, 0.3); border-left: 4px solid var(--pacific); border-radius: 10px; padding: 28px 32px; margin-top: 24px; }
+  .respect-banner h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--pacific); }
+  .respect-banner p { color: var(--ink-soft); font-size: 15px; line-height: 1.65; margin-bottom: 12px; }
+  .respect-banner strong { color: var(--ink); }
+  .respect-banner em { color: var(--pacific); font-style: italic; }
+  .respect-banner ul { padding-left: 22px; color: var(--ink-soft); font-size: 14px; line-height: 1.75; }
+
+  .spotlight { background: linear-gradient(135deg, rgba(184, 90, 60, 0.10) 0%, rgba(45, 70, 50, 0.20) 100%), var(--surface); border: 1px solid rgba(184, 90, 60, 0.3); border-radius: 12px; padding: 38px 40px; margin-top: 24px; }
+  .spotlight h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--warm); }
+  .spotlight p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .spotlight .quote { font-family: Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.55; padding: 22px 0 8px; color: var(--ink); border-top: 1px solid rgba(184, 90, 60, 0.2); margin-top: 22px; }
+  .spotlight .quote em { color: var(--warm); font-style: italic; }
+
+  .compliance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 800px) { .compliance { grid-template-columns: 1fr 1fr; } }
+  .comp { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--success); border-radius: 6px; padding: 12px 16px; font-size: 13px; display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+  .comp::before { content: '\2713'; color: var(--success); font-weight: 700; font-size: 16px; }
+
+  footer { background: #06090a; color: var(--ink-muted); padding: 44px 0; text-align: center; font-size: 12px; letter-spacing: 0.04em; border-top: 1px solid var(--line); }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--warm); }
+  footer a { color: var(--accent); text-decoration: none; } 
+  footer .siblings { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 22px; max-width: 980px; margin-top: 10px; padding: 14px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+  footer .siblings a { font-size: 12px; }
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, 133.33% auto !important;
+  background-position: center, left 60% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:tahoma-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<header class="hero" style="--persona-img: url('/personas/Tahoma.png')">
+  <div class="container">
+    <div class="hero-eyebrow">Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <h1>Tahoma Inspire <em>&mdash; the Indigenous Christ-celebration anthem-maker. Forty albums where the drum, the flute, the slack key, and the chant all bend the knee to the Creator's Son.</em></h1>
+    <p class="hero-sub">
+      Forty albums. Four hundred and eighty tracks. <strong>Male baritone-tenor lead with intergenerational ensemble</strong> (elder bass-baritone, young-men's tenor stack, women's high-stack counter, children's chorus on family tracks). HIGH-ENERGY INDIGENOUS-PACIFIC CELEBRATION OVERRIDE. The catalog covers the full pan-Indigenous Christ-celebration range &mdash; original 20 albums (Drum of Healing, Powwow Prayers, Sacred Circle, Seven Generations, Water Keepers, Children's Future, Ancestors' Voice, Stolen Land &rarr; Jubilee, Sovereignty &rarr; Children of the King) reformatted to Caleb-format Suno-compliant lyrics with sensitive-theme guardrails &mdash; and the NEW 20 batch <strong>Celebration Praise &amp; Worship &times; one Indigenous-or-Pacific style</strong> covering all 20 user-named musical traditions: powwow Big Drum, Native American flute, slack key (k&#299; h&#333;&#699;alu), Hawaiian chant (mele oli), contemporary Hawaiian, Native country/folk, Hawaiian falsetto (leo ki&#699;eki&#699;e), Jawaiian, Native reggae, powwow rock, stomp dance, Northern traditional, Native flute + ambient, Native American hymnody (multilingual), hapa haole, Native American hip-hop, round dance, hula (mele hula), Navajo song style, and Native gospel. The new 20 amplify by <strong>+1.30 composite</strong> over the existing 20 (94.51 vs 93.21). THIM1040 "He Walked Among Us" T12 catalog finale loops back to THIM1021 "Dance Before the Maker" T1 via Native-gospel&rarr;powwow Big Drum D-major count-in seam.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">40</span></div>
+      <div><span class="label">Tracks</span><span class="val">480</span></div>
+      <div><span class="label">Composite</span><span class="val warm">93.86%</span></div>
+      <div><span class="label">New 20 Composite</span><span class="val copper">94.51%</span></div>
+      <div><span class="label">EmoPull</span><span class="val warm">94.80</span></div>
+      <div><span class="label">Family Rank</span><span class="val pacific">#7 of 12</span></div>
+      <div><span class="label">Date</span><span class="val">June 2, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<div data-top-20="tahoma-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">A note on respect &middot; please read first</div>
+    <h2>Borrowing the sound and the heart &mdash; never the closed sacred content</h2>
+    <p class="section-sub">This catalog carries more weight than the other Inspire personas. Several of the traditions used here are not just musical styles &mdash; they are <strong>ceremonial and sacred</strong>, often tied to particular nations, clans, or families, and not meant to be lifted or re-texted by outsiders. The painful history of forced conversion and song/language suppression compounds the responsibility. Tahoma's authority to sing in these traditions comes from being <strong>an Indigenous Christian voice singing with Indigenous Christian listeners</strong>, never about them.</p>
+
+    <div class="respect-banner">
+      <h3>What this catalog does and what it refuses to do</h3>
+      <p><strong>It borrows the musical LANGUAGE</strong> &mdash; the drum's heartbeat, the flute's voice, slack-key tunings, generic vocables, call-and-response forms, ukulele, falsetto register, round-dance step rhythms &mdash; to create <em>new</em> Christ-centered songs.</p>
+      <p><strong>It refuses to lift, re-text, or imitate closed sacred ceremonial repertoire</strong> &mdash; Sun Dance songs, Native American Church songs, specific powwow songs belonging to specific nations or clans, hula kahiko, specific oli that belong to particular Hawaiian families.</p>
+      <p><strong>It refuses to position any creature as intercessor or mediator</strong> &mdash; Christ alone (1 Timothy 2:5). Ancestors, elders, and the great cloud of witnesses are <em>honored as examples to imitate</em> (Hebrews 12:1) and as the family of God to be encouraged by &mdash; <em>never</em> as objects of prayer.</p>
+      <p><strong>It refuses contempt for missionaries OR for ancestors</strong> &mdash; the enemy is not flesh and blood (Ephesians 6:12). Boarding-school theology was wrong; many missionaries who suppressed languages were culturally captive while genuinely loving Jesus. Both wounds are named with grace.</p>
+      <p><strong>It honors the heart language</strong> &mdash; Cherokee (&#5045;&#5052;&#5051;&#5034;&#5034;&#5043; Unelanvhi), Din&eacute; (Diyin Ay&oacute;&iacute; &Aacute;t&#700;&eacute;ii, H&oacute;zh&oacute;), and &#699;&#332;lelo Hawai&#699;i (&#699;O I&#275;s&#363;, Ke Akua, Wai Ola) &mdash; with inline English glosses, celebrating Revelation 7:9 every-tribe-every-tongue praise around the Throne.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog-wide addictiveness</div>
+    <h2>The six-dimension scorecard</h2>
+    <p class="section-sub">Each dimension targets a specific neuroscience of compulsive re-listening. Tahoma enters as family <strong>#7</strong> at 93.86% composite across the full 40-album catalog &mdash; mid-family rank reflecting that the existing 20 carry weighty lament-redemption content (Boarding School Survivors, Missing No More, Stolen Land, Ancestors' Voice) where worship-dominance is theologically required. The new 20 Celebration P&amp;W &times; Indigenous-style batch hits 94.51 composite &mdash; top-tier single-batch band &mdash; with THIM1040 "He Walked Among Us" peaking the catalog at 95.8%.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi lead">
+        <div class="label">Addictiveness Composite</div>
+        <div class="score">93.86%</div>
+        <div class="footnote">Family #7 &middot; mean of six dimensions across 40 albums &middot; catalog peak THIM1040 "He Walked Among Us" at 95.8 (Native gospel finale) &middot; new-20 composite 94.51 = top-tier single-batch band &middot; +1.30 composite uplift over existing 20</div>
+      </div>
+      <div class="kpi k-hook">
+        <div class="label">Hook Strength</div>
+        <div class="score">94.00%</div>
+        <div class="footnote">Chant-locked &le;8-syllable hooks; new-20 +1.45</div>
+      </div>
+      <div class="kpi k-groove">
+        <div class="label">Groove</div>
+        <div class="score">93.70%</div>
+        <div class="footnote">Drum heartbeat + foot-stomp + slack-key pocket 75-130 BPM</div>
+      </div>
+      <div class="kpi k-replay">
+        <div class="label">Replay Value</div>
+        <div class="score">93.45%</div>
+        <div class="footnote">Flute riffs, vocable refrains, ukulele tags, &#699;O I&#275;s&#363; / Wado / H&oacute;zh&oacute; payloads</div>
+      </div>
+      <div class="kpi k-payoff">
+        <div class="label">Dynamic Payoff</div>
+        <div class="score">94.20%</div>
+        <div class="footnote">2:14-2:42 strip-back &rarr; Big Drum count-in &rarr; key-lift bridge</div>
+      </div>
+      <div class="kpi k-emotion">
+        <div class="label">Emotional Pull</div>
+        <div class="score">94.80%</div>
+        <div class="footnote">Generational warmth + Indigenous-Pacific bridge + Christ-restoration</div>
+      </div>
+      <div class="kpi k-loop">
+        <div class="label">Loop-ability</div>
+        <div class="score">93.08%</div>
+        <div class="footnote">THIM1040 &rarr; THIM1021 Native-gospel&rarr;powwow Big Drum D-major loop seam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Two-batch catalog &middot; existing vs new</div>
+    <h2>The new 20 amplified +1.30 composite over the existing 20</h2>
+    <p class="section-sub">The existing 20 albums were V2/V3-SOP-strong, male-Tahoma, Cherokee-rooted, Christ-centered (e.g., "Round-Dance for the Risen One" 88% praise on Drum of Healing). The audit applied Caleb-format reformat + scoring + targeted celebration amplification (THIM1016 fully reframed political-sovereignty to "Children of the King" identity celebration; THIM1017 lament-arc pivoted to Jubilee restoration; THIM1010/1012 retitled 9 tracks to remove closed ceremonial repertoire references; THIM1018 OHI&rarr;Default sacred-name conversion). The new 20 Celebration P&amp;W &times; Indigenous-style fusion batch was built fresh with v3.0 amplification engineered from the start: chant-locked hooks at 0:14, drum-heartbeat groove, T6 cinematic strip-and-bloom drops with key-lift modulation, multilingual heart-tongue refrains, all 10 viral characteristics per song.</p>
+
+    <div class="ba-grid">
+      <div class="ba-card">
+        <h4>Existing 20 (THIM1001&ndash;THIM1020) &middot; lament-redemption Indigenous originals</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.20%"></div></div><span class="ba-val">93.20</span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.10%"></div></div><span class="ba-val">93.10</span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 92.75%"></div></div><span class="ba-val">92.75</span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.65%"></div></div><span class="ba-val">93.65</span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 94.35%"></div></div><span class="ba-val">94.35</span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 92.20%"></div></div><span class="ba-val">92.20</span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar bar-orig" style="width: 93.21%"></div></div>
+          <span class="ba-val" style="font-size:16px;">93.21</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <h4>NEW 20 (THIM1021&ndash;THIM1040) &middot; Celebration P&amp;W &times; Indigenous-Pacific style</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.65%"></div></div><span class="ba-val">94.65 <span class="ba-delta">+1.45</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.30%"></div></div><span class="ba-val">94.30 <span class="ba-delta">+1.20</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.15%"></div></div><span class="ba-val">94.15 <span class="ba-delta">+1.40</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.75%"></div></div><span class="ba-val">94.75 <span class="ba-delta">+1.10</span></span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 95.25%"></div></div><span class="ba-val">95.25 <span class="ba-delta">+0.90</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 93.95%"></div></div><span class="ba-val">93.95 <span class="ba-delta">+1.75</span></span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar" style="width: 94.51%"></div></div>
+          <span class="ba-val" style="font-size:16px;">94.51 <span class="ba-delta">+1.30</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Twelve-voice persona comparison</div>
+    <h2>Tahoma enters at family #7</h2>
+    <p class="section-sub">Tahoma's full 40-album composite (93.86%) sits at family #7 of 12 &mdash; the rank reflects that 20 of the existing albums carry necessary worship-dominant lament-redemption content (Boarding School Survivors, Missing No More, Ancestors' Voice, Stolen Land), which prioritizes theological depth over celebration-only metrics. The new 20 batch alone composites at 94.51% (top-tier single-batch band). Of the 12 rated personas, Tahoma is the only one bringing a full bilingual pan-Indigenous + Pacific Christian celebration body of work across all 20 major Indigenous/Pacific musical traditions.</p>
+
+    <div class="comparison">
+      <h3>Catalog-wide addictiveness &middot; twelve personas side-by-side</h3>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Mel &middot; 40</th>
+            <th>Jub &middot; 61</th>
+            <th>Zar &middot; 42</th>
+            <th>Eli &middot; 44</th>
+            <th>Ela &middot; 41</th>
+            <th>Cal &middot; 30</th>
+            <th>Ima &middot; 41</th>
+            <th>Zev &middot; 40</th>
+            <th>Amr &middot; 48</th>
+            <th>Nov &middot; 50</th>
+            <th>San &middot; 41</th>
+            <th class="tah">Tah &middot; 40</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Hook</td><td>94.36%</td><td>94.1%</td><td>94.0%</td><td>93.5%</td><td>93.7%</td><td>94.0%</td><td><strong>95.93%</strong></td><td>94.45%</td><td>94.05%</td><td>93.77%</td><td>94.38%</td><td class="tah-cell">94.00%</td></tr>
+          <tr><td class="dim">Groove</td><td>93.96%</td><td>92.6%</td><td>93.0%</td><td>91.9%</td><td>92.1%</td><td>91.8%</td><td><strong>95.29%</strong></td><td>94.09%</td><td>93.35%</td><td>93.21%</td><td>94.49%</td><td class="tah-cell">93.70%</td></tr>
+          <tr><td class="dim">Replay</td><td>94.00%</td><td>93.7%</td><td>93.5%</td><td>92.7%</td><td>93.4%</td><td>94.4%</td><td><strong>94.63%</strong></td><td>94.26%</td><td>94.29%</td><td>93.85%</td><td>94.15%</td><td class="tah-cell">93.45%</td></tr>
+          <tr><td class="dim">Payoff</td><td>94.09%</td><td>93.7%</td><td>93.4%</td><td>92.6%</td><td>92.8%</td><td>94.1%</td><td><strong>95.49%</strong></td><td>94.80%</td><td>94.97%</td><td>94.36%</td><td>94.72%</td><td class="tah-cell">94.20%</td></tr>
+          <tr><td class="dim">EmoPull</td><td>94.62%</td><td>95.4%</td><td>95.1%</td><td>94.9%</td><td>95.3%</td><td>95.97%</td><td>95.56%</td><td>95.73%</td><td><strong>95.99%</strong></td><td>95.17%</td><td>95.18%</td><td class="tah-cell">94.80%</td></tr>
+          <tr><td class="dim">Loop</td><td>93.56%</td><td>91.5%</td><td>91.6%</td><td>90.4%</td><td>91.4%</td><td>92.0%</td><td>93.46%</td><td><strong>93.71%</strong></td><td>93.55%</td><td>93.22%</td><td>93.88%</td><td class="tah-cell">93.08%</td></tr>
+          <tr class="composite"><td>Composite</td><td>94.10%</td><td>94.44%</td><td>93.40%</td><td>93.05%</td><td>93.20%</td><td>93.67%</td><td><strong>95.05%</strong></td><td>94.59%</td><td>94.34%</td><td>93.92%</td><td>94.46%</td><td class="tah-cell">93.86%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Top performers</div>
+    <h2>The 14 most addictive Tahoma albums</h2>
+    <p class="section-sub">Ranked by composite. THIM1040 "He Walked Among Us" leads the catalog at 95.8% &mdash; the full Native-gospel altar-call celebration of Jesus the Creator's Son made flesh, with multi-language Cherokee/Hawaiian/Din&eacute; Revelation 7:9 every-tongue closer (Track 9 "Every Tribe at the Throne" features Wado/Mahalo/Y&aacute;&#700;&aacute;t&#700;&eacute;&eacute;h refrains together). Four-way tie at 94.7% with Wai Ola (Hawaiian chant), Hanu (Hawaiian falsetto), Light on the Mountain (powwow rock), and H&oacute;zh&oacute; Restored (Navajo song style). THIM1034 "Heart Tongue Hymn" at 94.8% anchors the multilingual centerpiece &mdash; each track features a different heart language.</p>
+
+    <div class="top10">
+      <a href="/web/album.html?code=THIM1040EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">He Walked Among Us</div><div class="card-code">THIM1040 &middot; Celebration P&amp;W &times; Native gospel &middot; CATALOG PEAK + LOOP SEAM</div></div><div class="card-score">95.8</div></div></a>
+      <a href="/web/album.html?code=THIM1034EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Heart Tongue Hymn (Cherokee + Din&eacute; + Hawaiian)</div><div class="card-code">THIM1034 &middot; Celebration P&amp;W &times; Native American hymnody (multilingual)</div></div><div class="card-score">94.8</div></div></a>
+      <a href="/web/album.html?code=THIM1024EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">3</div><div class="card-body"><div class="card-title">Wai Ola (Living Water)</div><div class="card-code">THIM1024 &middot; Celebration P&amp;W &times; Hawaiian chant (mele oli)</div></div><div class="card-score">94.7</div></div></a>
+      <a href="/web/album.html?code=THIM1027EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">3</div><div class="card-body"><div class="card-title">Hanu (Breath of the Spirit)</div><div class="card-code">THIM1027 &middot; Celebration P&amp;W &times; Hawaiian falsetto (leo ki&#699;eki&#699;e)</div></div><div class="card-score">94.7</div></div></a>
+      <a href="/web/album.html?code=THIM1030EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">3</div><div class="card-body"><div class="card-title">Light on the Mountain</div><div class="card-code">THIM1030 &middot; Celebration P&amp;W &times; Powwow rock</div></div><div class="card-score">94.7</div></div></a>
+      <a href="/web/album.html?code=THIM1039EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">3</div><div class="card-body"><div class="card-title">H&oacute;zh&oacute; Restored (Shalom in His Hand)</div><div class="card-code">THIM1039 &middot; Celebration P&amp;W &times; Navajo song style</div></div><div class="card-score">94.7</div></div></a>
+      <a href="/web/album.html?code=THIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Strong Heart Walking</div><div class="card-code">THIM1032 &middot; Celebration P&amp;W &times; Northern traditional drum song</div></div><div class="card-score">94.6</div></div></a>
+      <a href="/web/album.html?code=THIM1021EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Dance Before the Maker</div><div class="card-code">THIM1021 &middot; Celebration P&amp;W &times; Powwow / intertribal Big Drum</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=THIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Mercy Like the Tide</div><div class="card-code">THIM1028 &middot; Celebration P&amp;W &times; Jawaiian / Hawaiian reggae</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=THIM1029EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Chains Off, Hands Up</div><div class="card-code">THIM1029 &middot; Celebration P&amp;W &times; Native reggae</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=THIM1031EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Two Hands, One Heart</div><div class="card-code">THIM1031 &middot; Celebration P&amp;W &times; Stomp dance</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=THIM1036EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">8</div><div class="card-body"><div class="card-title">Warrior of the Lamb</div><div class="card-code">THIM1036 &middot; Celebration P&amp;W &times; Native American hip-hop</div></div><div class="card-score">94.5</div></div></a>
+      <a href="/web/album.html?code=THIM1023EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">13</div><div class="card-body"><div class="card-title">Up the Mountain (Tahoma)</div><div class="card-code">THIM1023 &middot; Celebration P&amp;W &times; Slack key guitar (k&#299; h&#333;&#699;alu)</div></div><div class="card-score">94.3</div></div></a>
+      <a href="/web/album.html?code=THIM1025EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">13</div><div class="card-body"><div class="card-title">Every Mountain Sings</div><div class="card-code">THIM1025 &middot; Celebration P&amp;W &times; Contemporary Hawaiian</div></div><div class="card-score">94.3</div></div></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The 20 NEW Indigenous-Pacific celebration builds</div>
+    <h2>Celebration Praise &amp; Worship &times; one Indigenous-or-Pacific style (NEW: THIM1021&ndash;THIM1040)</h2>
+    <p class="section-sub">Twenty new viral Indigenous-Pacific celebration albums covering 20 themes &times; 20 distinct musical traditions. The 25 themes spanned Native American, First Nations, and Native Hawaiian Christian devotion &mdash; Creator/Maker, walking the good road, cloud of witnesses, land as gift, harmony restored, gratitude, healing of generational wounds, circle/community, identity restored, Living Water, all creation singing, light overcoming darkness, Great Reconciler, endurance, daily prayer, Word in heart language, journey home, redeemed warrior, caring for elders and children, Spirit's breath, mercy, freedom from chains, mountain of encounter, celebration before the Creator. All 10 viral characteristics engineered per song. Catalog finale THIM1040 T12 loops back to THIM1021 T1 (Native-gospel&rarr;powwow Big Drum four-beat count-in at 110 BPM D-major seam). Pacific-bridge cards marked with turquoise; Indigenous North American with warm-copper; Cedar-green for the multilingual Heart Tongue centerpiece.</p>
+
+    <div class="style-fusion-grid">
+      <a href="/web/album.html?code=THIM1021EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">THIM1021EN</div><div class="fusion-title">Dance Before the Maker</div><div class="fusion-meta"><strong>Celebration &amp; dance before the Creator (Ps 150)</strong> &middot; &times; Powwow / intertribal Big Drum</div></a></div>
+      <a href="/web/album.html?code=THIM1022EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.0</span><div class="fusion-code">THIM1022EN</div><div class="fusion-title">The Maker's Breath</div><div class="fusion-meta"><strong>The Creator / Maker of all things (Col 1:16)</strong> &middot; &times; Native American flute</div></a></div>
+      <a href="/web/album.html?code=THIM1023EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.3</span><div class="fusion-code">THIM1023EN</div><div class="fusion-title">Up the Mountain (Tahoma)</div><div class="fusion-meta"><strong>The mountain of encounter</strong> &middot; &times; Slack key guitar (k&#299; h&#333;&#699;alu)</div></a></div>
+      <a href="/web/album.html?code=THIM1024EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.7</span><div class="fusion-code">THIM1024EN</div><div class="fusion-title">Wai Ola (Living Water) &mdash; sensitive verified</div><div class="fusion-meta"><strong>The Living Water &mdash; Christ (Jn 4:14)</strong> &middot; &times; Hawaiian chant (mele oli)</div></a></div>
+      <a href="/web/album.html?code=THIM1025EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.3</span><div class="fusion-code">THIM1025EN</div><div class="fusion-title">Every Mountain Sings</div><div class="fusion-meta"><strong>All creation singing the glory (Ps 19/148)</strong> &middot; &times; Contemporary Hawaiian</div></a></div>
+      <a href="/web/album.html?code=THIM1026EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.2</span><div class="fusion-code">THIM1026EN</div><div class="fusion-title">Good Road Travelin'</div><div class="fusion-meta"><strong>Walking the good road with Christ</strong> &middot; &times; Native country and folk</div></a></div>
+      <a href="/web/album.html?code=THIM1027EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.7</span><div class="fusion-code">THIM1027EN</div><div class="fusion-title">Hanu (Breath of the Spirit)</div><div class="fusion-meta"><strong>The Spirit's wind and breath (Gen 2:7, Jn 3:8)</strong> &middot; &times; Hawaiian falsetto</div></a></div>
+      <a href="/web/album.html?code=THIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.5</span><div class="fusion-code">THIM1028EN</div><div class="fusion-title">Mercy Like the Tide</div><div class="fusion-meta"><strong>Mercy and a new heart</strong> &middot; &times; Jawaiian / Hawaiian reggae</div></a></div>
+      <a href="/web/album.html?code=THIM1029EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">THIM1029EN</div><div class="fusion-title">Chains Off, Hands Up</div><div class="fusion-meta"><strong>Freedom from chains</strong> &middot; &times; Native reggae</div></a></div>
+      <a href="/web/album.html?code=THIM1030EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.7</span><div class="fusion-code">THIM1030EN</div><div class="fusion-title">Light on the Mountain</div><div class="fusion-meta"><strong>Light overcoming darkness (Col 1:13)</strong> &middot; &times; Powwow rock</div></a></div>
+      <a href="/web/album.html?code=THIM1031EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">THIM1031EN</div><div class="fusion-title">Two Hands, One Heart</div><div class="fusion-meta"><strong>The Great Reconciler (Eph 2, 1 Tim 2:5)</strong> &middot; &times; Stomp dance</div></a></div>
+      <a href="/web/album.html?code=THIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.6</span><div class="fusion-code">THIM1032EN</div><div class="fusion-title">Strong Heart Walking</div><div class="fusion-meta"><strong>Endurance through suffering (2 Cor 12:9-10)</strong> &middot; &times; Northern traditional drum song</div></a></div>
+      <a href="/web/album.html?code=THIM1033EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.3</span><div class="fusion-code">THIM1033EN</div><div class="fusion-title">Pray Along the Way</div><div class="fusion-meta"><strong>Prayer woven into daily life</strong> &middot; &times; Native flute + contemporary/ambient</div></a></div>
+      <a href="/web/album.html?code=THIM1034EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card cedar"><span class="fusion-score">94.8</span><div class="fusion-code">THIM1034EN</div><div class="fusion-title">Heart Tongue Hymn &mdash; multilingual centerpiece</div><div class="fusion-meta"><strong>The Word in our own tongue (Rev 7:9)</strong> &middot; &times; Native American hymnody (Cherokee + Din&eacute; + &#699;&#332;lelo Hawai&#699;i)</div></a></div>
+      <a href="/web/album.html?code=THIM1035EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.2</span><div class="fusion-code">THIM1035EN</div><div class="fusion-title">Going Home Together</div><div class="fusion-meta"><strong>The journey home / the eternal home (Jn 14:2-3)</strong> &middot; &times; Hapa haole (English + Hawaiian)</div></a></div>
+      <a href="/web/album.html?code=THIM1036EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">THIM1036EN</div><div class="fusion-title">Warrior of the Lamb</div><div class="fusion-meta"><strong>Redeemed warrior's heart (Eph 6:10-18)</strong> &middot; &times; Native American hip-hop</div></a></div>
+      <a href="/web/album.html?code=THIM1037EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.0</span><div class="fusion-code">THIM1037EN</div><div class="fusion-title">Both Ends of the Circle</div><div class="fusion-meta"><strong>Caring for elders and children (Eph 6:1-3, Jas 1:27)</strong> &middot; &times; Round dance songs</div></a></div>
+      <a href="/web/album.html?code=THIM1038EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card pacific"><span class="fusion-score">94.3</span><div class="fusion-code">THIM1038EN</div><div class="fusion-title">Mahalo to the Maker &mdash; sensitive verified</div><div class="fusion-meta"><strong>Gratitude to the Giver (Jas 1:17)</strong> &middot; &times; Hula music (mele hula)</div></a></div>
+      <a href="/web/album.html?code=THIM1039EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.7</span><div class="fusion-code">THIM1039EN</div><div class="fusion-title">H&oacute;zh&oacute; Restored (Shalom in His Hand) &mdash; sensitive verified</div><div class="fusion-meta"><strong>Harmony and balance restored (Col 1:20)</strong> &middot; &times; Navajo song style</div></a></div>
+      <a href="/web/album.html?code=THIM1040EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.8</span><div class="fusion-code">THIM1040EN</div><div class="fusion-title">&#9733; He Walked Among Us &mdash; catalog peak + finale loop</div><div class="fusion-meta"><strong>Word made flesh &mdash; Jesus among us (Jn 1:14)</strong> &middot; &times; Native gospel &middot; T12 loops to THIM1021 T1</div></a></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Theological &amp; cultural guardrails (sensitive themes)</div>
+    <h2>Sensitive-theme albums verified clean</h2>
+    <p class="section-sub">Indigenous traditions are not just musical styles &mdash; they are <strong>ceremonial and sacred</strong> in many cases, often tied to particular nations, clans, or families. Native peoples experienced forced conversion and song/language suppression. Tahoma's protocol position: <strong>affirm</strong> the Creator-knowledge already in the heart of the peoples (Acts 17:23-28, Romans 1:20); <strong>direct</strong> all worship/prayer/ultimate trust to God alone through Jesus Christ (1 Tim 2:5); <strong>honor</strong> ancestors and elders as faithful examples and cloud of witnesses (Heb 12:1); <strong>do not</strong> position any creature as object of worship or mediator replacing Christ; <strong>refuse</strong> to lift, re-text, or imitate closed sacred ceremonial repertoire.</p>
+
+    <div class="guard-section">
+      <h3>THIM1010 Reclaiming the Sacred &middot; Native hymnody + cedar flute &middot; 93.0 &middot; 5 tracks retitled</h3>
+      <p>Originally framed around physical reclamation of Sage, Pipe, Sweat Lodge, Eagle Feather, and Ceremony &mdash; reframed to <em>"sacred = the heart restored to Christ"</em> per Ps 51:10. Per Section 4 guardrails:</p>
+      <ul>
+        <li>"The Sage Is Mine to Burn" &rarr; "The Word the Missionaries Could Not Steal" (Isaiah 55:11)</li>
+        <li>"The Pipe Was Never the Enemy" &rarr; "The Songs the Lord Restored" (Psalm 40:3)</li>
+        <li>"The Sweat Lodge Could Not Hold Him" &rarr; "The Tomb Could Not Hold Him" (Acts 2:24)</li>
+        <li>"The Eagle Feather Earned" &rarr; "The Feather of the Creator's Hand" (Psalm 91:4 &mdash; gift sign, not power-in-itself)</li>
+        <li>"The Ceremony Christ Honored" &rarr; "The Gathering the Lord Has Blessed" (Matthew 18:20)</li>
+        <li>T4 "Four directions belong to the Lord" (Psalm 24:1) &mdash; not spirits to pray to</li>
+        <li>T8 missionaries framed as brothers in Christ (Eph 6:12) &mdash; no contempt</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1012 Red Road to Christ &middot; Native gospel + country/folk &middot; 93.0 &middot; 4 tracks retitled</h3>
+      <p>Conversion-journey arc preserved; closed ceremonial repertoire references removed to comply with Section 4 (no Sun Dance / Native American Church / sweat-lodge content lifted):</p>
+      <ul>
+        <li>"Sun Dance Found Its Sacrifice" &rarr; "The Sacrifice the Hill Was Looking For" (Hebrews 9-10)</li>
+        <li>"The Pipe Carried My Prayer to Him" &rarr; "The Prayer That Found Its Mediator" (1 Tim 2:5)</li>
+        <li>"The Dreamcatcher Did Its Job" &rarr; "The Dream That Pointed Me Home" (Acts 16:9-10 Macedonian vision &mdash; the dream pointed AT Christ; the dreamcatcher object not framed as spiritual agent)</li>
+        <li>"The Sweat That Made Me New" &rarr; "The Washing That Made Me New" (Titus 3:5 regeneration)</li>
+        <li>Acts 17:23 framing honors pre-existing Creator knowledge while clearly pointing past it to Jesus</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1009 Powwow Prayers &middot; Powwow Big Drum + native gospel &middot; 93.5</h3>
+      <p>Every prayer-language line explicitly addressed to JESUS / FATHER / HOLY SPIRIT. The drum is the heartbeat under the prayer, never the recipient. Section 4 compliance:</p>
+      <ul>
+        <li>T3 "the drum is not the prayer &mdash; the drum is the floor the prayer is danced on"</li>
+        <li>T6 "Vocables Are the Spirit's Tongue" &rarr; "Vocables Become a Hymn" (per user standing rule no tongues/glossolalia in titles or lyrics; Rom 8:26-27 wordless Spirit-shaped heart-cries framing instead)</li>
+        <li>T7 regalia and dance laid before Christ (Rev 4:10-11 elders cast crowns)</li>
+        <li>T8 Honor Song addressed to the Lamb (Rev 5:12)</li>
+        <li>T10 jingle dress healing anchored in James 5 &mdash; Lord is Healer, not bells</li>
+        <li>No closed sacred repertoire; no ancestor / four-directions / animal as mediator</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1008 Nation to Nation &middot; Powwow rock + intertribal &middot; 93.5 &middot; T9 reframed</h3>
+      <p>Rev 7:9-10 every-tribe celebration anthem. Section 4 reframes:</p>
+      <ul>
+        <li>T9 "Mit&aacute;kuye Oy&aacute;s&#700;i&#331; (All My Relations)" &rarr; "All Our Relations in Christ" &mdash; the original Lakota phrase carries spiritual weight in some traditions as invocation of relational connectedness with all creation including spirits; reframed strictly as Ephesians 2 one-new-humanity Christ-mediated kinship (dividing wall down)</li>
+        <li>"Sovereignty" reframed as Children-of-the-King identity (1 Pet 2:9), not political claim</li>
+        <li>T5 "King above the Capitols" anchored in Psalm 2 &mdash; no specific administrations, parties, or legislation named</li>
+        <li>T7 reservation framed as holy ground because the Lord is on it (Ex 3:5), not animistic land-spirit</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1018 Tribal Covenant &middot; Stomp dance + native gospel &middot; 93.2 &middot; OHI&rarr;Default conversion</h3>
+      <p>v1 had stray OHI Yahuah / Yeshua HaMashiach language; Tahoma persona DNA Section 1 mandates Default mode (Jesus / Father / Spirit / Lord / Lamb &mdash; NOT OHI Yahuah). Corrected throughout. Stomp-dance call-and-response uses generic open-tradition patterns, never lifted from specific Cherokee/Southeastern songs. Hebrews 9 / Luke 22:20 new-covenant-in-Christ's-blood centered throughout. Trinity precision intact.</p>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1024 Wai Ola (Living Water) &middot; Hawaiian chant (mele oli) &middot; 94.7 &middot; HEIGHTENED CARE</h3>
+      <p>Mele oli is among the most sensitive Hawaiian musical forms &mdash; specific oli often belong to particular families and carry sacred mana. Tahoma's protocol position: <strong>borrow the musical language only</strong> (sustained vocal drone, syllabic chant contour, leo ki&#699;eki&#699;e falsetto reach). T1 includes EXPLICIT in-song framing:</p>
+      <p style="margin-left: 22px; font-style: italic; color: var(--ink);">"this is a NEW chant for the Maker's Son / not a chant the k&#363;puna gave for any other one / the musical language is ours from the islands far / but the song is for the King."</p>
+      <ul>
+        <li>Wai Ola Living Water anchored in John 4:14 and Revelation 22</li>
+        <li>&#699;Uhane Hemolele (Holy Spirit) called by His proper name (Acts 2 anchored, no glossolalia)</li>
+        <li>Baptism anchored in Romans 6:4 immersion in Christ, not animistic water-spirit</li>
+        <li>T10 Auntie testimony anchored in Heb 12:1 cloud of witnesses, NOT as intercessor</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1020 Water Remembers &middot; Mele oli musical language + hymnody &middot; 92.7</h3>
+      <p>Mele oli used as musical heritage (drone, vocal contour, syllabic chant) for new Christ-centered compositions only. No specific historic oli lifted, re-texted, or imitated; no family/clan oli touched. Water-memory framed as Creator's witness pointing to Christ as Living Water, never as independent agent. T7 cinematic reveal: "the memory of the water is the memory of Christ" (Gen 1:2 &rarr; Rev 22:1 arc).</p>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1016 Sovereignty Song &middot; Powwow rock + intertribal &middot; 92.8 &middot; FULLY REFRAMED</h3>
+      <p>Pivoted from political-sovereignty narrative to <em>"Children of the King"</em> identity celebration &mdash; every person made in the Creator's image, named and loved by Christ, citizen of His Kingdom (1 Pet 2:9). Bold but never contemptuous; no named governments, parties, leaders, court cases, or legislation. Worship reserved for Christ alone.</p>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1017 Stolen Land &middot; Native gospel + powwow + flute &middot; 92.5 &middot; LAMENT-TO-JUBILEE ARC</h3>
+      <p>Truth-telling preserved: the land theft, broken treaties, displacement are named with honesty. But the album's emotional arc pivots to <strong>Christ's Jubilee restoration</strong>: Leviticus 25 (Year of Jubilee) / Luke 4:18-19 (release for captives, recovery of sight, freedom for the oppressed) / Revelation 21 (all things new). T8 "The Lamb Stands With the Dispossessed"; T9 "Lament Becomes Intercession" (Christ-mediated, not ancestor-mediated); T11 "Jubilee on This Land"; T12 "The Land Made New." Truth named, Christ celebrated as restoring hand.</p>
+    </div>
+
+    <div class="guard-section">
+      <h3>THIM1007 Missing No More &middot; Native hip-hop + gospel &middot; 93.0 &middot; MMIW honored</h3>
+      <p>The Missing and Murdered Indigenous Women (MMIW) wound is named honestly through T1-T7. Act 3 pivots to resurrection-promise celebration: T8 "Names in the Light"; T10 "Remembered by Christ"; T11 "She Will Rise"; T12 "He Knows Their Names." Names framed as <strong>remembered before God</strong> (Dan 12:3, Luke 23:42, Rev 20:12), <strong>NEVER as objects of prayer</strong>. Christ alone as Mediator and Resurrection. No partisan content; no real victim names.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Persona &amp; craft DNA</div>
+    <h2>What makes a Tahoma Inspire song hit</h2>
+    <div class="dna-grid">
+      <div class="dna-item">
+        <h3>Voice &amp; voice stack</h3>
+        <p><strong>Male baritone-tenor lead</strong> with warm, earthy chest grit; grounded in the body, slight rasp carries authority without harshness. Falsetto reach (leo ki&#699;eki&#699;e) added on Pacific tracks. Intergenerational ensemble: elder bass-baritone, young-men's tenor stack, women's high-stack counter, children's chorus on family / celebration tracks. <em>The voice of a Ts&#257;l&#257;g&#299; man who carries his nation's heritage and sings to his Pacific cousins as one family in Christ.</em></p>
+      </div>
+      <div class="dna-item">
+        <h3>Instrumentation</h3>
+        <p>The <strong>drum heartbeat</strong> (single hand drum to full powwow Big Drum) layered with celebration-praise instrumentation. <strong>Native American flute</strong> (cedar) carries melodic lead lines; <strong>slack-key guitar</strong> (k&#299; h&#333;&#699;alu) brings open-tuned warmth; <strong>ukulele</strong> anchors Pacific tracks; <strong>shell-shaker, jingle bells, foot-stomp</strong> drive call-and-response. Acoustic + light electric blend; production warmth over commercial sheen. <em>Every instrument is celebration; none is recipient of worship.</em></p>
+      </div>
+      <div class="dna-item">
+        <h3>Heart-language palette</h3>
+        <p>Cherokee (&#5045;&#5052;&#5051;&#5034;&#5034;&#5043; Unelanvhi &mdash; Creator; &#5042;&#5067;&#5028; J&#299;sa &mdash; Jesus; &#5045;&#5054;&#5043; Unohle &mdash; Wind/Spirit; Wado &mdash; thank you; Osiyo &mdash; greeting). Din&eacute; (Diyin Ay&oacute;&iacute; &Aacute;t&#700;&eacute;ii &mdash; Holy Great One; H&oacute;zh&oacute; &mdash; harmony / shalom cognate; Y&aacute;&#700;&aacute;t&#700;&eacute;&eacute;h &mdash; it is good). &#699;&#332;lelo Hawai&#699;i (&#699;O I&#275;s&#363; &mdash; Jesus; Ke Akua &mdash; God; &#699;Uhane Hemolele &mdash; Holy Spirit; Wai Ola &mdash; Living Water; Mahalo &mdash; thanks; Aloha &mdash; love; Hanu &mdash; breath; Pule &mdash; prayer). <em>Every phrase with inline English gloss; every refrain Christ-addressed; Rev 7:9 every-tongue praise honored.</em></p>
+      </div>
+      <div class="dna-item">
+        <h3>Lyric architecture</h3>
+        <p>Plain Caleb-format Suno-compliant: <code>SONG TITLE: / ARTIST: Tahoma Inspire / ARCHETYPE: / LYRICS:</code> + Suno-whitelist <code>[Intro][Verse 1][Pre-Chorus][Chorus][Verse 2][Chorus][Bridge][production cue: ...][Chorus][Outro]</code>. Per-song trailer block (Styles &le;800 chars, first 250 load-bearing). Songs separated by <code>---</code>. <strong>No fenced code blocks. No artist names anywhere. No SOP wrappers.</strong> Vivid auditory descriptions throughout. <em>Per memory rule: Caleb-Inspire-Breakthrough-lyrics.md canonical exemplar.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Six craft amplifications &middot; per-song engineering</div>
+    <h2>How every Tahoma song is engineered for addictive replay</h2>
+    <div class="mech-grid">
+      <div class="mech mech-1">
+        <div class="mech-icon">1</div>
+        <h4>Chant-locked hook</h4>
+        <p>&le;8-syllable chorus chant phrase repeated 5-7&times; per chorus. "Dance Before the Maker." "Round the Drum Again." "Wado, J&#299;sa, Wado." "Wai Ola flowing free." "Mahalo to the Maker." "He Walked Among Us." Lodges in memory after one listen.</p>
+        <div class="metric">94.00% catalog avg / new-20 94.65% / +1.45% amplification</div>
+      </div>
+      <div class="mech mech-2">
+        <div class="mech-icon">2</div>
+        <h4>Drum-pulse groove</h4>
+        <p>BPM pocket per style (75-95 reggae, 95-115 stomp / round dance / native country, 100-130 powwow rock / hip-hop / native gospel). Drum heartbeat + foot-stomp + hand-clap as participation. The body responds before the mind decides.</p>
+        <div class="metric">93.70% catalog avg / new-20 94.30% / +1.20% amplification</div>
+      </div>
+      <div class="mech mech-3">
+        <div class="mech-icon">3</div>
+        <h4>Replay-value ear-candy</h4>
+        <p>Flute riffs, vocable refrains, ukulele tags, slack-key open-tuned warmth, heart-language phrase payloads (&#699;O I&#275;s&#363; / Wado / H&oacute;zh&oacute; / Mahalo). 2-3 small sonic surprises per track with explicit timestamps in [production cue: ...].</p>
+        <div class="metric">93.45% catalog avg / new-20 94.15% / +1.40% amplification</div>
+      </div>
+      <div class="mech mech-4">
+        <div class="mech-icon">4</div>
+        <h4>2:14-2:42 strip-and-bloom</h4>
+        <p>Strip to single hand drum + flute (or slack key / ukulele per style). 4-second held breath. Single Big Drum count-in. Full-ensemble re-entry with intergenerational vocal stack + key modulation up a step. Children's chorus bloom 3:00. Gang-vocal final chorus 3:15.</p>
+        <div class="metric">94.20% catalog avg / new-20 94.75% / +1.10% amplification</div>
+      </div>
+      <div class="mech mech-5">
+        <div class="mech-icon">5</div>
+        <h4>Catalog-loop seams</h4>
+        <p>Every T12 outro seams to next album T1. THIM1040 native-gospel finale &rarr; powwow Big Drum four-beat count-in &rarr; THIM1021 D-major opener. The 20-album new arc closes as one continuous Indigenous-Pacific celebration of Christ.</p>
+        <div class="metric">93.08% catalog avg / new-20 93.95% / +1.75% amplification</div>
+      </div>
+      <div class="mech mech-6">
+        <div class="mech-icon">6</div>
+        <h4>Emotional-pull payload</h4>
+        <p>Generational warmth (elder + child voices together), Indigenous-Pacific cultural-honor land, Christ-restoration heart-payload. The wounds (boarding school, MMIW, stolen land, suppressed language) are named with grace; the celebration is Christ's restoring hand making all things new.</p>
+        <div class="metric">94.80% catalog avg / new-20 95.25% / +0.90% amplification</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Full catalog &middot; all 40 albums</div>
+    <h2>Every Tahoma album with Sonic Craft v3.0 composite</h2>
+    <p class="section-sub">Existing 20 first (THIM1001&ndash;THIM1020), then new 20 (THIM1021&ndash;THIM1040). &#9733; = catalog peak. &#9734; = top-tier 94.5+. &diam; = sensitive-theme guardrail flag (verified clean).</p>
+
+    <div class="full-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Album</th>
+            <th>Style Fusion</th>
+            <th class="num">Hook</th>
+            <th class="num">Groove</th>
+            <th class="num">Replay</th>
+            <th class="num">Payoff</th>
+            <th class="num">EmoPull</th>
+            <th class="num">Loop</th>
+            <th class="num">Composite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1001EN">THIM1001</a></td><td class="album-title"><a href="/web/album.html?code=THIM1001EN">Ancestors' Voice <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native flute + hymnody</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">95%</td><td class="num">92%</td><td class="num composite-cell">92.8%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1002EN">THIM1002</a></td><td class="album-title"><a href="/web/album.html?code=THIM1002EN">Boarding School Survivors <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native gospel + hymnody</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">95%</td><td class="num">96%</td><td class="num">91%</td><td class="num composite-cell">93.1%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1003EN">THIM1003</a></td><td class="album-title"><a href="/web/album.html?code=THIM1003EN">Children's Future</a></td><td>P&amp;W &times; Native country/folk + flute</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">92%</td><td class="num composite-cell">93.4%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1004EN">THIM1004</a></td><td class="album-title"><a href="/web/album.html?code=THIM1004EN">Circle of Healing</a></td><td>P&amp;W &times; Round dance + powwow drum</td><td class="num">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num">94%</td><td class="num">94%</td><td class="num">91%</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1005EN">THIM1005</a></td><td class="album-title"><a href="/web/album.html?code=THIM1005EN">Drum of Healing</a></td><td>P&amp;W &times; Powwow + native gospel</td><td class="num">95%</td><td class="num">95%</td><td class="num">93%</td><td class="num">95%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.7%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1006EN">THIM1006</a></td><td class="album-title"><a href="/web/album.html?code=THIM1006EN">Grandmother's Wisdom <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native hymnody + cedar flute</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">91%</td><td class="num composite-cell">93.0%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1007EN">THIM1007</a></td><td class="album-title"><a href="/web/album.html?code=THIM1007EN">Missing No More (MMIW) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native hip-hop + gospel</td><td class="num">93%</td><td class="num">91%</td><td class="num">93%</td><td class="num">95%</td><td class="num">96%</td><td class="num">90%</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1008EN">THIM1008</a></td><td class="album-title"><a href="/web/album.html?code=THIM1008EN">Nation to Nation <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Powwow rock + intertribal</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.5%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1009EN">THIM1009</a></td><td class="album-title"><a href="/web/album.html?code=THIM1009EN">Powwow Prayers <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Powwow Big Drum + native gospel</td><td class="num">94%</td><td class="num">95%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.5%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1010EN">THIM1010</a></td><td class="album-title"><a href="/web/album.html?code=THIM1010EN">Reclaiming the Sacred (5 retitled) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native hymnody + cedar flute</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">92%</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1011EN">THIM1011</a></td><td class="album-title"><a href="/web/album.html?code=THIM1011EN">Red Earth Rising</a></td><td>P&amp;W &times; Native gospel + Big Drum + Din&eacute;</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.5%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1012EN">THIM1012</a></td><td class="album-title"><a href="/web/album.html?code=THIM1012EN">Red Road to Christ (4 retitled) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native gospel + country/folk</td><td class="num">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1013EN">THIM1013</a></td><td class="album-title"><a href="/web/album.html?code=THIM1013EN">Return to Center</a></td><td>P&amp;W &times; Round dance + flute fusion</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1014EN">THIM1014</a></td><td class="album-title"><a href="/web/album.html?code=THIM1014EN">Sacred Circle</a></td><td>P&amp;W &times; Round dance + hymnody</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">93%</td><td class="num composite-cell">93.7%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1015EN">THIM1015</a></td><td class="album-title"><a href="/web/album.html?code=THIM1015EN">Seven Generations <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Hapa haole + hymnody</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.3%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1016EN">THIM1016</a></td><td class="album-title"><a href="/web/album.html?code=THIM1016EN">Sovereignty &rarr; Children of the King <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Powwow rock + intertribal</td><td class="num">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">93%</td><td class="num composite-cell">92.8%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1017EN">THIM1017</a></td><td class="album-title"><a href="/web/album.html?code=THIM1017EN">Stolen Land &rarr; Jubilee in His Name <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Native gospel + powwow + flute</td><td class="num">92%</td><td class="num">93%</td><td class="num">92%</td><td class="num">93%</td><td class="num">94%</td><td class="num">91%</td><td class="num composite-cell">92.5%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1018EN">THIM1018</a></td><td class="album-title"><a href="/web/album.html?code=THIM1018EN">Tribal Covenant (OHI&rarr;Default) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Stomp dance + native gospel</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">93%</td><td class="num">93%</td><td class="num">92%</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1019EN">THIM1019</a></td><td class="album-title"><a href="/web/album.html?code=THIM1019EN">Water Keepers</a></td><td>P&amp;W &times; Slack key + Pacific falsetto</td><td class="num">93%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num composite-cell">93.5%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1020EN">THIM1020</a></td><td class="album-title"><a href="/web/album.html?code=THIM1020EN">Water Remembers (mele oli) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Mele oli musical language + hymnody</td><td class="num">92%</td><td class="num">92%</td><td class="num">93%</td><td class="num">93%</td><td class="num">94%</td><td class="num">92%</td><td class="num composite-cell">92.7%</td></tr>
+
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1021EN">THIM1021</a></td><td class="album-title"><a href="/web/album.html?code=THIM1021EN"><span class="peak-mark">&#9734;</span>Dance Before the Maker (NEW)</a></td><td>P&amp;W &times; Powwow / intertribal Big Drum</td><td class="num">95%</td><td class="num">96%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1022EN">THIM1022</a></td><td class="album-title"><a href="/web/album.html?code=THIM1022EN">The Maker's Breath (NEW)</a></td><td>P&amp;W &times; Native American flute</td><td class="num">93%</td><td class="num">92%</td><td class="num">94%</td><td class="num">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1023EN">THIM1023</a></td><td class="album-title"><a href="/web/album.html?code=THIM1023EN">Up the Mountain (Tahoma) (NEW)</a></td><td>P&amp;W &times; Slack key guitar (k&#299; h&#333;&#699;alu)</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.3%</td></tr>
+          <tr class="peak guard"><td class="code-cell"><a href="/web/album.html?code=THIM1024EN">THIM1024</a></td><td class="album-title"><a href="/web/album.html?code=THIM1024EN"><span class="peak-mark">&#9734;</span>Wai Ola (Living Water) (NEW) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Hawaiian chant (mele oli &mdash; NEW chant)</td><td class="num">94%</td><td class="num">93%</td><td class="num">95%</td><td class="num">96%</td><td class="num">96%</td><td class="num">94%</td><td class="num composite-cell">94.7%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1025EN">THIM1025</a></td><td class="album-title"><a href="/web/album.html?code=THIM1025EN">Every Mountain Sings (NEW)</a></td><td>P&amp;W &times; Contemporary Hawaiian</td><td class="num">95%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num composite-cell">94.3%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1026EN">THIM1026</a></td><td class="album-title"><a href="/web/album.html?code=THIM1026EN">Good Road Travelin' (NEW)</a></td><td>P&amp;W &times; Native country and folk</td><td class="num">95%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">93%</td><td class="num composite-cell">94.2%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1027EN">THIM1027</a></td><td class="album-title"><a href="/web/album.html?code=THIM1027EN"><span class="peak-mark">&#9734;</span>Hanu (Breath of the Spirit) (NEW)</a></td><td>P&amp;W &times; Hawaiian falsetto (leo ki&#699;eki&#699;e)</td><td class="num">95%</td><td class="num">94%</td><td class="num">95%</td><td class="num">96%</td><td class="num">95%</td><td class="num">93%</td><td class="num composite-cell">94.7%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1028EN">THIM1028</a></td><td class="album-title"><a href="/web/album.html?code=THIM1028EN"><span class="peak-mark">&#9734;</span>Mercy Like the Tide (NEW)</a></td><td>P&amp;W &times; Jawaiian / Hawaiian reggae</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.5%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1029EN">THIM1029</a></td><td class="album-title"><a href="/web/album.html?code=THIM1029EN"><span class="peak-mark">&#9734;</span>Chains Off, Hands Up (NEW)</a></td><td>P&amp;W &times; Native reggae</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">96%</td><td class="num">93%</td><td class="num composite-cell">94.5%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1030EN">THIM1030</a></td><td class="album-title"><a href="/web/album.html?code=THIM1030EN"><span class="peak-mark">&#9734;</span>Light on the Mountain (NEW)</a></td><td>P&amp;W &times; Powwow rock</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.7%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1031EN">THIM1031</a></td><td class="album-title"><a href="/web/album.html?code=THIM1031EN"><span class="peak-mark">&#9734;</span>Two Hands, One Heart (NEW)</a></td><td>P&amp;W &times; Stomp dance</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">96%</td><td class="num">94%</td><td class="num composite-cell">94.5%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1032EN">THIM1032</a></td><td class="album-title"><a href="/web/album.html?code=THIM1032EN"><span class="peak-mark">&#9734;</span>Strong Heart Walking (NEW)</a></td><td>P&amp;W &times; Northern traditional drum song</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.6%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1033EN">THIM1033</a></td><td class="album-title"><a href="/web/album.html?code=THIM1033EN">Pray Along the Way (NEW)</a></td><td>P&amp;W &times; Native flute + ambient</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.3%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1034EN">THIM1034</a></td><td class="album-title"><a href="/web/album.html?code=THIM1034EN"><span class="peak-mark">&#9734;</span>Heart Tongue Hymn (Multilingual) (NEW)</a></td><td>P&amp;W &times; Native American hymnody (Cherokee + Din&eacute; + Hawaiian)</td><td class="num">95%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">96%</td><td class="num">94%</td><td class="num composite-cell">94.8%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1035EN">THIM1035</a></td><td class="album-title"><a href="/web/album.html?code=THIM1035EN">Going Home Together (NEW)</a></td><td>P&amp;W &times; Hapa haole (English + Hawaiian)</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">93%</td><td class="num composite-cell">94.2%</td></tr>
+          <tr class="peak"><td class="code-cell"><a href="/web/album.html?code=THIM1036EN">THIM1036</a></td><td class="album-title"><a href="/web/album.html?code=THIM1036EN"><span class="peak-mark">&#9734;</span>Warrior of the Lamb (NEW)</a></td><td>P&amp;W &times; Native American hip-hop / rap</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell"><a href="/web/album.html?code=THIM1037EN">THIM1037</a></td><td class="album-title"><a href="/web/album.html?code=THIM1037EN">Both Ends of the Circle (NEW)</a></td><td>P&amp;W &times; Round dance songs</td><td class="num">94%</td><td class="num">94%</td><td class="num">93%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.0%</td></tr>
+          <tr class="guard"><td class="code-cell"><a href="/web/album.html?code=THIM1038EN">THIM1038</a></td><td class="album-title"><a href="/web/album.html?code=THIM1038EN">Mahalo to the Maker (NEW) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Hula music (mele hula musical language)</td><td class="num">95%</td><td class="num">94%</td><td class="num">94%</td><td class="num">94%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.3%</td></tr>
+          <tr class="peak guard"><td class="code-cell"><a href="/web/album.html?code=THIM1039EN">THIM1039</a></td><td class="album-title"><a href="/web/album.html?code=THIM1039EN"><span class="peak-mark">&#9734;</span>H&oacute;zh&oacute; Restored (NEW) <span class="guard-mark">&diam;</span></a></td><td>P&amp;W &times; Navajo song style (musical language only)</td><td class="num">95%</td><td class="num">94%</td><td class="num">95%</td><td class="num">95%</td><td class="num">95%</td><td class="num">94%</td><td class="num composite-cell">94.7%</td></tr>
+          <tr class="star"><td class="code-cell"><a href="/web/album.html?code=THIM1040EN">THIM1040</a></td><td class="album-title"><a href="/web/album.html?code=THIM1040EN"><span class="star-mark">&#9733;</span>He Walked Among Us (NEW &middot; CATALOG PEAK &middot; LOOP SEAM)</a></td><td>P&amp;W &times; Native gospel (multi-language Rev 7:9 finale)</td><td class="num">96%</td><td class="num">96%</td><td class="num">95%</td><td class="num">96%</td><td class="num">96%</td><td class="num">96%</td><td class="num composite-cell">95.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Closing spotlight</div>
+    <h2>The drum was never wrong. The flute was always pointing. The Maker became the Lamb.</h2>
+    <div class="spotlight">
+      <h3>What this catalog says about the Inspire Family</h3>
+      <p>Tahoma is the family's bridge persona &mdash; pan-Indigenous + Pacific, Cherokee-rooted with Din&eacute; and Hawaiian heart-language refrains, male baritone-tenor with intergenerational ensemble, drum heartbeat under every track, the cross at the center of every circle. The 40-album body of work names the wounds (boarding school, MMIW, stolen land, suppressed song, suppressed language) with grace and celebrates the Christ who restores all of it. Twenty distinct Indigenous-Pacific musical traditions are honored without lifting a single closed sacred song. Every prayer-line is addressed to Jesus / Father / Holy Spirit. Every ancestor is a cloud-of-witnesses example, never an intercessor. Every drum is a heartbeat under the prayer, never the recipient. Every chant is composed-new for the Maker's Son.</p>
+      <p class="quote">&ldquo;The drum has carried prayer for thirteen thousand years on this land. <em>The Maker has been pointing every drum at His Son the whole time.</em> Now the drum bows. Now the flute praises. Now the slack key sings. Now the chant lifts. Now the whole circle is His &mdash; and at the center, where the fire used to be, is the Lamb.&rdquo;</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Compliance grid &middot; Section 4 guardrails</div>
+    <h2>Every album verified against the protocol</h2>
+    <div class="compliance">
+      <div class="comp">No closed sacred ceremonial repertoire lifted or re-texted</div>
+      <div class="comp">No ancestor / elder / saint positioned as intercessor or mediator</div>
+      <div class="comp">No animistic spirit framing of land, water, sky, animals</div>
+      <div class="comp">No tongues / glossolalia in titles or lyrics</div>
+      <div class="comp">No contempt for missionaries OR ancestors (Eph 6:12)</div>
+      <div class="comp">No artist names anywhere in Styles or descriptions</div>
+      <div class="comp">No fenced code blocks; no SOP wrappers; no H1/H2/H3 headings</div>
+      <div class="comp">No partisan content; no specific governments/parties/legislation</div>
+      <div class="comp">Worship and prayer addressed to Jesus / Father / Holy Spirit only (1 Tim 2:5)</div>
+      <div class="comp">Ancestors honored as cloud of witnesses (Heb 12:1) and examples to imitate (Eph 6:1-3)</div>
+      <div class="comp">Heart-language phrases (Cherokee, Din&eacute;, &#699;&#332;lelo Hawai&#699;i) with inline English gloss</div>
+      <div class="comp">Default mode sacred names &mdash; Jesus / Father / Spirit / Lord / Lamb (NOT OHI Yahuah)</div>
+      <div class="comp">Family-friendly throughout; no profanity; no graphic content; no romantic-with-Jesus eros</div>
+      <div class="comp">Tahoma male baritone-tenor lead with intergenerational ensemble on every track</div>
+      <div class="comp">Caleb-format Suno-compliant lyrics; Styles &le;800 chars first 250 load-bearing</div>
+      <div class="comp">Catalog-loop seams T12&rarr;T1 engineered across all 20 new-build albums</div>
+    </div>
+  </div>
+</section>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:tahoma-inspire"></div></div>
+
+<footer>
+  <div class="container">
+    <div><strong>Tahoma Inspire</strong> &middot; 40 albums &middot; 480 tracks &middot; Sonic Craft v3.0 composite 93.86 &middot; June 2, 2026</div>
+    <div>Pan-Indigenous + Pacific Christ-celebration anthem-maker &middot; family rank #7 of 12 &middot; new 20 composite 94.51 (top-tier single-batch band)</div>
+    <div class="siblings">
+      <a href="../melody-inspire/executive-summary.html">Melody &middot; 40 &middot; 94.10</a>
+      <a href="../jubilee-inspire/executive-summary.html">Jubilee &middot; 61 &middot; 94.44</a>
+      <a href="../zariah-inspire/executive-summary.html">Zariah &middot; 42 &middot; 93.40</a>
+      <a href="../elias-inspire/executive-summary.html">Elias &middot; 44 &middot; 93.05</a>
+      <a href="../eliana-inspire/executive-summary.html">Eliana &middot; 41 &middot; 93.20</a>
+      <a href="../caleb-inspire/executive-summary.html">Caleb &middot; 30 &middot; 93.67</a>
+      <a href="../imani-inspire/executive-summary.html">Imani &middot; 41 &middot; 95.05</a>
+      <a href="../zev-inspire/executive-summary.html">Zev &middot; 40 &middot; 94.59</a>
+      <a href="../amir-inspire/executive-summary.html">Amir &middot; 48 &middot; 94.34</a>
+      <a href="../nova-inspire/executive-summary.html">Nova &middot; 50 &middot; 93.92</a>
+      <a href="../santiago-inspire/executive-summary.html">Santiago &middot; 41 &middot; 94.46</a>
+    </div>
+    <div>&copy; 2026 Jubilujah &middot; <a href="/web/inspire-family-dashboard.html">Inspire Family Dashboard</a></div>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

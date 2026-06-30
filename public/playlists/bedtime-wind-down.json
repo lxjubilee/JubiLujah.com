@@ -1,0 +1,48 @@
+{
+  "id": "bedtime-wind-down",
+  "title": "Bedtime Wind-Down",
+  "category": "children",
+  "category_label": "Children Music",
+  "description": "Sleepy-time lullabies and gentle dance-down tracks from My Tiny Tiggles. Kitty's pajama jam, Sloth's sleeptime shindig, Seal's serenade, Leopard's lullaby lounge. Soft tempos, sweet harmonies, sweet-dreams payload. For the snuggle-and-rest crowd (ages 3–5).",
+  "theme": "Lullaby, bedtime, gentle, sleep, wind-down",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-children",
+  "albums": [
+    {
+      "artist_name": "My Tiny Tiggles",
+      "artist_slug": "my-tiny-tiggles",
+      "album_title": "Kitty's Pajama Jam",
+      "album_code": "TTX309",
+      "album_slug": "TTX309-kitty-s-pajama-jam",
+      "category_path": "children/tiny-tiggles",
+      "why_included": "Pajamas on, lights low, the gentlest wiggle before the cuddle."
+    },
+    {
+      "artist_name": "My Tiny Tiggles",
+      "artist_slug": "my-tiny-tiggles",
+      "album_title": "Sloth's Sleeptime Shindig",
+      "album_code": "TTX311",
+      "album_slug": "TTX311-sloth-s-sleeptime-shindig",
+      "category_path": "children/tiny-tiggles",
+      "why_included": "The slowest shindig in the forest — sleep is sweet when sloth says so."
+    },
+    {
+      "artist_name": "My Tiny Tiggles",
+      "artist_slug": "my-tiny-tiggles",
+      "album_title": "Seal Serenade",
+      "album_code": "TTX316",
+      "album_slug": "TTX316-seal-serenade",
+      "category_path": "children/tiny-tiggles",
+      "why_included": "Ocean-tone serenade for the underwater dream voyage."
+    },
+    {
+      "artist_name": "My Tiny Tiggles",
+      "artist_slug": "my-tiny-tiggles",
+      "album_title": "Leopard Lullaby Lounge",
+      "album_code": "TTX325",
+      "album_slug": "TTX325-leopard-lullaby-lounge",
+      "category_path": "children/tiny-tiggles",
+      "why_included": "Velvet-spotted lullaby lounge for the long sweet sleep."
+    }
+  ]
+}

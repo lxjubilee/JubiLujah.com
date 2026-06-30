@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/artist.schema.json",
+  "id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+  "type": "artist",
+  "version": 3,
+  "status": "published",
+  "slug": "santiago-inspire",
+  "name": "Santiago Inspire",
+  "display_name": "Santiago Inspire",
+  "grouping": "inspire_family",
+  "five_fold_office": "evangelist",
+  "genre_anchor": "latin worship",
+  "vocal_gender": "male",
+  "bio_short": "Bilingual Latin worship evangelist of the Inspire Family — reggaeton, bolero, and bachata declaring that Jesús is the only Savior and the only Beloved.",
+  "bio_long": "Santiago Inspire is the bilingual Latin worship voice of the Inspire Family, called to the evangelist office and built for the streets, the dance floor, and the cathedral steps. His tenor moves fluidly between Spanish and English — and between reggaeton fire, bolero ache, bachata romance, and salsa joy — without ever losing the single thread that holds every song together: the exclusive lordship of Jesús de Nazaret. Santiago does not negotiate; he declares. Every chorus is an altar call dressed in clave and montuno. His catalog opens the door for a Spanish-speaking world to hear Christ proclaimed in their own rhythm — never as cultural decoration, always as Savior. From the reggaeton declaration of Solo Tú, Jesús to the bolero adoration of Cuánto Te Adoro, Santiago carries the gospel into Latin musical traditions with reverence and a beat the body cannot refuse. Co-signed by Gabriel Inspire under apostolic covering, he stands shoulder-to-shoulder with the contemplative wing as the family's evangelistic engine.",
+  "visual_identity": {
+    "avatar_url": "https://cdn.jubileeverse.com/art/artists/santiago-inspire/avatar-512.webp",
+    "avatar_url_large": "https://cdn.jubileeverse.com/art/artists/santiago-inspire/avatar-1024.webp",
+    "banner_url": "https://cdn.jubileeverse.com/art/artists/santiago-inspire/banner-1600.webp",
+    "color_primary": "#c8412a",
+    "color_secondary": "#f4d35e"
+  },
+  "languages_primary": ["es"],
+  "languages_secondary": ["en"],
+  "album_count": 28,
+  "song_count": 336,
+  "metadata": {
+    "first_published_at": "2024-11-03T00:00:00Z",
+    "last_updated_at": "2026-05-19T09:42:08Z"
+  }
+}

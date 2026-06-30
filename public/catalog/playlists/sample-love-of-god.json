@@ -1,0 +1,113 @@
+{
+  "$schema": "https://cdn.jubileeverse.com/schemas/v1/playlist.schema.json",
+  "id": "8d3e6a2f-5b91-4c74-9a18-7f4c2d8b6e35",
+  "type": "playlist",
+  "version": 2,
+  "status": "published",
+  "slug": "love-of-god",
+  "title": "Love of God",
+  "description": "Songs across the Inspire Family that center the Father's love, Christ's love for the church, and the immovable affection of God for His people. Tahoma's flute meditations on the Creator, Santiago's bilingual adoration, Melody's bridal contemplation. The Maker who is love.",
+  "theme": "God's love, mercy, fatherhood, adoration",
+  "category": "inspire",
+  "category_label": "Inspire Family",
+  "cover_art": "https://cdn.jubileeverse.com/art/playlists/8d3e6a2f-5b91-4c74-9a18-7f4c2d8b6e35/cover-1200.webp",
+  "cover_gradient_class": "cat-inspire",
+  "curator": {
+    "name": "Gabriel Inspire",
+    "role": "apostolic covering"
+  },
+  "items": [
+    {
+      "position": 1,
+      "song_id": "e9a1b5c7-3d62-4f48-9b71-8c4d2e6a3f95",
+      "title": "Breath of the Maker",
+      "artist": {
+        "id": "2f8b9c45-6d18-4a73-9e51-c3a7b2d8f491",
+        "slug": "tahoma-inspire",
+        "name": "Tahoma Inspire"
+      },
+      "album": {
+        "id": "5d9b1f7e-3a82-4c64-9e17-8b4d2c5a6f93",
+        "slug": "the-makers-breath",
+        "title": "The Maker's Breath"
+      },
+      "duration_seconds": 312,
+      "why_included": "Native American flute meditation on the Creator who knew us before the wind had a name (Col 1:16)."
+    },
+    {
+      "position": 2,
+      "song_id": "b7e3a9d4-2c81-4f56-9b73-5a8d6f2c4e91",
+      "title": "Solo Tú, Jesús",
+      "artist": {
+        "id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+        "slug": "santiago-inspire",
+        "name": "Santiago Inspire"
+      },
+      "album": {
+        "id": "4a6c8e2b-9d51-4f73-b285-3c7a1e9d6f48",
+        "slug": "solo-tu-jesus",
+        "title": "Solo Tú, Jesús"
+      },
+      "duration_seconds": 218,
+      "why_included": "Bilingual reggaeton declaration that Christ alone is Savior and Beloved (Jn 14:6)."
+    },
+    {
+      "position": 3,
+      "song_id": "d6f4c2b8-7a19-4e35-8d94-1c5b3a7f6e28",
+      "title": "Eres Mi Refugio",
+      "artist": {
+        "id": "7c4e8d12-3a5b-4f91-b8c2-1d9e3a6f4b27",
+        "slug": "santiago-inspire",
+        "name": "Santiago Inspire"
+      },
+      "album": {
+        "id": "4a6c8e2b-9d51-4f73-b285-3c7a1e9d6f48",
+        "slug": "solo-tu-jesus",
+        "title": "Solo Tú, Jesús"
+      },
+      "duration_seconds": 232,
+      "why_included": "Bolero shelter — the Father's love as the place the soul runs and is held (Ps 46:1)."
+    },
+    {
+      "position": 4,
+      "song_id": "a4c7e1d2-9b58-4f63-8e29-1d5b3a8c6f47",
+      "title": "Bride Awakening",
+      "artist": {
+        "id": "86a590fe-9194-44a8-9e43-af129f453a36",
+        "slug": "melody-inspire",
+        "name": "Melody Inspire"
+      },
+      "album": {
+        "id": "b3d7f2a8-4e91-4c56-a219-f8b6d4e3c7a1",
+        "slug": "hearts-in-bloom",
+        "title": "Hearts in Bloom"
+      },
+      "duration_seconds": 247,
+      "why_included": "Bridal anticipation rooted in Isaiah 62:5 — the Bridegroom rejoicing over the bride."
+    },
+    {
+      "position": 5,
+      "song_id": "c8b2f6a1-4d73-4e95-9c18-6f3e2b5a8d49",
+      "title": "Luminous Hour",
+      "artist": {
+        "id": "86a590fe-9194-44a8-9e43-af129f453a36",
+        "slug": "melody-inspire",
+        "name": "Melody Inspire"
+      },
+      "album": {
+        "id": "9f8e2d1c-5b47-4a93-8c61-7d3e5f2a8b94",
+        "slug": "luminous",
+        "title": "Luminous"
+      },
+      "duration_seconds": 263,
+      "why_included": "Contemplative pop on the mercies new every morning (Lam 3:22-23)."
+    }
+  ],
+  "item_count": 5,
+  "total_duration_seconds": 1272,
+  "metadata": {
+    "created_at": "2026-06-03T17:30:00Z",
+    "first_published_at": "2026-06-03T17:45:00Z",
+    "last_updated_at": "2026-06-03T17:45:00Z"
+  }
+}

@@ -1,0 +1,19 @@
+/* ============================================================================
+   Album page — "Similar Music" left rail (replaces the old library list).
+   The title reuses the .jv-right-sec h3 treatment (same as "Popular Albums").
+   ============================================================================ */
+.album-exec .jv-similar-sec { padding: 16px 14px 0; }
+/* Let the list take the remaining panel height and scroll within it. */
+.album-exec .jv-lib .jv-similar-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+
+/* Equal-height columns: the Similar Music (left) panel matches the CENTER album
+   panel's height dynamically. The grid stretches all columns to the row height;
+   the center (its natural content) drives that height, while the left panel is a
+   zero-min, clipped flex column so its own (possibly longer) list never inflates
+   the row — it just scrolls inside, always exactly as tall as the center.
+   (3-class selectors so these win over site.css's 2-class rules regardless of
+   bundle order.) */
+.album-exec .jv-app .jv-app-grid { align-items: stretch; }
+.album-exec .jv-app-grid .jv-lib { max-height: none; min-height: 0; overflow: hidden; }
+/* Keep the right discovery rail top-aligned (don't stretch it). */
+.album-exec .jv-app-grid .jv-right { align-self: start; }

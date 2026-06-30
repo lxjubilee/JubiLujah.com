@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jubilee Inspire — Executive Summary · Jubilujah.com</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg:        #0a0e14;
+    --surface:   #141921;
+    --surface-2: #1c232d;
+    --ink:       #f0ebe3;
+    --ink-soft:  #b0a89c;
+    --ink-muted: #6e6760;
+    --line:      #2a313c;
+    --accent:    #c8954a;
+    --accent-warm: #e8b870;
+    --ok:        #5fb371;
+    --mid:       #d4a05c;
+    --low:       #b85d5d;
+    --jubilee:   #e94560;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; color: var(--ink); line-height: 1.55; font-size: 15px; min-height: 100vh; }
+  a { color: var(--accent-warm); text-decoration: none; } 
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .topbar { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .topbar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .crumbs { font-size: 13px; color: var(--ink-soft); }
+  .crumbs .sep { color: var(--ink-muted); margin: 0 8px; }
+  .hero { padding: 28px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  h1 { font-family: Georgia, "Iowan Old Style", serif; font-size: 48px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.05; margin-bottom: 8px; color: var(--ink); }
+  .subhead { font-size: 18px; color: var(--ink-soft); margin-bottom: 20px; max-width: 900px; }
+  .stats-row { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 18px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 20px; min-width: 160px; }
+  .stat-card .label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+  .stat-card .val { font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: var(--ink); }
+  .stat-card .val.accent { color: var(--accent-warm); }
+  .stat-card .val.qual { color: var(--ok); }
+  .hero-meta .val.accent { color: var(--accent-warm); }
+  .hero-meta .val.qual { color: var(--ok); }
+  .note { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 6px; padding: 12px 16px; font-size: 13px; color: var(--ink-soft); margin: 28px 0; line-height: 1.6; }
+  .note strong { color: var(--ink); }
+  section.block { margin: 40px 0; }
+  h2.block-title { font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .block-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 18px; max-width: 800px; }
+  table.tbl { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 10px; overflow: hidden; font-size: 13px; }
+  table.tbl thead th { background: var(--surface-2); color: var(--ink-soft); text-align: left; padding: 12px 14px; font-weight: 600; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+  table.tbl thead th.r { text-align: center; }
+  table.tbl tbody tr { border-bottom: 1px solid var(--line); }
+  table.tbl tbody tr:last-child { border-bottom: none; }
+  table.tbl tbody tr.qrow { background: rgba(95, 179, 113, 0.05); }
+  table.tbl tbody tr:hover { background: rgba(232, 184, 112, 0.04); }
+  table.tbl td { padding: 10px 14px; color: var(--ink); vertical-align: middle; }
+  table.tbl td.code { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--accent-warm); white-space: nowrap; }
+  table.tbl td.title { font-weight: 600; }
+  table.tbl td.album-cell { color: var(--ink-soft); font-size: 12px; }
+  table.tbl td.r { text-align: center; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; }
+  table.tbl td.r.ok { color: var(--ok); font-weight: 700; }
+  table.tbl td.r.mid { color: var(--mid); }
+  table.tbl td.r.low { color: var(--low); }
+  table.tbl td.r.dash { color: var(--ink-muted); }
+  table.tbl td.r.comp { color: var(--accent-warm); font-weight: 700; }
+  table.tbl td.rank { width: 36px; text-align: center; color: var(--ink-muted); font-family: 'SF Mono', Menlo, monospace; font-weight: 700; }
+  .badge { display: inline-block; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; margin-left: 8px; vertical-align: middle; font-weight: 700; }
+  .badge.q { background: rgba(95, 179, 113, 0.18); color: var(--ok); border: 1px solid rgba(95, 179, 113, 0.5); }
+  .badge.p { background: rgba(212, 160, 92, 0.14); color: var(--mid); border: 1px solid rgba(212, 160, 92, 0.4); }
+  .dash { color: var(--ink-muted); }
+  footer.site { margin-top: 60px; padding: 28px 0; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 12px; text-align: center; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); margin: 14px 0 0; align-items: center; }
+  .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+  .legend .dot.ok { background: var(--ok); }
+  .legend .dot.mid { background: var(--mid); }
+  .legend .dot.low { background: var(--low); }
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, cover !important;
+  background-position: center, right center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { display: block !important; font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; text-align: justify !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+/* Layout overrides — declared after site.css so they win the cascade (scoped to this page) */
+.container { max-width: 1600px !important; }
+.site-nav { justify-content: space-between !important; }
+.site-nav a { flex: 0 0 auto !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, right center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:jubilee-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<div class="topbar">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/index.html">Jubilujah</a>
+      <span class="sep">·</span>
+      <a href="/inspire.html">Inspire Family</a>
+      <span class="sep">·</span>
+      <span>Jubilee Inspire — Executive Summary</span>
+    </div>
+  </div>
+</div>
+
+<header class="hero" style="--persona-img: url('/personas/slide-Jubilee.jpg')">
+  <div class="container">
+    <div class="hero-eyebrow">Inspire Family &middot; Persona Executive Summary</div>
+    <h1>Jubilee Inspire <em>&mdash; modern worship &middot; female mezzo-soprano &middot; arena-anthem doctrinal floor. Sixty-one albums anchoring the doctrinal foundation of the Inspire Family.</em></h1>
+    <p class="hero-sub">
+      Sixty-one albums. <strong>1,464 tracks</strong>. Female mezzo-soprano with arena-anthem dynamics built on the doctrinal foundation floor of the Inspire Family. Catalog rating snapshot across faith-focus, praise-vs-worship, earworm, and bestseller dimensions &mdash; with the 97%+ qualifying tier highlighted as the strictest qualifying bar.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">61</span></div>
+      <div><span class="label">Tracks</span><span class="val">1464</span></div>
+      <div><span class="label">Family Composite</span><span class="val accent">94.44%</span></div>
+      <div><span class="label">97%+ Tracks</span><span class="val qual">57 / 1464</span></div>
+      <div><span class="label">Qualifying Albums</span><span class="val qual">0 / 61</span></div>
+      <div><span class="label">Date</span><span class="val">June 2, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<style id="JV-APP-LAYOUT">
+/* Three-column music-app layout, injected below the hero. Scoped under .jv-app. */
+.jv-app { background: var(--bg); color: var(--ink); }
+.jv-app * { box-sizing: border-box; }
+.jv-app-grid {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 320px;
+  gap: 16px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px 24px 36px;
+  align-items: start;
+}
+.jv-app .jv-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+/* ---- Left: library ---- */
+.jv-lib { display: flex; flex-direction: column; max-height: calc(100dvh - 120px); }
+.jv-lib-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px 10px; flex: 0 0 auto;
+}
+.jv-lib-head .jv-lib-h { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 15px; color: var(--ink-soft); }
+.jv-lib-head .jv-add { background: none; border: none; color: var(--ink-soft); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.jv-lib-head .jv-add:hover { color: var(--ink); }
+.jv-tabs { display: flex; gap: 8px; padding: 0 16px 10px; flex: 0 0 auto; }
+.jv-tab {
+  border: none; cursor: pointer; font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 999px; background: var(--surface-2); color: var(--ink-soft);
+}
+.jv-tab.active { background: var(--accent); color: #0a0e14; }
+.jv-lib-recents {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 18px; font-size: 12px; color: var(--ink-muted); flex: 0 0 auto;
+}
+.jv-lib-list { overflow-y: auto; padding: 4px 8px 12px; flex: 1 1 auto; min-height: 0; }
+.jv-lib-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  background: none; border: 1px solid transparent; border-radius: 8px;
+  padding: 8px 10px; cursor: pointer; color: var(--ink);
+}
+.jv-lib-row:hover { background: rgba(200,149,74,0.06); border-color: rgba(200,149,74,0.28); }
+.jv-lib-row.active { background: var(--surface-2); }
+.jv-lib-row.active .jv-lib-title { color: var(--accent-warm); }
+.jv-thumb { width: 46px; height: 46px; border-radius: 6px; object-fit: cover; flex: 0 0 auto; background: var(--surface-2); }
+.jv-lib-tx { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.jv-lib-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jv-lib-sub { font-size: 12px; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* ---- Center: now-playing album + tracks ---- */
+.jv-center { padding: 0; }
+.jv-center-head { display: flex; gap: 24px; padding: 24px 28px 8px; align-items: flex-end; }
+.jv-cover-wrap { position: relative; flex: 0 0 auto; }
+.jv-cover { width: 168px; height: 168px; border-radius: 10px; object-fit: cover; box-shadow: 0 8px 28px rgba(0,0,0,0.45); }
+.jv-cover-badge {
+  position: absolute; top: 8px; right: 8px; min-width: 26px; height: 26px; padding: 0 7px;
+  border-radius: 6px; background: rgba(10,14,20,0.78); color: var(--ink);
+  font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center;
+}
+.jv-center-meta { min-width: 0; padding-bottom: 6px; }
+.jv-eyebrow-sm { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+.jv-center-title { font-family: Georgia, serif; font-size: 44px; line-height: 1.05; font-weight: 700; margin: 8px 0 12px; color: var(--ink); }
+.jv-center-sub { font-size: 14px; color: var(--ink-soft); }
+.jv-center-sub .dot { color: var(--ink-muted); margin: 0 6px; }
+.jv-center-listeners { font-size: 13px; color: var(--ink-muted); margin-top: 4px; }
+.jv-center-actions { display: flex; align-items: center; gap: 18px; padding: 14px 28px 18px; }
+.jv-bigplay {
+  width: 54px; height: 54px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--accent); color: #0a0e14; font-size: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+.jv-bigplay:hover { background: var(--accent-warm); transform: scale(1.05); }
+.jv-follow {
+  background: none; border: 1px solid var(--ink-soft); color: var(--ink);
+  border-radius: 999px; padding: 8px 22px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.jv-follow:hover { border-color: var(--ink); }
+.jv-tracks { padding: 0 18px 22px; }
+.jv-track-head {
+  display: grid; grid-template-columns: 36px 1fr auto 64px; gap: 14px; align-items: center;
+  padding: 6px 12px; border-bottom: 1px solid var(--line);
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
+}
+.jv-track-head .jv-th-dur { text-align: right; }
+.jv-track-row {
+  display: grid; grid-template-columns: 36px 1fr auto 64px; gap: 14px; align-items: center;
+  padding: 11px 12px; border-radius: 6px; cursor: pointer; border: 1px solid transparent;
+}
+.jv-track-row:hover { background: rgba(200,149,74,0.06); }
+.jv-track-row:hover .jv-tnum { display: none; }
+.jv-tnum-wrap { position: relative; width: 16px; text-align: center; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.jv-track-row .jv-tplay { display: none; color: var(--accent-warm); }
+.jv-track-row:hover .jv-tplay { display: inline; }
+.jv-tname { color: var(--ink); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jv-tdur { text-align: right; color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: 13px; }
+.jv-comp-pill {
+  font-family: 'SF Mono', Menlo, monospace; font-size: 12px; padding: 3px 9px; border-radius: 999px;
+  background: rgba(95,179,113,0.14); color: var(--ok); border: 1px solid rgba(95,179,113,0.4);
+  font-weight: 700; white-space: nowrap;
+}
+.jv-comp-pill.none { background: rgba(110,103,96,0.10); color: var(--ink-muted); border-color: rgba(110,103,96,0.35); }
+/* ---- Right: popular / viral ---- */
+.jv-right { display: flex; flex-direction: column; gap: 18px; background: none; border: none; }
+.jv-right-sec h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin: 0 0 12px; padding: 0 4px; }
+.jv-mini {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  background: none; border: none; border-radius: 8px; padding: 8px 8px; cursor: pointer; color: var(--ink);
+}
+.jv-mini:hover { background: rgba(200,149,74,0.06); }
+.jv-mini .jv-thumb { width: 48px; height: 48px; }
+.jv-mini-tx { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.jv-mini-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jv-mini-sub { font-size: 12px; color: var(--ink-soft); }
+.jv-mini-list { font-size: 12px; color: var(--ink-muted); }
+@media (max-width: 1200px) {
+  .jv-app-grid { grid-template-columns: 260px minmax(0,1fr); }
+  .jv-right { display: none; }
+}
+@media (max-width: 820px) {
+  .jv-app-grid { grid-template-columns: 1fr; }
+  .jv-lib { max-height: none; }
+  .jv-lib-list { max-height: 320px; }
+  .jv-center-title { font-size: 32px; }
+  .jv-cover { width: 120px; height: 120px; }
+}
+</style>
+
+<!-- BEGIN JV-APP (injected three-column layout) -->
+<section class="jv-app" id="jv-app">
+  <div class="jv-app-grid">
+    <aside class="jv-panel jv-lib">
+      <div class="jv-lib-head">
+        <span class="jv-lib-h">&#x1F4DA; Your Library</span>
+        <button class="jv-add" type="button" title="Add" aria-label="Add">+</button>
+      </div>
+      <div class="jv-tabs">
+        <button class="jv-tab active" type="button">Albums</button>
+        <button class="jv-tab" type="button">Playlists</button>
+      </div>
+      <div class="jv-lib-recents"><span>Recents</span><span>Recents &#x25BE;</span></div>
+      <div class="jv-lib-list" data-jv-lib></div>
+    </aside>
+    <main class="jv-panel jv-center" data-jv-center></main>
+    <aside class="jv-right" data-jv-right></aside>
+  </div>
+  <script type="application/json" id="jv-app-data">{"artist":"Jubilee Inspire","cover":"/personas/Jubilee.png","albums":[{"code":"JEIM1001EN","title":"Sky Splits Open","year":2026,"tracks":[{"n":1,"title":"Sky Splits Open","comp":null},{"n":2,"title":"He's Descending Now","comp":null},{"n":3,"title":"Trumpet on the Wind","comp":null},{"n":4,"title":"First the Graves Open","comp":null},{"n":5,"title":"Caught Up Together","comp":null},{"n":6,"title":"Table Set for Forever","comp":null},{"n":7,"title":"Maranatha Whisper","comp":null},{"n":8,"title":"The Knee That Bends","comp":null},{"n":9,"title":"Name Found in the Book","comp":null},{"n":10,"title":"City Coming Down","comp":null},{"n":11,"title":"He Dwells With Us","comp":null},{"n":12,"title":"Maranatha, Come","comp":98.8}]},{"code":"JEIM1002EN","title":"Sunday Rolled Back","year":2026,"tracks":[{"n":1,"title":"Stone Rolled Back","comp":null},{"n":2,"title":"Spices in the Dark","comp":null},{"n":3,"title":"He Is Not Here","comp":null},{"n":4,"title":"Running to the Tomb","comp":null},{"n":5,"title":"His Name Spoke My Name","comp":null},{"n":6,"title":"Burning on the Road","comp":null},{"n":7,"title":"Peace I Walked Right Through","comp":null},{"n":8,"title":"Sunday Through the Week","comp":null},{"n":9,"title":"Touch the Place It Held","comp":null},{"n":10,"title":"Breakfast on the Shore","comp":null},{"n":11,"title":"Resurrection People","comp":null},{"n":12,"title":"The Stone Stays Rolled","comp":98.8}]},{"code":"JEIM1003EN","title":"Heaven On The Floor","year":2026,"tracks":[{"n":1,"title":"Room Just Tilted","comp":null},{"n":2,"title":"First Hand Up","comp":null},{"n":3,"title":"Holy Came Down","comp":null},{"n":4,"title":"Healing Walks In","comp":null},{"n":5,"title":"Set The Captive Loose","comp":null},{"n":6,"title":"Rebuild What Broke","comp":null},{"n":7,"title":"Wake The Dead Heart","comp":null},{"n":8,"title":"We Are The Room","comp":null},{"n":9,"title":"Anoint The Sent","comp":null},{"n":10,"title":"Carry The Floor","comp":null},{"n":11,"title":"Outside These Walls","comp":null},{"n":12,"title":"Heaven Won't Leave","comp":98.3}]},{"code":"JEIM1004EN","title":"Every Tribe Sings","year":2026,"tracks":[{"n":1,"title":"Throne Room Multitude","comp":null},{"n":2,"title":"Salvation Belongs","comp":null},{"n":3,"title":"Loud One Song","comp":null},{"n":4,"title":"Yesu Yangu","comp":null},{"n":5,"title":"Cristo Reigns","comp":null},{"n":6,"title":"Island Hands Lifted","comp":null},{"n":7,"title":"Yēsū My Anchor","comp":null},{"n":8,"title":"All Voices, One Name","comp":98.8},{"n":9,"title":"Yasu Walks the Sand","comp":null},{"n":10,"title":"Kyrie of the Kingdom","comp":null},{"n":11,"title":"Streets of Many Songs","comp":null},{"n":12,"title":"Rehearsing Heaven","comp":98.5}]},{"code":"JEIM1005EN","title":"Roots By the River","year":2026,"tracks":[{"n":1,"title":"Roots By the River","comp":null},{"n":2,"title":"River Where I Live","comp":null},{"n":3,"title":"Vine and Branches","comp":null},{"n":4,"title":"Leaves Stay Green","comp":null},{"n":5,"title":"Fruit in Its Season","comp":null},{"n":6,"title":"He Prunes Because He Loves","comp":null},{"n":7,"title":"Bend Me, Don't Break Me","comp":null},{"n":8,"title":"Fruit in the Drought","comp":null},{"n":9,"title":"Where He Cuts, He Plants","comp":null},{"n":10,"title":"Harvest Coming In","comp":null},{"n":11,"title":"Every Generation Roots","comp":null},{"n":12,"title":"Forever Bearing","comp":98.5}]},{"code":"JEIM1006EN","title":"Cradle Cracks the Dark","year":2026,"tracks":[{"n":1,"title":"Cradle Cracks the Dark","comp":null},{"n":2,"title":"Mary Said Yes","comp":null},{"n":3,"title":"Shepherds Saw the Sky","comp":null},{"n":4,"title":"Word in Straw","comp":null},{"n":5,"title":"Glory to God in the Highest","comp":null},{"n":6,"title":"Holy Night Heart","comp":null},{"n":7,"title":"Rachel Still Weeping","comp":null},{"n":8,"title":"Born for the World","comp":null},{"n":9,"title":"Simeon Held the King","comp":null},{"n":10,"title":"Gift With Every Name","comp":null},{"n":11,"title":"Christmas Every Generation","comp":null},{"n":12,"title":"He Is Born","comp":98.8}]},{"code":"JEIM1009EN","title":"Eternal Kingdom Rising","year":2026,"tracks":[{"n":1,"title":"Eternal King Is Rising","comp":null},{"n":2,"title":"Throne That Won't Empty","comp":null},{"n":3,"title":"Every Crown Bows","comp":null},{"n":4,"title":"Covenant Of A King","comp":null},{"n":5,"title":"Every Knee Folds Down","comp":null},{"n":6,"title":"Government On His Shoulder","comp":null},{"n":7,"title":"Crown In The ICU","comp":null},{"n":8,"title":"The King Was Always Here","comp":null},{"n":9,"title":"Ambassador Marked","comp":null},{"n":10,"title":"Cannot Be Shaken","comp":null},{"n":11,"title":"Kingdom On The Street","comp":null},{"n":12,"title":"Forever On The Throne","comp":null}]},{"code":"JEIM1010EN","title":"Every Generation Prays","year":2026,"tracks":[{"n":1,"title":"Bowls Before The Throne","comp":null},{"n":2,"title":"Altar That Won't Cool","comp":null},{"n":3,"title":"Inheritance Of Prayer","comp":null},{"n":4,"title":"Prayed Me Through The Womb","comp":null},{"n":5,"title":"Same Knees Same God","comp":null},{"n":6,"title":"Children's Hands Up","comp":null},{"n":7,"title":"Granny's Kitchen Floor","comp":null},{"n":8,"title":"Prayer Outlives The Pray-er","comp":null},{"n":9,"title":"Lay The Mantle Down","comp":null},{"n":10,"title":"Watchmen On The Wall","comp":null},{"n":11,"title":"Carry The Altar Out","comp":null},{"n":12,"title":"Generations Still Pray","comp":null}]},{"code":"JEIM1011EN","title":"Joy Unbound","year":2026,"tracks":[{"n":1,"title":"Joy Came Down Walking","comp":null},{"n":2,"title":"Morning Has Come Loud","comp":null},{"n":3,"title":"Shame Gets No Floor","comp":null},{"n":4,"title":"Joy Outs The Lie","comp":null},{"n":5,"title":"Out-Dance The Grief","comp":null},{"n":6,"title":"Holy Laughter","comp":null},{"n":7,"title":"Wake Up Dancing","comp":null},{"n":8,"title":"Joy Was Never Mine To Make","comp":98},{"n":9,"title":"Quiet Joy Still Joy","comp":null},{"n":10,"title":"Take The Joy To Monday","comp":null},{"n":11,"title":"Loose In The Street","comp":null},{"n":12,"title":"Joy Will Never Quiet","comp":98}]},{"code":"JEIM1012EN","title":"Kingdom Roars","year":2026,"tracks":[{"n":1,"title":"Lion Of Judah Roars","comp":null},{"n":2,"title":"Tribe Of Judah Stands","comp":null},{"n":3,"title":"Roar Wakes The Sleeping","comp":null},{"n":4,"title":"Hand On The Mane","comp":null},{"n":5,"title":"Roar Over The Fear","comp":null},{"n":6,"title":"Roar In The Wilderness","comp":null},{"n":7,"title":"Roar In The Cancer Ward","comp":null},{"n":8,"title":"The Lion Stayed Awake","comp":null},{"n":9,"title":"Cub Before The Lion","comp":null},{"n":10,"title":"Roar Through Me","comp":null},{"n":11,"title":"Roar In The Marketplace","comp":null},{"n":12,"title":"Lion Roars Forever","comp":null}]},{"code":"JEIM1013EN","title":"Lament & Longing","year":2026,"tracks":[{"n":1,"title":"How Long O Lord","comp":null},{"n":2,"title":"Why Have You Hidden","comp":null},{"n":3,"title":"Where Are You Father","comp":null},{"n":4,"title":"Saturday Silence","comp":null},{"n":5,"title":"Longing For The Morning","comp":null},{"n":6,"title":"Yet I Will Trust","comp":null},{"n":7,"title":"Empty Cradle","comp":null},{"n":8,"title":"Sunday Bled Into Saturday","comp":null},{"n":9,"title":"Held In The Hush","comp":null},{"n":10,"title":"Praise Through The Tears","comp":null},{"n":11,"title":"Hope Holds The Door","comp":null},{"n":12,"title":"Joy Comes In The Morning","comp":null}]},{"code":"JEIM1015EN","title":"Mercy Unrehearsed","year":2026,"tracks":[{"n":1,"title":"Mercy Walked In","comp":null},{"n":2,"title":"Not Guilty","comp":null},{"n":3,"title":"Undeserved","comp":null},{"n":4,"title":"Mirror Mercy","comp":null},{"n":5,"title":"Grace On The Run","comp":null},{"n":6,"title":"Verdict Of Love","comp":null},{"n":7,"title":"Mercy Found Me","comp":null},{"n":8,"title":"Free Indeed","comp":98.3},{"n":9,"title":"Monday Mercy","comp":null},{"n":10,"title":"Carried By Mercy","comp":null},{"n":11,"title":"Pass It On","comp":null},{"n":12,"title":"Mercy Sings Forever","comp":98}]},{"code":"JEIM1016EN","title":"Nations Bow","year":2026,"tracks":[{"n":1,"title":"Every Knee","comp":null},{"n":2,"title":"Jesus Is Lord","comp":null},{"n":3,"title":"Global Knee","comp":null},{"n":4,"title":"High Places Bow","comp":null},{"n":5,"title":"Continents Are Bending","comp":null},{"n":6,"title":"Throne Room Quiet","comp":null},{"n":7,"title":"Continents Confess","comp":null},{"n":8,"title":"The Name Above","comp":98.3},{"n":9,"title":"Rulers Yield","comp":null},{"n":10,"title":"Islands Confess","comp":null},{"n":11,"title":"Worthy Is The Lamb","comp":null},{"n":12,"title":"All The World Bows","comp":98}]},{"code":"JEIM1017EN","title":"Questions Into Fire","year":2026,"tracks":[{"n":1,"title":"Bring The Question","comp":null},{"n":2,"title":"Honest At The Altar","comp":null},{"n":3,"title":"Hold The Question","comp":null},{"n":4,"title":"Upper Room","comp":null},{"n":5,"title":"Fire Falling","comp":null},{"n":6,"title":"Wilderness Wait","comp":null},{"n":7,"title":"Joel Two Fire","comp":null},{"n":8,"title":"Spirit's Yes","comp":98.8},{"n":9,"title":"Burning Bush","comp":null},{"n":10,"title":"Question Becomes Praise","comp":null},{"n":11,"title":"Praise Break Prophetic","comp":null},{"n":12,"title":"Questions Into Fire Forever","comp":98.5}]},{"code":"JEIM1018EN","title":"Salvation's Song","year":2026,"tracks":[{"n":1,"title":"Salvation Started","comp":null},{"n":2,"title":"Lifted Up","comp":null},{"n":3,"title":"Calvary Hill","comp":null},{"n":4,"title":"Empty Tomb Joy","comp":null},{"n":5,"title":"Drawn From The Well","comp":null},{"n":6,"title":"Cross Of Wonder","comp":null},{"n":7,"title":"Crimson Thread","comp":null},{"n":8,"title":"It Is Finished","comp":98.8},{"n":9,"title":"Great Exchange","comp":null},{"n":10,"title":"Baptism Joy","comp":null},{"n":11,"title":"Communion Song","comp":null},{"n":12,"title":"Salvation's Song Forever","comp":98.5}]},{"code":"JEIM1019EN","title":"Table for the Nations","year":2026,"tracks":[{"n":1,"title":"Set My Chair","comp":null},{"n":2,"title":"Trumpet to the Nations","comp":null},{"n":3,"title":"Pull Up a Long, Long Table","comp":null},{"n":4,"title":"Bread Broken in Twelve Voices","comp":null},{"n":5,"title":"Far Country Comes Home","comp":null},{"n":6,"title":"White Linen, Real Sweat","comp":null},{"n":7,"title":"The Empty Chairs Have Names","comp":null},{"n":8,"title":"He Knew My Name First","comp":null},{"n":9,"title":"The Multitude No One Could Count","comp":null},{"n":10,"title":"Every Color He Ever Painted","comp":null},{"n":11,"title":"The Bride Is Ready","comp":null},{"n":12,"title":"Forever at the Feast","comp":98.3}]}]}</script>
+  <script>
+  (function(){
+    var mount = document.getElementById('jv-app');
+    if (!mount) return;
+    var dataEl = document.getElementById('jv-app-data');
+    var DATA; try { DATA = JSON.parse(dataEl.textContent); } catch(e){ return; }
+    var albums = DATA.albums || [], cover = DATA.cover, artist = DATA.artist;
+    if (!albums.length) return;
+    var sel = 0;
+    var libEl = mount.querySelector('[data-jv-lib]');
+    var centerEl = mount.querySelector('[data-jv-center]');
+    var rightEl = mount.querySelector('[data-jv-right]');
+    function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    function pill(c){ return c != null ? '<span class="jv-comp-pill">' + Number(c).toFixed(1) + '%</span>' : '<span class="jv-comp-pill none">\u2014</span>'; }
+    function play(code, n){ if (window.jvPlayer && window.jvPlayer.play) window.jvPlayer.play(code, n || 1); }
+    function playAlbum(a){
+      if (window.jvPlayer && window.jvPlayer.playSet) window.jvPlayer.playSet(a.tracks.map(function(t){ return { albumCode: a.code, trackNum: t.n }; }));
+      else play(a.code, 1);
+    }
+    function libHTML(){
+      return albums.map(function(a, i){
+        return '<button class="jv-lib-row' + (i===sel?' active':'') + '" data-i="' + i + '" type="button">' +
+          '<img class="jv-thumb" src="' + cover + '" alt="" loading="lazy">' +
+          '<span class="jv-lib-tx"><span class="jv-lib-title">' + esc(a.title) + '</span>' +
+          '<span class="jv-lib-sub">Album \u00b7 ' + esc(artist) + '</span></span></button>';
+      }).join('');
+    }
+    function centerHTML(){
+      var a = albums[sel];
+      var rows = a.tracks.map(function(t){
+        return '<div class="jv-track-row" data-code="' + esc(a.code) + '" data-n="' + t.n + '">' +
+          '<span class="jv-tnum-wrap"><span class="jv-tnum">' + t.n + '</span><span class="jv-tplay">&#x25B6;</span></span>' +
+          '<span class="jv-tname">' + esc(t.title) + '</span>' +
+          pill(t.comp) +
+          '<span class="jv-tdur">--:--</span>' +
+        '</div>';
+      }).join('');
+      return '<div class="jv-center-head">' +
+          '<div class="jv-cover-wrap"><img class="jv-cover" src="' + cover + '" alt="' + esc(a.title) + ' cover"><span class="jv-cover-badge">' + (sel+1) + '</span></div>' +
+          '<div class="jv-center-meta">' +
+            '<div class="jv-eyebrow-sm">Album</div>' +
+            '<div class="jv-center-title">' + esc(a.title) + '</div>' +
+            '<div class="jv-center-sub">' + esc(artist) + '<span class="dot">\u00b7</span>' + a.year + '<span class="dot">\u00b7</span>' + a.tracks.length + ' songs</div>' +
+            '<div class="jv-center-listeners">\u2014 monthly listeners</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="jv-center-actions">' +
+          '<button class="jv-bigplay" type="button" data-play-album title="Play album">&#x25B6;</button>' +
+          '<button class="jv-follow" type="button">Follow</button>' +
+        '</div>' +
+        '<div class="jv-tracks">' +
+          '<div class="jv-track-head"><span>#</span><span>Title</span><span>Rating</span><span class="jv-th-dur">&#x1F551;</span></div>' +
+          rows +
+        '</div>';
+    }
+    function rightHTML(){
+      function mini(a){
+        return '<button class="jv-mini" type="button" data-code="' + esc(a.code) + '">' +
+          '<img class="jv-thumb" src="' + cover + '" alt="" loading="lazy">' +
+          '<span class="jv-mini-tx"><span class="jv-mini-title">' + esc(a.title) + '</span>' +
+          '<span class="jv-mini-sub">' + esc(artist) + '</span>' +
+          '<span class="jv-mini-list">\u2014 monthly listeners</span></span></button>';
+      }
+      var pop = albums.slice(0, 5).map(mini).join('');
+      var viral = albums.slice(5, 10).map(mini).join('');
+      return '<div class="jv-right-sec"><h3>Popular Albums</h3>' + pop + '</div>' +
+             '<div class="jv-right-sec"><h3>Viral Worship</h3>' + viral + '</div>';
+    }
+    function selectByCode(code){
+      for (var i=0;i<albums.length;i++){ if (albums[i].code===code){ sel=i; renderAll(); return true; } }
+      return false;
+    }
+    function renderAll(){
+      libEl.innerHTML = libHTML();
+      centerEl.innerHTML = centerHTML();
+      rightEl.innerHTML = rightHTML();
+      wire();
+    }
+    function wire(){
+      libEl.querySelectorAll('.jv-lib-row').forEach(function(b){
+        b.addEventListener('click', function(){ sel = parseInt(b.getAttribute('data-i'),10) || 0; renderAll(); });
+      });
+      var bp = centerEl.querySelector('[data-play-album]');
+      if (bp) bp.addEventListener('click', function(){ playAlbum(albums[sel]); });
+      centerEl.querySelectorAll('.jv-track-row').forEach(function(r){
+        r.addEventListener('click', function(){ play(r.getAttribute('data-code'), parseInt(r.getAttribute('data-n'),10)); });
+      });
+      rightEl.querySelectorAll('.jv-mini').forEach(function(b){
+        b.addEventListener('click', function(){ var code=b.getAttribute('data-code'); if(!selectByCode(code)) play(code,1); });
+      });
+    }
+    renderAll();
+  })();
+  </script>
+</section>
+<!-- END JV-APP -->
+
+<div class="container">
+
+  <div class="note"><strong>About the ratings.</strong> Per-song ratings (Faith-Focus, Praise vs. Worship, Earworm, Bestseller) are extracted directly from each album's lyrics file. The 97%+ tier shown here is the strictest qualifying bar &mdash; a track must hit &ge;97% on <em>all four</em> dimensions to qualify; an album qualifies when every one of its tracks does. Ratings are blueprint-based &mdash; derived from the lyric/style metadata, not from audio listening tests.</div>
+
+  <div class="legend"><span><span class="dot ok"></span>&ge; 97%</span><span><span class="dot mid"></span>90 &ndash; 96%</span><span><span class="dot low"></span>&lt; 90%</span><span class="dash">&mdash; = not yet rated</span></div>
+
+<div data-top-20="jubilee-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+  <section class="block">
+    <h2 class="block-title">Top tracks at the 97%+ tier</h2>
+    <div class="block-sub">All four dimensions ≥97%, ranked by composite of the four dimensions. 24 of 1464 tracks qualify; up to top 24 shown.</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Track</th>
+          <th>Album</th>
+          <th class="r">Faith</th>
+          <th class="r">Praise/Worship</th>
+          <th class="r">Earworm</th>
+          <th class="r">Bestseller</th>
+          <th class="r">Composite</th>
+        </tr>
+      </thead>
+      <tbody>
+    <tr>
+      <td class="rank">1</td>
+      <td><a href="/web/album.html?code=JEIM1002EN">The Stone Stays Rolled</a></td>
+      <td class="album-cell">Sunday Rolled Back</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">2</td>
+      <td><a href="/web/album.html?code=JEIM1001EN">Maranatha, Come</a></td>
+      <td class="album-cell">Sky Splits Open</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">3</td>
+      <td><a href="/web/album.html?code=JEIM1004EN">All Voices, One Name</a></td>
+      <td class="album-cell">Every Tribe Sings</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">4</td>
+      <td><a href="/web/album.html?code=JEIM1017EN">Spirit&#39;s Yes</a></td>
+      <td class="album-cell">Questions Into Fire</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">5</td>
+      <td><a href="/web/album.html?code=JEIM1018EN">It Is Finished</a></td>
+      <td class="album-cell">Salvation&#39;s Song</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">6</td>
+      <td><a href="/web/album.html?code=JEIM1006EN">He Is Born</a></td>
+      <td class="album-cell">Cradle Cracks the Dark</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.8%</td>
+    </tr>
+    <tr>
+      <td class="rank">7</td>
+      <td><a href="/web/album.html?code=JEIM1004EN">Rehearsing Heaven</a></td>
+      <td class="album-cell">Every Tribe Sings</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.5%</td>
+    </tr>
+    <tr>
+      <td class="rank">8</td>
+      <td><a href="/web/album.html?code=JEIM1005EN">Forever Bearing</a></td>
+      <td class="album-cell">Roots By the River</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.5%</td>
+    </tr>
+    <tr>
+      <td class="rank">9</td>
+      <td><a href="/web/album.html?code=JEIM1017EN">Questions Into Fire Forever</a></td>
+      <td class="album-cell">Questions Into Fire</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.5%</td>
+    </tr>
+    <tr>
+      <td class="rank">10</td>
+      <td><a href="/web/album.html?code=JEIM1018EN">Salvation&#39;s Song Forever</a></td>
+      <td class="album-cell">Salvation&#39;s Song</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.5%</td>
+    </tr>
+    <tr>
+      <td class="rank">11</td>
+      <td><a href="/web/album.html?code=JEIM1008EN">Coronation Right Now</a></td>
+      <td class="album-cell">Crown Him King</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">12</td>
+      <td><a href="/web/album.html?code=JEIM1008EN">Crown Him King Forever</a></td>
+      <td class="album-cell">Crown Him King</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">13</td>
+      <td><a href="/web/album.html?code=JEIM1014EN">Kingdom Come Down</a></td>
+      <td class="album-cell">Kingdom Arriving</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">14</td>
+      <td><a href="/web/album.html?code=JEIM1016EN">The Name Above</a></td>
+      <td class="album-cell">Nations Bow</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">15</td>
+      <td><a href="/web/album.html?code=JEIM1015EN">Free Indeed</a></td>
+      <td class="album-cell">Mercy Unrehearsed</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">16</td>
+      <td><a href="/web/album.html?code=JEIM1003EN">Heaven Won&#39;t Leave</a></td>
+      <td class="album-cell">Heaven On The Floor</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">97%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">17</td>
+      <td><a href="/web/album.html?code=JEIM1061EN">Death Lost Its Voice Forever</a></td>
+      <td class="album-cell">Death Lost Its Voice</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">97%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">18</td>
+      <td><a href="/web/album.html?code=JEIM1019EN">Forever at the Feast</a></td>
+      <td class="album-cell">Table for the Nations</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.3%</td>
+    </tr>
+    <tr>
+      <td class="rank">19</td>
+      <td><a href="/web/album.html?code=JEIM1014EN">Reign Without End</a></td>
+      <td class="album-cell">Kingdom Arriving</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.0%</td>
+    </tr>
+    <tr>
+      <td class="rank">20</td>
+      <td><a href="/web/album.html?code=JEIM1016EN">All The World Bows</a></td>
+      <td class="album-cell">Nations Bow</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.0%</td>
+    </tr>
+    <tr>
+      <td class="rank">21</td>
+      <td><a href="/web/album.html?code=JEIM1011EN">Joy Will Never Quiet</a></td>
+      <td class="album-cell">Joy Unbound</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">97%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.0%</td>
+    </tr>
+    <tr>
+      <td class="rank">22</td>
+      <td><a href="/web/album.html?code=JEIM1015EN">Mercy Sings Forever</a></td>
+      <td class="album-cell">Mercy Unrehearsed</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r comp">98.0%</td>
+    </tr>
+    <tr>
+      <td class="rank">23</td>
+      <td><a href="/web/album.html?code=JEIM1001EN">The Knee That Bends</a></td>
+      <td class="album-cell">Sky Splits Open</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.0%</td>
+    </tr>
+    <tr>
+      <td class="rank">24</td>
+      <td><a href="/web/album.html?code=JEIM1007EN">Crown on the Way</a></td>
+      <td class="album-cell">Clay Turns to Crown</td>
+      <td class="r ok">98%</td>
+      <td class="r ok">97%</td>
+      <td class="r ok">99%</td>
+      <td class="r ok">98%</td>
+      <td class="r comp">98.0%</td>
+    </tr></tbody>
+    </table>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">All 61 albums · average per dimension</h2>
+    <div class="block-sub">Sorted by catalog code. Click any code to open the album page (player loads automatically).</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th class="r">Faith</th>
+          <th class="r">Praise/Worship</th>
+          <th class="r">Earworm</th>
+          <th class="r">Bestseller</th>
+          <th class="r">Composite</th>
+        </tr>
+      </thead>
+      <tbody>
+    <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1001EN">JEIM1001EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1001EN">Sky Splits Open <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.5%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1002EN">JEIM1002EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1002EN">Sunday Rolled Back <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.6%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1003EN">JEIM1003EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1003EN">Heaven On The Floor <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">90%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.6%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1004EN">JEIM1004EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1004EN">Every Tribe Sings <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1005EN">JEIM1005EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1005EN">Roots By the River <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">98%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1006EN">JEIM1006EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1006EN">Cradle Cracks the Dark <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">98%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.7%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1007EN">JEIM1007EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1007EN">Clay Turns to Crown <span class="badge p">3/24 qual</span></a></td>
+      <td class="r ok">98%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.4%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1008EN">JEIM1008EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1008EN">Crown Him King <span class="badge p">4/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">96.2%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1009EN">JEIM1009EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1009EN">Eternal Kingdom Rising </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1010EN">JEIM1010EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1010EN">Every Generation Prays </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1011EN">JEIM1011EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1011EN">Joy Unbound <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">98%</td>
+      <td class="r mid">93%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1012EN">JEIM1012EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1012EN">Kingdom Roars <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">98%</td>
+      <td class="r mid">91%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.2%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1013EN">JEIM1013EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1013EN">Lament &amp; Longing </a></td>
+      <td class="r ok">98%</td>
+      <td class="r low">73%</td>
+      <td class="r mid">93%</td>
+      <td class="r low">88%</td>
+      <td class="r comp">88.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1014EN">JEIM1014EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1014EN">Kingdom Arriving <span class="badge p">3/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">96.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1015EN">JEIM1015EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1015EN">Mercy Unrehearsed <span class="badge p">3/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.7%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1016EN">JEIM1016EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1016EN">Nations Bow <span class="badge p">3/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r ok">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">96.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1017EN">JEIM1017EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1017EN">Questions Into Fire <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1018EN">JEIM1018EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1018EN">Salvation&#39;s Song <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1019EN">JEIM1019EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1019EN">Table for the Nations <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1020EN">JEIM1020EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1020EN">Joy That Won&#39;t Sit Down <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1021EN">JEIM1021EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1021EN">The Savior Reigns <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1022EN">JEIM1022EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1022EN">Throne Room Glory <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1023EN">JEIM1023EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1023EN">Victory Proclaimed <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.1%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1024EN">JEIM1024EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1024EN">Yeshua Rising </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.7%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1025EN">JEIM1025EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1025EN">Yeshua Rising (OHI) </a></td>
+      <td class="r mid">96%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">93%</td>
+      <td class="r comp">93.6%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1026EN">JEIM1026EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1026EN">Crown and Scepter </a></td>
+      <td class="r mid">96%</td>
+      <td class="r low">90%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">93%</td>
+      <td class="r comp">93.4%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1027EN">JEIM1027EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1027EN">Year of Jubilee Forever </a></td>
+      <td class="r mid">96%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">93%</td>
+      <td class="r comp">94.1%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1028EN">JEIM1028EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1028EN">Reign Established </a></td>
+      <td class="r mid">96%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">92%</td>
+      <td class="r comp">93.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1029EN">JEIM1029EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1029EN">The King Is Coming <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.5%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1030EN">JEIM1030EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1030EN">Day of the Lord <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.4%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1031EN">JEIM1031EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1031EN">Trumpet of Jubilee <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.1%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1032EN">JEIM1032EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1032EN">Heaven Coronation <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.9%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1033EN">JEIM1033EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1033EN">Millennial Dawn <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1034EN">JEIM1034EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1034EN">Throne of David <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1035EN">JEIM1035EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1035EN">Sons and Daughters Return <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1036EN">JEIM1036EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1036EN">Zion Restored <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1037EN">JEIM1037EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1037EN">Beulah Land <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1038EN">JEIM1038EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1038EN">New Heavens New Earth <span class="badge p">1/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">95.4%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1039EN">JEIM1039EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1039EN">The Marriage Supper </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1040EN">JEIM1040EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1040EN">Jesus Crowned Forever </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1041EN">JEIM1041EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1041EN">Wisdom Reigns Forever </a></td>
+      <td class="r mid">94%</td>
+      <td class="r low">72%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">88.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1042EN">JEIM1042EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1042EN">Morning By Morning </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">90%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.6%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1043EN">JEIM1043EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1043EN">Sea Cracked Open <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">95.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1044EN">JEIM1044EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1044EN">Bought Back Whole <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r low">90%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.2%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1045EN">JEIM1045EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1045EN">Thank You Out Loud <span class="badge p">1/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">92%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.9%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1046EN">JEIM1046EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1046EN">His Love Won&#39;t Quit </a></td>
+      <td class="r mid">97%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">93.7%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1047EN">JEIM1047EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1047EN">Out Of The Pit <span class="badge p">2/24 qual</span></a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.9%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1048EN">JEIM1048EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1048EN">Bigger Than All This </a></td>
+      <td class="r mid">97%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">96%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1049EN">JEIM1049EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1049EN">Skies Speak Out </a></td>
+      <td class="r mid">96%</td>
+      <td class="r mid">90%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.1%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1050EN">JEIM1050EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1050EN">Joy Made Me Strong </a></td>
+      <td class="r mid">96%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.6%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1051EN">JEIM1051EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1051EN">Locust Years Repaid </a></td>
+      <td class="r mid">96%</td>
+      <td class="r low">88%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">93.0%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1052EN">JEIM1052EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1052EN">Bless His Name </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.5%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1053EN">JEIM1053EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1053EN">He Bent His Ear </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.1%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1054EN">JEIM1054EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1054EN">Daily Bread Yes </a></td>
+      <td class="r mid">96%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">93.5%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1055EN">JEIM1055EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1055EN">Clap, The King Rules </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">95%</td>
+      <td class="r comp">94.5%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1056EN">JEIM1056EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1056EN">Whole Again </a></td>
+      <td class="r mid">97%</td>
+      <td class="r low">87%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">93%</td>
+      <td class="r comp">92.8%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1057EN">JEIM1057EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1057EN">Better Than One Day </a></td>
+      <td class="r mid">97%</td>
+      <td class="r low">89%</td>
+      <td class="r mid">95%</td>
+      <td class="r mid">93%</td>
+      <td class="r comp">93.4%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1058EN">JEIM1058EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1058EN">Slate Wiped Clean </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">93.7%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1059EN">JEIM1059EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1059EN">Hiding Place </a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">91%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">92%</td>
+      <td class="r comp">93.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1060EN">JEIM1060EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1060EN">Made New Today </a></td>
+      <td class="r mid">97%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.3%</td>
+    </tr>     <tr class="">
+      <td class="code"><a href="/web/album.html?code=JEIM1061EN">JEIM1061EN</a></td>
+      <td class="title"><a href="/web/album.html?code=JEIM1061EN">Death Lost Its Voice <span class="badge p">2/24 qual</span></a></td>
+      <td class="r ok">97%</td>
+      <td class="r mid">93%</td>
+      <td class="r mid">94%</td>
+      <td class="r mid">94%</td>
+      <td class="r comp">94.5%</td>
+    </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:jubilee-inspire"></div></div>
+
+<footer class="site">
+  <div class="container">
+    Jubilee Inspire · Executive Summary generated 2026-06-04 · Ratings are blueprint-based, not audio-tested · <a href="/inspire.html">Back to Inspire Family dashboard</a>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

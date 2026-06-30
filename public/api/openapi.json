@@ -1,0 +1,1202 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Jubilujah Internal API",
+    "version": "1.0.0",
+    "summary": "Editorial, pipeline, ratings, awards, radio, and admin surface for Jubilujah.",
+    "description": "OpenAPI 3.1 contract implementing every endpoint enumerated in Jubilujah Build Spec v1.0 §19 (API Surface — Initial). Authentication is delegated to JubileeInspire SSO (Build Spec §5); the resulting session cookie (`session_id`, HttpOnly/Secure/SameSite=Strict) authorizes all calls. All mutating requests require a CSRF token header (`X-CSRF-Token`). Role-based gates per §5: minimum `content_editor` for read; `production_manager` for pipeline transitions; `radio_producer` for playlist mutations; `admin` for `/admin/*`. Domain schemas live at `/schemas/v1/*.schema.json` and are referenced via `$ref` from this document.",
+    "contact": {
+      "name": "Gabriel Ungureanu — Stewardship",
+      "url": "https://jubilujah.com"
+    },
+    "license": {
+      "name": "Proprietary — Jubilee Music Internal Use Only",
+      "identifier": "LicenseRef-Jubilee-Internal"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3119/api",
+      "description": "Local development (server.js)"
+    },
+    {
+      "url": "https://jubilujah.com/api",
+      "description": "Production stub (gated by JubileeInspire SSO)"
+    }
+  ],
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ],
+  "tags": [
+    { "name": "Catalog",  "description": "Artists, albums, songs, lyrics (Build Spec §7)." },
+    { "name": "Pipeline", "description": "10-stage production pipeline (Build Spec §8)." },
+    { "name": "Ratings",  "description": "Polymorphic 1-5 star ratings on rateable objects." },
+    { "name": "Comments", "description": "Polymorphic threaded editorial comments." },
+    { "name": "Awards",   "description": "Quarterly / annual award categories, periods, nominations, winners." },
+    { "name": "Radio",    "description": "Stations, programs, and producer playlists (HM-band)." },
+    { "name": "Admin",    "description": "Publish triggers, user/role admin, audit log (admin role only)." }
+  ],
+  "paths": {
+    "/artists": {
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "listArtists",
+        "summary": "List artists, optionally filtered by grouping.",
+        "parameters": [
+          { "$ref": "#/components/parameters/GroupingQuery" },
+          { "$ref": "#/components/parameters/LimitQuery" },
+          { "$ref": "#/components/parameters/OffsetQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of artists.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ArtistList" },
+                "examples": {
+                  "inspireFamily": { "$ref": "#/components/examples/ArtistListInspireFamily" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      },
+      "post": {
+        "tags": ["Catalog"],
+        "operationId": "createArtist",
+        "summary": "Create a new artist (content_editor+).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ArtistCreate" },
+              "examples": {
+                "affiliated": { "$ref": "#/components/examples/ArtistCreateAffiliated" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Artist created.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Artist" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/artists/{id}": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "getArtist",
+        "summary": "Fetch a single artist by id.",
+        "responses": {
+          "200": {
+            "description": "Artist found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Artist" },
+                "examples": {
+                  "melodyInspire": { "$ref": "#/components/examples/ArtistMelody" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "patch": {
+        "tags": ["Catalog"],
+        "operationId": "updateArtist",
+        "summary": "Partial update of an artist record.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/ArtistPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated artist.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Artist" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/albums": {
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "listAlbums",
+        "summary": "List albums, optionally scoped to one artist.",
+        "parameters": [
+          { "$ref": "#/components/parameters/ArtistIdQuery" },
+          { "$ref": "#/components/parameters/LimitQuery" },
+          { "$ref": "#/components/parameters/OffsetQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of albums.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AlbumList" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      },
+      "post": {
+        "tags": ["Catalog"],
+        "operationId": "createAlbum",
+        "summary": "Create a new album (Inspire Family albums must reach 12 songs before publish).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/AlbumCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Album created.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Album" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/albums/{id}": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "getAlbum",
+        "summary": "Fetch a single album.",
+        "responses": {
+          "200": {
+            "description": "Album found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Album" },
+                "examples": {
+                  "breakthrough": { "$ref": "#/components/examples/AlbumBreakthrough" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "patch": {
+        "tags": ["Catalog"],
+        "operationId": "updateAlbum",
+        "summary": "Partial update of an album.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/AlbumPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated album.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Album" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/songs": {
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "listSongs",
+        "summary": "List songs, optionally scoped to one album.",
+        "parameters": [
+          { "$ref": "#/components/parameters/AlbumIdQuery" },
+          { "$ref": "#/components/parameters/LimitQuery" },
+          { "$ref": "#/components/parameters/OffsetQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of songs.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/SongList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      },
+      "post": {
+        "tags": ["Catalog"],
+        "operationId": "createSong",
+        "summary": "Create a new song under an album.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/SongCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Song created.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Song" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/songs/{id}": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "getSong",
+        "summary": "Fetch a single song.",
+        "responses": {
+          "200": {
+            "description": "Song found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Song" },
+                "examples": {
+                  "calebBreakthrough": { "$ref": "#/components/examples/SongCalebBreakthrough" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "patch": {
+        "tags": ["Catalog"],
+        "operationId": "updateSong",
+        "summary": "Partial update of song metadata.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/SongPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated song.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Song" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/songs/{id}/lyrics": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "put": {
+        "tags": ["Catalog"],
+        "operationId": "replaceSongLyrics",
+        "summary": "Replace the lyrics payload for a song. Validates Hebrew article rule.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/LyricsReplace" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lyrics replaced.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lyrics" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/pipeline": {
+      "get": {
+        "tags": ["Pipeline"],
+        "operationId": "listPipeline",
+        "summary": "List rateable objects currently in the production pipeline.",
+        "parameters": [
+          { "$ref": "#/components/parameters/StageQuery" },
+          { "$ref": "#/components/parameters/LimitQuery" },
+          { "$ref": "#/components/parameters/OffsetQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pipeline snapshot.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PipelineList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      }
+    },
+    "/pipeline/{type}/{id}/transition": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RateableTypePath" },
+        { "$ref": "#/components/parameters/IdPath" }
+      ],
+      "post": {
+        "tags": ["Pipeline"],
+        "operationId": "transitionPipeline",
+        "summary": "Advance (or reverse) a pipeline object to a new stage. Append-only history.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PipelineTransition" },
+              "examples": {
+                "advanceToQa": { "$ref": "#/components/examples/PipelineTransitionRequest" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transition recorded.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PipelineHistoryEntry" },
+                "examples": {
+                  "qaReview": { "$ref": "#/components/examples/PipelineTransitionResponse" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/ratings/{type}/{id}": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RateableTypePath" },
+        { "$ref": "#/components/parameters/IdPath" }
+      ],
+      "get": {
+        "tags": ["Ratings"],
+        "operationId": "getRating",
+        "summary": "Aggregate rating + distribution for a rateable object.",
+        "responses": {
+          "200": {
+            "description": "Aggregate rating payload.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RatingAggregate" },
+                "examples": {
+                  "fiveStarSong": { "$ref": "#/components/examples/RatingAggregateExample" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "put": {
+        "tags": ["Ratings"],
+        "operationId": "upsertRating",
+        "summary": "Upsert the current user's rating (1-5).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RatingUpsert" },
+              "examples": {
+                "fiveStars": { "$ref": "#/components/examples/RatingUpsertRequest" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rating stored.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Rating" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      },
+      "delete": {
+        "tags": ["Ratings"],
+        "operationId": "deleteRating",
+        "summary": "Remove the current user's rating.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "responses": {
+          "204": { "description": "Rating removed." },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/comments/{type}/{id}": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RateableTypePath" },
+        { "$ref": "#/components/parameters/IdPath" }
+      ],
+      "get": {
+        "tags": ["Comments"],
+        "operationId": "listComments",
+        "summary": "List comments for a rateable object (oldest first).",
+        "parameters": [
+          { "$ref": "#/components/parameters/LimitQuery" },
+          { "$ref": "#/components/parameters/OffsetQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment thread.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/CommentList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "post": {
+        "tags": ["Comments"],
+        "operationId": "createComment",
+        "summary": "Post a comment to a rateable object.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CommentCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment created.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/comments/{commentId}": {
+      "parameters": [{ "$ref": "#/components/parameters/CommentIdPath" }],
+      "patch": {
+        "tags": ["Comments"],
+        "operationId": "editComment",
+        "summary": "Edit body of an existing comment (author only, or admin).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CommentPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated comment.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      },
+      "delete": {
+        "tags": ["Comments"],
+        "operationId": "deleteComment",
+        "summary": "Soft-delete a comment (author only, or admin).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "responses": {
+          "204": { "description": "Comment soft-deleted." },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/awards/categories": {
+      "get": {
+        "tags": ["Awards"],
+        "operationId": "listAwardCategories",
+        "summary": "List award categories.",
+        "responses": {
+          "200": {
+            "description": "Award categories.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/AwardCategoryList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      }
+    },
+    "/awards/periods/{year}": {
+      "parameters": [{ "$ref": "#/components/parameters/YearPath" }],
+      "get": {
+        "tags": ["Awards"],
+        "operationId": "getAwardPeriods",
+        "summary": "List award periods (quarterly + annual) for a given year.",
+        "responses": {
+          "200": {
+            "description": "Award periods for the year.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/AwardPeriodList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/awards/nominations": {
+      "get": {
+        "tags": ["Awards"],
+        "operationId": "listNominations",
+        "summary": "List nominations, filterable by period (year) and category.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PeriodQuery" },
+          { "$ref": "#/components/parameters/CategoryQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nominations matching filters.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/NominationList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      },
+      "post": {
+        "tags": ["Awards"],
+        "operationId": "createNomination",
+        "summary": "Submit a nomination for a rateable object inside an open period.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/NominationCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Nomination created.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Nomination" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/admin/awards/winners": {
+      "post": {
+        "tags": ["Awards", "Admin"],
+        "operationId": "selectAwardWinner",
+        "summary": "Select winner(s) for a category/period (admin only).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/AwardWinnerCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Winner recorded.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AwardWinner" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/stations": {
+      "get": {
+        "tags": ["Radio"],
+        "operationId": "listStations",
+        "summary": "List Jubilee Radio stations across the HM-band.",
+        "responses": {
+          "200": {
+            "description": "Station roster.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/StationList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      }
+    },
+    "/programs": {
+      "get": {
+        "tags": ["Radio"],
+        "operationId": "listPrograms",
+        "summary": "List radio programs (shows) across stations.",
+        "responses": {
+          "200": {
+            "description": "Program list.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/ProgramList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      }
+    },
+    "/playlists": {
+      "get": {
+        "tags": ["Radio"],
+        "operationId": "listPlaylists",
+        "summary": "List producer playlists.",
+        "responses": {
+          "200": {
+            "description": "Playlists.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PlaylistList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      },
+      "post": {
+        "tags": ["Radio"],
+        "operationId": "createPlaylist",
+        "summary": "Create a new playlist (radio_producer+).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PlaylistCreate" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Playlist created.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Playlist" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/playlists/{id}/items": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "patch": {
+        "tags": ["Radio"],
+        "operationId": "modifyPlaylistItems",
+        "summary": "Reorder, add, or remove items on a playlist.",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PlaylistItemsPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated playlist.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Playlist" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/admin/publish/{type}/{id}": {
+      "parameters": [
+        { "$ref": "#/components/parameters/RateableTypePath" },
+        { "$ref": "#/components/parameters/IdPath" }
+      ],
+      "post": {
+        "tags": ["Admin"],
+        "operationId": "triggerPublish",
+        "summary": "Trigger CDN publish for an album or song (admin only).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "responses": {
+          "202": {
+            "description": "Publish queued.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/PublishJob" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": ["Admin"],
+        "operationId": "listUsers",
+        "summary": "List local user-role records (admin only).",
+        "responses": {
+          "200": {
+            "description": "User list.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/UserList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        }
+      }
+    },
+    "/admin/users/{id}/roles": {
+      "parameters": [{ "$ref": "#/components/parameters/IdPath" }],
+      "patch": {
+        "tags": ["Admin"],
+        "operationId": "updateUserRoles",
+        "summary": "Update the cached roles for a user (admin only).",
+        "parameters": [{ "$ref": "#/components/parameters/CsrfHeader" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UserRolesPatch" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/admin/audit": {
+      "get": {
+        "tags": ["Admin"],
+        "operationId": "listAuditEvents",
+        "summary": "List audit events since a given ISO-8601 timestamp (admin only).",
+        "parameters": [
+          { "$ref": "#/components/parameters/SinceQuery" },
+          { "$ref": "#/components/parameters/LimitQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit events.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/AuditEventList" } }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "session_id",
+        "description": "HttpOnly + Secure + SameSite=Strict cookie issued by the backend after a successful JubileeInspire SSO exchange (Build Spec §5)."
+      }
+    },
+    "parameters": {
+      "IdPath": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "UUID of the resource.",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "CommentIdPath": {
+        "name": "commentId",
+        "in": "path",
+        "required": true,
+        "description": "UUID of the comment.",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "YearPath": {
+        "name": "year",
+        "in": "path",
+        "required": true,
+        "description": "Four-digit year (e.g. 2026).",
+        "schema": { "type": "integer", "minimum": 2000, "maximum": 2999 }
+      },
+      "RateableTypePath": {
+        "name": "type",
+        "in": "path",
+        "required": true,
+        "description": "Polymorphic object type.",
+        "schema": {
+          "type": "string",
+          "enum": ["song", "album", "artist", "lyrics", "playlist"]
+        }
+      },
+      "CsrfHeader": {
+        "name": "X-CSRF-Token",
+        "in": "header",
+        "required": true,
+        "description": "Double-submit CSRF token issued at login (Build Spec §20).",
+        "schema": { "type": "string", "minLength": 16 }
+      },
+      "GroupingQuery": {
+        "name": "grouping",
+        "in": "query",
+        "required": false,
+        "description": "Restrict to one artist grouping (Build Spec §6).",
+        "schema": {
+          "type": "string",
+          "enum": ["inspire_family", "affiliated", "childrens_brands", "other_initiatives"]
+        }
+      },
+      "ArtistIdQuery": {
+        "name": "artist_id",
+        "in": "query",
+        "required": false,
+        "description": "Scope to a single artist UUID.",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "AlbumIdQuery": {
+        "name": "album_id",
+        "in": "query",
+        "required": false,
+        "description": "Scope to a single album UUID.",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "StageQuery": {
+        "name": "stage",
+        "in": "query",
+        "required": false,
+        "description": "Pipeline stage to filter by (Build Spec §8).",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "concept", "lyrics_drafting", "lyrics_approved", "song_generation",
+            "qa_review", "engineering", "sunil_approval", "final_approval",
+            "published", "distributed"
+          ]
+        }
+      },
+      "PeriodQuery": {
+        "name": "period",
+        "in": "query",
+        "required": false,
+        "description": "Four-digit year scoping nominations.",
+        "schema": { "type": "integer", "minimum": 2000, "maximum": 2999 }
+      },
+      "CategoryQuery": {
+        "name": "category",
+        "in": "query",
+        "required": false,
+        "description": "Award category UUID.",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "SinceQuery": {
+        "name": "since",
+        "in": "query",
+        "required": false,
+        "description": "ISO-8601 timestamp; only events at or after this instant are returned.",
+        "schema": { "type": "string", "format": "date-time" }
+      },
+      "LimitQuery": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "description": "Page size (default 50, max 200).",
+        "schema": { "type": "integer", "minimum": 1, "maximum": 200, "default": 50 }
+      },
+      "OffsetQuery": {
+        "name": "offset",
+        "in": "query",
+        "required": false,
+        "description": "Pagination offset.",
+        "schema": { "type": "integer", "minimum": 0, "default": 0 }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "No valid session cookie present.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "examples": {
+              "missingSession": {
+                "value": { "error": "unauthorized", "message": "Session required. Re-authenticate via JubileeInspire SSO." }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Authenticated but role does not satisfy the route's minimum.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "examples": {
+              "needsAdmin": {
+                "value": { "error": "forbidden", "message": "Role 'admin' required for this operation." }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource does not exist or is not visible to the caller.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "examples": {
+              "missing": { "value": { "error": "not_found", "message": "Resource not found." } }
+            }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "Request body failed Pydantic / domain validation.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ValidationError" },
+            "examples": {
+              "hebrewArticle": {
+                "value": {
+                  "error": "validation_failed",
+                  "message": "Hebrew article rule violation in lyrics.",
+                  "details": [
+                    { "field": "lyrics.text", "code": "hebrew_article_rule", "hint": "Use 'the Ruach Kodesh' or 'Ruach HaKodesh' — never 'the Ruach HaKodesh'." }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Error": { "$ref": "/schemas/v1/error.schema.json" },
+      "ValidationError": { "$ref": "/schemas/v1/validation-error.schema.json" },
+
+      "Artist":         { "$ref": "/schemas/v1/artist.schema.json" },
+      "ArtistCreate":   { "$ref": "/schemas/v1/artist.create.schema.json" },
+      "ArtistPatch":    { "$ref": "/schemas/v1/artist.patch.schema.json" },
+      "ArtistList":     { "$ref": "/schemas/v1/artist.list.schema.json" },
+
+      "Album":          { "$ref": "/schemas/v1/album.schema.json" },
+      "AlbumCreate":    { "$ref": "/schemas/v1/album.create.schema.json" },
+      "AlbumPatch":     { "$ref": "/schemas/v1/album.patch.schema.json" },
+      "AlbumList":      { "$ref": "/schemas/v1/album.list.schema.json" },
+
+      "Song":           { "$ref": "/schemas/v1/song.schema.json" },
+      "SongCreate":     { "$ref": "/schemas/v1/song.create.schema.json" },
+      "SongPatch":      { "$ref": "/schemas/v1/song.patch.schema.json" },
+      "SongList":       { "$ref": "/schemas/v1/song.list.schema.json" },
+
+      "Lyrics":         { "$ref": "/schemas/v1/lyrics.schema.json" },
+      "LyricsReplace":  { "$ref": "/schemas/v1/lyrics.replace.schema.json" },
+
+      "PipelineList":         { "$ref": "/schemas/v1/pipeline.list.schema.json" },
+      "PipelineTransition":   { "$ref": "/schemas/v1/pipeline.transition.schema.json" },
+      "PipelineHistoryEntry": { "$ref": "/schemas/v1/pipeline.history-entry.schema.json" },
+
+      "Rating":          { "$ref": "/schemas/v1/rating.schema.json" },
+      "RatingUpsert":    { "$ref": "/schemas/v1/rating.upsert.schema.json" },
+      "RatingAggregate": { "$ref": "/schemas/v1/rating.aggregate.schema.json" },
+
+      "Comment":        { "$ref": "/schemas/v1/comment.schema.json" },
+      "CommentCreate":  { "$ref": "/schemas/v1/comment.create.schema.json" },
+      "CommentPatch":   { "$ref": "/schemas/v1/comment.patch.schema.json" },
+      "CommentList":    { "$ref": "/schemas/v1/comment.list.schema.json" },
+
+      "AwardCategoryList": { "$ref": "/schemas/v1/award.category-list.schema.json" },
+      "AwardPeriodList":   { "$ref": "/schemas/v1/award.period-list.schema.json" },
+      "Nomination":        { "$ref": "/schemas/v1/award.nomination.schema.json" },
+      "NominationCreate":  { "$ref": "/schemas/v1/award.nomination.create.schema.json" },
+      "NominationList":    { "$ref": "/schemas/v1/award.nomination-list.schema.json" },
+      "AwardWinner":       { "$ref": "/schemas/v1/award.winner.schema.json" },
+      "AwardWinnerCreate": { "$ref": "/schemas/v1/award.winner.create.schema.json" },
+
+      "Station":            { "$ref": "/schemas/v1/station.schema.json" },
+      "StationList":        { "$ref": "/schemas/v1/station.list.schema.json" },
+      "Program":            { "$ref": "/schemas/v1/program.schema.json" },
+      "ProgramList":        { "$ref": "/schemas/v1/program.list.schema.json" },
+      "Playlist":           { "$ref": "/schemas/v1/playlist.schema.json" },
+      "PlaylistCreate":     { "$ref": "/schemas/v1/playlist.create.schema.json" },
+      "PlaylistList":       { "$ref": "/schemas/v1/playlist.list.schema.json" },
+      "PlaylistItemsPatch": { "$ref": "/schemas/v1/playlist.items.patch.schema.json" },
+
+      "PublishJob":     { "$ref": "/schemas/v1/admin.publish-job.schema.json" },
+      "User":           { "$ref": "/schemas/v1/admin.user.schema.json" },
+      "UserList":       { "$ref": "/schemas/v1/admin.user-list.schema.json" },
+      "UserRolesPatch": { "$ref": "/schemas/v1/admin.user-roles.patch.schema.json" },
+      "AuditEventList": { "$ref": "/schemas/v1/admin.audit-event-list.schema.json" }
+    },
+    "examples": {
+      "ArtistListInspireFamily": {
+        "summary": "First page of Inspire Family artists.",
+        "value": {
+          "items": [
+            {
+              "id": "0c0a1d2e-1111-4aaa-9000-000000000001",
+              "display_name": "Melody Inspire",
+              "slug": "melody-inspire",
+              "grouping": "inspire_family",
+              "five_fold": ["pastor", "evangelist"],
+              "genre_anchor": "contemporary-worship",
+              "ohi_default": true
+            },
+            {
+              "id": "0c0a1d2e-1111-4aaa-9000-000000000006",
+              "display_name": "Caleb Inspire",
+              "slug": "caleb-inspire",
+              "grouping": "inspire_family",
+              "five_fold": ["prophet", "teacher"],
+              "genre_anchor": "modern-gospel-rock",
+              "ohi_default": true
+            }
+          ],
+          "limit": 50,
+          "offset": 0,
+          "total": 13
+        }
+      },
+      "ArtistCreateAffiliated": {
+        "summary": "Create an affiliated artist record.",
+        "value": {
+          "display_name": "Hosanna Collective",
+          "slug": "hosanna-collective",
+          "grouping": "affiliated",
+          "genre_anchor": "modern-worship",
+          "bio": "Multi-vocalist worship collective affiliated with Jubilee Music."
+        }
+      },
+      "ArtistMelody": {
+        "summary": "Single artist response for Melody Inspire.",
+        "value": {
+          "id": "0c0a1d2e-1111-4aaa-9000-000000000001",
+          "display_name": "Melody Inspire",
+          "slug": "melody-inspire",
+          "grouping": "inspire_family",
+          "five_fold": ["pastor", "evangelist"],
+          "genre_anchor": "contemporary-worship",
+          "ohi_default": true,
+          "bio": "Lead vocalist of the Inspire Family; pastoral-evangelistic anchor.",
+          "created_at": "2025-01-15T10:00:00Z",
+          "updated_at": "2026-05-30T18:42:11Z"
+        }
+      },
+      "AlbumBreakthrough": {
+        "summary": "Album record for Caleb Inspire's Breakthrough.",
+        "value": {
+          "id": "1a2b3c4d-2222-4bbb-9000-000000000010",
+          "artist_id": "0c0a1d2e-1111-4aaa-9000-000000000006",
+          "title": "Breakthrough",
+          "slug": "breakthrough",
+          "release_date": "2026-04-12",
+          "language": "en",
+          "song_count": 12,
+          "twelve_song_lock_satisfied": true,
+          "ohi_label": true
+        }
+      },
+      "SongCalebBreakthrough": {
+        "summary": "Single song response for Caleb's title track.",
+        "value": {
+          "id": "9f8e7d6c-3333-4ccc-9000-000000000100",
+          "album_id": "1a2b3c4d-2222-4bbb-9000-000000000010",
+          "title": "Breakthrough",
+          "duration_seconds": 218,
+          "language": ["en"],
+          "isrc": "USJUB2600001",
+          "stage": "published",
+          "audio_asset_id": "asset-9f8e7d6c",
+          "lyrics_id": "lyr-9f8e7d6c"
+        }
+      },
+      "PipelineTransitionRequest": {
+        "summary": "Advance a song from song_generation to qa_review.",
+        "value": { "to_stage": "qa_review", "note": "First generation pass complete; handing to Tahoma for QA." }
+      },
+      "PipelineTransitionResponse": {
+        "summary": "Recorded transition entry.",
+        "value": {
+          "id": "55555555-aaaa-4ddd-9000-000000000777",
+          "object_type": "song",
+          "object_id": "9f8e7d6c-3333-4ccc-9000-000000000100",
+          "from_stage": "song_generation",
+          "to_stage": "qa_review",
+          "note": "First generation pass complete; handing to Tahoma for QA.",
+          "actor_id": "44444444-bbbb-4eee-9000-000000000022",
+          "occurred_at": "2026-06-01T16:20:05Z"
+        }
+      },
+      "RatingUpsertRequest": {
+        "summary": "Five-star rating on a song.",
+        "value": { "stars": 5, "note": "Anchor track for the album." }
+      },
+      "RatingAggregateExample": {
+        "summary": "Aggregate ratings for a song.",
+        "value": {
+          "object_type": "song",
+          "object_id": "9f8e7d6c-3333-4ccc-9000-000000000100",
+          "count": 14,
+          "average": 4.71,
+          "distribution": { "1": 0, "2": 0, "3": 1, "4": 2, "5": 11 },
+          "current_user_rating": 5
+        }
+      }
+    }
+  }
+}

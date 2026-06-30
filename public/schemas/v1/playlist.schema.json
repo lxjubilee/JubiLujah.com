@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jubileeverse.com/schemas/v1/playlist.schema.json",
+  "title": "Playlist Manifest",
+  "description": "Canonical published JSON manifest for a playlist (Build Spec sections 12, 16). Drives both the persistent footer player on Jubilujah and the Jubilee Radio Engine v3.0 (Liquidsoap) station rotations. Playlists are an ordered collection of song references; each item carries an explicit transition directive consumed by the radio engine.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "name",
+    "items",
+    "metadata"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional self-link to this schema document."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable RFC 4122 UUID. Matches radio.playlists.id."
+    },
+    "type": {
+      "type": "string",
+      "const": "playlist",
+      "description": "Discriminator. Always the literal string 'playlist'."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing publish version."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Display name of the playlist."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Optional curator-written description shown on browse surfaces."
+    },
+    "program_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional reference to a parent radio program. Null / omitted for standalone playlists."
+    },
+    "items": {
+      "type": "array",
+      "description": "Ordered list of playlist items. Order is canonical (position ascending); 'position' is repeated explicitly for clarity and for partial-update diffs.",
+      "minItems": 1,
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["position", "song_id", "transition"],
+        "properties": {
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "1-based ordinal position within the playlist. Unique across items."
+          },
+          "song_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to catalog.songs.id. The full song manifest lives at /catalog/songs/{song_id}.json."
+          },
+          "transition": {
+            "type": "string",
+            "enum": [
+              "crossfade",
+              "hard_cut",
+              "sweeper",
+              "fade_in",
+              "fade_out",
+              "segue"
+            ],
+            "description": "Transition directive applied when moving from this item to the next. Consumed by Liquidsoap on the radio engine; ignored by the in-browser footer player."
+          },
+          "transition_duration_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30000,
+            "description": "Optional fine-grained transition length in milliseconds. Only meaningful for crossfade / fade_in / fade_out."
+          },
+          "sweeper_asset_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Optional URL to a sweeper audio asset. Required when transition = 'sweeper'."
+          }
+        }
+      }
+    },
+    "loop_mode": {
+      "type": "string",
+      "enum": ["off", "one", "source", "all"],
+      "description": "Default loop mode hint for the footer player. Mirrors the loopMode field of the Zustand player store (Build Spec section 13)."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first_published_at", "last_updated_at"],
+      "properties": {
+        "created_by_user_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Editor who originally created the playlist."
+        },
+        "curator_display_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Public display name of the curator (may differ from the user's identity record)."
+        },
+        "first_published_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jubileeverse.com/schemas/v1/program.schema.json",
+  "title": "Radio Program Manifest",
+  "description": "Canonical published JSON manifest for a radio program (Build Spec sections 12, 16). A program is a named show (e.g. 'Morning Awakening with Eliana') hosted by an artist persona, scheduled on one station via a cron expression, with a fixed duration. The Jubilee Radio Engine v3.0 reads these manifests from /radio/programs/{id}.json to build station lineups.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "name",
+    "station_id",
+    "schedule_cron",
+    "duration_min",
+    "is_active",
+    "metadata"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional self-link to this schema document."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable RFC 4122 UUID. Matches radio.programs.id."
+    },
+    "type": {
+      "type": "string",
+      "const": "program",
+      "description": "Discriminator. Always the literal string 'program'."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing publish version."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Display name of the program (e.g. 'Morning Awakening with Eliana')."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Optional editorial description shown on program landing pages and electronic program guides."
+    },
+    "host_artist_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Reference to catalog.artists.id of the hosting persona. Omit for unhosted programs (automated rotations)."
+    },
+    "station_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Reference to radio.stations.id of the airing station."
+    },
+    "schedule_cron": {
+      "type": "string",
+      "minLength": 9,
+      "maxLength": 200,
+      "pattern": "^([^\\s]+\\s+){4}[^\\s]+(\\s+[^\\s]+)?$",
+      "description": "Cron expression describing the recurring airing schedule, in standard 5-field form (minute hour day-of-month month day-of-week) with an optional 6th field for year. Times are interpreted in the station's local timezone."
+    },
+    "duration_min": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1440,
+      "description": "Program duration in minutes. Capped at 24 hours."
+    },
+    "playlist_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional reference to a playlist that backs this program. When present, the radio engine plays the playlist contents during the program's airtime."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Whether the program is currently in rotation. Inactive programs remain in the manifest for historical / audit purposes but are skipped by the radio engine."
+    },
+    "cover_art_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://cdn\\.jubileeverse\\.com/.+",
+      "description": "Optional cover art for the program (used in EPG and station landing pages)."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first_published_at", "last_updated_at"],
+      "properties": {
+        "timezone": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "IANA timezone name (e.g. 'America/Chicago', 'Europe/Bucharest') that schedule_cron is interpreted in. Defaults to the station's configured timezone when omitted."
+        },
+        "first_published_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

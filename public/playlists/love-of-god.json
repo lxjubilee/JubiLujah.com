@@ -1,0 +1,84 @@
+{
+  "id": "love-of-god",
+  "title": "Love of God",
+  "category": "inspire",
+  "category_label": "Inspire Family",
+  "description": "Songs across the Inspire Family that center the Father's love, Christ's love for the church, and the immovable affection of God for His people. Tahoma's flute-meditations on the Creator, Santiago's bilingual adoration, Jubilee's mercy ballads, Nova's mercy-on-repeat. The Maker who is love.",
+  "theme": "God's love, mercy, fatherhood, adoration",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-inspire",
+  "albums": [
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "The Maker's Breath",
+      "album_code": "THIM1022",
+      "album_slug": "THIM1022EN-the-maker-s-breath",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Native American flute meditation on the Creator who knew us before the wind had a name (Col 1:16)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Wai Ola (Living Water)",
+      "album_code": "THIM1024",
+      "album_slug": "THIM1024EN-wai-ola-living-water",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Hawaiian chant centering Christ as the love that satisfies the deepest thirst (Jn 4:14)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Mercy Like the Tide",
+      "album_code": "THIM1028",
+      "album_slug": "THIM1028EN-mercy-like-the-tide",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Hawaiian reggae warmth carrying the mercy of God across the shoreline of the heart."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Solo Tú, Jesús",
+      "album_code": "SAIM1022",
+      "album_slug": "SAIM1022EN-solo-tu-jesus",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Bilingual reggaeton declaration that Christ alone is Savior and Beloved (Jn 14:6)."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Cuánto Te Adoro",
+      "album_code": "SAIM1025",
+      "album_slug": "SAIM1025EN-cuanto-te-adoro",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Bolero adoration directed exclusively to Jesús — the Beloved who is the Lamb (Rev 5:9)."
+    },
+    {
+      "artist_name": "Jubilee Inspire",
+      "artist_slug": "jubilee-inspire",
+      "album_title": "Mercy Unrehearsed",
+      "album_code": "JEIM1015",
+      "album_slug": "JEIM1015EN-mercy-unrehearsed",
+      "category_path": "inspire/jubilee-inspire",
+      "why_included": "Female mezzo-soprano arena-anthem on the mercy that doesn't need a script."
+    },
+    {
+      "artist_name": "Jubilee Inspire",
+      "artist_slug": "jubilee-inspire",
+      "album_title": "Clay Turns to Crown",
+      "album_code": "JEIM1007",
+      "album_slug": "JEIM1007EN-clay-turns-to-crown",
+      "category_path": "inspire/jubilee-inspire",
+      "why_included": "Potter-House gospel celebrating the Father's love shaping clay into crown (Isa 64:8)."
+    },
+    {
+      "artist_name": "Nova Inspire",
+      "artist_slug": "nova-inspire",
+      "album_title": "Mercy on Repeat",
+      "album_code": "NVIM1047",
+      "album_slug": "NVIM1047EN-mercy-on-repeat",
+      "category_path": "inspire/nova-inspire",
+      "why_included": "Electronic-modern devotion to the mercies new every morning (Lam 3:22-23)."
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jubileeverse.com/schemas/v1/album.schema.json",
+  "title": "Album Manifest",
+  "description": "Canonical published JSON manifest for an album in the Jubilujah catalog (Build Spec section 16). Enforces the 12-song lock for Inspire Family albums via JSON Schema if/then/else: when artist.grouping = 'inspire_family', the songs array must contain exactly 12 entries with track_numbers 1 through 12.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "status",
+    "title",
+    "artist",
+    "songs",
+    "released_at",
+    "language_primary",
+    "metadata"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional self-link to this schema document."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable RFC 4122 UUID for this album. Matches catalog.albums.id."
+    },
+    "type": {
+      "type": "string",
+      "const": "album",
+      "description": "Discriminator. Always the literal string 'album'."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing publish version for this album manifest."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "lyrics_drafting",
+        "lyrics_approved",
+        "song_generation",
+        "qa_review",
+        "engineering",
+        "sunil_approval",
+        "final_approval",
+        "published",
+        "distributed"
+      ],
+      "description": "Pipeline stage of the album as a whole. An album cannot reach 'published' until every constituent song is 'published' (Build Spec section 8)."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Primary display title in the album's primary language."
+    },
+    "title_translations": {
+      "type": "object",
+      "description": "Map of ISO 639-1 codes to translated album titles.",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      }
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "URL-safe album slug used in marketing URLs."
+    },
+    "artist": {
+      "type": "object",
+      "description": "Denormalized artist reference. Carries 'grouping' so the consumer can apply Inspire Family treatments without a second fetch.",
+      "additionalProperties": false,
+      "required": ["id", "slug", "name", "grouping"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "grouping": {
+          "type": "string",
+          "enum": [
+            "inspire_family",
+            "affiliated",
+            "children",
+            "other_initiatives"
+          ],
+          "description": "Drives the 12-song lock conditional below."
+        }
+      }
+    },
+    "cover_art": {
+      "type": "object",
+      "description": "References to cover art renditions on the CDN.",
+      "additionalProperties": false,
+      "required": ["primary_url"],
+      "properties": {
+        "primary_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://cdn\\.jubileeverse\\.com/art/albums/.+",
+          "description": "Absolute URL of the largest delivered cover rendition."
+        },
+        "renditions": {
+          "type": "object",
+          "description": "Map of size keys (e.g. '300', '600', '1200') to absolute URLs of size-specific WebP renditions.",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[0-9]{2,4}$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "songs": {
+      "type": "array",
+      "description": "Ordered list of songs on this album. Order is canonical (track_number ascending) but track_number is repeated explicitly for clarity.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "track_number", "title", "duration_seconds"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "track_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7200
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 99,
+      "uniqueItems": true
+    },
+    "released_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Public-facing release date."
+    },
+    "language_primary": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+      "description": "ISO 639-1 code of the album's primary language."
+    },
+    "languages": {
+      "type": "array",
+      "description": "All languages represented across the album's songs, including the primary.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      },
+      "uniqueItems": true,
+      "maxItems": 12
+    },
+    "genre_tags": {
+      "type": "array",
+      "description": "Editorial genre / mood tags for the album as a whole.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "minLength": 1,
+        "maxLength": 60
+      },
+      "uniqueItems": true,
+      "maxItems": 24
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first_published_at", "last_updated_at"],
+      "properties": {
+        "upc": {
+          "type": "string",
+          "pattern": "^[0-9]{12,13}$",
+          "description": "Universal Product Code, when assigned for distribution."
+        },
+        "first_published_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "awards": {
+      "type": "array",
+      "description": "Awards conferred on this album.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "period", "type"],
+        "properties": {
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "period": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["winner", "honorable_mention", "nominee"]
+          },
+          "citation": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        }
+      }
+    }
+  },
+  "if": {
+    "type": "object",
+    "properties": {
+      "artist": {
+        "type": "object",
+        "properties": {
+          "grouping": { "const": "inspire_family" }
+        },
+        "required": ["grouping"]
+      }
+    },
+    "required": ["artist"]
+  },
+  "then": {
+    "description": "Inspire Family 12-song lock (Build Spec sections 6, 7, 17). Exactly 12 songs, track numbers 1 through 12.",
+    "properties": {
+      "songs": {
+        "type": "array",
+        "minItems": 12,
+        "maxItems": 12,
+        "items": {
+          "type": "object",
+          "properties": {
+            "track_number": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            }
+          },
+          "required": ["track_number"]
+        }
+      }
+    }
+  },
+  "else": {
+    "description": "Non-Inspire-Family albums: 1 to 99 songs, no track-count constraint beyond that.",
+    "properties": {
+      "songs": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 99
+      }
+    }
+  }
+}

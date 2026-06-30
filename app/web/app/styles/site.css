@@ -1,0 +1,1044 @@
+/* Jubilujah.com — shared site styles (W: build)
+   Navy base + red/peach/gold accent palette + animated particles flourish.
+   Adapted from the C: warm-copper variant; same structure, Jubilujah brand. */
+
+:root {
+  /* Navy base */
+  --bg: #131a2c;
+  --bg-deep: #0c1226;
+  --bg-1: #1a1a2e;
+  --bg-2: #16213e;
+  --bg-3: #0f3460;
+  --surface: #1d2745;
+  --surface-2: #243355;
+  --surface-3: #2d3e64;
+  --ink: #f0ebe3;
+  --ink-soft: #b0b4cc;
+  --ink-muted: #6c7494;
+  --line: #2a3454;
+  --line-soft: #1f2740;
+
+  /* Jubilujah signature accent palette */
+  --accent: #e94560;          /* JV red */
+  --accent-peach: #ff6b6b;    /* peach */
+  --accent-gold: #feca57;     /* gold */
+  --accent-deep: #c2304c;     /* deep red */
+  --cream: #f4d8a8;           /* warm text accent */
+  --copper: #feca57;          /* alias for compatibility */
+  --warm: #ff6b6b;            /* alias for compatibility */
+
+  /* Category color identities (JV-tuned) */
+  --inspire-1: #e94560;
+  --inspire-2: #ff6b6b;
+  --children-1: #4ab1c4;
+  --children-2: #ff6b6b;
+  --children-3: #feca57;
+  --faith-1: #8c6fcf;
+  --faith-2: #5e4ba8;
+  --general-1: #c89c4a;
+  --general-2: #7a5c1e;
+
+  --success: #5fb371;
+
+  /* Shared content width. Every centered content wrapper (.container,
+     .jvh-inner, .jvh-nav-inner, .album-exec .x-container, etc.) uses these so
+     the page content column lines up exactly with the header nav-bar edges. */
+  --site-max: 1548px;
+  --site-pad: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(ellipse at top, rgba(15, 52, 96, 0.4) 0%, transparent 60%),
+    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 15px;
+  min-height: 100vh;
+  /* Sticky-footer layout: column flexbox so <main> can grow and pin
+     .site-footer to the bottom of the viewport on short pages. */
+  display: flex;
+  flex-direction: column;
+}
+/* <main> grows to fill the space between the header and footer, so the footer
+   always rests at the bottom — even when a page's content is short (e.g. the
+   admin screens). Particles + the footer player are position:fixed, so they
+   stay out of this flow. */
+main { flex: 1 0 auto; }
+
+.container { max-width: var(--site-max); margin: 0 auto; padding: 0 var(--site-pad); }
+
+/* ============================= SITE HEADER ============================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(19, 26, 44, 0.96) 0%, rgba(19, 26, 44, 0.88) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.site-logo {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-peach) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: filter 0.15s;
+}
+.site-logo:hover { filter: brightness(1.15); }
+
+.site-tools {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.site-tools a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 999px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.site-tools a:hover { color: var(--ink); background: var(--surface-2); }
+.site-tools a.login {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.site-tools a.login:hover { background: rgba(233, 69, 96, 0.12); color: var(--accent-peach); border-color: var(--accent-peach); }
+.site-tools .sep { color: var(--ink-muted); }
+
+.site-nav {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--line-soft);
+}
+.site-nav a {
+  flex: 1;
+  text-align: center;
+  padding: 5px 10px;
+  line-height: 1.2;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { color: var(--ink); background: rgba(233, 69, 96, 0.08); }
+.site-nav a.active { color: var(--accent-gold); border-bottom-color: var(--accent); }
+
+@media (max-width: 640px) {
+  .site-header .topbar { padding: 4px 0; }
+  .site-logo { font-size: 18px; }
+  .site-tools { gap: 8px; font-size: 11px; }
+  .site-tools a { padding: 3px 9px; }
+  .site-nav a { padding: 4px 6px; font-size: 11px; letter-spacing: 0.04em; }
+}
+
+/* ============================= HERO ============================= */
+
+.page-hero {
+  padding: 64px 0 48px;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(233, 69, 96, 0.18) 0%, transparent 50%),
+    radial-gradient(800px 400px at 10% 110%, rgba(254, 202, 87, 0.10) 0%, transparent 50%);
+  border-bottom: 3px solid var(--accent);
+  position: relative;
+}
+.page-hero .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.page-hero h1 {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 8px 0 14px;
+  color: var(--ink);
+}
+.page-hero h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--accent-peach) 0%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 500;
+}
+.page-hero .lead {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 880px;
+  line-height: 1.6;
+}
+.page-hero .tagline {
+  font-size: 20px;
+  color: var(--accent-gold);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .page-hero { padding: 40px 0 32px; }
+  .page-hero h1 { font-size: 34px; }
+  .page-hero .lead { font-size: 15px; }
+  .page-hero .tagline { font-size: 17px; }
+}
+
+/* ============================= SECTIONS ============================= */
+
+section.standard {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+h2.section-title {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.section-sub {
+  color: var(--ink-soft);
+  font-size: 16px;
+  max-width: 880px;
+  margin-bottom: 32px;
+}
+
+/* ============================= HOMEPAGE CHOICE CARDS ============================= */
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 36px;
+}
+@media (max-width: 1100px) { .choice-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .choice-grid { grid-template-columns: 1fr; } }
+
+.choice-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.choice-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 40px rgba(233, 69, 96, 0.24);
+}
+.choice-card .placeholder {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+  position: relative;
+  overflow: hidden;
+}
+.choice-card .placeholder::after {
+  content: '[ image coming soon ]';
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+.choice-card.inspire .placeholder { background: linear-gradient(135deg, #e94560 0%, #c2304c 55%, #7a1d35 100%); }
+.choice-card.children .placeholder { background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #4ab1c4 100%); }
+.choice-card.faith-based .placeholder { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 55%, #2c1f5e 100%); }
+.choice-card.general .placeholder { background: linear-gradient(135deg, #feca57 0%, #c89c4a 50%, #7a5c1e 100%); }
+.choice-card .body { padding: 24px 28px 28px; }
+.choice-card .body h3 {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent-peach) 0%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.choice-card .body p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+.choice-card .meta {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.choice-card .meta strong { color: var(--accent-gold); font-weight: 700; }
+.choice-card .cta {
+  margin-top: 18px;
+  display: inline-block;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================= ALBUM/ARTIST CARDS ============================= */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.album-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+.album-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.18);
+}
+.album-card .art {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  padding: 16px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  position: relative;
+  overflow: hidden;
+}
+.album-card .art::after {
+  content: 'image placeholder';
+  position: absolute;
+  bottom: 6px;
+  right: 8px;
+  font-size: 9px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.album-card .art.pg { background: linear-gradient(135deg, #4ab1c4 0%, #1e617a 100%); }
+.album-card .art.tt { background: linear-gradient(135deg, #ff6b6b 0%, #c2304c 100%); }
+.album-card .art.allan { background: linear-gradient(135deg, #c89c4a 0%, #7a5c1e 100%); }
+.album-card .art.cornell { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%); }
+.album-card .art.daisy { background: linear-gradient(135deg, #feca57 0%, #c8911e 100%); }
+.album-card .art.gage { background: linear-gradient(135deg, #e94560 0%, #7a1d35 100%); }
+.album-card .art.ruthie { background: linear-gradient(135deg, #4a7ac4 0%, #1d4080 100%); }
+.album-card .art.judah { background: linear-gradient(135deg, #ff8c4a 0%, #c25a1e 100%); }
+.album-card .art.mercy { background: linear-gradient(135deg, #c285a4 0%, #6e3c5e 100%); }
+.album-card .body { padding: 14px 16px 18px; flex: 1; display: flex; flex-direction: column; }
+.album-card .ttl {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.album-card .sub {
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+.album-card .row {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.album-card .score {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-size: 16px;
+}
+.album-card .score.pending {
+  font-size: 10px;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.album-card .tracks { color: var(--ink-muted); letter-spacing: 0.04em; }
+.album-card .badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--accent-gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+.album-card .badge.coming { background: rgba(140, 111, 207, 0.7); color: #fff; }
+
+/* ============================= PERSONA CARDS (Inspire) ============================= */
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.persona-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.persona-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 32px rgba(233, 69, 96, 0.2);
+}
+.persona-card .avatar {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  position: relative;
+  overflow: hidden;
+}
+.persona-card .avatar .avatar-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  transition: transform 0.4s ease;
+}
+.persona-card:hover .avatar .avatar-img { transform: scale(1.04); }
+.persona-card .avatar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.30) 65%, rgba(0, 0, 0, 0.78) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.persona-card .avatar .avatar-label {
+  position: relative;
+  z-index: 2;
+}
+.persona-card .body { padding: 16px 18px 20px; }
+.persona-card .role {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+.persona-card .name {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.persona-card .tagline {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 6px 0 12px;
+  font-style: italic;
+}
+.persona-card .stats {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--line-soft);
+  padding-top: 10px;
+}
+.persona-card .stats strong {
+  color: var(--accent-gold);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+/* Avatar gradients per persona — assigned color groups */
+/* Azure Blue: Jubilee, Melody, Amir */
+.avatar.jubilee { background: linear-gradient(135deg, #4ab3ff 0%, #2470c8 60%, #0d3a7a 100%); }
+.avatar.melody { background: linear-gradient(135deg, #4ab3ff 0%, #2470c8 60%, #0d3a7a 100%); }
+.avatar.amir { background: linear-gradient(135deg, #4ab3ff 0%, #2470c8 60%, #0d3a7a 100%); }
+
+/* Golden Yellow: Zariah, Zev */
+.avatar.zariah { background: linear-gradient(135deg, #ffdb4a 0%, #e8a720 60%, #8a5e0a 100%); }
+.avatar.zev { background: linear-gradient(135deg, #ffdb4a 0%, #e8a720 60%, #8a5e0a 100%); }
+
+/* Royal Purple: Elias, Eliana */
+.avatar.elias { background: linear-gradient(135deg, #9c6fc4 0%, #5e3a9c 60%, #2e1d54 100%); }
+.avatar.eliana { background: linear-gradient(135deg, #9c6fc4 0%, #5e3a9c 60%, #2e1d54 100%); }
+
+/* Rich Grass Green: Caleb, Nova */
+.avatar.caleb { background: linear-gradient(135deg, #7ac24a 0%, #4a8c2d 60%, #2d5a1e 100%); }
+.avatar.nova { background: linear-gradient(135deg, #7ac24a 0%, #4a8c2d 60%, #2d5a1e 100%); }
+
+/* Maroon Red: Imani, Santiago, Tahoma */
+.avatar.imani { background: linear-gradient(135deg, #c2455a 0%, #8c2a3e 60%, #4a162a 100%); }
+.avatar.santiago { background: linear-gradient(135deg, #c2455a 0%, #8c2a3e 60%, #4a162a 100%); }
+.avatar.tahoma { background: linear-gradient(135deg, #c2455a 0%, #8c2a3e 60%, #4a162a 100%); }
+
+/* ============================= ARTIST CARDS (General/Faith-Based) ============================= */
+
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.artist-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s, border-color 0.18s;
+}
+.artist-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(233, 69, 96, 0.16); }
+.artist-card .photo {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+  position: relative;
+  overflow: hidden;
+}
+.artist-card .photo::after {
+  content: 'image placeholder';
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 9px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.artist-card .photo.allan { background: linear-gradient(135deg, #c89c4a 0%, #7a5c1e 100%); }
+.artist-card .photo.cornell { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%); }
+.artist-card .photo.daisy { background: linear-gradient(135deg, #feca57 0%, #c8911e 100%); }
+.artist-card .photo.gage { background: linear-gradient(135deg, #e94560 0%, #7a1d35 100%); }
+.artist-card .photo.ruthie { background: linear-gradient(135deg, #4a7ac4 0%, #1d4080 100%); }
+.artist-card .photo.judah { background: linear-gradient(135deg, #ff8c4a 0%, #c25a1e 100%); }
+.artist-card .photo.mercy { background: linear-gradient(135deg, #c285a4 0%, #6e3c5e 100%); }
+.artist-card .photo.gabriel { background: linear-gradient(135deg, #ffffff 0%, #e8e8ee 50%, #b8b8c4 100%); color: #2e1d54; text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7); }
+.artist-card .photo.gabriel::after { color: rgba(46, 29, 84, 0.55); text-shadow: none; }
+.artist-card .photo.radiant { background: linear-gradient(135deg, #ffffff 0%, #4ab3ff 50%, #ffdb4a 100%); }
+.artist-card .photo.kingdom { background: linear-gradient(135deg, #9c6fc4 0%, #7ac24a 50%, #ffdb4a 100%); }
+.artist-card .body { padding: 18px 20px 22px; }
+.artist-card .name {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.artist-card .role {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+}
+.artist-card .desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.artist-card .stats {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.artist-card .stats strong {
+  color: var(--accent-gold);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+/* ============================= PLAYLIST CARDS ============================= */
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.playlist-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+.playlist-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(233, 69, 96, 0.16); }
+.playlist-card .cover {
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  padding: 18px;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  position: relative;
+}
+.playlist-card .cover::after {
+  content: 'image placeholder';
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.playlist-card.cat-inspire .cover { background: linear-gradient(135deg, #e94560 0%, #c2304c 100%); }
+.playlist-card.cat-children .cover { background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); }
+.playlist-card.cat-faith-based .cover { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%); }
+.playlist-card.cat-general .cover { background: linear-gradient(135deg, #feca57 0%, #c89c4a 100%); }
+.playlist-card .body { padding: 16px 20px 20px; }
+.playlist-card .cat-tag {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+.playlist-card h3 {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 6px 0 4px;
+  color: var(--ink);
+}
+.playlist-card .desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.playlist-card .stats {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ============================= FILTER BAR ============================= */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 24px;
+}
+.filter-pill {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.filter-pill:hover { border-color: var(--accent-peach); color: var(--ink); }
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-peach) 100%);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================= PLAYER (Playlist Detail) ============================= */
+
+.player-shell {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-top: 24px;
+  position: sticky;
+  top: 96px;
+  z-index: 10;
+}
+.player-cover {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  padding: 18px;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+}
+.player-title {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.player-now { font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; }
+.player-now strong { color: var(--accent-gold); }
+.player-shell audio { width: 100%; margin-top: 8px; }
+.track-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-soft);
+}
+.track-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ink-soft);
+  transition: background 0.12s, color 0.12s;
+}
+.track-row:hover { background: var(--surface-2); color: var(--ink); }
+.track-row.playing { background: rgba(233, 69, 96, 0.14); color: var(--ink); }
+.track-row.playing .tno { color: var(--accent); }
+.track-row .tno { color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+.track-row .tname { font-weight: 500; }
+.track-row .talbum { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.04em; }
+.track-row .tdur { color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+
+/* ============================= ALBUM SUBSECTIONS ============================= */
+
+.subsection {
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+}
+.subsection-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.subsection h3 {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+.subsection .sub-meta {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+.subsection .sub-desc { color: var(--ink-soft); font-size: 14px; max-width: 760px; margin-bottom: 18px; line-height: 1.55; }
+
+/* ============================= NOTICE BANNER ============================= */
+
+.notice {
+  background: linear-gradient(135deg, rgba(254, 202, 87, 0.10) 0%, rgba(140, 111, 207, 0.08) 100%), var(--surface);
+  border: 1px solid rgba(254, 202, 87, 0.28);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.notice strong { color: var(--ink); }
+.notice em { color: var(--accent-gold); font-style: italic; }
+
+/* ============================= JUBILEE BADGE ============================= */
+
+.jubilee-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(233, 69, 96, 0.10);
+  border: 1px solid var(--accent);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* ============================= PARTICLES (homepage signature) ============================= */
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(233, 69, 96, 0.32);
+  border-radius: 50%;
+  animation: float 15s infinite;
+}
+.particle.gold { background: rgba(254, 202, 87, 0.28); }
+.particle.peach { background: rgba(255, 107, 107, 0.30); }
+@keyframes float {
+  0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+}
+
+/* ============================= FOOTER ============================= */
+
+.site-footer {
+  background: var(--bg-deep);
+  color: var(--cream);
+  padding: 20px 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  border-top: 2px solid var(--accent-gold);
+}
+.site-footer .container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.site-footer strong {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #ffd877 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.site-footer a { color: var(--accent-gold); text-decoration: none; }
+.site-footer a:hover { color: #ffd877; }
+.site-footer .jubilee-badge { margin-top: 6px; }
+/* Footer badge in the theme gold (matches the footer's gold links/border). */
+.site-footer .jubilee-badge { background: rgba(254, 202, 87, 0.10); border-color: var(--accent-gold); color: var(--accent-gold); }
+
+/* ============================= GLOBAL WIDGETS HOOKS ============================= */
+/* Footer-player bottom spacing is applied conditionally in globals.css
+   (body.jv-has-player) so pages don't show an empty gap when nothing is playing. */
+.admin-only.show { display: block !important; }
+
+
+/* ============================= JV-ALBUM-LINK-COLORS =============================
+   White by default, warm gold on hover, no underline. Applies to:
+   - Album title cells on persona executive summaries (td.album-title a, td.title a)
+   - Album code cells on persona executive summaries (td.code-cell a, td.code a)
+   - "Most addictive" card-link anchors (a.jv-card-link with its inner card titles/codes)
+   These are the cells generated by the 2026-06-04 album-row + most-addictive
+   linking passes. Per owner request — never underline these links on hover.
+   ================================================================================= */
+td.album-title a,
+td.title a,
+td.code-cell a,
+td.code a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.12s ease;
+}
+td.album-title a:hover,
+td.title a:hover,
+td.code-cell a:hover,
+td.code a:hover {
+  color: #e8b870;          /* warm gold accent */
+  text-decoration: none;
+}
+
+/* Wrapper anchors around top-performer / fusion cards inherit color, but their
+   inner .card-title / .card-code / .fusion-title / .fusion-code text should also
+   shift on hover. */
+a.jv-card-link { color: #ffffff; }
+a.jv-card-link .card-title,
+a.jv-card-link .card-code,
+a.jv-card-link .fusion-title,
+a.jv-card-link .fusion-code {
+  color: #ffffff;
+  transition: color 0.12s ease;
+}
+a.jv-card-link:hover .card-title,
+a.jv-card-link:hover .card-code,
+a.jv-card-link:hover .fusion-title,
+a.jv-card-link:hover .fusion-code {
+  color: #e8b870;
+}
+
+/* ============================= LEGAL / PROSE =============================
+   Long-form readable prose for legal pages (Privacy Policy, Terms). Narrow
+   measure for comfortable reading; same navy/gold palette as the rest of the
+   site. */
+.legal { max-width: 820px; }
+.legal .updated {
+  color: var(--ink-muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.legal .intro { color: var(--ink-soft); font-size: 16px; line-height: 1.7; margin-bottom: 8px; }
+.legal h2 {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 38px 0 12px;
+  scroll-margin-top: 90px;
+}
+.legal h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin: 22px 0 8px;
+}
+.legal p { color: var(--ink-soft); font-size: 15px; line-height: 1.7; margin-bottom: 14px; }
+.legal ul { color: var(--ink-soft); font-size: 15px; line-height: 1.7; margin: 0 0 16px; padding-left: 22px; }
+.legal li { margin-bottom: 8px; }
+.legal li::marker { color: var(--accent-gold); }
+.legal strong { color: var(--ink); font-weight: 600; }
+.legal a { color: var(--accent-gold); text-decoration: none; }
+.legal a:hover { color: #ffd877; text-decoration: underline; }
+.legal .legal-contact {
+  margin-top: 10px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.legal .legal-contact p { margin-bottom: 4px; }
+
+/* Legal/text pages (terms, privacy): the global .container is 1548px wide, which
+   left-strands the 820px article on huge screens and misaligns it with the hero.
+   Narrow BOTH the hero and the body to one centered reading column so the page
+   reads as a tidy, aligned document at every width. */
+.legal-page .container { max-width: 880px; }
+.legal-page .legal { max-width: none; }            /* fill the now-narrow column */
+.legal-page .page-hero h1 { font-size: 40px; }     /* hero scaled to the column */
+.legal-page section.standard { padding-top: 40px; }
+@media (max-width: 640px) {
+  .legal-page .page-hero h1 { font-size: 30px; }
+}

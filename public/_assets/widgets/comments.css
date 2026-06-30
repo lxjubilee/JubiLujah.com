@@ -1,0 +1,209 @@
+/* Jubilujah Comments Widget — Build Spec §10
+   Threaded comments (one level deep) with @mentions, edit/delete, lyric anchors.
+   Uses CSS custom properties defined in site.css (--bg, --surface-2, --ink, etc). */
+
+.jv-comments { margin-top: 24px; }
+
+.jv-comments .jv-comments-loading,
+.jv-comments .jv-comments-empty,
+.jv-comments .jv-comments-error {
+  color: var(--ink-muted);
+  font-size: 13px;
+  padding: 12px 0;
+  font-style: italic;
+}
+.jv-comments .jv-comments-error { color: var(--accent-peach); }
+
+/* --- Compose form --- */
+.jv-comments .compose {
+  background: var(--surface-2);
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.jv-comments .compose textarea {
+  width: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 60px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.jv-comments .compose textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.jv-comments .compose .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.jv-comments .compose .footer .lyric-anchor {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+.jv-comments .compose .footer .count.over { color: var(--accent-peach); }
+.jv-comments .compose button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-peach));
+  color: white;
+  border: none;
+  padding: 7px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.jv-comments .compose button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --- Thread list --- */
+.jv-comments .thread { list-style: none; padding: 0; margin: 0; }
+.jv-comments .thread > li { list-style: none; }
+.jv-comments .replies { list-style: none; padding: 0; margin: 0; }
+
+/* --- Comment card --- */
+.jv-comments .comment {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line-soft);
+}
+.jv-comments .comment .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  user-select: none;
+}
+.jv-comments .comment .content { min-width: 0; }
+.jv-comments .comment .meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.jv-comments .comment .meta .name {
+  color: var(--ink);
+  font-weight: 600;
+}
+.jv-comments .comment .meta .edited {
+  font-style: italic;
+  font-size: 11px;
+  opacity: 0.75;
+}
+.jv-comments .comment .meta .anchor {
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-size: 11px;
+}
+.jv-comments .comment .body {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.jv-comments .comment .body .mention {
+  color: var(--accent-peach);
+  font-weight: 600;
+}
+.jv-comments .comment .actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.jv-comments .comment .actions button {
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+}
+.jv-comments .comment .actions button:hover { color: var(--accent-peach); }
+
+/* --- Reply (one level deep) --- */
+.jv-comments .comment.reply {
+  margin-left: 48px;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent-deep);
+}
+
+/* --- Deleted state --- */
+.jv-comments .comment.deleted .body {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+.jv-comments .comment.deleted .actions { display: none; }
+
+/* --- Inline reply / edit form --- */
+.jv-comments .inline-form {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.jv-comments .inline-form textarea {
+  width: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 13px;
+  resize: vertical;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+.jv-comments .inline-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.jv-comments .inline-form .form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.jv-comments .inline-form button {
+  background: var(--surface-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+.jv-comments .inline-form button.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-peach));
+  color: white;
+  border: none;
+}
+.jv-comments .inline-form button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

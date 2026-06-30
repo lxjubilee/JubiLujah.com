@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caleb Inspire &mdash; v3.0 Regeneration Priority List</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #4a7a8c;
+    --copper: #6ba0b8;
+    --burgundy: #8b3a52;
+    --warm: #d4a585;
+    --moss: #5e8579;
+    --critical: #d97e57;
+    --high: #d4a05c;
+    --medium: #7ba174;
+    --low: #5e95a8;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(74, 122, 140, 0.18) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(217, 126, 87, 0.14) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 64px 0 56px;
+    border-bottom: 4px solid var(--accent);
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 6px 0 14px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--copper); font-weight: 500; }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 880px;
+    line-height: 1.55;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  @media (max-width: 800px) { .hero-stats { grid-template-columns: 1fr 1fr; } }
+  .hero-stat {
+    padding: 18px 22px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat .label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .hero-stat .val {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat.crit .val { color: var(--critical); }
+  .hero-stat.hi .val { color: var(--high); }
+  .hero-stat.med .val { color: var(--medium); }
+  .hero-stat.lo .val { color: var(--low); }
+
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .section-eyebrow.crit { color: var(--critical); }
+  .section-eyebrow.hi { color: var(--high); }
+  .section-eyebrow.med { color: var(--medium); }
+  .section-eyebrow.lo { color: var(--low); }
+  .section-sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 880px;
+    margin-bottom: 28px;
+  }
+
+  /* WHY-UPDATED EXPLAINER */
+  .explainer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--copper);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-top: 22px;
+  }
+  .explainer h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: var(--copper);
+    margin-bottom: 10px;
+  }
+  .explainer p {
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .explainer ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 4px;
+  }
+  .explainer ul li {
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 4px 0 4px 18px;
+    position: relative;
+  }
+  .explainer ul li::before {
+    content: '\2192';
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+    font-weight: 700;
+  }
+  .explainer strong { color: var(--ink); }
+
+  /* TRACK LISTING */
+  .track-list-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: 18px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 720px; }
+  thead { background: var(--surface-2); }
+  th {
+    text-align: left;
+    padding: 11px 12px;
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  td.code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); white-space: nowrap; }
+  td.album-cell { color: var(--ink); font-weight: 500; }
+  td.song-cell { color: var(--ink); font-weight: 600; }
+  td.track-num { color: var(--copper); font-weight: 700; }
+  tbody tr:hover { background: var(--surface-2); }
+  td.composite-cell { color: var(--accent); font-weight: 700; }
+  td.empull-cell { color: var(--emotion); font-weight: 700; }
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .badge.peak { background: rgba(107, 160, 184, 0.20); color: var(--copper); }
+  .badge.finale { background: rgba(217, 126, 87, 0.20); color: var(--critical); }
+  .badge.receiver { background: rgba(94, 133, 121, 0.20); color: var(--moss); }
+  .badge.lament { background: rgba(178, 133, 194, 0.20); color: #b285c2; }
+  .badge.t7 { background: rgba(123, 161, 116, 0.18); color: var(--medium); }
+  .badge.t8 { background: rgba(212, 160, 92, 0.18); color: var(--high); }
+  .badge.t12 { background: rgba(74, 122, 140, 0.18); color: var(--accent); }
+  .badge.t1 { background: rgba(94, 149, 168, 0.18); color: var(--low); }
+  .what-changed {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .what-changed em { color: var(--warm); font-style: italic; }
+
+  /* SECTION HEADER WITH COUNT */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .section-header .count-pill {
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .section-header .count-pill.crit { background: rgba(217, 126, 87, 0.20); color: var(--critical); }
+  .section-header .count-pill.hi { background: rgba(212, 160, 92, 0.20); color: var(--high); }
+  .section-header .count-pill.med { background: rgba(123, 161, 116, 0.20); color: var(--medium); }
+  .section-header .count-pill.lo { background: rgba(94, 149, 168, 0.20); color: var(--low); }
+
+  /* LOOP-CLOSURE CALLOUT */
+  .loop-callout {
+    background:
+      linear-gradient(135deg, rgba(217, 126, 87, 0.12) 0%, rgba(74, 122, 140, 0.08) 100%),
+      var(--surface);
+    border: 1px solid var(--critical);
+    border-radius: 12px;
+    padding: 26px 30px;
+    margin-top: 18px;
+  }
+  .loop-callout h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--critical);
+    margin-bottom: 12px;
+  }
+  .loop-pair {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-top: 12px;
+  }
+  @media (max-width: 700px) { .loop-pair { grid-template-columns: 1fr; } }
+  .loop-track {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .loop-track .meta { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; }
+  .loop-track .title { font-size: 18px; color: var(--ink); font-weight: 700; font-family: Georgia, serif; margin: 4px 0 6px; }
+  .loop-track .role { font-size: 13px; color: var(--copper); font-weight: 600; }
+  .loop-arrow {
+    font-size: 36px;
+    color: var(--critical);
+    text-align: center;
+  }
+  @media (max-width: 700px) { .loop-arrow { transform: rotate(90deg); } }
+  .loop-handshake {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .loop-handshake .label { color: var(--copper); font-weight: 700; }
+  .loop-handshake .val { color: var(--warm); }
+
+  footer {
+    background: #06090e;
+    color: var(--ink-muted);
+    padding: 38px 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--line);
+  }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--copper); }
+  footer a { color: var(--accent); text-decoration: none; } 
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Caleb Inspire &middot; Sonic Craft v3.0 Regeneration Priority List</div>
+    <h1>Songs that should be <em>re-rendered in Suno</em> after the v3.0 pass.</h1>
+    <p class="hero-sub">
+      The Sonic Craft v3.0 audit added per-album scoring and identified architectural production direction for specific track positions (T1, T7, T8, T12) across all 30 Caleb albums. Lyric bodies were preserved verbatim &mdash; but the v3.0 pass formalized <strong>new production guidance</strong> for 122 marquee tracks. This page ranks them by regeneration priority so you know which Suno cuts to refresh first.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat crit"><div class="label">Critical (Catalog Loop)</div><div class="val">2</div></div>
+      <div class="hero-stat hi"><div class="label">High (Catalog Peaks)</div><div class="val">6</div></div>
+      <div class="hero-stat med"><div class="label">Medium (T7+T8+T12)</div><div class="val">114</div></div>
+      <div class="hero-stat lo"><div class="label">Low (Other Tracks)</div><div class="val">238</div></div>
+      <div class="hero-stat"><div class="label">Total updated</div><div class="val">360</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="explainer">
+      <h3>What "updated" means in the v3.0 pass</h3>
+      <p>The v3.0 audit was an <strong>analytical &amp; architectural</strong> pass &mdash; it added per-album dimensional scoring (composite + 6 dimensions) to all 30 <code>album.meta.json</code> files. <strong>No lyric .md files were modified.</strong> But the worker analysis formalized new production direction for specific track positions across every album:</p>
+      <ul>
+        <li><strong>CAIM1030 T12 + CAIM1001 T1</strong> received the brand-new <strong>catalog-loop closure spec</strong> (5 handshake fields). These two tracks <strong>must be regenerated</strong> for the loop to land.</li>
+        <li><strong>All T7 tracks (30 across 30 albums)</strong> received the formalized <strong>"pastoral testimony anchor"</strong> signature &mdash; pastor-voice spoken-word over Rhodes/Hammond/cello with named pastoral composite. Hits EmPull 96&ndash;97 when correctly produced.</li>
+        <li><strong>All T8 tracks (30 across 30 albums)</strong> received the formalized <strong>"cinematic peak strip-down + gospel choir bloom"</strong> signature. The kit cuts, single Rhodes/Martin carries one bar of silence-the-room, then choir+brass bloom returns.</li>
+        <li><strong>All T12 tracks (30 across 30 albums)</strong> received the formalized <strong>"T12 album-loop architecture"</strong> &mdash; outro pulls back to T1 via Hammond pad sustain or Rhodes hold.</li>
+        <li><strong>All other tracks (T2&ndash;T6, T9&ndash;T11; 238 tracks)</strong> received per-track ear-candy + dynamic-arc + emotional-anchor scoring but no fundamentally-new production direction. Regenerate only if you want incremental refinement.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow crit">Priority 1 of 4 &middot; CATALOG INFRASTRUCTURE</div>
+    <div class="section-header">
+      <h2>Critical &mdash; the catalog-loop pair</h2>
+      <span class="count-pill crit">2 tracks</span>
+    </div>
+    <p class="section-sub">These two tracks form the structural bookends of the 30-album Caleb pastoral body. <strong>If only two tracks are regenerated, these are the two.</strong> Together they close the catalog into a continuous prayer.</p>
+
+    <div class="loop-callout">
+      <h3>CAIM1030 T12 &rarr; CAIM1001 T1 catalog-loop closure</h3>
+      <div class="loop-pair">
+        <div class="loop-track">
+          <div class="meta">CAIM1030EN &middot; Loved Forever</div>
+          <div class="title">Track 12 &mdash; "Loved Forever (Sing It Loud)"</div>
+          <div class="role"><span class="badge finale">CATALOG FINALE</span> Composite 95.0 &middot; EmPull 97</div>
+        </div>
+        <div class="loop-arrow">&rarr;</div>
+        <div class="loop-track">
+          <div class="meta">CAIM1001EN &middot; Anchor in the Storm</div>
+          <div class="title">Track 1 &mdash; "The Phone Call"</div>
+          <div class="role"><span class="badge receiver">LOOP RECEIVER</span> Composite 94.2 &middot; EmPull 96</div>
+        </div>
+      </div>
+      <div class="loop-handshake"><span class="label">Key handoff</span>       &rarr;  D major &rarr; D major (same-key seamless, no modulation)
+
+<span class="label">Tempo bridge</span>      &rarr;  T12 final 30-sec decays to <span class="val">~84 BPM Rhodes-hold</span> &rarr; T1 <span class="val">88 BPM Hammond pickup</span> (+4 BPM)
+
+<span class="label">Instrument handshake</span> &rarr;  T12 outro: <span class="val">Rhodes hold + Hammond pad sustain + finger-picked Martin tag</span>
+                  &rarr; T1 0:00: <span class="val">Hammond B3 chord held long</span> (the iconic Caleb opener)
+
+<span class="label">Lyric handshake</span>   &rarr;  T12 tag <span class="val">"Loved forever &mdash; anchor in the storm"</span>
+                  &rarr; T1 verse <span class="val">"Lord, when the storm is rising&hellip;"</span>
+
+<span class="label">Production</span>        &rarr;  Gapless-playback mandate &middot; Rhodes sustain bleeds through D-tonic into T1 Hammond pickup</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow hi">Priority 2 of 4 &middot; CATALOG PEAKS</div>
+    <div class="section-header">
+      <h2>High &mdash; the 6 highest-composite albums' marquee tracks</h2>
+      <span class="count-pill hi">6 tracks</span>
+    </div>
+    <p class="section-sub">These six tracks are the standout cinematic peaks across all 30 albums. Each is the T8 of an album scoring composite &ge;94.5 OR a Resurrection-themed cinematic moment. Regenerating these gives the most visible catalog upgrade.</p>
+
+    <div class="track-list-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Album Code</th>
+            <th>Album</th>
+            <th class="num">Track</th>
+            <th>Song Title</th>
+            <th>Role</th>
+            <th class="num">Composite</th>
+            <th class="num">EmPull</th>
+            <th>Why regenerate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="code-cell">CAIM1015EN</td><td class="album-cell">Resurrection Sunday</td><td class="num track-num">T8</td><td class="song-cell">King Jesus Lives</td><td><span class="badge peak">PEAK</span><span class="badge t8">T8</span></td><td class="num composite-cell">95.0%</td><td class="num empull-cell">97%</td><td class="what-changed">Catalog single-track peak. <em>Resurrection-shout T8 with dance-floor groove 95 + EmPull 97</em> &mdash; the brightest moment in the entire Caleb body.</td></tr>
+          <tr><td class="code-cell">CAIM1003EN</td><td class="album-cell">Breakthrough</td><td class="num track-num">T8</td><td class="song-cell">His Faithfulness Endures</td><td><span class="badge peak">PEAK</span><span class="badge t8">T8</span></td><td class="num composite-cell">94.8%</td><td class="num empull-cell">97%</td><td class="what-changed">Format exemplar. <em>T8 cinematic strip-down to single Rhodes + gospel choir bloom</em> = the catalog-defining payoff that became the canonical Caleb Suno standard.</td></tr>
+          <tr><td class="code-cell">CAIM1007EN</td><td class="album-cell">Full Circle</td><td class="num track-num">T8</td><td class="song-cell">Belonging Restored</td><td><span class="badge peak">PEAK</span><span class="badge t8">T8</span></td><td class="num composite-cell">94.5%</td><td class="num empull-cell">96%</td><td class="what-changed">T12 album-loop structural masterclass &mdash; Hammond pad sustain bridges T8 cinematic peak into T12 capstone. <em>Regenerate to lock the loop architecture.</em></td></tr>
+          <tr><td class="code-cell">CAIM1014EN</td><td class="album-cell">Resurrection Hope</td><td class="num track-num">T8</td><td class="song-cell">Garden Morning</td><td><span class="badge peak">PEAK</span><span class="badge t8">T8</span></td><td class="num composite-cell">94.5%</td><td class="num empull-cell">96%</td><td class="what-changed">Empty-tomb cinematic lift, Dynamic Payoff 96. <em>February graveside &rarr; garden morning</em> &mdash; the album's tomb-to-risen-walk pivot.</td></tr>
+          <tr><td class="code-cell">CAIM1026EN</td><td class="album-cell">Dance And Rejoice</td><td class="num track-num">T8</td><td class="song-cell">Everybody On The Floor</td><td><span class="badge peak">PEAK</span><span class="badge t8">T8</span></td><td class="num composite-cell">94.5%</td><td class="num empull-cell">95%</td><td class="what-changed">Dance-floor groove peak (95) + clap-track/horn-stab celebration pocket. <em>The only Caleb T8 designed to move bodies, not just rooms.</em></td></tr>
+          <tr><td class="code-cell">CAIM1020EN</td><td class="album-cell">When Doubt Comes Home</td><td class="num track-num">T8</td><td class="song-cell">Throw the Doors Open</td><td><span class="badge lament">LAMENT</span><span class="badge t8">T8</span></td><td class="num composite-cell">91.5%</td><td class="num empull-cell">97%</td><td class="what-changed">Lament-grade outlier. EmPull 97 catalog ceiling. <em>76-86 BPM dignity-preserved doubt-confession pocket</em> &mdash; needs careful production to preserve the vulnerability arc.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow med">Priority 3 of 4 &middot; T7 + T8 + T12 ARCHITECTURAL POSITIONS</div>
+    <div class="section-header">
+      <h2>Medium &mdash; all T7, T8, and T12 tracks across all 30 albums</h2>
+      <span class="count-pill med">90 tracks</span>
+    </div>
+    <p class="section-sub">The v3.0 audit formalized three architectural positions across every Caleb album: <strong>T7 (pastoral testimony anchor)</strong>, <strong>T8 (cinematic peak strip-down + bloom)</strong>, <strong>T12 (album-loop capstone)</strong>. Regenerating these 90 tracks lifts every album's signature moments. (The 6 tracks already listed in Priority 2 above are duplicated here for completeness &mdash; total unique medium-priority tracks is 90.)</p>
+
+    <h3 style="font-family: Georgia, serif; font-size: 19px; color: var(--medium); margin-top: 28px; margin-bottom: 12px;">All T7 Pastoral Testimony Anchors (30 tracks)</h3>
+    <div class="track-list-wrap">
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Album</th><th class="num">T7 Title</th><th class="num">Album EmPull</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code-cell">CAIM1001</td><td class="album-cell">Anchor in the Storm</td><td class="song-cell" style="text-align: right;">When the Wind Tears at Me</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1002</td><td class="album-cell">Awakening Fire</td><td class="song-cell" style="text-align: right;">When the Spirit Falls</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1003</td><td class="album-cell">Breakthrough</td><td class="song-cell" style="text-align: right;">When the Walls Fall Down</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1004</td><td class="album-cell">Called &amp; Chosen</td><td class="song-cell" style="text-align: right;">Faithfulness in Calling</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1005</td><td class="album-cell">Faithful Witness</td><td class="song-cell" style="text-align: right;">The Long Haul Honesty</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1006</td><td class="album-cell">Family Blessing</td><td class="song-cell" style="text-align: right;">The Blessing Breaks (Altar Track)</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1007</td><td class="album-cell">Full Circle</td><td class="song-cell" style="text-align: right;">The Table Set as If</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1008</td><td class="album-cell">Grace Redeems</td><td class="song-cell" style="text-align: right;">New Name Spoken</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1009</td><td class="album-cell">Healing Wounds</td><td class="song-cell" style="text-align: right;">Balm for Gilead</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1010</td><td class="album-cell">Kingdom Come</td><td class="song-cell" style="text-align: right;">On Earth As It Is</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1011</td><td class="album-cell">Legacy of Light</td><td class="song-cell" style="text-align: right;">What We Leave Behind</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1012</td><td class="album-cell">Refuge</td><td class="song-cell" style="text-align: right;">The Cleft of the Rock</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1013</td><td class="album-cell">Rescue Story</td><td class="song-cell" style="text-align: right;">My Marriage Back From the Dead</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1014</td><td class="album-cell">Resurrection Hope</td><td class="song-cell" style="text-align: right;">Stone Rolled Away</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1015</td><td class="album-cell">Resurrection Sunday</td><td class="song-cell" style="text-align: right;">Empty Tomb, Full Heart</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1016</td><td class="album-cell">Surrender</td><td class="song-cell" style="text-align: right;">Surrender Is Victory</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1017</td><td class="album-cell">The Gospel of Belonging</td><td class="song-cell" style="text-align: right;">Doors Thrown Open for Everyone</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1018</td><td class="album-cell">The Sent Ones</td><td class="song-cell" style="text-align: right;">Carry the Fire</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1019</td><td class="album-cell">Together Again</td><td class="song-cell" style="text-align: right;">Grandfather's Eyes Filling Up</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1020</td><td class="album-cell">When Doubt Comes Home</td><td class="song-cell" style="text-align: right;">Faith Stands Up (Cinematic Roar)</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1021</td><td class="album-cell">Celebrate Jesus Now</td><td class="song-cell" style="text-align: right;">Rooftops Right Now</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1022</td><td class="album-cell">Jesus Is Here</td><td class="song-cell" style="text-align: right;">Run to Where He Stands</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1023</td><td class="album-cell">King Jesus Reigns</td><td class="song-cell" style="text-align: right;">Roar of the Lion King</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1024</td><td class="album-cell">Throne Of My Heart</td><td class="song-cell" style="text-align: right;">You Alone, You Alone</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1025</td><td class="album-cell">I Bow My Knees (King Jesus)</td><td class="song-cell" style="text-align: right;">Holy, Holy, Holy (Thunder Hymn)</td><td class="num empull-cell">96%</td></tr>
+          <tr><td class="code-cell">CAIM1026</td><td class="album-cell">Dance And Rejoice</td><td class="song-cell" style="text-align: right;">Shake The Roof</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1027</td><td class="album-cell">Kingdom Revealed</td><td class="song-cell" style="text-align: right;">Sunrise Like a Trumpet</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1028</td><td class="album-cell">The Millennium Begins</td><td class="song-cell" style="text-align: right;">Evil Ends Tonight</td><td class="num empull-cell">95%</td></tr>
+          <tr><td class="code-cell">CAIM1029</td><td class="album-cell">No Greater Love</td><td class="song-cell" style="text-align: right;">Carry Me to the Table</td><td class="num empull-cell">97%</td></tr>
+          <tr><td class="code-cell">CAIM1030</td><td class="album-cell">Loved Forever</td><td class="song-cell" style="text-align: right;">Dance the Forever Down</td><td class="num empull-cell">97%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family: Georgia, serif; font-size: 19px; color: var(--high); margin-top: 32px; margin-bottom: 12px;">All T8 Cinematic Peak Tracks (30 tracks)</h3>
+    <div class="track-list-wrap">
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Album</th><th class="num">T8 Title</th><th class="num">Album Composite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code-cell">CAIM1001</td><td class="album-cell">Anchor in the Storm</td><td class="song-cell" style="text-align: right;">Not Alone in This Storm</td><td class="num composite-cell">94.2%</td></tr>
+          <tr><td class="code-cell">CAIM1002</td><td class="album-cell">Awakening Fire</td><td class="song-cell" style="text-align: right;">Revival Comes</td><td class="num composite-cell">93.3%</td></tr>
+          <tr><td class="code-cell">CAIM1003</td><td class="album-cell">Breakthrough</td><td class="song-cell" style="text-align: right;">His Faithfulness Endures</td><td class="num composite-cell">94.8%</td></tr>
+          <tr><td class="code-cell">CAIM1004</td><td class="album-cell">Called &amp; Chosen</td><td class="song-cell" style="text-align: right;">His Hand Upon My Life</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1005</td><td class="album-cell">Faithful Witness</td><td class="song-cell" style="text-align: right;">Faithful Through Repetition</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1006</td><td class="album-cell">Family Blessing</td><td class="song-cell" style="text-align: right;">The Table Is Long</td><td class="num composite-cell">93.8%</td></tr>
+          <tr><td class="code-cell">CAIM1007</td><td class="album-cell">Full Circle</td><td class="song-cell" style="text-align: right;">Belonging Restored</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1008</td><td class="album-cell">Grace Redeems</td><td class="song-cell" style="text-align: right;">Standing Tall</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell">CAIM1009</td><td class="album-cell">Healing Wounds</td><td class="song-cell" style="text-align: right;">The Room Around Me</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1010</td><td class="album-cell">Kingdom Come</td><td class="song-cell" style="text-align: right;">Embassy</td><td class="num composite-cell">93.3%</td></tr>
+          <tr><td class="code-cell">CAIM1011</td><td class="album-cell">Legacy of Light</td><td class="song-cell" style="text-align: right;">Carrying the Flame</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1012</td><td class="album-cell">Refuge</td><td class="song-cell" style="text-align: right;">Hidden in You</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell">CAIM1013</td><td class="album-cell">Rescue Story</td><td class="song-cell" style="text-align: right;">Rescue in the Waiting Room</td><td class="num composite-cell">93.7%</td></tr>
+          <tr><td class="code-cell">CAIM1014</td><td class="album-cell">Resurrection Hope</td><td class="song-cell" style="text-align: right;">Garden Morning</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1015</td><td class="album-cell">Resurrection Sunday</td><td class="song-cell" style="text-align: right;">King Jesus Lives</td><td class="num composite-cell">95.0%</td></tr>
+          <tr><td class="code-cell">CAIM1016</td><td class="album-cell">Surrender</td><td class="song-cell" style="text-align: right;">The Altar of My Heart</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1017</td><td class="album-cell">The Gospel of Belonging</td><td class="song-cell" style="text-align: right;">Stranger to Sister Stranger to Brother</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1018</td><td class="album-cell">The Sent Ones</td><td class="song-cell" style="text-align: right;">March On the Nation</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1019</td><td class="album-cell">Together Again</td><td class="song-cell" style="text-align: right;">Together Again (The Song Everyone Knows)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1020</td><td class="album-cell">When Doubt Comes Home</td><td class="song-cell" style="text-align: right;">Throw the Doors Open</td><td class="num composite-cell">91.5%</td></tr>
+          <tr><td class="code-cell">CAIM1021</td><td class="album-cell">Celebrate Jesus Now</td><td class="song-cell" style="text-align: right;">Sky Open Wide</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1022</td><td class="album-cell">Jesus Is Here</td><td class="song-cell" style="text-align: right;">Room Won't Be the Same</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1023</td><td class="album-cell">King Jesus Reigns</td><td class="song-cell" style="text-align: right;">Coronation Day</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1024</td><td class="album-cell">Throne Of My Heart</td><td class="song-cell" style="text-align: right;">Sold Out (Throne of My Heart)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1025</td><td class="album-cell">I Bow My Knees (King Jesus)</td><td class="song-cell" style="text-align: right;">Every Knee Will Bow (Coronation)</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1026</td><td class="album-cell">Dance And Rejoice</td><td class="song-cell" style="text-align: right;">Everybody On The Floor</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1027</td><td class="album-cell">Kingdom Revealed</td><td class="song-cell" style="text-align: right;">The Kingdom Is Here</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1028</td><td class="album-cell">The Millennium Begins</td><td class="song-cell" style="text-align: right;">He's Here, the Reign Begins</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1029</td><td class="album-cell">No Greater Love</td><td class="song-cell" style="text-align: right;">No Greater Love Than This</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1030</td><td class="album-cell">Loved Forever</td><td class="song-cell" style="text-align: right;">Loved Forever (Sing It Loud)</td><td class="num composite-cell">95.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family: Georgia, serif; font-size: 19px; color: var(--accent); margin-top: 32px; margin-bottom: 12px;">All T12 Album-Loop Capstone Tracks (30 tracks)</h3>
+    <div class="track-list-wrap">
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Album</th><th class="num">T12 Title</th><th class="num">Album Composite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code-cell">CAIM1001</td><td class="album-cell">Anchor in the Storm</td><td class="song-cell" style="text-align: right;">After the Storm</td><td class="num composite-cell">94.2%</td></tr>
+          <tr><td class="code-cell">CAIM1002</td><td class="album-cell">Awakening Fire</td><td class="song-cell" style="text-align: right;">Awakening Fire</td><td class="num composite-cell">93.3%</td></tr>
+          <tr><td class="code-cell">CAIM1003</td><td class="album-cell">Breakthrough</td><td class="song-cell" style="text-align: right;">Breakthrough Proclamation</td><td class="num composite-cell">94.8%</td></tr>
+          <tr><td class="code-cell">CAIM1004</td><td class="album-cell">Called &amp; Chosen</td><td class="song-cell" style="text-align: right;">Called and Chosen Forever</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1005</td><td class="album-cell">Faithful Witness</td><td class="song-cell" style="text-align: right;">Witness Forever (Benediction Finale)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1006</td><td class="album-cell">Family Blessing</td><td class="song-cell" style="text-align: right;">Blessing Goes Forward (Benediction Finale)</td><td class="num composite-cell">93.8%</td></tr>
+          <tr><td class="code-cell">CAIM1007</td><td class="album-cell">Full Circle</td><td class="song-cell" style="text-align: right;">Full Circle Forever (Benediction Finale)</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1008</td><td class="album-cell">Grace Redeems</td><td class="song-cell" style="text-align: right;">Grace Forever (Benediction Finale)</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell">CAIM1009</td><td class="album-cell">Healing Wounds</td><td class="song-cell" style="text-align: right;">The Road Home</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1010</td><td class="album-cell">Kingdom Come</td><td class="song-cell" style="text-align: right;">Until the Day</td><td class="num composite-cell">93.3%</td></tr>
+          <tr><td class="code-cell">CAIM1011</td><td class="album-cell">Legacy of Light</td><td class="song-cell" style="text-align: right;">His Light in Us</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1012</td><td class="album-cell">Refuge</td><td class="song-cell" style="text-align: right;">Forever My Refuge</td><td class="num composite-cell">93.2%</td></tr>
+          <tr><td class="code-cell">CAIM1013</td><td class="album-cell">Rescue Story</td><td class="song-cell" style="text-align: right;">Still Being Rescued</td><td class="num composite-cell">93.7%</td></tr>
+          <tr><td class="code-cell">CAIM1014</td><td class="album-cell">Resurrection Hope</td><td class="song-cell" style="text-align: right;">Rise</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1015</td><td class="album-cell">Resurrection Sunday</td><td class="song-cell" style="text-align: right;">Because He Lives</td><td class="num composite-cell">95.0%</td></tr>
+          <tr><td class="code-cell">CAIM1016</td><td class="album-cell">Surrender</td><td class="song-cell" style="text-align: right;">Surrendered and Free</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1017</td><td class="album-cell">The Gospel of Belonging</td><td class="song-cell" style="text-align: right;">The Family Won't Stop Singing</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1018</td><td class="album-cell">The Sent Ones</td><td class="song-cell" style="text-align: right;">Send the Next Sent One</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1019</td><td class="album-cell">Together Again</td><td class="song-cell" style="text-align: right;">Family Forever (The Chain That Won't Break)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1020</td><td class="album-cell">When Doubt Comes Home</td><td class="song-cell" style="text-align: right;">Faith Loud Forever (Stadium Send)</td><td class="num composite-cell">91.5%</td></tr>
+          <tr><td class="code-cell">CAIM1021</td><td class="album-cell">Celebrate Jesus Now</td><td class="song-cell" style="text-align: right;">Celebration Never Ends</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1022</td><td class="album-cell">Jesus Is Here</td><td class="song-cell" style="text-align: right;">Here Forever</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1023</td><td class="album-cell">King Jesus Reigns</td><td class="song-cell" style="text-align: right;">King Jesus Reigns Forever</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1024</td><td class="album-cell">Throne Of My Heart</td><td class="song-cell" style="text-align: right;">He Reigns and I Am His</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1025</td><td class="album-cell">I Bow My Knees (King Jesus)</td><td class="song-cell" style="text-align: right;">Bowed Once, Reigning Forever</td><td class="num composite-cell">93.0%</td></tr>
+          <tr><td class="code-cell">CAIM1026</td><td class="album-cell">Dance And Rejoice</td><td class="song-cell" style="text-align: right;">Dance Forever (Floor Of Heaven)</td><td class="num composite-cell">94.5%</td></tr>
+          <tr><td class="code-cell">CAIM1027</td><td class="album-cell">Kingdom Revealed</td><td class="song-cell" style="text-align: right;">Kingdom Forever (Sing It Loud)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1028</td><td class="album-cell">The Millennium Begins</td><td class="song-cell" style="text-align: right;">Reign Begins (Sing Without End)</td><td class="num composite-cell">93.5%</td></tr>
+          <tr><td class="code-cell">CAIM1029</td><td class="album-cell">No Greater Love</td><td class="song-cell" style="text-align: right;">This Love Stays</td><td class="num composite-cell">94.0%</td></tr>
+          <tr><td class="code-cell">CAIM1030</td><td class="album-cell">Loved Forever</td><td class="song-cell" style="text-align: right;">The Anchor Held (Home, Loved Forever)</td><td class="num composite-cell">95.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow lo">Priority 4 of 4 &middot; INCREMENTAL REFINEMENT</div>
+    <div class="section-header">
+      <h2>Low &mdash; all T1 openers, T2&ndash;T6 middle tracks, T9&ndash;T11 late tracks</h2>
+      <span class="count-pill lo">238 tracks (T1 + T2&ndash;T6 + T9&ndash;T11 across 30 albums, minus the 2 in Priority 1)</span>
+    </div>
+    <p class="section-sub">These 238 tracks received per-track ear-candy / dynamic-arc / emotional-anchor scoring in the v3.0 worker pass, but no fundamentally new architectural production direction. <strong>Lyric bodies are unchanged.</strong> Regenerate only if you want incremental refinement &mdash; the existing Suno cuts are already aligned to the v3.0 craft DNA via the original Caleb-format Suno-compliant lyric files.</p>
+
+    <div class="explainer" style="border-left-color: var(--low);">
+      <h3 style="color: var(--low);">Why these are "low priority"</h3>
+      <p>The Caleb lyric .md files were <strong>not modified</strong> by the v3.0 pass &mdash; they remain the canonical Caleb-format Suno-compliant exemplar that the entire family's other personas were later converted to match. Every Styles field, every section tag, every production cue in those 360 lyric files is the same as before v3.0.</p>
+      <p>What changed for these 238 tracks is the per-album <code>album.meta.json</code> 6-dimension scoring &mdash; an analytical layer that informs <em>future</em> craft passes but does not alter the existing Suno generation inputs (Styles + Lyrics).</p>
+      <p>If you regenerate all 360 tracks anyway (e.g., for a full catalog refresh), the new Suno cuts will be re-rendered from identical inputs to the prior cuts &mdash; the variation will come from Suno's stochastic generation, not from v3.0-introduced changes.</p>
+    </div>
+
+    <div class="explainer" style="border-left-color: var(--medium); margin-top: 18px;">
+      <h3 style="color: var(--medium);">Recommended regeneration order if you want to prioritize impact</h3>
+      <p><strong>Step 1 (must do):</strong> Regenerate the 2 Priority-1 tracks (CAIM1001 T1 + CAIM1030 T12) so the catalog-loop closure lands.</p>
+      <p><strong>Step 2 (high ROI):</strong> Regenerate the 6 Priority-2 catalog peaks &mdash; visible quality lift across the most-listened albums.</p>
+      <p><strong>Step 3 (architectural lift):</strong> Regenerate the remaining 88 unique T7/T8/T12 tracks (28 T7 + 28 T8 + 28 T12, after removing the 6 duplicates from Step 2 and the 2 from Step 1). This locks the formalized v3.0 architectural-position signatures.</p>
+      <p><strong>Step 4 (full refresh, optional):</strong> Regenerate the remaining 238 lower-priority tracks for a full catalog refresh. No urgency &mdash; lyric inputs are unchanged.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>Caleb Inspire &middot; Sonic Craft v3.0 Regeneration Priority List</div>
+    <div>30 albums &middot; 360 tracks total &middot; <strong>2 critical + 6 high + 88 medium-architectural + 238 low-priority</strong> &middot; Generated June 1, 2026</div>
+    <div>
+      <a href="executive-summary.html">Caleb Executive Summary</a> &middot;
+      <a href="_v3-rating-change-report.md">v3.0 Rating Change Report</a> &middot;
+      <a href="../../../../web/inspire-family-dashboard.html">Inspire Family Dashboard</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

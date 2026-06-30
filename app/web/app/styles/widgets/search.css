@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Search results (.sr-*) — Spotify-style layout: category tabs, a Top Result
+   card + Songs list, then card rows for albums / artists / music types /
+   playlists. Uses the site design tokens.
+   ========================================================================== */
+.sr-title { font-size: 26px; font-weight: 800; color: var(--ink); margin: 4px 0 0; padding-bottom: 10px; border-bottom: 1px solid rgba(254, 202, 87, 0.45); }
+.sr-notice { color: var(--ink-soft); font-size: 15px; padding: 24px 0; }
+
+/* Search-page-only override of the standard section padding (other pages keep
+   the default 56px). Scoped via the `sr-page` class on the search <section>. */
+section.standard.sr-page { padding: 20px 0 50px; }
+
+/* Two-column layout: a left vertical nav (the category filters, styled like the
+   admin Operations Console) + the results content on the right. */
+.sr-layout { display: flex; gap: 28px; align-items: flex-start; }
+.sr-nav {
+  display: flex; flex-direction: column; gap: 4px;
+  flex: 0 0 190px; max-width: 190px;
+  border-right: 1px solid rgba(254, 202, 87, 0.45); padding-right: 14px;
+  align-self: stretch; /* stretch to the content's full height so the divider runs all the way down */
+}
+.sr-nav-label { font-size: 16px; line-height: 1.2; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-gold); padding: 30px 14px 14px; }
+.sr-nav-item {
+  text-align: left; background: transparent; border: none; cursor: pointer;
+  border-left: 3px solid transparent; padding: 10px 14px; border-radius: 6px;
+  color: var(--ink-soft); font-size: 14px; font-weight: 600; transition: background 0.15s, color 0.15s;
+}
+.sr-nav-item:hover { color: var(--ink); background: var(--surface-2); }
+.sr-nav-item.active { color: var(--accent-gold); background: var(--surface); border-left: 3px solid var(--accent-gold); }
+.sr-content { flex: 1 1 320px; min-width: 0; padding-top: 20px; }
+
+/* Narrow screens: the nav collapses to a horizontal pill bar above the results. */
+@media (max-width: 820px) {
+  .sr-layout { flex-direction: column; gap: 16px; }
+  .sr-nav {
+    flex-direction: row; flex-wrap: wrap; gap: 8px; max-width: none; flex-basis: auto; width: 100%;
+    border-right: none; border-bottom: 1px solid rgba(254, 202, 87, 0.45);
+    padding-right: 0; padding-bottom: 14px; position: static;
+  }
+  .sr-nav-label { display: none; }
+  .sr-nav-item { border-left: none; border-radius: 999px; background: var(--surface-2); padding: 7px 16px; font-size: 13px; }
+  .sr-nav-item.active { background: var(--accent-gold); color: #000; border-left: none; }
+}
+
+/* Top row: Top Result card + Songs list, side by side (stacks on narrow). */
+.sr-top-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 24px; margin-bottom: 14px; }
+@media (max-width: 820px) { .sr-top-row { grid-template-columns: 1fr; } }
+.sr-h2 { font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 14px; }
+
+/* Top Result big card */
+.sr-top-card {
+  position: relative; display: block; text-decoration: none; cursor: pointer;
+  background: var(--surface-2); border: 1px solid rgba(254, 202, 87, 0.45); border-radius: 12px;
+  padding: 22px; min-height: 200px; transition: background 0.18s, transform 0.12s;
+}
+.sr-top-card:hover { background: var(--surface-3); }
+.sr-top-card:hover .sr-top-play { opacity: 1; transform: translateY(0); }
+.sr-top-art { width: 92px; height: 92px; border-radius: 8px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.sr-top-art--round { border-radius: 50%; }
+.sr-top-name { font-size: 30px; font-weight: 800; color: var(--ink); line-height: 1.1; margin-bottom: 8px; word-break: break-word; }
+.sr-top-kind { font-size: 13px; color: var(--ink-muted); text-transform: capitalize; }
+.sr-top-play {
+  position: absolute; right: 20px; bottom: 20px; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--accent-gold); color: #000;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5); opacity: 0; transform: translateY(8px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+/* Songs list */
+.sr-song-list { display: flex; flex-direction: column; }
+.sr-song-list--full { max-width: none; }
+.sr-song {
+  display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px;
+  cursor: pointer; transition: background 0.14s;
+  border-bottom: 1px solid rgba(254, 202, 87, 0.45);
+}
+.sr-song:hover { background: var(--surface-2); }
+.sr-song-art { position: relative; width: 42px; height: 42px; border-radius: 5px; overflow: hidden; flex: 0 0 auto; }
+.sr-song-play {
+  position: absolute; inset: 0; display: grid; place-items: center; color: #fff;
+  background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.14s;
+}
+.sr-song:hover .sr-song-play { opacity: 1; }
+.sr-song-txt { min-width: 0; }
+.sr-song-title { font-size: 15px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 7px; }
+.sr-song-sub { font-size: 13px; color: var(--ink-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sr-inline-link { color: var(--ink-muted); text-decoration: none; }
+.sr-inline-link:hover { color: var(--ink); text-decoration: underline; }
+.sr-studio-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-gold); flex: 0 0 auto; }
+
+/* Card grids (albums / artists / types / playlists) */
+.sr-section { margin-top: 30px; }
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 18px; }
+.sr-card {
+  position: relative; display: block; text-decoration: none; padding: 14px; border-radius: 10px;
+  background: var(--surface-2); transition: background 0.18s; overflow: hidden;
+  border: 1px solid rgba(254, 202, 87, 0.45);
+}
+.sr-card:hover { background: var(--surface-3); }
+.sr-card:hover .sr-card-play { opacity: 1; transform: translateY(0); }
+.sr-card-art { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 8px 18px rgba(0,0,0,0.4); }
+.sr-card-art--round { border-radius: 50%; box-shadow: none; }
+.sr-card--artist { text-align: center; }
+.sr-card--studio .sr-card-art { border: 2px solid var(--accent-gold); }
+.sr-card-title { font-size: 15px; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sr-card-sub { font-size: 12.5px; color: var(--ink-muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sr-card-play {
+  position: absolute; right: 10px; bottom: 10px; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--accent-gold); color: #000;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.5); opacity: 0; transform: translateY(8px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+/* Cover image + fallback */
+.sr-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sr-cover--round { border-radius: 50%; }
+.sr-cover--empty { display: grid; place-items: center; background: var(--surface-3); color: var(--ink-muted); }

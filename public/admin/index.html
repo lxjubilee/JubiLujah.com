@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Overview &middot; Jubilujah.com</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<link rel="stylesheet" href="/_assets/widgets/rating-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/comment-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/trophy-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/player-widget.css">
+<script src="/_assets/widgets/rating-widget.js" defer></script>
+<script src="/_assets/widgets/comment-widget.js" defer></script>
+<script src="/_assets/widgets/trophy-widget.js" defer></script>
+<script src="/_assets/widgets/player-widget.js" defer></script>
+<style>
+  /* ==================== ADMIN-SHARED STYLES ==================== */
+  .admin-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .admin-notice {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.12) 0%, rgba(254, 202, 87, 0.06) 100%), var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-notice strong { color: var(--accent-peach); letter-spacing: 0.04em; }
+
+  .admin-subnav {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .admin-subnav a {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--line);
+    transition: background 0.15s, color 0.15s;
+  }
+  .admin-subnav a:last-child { border-right: none; }
+  .admin-subnav a:hover { background: var(--surface-2); color: var(--ink); }
+  .admin-subnav a.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+
+  /* ==================== COUNTER STRIP ==================== */
+  .counter-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 900px) { .counter-strip { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .counter-strip { grid-template-columns: 1fr; } }
+  .counter-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  }
+  .counter-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(233, 69, 96, 0.18); }
+  .counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-gold) 100%);
+  }
+  .counter-card .num {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 54px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent-peach) 0%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .counter-card .label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .counter-card .stage-tag {
+    margin-top: 12px;
+    display: inline-block;
+    font-size: 10px;
+    color: var(--accent-gold);
+    background: rgba(254, 202, 87, 0.10);
+    border: 1px solid rgba(254, 202, 87, 0.32);
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ==================== ACTIVITY FEED ==================== */
+  .feed-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+  }
+  @media (max-width: 980px) { .feed-grid { grid-template-columns: 1fr; } }
+
+  .feed-card, .alerts-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+  .feed-card h3, .alerts-card h3 {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .feed-card h3 .meta, .alerts-card h3 .meta {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .feed-list {
+    max-height: 720px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+  .feed-list::-webkit-scrollbar { width: 8px; }
+  .feed-list::-webkit-scrollbar-track { background: var(--bg-1); border-radius: 4px; }
+  .feed-list::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 4px; }
+  .feed-list::-webkit-scrollbar-thumb:hover { background: var(--accent-deep); }
+
+  .feed-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: flex-start;
+  }
+  .feed-row:last-child { border-bottom: none; }
+  .feed-row .icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .feed-row .icon.transition { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%); }
+  .feed-row .icon.rating { background: linear-gradient(135deg, var(--accent-gold) 0%, #c89c4a 100%); color: #2c1f1a; }
+  .feed-row .icon.comment { background: linear-gradient(135deg, #4ab1c4 0%, #1e617a 100%); }
+  .feed-row .icon.nomination { background: linear-gradient(135deg, #8c6fcf 0%, #5e4ba8 100%); }
+  .feed-row .body { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+  .feed-row .body strong { color: var(--ink); }
+  .feed-row .body em { color: var(--accent-gold); font-style: normal; }
+  .feed-row .body .actor { color: var(--accent-peach); font-weight: 600; }
+  .feed-row .body .detail { color: var(--ink-muted); font-size: 12px; margin-top: 2px; font-style: italic; }
+  .feed-row .ts {
+    font-size: 11px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ==================== BOTTLENECK ALERTS ==================== */
+  .alerts-card {
+    background: linear-gradient(180deg, rgba(254, 202, 87, 0.06) 0%, transparent 100%), var(--surface);
+    border-color: rgba(254, 202, 87, 0.32);
+  }
+  .alerts-card h3 { color: var(--accent-gold); }
+  .alert-row {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .alert-row:last-child { border-bottom: none; }
+  .alert-row .title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .alert-row .artist { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+  .alert-row .stuck {
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--accent-gold);
+    background: rgba(254, 202, 87, 0.12);
+    border: 1px solid rgba(254, 202, 87, 0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .alert-row .stuck .age { color: var(--accent-peach); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span class="admin-badge">Admin Mode</span>
+        <a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="#login" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Admin Dashboard</div>
+    <h1>Operational <em>overview</em></h1>
+    <p class="lead">
+      Live pipeline counters, the last 50 activity events across the production line, and bottleneck alerts for anything sitting more than 7 days in a stage. All other admin tools are linked below.
+    </p>
+  </div>
+</section>
+
+<section class="standard">
+  <div class="container">
+
+    <div class="admin-notice">
+      <strong>ADMIN MODE</strong>
+      <span>This section is gated to the <strong>admin</strong> role per Build Spec &sect;5. All actions below are audited and logged to <code>production.pipeline_history</code> and related audit tables.</span>
+    </div>
+
+    <nav class="admin-subnav">
+      <a href="/admin/index.html" class="active">Overview</a>
+      <a href="/admin/pipeline.html">Pipeline Kanban</a>
+      <a href="/admin/awards.html">Awards Review</a>
+      <a href="/admin/users.html">Users &amp; Roles</a>
+    </nav>
+
+    <div class="counter-strip" id="counterStrip"></div>
+
+    <div class="feed-grid">
+      <div class="feed-card">
+        <h3>Activity feed <span class="meta" id="feedMeta">Last 50 events</span></h3>
+        <div class="feed-list" id="feedList"></div>
+      </div>
+
+      <div class="alerts-card">
+        <h3>Bottleneck alerts <span class="meta">&gt; 7 days in stage</span></h3>
+        <div id="alertsList"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><strong>Jubilujah.com Admin</strong> &middot; Operational dashboard</div>
+    <div>Pipeline visibility &middot; activity audit &middot; bottleneck triage</div>
+    <span class="jubilee-badge">A Jubilee Enterprise</span>
+    <div>&copy; 2026 Jubilee Software, Inc.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   ADMIN OVERVIEW — MOCK DATA (Build Spec §14)
+   Counters, last-50 activity feed, bottleneck alerts.
+   ============================================================ */
+
+const COUNTERS = [
+  { num: 23, label: 'Songs awaiting Tahoma QA',     stage: 'qa_review' },
+  { num: 7,  label: 'Awaiting Sunil approval',      stage: 'sunil_approval' },
+  { num: 5,  label: 'Awaiting final approval',      stage: 'final_approval' },
+  { num: 2,  label: 'Ready to publish',             stage: 'published (queued)' },
+];
+
+function renderCounters() {
+  const root = document.getElementById('counterStrip');
+  root.innerHTML = COUNTERS.map(c => `
+    <div class="counter-card">
+      <div class="num">${c.num}</div>
+      <div class="label">${c.label}</div>
+      <span class="stage-tag">${c.stage}</span>
+    </div>
+  `).join('');
+}
+
+/* ---- Activity feed (50 mock events) ---- */
+const ACTORS = [
+  'Gabriel Ungureanu', 'Melody Inspire', 'Tahoma Inspire', 'Sunil Gemini',
+  'Caleb Inspire', 'Imani Inspire', 'Zariah Inspire', 'Elias Inspire',
+  'Eliana Inspire', 'Nova Inspire', 'Santiago Inspire', 'Amir Inspire',
+  'Zev Inspire', 'Jubilee Inspire'
+];
+
+const SONGS = [
+  { t: 'Breakthrough',                a: 'Caleb Inspire' },
+  { t: 'Lifted Higher',               a: 'Melody Inspire' },
+  { t: 'Mountains Move',              a: 'Imani Inspire' },
+  { t: 'Tierra de Promesa',           a: 'Santiago Inspire' },
+  { t: 'Watch the Sky',               a: 'Nova Inspire' },
+  { t: 'Coyote Moon',                 a: 'Elias Inspire' },
+  { t: 'Praise Him Loud',             a: 'Zev Inspire' },
+  { t: 'River of Healing',            a: 'Eliana Inspire' },
+  { t: 'Awake, Awake',                a: 'Jubilee Inspire' },
+  { t: 'Crown of Light',              a: 'Amir Inspire' },
+  { t: 'Wildflower Song',             a: 'Zariah Inspire' },
+  { t: 'King of My Heart',            a: 'Kingdom Pulse' },
+  { t: 'Send Me, Lord',               a: 'Gabriel Inspire' },
+  { t: 'Stone by Stone',              a: 'Radiant Stones' },
+  { t: 'Daisy Says Dance',            a: 'Party Giggles' },
+  { t: 'Bedtime in the Barn',         a: 'Tiny Tiggles' },
+  { t: 'Old Allan Hassan Road',       a: 'Allan Hassan' },
+  { t: 'Cornell\'s Lullaby',          a: 'Cornell Kay' },
+  { t: 'Ruthie Comes Home',           a: 'Ruthie Bolton' },
+  { t: 'Wildfire Hymn',               a: 'Daisy Wylder' },
+];
+
+const STAGES = [
+  'concept', 'lyrics_drafting', 'lyrics_approved', 'song_generation',
+  'qa_review', 'engineering', 'sunil_approval', 'final_approval',
+  'published', 'distributed'
+];
+
+const TYPES = [
+  { k: 'transition', icon: '&rarr;', weight: 5 },
+  { k: 'rating',     icon: '&#9733;', weight: 3 },
+  { k: 'comment',    icon: '&#128172;', weight: 3 },
+  { k: 'nomination', icon: '&#127942;', weight: 1 },
+];
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function weightedType() {
+  const total = TYPES.reduce((s, t) => s + t.weight, 0);
+  let r = Math.random() * total;
+  for (const t of TYPES) { r -= t.weight; if (r <= 0) return t; }
+  return TYPES[0];
+}
+
+function fmtAgo(minsAgo) {
+  if (minsAgo < 60) return `${minsAgo}m ago`;
+  if (minsAgo < 60 * 24) return `${Math.floor(minsAgo / 60)}h ago`;
+  return `${Math.floor(minsAgo / (60 * 24))}d ago`;
+}
+
+/* Deterministic-ish mock — uses seeded sequence so the page looks alive but stable per load */
+function buildFeed(n) {
+  const events = [];
+  let cursorMin = 4; // start ~4 minutes ago
+  for (let i = 0; i < n; i++) {
+    const type = weightedType();
+    const actor = pick(ACTORS);
+    const obj = pick(SONGS);
+    let body = '';
+    let detail = '';
+    if (type.k === 'transition') {
+      const fromIdx = Math.floor(Math.random() * (STAGES.length - 1));
+      const toIdx = Math.random() < 0.85 ? fromIdx + 1 : Math.max(0, fromIdx - 1);
+      const direction = toIdx > fromIdx ? 'advanced' : 'reverted';
+      body = `<span class="actor">${actor}</span> ${direction} <strong>"${obj.t}"</strong> from <em>${STAGES[fromIdx]}</em> &rarr; <em>${STAGES[toIdx]}</em>`;
+      if (direction === 'reverted') detail = 'Note: needs additional vocal layer pass before re-submit.';
+    } else if (type.k === 'rating') {
+      const stars = 3 + Math.floor(Math.random() * 3);
+      body = `<span class="actor">${actor}</span> rated <strong>"${obj.t}"</strong> by ${obj.a} &mdash; <em>${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</em>`;
+    } else if (type.k === 'comment') {
+      const snippets = [
+        'Bridge needs more breath room before the final chorus.',
+        'Love the harmonies at 2:14 &mdash; ship it.',
+        'Lyric on line 18 should rhyme with verse 1 motif.',
+        'Mix is hot on the snare; pull 1.5dB.',
+        'Stem split needed before engineering pass.'
+      ];
+      body = `<span class="actor">${actor}</span> commented on <strong>"${obj.t}"</strong>`;
+      detail = '"' + pick(snippets) + '"';
+    } else { // nomination
+      const cats = ['Song of the Year', 'Most Anointed Lyric', 'Best Worship Anthem', 'Best Prophetic Song', 'Best Declaration Song'];
+      body = `<span class="actor">${actor}</span> nominated <strong>"${obj.t}"</strong> for <em>${pick(cats)}</em>`;
+      detail = 'Justification: 287 chars submitted.';
+    }
+    events.push({ type, body, detail, ts: fmtAgo(cursorMin) });
+    cursorMin += 2 + Math.floor(Math.random() * 28);
+  }
+  return events;
+}
+
+function renderFeed() {
+  const events = buildFeed(50);
+  const root = document.getElementById('feedList');
+  root.innerHTML = events.map(e => `
+    <div class="feed-row">
+      <div class="icon ${e.type.k}">${e.type.icon}</div>
+      <div class="body">
+        ${e.body}
+        ${e.detail ? `<div class="detail">${e.detail}</div>` : ''}
+      </div>
+      <div class="ts">${e.ts}</div>
+    </div>
+  `).join('');
+  document.getElementById('feedMeta').textContent = `Last ${events.length} events`;
+}
+
+/* ---- Bottleneck alerts ---- */
+const ALERTS = [
+  { title: 'Coyote Moon',          artist: 'Elias Inspire',     stage: 'qa_review',       days: 11 },
+  { title: 'Tierra de Promesa',    artist: 'Santiago Inspire',  stage: 'engineering',     days: 9  },
+  { title: 'Crown of Light',       artist: 'Amir Inspire',      stage: 'sunil_approval',  days: 8  },
+  { title: 'Wildflower Song',      artist: 'Zariah Inspire',    stage: 'qa_review',       days: 14 },
+  { title: 'Bedtime in the Barn',  artist: 'Tiny Tiggles',      stage: 'lyrics_drafting', days: 23 },
+  { title: 'Stone by Stone',       artist: 'Radiant Stones',    stage: 'final_approval',  days: 8  },
+];
+
+function renderAlerts() {
+  const root = document.getElementById('alertsList');
+  root.innerHTML = ALERTS.map(a => `
+    <div class="alert-row">
+      <div class="title">${a.title}</div>
+      <div class="artist">${a.artist}</div>
+      <div class="stuck">stuck in <strong>${a.stage}</strong> &middot; <span class="age">${a.days}d</span></div>
+    </div>
+  `).join('');
+}
+
+renderCounters();
+renderFeed();
+renderAlerts();
+</script>
+
+</body>
+</html>

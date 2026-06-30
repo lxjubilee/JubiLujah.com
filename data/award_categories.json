@@ -1,0 +1,79 @@
+[
+  {
+    "id": "80eb3486-7487-4730-b399-9b1e5dd66874",
+    "name": "Song of the Year",
+    "description": "The single best song of the year, regardless of style.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "1fb72ff9-4f6f-4a03-9c6a-16b33349e2e5",
+    "name": "Album of the Year",
+    "description": "The single best album of the year, regardless of style.",
+    "rateable_type": "album",
+    "active": true
+  },
+  {
+    "id": "74889d1c-f5bb-4d86-a060-96e8fa788dba",
+    "name": "Most Anointed Lyric",
+    "description": "The song whose lyric carries the heaviest anointing.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "4838182f-7f24-4e97-a186-9051b9b5110b",
+    "name": "Best Worship Anthem",
+    "description": "The standout congregational worship anthem of the year.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "c607849f-beb2-4c5d-a33a-4fa7aec5ed71",
+    "name": "Best Prophetic Song",
+    "description": "The song that most powerfully carries a prophetic word.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "fca8a3f0-7ec6-4b97-bd4f-cba178b2f446",
+    "name": "Best Declaration Song",
+    "description": "The song that most powerfully equips believers to declare truth.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "22c1458f-4583-49b4-bc31-477e878861c1",
+    "name": "Best Children's Song",
+    "description": "The standout song written for children.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "195f1a4a-b007-4be9-bec3-65f12f06d6db",
+    "name": "Best Children's Album",
+    "description": "The standout album written for children.",
+    "rateable_type": "album",
+    "active": true
+  },
+  {
+    "id": "9d9265b6-5284-45dc-b596-006e67ceadc1",
+    "name": "Best Bilingual or Multilingual Production",
+    "description": "The standout production featuring more than one language.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "c41bbc8f-807e-499f-a9af-de948d235a6c",
+    "name": "Best Cinematic Production",
+    "description": "The most cinematic, film-scored production of the year.",
+    "rateable_type": "song",
+    "active": true
+  },
+  {
+    "id": "aeb3f1f4-adb9-45cd-973d-2aeb532c08c5",
+    "name": "Breakthrough Album of the Year",
+    "description": "The breakthrough album of the year from a new or rising artist.",
+    "rateable_type": "album",
+    "active": true
+  }
+]

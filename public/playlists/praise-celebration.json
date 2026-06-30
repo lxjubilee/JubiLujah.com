@@ -1,0 +1,84 @@
+{
+  "id": "praise-celebration",
+  "title": "Praise Celebration",
+  "category": "inspire",
+  "category_label": "Inspire Family",
+  "description": "High-energy celebration anthems from across the family. Drums, brass, choir stacks, dance grooves, and the unrestrained joy of knowing the King. Tahoma's powwow Big Drum, Santiago's Latin-funk gratitude, Imani's gospel-house, Nova's anthem-electronic.",
+  "theme": "Celebration, dance, praise, gratitude, victory",
+  "created": "2026-06-03",
+  "cover_gradient_class": "cat-inspire",
+  "albums": [
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Dance Before the Maker",
+      "album_code": "THIM1021",
+      "album_slug": "THIM1021EN-dance-before-the-maker",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Powwow / intertribal Big Drum opening anthem for celebration before the Creator (Ps 150)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Light on the Mountain",
+      "album_code": "THIM1030",
+      "album_slug": "THIM1030EN-light-on-the-mountain",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Powwow rock arena celebration of Christ's already-finished victory over darkness (Col 1:13)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "He Walked Among Us",
+      "album_code": "THIM1040",
+      "album_slug": "THIM1040EN-he-walked-among-us",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Native gospel altar-call finale celebrating the Word made flesh — catalog peak at 95.8."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Acción de Gracias",
+      "album_code": "SAIM1040",
+      "album_slug": "SAIM1040EN-accion-de-gracias",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Brazilian favela funk gratitude celebration — Santiago catalog peak."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Samba de la Fiesta Santa",
+      "album_code": "SAIM1036",
+      "album_slug": "SAIM1036EN-samba-de-la-fiesta-santa",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Brazilian samba holy-fiesta dance celebration."
+    },
+    {
+      "artist_name": "Santiago Inspire",
+      "artist_slug": "santiago-inspire",
+      "album_title": "Te Encontré, Jesús",
+      "album_code": "SAIM1031",
+      "album_slug": "SAIM1031EN-te-encontre-jesus",
+      "category_path": "inspire/santiago-inspire",
+      "why_included": "Salsa testimony of the encounter with the living Jesús."
+    },
+    {
+      "artist_name": "Imani Inspire",
+      "artist_slug": "imani-inspire",
+      "album_title": "Dance Floor of Heaven",
+      "album_code": "IMIM1001",
+      "album_slug": "IMIM1001EN-dance-floor-of-heaven",
+      "category_path": "inspire/imani-inspire",
+      "why_included": "Afrobeats / gospel-house family-highest-composite celebration anthem (95.05 composite)."
+    },
+    {
+      "artist_name": "Tahoma Inspire",
+      "artist_slug": "tahoma-inspire",
+      "album_title": "Mahalo to the Maker",
+      "album_code": "THIM1038",
+      "album_slug": "THIM1038EN-mahalo-to-the-maker",
+      "category_path": "inspire/tahoma-inspire",
+      "why_included": "Hula music gratitude celebration to the Giver of every good gift (Jas 1:17)."
+    }
+  ]
+}

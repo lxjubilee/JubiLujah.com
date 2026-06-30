@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jubileeverse.com/schemas/v1/song.schema.json",
+  "title": "Song Manifest",
+  "description": "Canonical published JSON manifest for a single song in the Jubilujah catalog. Written by the Jubilujah publish flow (see Build Spec sections 16 and 17) and read by Jubilee Radio, the persistent footer player, DSP distribution, and any downstream consumer surface on cdn.jubileeverse.com. Editorial-only state (comments, ratings, internal notes, OHI/CCI mode labels) is intentionally excluded.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "status",
+    "title",
+    "artist",
+    "album",
+    "duration_seconds",
+    "language",
+    "genre_tags",
+    "audio",
+    "metadata"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional self-link to this schema document on the CDN."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable RFC 4122 UUID for this song. Matches catalog.songs.id in Postgres and the audio asset filename at /audio/{id}.{format}."
+    },
+    "type": {
+      "type": "string",
+      "const": "song",
+      "description": "Discriminator. Always the literal string 'song'."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing publish version. Incremented every time a new manifest is PUT to R2 for this id (see production.publications)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "lyrics_drafting",
+        "lyrics_approved",
+        "song_generation",
+        "qa_review",
+        "engineering",
+        "sunil_approval",
+        "final_approval",
+        "published",
+        "distributed"
+      ],
+      "description": "Current pipeline stage (Build Spec section 8). Mirrors production.pipeline_state.current_stage. Worker audio-gating only allows public access when status = 'published'."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Primary display title in the song's primary language. UTF-8; diacritics and non-Latin scripts preserved verbatim."
+    },
+    "title_translations": {
+      "type": "object",
+      "description": "Map of ISO 639-1 language codes to translated titles. Excludes the primary language captured in 'title'.",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      }
+    },
+    "artist": {
+      "type": "object",
+      "description": "Denormalized artist reference. Full artist record lives at /catalog/artists/{slug}.json.",
+      "additionalProperties": false,
+      "required": ["id", "slug", "name", "grouping"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Artist UUID matching catalog.artists.id."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "URL-safe artist slug (lowercase kebab-case)."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Human-readable display name."
+        },
+        "grouping": {
+          "type": "string",
+          "enum": [
+            "inspire_family",
+            "affiliated",
+            "children",
+            "other_initiatives"
+          ],
+          "description": "Taxonomy bucket per Build Spec section 6."
+        }
+      }
+    },
+    "album": {
+      "type": "object",
+      "description": "Denormalized album reference. Full album record lives at /catalog/albums/{album-id}.json.",
+      "additionalProperties": false,
+      "required": ["id", "slug", "track_number"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Album UUID matching catalog.albums.id."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "URL-safe album slug."
+        },
+        "track_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99,
+          "description": "1-based ordinal position within the album. For Inspire Family albums, valid values are 1 through 12 (12-song lock)."
+        }
+      }
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 7200,
+      "description": "Audio duration rounded to whole seconds. Hard cap of two hours protects downstream queue and scheduling math."
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+      "description": "Primary language of the lyrics, ISO 639-1 (optionally region-tagged, e.g. 'pt-BR')."
+    },
+    "language_secondary": {
+      "type": "array",
+      "description": "Additional languages present in the lyrics (bilingual or multilingual productions). Does not include the primary language.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      },
+      "uniqueItems": true,
+      "maxItems": 12
+    },
+    "genre_tags": {
+      "type": "array",
+      "description": "Free-form editorial genre / mood tags (e.g. 'worship', 'bridal', 'bilingual', 'lullaby'). At least one required for catalog browse facets.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "maxItems": 24,
+      "uniqueItems": true
+    },
+    "five_fold_office": {
+      "type": "string",
+      "enum": [
+        "apostle",
+        "prophet",
+        "evangelist",
+        "pastor",
+        "teacher"
+      ],
+      "description": "Five-Fold ministry typology applied to this song. Typically inherited from the performing persona's dual-office; may be overridden per-song. Omit when not applicable (children's content, instrumentals, etc.)."
+    },
+    "audio": {
+      "type": "object",
+      "description": "Reference to the canonical audio asset on the CDN. Worker gates access until status = 'published'.",
+      "additionalProperties": false,
+      "required": ["primary_url", "format", "bitrate_kbps", "checksum_sha256"],
+      "properties": {
+        "primary_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://cdn\\.jubileeverse\\.com/audio/.+",
+          "description": "Absolute URL to the audio file on cdn.jubileeverse.com."
+        },
+        "format": {
+          "type": "string",
+          "enum": ["mp3", "flac", "wav", "m4a", "opus"],
+          "description": "Container / codec family of the primary asset."
+        },
+        "bitrate_kbps": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 1411,
+          "description": "Audio bitrate in kilobits per second (lossy codecs) or nominal bitrate (lossless)."
+        },
+        "checksum_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Lowercase hex SHA-256 of the audio bytes. Used for cache validation and integrity audits."
+        }
+      }
+    },
+    "lyrics": {
+      "type": "object",
+      "description": "Lyric content and supporting metadata. Optional for instrumentals.",
+      "additionalProperties": false,
+      "required": ["format", "content"],
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": ["plain", "lrc", "enhanced_lrc", "ttml"],
+          "description": "Lyric serialization format. 'plain' is line-broken text; 'lrc' and 'enhanced_lrc' carry timestamps; 'ttml' is W3C Timed Text."
+        },
+        "content": {
+          "type": "string",
+          "description": "Lyric body in the song's primary language. UTF-8 preserved verbatim including diacritics and non-Latin scripts."
+        },
+        "translations": {
+          "type": "object",
+          "description": "Map of ISO 639-1 codes to translated lyric bodies. Translation format may differ from the primary 'format' (e.g. plain English alongside an LRC Romanian original).",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scripture_refs": {
+          "type": "array",
+          "description": "Bible references the lyric draws on, formatted as 'Book Chapter:Verse' or 'Book Chapter:Verse-Verse'.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "uniqueItems": true,
+          "maxItems": 64
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Distribution and lifecycle metadata.",
+      "additionalProperties": false,
+      "required": ["released_at", "first_published_at", "last_updated_at"],
+      "properties": {
+        "isrc": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$",
+          "description": "International Standard Recording Code (12 characters, no hyphens)."
+        },
+        "iswc": {
+          "type": "string",
+          "pattern": "^T-?[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}-?[0-9]$",
+          "description": "International Standard Musical Work Code, when applicable."
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Public-facing release date (RFC 3339 / ISO 8601 with timezone)."
+        },
+        "first_published_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the first PUT to the CDN at status = 'published'."
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the most recent manifest write."
+        }
+      }
+    },
+    "awards": {
+      "type": "array",
+      "description": "Awards conferred on this song. Mirrors production.awards rows where rateable_type = 'song'.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "period", "type"],
+        "properties": {
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "Award category name (e.g. 'Most Anointed Lyric')."
+          },
+          "period": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$",
+            "description": "Four-digit award year."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["winner", "honorable_mention", "nominee"],
+            "description": "Recognition tier. 'nominee' is only emitted while the period is closed-pending-decision."
+          },
+          "citation": {
+            "type": "string",
+            "maxLength": 4000,
+            "description": "Optional admin-written citation accompanying a winner or honorable mention."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santiago Inspire &mdash; Sonic Craft v3.0 Executive Summary</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<script src="/web/_assets/player.js" defer></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #d4622d;
+    --copper: #c8a04a;
+    --warm: #e8854a;
+    --santiago-deep: #8b2a3e;
+    --hook: #e07856;
+    --groove: #7ba174;
+    --replay: #6ba0c0;
+    --payoff: #d4a05c;
+    --emotion: #b285c2;
+    --loop: #5e95a8;
+    --success: #5fb371;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(212, 98, 45, 0.22) 0%, transparent 50%),
+      radial-gradient(800px 400px at 10% 110%, rgba(200, 160, 74, 0.16) 0%, transparent 50%),
+      radial-gradient(600px 300px at 50% 50%, rgba(139, 42, 62, 0.10) 0%, transparent 60%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 72px 0 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .container { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--warm); font-weight: 600; }
+  .hero h1 { font-family: Georgia, serif; font-size: 56px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 6px 0 14px; color: var(--ink); }
+  .hero h1 em { font-style: italic; color: var(--warm); font-weight: 500; }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 860px; line-height: 1.55; }
+  .hero-meta { display: flex; gap: 36px; margin-top: 28px; flex-wrap: wrap; }
+  .hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .hero-meta .val { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .hero-meta .val.copper { color: var(--copper); }
+  .hero-meta .val.warm { color: var(--warm); }
+
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-family: Georgia, serif; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; color: var(--ink); }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .section-sub { color: var(--ink-soft); font-size: 16px; max-width: 860px; margin-bottom: 32px; }
+
+  .kpi-grid { display: grid; grid-template-columns: 1.4fr repeat(6, 1fr); gap: 14px; margin-top: 24px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 20px; display: flex; flex-direction: column; gap: 4px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .kpi:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .kpi.lead { background: linear-gradient(135deg, rgba(212, 98, 45, 0.25) 0%, rgba(200, 160, 74, 0.16) 100%), var(--surface); border-color: rgba(212, 98, 45, 0.4); }
+  .kpi .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; line-height: 1.25; min-height: 2.5em; display: flex; align-items: flex-start; }
+  .kpi.lead .label { color: var(--warm); }
+  .kpi .score { font-family: Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1; margin-top: 6px; color: var(--ink); }
+  .kpi.lead .score { font-size: 50px; background: linear-gradient(135deg, var(--warm) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .kpi .footnote { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .kpi.lead .footnote { color: var(--ink-soft); }
+  .kpi.k-hook { border-top: 3px solid var(--hook); }
+  .kpi.k-groove { border-top: 3px solid var(--groove); }
+  .kpi.k-replay { border-top: 3px solid var(--replay); }
+  .kpi.k-payoff { border-top: 3px solid var(--payoff); }
+  .kpi.k-emotion { border-top: 3px solid var(--emotion); }
+  .kpi.k-loop { border-top: 3px solid var(--loop); }
+  @media (max-width: 1024px) { .kpi-grid { grid-template-columns: 1fr 1fr 1fr; } .kpi.lead { grid-column: span 3; } }
+  @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .kpi.lead { grid-column: span 2; } }
+
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .ba-card h4 { font-family: Georgia, serif; font-size: 18px; color: var(--warm); margin-bottom: 2px; }
+  .ba-card .ba-row { display: grid; grid-template-columns: 80px 1fr 100px; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line-soft); font-size: 13px; }
+  .ba-card .ba-row:last-child { border-bottom: none; }
+  .ba-card .ba-dim { color: var(--ink-soft); text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  .ba-card .ba-bar-wrap { height: 18px; background: var(--surface-2); border-radius: 3px; position: relative; overflow: hidden; }
+  .ba-card .ba-bar { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--copper) 0%, var(--warm) 100%); border-radius: 3px; }
+  .ba-card .ba-bar.bar-orig { background: linear-gradient(90deg, #555 0%, #777 100%); }
+  .ba-card .ba-val { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; color: var(--ink); font-size: 13px; }
+  .ba-card .ba-delta { font-size: 11px; color: var(--success); font-weight: 700; margin-left: 4px; }
+
+  .comparison { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px 32px; margin-top: 24px; overflow-x: auto; }
+  .comparison h3 { font-family: Georgia, serif; font-size: 20px; margin-bottom: 16px; color: var(--accent); }
+  .comp-table { width: 100%; border-collapse: collapse; min-width: 1240px; }
+  .comp-table th, .comp-table td { padding: 12px 10px; text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .comp-table th:first-child, .comp-table td:first-child { text-align: left; }
+  .comp-table th { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+  .comp-table th.san { color: var(--warm); }
+  .comp-table td { border-bottom: 1px solid var(--line-soft); font-weight: 500; }
+  .comp-table td.dim { font-weight: 600; }
+  .comp-table tr.composite td { background: rgba(212, 98, 45, 0.12); font-weight: 700; font-size: 16px; }
+  .comp-table .san-cell { color: var(--warm); font-weight: 700; }
+
+  .top10 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .top10 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; align-items: center; gap: 18px; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .rank { font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: var(--accent); min-width: 36px; }
+  .card.gold .rank { color: var(--warm); }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; color: var(--ink); }
+  .card-code { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; font-family: "SF Mono", Monaco, monospace; }
+  .card-score { font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: var(--accent); }
+  .card.gold { border-color: var(--warm); border-width: 2px; background: linear-gradient(135deg, rgba(232, 133, 74, 0.10) 0%, transparent 60%), var(--surface); }
+  .card.gold .card-score { color: var(--warm); }
+
+  .style-fusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 700px) { .style-fusion-grid { grid-template-columns: 1fr; } }
+  .fusion-card { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--warm); border-radius: 8px; padding: 14px 18px; }
+  .fusion-card .fusion-code { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; }
+  .fusion-card .fusion-title { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 2px; margin-bottom: 4px; }
+  .fusion-card .fusion-meta { font-size: 12px; color: var(--ink-soft); }
+  .fusion-card .fusion-meta strong { color: var(--copper); }
+  .fusion-card .fusion-score { font-family: Georgia, serif; font-size: 18px; color: var(--warm); font-weight: 700; float: right; }
+
+  .full-table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--surface-2); }
+  th { text-align: left; padding: 12px 10px; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 2px solid var(--line); white-space: nowrap; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td { padding: 11px 10px; border-bottom: 1px solid var(--line-soft); color: var(--ink-soft); }
+  td.album-title { color: var(--ink); font-weight: 500; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr.star td { background: linear-gradient(90deg, rgba(232, 133, 74, 0.12) 0%, transparent 100%); }
+  tbody tr.peak td { background: linear-gradient(90deg, rgba(212, 98, 45, 0.06) 0%, transparent 100%); }
+  tbody tr.guard td { background: linear-gradient(90deg, rgba(200, 160, 74, 0.07) 0%, transparent 100%); }
+  .code-cell { font-family: "SF Mono", Monaco, monospace; font-size: 11px; color: var(--ink-muted); }
+  .composite-cell { font-weight: 700; color: var(--accent); }
+  tr.star .composite-cell { color: var(--warm); }
+  tr.peak .composite-cell { color: var(--warm); }
+  tr.guard .composite-cell { color: var(--copper); }
+  .star-mark { color: var(--warm); margin-right: 4px; }
+  .peak-mark { color: var(--warm); margin-right: 4px; }
+  .guard-mark { color: var(--copper); margin-right: 4px; }
+
+  .dna-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; }
+  @media (max-width: 700px) { .dna-grid { grid-template-columns: 1fr; } }
+  .dna-item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; border-left: 4px solid var(--accent); }
+  .dna-item h3 { font-family: Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--warm); }
+  .dna-item p { color: var(--ink-soft); font-size: 14px; }
+  .dna-item strong { color: var(--ink); }
+  .dna-item em { color: var(--copper); font-style: italic; }
+
+  .mech-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 24px; }
+  @media (max-width: 900px) { .mech-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .mech-grid { grid-template-columns: 1fr; } }
+  .mech { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
+  .mech-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0a0e14; font-family: Georgia, serif; font-size: 18px; margin-bottom: 12px; }
+  .mech-1 .mech-icon { background: var(--hook); }
+  .mech-2 .mech-icon { background: var(--groove); }
+  .mech-3 .mech-icon { background: var(--replay); }
+  .mech-4 .mech-icon { background: var(--payoff); }
+  .mech-5 .mech-icon { background: var(--loop); }
+  .mech-6 .mech-icon { background: var(--emotion); }
+  .mech h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .mech p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .mech .metric { margin-top: 10px; font-size: 11px; letter-spacing: 0.05em; color: var(--success); font-weight: 700; }
+
+  .guard-section { background: linear-gradient(135deg, rgba(200, 160, 74, 0.12) 0%, rgba(139, 42, 62, 0.06) 100%), var(--surface); border: 1px solid rgba(200, 160, 74, 0.3); border-radius: 12px; padding: 28px 32px; margin-top: 24px; }
+  .guard-section h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--copper); }
+  .guard-section p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; margin-bottom: 14px; }
+  .guard-section strong { color: var(--ink); }
+  .guard-section em { color: var(--copper); font-style: italic; }
+  .guard-section ul { padding-left: 22px; color: var(--ink-soft); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+
+  .spotlight { background: linear-gradient(135deg, rgba(212, 98, 45, 0.10) 0%, rgba(139, 42, 62, 0.06) 100%), var(--surface); border: 1px solid rgba(212, 98, 45, 0.3); border-radius: 12px; padding: 38px 40px; margin-top: 24px; }
+  .spotlight h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 12px; color: var(--warm); }
+  .spotlight p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .spotlight .quote { font-family: Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.55; padding: 22px 0 8px; color: var(--ink); border-top: 1px solid rgba(212, 98, 45, 0.2); margin-top: 22px; }
+  .spotlight .quote em { color: var(--warm); font-style: italic; }
+
+  .compliance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 800px) { .compliance { grid-template-columns: 1fr 1fr; } }
+  .comp { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--success); border-radius: 6px; padding: 12px 16px; font-size: 13px; display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+  .comp::before { content: '\2713'; color: var(--success); font-weight: 700; font-size: 16px; }
+
+  footer { background: #06090e; color: var(--ink-muted); padding: 44px 0; text-align: center; font-size: 12px; letter-spacing: 0.04em; border-top: 1px solid var(--line); }
+  footer .container { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  footer strong { color: var(--warm); }
+  footer a { color: var(--accent); text-decoration: none; } 
+</style>
+<script src="/web/_assets/album-status.js" defer></script>
+<script src="/web/_assets/turbo-nav.js" defer></script>
+<script src="/web/_assets/top-20.js" defer></script>
+<link rel="stylesheet" href="/_assets/site.css">
+<style id="JV-HERO-PERSONA-BG-V2">
+/* Persona hero background — image URL is set per-page via inline --persona-img on
+ * the .hero element so turbo-nav soft-navigation correctly updates the image when
+ * navigating between personas (the static style block stays cached in head, only
+ * the inline custom-property value changes with the swapped body markup).
+ * Right 1/4 of the image is cropped by scaling the image to 133.33% width.
+ */
+.hero {
+  background-image:
+    linear-gradient(to right, rgba(10,14,20,0.94) 0%, rgba(10,14,20,0.86) 30%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.18) 78%, rgba(10,14,20,0) 100%),
+    var(--persona-img) !important;
+  background-size: 100% 100%, 133.33% auto !important;
+  background-position: center, left 60% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  min-height: calc(100dvh - var(--jv-above, 0px)) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.hero .container > * { max-width: 55% !important; position: relative !important; z-index: 1 !important; }
+.hero > .eyebrow, .hero > h1, .hero > .subhead,
+.hero > .stats-row, .hero > .note, .hero > .legend {
+  max-width: 55% !important; position: relative !important; z-index: 1 !important;
+}
+.hero h1 { font-size: 36px !important; line-height: 1.06 !important; margin: 6px 0 10px !important; }
+.hero h1 em { font-size: 0.55em !important; line-height: 1.4 !important; font-weight: 500 !important; }
+.hero-eyebrow { font-size: 11px !important; }
+.hero-sub { font-size: 14px !important; line-height: 1.55 !important; max-width: 100% !important; }
+.hero-meta { gap: 18px !important; margin-top: 14px !important; flex-wrap: wrap !important; }
+.hero-meta .label { font-size: 10px !important; }
+.hero-meta .val { font-size: 14px !important; }
+.hero .eyebrow { font-size: 11px !important; }
+.hero .subhead { font-size: 14px !important; max-width: 100% !important; margin-bottom: 12px !important; line-height: 1.5 !important; }
+.hero .stats-row { gap: 8px !important; margin-top: 10px !important; flex-wrap: wrap !important; }
+.hero .stat-card { padding: 6px 10px !important; min-width: 90px !important; background: rgba(20,25,33,0.85) !important; }
+.hero .stat-card .label { font-size: 9px !important; margin-bottom: 2px !important; }
+.hero .stat-card .val { font-size: 18px !important; }
+.hero .note { font-size: 12px !important; max-width: 100% !important; margin: 12px 0 !important; padding: 8px 12px !important; line-height: 1.5 !important; }
+.hero .legend { font-size: 11px !important; }
+@media (max-width: 900px) {
+  .hero { background-size: 100% 100%, cover !important; background-position: center, center !important; min-height: calc(100dvh - var(--jv-above, 0px)) !important; }
+  .hero .container > *,
+  .hero > .eyebrow, .hero > h1, .hero > .subhead, .hero > .stats-row, .hero > .note, .hero > .legend { max-width: 100% !important; }
+  .hero h1 { font-size: 26px !important; }
+  .hero .stat-card .val { font-size: 16px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span data-album-ready-header="artist:santiago-inspire"></span><span class="sep">|</span><a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="/auth/login.html" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html" class="active">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+      <a href="/admin/index.html" class="admin-only" style="display:none;">Admin</a>
+    </nav>
+  </div>
+</header>
+</div>
+<header class="hero" style="--persona-img: url('/personas/Santiago.png')">
+  <div class="container">
+    <div class="hero-eyebrow">Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <h1>Santiago Inspire <em>&mdash; the bilingual Latin Cristo-celebration anthem-maker. Forty-one albums where every Latin rhythm bends the knee to one Name.</em></h1>
+    <p class="hero-sub">
+      Forty-one albums. Four hundred and ninety-two tracks. <strong>Male theatrical baritone with mixed three-part choir</strong>; +10% praise intensity; HIGH-ENERGY LATIN POP CELEBRATION OVERRIDE. The catalog covers the full bilingual Cristo-celebration range &mdash; original 21 albums in Corona-Pop, Tango Esperanza, Mariachi Resurrecci&oacute;n, Bachata-Novio, Salsa Barrio-Praise, Sertanejo Reino, Funk-Carioca Voz-Prof&eacute;tica, Cumbia-Cruz, Trap Sagrado fusion lanes &mdash; and the NEW 20 batch <strong>Celebration Praise &amp; Worship &times; one Latin style</strong> covering reggaeton, latin pop, mariachi, bolero, flamenco, bachata, rock en espa&ntilde;ol, bossa nova, sertanejo, salsa, vallenato, tango, latin trap, cumbia, samba, sierre&ntilde;o, regional Mexican, merengue, funk carioca, and dembow. The new 20 amplify by <strong>+0.92 composite</strong> over the existing 21 (94.93 vs 94.01). SAIM1041 "Fiel a Cada Generaci&oacute;n" T12 catalog finale loops back to SAIM1022 "Solo T&uacute;, Jes&uacute;s" T1 via dembow&rarr;reggaeton A-major tempo bleed.
+    </p>
+    <div class="hero-meta">
+      <div><span class="label">Albums</span><span class="val">41</span></div>
+      <div><span class="label">Tracks</span><span class="val">492</span></div>
+      <div><span class="label">Composite</span><span class="val warm">94.46%</span></div>
+      <div><span class="label">New 20 Composite</span><span class="val copper">94.93%</span></div>
+      <div><span class="label">EmoPull</span><span class="val warm">95.18</span></div>
+      <div><span class="label">Date</span><span class="val">June 2, 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<div data-top-20="santiago-inspire" class="jv-top20-mount" style="max-width:1180px;margin:32px auto 0;padding:0 24px;"></div>
+
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Catalog-wide addictiveness</div>
+    <h2>The six-dimension scorecard</h2>
+    <p class="section-sub">Each dimension targets a specific neuroscience of compulsive re-listening. Santiago enters as family <strong>#3</strong> at 94.46% composite across the full 41-album catalog &mdash; behind only Imani (95.05%) and Zev (94.59%). 32 of 41 albums score 94.0+; 14 above 95.0. The new 20 Celebration P&amp;W &times; Latin-style batch hits 94.93 composite, second-highest single-batch behind Amir's new 20.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi lead">
+        <div class="label">Addictiveness Composite</div>
+        <div class="score">94.46%</div>
+        <div class="footnote">Family #3 &middot; mean of six dimensions across 41 albums &middot; 14 of 41 above 95 &middot; 32 of 41 above 94 &middot; catalog peak SAIM1040 "Acci&oacute;n de Gracias" at 95.4 &middot; new-20 composite 94.93 = top-tier single-batch band</div>
+      </div>
+      <div class="kpi k-hook">
+        <div class="label">Hook Strength</div>
+        <div class="score">94.38%</div>
+        <div class="footnote">Bilingual chant-locked hooks; new-20 +1.09</div>
+      </div>
+      <div class="kpi k-groove">
+        <div class="label">Groove</div>
+        <div class="score">94.49%</div>
+        <div class="footnote">Latin percussion driving 100-130 BPM</div>
+      </div>
+      <div class="kpi k-replay">
+        <div class="label">Replay Value</div>
+        <div class="score">94.15%</div>
+        <div class="footnote">Latin instrument density, salsa breaks, mariachi trumpets</div>
+      </div>
+      <div class="kpi k-payoff">
+        <div class="label">Dynamic Payoff</div>
+        <div class="score">94.72%</div>
+        <div class="footnote">T8 cinematic peaks with D&rarr;E key lifts</div>
+      </div>
+      <div class="kpi k-emotion">
+        <div class="label">Emotional Pull</div>
+        <div class="score">95.18%</div>
+        <div class="footnote">Latino devotional warmth + Christ-centered theology</div>
+      </div>
+      <div class="kpi k-loop">
+        <div class="label">Loop-ability</div>
+        <div class="score">93.88%</div>
+        <div class="footnote">SAIM1041&rarr;SAIM1022 dembow-reggaeton catalog finale loop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Two-batch catalog &middot; existing vs new</div>
+    <h2>The new 20 amplified +0.92 composite over the existing 21</h2>
+    <p class="section-sub">The existing 21 albums were already V4-SOP-compliant high-energy Latin celebration; the audit applied light reformat + scoring, not heavy rewrites (most albums needed no celebration boost). The new 20 Celebration P&amp;W &times; Latin style fusion batch was built fresh with V3 amplification engineered from the start: chant-locked hooks at 0:08-0:14, 100-130 BPM Latin viral pocket, T8 cinematic drops with D&rarr;E key-lift modulation, bilingual Spanish+English+Portuguese welcome, all 10 viral characteristics per song.</p>
+
+    <div class="ba-grid">
+      <div class="ba-card">
+        <h4>Existing 21 (SAIM1001&ndash;SAIM1021) &middot; Latin celebration originals</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.85%"></div></div><span class="ba-val">93.85</span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 94.13%"></div></div><span class="ba-val">94.13</span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.73%"></div></div><span class="ba-val">93.73</span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 94.29%"></div></div><span class="ba-val">94.29</span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 94.71%"></div></div><span class="ba-val">94.71</span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar bar-orig" style="width: 93.44%"></div></div><span class="ba-val">93.44</span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar bar-orig" style="width: 94.01%"></div></div>
+          <span class="ba-val" style="font-size:16px;">94.01</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <h4>NEW 20 (SAIM1022&ndash;SAIM1041) &middot; Celebration P&amp;W &times; Latin style</h4>
+        <div class="ba-row"><span class="ba-dim">Hook</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.94%"></div></div><span class="ba-val">94.94 <span class="ba-delta">+1.09</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Groove</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.88%"></div></div><span class="ba-val">94.88 <span class="ba-delta">+0.75</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Replay</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.59%"></div></div><span class="ba-val">94.59 <span class="ba-delta">+0.86</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Payoff</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 95.17%"></div></div><span class="ba-val">95.17 <span class="ba-delta">+0.88</span></span></div>
+        <div class="ba-row"><span class="ba-dim">EmoPull</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 95.66%"></div></div><span class="ba-val">95.66 <span class="ba-delta">+0.95</span></span></div>
+        <div class="ba-row"><span class="ba-dim">Loop</span><div class="ba-bar-wrap"><div class="ba-bar" style="width: 94.33%"></div></div><span class="ba-val">94.33 <span class="ba-delta">+0.89</span></span></div>
+        <div class="ba-row" style="margin-top:8px;border-top:2px solid var(--line);padding-top:12px;">
+          <span class="ba-dim" style="font-weight:700;">Composite</span>
+          <div class="ba-bar-wrap" style="height:22px;"><div class="ba-bar" style="width: 94.93%"></div></div>
+          <span class="ba-val" style="font-size:16px;">94.93 <span class="ba-delta">+0.92</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Eleven-voice persona comparison</div>
+    <h2>Santiago enters at family #3</h2>
+    <p class="section-sub">Santiago's full 41-album composite (94.46%) sits at family #3 behind only Imani (95.05%) and Zev (94.59%). Of the 11 rated personas, Santiago is the only one bringing a full bilingual Spanish-Christian celebration body of work across all 20 major Latin music traditions &mdash; reggaeton, latin pop, mariachi, bolero, flamenco, bachata, rock en espa&ntilde;ol, bossa nova, sertanejo, salsa, vallenato, tango, latin trap, cumbia, samba, sierre&ntilde;o, regional Mexican, merengue, funk carioca, dembow.</p>
+
+    <div class="comparison">
+      <h3>Catalog-wide addictiveness &middot; eleven personas side-by-side</h3>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Mel &middot; 40</th>
+            <th>Jub &middot; 61</th>
+            <th>Zar &middot; 42</th>
+            <th>Eli &middot; 44</th>
+            <th>Ela &middot; 41</th>
+            <th>Cal &middot; 30</th>
+            <th>Ima &middot; 41</th>
+            <th>Zev &middot; 40</th>
+            <th>Amr &middot; 48</th>
+            <th>Nov &middot; 50</th>
+            <th class="san">San &middot; 41</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="dim">Hook</td><td>94.36%</td><td>94.1%</td><td>94.0%</td><td>93.5%</td><td>93.7%</td><td>94.0%</td><td><strong>95.93%</strong></td><td>94.45%</td><td>94.05%</td><td>93.77%</td><td class="san-cell">94.38%</td></tr>
+          <tr><td class="dim">Groove</td><td>93.96%</td><td>92.6%</td><td>93.0%</td><td>91.9%</td><td>92.1%</td><td>91.8%</td><td><strong>95.29%</strong></td><td>94.09%</td><td>93.35%</td><td>93.21%</td><td class="san-cell">94.49%</td></tr>
+          <tr><td class="dim">Replay</td><td>94.00%</td><td>93.7%</td><td>93.5%</td><td>92.7%</td><td>93.4%</td><td>94.4%</td><td><strong>94.63%</strong></td><td>94.26%</td><td>94.29%</td><td>93.85%</td><td class="san-cell">94.15%</td></tr>
+          <tr><td class="dim">Payoff</td><td>94.09%</td><td>93.7%</td><td>93.4%</td><td>92.6%</td><td>92.8%</td><td>94.1%</td><td><strong>95.49%</strong></td><td>94.80%</td><td>94.97%</td><td>94.36%</td><td class="san-cell">94.72%</td></tr>
+          <tr><td class="dim">EmoPull</td><td>94.62%</td><td>95.4%</td><td>95.1%</td><td>94.9%</td><td>95.3%</td><td>95.97%</td><td>95.56%</td><td>95.73%</td><td><strong>95.99%</strong></td><td>95.17%</td><td class="san-cell">95.18%</td></tr>
+          <tr><td class="dim">Loop</td><td>93.56%</td><td>91.5%</td><td>91.6%</td><td>90.4%</td><td>91.4%</td><td>92.0%</td><td>93.46%</td><td><strong>93.71%</strong></td><td>93.55%</td><td>93.22%</td><td class="san-cell">93.88%</td></tr>
+          <tr class="composite"><td>Composite</td><td>94.10%</td><td>94.44%</td><td>93.40%</td><td>93.05%</td><td>93.20%</td><td>93.67%</td><td><strong>95.05%</strong></td><td>94.59%</td><td>94.34%</td><td>93.92%</td><td class="san-cell">94.46%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Top performers</div>
+    <h2>The 14 most addictive Santiago albums</h2>
+    <p class="section-sub">Ranked by composite. SAIM1040 "Acci&oacute;n de Gracias" (Funk Carioca) leads the catalog at 95.4% &mdash; the Brazilian favela-funk gratitude celebration. Three-way tie at 95.2% with Solo T&uacute; Jes&uacute;s (Reggaeton), Te Encontr&eacute; Jes&uacute;s (Salsa), and Fiel a Cada Generaci&oacute;n (Dembow catalog-finale). The existing 21 peak is SAIM1001 "Cristo Rey del Ritmo" at 94.5%.</p>
+
+    <div class="top10">
+      <a href="/web/album.html?code=SAIM1040EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Acci&oacute;n de Gracias</div><div class="card-code">SAIM1040 &middot; Celebration P&amp;W &times; Funk Carioca &middot; NEW</div></div><div class="card-score">95.4</div></div></a>
+      <a href="/web/album.html?code=SAIM1022EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Solo T&uacute;, Jes&uacute;s</div><div class="card-code">SAIM1022 &middot; Celebration P&amp;W &times; Reggaeton &middot; NEW</div></div><div class="card-score">95.2</div></div></a>
+      <a href="/web/album.html?code=SAIM1031EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Te Encontr&eacute;, Jes&uacute;s</div><div class="card-code">SAIM1031 &middot; Celebration P&amp;W &times; Salsa &middot; NEW</div></div><div class="card-score">95.2</div></div></a>
+      <a href="/web/album.html?code=SAIM1041EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card gold"><div class="rank">&#9733;</div><div class="card-body"><div class="card-title">Fiel a Cada Generaci&oacute;n (finale)</div><div class="card-code">SAIM1041 &middot; Celebration P&amp;W &times; Dembow &middot; NEW</div></div><div class="card-score">95.2</div></div></a>
+      <a href="/web/album.html?code=SAIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">5</div><div class="card-body"><div class="card-title">Vuelvo a Casa, Jes&uacute;s</div><div class="card-code">SAIM1028 &middot; Celebration P&amp;W &times; Rock en espa&ntilde;ol &middot; NEW</div></div><div class="card-score">95.1</div></div></a>
+      <a href="/web/album.html?code=SAIM1036EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">5</div><div class="card-body"><div class="card-title">Samba de la Fiesta Santa</div><div class="card-code">SAIM1036 &middot; Celebration P&amp;W &times; Brazilian Samba &middot; NEW</div></div><div class="card-score">95.1</div></div></a>
+      <a href="/web/album.html?code=SAIM1026EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">La Cruz Habla</div><div class="card-code">SAIM1026 &middot; Celebration P&amp;W &times; Flamenco &middot; NEW</div></div><div class="card-score">95.0</div></div></a>
+      <a href="/web/album.html?code=SAIM1030EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Tu Palabra Es Mi Pan</div><div class="card-code">SAIM1030 &middot; Celebration P&amp;W &times; Sertanejo &middot; NEW</div></div><div class="card-score">95.0</div></div></a>
+      <a href="/web/album.html?code=SAIM1034EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Hecho a Su Imagen</div><div class="card-code">SAIM1034 &middot; Celebration P&amp;W &times; Latin trap / Urbano &middot; NEW</div></div><div class="card-score">95.0</div></div></a>
+      <a href="/web/album.html?code=SAIM1037EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Corrido del Peregrino</div><div class="card-code">SAIM1037 &middot; Celebration P&amp;W &times; Sierre&ntilde;o &middot; NEW</div></div><div class="card-score">95.0</div></div></a>
+      <a href="/web/album.html?code=SAIM1038EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">7</div><div class="card-body"><div class="card-title">Ra&iacute;ces en Cristo</div><div class="card-code">SAIM1038 &middot; Celebration P&amp;W &times; Regional Mexican &middot; NEW</div></div><div class="card-score">95.0</div></div></a>
+      <a href="/web/album.html?code=SAIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">12</div><div class="card-body"><div class="card-title">Nube de Testigos</div><div class="card-code">SAIM1032 &middot; Celebration P&amp;W &times; Vallenato &middot; NEW (sensitive-theme verified)</div></div><div class="card-score">94.9</div></div></a>
+      <a href="/web/album.html?code=SAIM1035EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">12</div><div class="card-body"><div class="card-title">Cumbia del Pan Compartido</div><div class="card-code">SAIM1035 &middot; Celebration P&amp;W &times; Cumbia &middot; NEW</div></div><div class="card-score">94.9</div></div></a>
+      <a href="/web/album.html?code=SAIM1001EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="card"><div class="rank">14</div><div class="card-body"><div class="card-title">Cristo Rey del Ritmo (existing peak)</div><div class="card-code">SAIM1001 &middot; Corona-Pop (CPW &times; Latin Pop)</div></div><div class="card-score">94.5</div></div></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The 20 NEW Latin-celebration builds</div>
+    <h2>Celebration Praise &amp; Worship &times; one Latin style (NEW: SAIM1022&ndash;SAIM1041)</h2>
+    <p class="section-sub">Twenty new viral Latin-celebration albums covering 20 themes &times; 20 distinct Latin music styles. The 25 themes spanned Hispanic/Latino/Brazilian Christian devotion &mdash; Jesus as only Savior, faith and family, honoring elders, devotion, the Cross, mercy, repentance, prayer, the Word, encounter, cloud of witnesses, hope through suffering, dignity, care for the poor, sacred celebration, pilgrimage, cultural identity, marriage/vocation/purity, gratitude, and God's faithfulness across generations. All 10 viral characteristics engineered per song. Catalog finale SAIM1041 T12 loops back to SAIM1022 T1 (dembow&rarr;reggaeton A-major bleed).</p>
+
+    <div class="style-fusion-grid">
+      <a href="/web/album.html?code=SAIM1022EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.2</span><div class="fusion-code">SAIM1022EN</div><div class="fusion-title">Solo T&uacute;, Jes&uacute;s</div><div class="fusion-meta"><strong>Jesus as Only Savior (Jn 14:6)</strong> &middot; &times; Reggaeton</div></a></div>
+      <a href="/web/album.html?code=SAIM1023EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.8</span><div class="fusion-code">SAIM1023EN</div><div class="fusion-title">La Familia Que Ora</div><div class="fusion-meta"><strong>Faith and family (la familia)</strong> &middot; &times; Latin pop</div></a></div>
+      <a href="/web/album.html?code=SAIM1024EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.6</span><div class="fusion-code">SAIM1024EN</div><div class="fusion-title">Las Manos de Abuela</div><div class="fusion-meta"><strong>Honoring grandparents and elders</strong> &middot; &times; Mariachi/Ranchera</div></a></div>
+      <a href="/web/album.html?code=SAIM1025EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">SAIM1025EN</div><div class="fusion-title">Cu&aacute;nto Te Adoro</div><div class="fusion-meta"><strong>Devotion and reverence in worship</strong> &middot; &times; Bolero</div></a></div>
+      <a href="/web/album.html?code=SAIM1026EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.0</span><div class="fusion-code">SAIM1026EN</div><div class="fusion-title">La Cruz Habla</div><div class="fusion-meta"><strong>Cross and Christ's sacrifice</strong> &middot; &times; Flamenco</div></a></div>
+      <a href="/web/album.html?code=SAIM1027EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.7</span><div class="fusion-code">SAIM1027EN</div><div class="fusion-title">Misericordia Sin Final</div><div class="fusion-meta"><strong>Mercy and grace (la misericordia)</strong> &middot; &times; Bachata</div></a></div>
+      <a href="/web/album.html?code=SAIM1028EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.1</span><div class="fusion-code">SAIM1028EN</div><div class="fusion-title">Vuelvo a Casa, Jes&uacute;s</div><div class="fusion-meta"><strong>Repentance and conversion</strong> &middot; &times; Rock en espa&ntilde;ol</div></a></div>
+      <a href="/web/album.html?code=SAIM1029EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.5</span><div class="fusion-code">SAIM1029EN</div><div class="fusion-title">Oraci&oacute;n Diaria</div><div class="fusion-meta"><strong>Prayer as a way of life</strong> &middot; &times; Bossa nova</div></a></div>
+      <a href="/web/album.html?code=SAIM1030EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.0</span><div class="fusion-code">SAIM1030EN</div><div class="fusion-title">Tu Palabra Es Mi Pan</div><div class="fusion-meta"><strong>Hunger for Scripture</strong> &middot; &times; Sertanejo</div></a></div>
+      <a href="/web/album.html?code=SAIM1031EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.2</span><div class="fusion-code">SAIM1031EN</div><div class="fusion-title">Te Encontr&eacute;, Jes&uacute;s</div><div class="fusion-meta"><strong>Encounter with living Jes&uacute;s</strong> &middot; &times; Salsa</div></a></div>
+      <a href="/web/album.html?code=SAIM1032EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.9</span><div class="fusion-code">SAIM1032EN</div><div class="fusion-title">Nube de Testigos &mdash; sensitive verified</div><div class="fusion-meta"><strong>Cloud of witnesses (Heb 12:1)</strong> &middot; &times; Vallenato</div></a></div>
+      <a href="/web/album.html?code=SAIM1033EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.8</span><div class="fusion-code">SAIM1033EN</div><div class="fusion-title">A&uacute;n en la Sombra, T&uacute;</div><div class="fusion-meta"><strong>Hope through suffering</strong> &middot; &times; Tango</div></a></div>
+      <a href="/web/album.html?code=SAIM1034EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.0</span><div class="fusion-code">SAIM1034EN</div><div class="fusion-title">Hecho a Su Imagen</div><div class="fusion-meta"><strong>Dignity (Imago Dei)</strong> &middot; &times; Latin trap / Urbano</div></a></div>
+      <a href="/web/album.html?code=SAIM1035EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.9</span><div class="fusion-code">SAIM1035EN</div><div class="fusion-title">Cumbia del Pan Compartido</div><div class="fusion-meta"><strong>Care for poor (Matt 25)</strong> &middot; &times; Cumbia</div></a></div>
+      <a href="/web/album.html?code=SAIM1036EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.1</span><div class="fusion-code">SAIM1036EN</div><div class="fusion-title">Samba de la Fiesta Santa</div><div class="fusion-meta"><strong>Sacred celebration</strong> &middot; &times; Brazilian Samba</div></a></div>
+      <a href="/web/album.html?code=SAIM1037EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.0</span><div class="fusion-code">SAIM1037EN</div><div class="fusion-title">Corrido del Peregrino</div><div class="fusion-meta"><strong>Pilgrimage and journey</strong> &middot; &times; Sierre&ntilde;o / Corridos tumbados</div></a></div>
+      <a href="/web/album.html?code=SAIM1038EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.0</span><div class="fusion-code">SAIM1038EN</div><div class="fusion-title">Ra&iacute;ces en Cristo</div><div class="fusion-meta"><strong>Cultural identity in Christ</strong> &middot; &times; Regional Mexican (banda/norte&ntilde;o)</div></a></div>
+      <a href="/web/album.html?code=SAIM1039EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">94.7</span><div class="fusion-code">SAIM1039EN</div><div class="fusion-title">Para Siempre, en Cristo</div><div class="fusion-meta"><strong>Marriage, vocation, purity</strong> &middot; &times; Merengue</div></a></div>
+      <a href="/web/album.html?code=SAIM1040EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.4</span><div class="fusion-code">SAIM1040EN</div><div class="fusion-title">&#9733; Acci&oacute;n de Gracias (catalog peak)</div><div class="fusion-meta"><strong>Gratitude / acci&oacute;n de gracias</strong> &middot; &times; Funk Carioca (Brazilian)</div></a></div>
+      <a href="/web/album.html?code=SAIM1041EN" class="jv-card-link" style="display:block;text-decoration:none;color:inherit;"><div class="fusion-card"><span class="fusion-score">95.2</span><div class="fusion-code">SAIM1041EN</div><div class="fusion-title">Fiel a Cada Generaci&oacute;n &mdash; catalog finale</div><div class="fusion-meta"><strong>God's faithfulness</strong> &middot; &times; Dembow &middot; T12 loops to SAIM1022 T1</div></a></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Theological guardrails (sensitive themes)</div>
+    <h2>Four sensitive-theme albums verified clean</h2>
+    <p class="section-sub">Tradition (Catholic, Orthodox, Hispanic-Pentecostal) sometimes differs from Bible-only evangelical practice around the saints, Mary, sacred images, and intercession. Santiago's protocol position: <strong>affirm</strong> the genuine love and reverence behind the practice, <strong>direct</strong> all worship/prayer/ultimate trust to God alone through Jesus Christ, <strong>honor</strong> saints and Mary as faithful examples to imitate, <strong>do not</strong> position any creature as object of worship or mediator replacing Christ (1 Tim 2:5).</p>
+
+    <div class="guard-section">
+      <h3>SAIM1024 Las Manos de Abuela &middot; Mariachi/Ranchera &middot; 94.6</h3>
+      <p>Honors abuelas/abuelos as faithful examples whose prayers carried the faith forward. Section K guardrails verified:</p>
+      <ul>
+        <li>ZERO prayer to dead grandparents; ZERO veneration of relics (T4 explicit "no es un amuleto")</li>
+        <li>T2/T8 explicit "no como reliquia" / "no es objeto de culto" on Bibles</li>
+        <li>T9 explicit "no te llamo" against praying to dead</li>
+        <li>T10 Heb 13:7 imitate-their-faith doctrinal anchor</li>
+        <li>T11 Heb 12:2 "fijemos los ojos en JES&Uacute;S &mdash; no en la nube" cloud-to-Christ pivot</li>
+        <li>Cristo as One Mediator preserved across all 12 tracks (1 Tim 2:5)</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>SAIM1025 Cu&aacute;nto Te Adoro &middot; Bolero &middot; 94.5</h3>
+      <p>All adoration EXCLUSIVELY to Jes&uacute;s. The bolero tradition has rich romantic-adoration language; here the Beloved (Amado) is ALWAYS Jes&uacute;s.</p>
+      <ul>
+        <li>"Amado" strictly = Jes&uacute;s (Song of Songs 5:16 corporate-Bride, NOT erotic, NOT individualistic)</li>
+        <li>T6 "no beso una imagen &mdash; beso los pies del Cristo Resucitado" vs icon-veneration</li>
+        <li>T8 "el Amado es Jes&uacute;s &mdash; no es un santo, no es un s&iacute;mbolo, es el Cordero" vs saint/Marian substitution</li>
+        <li>T10 "solo el Cordero es digno" (Rev 5:9)</li>
+        <li>Kiss/feet/chest imagery cross-referenced to NT moments with Jesus (Lk 7:38, Jn 13:23, Rev 1:17)</li>
+        <li>Only worship-dominant album in new-20 catalog (35% praise / 65% worship)</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>SAIM1026 La Cruz Habla &middot; Flamenco &middot; 95.0</h3>
+      <p>Meditation on Calvary is central to Christian worship. Reverence the historical act of Christ, NOT the wooden object as relic-with-power.</p>
+      <ul>
+        <li>T1 explicit "no le rezo a la madera" (I do not pray to the wood)</li>
+        <li>T8 doctrinal-clarification track "El Madero Habla de Ti" &mdash; "yo no le canto a la madera &mdash; yo le canto al Crucificado"</li>
+        <li>T6 explicit 1 Tim 2:5 Christ as sole Mediator preserved</li>
+        <li>No relic worship; no Mariology; T10 resurrection-pivot anchored</li>
+        <li>The Cross POINTS TO Christ's act; worship goes to Christ Himself</li>
+      </ul>
+    </div>
+
+    <div class="guard-section">
+      <h3>SAIM1032 Nube de Testigos &middot; Vallenato &middot; 94.9 (MOST SENSITIVE)</h3>
+      <p>The album honors saints / cloud of witnesses per Heb 12:1-2 &mdash; explicitly STRICTLY Christ-centered:</p>
+      <ul>
+        <li>Heb 12:1-2 framing throughout: cloud of witnesses surrounding us, <em>fixing our eyes on JES&Uacute;S</em></li>
+        <li>Saints (Paul, Peter, Stephen, the martyrs, unnamed faithful, abuelas, missionaries) as EXAMPLES to imitate &mdash; never objects of worship</li>
+        <li>ZERO prayer to any saint (no "San Pedro, intercede por nosotros")</li>
+        <li>ZERO Mary as "Mother of Mercy" / "Queen of Heaven" / "co-redeemer" / "mediatrix" in worship sense</li>
+        <li>Mary appears only via her own Magnificat (Luke 1:46-55) <em>worshipping God</em> + John 2:5 <em>pointing to Jesus</em> &mdash; "do whatever He tells you"</li>
+        <li>T2 "Los Ojos en Jes&uacute;s" + T7 "Un Solo Mediador" function as doctrinal-anchor songs (1 Tim 2:5 explicit)</li>
+        <li>Multiple tracks contain explicit honramos-NO-invocamos / honor-NOT-pray-to clauses</li>
+        <li>All worship/prayer/ultimate trust directed to Jes&uacute;s/Padre/Esp&iacute;ritu Santo only</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Full catalog</div>
+    <h2>All 41 albums &middot; 6-dimension scorecard</h2>
+    <p class="section-sub">Sorted by catalog code. &#9733; catalog peak &middot; &#9733; secondary peaks &middot; &#9670; sensitive-theme guardrails verified clean. NEW Latin-celebration batch is SAIM1022&ndash;SAIM1041.</p>
+
+    <div class="full-table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Album</th><th>Code</th><th class="num">Comp</th><th class="num">Hook</th><th class="num">Groove</th><th class="num">Replay</th><th class="num">DynPay</th><th class="num">EmoPull</th><th class="num">Loop</th></tr>
+        </thead>
+        <tbody>
+          <tr class="peak"><td>01</td><td class="album-title"><a href="/web/album.html?code=SAIM1001EN"><span class="peak-mark">&#9733;</span>Cristo Rey del Ritmo (existing peak)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1001EN">SAIM1001</a></td><td class="num composite-cell">94.5%</td><td class="num">94.6%</td><td class="num">94.8%</td><td class="num">94.0%</td><td class="num">94.8%</td><td class="num">95.2%</td><td class="num">94.0%</td></tr>
+          <tr class="guard"><td>02</td><td class="album-title"><a href="/web/album.html?code=SAIM1002EN"><span class="guard-mark">&#9670;</span>El Rosario de Abuela (sensitive-theme verified)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1002EN">SAIM1002</a></td><td class="num composite-cell">93.8%</td><td class="num">93.7%</td><td class="num">93.3%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">95.0%</td><td class="num">93.3%</td></tr>
+          <tr><td>03</td><td class="album-title"><a href="/web/album.html?code=SAIM1003EN">Amor en la Lucha</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1003EN">SAIM1003</a></td><td class="num composite-cell">94.0%</td><td class="num">94.1%</td><td class="num">93.8%</td><td class="num">93.7%</td><td class="num">94.2%</td><td class="num">95.2%</td><td class="num">93.5%</td></tr>
+          <tr><td>04</td><td class="album-title"><a href="/web/album.html?code=SAIM1004EN">La Calle Canta (Barrio Blessings)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1004EN">SAIM1004</a></td><td class="num composite-cell">94.3%</td><td class="num">94.5%</td><td class="num">94.7%</td><td class="num">93.8%</td><td class="num">94.5%</td><td class="num">95.0%</td><td class="num">93.8%</td></tr>
+          <tr><td>05</td><td class="album-title"><a href="/web/album.html?code=SAIM1005EN">Coraz&oacute;n Latino (Late Para Ti)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1005EN">SAIM1005</a></td><td class="num composite-cell">94.2%</td><td class="num">94.3%</td><td class="num">94.8%</td><td class="num">93.7%</td><td class="num">94.5%</td><td class="num">94.7%</td><td class="num">93.5%</td></tr>
+          <tr><td>06</td><td class="album-title"><a href="/web/album.html?code=SAIM1006EN">La Cruz Que Baila (Cumbia de la Cruz)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1006EN">SAIM1006</a></td><td class="num composite-cell">94.4%</td><td class="num">94.5%</td><td class="num">94.7%</td><td class="num">93.8%</td><td class="num">94.6%</td><td class="num">95.0%</td><td class="num">93.8%</td></tr>
+          <tr><td>07</td><td class="album-title"><a href="/web/album.html?code=SAIM1007EN">Dios en el Margen</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1007EN">SAIM1007</a></td><td class="num composite-cell">94.0%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">93.7%</td><td class="num">94.3%</td><td class="num">94.5%</td><td class="num">93.5%</td></tr>
+          <tr class="guard"><td>08</td><td class="album-title"><a href="/web/album.html?code=SAIM1008EN"><span class="guard-mark">&#9670;</span>Vivos en Cristo (D&iacute;a-de-los-Muertos guardrails)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1008EN">SAIM1008</a></td><td class="num composite-cell">94.0%</td><td class="num">93.7%</td><td class="num">94.0%</td><td class="num">93.8%</td><td class="num">94.5%</td><td class="num">94.7%</td><td class="num">93.5%</td></tr>
+          <tr><td>09</td><td class="album-title"><a href="/web/album.html?code=SAIM1009EN">Cristo No Se Va</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1009EN">SAIM1009</a></td><td class="num composite-cell">94.0%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">93.7%</td><td class="num">94.3%</td><td class="num">95.0%</td><td class="num">93.5%</td></tr>
+          <tr class="guard"><td>10</td><td class="album-title"><a href="/web/album.html?code=SAIM1010EN"><span class="guard-mark">&#9670;</span>La Cruz Cruza (Frontera Sagrada)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1010EN">SAIM1010</a></td><td class="num composite-cell">93.7%</td><td class="num">93.5%</td><td class="num">94.0%</td><td class="num">93.3%</td><td class="num">94.0%</td><td class="num">94.2%</td><td class="num">93.3%</td></tr>
+          <tr><td>11</td><td class="album-title"><a href="/web/album.html?code=SAIM1011EN">Justicia y Redenci&oacute;n</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1011EN">SAIM1011</a></td><td class="num composite-cell">94.0%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">93.7%</td><td class="num">94.3%</td><td class="num">94.5%</td><td class="num">93.5%</td></tr>
+          <tr><td>12</td><td class="album-title"><a href="/web/album.html?code=SAIM1012EN">Cristo en la Lucha</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1012EN">SAIM1012</a></td><td class="num composite-cell">93.7%</td><td class="num">93.5%</td><td class="num">94.3%</td><td class="num">93.2%</td><td class="num">94.0%</td><td class="num">94.5%</td><td class="num">92.8%</td></tr>
+          <tr class="guard"><td>13</td><td class="album-title"><a href="/web/album.html?code=SAIM1013EN"><span class="guard-mark">&#9670;</span>Las Oraciones de Mam&aacute;</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1013EN">SAIM1013</a></td><td class="num composite-cell">94.2%</td><td class="num">94.0%</td><td class="num">93.8%</td><td class="num">94.2%</td><td class="num">94.7%</td><td class="num">95.3%</td><td class="num">93.0%</td></tr>
+          <tr><td>14</td><td class="album-title"><a href="/web/album.html?code=SAIM1014EN">Nuevo Amanecer (Cristo, La Ma&ntilde;ana)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1014EN">SAIM1014</a></td><td class="num composite-cell">93.6%</td><td class="num">93.5%</td><td class="num">92.8%</td><td class="num">93.8%</td><td class="num">94.0%</td><td class="num">94.7%</td><td class="num">92.8%</td></tr>
+          <tr><td>15</td><td class="album-title"><a href="/web/album.html?code=SAIM1015EN">Quincea&ntilde;era del Esp&iacute;ritu</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1015EN">SAIM1015</a></td><td class="num composite-cell">94.1%</td><td class="num">94.0%</td><td class="num">95.0%</td><td class="num">93.8%</td><td class="num">94.3%</td><td class="num">94.3%</td><td class="num">93.3%</td></tr>
+          <tr class="guard"><td>16</td><td class="album-title"><a href="/web/album.html?code=SAIM1016EN"><span class="guard-mark">&#9670;</span>Las Ra&iacute;ces Cantan (saint-heritage guardrails)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1016EN">SAIM1016</a></td><td class="num composite-cell">93.8%</td><td class="num">93.0%</td><td class="num">93.8%</td><td class="num">93.5%</td><td class="num">94.3%</td><td class="num">94.7%</td><td class="num">93.3%</td></tr>
+          <tr><td>17</td><td class="album-title"><a href="/web/album.html?code=SAIM1017EN">Regresa a Casa (La Banda Est&aacute; Tocando)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1017EN">SAIM1017</a></td><td class="num composite-cell">94.0%</td><td class="num">94.0%</td><td class="num">94.4%</td><td class="num">93.5%</td><td class="num">94.2%</td><td class="num">94.4%</td><td class="num">93.5%</td></tr>
+          <tr><td>18</td><td class="album-title"><a href="/web/album.html?code=SAIM1018EN">Spanglish Sundays</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1018EN">SAIM1018</a></td><td class="num composite-cell">94.2%</td><td class="num">94.2%</td><td class="num">94.5%</td><td class="num">94.0%</td><td class="num">94.3%</td><td class="num">94.4%</td><td class="num">93.8%</td></tr>
+          <tr><td>19</td><td class="album-title"><a href="/web/album.html?code=SAIM1019EN">Corridos del Cristo Que Cruz&oacute;</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1019EN">SAIM1019</a></td><td class="num composite-cell">94.1%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.0%</td><td class="num">94.2%</td><td class="num">94.5%</td><td class="num">93.8%</td></tr>
+          <tr><td>20</td><td class="album-title"><a href="/web/album.html?code=SAIM1020EN">El Cristo Que No Se Deporta</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1020EN">SAIM1020</a></td><td class="num composite-cell">93.6%</td><td class="num">93.0%</td><td class="num">93.2%</td><td class="num">93.8%</td><td class="num">93.8%</td><td class="num">95.0%</td><td class="num">93.0%</td></tr>
+          <tr><td>21</td><td class="album-title"><a href="/web/album.html?code=SAIM1021EN">Voz Prof&eacute;tica (La Voz del Cristo)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1021EN">SAIM1021</a></td><td class="num composite-cell">94.0%</td><td class="num">93.6%</td><td class="num">94.4%</td><td class="num">93.8%</td><td class="num">94.3%</td><td class="num">94.2%</td><td class="num">93.8%</td></tr>
+
+          <tr><td colspan="10" style="background:#1a1f28;padding:10px 14px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm);font-weight:700;">20 NEW VIRAL BUILDS &middot; Celebration P&amp;W &times; Latin style (SAIM1022&ndash;SAIM1041)</td></tr>
+          <tr class="star"><td>22</td><td class="album-title"><a href="/web/album.html?code=SAIM1022EN"><span class="star-mark">&#9733;</span>Solo T&uacute;, Jes&uacute;s (Jn 14:6 &times; Reggaeton)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1022EN">SAIM1022</a></td><td class="num composite-cell">95.2%</td><td class="num">95.5%</td><td class="num">95.3%</td><td class="num">94.7%</td><td class="num">95.5%</td><td class="num">95.6%</td><td class="num">94.4%</td></tr>
+          <tr class="peak"><td>23</td><td class="album-title"><a href="/web/album.html?code=SAIM1023EN"><span class="peak-mark">&#9733;</span>La Familia Que Ora (la familia &times; Latin pop)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1023EN">SAIM1023</a></td><td class="num composite-cell">94.8%</td><td class="num">95.0%</td><td class="num">94.5%</td><td class="num">94.5%</td><td class="num">95.0%</td><td class="num">95.7%</td><td class="num">94.0%</td></tr>
+          <tr class="guard"><td>24</td><td class="album-title"><a href="/web/album.html?code=SAIM1024EN"><span class="guard-mark">&#9670;</span>Las Manos de Abuela (elders &times; Mariachi) sensitive</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1024EN">SAIM1024</a></td><td class="num composite-cell">94.6%</td><td class="num">94.5%</td><td class="num">94.3%</td><td class="num">94.5%</td><td class="num">94.8%</td><td class="num">95.7%</td><td class="num">93.8%</td></tr>
+          <tr class="guard"><td>25</td><td class="album-title"><a href="/web/album.html?code=SAIM1025EN"><span class="guard-mark">&#9670;</span>Cu&aacute;nto Te Adoro (Devotion &times; Bolero) sensitive</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1025EN">SAIM1025</a></td><td class="num composite-cell">94.5%</td><td class="num">93.8%</td><td class="num">93.5%</td><td class="num">94.8%</td><td class="num">94.0%</td><td class="num">96.5%</td><td class="num">94.4%</td></tr>
+          <tr class="guard"><td>26</td><td class="album-title"><a href="/web/album.html?code=SAIM1026EN"><span class="guard-mark">&#9670;</span>La Cruz Habla (Cross &times; Flamenco) sensitive</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1026EN">SAIM1026</a></td><td class="num composite-cell">95.0%</td><td class="num">95.2%</td><td class="num">94.8%</td><td class="num">94.5%</td><td class="num">95.4%</td><td class="num">96.0%</td><td class="num">94.2%</td></tr>
+          <tr class="peak"><td>27</td><td class="album-title"><a href="/web/album.html?code=SAIM1027EN"><span class="peak-mark">&#9733;</span>Misericordia Sin Final (Mercy &times; Bachata)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1027EN">SAIM1027</a></td><td class="num composite-cell">94.7%</td><td class="num">95.0%</td><td class="num">94.5%</td><td class="num">94.2%</td><td class="num">95.0%</td><td class="num">95.8%</td><td class="num">93.9%</td></tr>
+          <tr class="peak"><td>28</td><td class="album-title"><a href="/web/album.html?code=SAIM1028EN"><span class="peak-mark">&#9733;</span>Vuelvo a Casa, Jes&uacute;s (Repentance &times; Rock)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1028EN">SAIM1028</a></td><td class="num composite-cell">95.1%</td><td class="num">95.4%</td><td class="num">94.9%</td><td class="num">94.7%</td><td class="num">95.5%</td><td class="num">96.0%</td><td class="num">94.3%</td></tr>
+          <tr><td>29</td><td class="album-title"><a href="/web/album.html?code=SAIM1029EN">Oraci&oacute;n Diaria (Prayer &times; Bossa nova)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1029EN">SAIM1029</a></td><td class="num composite-cell">94.5%</td><td class="num">94.7%</td><td class="num">94.3%</td><td class="num">94.4%</td><td class="num">94.6%</td><td class="num">95.4%</td><td class="num">93.6%</td></tr>
+          <tr class="peak"><td>30</td><td class="album-title"><a href="/web/album.html?code=SAIM1030EN"><span class="peak-mark">&#9733;</span>Tu Palabra Es Mi Pan (Scripture &times; Sertanejo)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1030EN">SAIM1030</a></td><td class="num composite-cell">95.0%</td><td class="num">95.0%</td><td class="num">95.2%</td><td class="num">94.7%</td><td class="num">95.3%</td><td class="num">95.5%</td><td class="num">94.5%</td></tr>
+          <tr class="star"><td>31</td><td class="album-title"><a href="/web/album.html?code=SAIM1031EN"><span class="star-mark">&#9733;</span>Te Encontr&eacute;, Jes&uacute;s (Encounter &times; Salsa)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1031EN">SAIM1031</a></td><td class="num composite-cell">95.2%</td><td class="num">95.3%</td><td class="num">95.6%</td><td class="num">94.8%</td><td class="num">95.4%</td><td class="num">95.5%</td><td class="num">94.6%</td></tr>
+          <tr class="guard"><td>32</td><td class="album-title"><a href="/web/album.html?code=SAIM1032EN"><span class="guard-mark">&#9670;</span>Nube de Testigos (Heb 12:1 &times; Vallenato) MOST sensitive</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1032EN">SAIM1032</a></td><td class="num composite-cell">94.9%</td><td class="num">94.7%</td><td class="num">94.9%</td><td class="num">94.5%</td><td class="num">95.1%</td><td class="num">95.4%</td><td class="num">94.4%</td></tr>
+          <tr class="peak"><td>33</td><td class="album-title"><a href="/web/album.html?code=SAIM1033EN"><span class="peak-mark">&#9733;</span>A&uacute;n en la Sombra, T&uacute; (Hope &times; Tango)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1033EN">SAIM1033</a></td><td class="num composite-cell">94.8%</td><td class="num">94.6%</td><td class="num">94.7%</td><td class="num">94.3%</td><td class="num">95.2%</td><td class="num">95.8%</td><td class="num">94.2%</td></tr>
+          <tr class="peak"><td>34</td><td class="album-title"><a href="/web/album.html?code=SAIM1034EN"><span class="peak-mark">&#9733;</span>Hecho a Su Imagen (Imago Dei &times; Latin trap)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1034EN">SAIM1034</a></td><td class="num composite-cell">95.0%</td><td class="num">95.0%</td><td class="num">94.8%</td><td class="num">94.7%</td><td class="num">95.3%</td><td class="num">95.6%</td><td class="num">94.5%</td></tr>
+          <tr class="peak"><td>35</td><td class="album-title"><a href="/web/album.html?code=SAIM1035EN"><span class="peak-mark">&#9733;</span>Cumbia del Pan Compartido (Matt 25 &times; Cumbia)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1035EN">SAIM1035</a></td><td class="num composite-cell">94.9%</td><td class="num">94.7%</td><td class="num">94.8%</td><td class="num">94.6%</td><td class="num">95.2%</td><td class="num">95.5%</td><td class="num">94.6%</td></tr>
+          <tr class="peak"><td>36</td><td class="album-title"><a href="/web/album.html?code=SAIM1036EN"><span class="peak-mark">&#9733;</span>Samba de la Fiesta Santa (Celebration &times; Samba)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1036EN">SAIM1036</a></td><td class="num composite-cell">95.1%</td><td class="num">95.0%</td><td class="num">95.3%</td><td class="num">94.8%</td><td class="num">95.4%</td><td class="num">95.4%</td><td class="num">94.8%</td></tr>
+          <tr class="peak"><td>37</td><td class="album-title"><a href="/web/album.html?code=SAIM1037EN"><span class="peak-mark">&#9733;</span>Corrido del Peregrino (Pilgrimage &times; Sierre&ntilde;o)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1037EN">SAIM1037</a></td><td class="num composite-cell">95.0%</td><td class="num">94.7%</td><td class="num">94.7%</td><td class="num">94.6%</td><td class="num">95.3%</td><td class="num">95.7%</td><td class="num">94.5%</td></tr>
+          <tr class="peak"><td>38</td><td class="album-title"><a href="/web/album.html?code=SAIM1038EN"><span class="peak-mark">&#9733;</span>Ra&iacute;ces en Cristo (Identity &times; Regional Mexican)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1038EN">SAIM1038</a></td><td class="num composite-cell">95.0%</td><td class="num">95.1%</td><td class="num">95.2%</td><td class="num">94.6%</td><td class="num">95.3%</td><td class="num">95.6%</td><td class="num">94.4%</td></tr>
+          <tr><td>39</td><td class="album-title"><a href="/web/album.html?code=SAIM1039EN">Para Siempre, en Cristo (Marriage &times; Merengue)</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1039EN">SAIM1039</a></td><td class="num composite-cell">94.7%</td><td class="num">94.8%</td><td class="num">95.0%</td><td class="num">94.2%</td><td class="num">95.0%</td><td class="num">95.3%</td><td class="num">93.9%</td></tr>
+          <tr class="star"><td>40</td><td class="album-title"><a href="/web/album.html?code=SAIM1040EN"><span class="star-mark">&#9733;</span>Acci&oacute;n de Gracias (Gratitude &times; Funk Carioca) &mdash; CATALOG PEAK</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1040EN">SAIM1040</a></td><td class="num composite-cell">95.4%</td><td class="num">95.5%</td><td class="num">95.8%</td><td class="num">94.9%</td><td class="num">95.6%</td><td class="num">95.5%</td><td class="num">94.9%</td></tr>
+          <tr class="star"><td>41</td><td class="album-title"><a href="/web/album.html?code=SAIM1041EN"><span class="star-mark">&#9733;</span>Fiel a Cada Generaci&oacute;n (Faithfulness &times; Dembow) &mdash; CATALOG FINALE</a></td><td class="code-cell"><a href="/web/album.html?code=SAIM1041EN">SAIM1041</a></td><td class="num composite-cell">95.2%</td><td class="num">95.3%</td><td class="num">95.4%</td><td class="num">94.8%</td><td class="num">95.5%</td><td class="num">95.7%</td><td class="num">94.7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">The signature</div>
+    <h2>Santiago's discovered craft DNA</h2>
+    <p class="section-sub">After three passes through 492 tracks across 41 albums, six structural traits surfaced as consistent across both arcs &mdash; the bilingual Latin Cristo-celebration compositional fingerprint, now formalized.</p>
+
+    <div class="dna-grid">
+      <div class="dna-item">
+        <h3>1 &middot; Male theatrical baritone with mixed three-part choir</h3>
+        <p>Vocals in the <strong>male theatrical baritone</strong> register with mixed three-part choir layers on choruses; +10% praise intensity per protocol; HIGH-ENERGY LATIN POP CELEBRATION OVERRIDE.</p>
+      </div>
+      <div class="dna-item">
+        <h3>2 &middot; Bilingual Spanish + English + Portuguese welcomed</h3>
+        <p>The seam between Spanish, English (Spanglish), and Portuguese (for Brazilian sertanejo / samba / funk carioca / bossa nova tracks) is <strong>AUDIBLE and CELEBRATED</strong> &mdash; Aleluya answers Hallelujah, Cristo answers Christ, Padre answers Father. Multi-language is a load-bearing identity feature, not a gimmick.</p>
+      </div>
+      <div class="dna-item">
+        <h3>3 &middot; Celebration P&amp;W &times; Latin style fusion</h3>
+        <p>Existing 21 explored fusion lanes (Corona-Pop, Bachata-Novio, Tango Esperanza, Mariachi Resurrecci&oacute;n, Trap Sagrado, Cumbia-Cruz, Sertanejo Reino, Funk-Carioca prof&eacute;tica, Salsa Barrio-Praise). New 20 covered the full canonical 20 Latin styles: <em>Reggaeton, Latin pop, Mariachi, Bolero, Flamenco, Bachata, Rock en espa&ntilde;ol, Bossa nova, Sertanejo, Salsa, Vallenato, Tango, Latin trap, Cumbia, Samba, Sierre&ntilde;o, Regional Mexican, Merengue, Funk Carioca, Dembow</em>.</p>
+      </div>
+      <div class="dna-item">
+        <h3>4 &middot; T8 cinematic peak with D&rarr;E key-lift modulation</h3>
+        <p>Signature payoff architecture across both arcs: <strong>strip-to-solo-instrument&rarr;full-Latin-percussion crash&rarr;key-lift modulation (D&rarr;E typical) at 2:42 / 6:45+ runtime</strong>. T5/T7/T8 cinematic peaks with brass-stab + clap-track + gang-vocal shout consistently hit emotion 96-97. The biggest emotional payoff is engineered impossible to walk away from.</p>
+      </div>
+      <div class="dna-item">
+        <h3>5 &middot; Sensitive-theme guardrails (1 Tim 2:5 anchored)</h3>
+        <p>Where Santiago's content overlaps with Catholic/Orthodox tradition (rosary, saints, Mary, sacred images, intercession, Cross-as-symbol), <strong>explicit Christ-as-sole-Mediator clarification</strong> is built in throughout. Saints/Mary/abuelas honored as <em>faithful examples to imitate</em> per Heb 12:1; <em>never</em> as objects of worship or mediators replacing Christ.</p>
+      </div>
+      <div class="dna-item">
+        <h3>6 &middot; SAIM1041&rarr;SAIM1022 catalog-finale loop</h3>
+        <p>The 20-album new Latin arc closes as <strong>one continuous celebration of Christ</strong>. SAIM1041 "Fiel a Cada Generaci&oacute;n" T12 outro (Dembow 110 BPM A major) bleeds tonally back to SAIM1022 "Solo T&uacute;, Jes&uacute;s" T1 opening (Reggaeton 102 BPM A major). Both genres share Caribbean urban-Latin DNA; the catalog loops as one body of work from Reggaeton through every Latin style back to the same Name.</p>
+      </div>
+    </div>
+
+    <div class="spotlight">
+      <h3>The bilingual Latin Cristo-celebration anthem-maker</h3>
+      <p>Across all 41 albums, Santiago covers more Latin music traditions than any persona in the family covers any single regional tradition. Every Latin rhythm finds its truest fulfillment when bent toward Cristo. The 11-persona family ranking places Santiago at #3 (94.46) behind only Imani and Zev:</p>
+      <div class="quote">
+        Where <em>Melody sings upward into adoration in the brave second</em>, <em>Jubilee outward into celebration</em>, <em>Zariah inward into intercession</em>, <em>Elias along the trail</em>, <em>Eliana across the table</em>, <em>Caleb beside you in the long night</em>, <em>Imani on the dance floor of heaven</em>, <em>Zev on the bridge where Hebrew answers the nations</em>, <em>Amir walks the seam where the ghazal's yearning finds Jesus</em>, <em>Nova carries you from the cellar door through the long silence into the neon city</em>, <em>Santiago bilingually bends every Latin rhythm to one Name &mdash; the abuela's kitchen radio and the nieto's Saturday-night stereo and the quincea&ntilde;era band and the corner-store reggaeton all crown Jes&uacute;s as Rey del Ritmo, the King of every beat</em>. Two batches, eleven voices, four hundred and seventy-eight albums &mdash; one Christ above every name.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">What was done &middot; why it works</div>
+    <h2>The six craft amplifications applied</h2>
+    <p class="section-sub">Each lever targets a specific cognitive or physiological mechanism of compulsive re-listening. The new 20 Latin-celebration builds delivered <strong>+1.09% Hook, +0.75% Groove, +0.86% Replay, +0.88% Payoff, +0.95% EmoPull, +0.89% Loop</strong> over the existing 21 baseline &mdash; a +0.92% composite gain. The existing 21 were also reformatted to Caleb-format Suno-paste-ready per standing memory rule.</p>
+
+    <div class="mech-grid">
+      <div class="mech mech-1">
+        <div class="mech-icon">1</div>
+        <h4>Hook &amp; Delivery</h4>
+        <p>New 20: hook fires at <strong>0:08&ndash;0:14</strong> in male theatrical baritone sweet spot, chant-locked 5&ndash;7&times;/chorus (&le;8 syllables). Bilingual chants engineered for stadium+TikTok ("&iexcl;Solo T&uacute;, Jes&uacute;s!", "&iexcl;Cristo Rey del Ritmo!", "&iexcl;Misericordia sin final!", "&iexcl;Vuelvo a casa!", "&iexcl;Acci&oacute;n de gracias!").</p>
+        <div class="metric">&rarr; Hook Strength 94.38% (new 20: 94.94%, +1.09%)</div>
+      </div>
+      <div class="mech mech-2">
+        <div class="mech-icon">2</div>
+        <h4>Groove &amp; Pulse</h4>
+        <p>BPM in <strong>100&ndash;130 Latin viral pocket</strong>: reggaeton 102, salsa 100, merengue 125, samba 110, dembow 110, funk carioca 130, mariachi 6/8 swing, tango 105, bolero 75 (tender lane), flamenco 105, bachata 110. Full Latin percussion: timbales, conga, bong&oacute;, claves, g&uuml;ira, tambora, cajon, pandeiro, cavaquinho, acorde&oacute;n, vihuela, trompeta.</p>
+        <div class="metric">&rarr; Groove 94.49% (new 20: 94.88%, +0.75%)</div>
+      </div>
+      <div class="mech mech-3">
+        <div class="mech-icon">3</div>
+        <h4>Texture &amp; Ear-candy</h4>
+        <p>2&ndash;3 small surprises per track with explicit timestamps &mdash; salsa breakdown, mariachi trumpet bloom, bachata vocal melisma, samba pandeiro riff, vallenato accordion solo, tango bandone&oacute;n cry, flamenco palmas-and-cajon, funk carioca tamborz&atilde;o stomp, reggaeton dembow pulse, dembow tambora roll.</p>
+        <div class="metric">&rarr; Replay Value 94.15% (new 20: 94.59%, +0.86%)</div>
+      </div>
+      <div class="mech mech-4">
+        <div class="mech-icon">4</div>
+        <h4>Dynamic Arc &amp; Payoff</h4>
+        <p>Per-track tension map: <strong>2:14 strip to nylon-guitar+voice (or genre-appropriate solo) / 2:30 4-sec held breath + clap-rolled crescendo / 2:35 single timbale roll count-in / 2:42 full-band CRASH re-entry with Latin percussion + brass + key modulation up a step / 3:00 multi-part choir bloom / 3:15 final-chorus stacked with gang-vocal shout</strong>.</p>
+        <div class="metric">&rarr; Dynamic Payoff 94.72% (new 20: 95.17%, +0.88%)</div>
+      </div>
+      <div class="mech mech-5">
+        <div class="mech-icon">5</div>
+        <h4>Loop Point</h4>
+        <p>Per-track outros pull into next track via sustained Spanish chant phrase + Latin percussion tail. <strong>SAIM1041 T12 catalog-finale handshake</strong> engineered to loop back to SAIM1022 T1 with key (A major) + tempo (110&rarr;102 BPM bleed) + style (Dembow&rarr;Reggaeton both share Caribbean urban-Latin DNA). The 20-album new Latin arc closes as one continuous celebration.</p>
+        <div class="metric">&rarr; Loop-ability 93.88% (new 20: 94.33%, +0.89%)</div>
+      </div>
+      <div class="mech mech-6">
+        <div class="mech-icon">6</div>
+        <h4>Emotional Pull</h4>
+        <p>Core feeling per track: Cristo-as-Rey, abuela-faithful-witness, casa-de-Padre return, misericordia-sin-final, encuentro-con-Jes&uacute;s, pan-compartido-en-Su-nombre, esperanza-aun-en-la-sombra, acci&oacute;n-de-gracias-en-todo. <strong>T7/T8 testimony anchors hit EmPull 95-97</strong> with named Hispanic-Latino-Brazilian pastoral composites (Tegucigalpa hermana, Recife av&oacute;, Chihuahua abuela Consuelo, M&eacute;xico abuela's photo, Buenos Aires hospital chapel 3 AM, Puerto Rico DJ).</p>
+        <div class="metric">&rarr; Emotional Pull 95.18% (new 20: 95.66%, +0.95%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Doctrinal floor &middot; Suno compliance</div>
+    <h2>What stayed exactly where it was</h2>
+    <p class="section-sub">Existing 21 lyrics preserved verbatim through Caleb-format reformat (V4 SOP wrappers stripped; per-song Styles trailer &le;800 chars first 250 load-bearing). 20 new Latin-celebration albums authored fresh in Caleb-format with 240 original songs. Both arcs Christ-centered throughout. Sensitive themes (rosary, Mary, saints, cross-as-symbol, day-of-the-dead) framed with explicit 1 Tim 2:5 Christ-as-sole-Mediator anchoring throughout.</p>
+
+    <div class="compliance">
+      <div class="comp">Existing 21 lyric content preserved verbatim through reformat</div>
+      <div class="comp">20 NEW albums: 240 original Latin-celebration worship songs</div>
+      <div class="comp">v3 amplification scoring on all 41 albums</div>
+      <div class="comp">Caleb-format Suno-paste-ready Styles trailers &le;800 chars</div>
+      <div class="comp">First 250 chars of Styles load-bearing per memory rule</div>
+      <div class="comp">No artist names anywhere &middot; auditory descriptions only</div>
+      <div class="comp">No glossolalia / tongues in titles or lyrics</div>
+      <div class="comp">No fenced code blocks in any lyrics .md file</div>
+      <div class="comp">Family-friendly across all 41 albums &middot; Ten Commandment compliant</div>
+      <div class="comp">Sensitive-theme guardrails: no saints/Mary as mediators</div>
+      <div class="comp">1 Tim 2:5 sole-Mediator anchored on guardrail albums</div>
+      <div class="comp">SAIM1041&rarr;SAIM1022 dembow-reggaeton catalog loop engineered</div>
+    </div>
+  </div>
+</section>
+
+<div class="album-status-bar" style="max-width:1180px;margin:0 auto;padding:24px 24px 0;"><div data-album-status-counts="artist:santiago-inspire"></div></div>
+
+<footer>
+  <div class="container">
+    <div>Santiago Inspire &middot; Sonic Craft Amplification v3.0 &middot; Executive Summary</div>
+    <div>41 albums &middot; 492 tracks &middot; Composite <strong>94.46%</strong> (family #3) &middot; New-20 composite <strong>94.93</strong> &middot; Generated June 2, 2026</div>
+    <div>
+      <a href="../../../../web/inspire-family-dashboard.html">Inspire Family Dashboard</a> &middot;
+      <a href="../jubilee-inspire/executive-summary.html">Jubilee &middot; 61 &middot; 94.44</a> &middot;
+      <a href="../melody-inspire/executive-summary.html">Melody &middot; 40 &middot; 94.10</a> &middot;
+      <a href="../zariah-inspire/executive-summary.html">Zariah &middot; 42 &middot; 93.40</a> &middot;
+      <a href="../elias-inspire/executive-summary.html">Elias &middot; 44 &middot; 93.05</a> &middot;
+      <a href="../eliana-inspire/executive-summary.html">Eliana &middot; 41 &middot; 93.20</a> &middot;
+      <a href="../caleb-inspire/executive-summary.html">Caleb &middot; 30 &middot; 93.67</a> &middot;
+      <a href="../imani-inspire/executive-summary.html">Imani &middot; 41 &middot; 95.05</a> &middot;
+      <a href="../zev-inspire/executive-summary.html">Zev &middot; 40 &middot; 94.59</a> &middot;
+      <a href="../amir-inspire/executive-summary.html">Amir &middot; 48 &middot; 94.34</a> &middot;
+      <a href="../nova-inspire/executive-summary.html">Nova &middot; 50 &middot; 93.92</a> &middot;
+      <a href="../tahoma-inspire/executive-summary.html">Tahoma &middot; 40 &middot; 93.86</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Hero fill: size .hero to the viewport height remaining below the sticky
+   site-header. Measures the hero's offset from the top of the document and
+   exposes it as --jv-above for the .hero min-height calc(). Re-runs on every
+   turbo-nav soft navigation (this inline body script is re-executed) and on
+   resize so it stays correct across all resolutions. */
+(function(){
+  function fit(){
+    var h=document.querySelector('.hero');
+    if(!h)return;
+    var t=h.getBoundingClientRect().top+window.scrollY;
+    document.documentElement.style.setProperty('--jv-above',Math.max(0,Math.round(t))+'px');
+  }
+  fit();
+  if(!window.__jvHeroFit){
+    window.__jvHeroFit=1;
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',fit);
+  }
+})();
+</script>
+</body>
+</html>

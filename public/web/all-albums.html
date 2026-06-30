@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspire Family &middot; All Albums by Persona</title>
+<link rel="stylesheet" href="/web/_assets/player.css">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141921;
+    --surface-2: #1c232d;
+    --surface-3: #232b37;
+    --ink: #f0ebe3;
+    --ink-soft: #b0a89c;
+    --ink-muted: #6e6760;
+    --line: #2a313c;
+    --line-soft: #1f252f;
+    --accent: #c8954a;
+    --accent-warm: #e8b870;
+    --success: #5fb371;
+    --warn: #d4a05c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    background:
+      radial-gradient(900px 400px at 20% 0%, rgba(200, 149, 74, 0.10) 0%, transparent 50%),
+      radial-gradient(900px 400px at 80% 100%, rgba(74, 140, 168, 0.08) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e14 0%, #141921 100%);
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-warm);
+    font-weight: 500;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 760px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-stats .stat .label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .hero-stats .stat .val {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .hero-stats .stat .val.accent { color: var(--accent-warm); }
+  .hero-nav {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .hero-nav a {
+    color: var(--accent-warm);
+    text-decoration: none;
+  } 
+
+  .controls {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .controls-inner {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 240px;
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    padding: 10px 14px 10px 38px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    opacity: 0.6;
+  }
+
+  .filter-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink-soft);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-weight: 500;
+  }
+  .filter-btn:hover { background: var(--surface-3); color: var(--ink); }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0e14;
+    font-weight: 700;
+  }
+
+  main { padding: 36px 0 60px; }
+
+  .persona-section {
+    margin-bottom: 44px;
+  }
+  .persona-section.hidden { display: none; }
+
+  .persona-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .persona-name {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .persona-name a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .persona-name a:hover {
+    color: var(--accent-warm);
+    border-bottom-color: var(--accent-warm);
+  }
+  .persona-role {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .persona-meta {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .persona-meta .accent { color: var(--accent-warm); font-weight: 600; }
+
+  .album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .album-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+  }
+  .album-card:hover {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .album-card.unavailable { opacity: 0.55; }
+  .album-card.unavailable:hover { transform: none; border-color: var(--line); }
+  .album-card.hidden { display: none; }
+
+  .album-code {
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    background: var(--surface-2);
+    padding: 3px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    min-width: 78px;
+    text-align: center;
+  }
+  .album-card:hover .album-code { background: var(--surface-3); color: var(--accent-warm); }
+
+  .album-info {
+    min-width: 0;
+    flex: 1;
+  }
+  .album-title-line {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .album-card:hover .album-title-line { color: var(--accent-warm); }
+
+  .album-badge {
+    flex-shrink: 0;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .album-badge.audio { background: rgba(95, 179, 113, 0.15); color: var(--success); }
+  .album-badge.lyrics { background: rgba(110, 103, 96, 0.2); color: var(--ink-muted); }
+
+  .empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--ink-muted);
+  }
+
+  .loader {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .toc-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .toc-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .toc-link {
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    transition: all 0.15s ease;
+    font-weight: 500;
+  }
+  .toc-link:hover {
+    background: var(--accent);
+    color: #0a0e14;
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .toc-link .count {
+    margin-left: 6px;
+    font-size: 10px;
+    opacity: 0.7;
+    font-variant-numeric: tabular-nums;
+  }
+  .toc-link:hover .count { opacity: 1; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Inspire Family &middot; Full Album Index</div>
+    <h1>Inspire Family albums, <em>by persona.</em></h1>
+    <p class="hero-sub">
+      Every Inspire Family album grouped by artist. Click any title to open the album page; click an artist name to jump to their full executive summary.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="label">Personas</div><div class="val" id="stat-personas">—</div></div>
+      <div class="stat"><div class="label">Albums</div><div class="val" id="stat-albums">—</div></div>
+      <div class="stat"><div class="label">Playable Albums</div><div class="val accent" id="stat-playable">—</div></div>
+      <div class="stat"><div class="label">Playable Tracks</div><div class="val accent" id="stat-tracks">—</div></div>
+    </div>
+    <div class="hero-nav">
+      <a href="/web/inspire-family-dashboard.html">← Inspire Family Dashboard</a>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="container">
+    <div class="controls-inner">
+      <div class="search-box">
+        <input id="search" type="search" placeholder="Search album titles or artists…" autocomplete="off">
+      </div>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="playable">Playable only</button>
+      <button class="filter-btn" data-filter="lyrics">Lyrics only</button>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+  <div id="toc-wrap"></div>
+  <div id="content"><div class="loader">Loading catalog…</div></div>
+</main>
+
+<script src="/web/_assets/player.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  const MANIFEST_URL = '/music/catalog-manifest.json';
+  const ALBUM_PAGE = '/web/album.html';
+
+  let manifest = null;
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  async function loadManifest() {
+    const cached = sessionStorage.getItem('jv_manifest_v1');
+    if (cached) {
+      try {
+        const obj = JSON.parse(cached);
+        if (obj._ts && Date.now() - obj._ts < 5 * 60 * 1000) return obj.data;
+      } catch (e) { /* ignore */ }
+    }
+    const r = await fetch(MANIFEST_URL);
+    if (!r.ok) throw new Error('manifest ' + r.status);
+    const data = await r.json();
+    try { sessionStorage.setItem('jv_manifest_v1', JSON.stringify({ _ts: Date.now(), data })); } catch (e) {}
+    return data;
+  }
+
+  function execSummaryUrl(catKey, artistSlug) {
+    return `/music/albums/${catKey}/${artistSlug}/executive-summary.html`;
+  }
+
+  function albumCardHTML(album) {
+    const playable = (album.playable || 0) > 0;
+    const cls = playable ? 'album-card' : 'album-card unavailable';
+    const badge = playable
+      ? `<span class="album-badge audio">${album.playable}</span>`
+      : `<span class="album-badge lyrics">Lyrics</span>`;
+    return `
+      <a class="${cls}" href="${ALBUM_PAGE}?code=${encodeURIComponent(album.code)}"
+         data-title="${escapeHtml(album.title.toLowerCase())}"
+         data-playable="${playable ? '1' : '0'}">
+        <div class="album-code">${escapeHtml(album.code)}</div>
+        <div class="album-info">
+          <div class="album-title-line">${escapeHtml(album.title)}</div>
+        </div>
+        ${badge}
+      </a>`;
+  }
+
+  function personaSectionHTML(category, artist) {
+    const albums = artist.albums || [];
+    const playableCount = albums.reduce((s, a) => s + (a.playable > 0 ? 1 : 0), 0);
+    const trackCount = albums.reduce((s, a) => s + (a.playable || 0), 0);
+    const id = 'persona-' + artist.slug;
+    return `
+      <section class="persona-section" id="${id}" data-artist="${escapeHtml(artist.slug)}">
+        <div class="persona-header">
+          <div>
+            <h2 class="persona-name"><a href="${execSummaryUrl(category.key, artist.slug)}">${escapeHtml(artist.name)}</a></h2>
+            <div class="persona-role">${escapeHtml(artist.role || category.label)}</div>
+          </div>
+          <div class="persona-meta">
+            <span class="accent">${albums.length}</span> albums &middot;
+            <span class="accent">${playableCount}</span> playable &middot;
+            <span class="accent">${trackCount}</span> playable tracks
+          </div>
+        </div>
+        <div class="album-grid">
+          ${albums.map(albumCardHTML).join('')}
+        </div>
+      </section>`;
+  }
+
+  function inspireCategories() {
+    return (manifest?.categories || []).filter(c => c.key === 'inspire');
+  }
+
+  function buildTOC() {
+    const wrap = document.getElementById('toc-wrap');
+    if (!manifest) return;
+    const links = [];
+    for (const cat of inspireCategories()) {
+      for (const art of (cat.artists || [])) {
+        const count = (art.albums || []).length;
+        if (count === 0) continue;
+        links.push(`<a class="toc-link" href="#persona-${art.slug}" data-artist="${art.slug}">${escapeHtml(art.name)}<span class="count">${count}</span></a>`);
+      }
+    }
+    wrap.innerHTML = `
+      <div class="toc">
+        <div class="toc-label">Jump to persona</div>
+        <div class="toc-links">${links.join('')}</div>
+      </div>`;
+  }
+
+  function render() {
+    const content = document.getElementById('content');
+    if (!manifest) return;
+    const sections = [];
+    let totalArtists = 0, totalAlbums = 0, totalPlayable = 0, totalTracks = 0;
+    for (const cat of inspireCategories()) {
+      for (const art of (cat.artists || [])) {
+        const albums = art.albums || [];
+        if (albums.length === 0) continue;
+        sections.push(personaSectionHTML(cat, art));
+        totalArtists += 1;
+        totalAlbums += albums.length;
+        totalPlayable += albums.reduce((s, a) => s + (a.playable > 0 ? 1 : 0), 0);
+        totalTracks += albums.reduce((s, a) => s + (a.trackCount || 0), 0);
+      }
+    }
+    content.innerHTML = sections.join('');
+    document.getElementById('stat-personas').textContent = totalArtists.toLocaleString();
+    document.getElementById('stat-albums').textContent = totalAlbums.toLocaleString();
+    document.getElementById('stat-playable').textContent = totalPlayable.toLocaleString();
+    document.getElementById('stat-tracks').textContent = totalTracks.toLocaleString();
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const q = currentSearch.trim().toLowerCase();
+    document.querySelectorAll('.album-card').forEach(card => {
+      const title = card.dataset.title || '';
+      const playable = card.dataset.playable === '1';
+      let visible = true;
+      if (currentFilter === 'playable' && !playable) visible = false;
+      if (currentFilter === 'lyrics' && playable) visible = false;
+      if (q && !title.includes(q)) {
+        // also check parent persona name
+        const sec = card.closest('.persona-section');
+        const persona = sec ? (sec.querySelector('.persona-name')?.textContent || '').toLowerCase() : '';
+        if (!persona.includes(q)) visible = false;
+      }
+      card.classList.toggle('hidden', !visible);
+    });
+    // hide empty sections
+    document.querySelectorAll('.persona-section').forEach(sec => {
+      const anyVisible = sec.querySelectorAll('.album-card:not(.hidden)').length > 0;
+      sec.classList.toggle('hidden', !anyVisible);
+    });
+  }
+
+  function wireControls() {
+    document.getElementById('search').addEventListener('input', e => {
+      currentSearch = e.target.value;
+      applyFilters();
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+  }
+
+  async function init() {
+    try {
+      manifest = await loadManifest();
+      buildTOC();
+      render();
+      wireControls();
+    } catch (e) {
+      document.getElementById('content').innerHTML = `<div class="empty"><p>Could not load catalog. ${escapeHtml(e.message)}</p></div>`;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

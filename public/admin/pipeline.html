@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline Kanban &middot; Jubilujah Admin</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<link rel="stylesheet" href="/_assets/widgets/rating-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/comment-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/trophy-widget.css">
+<link rel="stylesheet" href="/_assets/widgets/player-widget.css">
+<script src="/_assets/widgets/rating-widget.js" defer></script>
+<script src="/_assets/widgets/comment-widget.js" defer></script>
+<script src="/_assets/widgets/trophy-widget.js" defer></script>
+<script src="/_assets/widgets/player-widget.js" defer></script>
+<style>
+  /* ==================== ADMIN-SHARED ==================== */
+  .admin-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .admin-notice {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.12) 0%, rgba(254, 202, 87, 0.06) 100%), var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-notice strong { color: var(--accent-peach); letter-spacing: 0.04em; }
+
+  .admin-subnav {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-subnav a {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--line);
+    transition: background 0.15s, color 0.15s;
+  }
+  .admin-subnav a:last-child { border-right: none; }
+  .admin-subnav a:hover { background: var(--surface-2); color: var(--ink); }
+  .admin-subnav a.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+
+  /* ==================== FILTER BAR ==================== */
+  .kanban-filters {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .kanban-filters .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 140px;
+  }
+  .kanban-filters label {
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .kanban-filters select {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .kanban-filters select:focus { outline: none; border-color: var(--accent); }
+  .kanban-filters .age-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-gold);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--accent-gold);
+    background: rgba(254, 202, 87, 0.08);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-top: 16px;
+  }
+  .kanban-filters .age-toggle input { accent-color: var(--accent-gold); }
+
+  .read-only-note {
+    background: rgba(140, 111, 207, 0.08);
+    border: 1px solid rgba(140, 111, 207, 0.3);
+    border-left: 4px solid #8c6fcf;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 24px 0 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .read-only-note strong { color: #b89ce0; font-style: normal; }
+
+  /* ==================== KANBAN BOARD ==================== */
+  .kanban-scroll {
+    overflow-x: auto;
+    padding: 4px 0 16px;
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .kanban-scroll::-webkit-scrollbar { height: 10px; }
+  .kanban-scroll::-webkit-scrollbar-track { background: var(--bg-1); }
+  .kanban-scroll::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 5px; }
+
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(240px, 1fr));
+    gap: 14px;
+    min-width: 2200px;
+  }
+
+  .kb-col {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 400px;
+  }
+  .kb-col-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px 10px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .kb-col-head .stage {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    font-family: 'Segoe UI', monospace;
+  }
+  .kb-col-head .count {
+    background: var(--surface-2);
+    color: var(--accent-gold);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+  /* Per-column stage accents */
+  .kb-col[data-stage="concept"]          .kb-col-head { border-bottom-color: #6c7494; }
+  .kb-col[data-stage="lyrics_drafting"]  .kb-col-head { border-bottom-color: #8c6fcf; }
+  .kb-col[data-stage="lyrics_approved"]  .kb-col-head { border-bottom-color: #b89ce0; }
+  .kb-col[data-stage="song_generation"]  .kb-col-head { border-bottom-color: #4ab1c4; }
+  .kb-col[data-stage="qa_review"]        .kb-col-head { border-bottom-color: #feca57; }
+  .kb-col[data-stage="engineering"]      .kb-col-head { border-bottom-color: #ff8c4a; }
+  .kb-col[data-stage="sunil_approval"]   .kb-col-head { border-bottom-color: #ff6b6b; }
+  .kb-col[data-stage="final_approval"]   .kb-col-head { border-bottom-color: #e94560; }
+  .kb-col[data-stage="published"]        .kb-col-head { border-bottom-color: #5fb371; }
+  .kb-col[data-stage="distributed"]      .kb-col-head { border-bottom-color: #c89c4a; }
+
+  /* ==================== CARDS ==================== */
+  .kb-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 12px 10px;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .kb-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px rgba(233, 69, 96, 0.18);
+  }
+  .kb-card .type-strip {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 4px;
+  }
+  .kb-card .type-strip.album { color: var(--accent-peach); }
+  .kb-card .ttl {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .kb-card .artist {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .kb-card .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+  .kb-card .age {
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: rgba(95, 179, 113, 0.12);
+    color: #7fc28e;
+    border: 1px solid rgba(95, 179, 113, 0.3);
+  }
+  .kb-card .age.warn {
+    background: rgba(254, 202, 87, 0.14);
+    color: var(--accent-gold);
+    border-color: rgba(254, 202, 87, 0.4);
+  }
+  .kb-card .age.stuck {
+    background: rgba(233, 69, 96, 0.14);
+    color: var(--accent-peach);
+    border-color: rgba(233, 69, 96, 0.4);
+  }
+  .kb-card .lang {
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--ink-soft);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ==================== DRAWER ==================== */
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 18, 38, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    display: none;
+  }
+  .drawer-backdrop.open { display: block; }
+  .drawer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(520px, 100vw);
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    z-index: 201;
+    padding: 28px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5);
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer .close {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+  }
+  .drawer .close:hover { border-color: var(--accent); color: var(--accent-peach); }
+  .drawer h2 {
+    font-size: 24px;
+    margin: 8px 0 4px;
+    color: var(--ink);
+    background: linear-gradient(135deg, var(--accent-peach) 0%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .drawer .sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 16px; }
+  .drawer .placeholder-block {
+    background: var(--bg-1);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 32px 20px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 18px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">Jubilujah.com</a>
+      <div class="site-tools">
+        <span class="admin-badge">Admin Mode</span>
+        <a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="#login" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Admin Dashboard</div>
+    <h1>Pipeline <em>Kanban</em></h1>
+    <p class="lead">
+      The full 10-stage production pipeline. Every song or album in flight shows its title, artist, and age-in-stage. Filter by grouping, stage, language, assignee, or stuck-state.
+    </p>
+  </div>
+</section>
+
+<section class="standard">
+  <div class="container">
+
+    <div class="admin-notice">
+      <strong>ADMIN MODE</strong>
+      <span>This section is gated to the <strong>admin</strong> role per Build Spec &sect;5. Stage transitions are append-only to <code>production.pipeline_history</code>; backward moves require a note.</span>
+    </div>
+
+    <nav class="admin-subnav">
+      <a href="/admin/index.html">Overview</a>
+      <a href="/admin/pipeline.html" class="active">Pipeline Kanban</a>
+      <a href="/admin/awards.html">Awards Review</a>
+      <a href="/admin/users.html">Users &amp; Roles</a>
+    </nav>
+
+    <div class="kanban-filters">
+      <div class="filter-group">
+        <label>Grouping</label>
+        <select id="fGrouping">
+          <option>All groupings</option>
+          <option>Inspire Family</option>
+          <option>Children Music</option>
+          <option>Faith-Based</option>
+          <option>General Audiences</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Stage</label>
+        <select id="fStage">
+          <option>All stages</option>
+          <option>concept</option>
+          <option>lyrics_drafting</option>
+          <option>lyrics_approved</option>
+          <option>song_generation</option>
+          <option>qa_review</option>
+          <option>engineering</option>
+          <option>sunil_approval</option>
+          <option>final_approval</option>
+          <option>published</option>
+          <option>distributed</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Language</label>
+        <select id="fLang">
+          <option>All languages</option>
+          <option>English</option>
+          <option>Spanish</option>
+          <option>Bilingual</option>
+          <option>Lakota</option>
+          <option>Swahili</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Assignee</label>
+        <select id="fAssignee">
+          <option>All assignees</option>
+          <option>Gabriel Ungureanu</option>
+          <option>Melody Inspire</option>
+          <option>Tahoma Inspire</option>
+          <option>Sunil Gemini</option>
+          <option>Music Engineer</option>
+        </select>
+      </div>
+      <label class="age-toggle">
+        <input type="checkbox" id="fAge"> Age &gt; 7d only
+      </label>
+    </div>
+
+    <div class="kanban-scroll">
+      <div class="kanban-board" id="board"></div>
+    </div>
+
+    <div class="read-only-note">
+      <strong>Note:</strong> Drag-to-advance with mandatory transition note for backward moves will be wired in a future iteration. This view is currently read-only mock data &mdash; per Build Spec &sect;8.
+    </div>
+
+  </div>
+</section>
+
+<div class="drawer-backdrop" id="backdrop"></div>
+<div class="drawer" id="drawer">
+  <button class="close" onclick="closeDrawer()">Close &times;</button>
+  <div class="sub" id="drawerSub">song detail</div>
+  <h2 id="drawerTitle">&mdash;</h2>
+  <div class="sub" id="drawerArtist">&mdash;</div>
+  <div class="placeholder-block">
+    Detail drawer placeholder &mdash; future iteration will include full metadata, lyrics, audio player, comments, ratings, and pipeline history per Build Spec &sect;14.
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><strong>Jubilujah.com Admin</strong> &middot; Pipeline Kanban</div>
+    <span class="jubilee-badge">A Jubilee Enterprise</span>
+    <div>&copy; 2026 Jubilee Software, Inc.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PIPELINE KANBAN — MOCK DATA (Build Spec §8 + §14)
+   ============================================================ */
+
+const STAGES = [
+  'concept', 'lyrics_drafting', 'lyrics_approved', 'song_generation',
+  'qa_review', 'engineering', 'sunil_approval', 'final_approval',
+  'published', 'distributed'
+];
+
+/* Curated mock cards per column — 3 to 8 each, totaling ~50 items */
+const CARDS = {
+  concept: [
+    { type: 'song',  ttl: 'Quiet River',        artist: 'Caleb Inspire',     age: 2,  lang: 'EN' },
+    { type: 'song',  ttl: 'Star Path',          artist: 'Nova Inspire',      age: 1,  lang: 'EN' },
+    { type: 'album', ttl: 'Highlands & Hymns',  artist: 'Elias Inspire',     age: 4,  lang: 'EN' },
+    { type: 'song',  ttl: 'Mensajero',          artist: 'Santiago Inspire',  age: 3,  lang: 'ES' },
+  ],
+  lyrics_drafting: [
+    { type: 'song',  ttl: 'Bedtime in the Barn', artist: 'Tiny Tiggles',     age: 23, lang: 'EN' },
+    { type: 'song',  ttl: 'Lifted Higher',       artist: 'Melody Inspire',   age: 3,  lang: 'EN' },
+    { type: 'song',  ttl: 'Stone by Stone v2',   artist: 'Radiant Stones',   age: 5,  lang: 'EN' },
+    { type: 'song',  ttl: 'Cancion del Alba',    artist: 'Santiago Inspire', age: 2,  lang: 'ES' },
+    { type: 'song',  ttl: 'Send Me, Lord',       artist: 'Gabriel Inspire',  age: 6,  lang: 'EN' },
+  ],
+  lyrics_approved: [
+    { type: 'song',  ttl: 'Mountains Move',      artist: 'Imani Inspire',    age: 4,  lang: 'EN' },
+    { type: 'song',  ttl: 'River of Healing',    artist: 'Eliana Inspire',   age: 2,  lang: 'EN' },
+    { type: 'song',  ttl: 'Awake, Awake',        artist: 'Jubilee Inspire',  age: 5,  lang: 'EN' },
+  ],
+  song_generation: [
+    { type: 'song',  ttl: 'Praise Him Loud',     artist: 'Zev Inspire',      age: 1,  lang: 'EN' },
+    { type: 'song',  ttl: 'Watch the Sky',       artist: 'Nova Inspire',     age: 3,  lang: 'EN' },
+    { type: 'song',  ttl: 'Daisy Says Dance',    artist: 'Party Giggles',    age: 2,  lang: 'EN' },
+    { type: 'song',  ttl: 'Tierra de Promesa',   artist: 'Santiago Inspire', age: 5,  lang: 'ES' },
+  ],
+  qa_review: [
+    { type: 'song',  ttl: 'Breakthrough',        artist: 'Caleb Inspire',    age: 3,  lang: 'EN' },
+    { type: 'song',  ttl: 'Coyote Moon',         artist: 'Elias Inspire',    age: 11, lang: 'EN' },
+    { type: 'song',  ttl: 'Wildflower Song',     artist: 'Zariah Inspire',   age: 14, lang: 'EN' },
+    { type: 'song',  ttl: 'King of My Heart',    artist: 'Kingdom Pulse',    age: 4,  lang: 'EN' },
+    { type: 'song',  ttl: 'Old Allan Hassan Rd', artist: 'Allan Hassan',     age: 2,  lang: 'EN' },
+    { type: 'song',  ttl: 'Cornell\'s Lullaby',  artist: 'Cornell Kay',      age: 5,  lang: 'EN' },
+    { type: 'song',  ttl: 'Wildfire Hymn',       artist: 'Daisy Wylder',     age: 6,  lang: 'EN' },
+    { type: 'song',  ttl: 'Ruthie Comes Home',   artist: 'Ruthie Bolton',    age: 1,  lang: 'EN' },
+  ],
+  engineering: [
+    { type: 'song',  ttl: 'Tierra de Promesa',   artist: 'Santiago Inspire', age: 9,  lang: 'ES' },
+    { type: 'song',  ttl: 'Pinion Wind',         artist: 'Elias Inspire',    age: 4,  lang: 'EN' },
+    { type: 'song',  ttl: 'Hold the Light',      artist: 'Amir Inspire',     age: 2,  lang: 'EN' },
+    { type: 'song',  ttl: 'Salt of the Earth',   artist: 'Imani Inspire',    age: 6,  lang: 'EN' },
+  ],
+  sunil_approval: [
+    { type: 'song',  ttl: 'Crown of Light',      artist: 'Amir Inspire',     age: 8,  lang: 'EN' },
+    { type: 'song',  ttl: 'Lifted Higher (mst)', artist: 'Melody Inspire',   age: 3,  lang: 'EN' },
+    { type: 'song',  ttl: 'Praise Him Loud',     artist: 'Zev Inspire',      age: 5,  lang: 'EN' },
+  ],
+  final_approval: [
+    { type: 'song',  ttl: 'Stone by Stone',      artist: 'Radiant Stones',   age: 8,  lang: 'EN' },
+    { type: 'song',  ttl: 'Send Me, Lord',       artist: 'Gabriel Inspire',  age: 4,  lang: 'EN' },
+    { type: 'song',  ttl: 'Awake, Awake',        artist: 'Jubilee Inspire',  age: 2,  lang: 'EN' },
+  ],
+  published: [
+    { type: 'song',  ttl: 'Breakthrough',        artist: 'Caleb Inspire',    age: 14, lang: 'EN' },
+    { type: 'song',  ttl: 'Eagle\'s Wings',      artist: 'Elias Inspire',    age: 21, lang: 'EN' },
+    { type: 'album', ttl: 'Caleb-Inspire-Breakthrough', artist: 'Caleb Inspire', age: 30, lang: 'EN' },
+    { type: 'song',  ttl: 'Mountains Move',      artist: 'Imani Inspire',    age: 18, lang: 'EN' },
+    { type: 'song',  ttl: 'Daisy Says Dance',    artist: 'Party Giggles',    age: 12, lang: 'EN' },
+  ],
+  distributed: [
+    { type: 'album', ttl: 'Caleb-Inspire-Breakthrough', artist: 'Caleb Inspire', age: 60, lang: 'EN' },
+    { type: 'song',  ttl: 'Mercy Walks',         artist: 'Mercy Belle Hayes', age: 45, lang: 'EN' },
+    { type: 'song',  ttl: 'Old Allan Hassan Rd', artist: 'Allan Hassan',     age: 90, lang: 'EN' },
+  ],
+};
+
+function ageClass(d) {
+  if (d > 10) return 'stuck';
+  if (d > 7)  return 'warn';
+  return '';
+}
+
+function renderBoard() {
+  const board = document.getElementById('board');
+  board.innerHTML = STAGES.map(stage => {
+    const items = CARDS[stage] || [];
+    const cardsHtml = items.map(c => `
+      <div class="kb-card" onclick="openDrawer('${c.ttl.replace(/'/g, "\\'")}', '${c.artist.replace(/'/g, "\\'")}', '${c.type}', '${stage}')">
+        <div class="type-strip ${c.type}">${c.type}</div>
+        <div class="ttl">${c.ttl}</div>
+        <div class="artist">${c.artist}</div>
+        <div class="meta-row">
+          <span class="age ${ageClass(c.age)}">${c.age}d in stage</span>
+          <span class="lang">${c.lang}</span>
+        </div>
+      </div>
+    `).join('');
+    return `
+      <div class="kb-col" data-stage="${stage}">
+        <div class="kb-col-head">
+          <span class="stage">${stage}</span>
+          <span class="count">${items.length}</span>
+        </div>
+        ${cardsHtml}
+      </div>
+    `;
+  }).join('');
+}
+
+function openDrawer(ttl, artist, type, stage) {
+  document.getElementById('drawerTitle').textContent = ttl;
+  document.getElementById('drawerArtist').textContent = artist + ' · stage: ' + stage;
+  document.getElementById('drawerSub').textContent = type + ' detail';
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+}
+
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('open');
+}
+
+document.getElementById('backdrop').addEventListener('click', closeDrawer);
+
+renderBoard();
+</script>
+
+</body>
+</html>
