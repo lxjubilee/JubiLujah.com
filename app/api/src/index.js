@@ -34,6 +34,9 @@ import listeningRouter from './routes/listening.js';
 import musicAdminRouter from './routes/music.js';
 import publishRouter from './routes/publish.js';
 import tracksRouter from './routes/tracks.js';
+import appVersionRouter from './routes/appVersion.js';
+import mobileRouter from './routes/mobile.js';
+import mobileAdminRouter from './routes/mobileAdmin.js';
 import { serviceRateKey } from './middleware/serviceAuth.js';
 import { startMusicScheduler } from './services/musicScheduler.js';
 
@@ -108,6 +111,8 @@ app.use('/api/auth/admin', serviceLimiter, serviceRouter);
 // ---- Routes -----------------------------------------------------------------
 app.use('/api/auth', authLimiter, authRouter);
 app.use('/api', catalogRouter);                  // public catalog (manifest-backed)
+app.use('/api/app-version', appVersionRouter);   // public mobile update-check
+app.use('/api/mobile', mobileRouter);            // public mobile app config (categories)
 app.use('/api/ratings', writeLimiter, ratingsRouter);
 app.use('/api/comments', writeLimiter, commentsRouter);
 // Public Rating & Review module. /api/admin/reviews is mounted BEFORE the
@@ -127,6 +132,7 @@ app.use('/api/listening', writeLimiter, listeningRouter);
 // Manage Music admin module (CDN sync, publish/hide, validation). Mounted BEFORE
 // the generic /api/admin router so its routes resolve first.
 app.use('/api/admin/music', writeLimiter, musicAdminRouter);
+app.use('/api/admin/mobile', writeLimiter, mobileAdminRouter);
 app.use('/api/admin/publish', writeLimiter, publishRouter);
 app.use('/api/admin/tracks', writeLimiter, tracksRouter);
 app.use('/api/admin', writeLimiter, adminRouter);

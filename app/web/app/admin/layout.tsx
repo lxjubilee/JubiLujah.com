@@ -9,6 +9,7 @@ const TABS = [
   { href: '/admin/active-listeners', label: 'Active Listeners' },
   { href: '/admin', label: 'Overview' },
   { href: '/admin/music', label: 'Manage Music' },
+  { href: '/admin/mobile-settings', label: 'Mobile App Settings' },
   { href: '/admin/publish-to-production', label: 'Publish to Production' },
   { href: '/admin/pipeline', label: 'Pipeline' },
   { href: '/admin/awards', label: 'Awards' },
