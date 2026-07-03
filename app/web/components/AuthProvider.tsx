@@ -53,6 +53,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => { refresh(); }, [refresh]);
 
+  // Keep the session warm: periodically re-validate (which transparently mints a
+  // fresh access token via the refresh token) so a long-running or idle tab never
+  // silently lapses, and so fire-and-forget calls (play events, now-playing
+  // heartbeat) always have a usable token. Only runs while a refresh token exists.
+  useEffect(() => {
+    const t = setInterval(() => { if (getRefreshToken()) refresh(); }, 25 * 60 * 1000);
+    return () => clearInterval(t);
+  }, [refresh]);
+
   const logout = useCallback(async () => {
     try { await api.post('/api/auth/logout', { refreshToken: getRefreshToken() }); } catch { /* ignore */ }
     clearTokens();

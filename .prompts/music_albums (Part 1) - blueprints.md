@@ -49,7 +49,8 @@ These are music albums, meaning they are fundamentally **praise-centered, celebr
 0. **FAITH-FOCUS MANDATE (NON-NEGOTIABLE)**
    - Every album (except Melody Inspire) must hit its persona's minimum cumulative Faith-Focused average on the 0–100% rubric.
    - **Per-Persona Floors:** Zev 90%, Imani 90%, Jubilee 80%, Zariah 80%, Nova 80%, Caleb 80%, Gabriel 80%, Elias 70%, Eliana 70%, Santiago 70%, Tahoma 70%, Amir 70%. Melody is exempt (pre-evangelistic voice).
-   - **Main character rule:** Jesus / Father (God) / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh for OHI personas) must be the main character of every song — sung **to** or **about**, directly or indirectly. If you removed every reference to Him, the song should collapse.
+   - **Main character rule:** Jesus / Father (God) / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh for OHI personas) must be the main character of every song. If you removed every reference to Him, the song should collapse.
+   - **Vertical address (NON-NEGOTIABLE — SOP §3.6):** Every song is sung **directly TO the Lord** (second person), **not merely *about* Him**. Choruses, hooks, and bridges are 100% vertical; ≥60% of sung lines address God directly; verses may open in testimony but pivot to and resolve in address to Him. Design each track's hook and chorus TO God at the blueprint stage. Step-by-step in **Part 3 SOP §3.6.1**.
    - Full rubric and per-track gates are in **Part 3 SOP, Section 3**.
 
 1. **THE FOUR-METRIC RATING STACK** — every song carries:
@@ -256,6 +257,8 @@ For each of the 12 tracks, the blueprint provides a brief that the lyrics engine
 ### Section J: Album-Level Quality Gates Checklist
 
 Run before submission. Reproduces the Album-Level checklist from SOP Section 19, **plus** the Cross-Tradition Sensitivity Vetting attestation: all five passes complete, zero category flags unaddressed, rework rationale documented for any flagged-and-reworked tracks.
+
+**Vertical Address pre-finalize check (added 2026-07-02 — SOP §3.6 / §3.6.1):** Confirm every one of the 12 songs is sung **directly TO the Lord** — every chorus, hook, and bridge in the second person ("Jesus, You…", "Lord, You…"), ≥60% of sung lines direct address, ≤1 horizontal/altar-call section per song, and the Vertical Collapse Test passing (remove the Lord as *addressee* → the song collapses). Any song that is majority third-person "about Him," or whose hook/chorus is not sung to Him, is reworked before the blueprint ships. Record the vertical-address attestation in the album changelog/summary.
 
 **Fourth-Wall Discipline pre-finalize check (added 2026-06-13):** When designing cross-track narrative cohesion (echo-reprise, callback hooks, T12→T1 catalog-loop handshakes, T8 cinematic peak referencing T1 imagery), every cross-track callback in **sung lyric body** must use a **story-world anchor**, NOT an album-structure reference. Production-cue brackets `[Bridge — ECHO-REPRISE · pulling forward Track 1's melody]` are fine (studio direction, never sung), but the actual sung line must say "the wall I was sitting at for so long" — not "the wall I was sitting at in Track 1". See SOP non-negotiable #17 and `Part 2 → Fourth-Wall Discipline` for full ban list + replacement vocabulary.
 

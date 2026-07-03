@@ -89,6 +89,8 @@ Before producing any song or album, the AI Music Developer confirms every item o
     - **Why:** Suno renders both Styles and lyric text into audio and naming guidance. To keep every Inspire-Family song unambiguously Christ-centered and free of any perception of syncretism, the divine name sung and addressed is **God / Jesus**, never "Allah." Non-divine-name Arabic transliteration (Yasu'a, Habibi, Ya Rabb, al-Masih, Ruh) remains welcome.
     - **Enforcement:** every new-album and every rewrite/enhancement pass greps its lyrics files for `\bAllah\b` (case-insensitive) and must return **zero** before finalizing. Song titles and `album.meta.json` track lists are updated for consistency when a renamed compound was a title (e.g., a song titled "Kalimat-Allah" becomes "Word of God").
 
+19. **Vertical Address — songs sung directly TO the Lord** (added 2026-07-02). Every song's center of gravity is **second-person worship/praise addressed to God** ("Jesus, You…", "Lord, You…", "Father, we lift You…"), not third-person commentary *about* Him ("He did…", "He's still…"). **Choruses, hooks, and bridges must be 100% vertical** (addressed to God); verses may open in testimony but must turn to and resolve in direct address. See Section 3.6 for the full standard, floors, and QA test. **Why:** Jubilee music must actually **praise and worship — sung to the Lord** — not merely sing *about* Him or about "this or that."
+
 ---
 
 # PART 1 — THE RATING STACK
@@ -146,6 +148,57 @@ When uncertain, round down and flag for Daddy's review.
 Jesus / Father / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh in OHI mode) must be the **main character** of every song — directly addressed ("Jesus, You are…") or the clear grammatical subject of chorus and bridge ("He broke the chains…"). Self-as-protagonist patterns ("I am becoming myself," "I'm choosing truth") fail and must be rewritten.
 
 **Collapse test:** If every reference to Him were removed, the song must fall apart. If it still works, it fails the brief.
+
+### 3.6 Vertical Address Standard — Sung TO the Lord (added 2026-07-02)
+
+Jubilee songs are **acts of worship addressed to God**, not songs *about* God. The default and dominant grammatical posture is **second person — the singer speaks directly to the Lord, face to face** ("Jesus, You broke the chains," "Lord, You ran the whole way to me," "Father, we lift You higher"). A song that only *reports* on God in the third person ("He broke the chains," "He's still on the throne") — however true — is testimony, not worship, and does not meet the Jubilee brief on its own.
+
+**The rule:**
+1. **Choruses, hooks, and bridges are 100% vertical** — addressed to God in the second person. This is where the worship must land. A hook that is *about* Him ("Throne don't shake") is reframed **to** Him ("You don't shake" / "Your throne won't move, Lord").
+2. **≥ 60% of all sung lines** address God directly (You / Your / Lord / Jesus / Father / Spirit / Most High — OHI: Yahuah / Yeshua / Ruach HaKodesh — as the addressee).
+3. **Verses** may open in first-person testimony or brief narrative, but must **pivot to and resolve in direct address** — the story is told *to* Him ("I was face-down in the pit, Lord — and You reached in"). No song may be wholly third-person report.
+4. **Horizontal / evangelistic-invitation lines** to a human listener ("cry out His name," "He'll come for you too") are permitted in **at most one section** (a Ministry-Moment / altar-call zone) and must not be the song's center of gravity; prefer reframing toward the Lord ("we cry out to You," "You come for us").
+5. The One addressed is always **God / Jesus / Father / Holy Spirit / the Lord / the Most High** (OHI: Yahuah / Yeshua / Ruach HaKodesh) — never a generic "higher power," "the universe," or an ambiguous "You" that could be read as a human beloved.
+
+**Vertical Collapse Test:** Remove the Lord as the *addressee* and the song must collapse into a generic pep-talk or self-affirmation. If it still stands as a song sung to someone/something else, it fails.
+
+**Interaction with Praise vs. Worship (§4):** Vertical address is required in **both** modes — praise declares **to** God what He has done ("Lord, You pulled me out alive!"), worship adores **to** God who He is ("Jesus, You are holy"). Vertical ≠ slow: a 128-BPM soca banger can and must still be sung to the Lord.
+
+**QA / Enforcement (every new-album and every rewrite/enhancement pass):**
+- Confirm **every chorus, hook, and bridge is second-person vertical** (addressed to God).
+- Confirm **≥ 60% of sung lines** are direct address to the Lord; flag any song that is majority third-person "about Him."
+- Confirm the addressee is an explicit divine name/title — not a generic higher power or an ambiguous "you."
+- Confirm **no more than one** horizontal/altar-call section per song.
+- A song failing any of the above is **rewritten before finalizing**, and the vertical pass is recorded in the file changelog.
+
+### 3.6.1 Vertical Address Workflow — Step by Step
+
+Follow **A** when authoring a new song, **B** when flipping an existing/rendered song, and **C** as the gate before any album (new or edited) is finalized.
+
+**A. Authoring a new song — write it vertical from the first draft**
+1. **Name the Addressee first.** Before any line, decide the song is spoken TO God and pick the address — "Jesus," "Lord," "Father," "Holy Spirit," "King" (OHI: "Yahuah," "Yeshua"). That Person is who every line is aimed at.
+2. **Write the hook TO Him.** Draft the chorus/hook so God is the second-person subject or vocative ("You broke the chains," "Lord, You never fail," "We lift You higher"). If a hook starts with "He / His / the [thing]," rewrite it as "You / Your."
+3. **Build verses as testimony spoken to Him.** A verse may open with a first-person story ("I was face-down in the pit…"), but must turn to God by its last two lines and hand into a vertical chorus ("…and You reached in, Lord").
+4. **Make the bridge the most vertical moment** — pure address: surrender, adoration, or declaration straight to Him ("Jesus, You alone…").
+5. **Cap horizontal content at one section.** At most ONE section may speak to a human listener (an altar-call / invitation). Everywhere else, aim the words at God.
+6. **Name Him explicitly in every section** so the "You" can never be mistaken for a human beloved — anchor at least one divine name/title per section.
+
+**B. Flipping an existing / already-rendered song to vertical**
+1. **Tag every sung line** as (a) TO God (2nd person), (b) ABOUT God (3rd person), (c) horizontal (to a person), or (d) self.
+2. **Flip every chorus / hook / bridge** from (b)/(c)/(d) to (a): "He / His / Him" → "You / Your," add a vocative where the meter allows ("Jesus, …"). **Keep the syllable count and rhyme** so the melody and hook are unchanged.
+3. **Convert verse report to address:** "He carried me" → "You carried me, Lord." Keep a brief testimony opener only if it resolves to Him inside the verse.
+4. **Preserve the payload:** keep the catchy shout/chant word ("…the floor!", "Jump up!") — either make the surrounding line address God, or keep the shout as a crowd-answer inside a vertical chorus.
+5. **Kill self-affirmation:** "I am enough / I am amazing" → "You are enough / You made me on purpose, Lord."
+6. **Re-rate** Faith-Focus and Praise-vs-Worship, and record a "Vertical Address pass — SOP §3.6" bullet in the file changelog. If audio already exists, flag the track for **re-render**.
+
+**C. QA gate — run before finalizing ANY album (new or edited)**
+1. For each of the 12 songs, confirm **every chorus, hook, and bridge is second-person to God.** (Fail → rewrite.)
+2. Confirm **≥ 60% of all sung lines** are direct address to the Lord.
+3. Run the **Vertical Collapse Test** on each song — remove the Lord as the addressee; the song must fall apart.
+4. Confirm the addressee is an **explicit divine name/title** (not a generic "higher power" or an ambiguous "you").
+5. Confirm **≤ 1 horizontal/altar-call section** per song.
+6. **Red-flag scan:** any chorus with no "You/Your" and no divine vocative, or any song that is majority "He/His/Him," must be inspected and fixed.
+7. Record the **"Vertical Address pass — SOP §3.6"** line in the file changelog and the ALBUM SUMMARY.
 
 ---
 

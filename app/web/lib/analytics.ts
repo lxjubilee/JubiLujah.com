@@ -3,7 +3,7 @@
 // Media analytics client. recordPlay() fires a playback event (keepalive so it
 // survives navigation/unload). The admin getters back the dashboard.
 // ============================================================================
-import { getAccessToken } from '@/lib/auth';
+import { getAccessToken, getRefreshToken } from '@/lib/auth';
 import { api } from '@/lib/api';
 
 export interface PlayPayload {
@@ -51,16 +51,12 @@ export function recordPlay(p: PlayPayload): void {
 // Fire-and-forget; called by the player on play + every ~25s, and stopped on
 // pause/stop. Safe no-op when signed out.
 export function pingNowPlaying(songId: string): void {
-  const token = getAccessToken();
-  if (!token || !songId) return;
-  try {
-    fetch('/api/analytics/now-playing', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` },
-      body: JSON.stringify({ song_id: songId, session_id: getSessionId() }),
-      credentials: 'omit',
-    }).catch(() => {});
-  } catch { /* ignore */ }
+  // Skip entirely for fully-signed-out users; otherwise go through the api client
+  // so it transparently REFRESHES an expired access token (raw fetch + a bare
+  // getAccessToken() used to silently stop the heartbeat once the 1h access token
+  // lapsed mid-playback, so listeners vanished from Active Listeners).
+  if (!songId || (!getAccessToken() && !getRefreshToken())) return;
+  api.post('/api/analytics/now-playing', { song_id: songId, session_id: getSessionId() }).catch(() => {});
 }
 export function stopNowPlaying(): void {
   const token = getAccessToken();

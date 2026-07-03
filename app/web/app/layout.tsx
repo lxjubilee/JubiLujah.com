@@ -42,6 +42,13 @@ export const metadata: Metadata = {
     type: 'website',
   },
   robots: { index: true, follow: true },
+  // Suppress the browser's built-in "Translate this page?" prompt. Because the
+  // site sets <html lang="ro/ja/…"> for the chosen UI language, Chrome/Edge would
+  // otherwise offer to machine-translate the (already-localized) page back to the
+  // user's browser language. `google: notranslate` renders
+  // <meta name="google" content="notranslate"> which disables that offer; paired
+  // with translate="no" on <html> below for Firefox/Safari coverage.
+  other: { google: 'notranslate' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const dir = isRtlLang(lang) ? 'rtl' : 'ltr';
 
   return (
-    <html lang={lang} dir={dir} className={`${openSans.variable} ${orbitron.variable}`}>
+    <html lang={lang} dir={dir} translate="no" className={`notranslate ${openSans.variable} ${orbitron.variable}`}>
       <body>
         <LangProvider value={lang}>
           <AuthProvider>

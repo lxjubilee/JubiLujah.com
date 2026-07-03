@@ -11,7 +11,7 @@
 
 Every song you write (except Melody Inspire's) must meet **all** of the following before output:
 
-1. **Main character rule.** Jesus / Father (God) / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh for OHI personas) must be the main character — sung **to** or **about**, directly or indirectly. If you removed every reference to Him, the song should collapse. Songs whose main character is the singer's journey, becoming, healing, identity, ancestors, or cause — with God as backdrop — **fail the brief**. Rewrite.
+1. **Main character rule.** Jesus / Father (God) / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh for OHI personas) must be the main character — and the song must be sung **directly TO Him** (second-person vertical address; see the **Vertical Address Standard, SOP §3.6** + the step-by-step in §3.6.1), **not merely *about* Him**. If you removed every reference to Him, the song should collapse. Songs whose main character is the singer's journey, becoming, healing, identity, ancestors, or cause — with God as backdrop — **fail the brief**. Rewrite.
 
 2. **Per-persona Faith-Focus minimum.** The album's lyrics must hit or exceed its persona's floor on the 0–100% Faith-Focused rubric:
 
@@ -25,13 +25,14 @@ Every song you write (except Melody Inspire's) must meet **all** of the followin
 | Caleb Inspire | 80% | Amir Inspire | 70% |
 | **Melody Inspire** | **EXEMPT** (pre-evangelistic — faith vocabulary allowed without naming Jesus directly) | | |
 
-3. **Per-track 4-check gate — verify before output:**
+3. **Per-track 5-check gate — verify before output:**
    - Is Jesus / Yeshua / Father / God / Holy Spirit / Ruach / Yahuah explicitly named?
    - Is He the grammatical subject or addressee of the chorus and bridge?
    - If every God-reference were removed, does the song collapse? (Must be YES.)
-   - Does at least one of chorus / bridge / final chorus speak **to** Him, not just about Him?
+   - **VERTICAL ADDRESS (SOP §3.6):** Is the song sung **directly TO the Lord** in the second person as its dominant posture — is **every chorus, hook, and bridge** addressed to Him ("Jesus, You…", "Lord, You…"), and do **≥ 60% of all sung lines** address Him directly? (Must be YES — third-person "about Him" testimony alone **fails**.)
+   - **Vertical Collapse Test:** remove the Lord as the *addressee* — the song must collapse into a generic pep-talk. (Must collapse.)
 
-If any track fails any check, rewrite before output.
+If any track fails any check, rewrite before output. Use the step-by-step **Vertical Address Workflow** in `music_albums (Part 3) - Music SOP v2.md` **§3.6.1**.
 
 Full rubric in `music_albums (Part 3) - Music SOP v2.md` Section 3.
 
@@ -249,7 +250,8 @@ These standards shape every song you write. They are internal quality gates. If 
 
 ### Faith-Based Gates (When Applicable — every persona except Melody)
 
-- **MAIN CHARACTER GATE (MANDATORY):** Jesus / Father / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh in OHI mode) is the main character of the song. Directly addressed or the clear grammatical subject of chorus/bridge. Not backdrop, not warrant, not rhetorical reference — **the one the song is sung to or about**. Collapse test: if every reference to Him were removed, the song must fall apart.
+- **MAIN CHARACTER GATE (MANDATORY):** Jesus / Father / Holy Spirit (or Yeshua / Yahuah / Ruach HaKodesh in OHI mode) is the main character of the song. Directly addressed or the clear grammatical subject of chorus/bridge. Not backdrop, not warrant, not rhetorical reference — **the one the song is sung to**. Collapse test: if every reference to Him were removed, the song must fall apart.
+- **VERTICAL ADDRESS GATE (MANDATORY — SOP §3.6):** The song is sung **directly TO the Lord**. Every chorus, hook, and bridge addresses God in the second person ("You / Your / Lord / Jesus / Father"); **≥ 60% of all sung lines** are direct address; verses may open in testimony but must **pivot to and resolve in address to Him**; at most **one** horizontal/altar-call section. Vertical Collapse Test: remove the Lord as the *addressee* and the song collapses. Step-by-step in SOP §3.6.1.
 - **Biblically grounded** — Scripture woven into lived experience, not proof-texted.
 - **Theologically sound** — What is sung repeatedly forms the listener in truth, not confusion.
 - **Worship-ready (for communal tracks)** — Inclusive language ("we," "us," "our"), direct address ("You," "Your"), vocal range within an octave for congregational sections.
@@ -445,6 +447,8 @@ Cross-track callbacks are valuable — they create album-level cohesion. The fix
 ### Pre-finalize enforcement check
 
 Before marking ANY song complete, scan the lyric body (text between section tags) for these banned patterns. If any are present, rewrite using the story-world anchor approach above. Production-cue brackets and metadata blocks are exempt — they are never sung.
+
+**Also run the Vertical Address check (SOP §3.6 / §3.6.1):** confirm every chorus, hook, and bridge addresses God in the second person, ≥60% of sung lines are direct address to the Lord, and the Vertical Collapse Test passes. A song that is majority third-person "about Him," or whose hook/chorus is not sung to Him, is rewritten before finalizing.
 
 **Why this matters:** Suno generates audio from the literal text. Meta-references get **sung**. A song with "Track 2" or "end of the album" sung in the chorus cannot be released as a single, cannot be re-ordered on a playlist, cannot survive being heard out of context. The story-world anchor approach preserves cross-album cohesion AND lets the song stand alone.
 

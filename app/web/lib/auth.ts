@@ -51,9 +51,16 @@ export function setTokens(tokens: AuthTokens | null | undefined): void {
     clearTokens();
     return;
   }
+  // PERSIST the refreshToken — without it, once the 1h access token expires there
+  // is nothing to mint a new one from, and the user is silently logged out (and
+  // "keep me signed in" never works). The server returns the same long-lived
+  // refresh token on /refresh; if a response omits it (e.g. a refresh reply that
+  // echoes nothing), keep the one we already hold rather than dropping the session.
+  const prev = getTokens();
+  const refreshToken = tokens.refreshToken ?? prev?.refreshToken;
   window.localStorage.setItem(
     STORAGE_KEY,
-    JSON.stringify({ accessToken: tokens.accessToken, expiresAt: tokens.expiresAt }),
+    JSON.stringify({ accessToken: tokens.accessToken, refreshToken, expiresAt: tokens.expiresAt }),
   );
 }
 
