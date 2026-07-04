@@ -1,0 +1,187 @@
+/* ============================================================================
+   Mobile App Settings admin — dynamic Pages → per-page Hero + Sections, and
+   Music Types. Namespaced `mas-`, built on the site design tokens (site.css).
+   Reuses .mm-btn / .mm-pager / .jv-scroll from manage-music + globals.
+   ========================================================================== */
+
+/* ---- Tabs ---------------------------------------------------------------- */
+.mas-tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin: 14px 0 20px; }
+.mas-tab {
+  appearance: none; background: transparent; border: none; cursor: pointer; font: inherit;
+  font-weight: 600; font-size: 14px; color: var(--ink-soft);
+  padding: 10px 16px; border-radius: 8px 8px 0 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.mas-tab:hover { color: var(--ink); background: var(--surface-2); }
+.mas-tab.sel { color: var(--ink); border-bottom-color: var(--accent); }
+.mas-tab .mas-badge { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--surface-3); color: var(--muted); }
+.mas-tab.sel .mas-badge { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+
+/* ---- Flash banner -------------------------------------------------------- */
+.mas-flash { padding: 9px 13px; border-radius: 10px; font-size: 13px; margin-bottom: 14px; border: 1px solid var(--line); }
+.mas-flash.ok  { color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); border-color: color-mix(in srgb, var(--success) 40%, transparent); }
+.mas-flash.err { color: var(--accent);  background: color-mix(in srgb, var(--accent) 12%, transparent);  border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+
+/* ---- Layout: pages master / detail -------------------------------------- */
+.mas-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .mas-layout { grid-template-columns: 1fr; } }
+
+.mas-pages { display: flex; flex-direction: column; gap: 8px; }
+.mas-eyebrow { font-size: 11.5px; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 0 0 4px; }
+.mas-page {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center;
+  padding: 10px 12px; border-radius: 11px; border: 1px solid var(--line); background: var(--surface);
+  cursor: pointer; text-align: left; width: 100%; font: inherit; color: var(--ink);
+}
+.mas-page.mas-drag { opacity: .4; }
+.mas-page.mas-over { outline: 2px solid var(--accent); outline-offset: -1px; }
+.mas-page:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.mas-page.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); box-shadow: inset 3px 0 0 var(--accent); }
+.mas-page .mas-reorder { display: flex; flex-direction: column; gap: 2px; }
+.mas-page .mas-nm { font-weight: 700; font-size: 14px; }
+.mas-page .mas-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+.mas-flags { display: flex; gap: 5px; }
+.mas-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mas-dot.on  { background: var(--success); }
+.mas-dot.off { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
+
+/* ---- Cards + headers ----------------------------------------------------- */
+.mas-stack { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.mas-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.mas-card--inset { background: var(--surface-2); }
+.mas-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.mas-head--bottom { align-items: flex-end; }
+.mas-label { font-size: 11.5px; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 0; }
+.mas-hint { color: var(--muted); font-size: 12.5px; margin: 6px 0 14px; }
+.mas-toggles { display: flex; gap: 14px; align-items: center; }
+
+/* ---- Fields -------------------------------------------------------------- */
+.mas-field { display: block; }
+.mas-field .mas-flab { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin: 0 0 5px; }
+.mas-input {
+  font: inherit; font-size: 13.5px; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; width: 100%;
+}
+.mas-input:focus { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 0; border-color: var(--accent); }
+.mas-input[readonly] { color: var(--ink-soft); background: var(--surface-2); }
+
+/* ---- Toggle switch ------------------------------------------------------- */
+.mas-switch { position: relative; display: inline-flex; align-items: center; gap: 9px; cursor: pointer; font-size: 13px; color: var(--ink-soft); user-select: none; }
+.mas-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+/* Off state must read clearly against dark cards: a visibly filled track with a
+   defined border, and a bright thumb so the knob stands out from the track. */
+.mas-switch .mas-track { width: 40px; height: 22px; border-radius: 999px; background: var(--surface-3); border: 1px solid color-mix(in srgb, var(--ink) 26%, var(--line)); position: relative; transition: background .15s, border-color .15s; flex: 0 0 auto; }
+.mas-switch .mas-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink-soft); box-shadow: 0 1px 2px rgba(0, 0, 0, .4); transition: transform .15s, background .15s; }
+.mas-switch.on .mas-track { background: color-mix(in srgb, var(--success) 40%, transparent); border-color: color-mix(in srgb, var(--success) 60%, transparent); }
+.mas-switch.on .mas-track::after { transform: translateX(18px); background: var(--success); }
+.mas-switch input:focus-visible + .mas-track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- Icon buttons -------------------------------------------------------- */
+.mas-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 7px; border: 1px solid var(--line); background: var(--surface-2); color: var(--muted); cursor: pointer; font-size: 12px; line-height: 1; }
+.mas-icon:hover:not(:disabled) { color: var(--ink); border-color: var(--accent); }
+.mas-icon:disabled { opacity: .4; cursor: default; }
+.mas-icon--danger:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---- Segmented control (Artists / Albums) -------------------------------- */
+.mas-seg { display: inline-flex; gap: 4px; padding: 4px; background: var(--bg); border: 1px solid var(--line); border-radius: 11px; }
+.mas-seg button { appearance: none; cursor: pointer; font: inherit; font-weight: 700; font-size: 13px; color: var(--muted); background: transparent; border: none; border-radius: 8px; padding: 7px 16px; }
+.mas-seg button.on { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.18); }
+.mas-seg button.on span { color: var(--accent-gold); }
+
+/* ---- Placeholder tiles (cover / avatar) ---------------------------------- */
+.mas-tile { flex: 0 0 auto; display: grid; place-items: center; color: #fff; font-weight: 800; overflow: hidden; text-align: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.mas-tile span { font-size: 10px; padding: 2px; line-height: 1.05; text-shadow: 0 1px 3px rgba(0,0,0,.5); }
+.mas-tile.sq { border-radius: 7px; }
+.mas-tile.circ { border-radius: 50%; }
+/* When a real cover/avatar loads, the tile IS the <img>; cover-fit it. */
+img.mas-tile { object-fit: cover; display: block; background: var(--surface-2); }
+
+/* ---- Circular artist chips ----------------------------------------------- */
+.mas-circrow { display: flex; gap: 16px; flex-wrap: wrap; }
+.mas-circ { width: 82px; text-align: center; position: relative; cursor: grab; transition: opacity .12s; }
+.mas-circ:active { cursor: grabbing; }
+.mas-circ.mas-drag { opacity: .4; }
+.mas-circ.mas-over .mas-tile { box-shadow: 0 0 0 2px var(--accent); }
+.mas-circ .mas-tile { width: 62px; height: 62px; margin: 0 auto; font-size: 15px; }
+.mas-circ .mas-cnm { font-size: 12px; margin-top: 6px; color: var(--ink-soft); line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mas-circ .mas-x { position: absolute; top: -4px; right: 8px; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; font-size: 9px; padding: 0; }
+.mas-circ .mas-x:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---- Album item rows ----------------------------------------------------- */
+.mas-itemrow { display: grid; grid-template-columns: auto 42px 1fr auto; gap: 12px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line-soft); }
+.mas-itemrow:last-child { border-bottom: none; }
+.mas-itemrow.mas-drag { opacity: .4; }
+.mas-itemrow.mas-over { box-shadow: inset 0 0 0 2px var(--accent); border-radius: 8px; }
+.mas-itemrow .mas-tile { width: 42px; height: 42px; }
+.mas-itemrow .mas-it-title { font-weight: 600; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mas-itemrow .mas-it-sub { font-size: 12px; color: var(--muted); }
+
+/* Selected-items list: cap the height and scroll, so a long selection doesn't
+   stretch the page. The top padding gives the artist circles' remove (✕) badge
+   room so it isn't clipped by overflow. */
+.mas-itemlist { max-height: 320px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+
+/* ---- Section tab-strip --------------------------------------------------- */
+.mas-sectabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+.mas-sectab { flex: 0 0 auto; appearance: none; cursor: grab; font: inherit; font-weight: 700; font-size: 13px; text-align: left;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 13px; color: var(--ink-soft);
+  display: flex; flex-direction: column; gap: 2px; }
+.mas-sectab:active { cursor: grabbing; }
+.mas-sectab.mas-over { outline: 2px solid var(--accent); outline-offset: 1px; }
+.mas-sectab small { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.mas-sectab:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.mas-sectab.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, var(--surface)); box-shadow: inset 0 -2px 0 var(--accent); }
+.mas-sectab.sel small { color: var(--accent); }
+
+/* ---- Hero slide rows ----------------------------------------------------- */
+/* Compact single-row slide: ⠿ grip · cover · Active toggle · code ........ ✕ */
+.mas-slide { display: flex; align-items: center; gap: 14px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); margin-bottom: 8px; }
+.mas-slide .mas-tile { width: 46px; height: 46px; }
+.mas-slide .mas-sfields { flex: 1; min-width: 0; }
+.mas-slide .mas-smeta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.mas-slide .mas-sside { display: flex; flex-direction: row; align-items: center; gap: 6px; }
+.mas-slide.mas-drag { opacity: .4; }
+.mas-slide.mas-over { box-shadow: 0 0 0 2px var(--accent); }
+/* Scrollable hero-slide list (slides carry their own borders, so no box here). */
+.mas-slidelist { max-height: 340px; overflow-y: auto; padding-right: 4px; }
+.mas-grip { cursor: grab; color: var(--muted); font-size: 16px; line-height: 1; padding: 2px 4px; flex: 0 0 auto; user-select: none; }
+.mas-grip:hover { color: var(--ink); }
+.mas-grip:active { cursor: grabbing; }
+
+/* ---- Picker -------------------------------------------------------------- */
+.mas-picker { margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.mas-picker-bar { display: flex; gap: 10px; margin-bottom: 11px; }
+.mas-pickrow { display: grid; grid-template-columns: 36px 1fr auto; gap: 11px; align-items: center; padding: 7px 11px; border-bottom: 1px solid var(--line-soft); }
+.mas-pickrow:last-child { border-bottom: none; }
+.mas-pickrow .mas-tile { width: 36px; height: 36px; }
+.mas-pickrow .mas-pk-title { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mas-pickrow .mas-pk-sub { font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mas-added { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding: 3px 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); }
+
+/* ---- Genres (Music Types) ------------------------------------------------ */
+.mas-genrerow { display: grid; grid-template-columns: auto 1fr auto auto auto; gap: 12px; align-items: center; padding: 9px 4px; border-bottom: 1px solid var(--line-soft); }
+.mas-genrerow.mas-drag { opacity: .4; }
+.mas-genrerow.mas-over { outline: 2px solid var(--accent); outline-offset: -2px; }
+.mas-genrerow:last-child { border-bottom: none; }
+.mas-genrerow .mas-gnm { font-weight: 600; font-size: 14px; }
+.mas-genrerow:hover { background: var(--surface-2); border-radius: 8px; }
+.mas-genrerow.sel { background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 8px; box-shadow: inset 3px 0 0 var(--accent); }
+.mas-gcount { color: var(--muted); font-weight: 600; font-size: 12px; }
+.mas-pill { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.mas-pill.gold { color: var(--accent-gold); background: color-mix(in srgb, var(--accent-gold) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent-gold) 40%, transparent); }
+.mas-pill.mute { color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); }
+
+.mas-empty { color: var(--muted); font-size: 13px; padding: 6px 0 2px; }
+.mas-addbar { display: flex; gap: 10px; margin-top: 14px; align-items: center; }
+
+/* ---- Modal (themed confirm / prompt, replaces window.confirm/prompt) ------ */
+.mas-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(6, 10, 22, .62); display: grid; place-items: center; padding: 20px; animation: mas-fade .12s ease; }
+.mas-modal { width: 100%; max-width: 430px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 24px 64px rgba(0, 0, 0, .5); padding: 22px 22px 18px; animation: mas-pop .14s ease; }
+.mas-modal h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
+.mas-modal p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+.mas-modal .mas-input { margin-top: 14px; }
+.mas-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.mas-modal-actions .mm-btn { padding: 8px 16px; }
+@keyframes mas-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes mas-pop { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .mas-overlay, .mas-modal { animation: none; } }

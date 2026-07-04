@@ -42,7 +42,9 @@ function genreCounts() {
 
 // Ordered Music Type list: explicit admin rows first (pinned 5 + any added), then
 // auto genres that meet the ">= min albums" threshold, by album count desc.
-function buildMusicTypes(rows, minCount) {
+// Curated (admin) rows carry an `albums` list (their manually-picked album refs);
+// auto genres omit it, so the app falls back to catalog genre-tag matching.
+function buildMusicTypes(rows, minCount, albumsByType) {
   const counts = genreCounts();
   const out = [];
   const seen = new Set();
@@ -50,7 +52,7 @@ function buildMusicTypes(rows, minCount) {
     const k = String(r.genre).toLowerCase();
     if (seen.has(k)) continue;
     seen.add(k);
-    out.push({ genre: r.genre, label: r.label, order: out.length + 1, pinned: !!r.is_pinned });
+    out.push({ genre: r.genre, label: r.label, order: out.length + 1, pinned: !!r.is_pinned, albums: albumsByType.get(r.id) || [] });
   }
   const auto = [...counts.entries()]
     .filter(([g, n]) => n >= minCount && !seen.has(g.toLowerCase()))
@@ -93,44 +95,97 @@ function toItem(it, i) {
   return base;
 }
 
+// Nested config (v2): each page carries an optional per-page `hero` and an
+// ordered list of typed `sections`, each holding its items. A page with no admin
+// sections falls back to one manifest-derived default section so it works out of
+// the box. The `music_type` page keeps its `musicTypes` list.
 router.get('/config', ah(async (req, res) => {
-  const [cats, items, settings, mtypes] = await Promise.all([
-    query(`SELECT id, key, label, kind, display_order
+  const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
+    query(`SELECT id, key, label, kind, display_order, hero_enabled
              FROM production.mobile_categories
-            WHERE is_active AND is_visible
-            ORDER BY display_order, id`),
-    query(`SELECT category_id, item_type, item_ref, title, album_refs, display_order
-             FROM production.mobile_category_items
             WHERE is_active
             ORDER BY display_order, id`),
+    query(`SELECT id, category_id, name, kind, display_order
+             FROM production.mobile_sections
+            WHERE is_active
+            ORDER BY display_order, id`),
+    query(`SELECT section_id, item_type, item_ref, title, album_refs, display_order
+             FROM production.mobile_category_items
+            WHERE is_active AND section_id IS NOT NULL
+            ORDER BY display_order, id`),
+    query(`SELECT category_id, album_ref, headline, subtitle, display_order
+             FROM production.mobile_hero_slides
+            WHERE is_active
+              AND (starts_at IS NULL OR starts_at <= NOW())
+              AND (ends_at   IS NULL OR ends_at   >= NOW())
+            ORDER BY display_order, id`),
     query(`SELECT min_album_count FROM production.mobile_settings WHERE id = 1`),
-    query(`SELECT genre, label, display_order, is_pinned
+    query(`SELECT id, genre, label, display_order, is_pinned
              FROM production.mobile_music_types
+            WHERE is_active
+            ORDER BY display_order, id`),
+    query(`SELECT music_type_id, album_ref, display_order
+             FROM production.mobile_music_type_albums
             WHERE is_active
             ORDER BY display_order, id`),
   ]);
 
   const minCount = settings.rows[0]?.min_album_count ?? 12;
-  const itemsByCat = new Map();
-  for (const it of items.rows) {
-    if (!itemsByCat.has(it.category_id)) itemsByCat.set(it.category_id, []);
-    itemsByCat.get(it.category_id).push(it);
+  const groupBy = (rows, key) => {
+    const m = new Map();
+    for (const r of rows) { if (!m.has(r[key])) m.set(r[key], []); m.get(r[key]).push(r); }
+    return m;
+  };
+  const sectionsByCat = groupBy(sections.rows, 'category_id');
+  const itemsBySection = groupBy(items.rows, 'section_id');
+  const heroByCat = groupBy(hero.rows, 'category_id');
+  const mtAlbumsByType = new Map();
+  for (const r of mtAlbums.rows) {
+    if (!mtAlbumsByType.has(r.music_type_id)) mtAlbumsByType.set(r.music_type_id, []);
+    mtAlbumsByType.get(r.music_type_id).push(r.album_ref);
   }
 
   const categories = cats.rows.map((c) => {
     if (c.kind === 'music_type') {
       return {
         key: c.key, label: c.label, kind: c.kind, order: c.display_order,
-        musicTypes: buildMusicTypes(mtypes.rows, minCount),
+        musicTypes: buildMusicTypes(mtypes.rows, minCount, mtAlbumsByType),
       };
     }
-    const rows = itemsByCat.get(c.id) || [];
-    const list = rows.length ? rows.map(toItem) : defaultItems(c.key);
-    return { key: c.key, label: c.label, kind: c.kind, order: c.display_order, items: list };
+
+    const secRows = sectionsByCat.get(c.id) || [];
+    let sectionList;
+    if (secRows.length) {
+      sectionList = secRows.map((s) => ({
+        name: s.name, kind: s.kind, order: s.display_order,
+        items: (itemsBySection.get(s.id) || []).map(toItem),
+      }));
+    } else {
+      // No admin sections yet → one default section from the manifest so the page
+      // is populated out of the box (mirrors the pre-sections default behavior).
+      const def = defaultItems(c.key);
+      sectionList = def.length
+        ? [{ name: c.label, kind: def[0].type === 'artist' ? 'artists' : 'albums', order: 1, items: def }]
+        : [];
+    }
+
+    const out = { key: c.key, label: c.label, kind: c.kind, order: c.display_order, sections: sectionList };
+    if (c.hero_enabled) {
+      out.hero = {
+        enabled: true,
+        slides: (heroByCat.get(c.id) || []).map((h, i) => ({
+          ref: h.album_ref,
+          order: h.display_order ?? i + 1,
+          headline: h.headline || null,
+          subtitle: h.subtitle || null,
+        })),
+      };
+    }
+    return out;
   });
 
   res.set('Cache-Control', 'public, max-age=60');
-  res.json({ version: 1, generated: getManifest().raw?.generated || null, categories });
+  res.json({ version: 2, generated: getManifest().raw?.generated || null, categories });
 }));
 
 export default router;

@@ -12,6 +12,7 @@
 @import './styles/widgets/album-extras.css';
 @import './styles/widgets/search.css';
 @import './styles/widgets/manage-music.css';
+@import './styles/widgets/mobile-settings.css';
 
 /* ---- App-specific additions (Next.js migration) -------------------------- */
 
@@ -19,6 +20,31 @@
    pages don't show an empty gap below the footer when nothing is playing.
    FooterPlayer toggles .jv-has-player on <body> whenever a song is active. */
 body.jv-has-player { padding-bottom: 84px; }
+
+/* Reusable themed scrollbar. Add `className="jv-scroll"` to any overflow:auto
+   container. Slim, rounded, inset thumb on a transparent track that brightens to
+   gold on hover — matches the analytics + auth-panel scrollbars (site.css tokens).
+   Firefox uses scrollbar-width/color; WebKit uses the pseudo-elements. The 2px
+   thumb border is painted in the container background (--surface) via
+   background-clip:padding-box so the thumb reads as a slim floating pill. */
+.jv-scroll { scrollbar-width: thin; scrollbar-color: #46557d transparent; }
+.jv-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.jv-scroll::-webkit-scrollbar-track { background: transparent; }
+.jv-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 2px solid var(--surface);
+  background: linear-gradient(180deg, #4a5a83, #37456a);
+  background-clip: padding-box;
+}
+.jv-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-gold), #e0a93c);
+  background-clip: padding-box;
+}
+.jv-scroll::-webkit-scrollbar-thumb:active {
+  background: var(--accent-gold);
+  background-clip: padding-box;
+}
+.jv-scroll::-webkit-scrollbar-corner { background: transparent; }
 
 /* ===================== JUBILEEVERSE-STYLE SITE HEADER =====================
    Two-row MSN-style dark header ported to match jubileeverse.com: charcoal bar
