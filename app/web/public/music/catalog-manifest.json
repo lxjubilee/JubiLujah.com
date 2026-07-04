@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-01T16:54:25.305Z",
+  "generated": "2026-07-03T18:23:48.222Z",
   "totalArtists": 33,
-  "totalAlbums": 935,
-  "totalPlayableAlbums": 371,
-  "totalPlayableTracks": 4670,
+  "totalAlbums": 981,
+  "totalPlayableAlbums": 388,
+  "totalPlayableTracks": 4874,
   "categories": [
     {
       "key": "inspire",
@@ -252,9 +252,94 @@
               "title": "مقام القلب",
               "folder": "AMIM1011AR-maqam-al-qalb",
               "path": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "القَلْبُ كُلُّهُ لَكَ",
+                  "file": "01 القَلْبُ كُلُّهُ لَكَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/01 القَلْبُ كُلُّهُ لَكَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "المَلِكُ الجَريحُ",
+                  "file": "02 المَلِكُ الجَريحُ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/02 المَلِكُ الجَريحُ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "في الهُدوءِ",
+                  "file": "03 في الهُدوءِ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/03 في الهُدوءِ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "أَطْلُبُ وَجْهَكَ",
+                  "file": "04 أَطْلُبُ وَجْهَكَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/04 أَطْلُبُ وَجْهَكَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "يَسُوعُ هُوَ الرَّبُّ",
+                  "file": "05 يَسُوعُ هُوَ الرَّبُّ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/05 يَسُوعُ هُوَ الرَّبُّ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "دُمُوعٌ عِنْدَ قَدَمَيْهِ",
+                  "file": "06 دُمُوعٌ عِنْدَ قَدَمَيْهِ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/06 دُمُوعٌ عِنْدَ قَدَمَيْهِ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "افْتَحِ الفِناءَ",
+                  "file": "07 افْتَحِ الفِناءَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/07 افْتَحِ الفِناءَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "كُلُّ رُكْبَةٍ تَجْثُو",
+                  "file": "08 كُلُّ رُكْبَةٍ تَجْثُو.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/08 كُلُّ رُكْبَةٍ تَجْثُو.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "الجَمالُ كُلُّهُ لَكَ",
+                  "file": "09 الجَمالُ كُلُّهُ لَكَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/09 الجَمالُ كُلُّهُ لَكَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "العُودُ يَنْطِقُ بِاسْمِكَ",
+                  "file": "10 العُودُ يَنْطِقُ بِاسْمِكَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/10 العُودُ يَنْطِقُ بِاسْمِكَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "قَلْبٌ عَرَبِيٌّ، عَرْشُهُ",
+                  "file": "11 قَلْبٌ عَرَبِيٌّ، عَرْشُهُ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/11 قَلْبٌ عَرَبِيٌّ، عَرْشُهُ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "عائِدٌ إِلَيْكَ",
+                  "file": "12 عائِدٌ إِلَيْكَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/12 عائِدٌ إِلَيْكَ.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "AMIM1011EN",
@@ -703,9 +788,94 @@
               "title": "Al-Ism Fawqa Kulli Ism",
               "folder": "AMIM1035AR-al-ism-fawqa-kulli-ism",
               "path": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "الاسْمُ فَوْقَ كُلِّ اسْمٍ",
+                  "file": "01 الاسْمُ فَوْقَ كُلِّ اسْمٍ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/01 الاسْمُ فَوْقَ كُلِّ اسْمٍ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "يَسُوعُ، اسْمُ الأَسْمَاءِ",
+                  "file": "02 يَسُوعُ، اسْمُ الأَسْمَاءِ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/02 يَسُوعُ، اسْمُ الأَسْمَاءِ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "عِنْدَ هذا الاسْمِ نَسْجُدُ",
+                  "file": "03 عِنْدَ هذا الاسْمِ نَسْجُدُ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/03 عِنْدَ هذا الاسْمِ نَسْجُدُ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "الاسْمُ الَّذي يَشْفي",
+                  "file": "04 الاسْمُ الَّذي يَشْفي.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/04 الاسْمُ الَّذي يَشْفي.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "الاسْمُ الَّذي يُخَلِّصُ",
+                  "file": "05 الاسْمُ الَّذي يُخَلِّصُ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/05 الاسْمُ الَّذي يُخَلِّصُ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "الاسْمُ الَّذي يُسَكِّنُ العَاصِفَةَ",
+                  "file": "06 الاسْمُ الَّذي يُسَكِّنُ العَاصِفَةَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/06 الاسْمُ الَّذي يُسَكِّنُ العَاصِفَةَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "اسْمُ القُدْرَةِ الَّتي لا تَتَزَعْزَعُ",
+                  "file": "07 اسْمُ القُدْرَةِ الَّتي لا تَتَزَعْزَعُ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/07 اسْمُ القُدْرَةِ الَّتي لا تَتَزَعْزَعُ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "عِنْدَ اسْمِ يَسُوعَ، كُلُّ رُكْبَةٍ",
+                  "file": "08 عِنْدَ اسْمِ يَسُوعَ، كُلُّ رُكْبَةٍ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/08 عِنْدَ اسْمِ يَسُوعَ، كُلُّ رُكْبَةٍ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "الاسْمُ في كُلِّ لِسَانٍ",
+                  "file": "09 الاسْمُ في كُلِّ لِسَانٍ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/09 الاسْمُ في كُلِّ لِسَانٍ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "سَأَرْفَعُ اسْمَكَ إِلى الأَبَدِ",
+                  "file": "10 سَأَرْفَعُ اسْمَكَ إِلى الأَبَدِ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/10 سَأَرْفَعُ اسْمَكَ إِلى الأَبَدِ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "عَظِّمُوا الاسْمَ",
+                  "file": "11 عَظِّمُوا الاسْمَ.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/11 عَظِّمُوا الاسْمَ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "يَسُوعُ، الاسْمُ إِلى الأَبَدِ (بَرَكَةُ خِتَامٍ)",
+                  "file": "12 يَسُوعُ، الاسْمُ إِلى الأَبَدِ (بَرَكَةُ خِتَامٍ).mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/12 يَسُوعُ، الاسْمُ إِلى الأَبَدِ (بَرَكَةُ خِتَامٍ).mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "AMIM1035EN",
@@ -17569,9 +17739,94 @@
               "title": "내게 임한 기름부으심",
               "folder": "IMIM1034KO-naege-imhan-gireumbueusim",
               "path": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "내게 임한 기름부으심",
+                  "file": "01 내게 임한 기름부으심.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/01 내게 임한 기름부으심.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "주의 영",
+                  "file": "02 주의 영.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/02 주의 영.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "설교자의 가락",
+                  "file": "03 설교자의 가락.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/03 설교자의 가락.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "뿔에서 부은 기름",
+                  "file": "04 뿔에서 부은 기름.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/04 뿔에서 부은 기름.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "모태에서 구별되어",
+                  "file": "05 모태에서 구별되어.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/05 모태에서 구별되어.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "멍에가 깨어지네",
+                  "file": "06 멍에가 깨어지네.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/06 멍에가 깨어지네.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "성령님의 능력",
+                  "file": "07 성령님의 능력.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/07 성령님의 능력.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "속삭이는 강단",
+                  "file": "08 속삭이는 강단.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/08 속삭이는 강단.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "가는 길에 가르치소서",
+                  "file": "09 가는 길에 가르치소서.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/09 가는 길에 가르치소서.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "말씀 들려 보냄받아",
+                  "file": "10 말씀 들려 보냄받아.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/10 말씀 들려 보냄받아.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "그분이 채우신 손",
+                  "file": "11 그분이 채우신 손.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/11 그분이 채우신 손.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "가는 길 위해 기름부음받아",
+                  "file": "12 가는 길 위해 기름부음받아.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/12 가는 길 위해 기름부음받아.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "IMIM1034SW",
@@ -18482,6 +18737,436 @@
                 "Praise & Worship",
                 "Pentecostal Shout"
               ]
+            },
+            {
+              "code": "IMIM1043EN",
+              "title": "Chains Hit The Floor",
+              "folder": "IMIM1043EN-chains-hit-the-floor",
+              "path": "albums/inspire/imani-inspire/IMIM1043EN-chains-hit-the-floor",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "IMIM1044EN",
+              "title": "Pit To The Party",
+              "folder": "IMIM1044EN-pit-to-the-party",
+              "path": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Pit to the Party",
+                  "file": "01 Pit to the Party.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/01 Pit to the Party.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Best Robe On",
+                  "file": "02 Best Robe On.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/02 Best Robe On.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Mourning Into Dancing",
+                  "file": "03 Mourning Into Dancing.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/03 Mourning Into Dancing.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "He Carried Me",
+                  "file": "04 He Carried Me.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/04 He Carried Me.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "New Creation Now",
+                  "file": "05 New Creation Now.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/05 New Creation Now.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Look Where He Found Me",
+                  "file": "06 Look Where He Found Me.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/06 Look Where He Found Me.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Mama's Kitchen Prayer",
+                  "file": "07 Mama's Kitchen Prayer.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/07 Mama's Kitchen Prayer.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "The Bottom Fell Out for Good",
+                  "file": "08 The Bottom Fell Out for Good.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/08 The Bottom Fell Out for Good.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Grace on a Wednesday",
+                  "file": "09 Grace on a Wednesday.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/09 Grace on a Wednesday.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Whole Block Invited",
+                  "file": "10 Whole Block Invited.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/10 Whole Block Invited.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Beauty for the Ashes",
+                  "file": "11 Beauty for the Ashes.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/11 Beauty for the Ashes.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Dance Out the Door",
+                  "file": "12 Dance Out the Door.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/12 Dance Out the Door.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "IMIM1045EN",
+              "title": "Streets Of Gold Jump Up",
+              "folder": "IMIM1045EN-streets-of-gold-jump-up",
+              "path": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Streets of Gold Jump Up",
+                  "file": "01 Streets of Gold Jump Up.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/01 Streets of Gold Jump Up.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Wave the Flag",
+                  "file": "02 Wave the Flag.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/02 Wave the Flag.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Jump for the Lamb",
+                  "file": "03 Jump for the Lamb.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/03 Jump for the Lamb.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Every Tribe on the Road",
+                  "file": "04 Every Tribe on the Road.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/04 Every Tribe on the Road.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Steelpan Hallelujah",
+                  "file": "05 Steelpan Hallelujah.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/05 Steelpan Hallelujah.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Robe of White",
+                  "file": "06 Robe of White.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/06 Robe of White.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "She Came to the Feast",
+                  "file": "07 She Came to the Feast.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/07 She Came to the Feast.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Rev Nineteen Riddim",
+                  "file": "08 Rev Nineteen Riddim.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/08 Rev Nineteen Riddim.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Dance Till the Sunrise",
+                  "file": "09 Dance Till the Sunrise.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/09 Dance Till the Sunrise.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Marching Into Glory",
+                  "file": "10 Marching Into Glory.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/10 Marching Into Glory.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Never Coming Down",
+                  "file": "11 Never Coming Down.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/11 Never Coming Down.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Endless Jubilee",
+                  "file": "12 Endless Jubilee.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/12 Endless Jubilee.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "IMIM1046EN",
+              "title": "He Ran The Whole Way",
+              "folder": "IMIM1046EN-he-ran-the-whole-way",
+              "path": "albums/inspire/imani-inspire/IMIM1046EN-he-ran-the-whole-way",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "IMIM1047EN",
+              "title": "Ashes Into Gold",
+              "folder": "IMIM1047EN-ashes-into-gold",
+              "path": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Ashes into Gold",
+                  "file": "01 Ashes into Gold.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/01 Ashes into Gold.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Oil of Joy",
+                  "file": "02 Oil of Joy.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/02 Oil of Joy.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Mourning into Dancing",
+                  "file": "03 Mourning into Dancing.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/03 Mourning into Dancing.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Restore the Years",
+                  "file": "04 Restore the Years.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/04 Restore the Years.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Rivers in the Desert",
+                  "file": "05 Rivers in the Desert.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/05 Rivers in the Desert.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Heart of Flesh",
+                  "file": "06 Heart of Flesh.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/06 Heart of Flesh.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "The Day the House Burned",
+                  "file": "07 The Day the House Burned.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/07 The Day the House Burned.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Beauty from the Break",
+                  "file": "08 Beauty from the Break.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/08 Beauty from the Break.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "New Every Morning",
+                  "file": "09 New Every Morning.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/09 New Every Morning.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "All Things New",
+                  "file": "10 All Things New.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/10 All Things New.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "New Creation",
+                  "file": "11 New Creation.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/11 New Creation.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Dance in the Gold",
+                  "file": "12 Dance in the Gold.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/12 Dance in the Gold.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "IMIM1048EN",
+              "title": "Throne Dont Shake",
+              "folder": "IMIM1048EN-throne-dont-shake",
+              "path": "albums/inspire/imani-inspire/IMIM1048EN-throne-dont-shake",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "IMIM1049EN",
+              "title": "One Table Wide",
+              "folder": "IMIM1049EN-one-table-wide",
+              "path": "albums/inspire/imani-inspire/IMIM1049EN-one-table-wide",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "IMIM1050EN",
+              "title": "Grateful Anyway",
+              "folder": "IMIM1050EN-grateful-anyway",
+              "path": "albums/inspire/imani-inspire/IMIM1050EN-grateful-anyway",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "IMIM1051EN",
+              "title": "Any Day Now",
+              "folder": "IMIM1051EN-any-day-now",
+              "path": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Any Day Now",
+                  "file": "1_ Any Day Now.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/1_ Any Day Now.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Lace Up Your Shoes",
+                  "file": "2_ Lace Up Your Shoes.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/2_ Lace Up Your Shoes.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Trim the Lamp",
+                  "file": "3_ Trim the Lamp.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/3_ Trim the Lamp.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Watch the Sky",
+                  "file": "4_ Watch the Sky.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/4_ Watch the Sky.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Every Ordinary Morning",
+                  "file": "5_ Every Ordinary Morning.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/5_ Every Ordinary Morning.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "The Waiting Was the Wedding",
+                  "file": "6_ The Waiting Was the Wedding.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/6_ The Waiting Was the Wedding.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "The Chair by the Window",
+                  "file": "7_ The Chair by the Window.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/7_ The Chair by the Window.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Trumpet on the Downbeat",
+                  "file": "8_ Trumpet on the Downbeat.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/8_ Trumpet on the Downbeat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "I'll Be Found Loving You",
+                  "file": "9_ I'll Be Found Loving You.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/9_ I'll Be Found Loving You.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "The Best Is Yet",
+                  "file": "10_ The Best Is Yet.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/10_ The Best Is Yet.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Even So, Come",
+                  "file": "11_ Even So, Come.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/11_ Even So, Come.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "The King Returns",
+                  "file": "12_ The King Returns.mp3",
+                  "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/12_ The King Returns.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "IMIM1052EN",
+              "title": "Made On Purpose",
+              "folder": "IMIM1052EN-made-on-purpose",
+              "path": "albums/inspire/imani-inspire/IMIM1052EN-made-on-purpose",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
             }
           ],
           "genres": [
@@ -25724,6 +26409,266 @@
                   "audio": true
                 }
               ]
+            },
+            {
+              "code": "JEIM1072EN",
+              "title": "Peace Got Loud",
+              "folder": "JEIM1072EN-peace-got-loud",
+              "path": "albums/inspire/jubilee-inspire/JEIM1072EN-peace-got-loud",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1073EN",
+              "title": "Named Before The Likes",
+              "folder": "JEIM1073EN-named-before-the-likes",
+              "path": "albums/inspire/jubilee-inspire/JEIM1073EN-named-before-the-likes",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1074EN",
+              "title": "Never A Solo",
+              "folder": "JEIM1074EN-never-a-solo",
+              "path": "albums/inspire/jubilee-inspire/JEIM1074EN-never-a-solo",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1075EN",
+              "title": "Kick Off Your Shoes",
+              "folder": "JEIM1075EN-kick-off-your-shoes",
+              "path": "albums/inspire/jubilee-inspire/JEIM1075EN-kick-off-your-shoes",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1076EN",
+              "title": "Questions Still Clap",
+              "folder": "JEIM1076EN-questions-still-clap",
+              "path": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Questions Still Clap",
+                  "file": "01 Questions Still Clap.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/01 Questions Still Clap.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Loud About It",
+                  "file": "02 Loud About It.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/02 Loud About It.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Help My Unbelief",
+                  "file": "03 Help My Unbelief.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/03 Help My Unbelief.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Till You Bless Me",
+                  "file": "04 Till You Bless Me.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/04 Till You Bless Me.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Still Good",
+                  "file": "05 Still Good.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/05 Still Good.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Stayed in the Room",
+                  "file": "06 Stayed in the Room.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/06 Stayed in the Room.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Show Me Your Hands",
+                  "file": "07 Show Me Your Hands.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/07 Show Me Your Hands.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "You Ask Me Back",
+                  "file": "08 You Ask Me Back.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/08 You Ask Me Back.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Praise Is My Protest",
+                  "file": "09 Praise Is My Protest.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/09 Praise Is My Protest.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "My Lord and My God",
+                  "file": "10 My Lord and My God.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/10 My Lord and My God.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Still Clapping",
+                  "file": "11 Still Clapping.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/11 Still Clapping.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Louder Than the Doubt",
+                  "file": "12 Louder Than the Doubt.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/12 Louder Than the Doubt.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "JEIM1077EN",
+              "title": "Shame Missed The Party",
+              "folder": "JEIM1077EN-shame-missed-the-party",
+              "path": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Shame Missed the Party",
+                  "file": "01 Shame Missed the Party.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/01 Shame Missed the Party.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "You Ran First",
+                  "file": "02 You Ran First.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/02 You Ran First.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Who's at the Door",
+                  "file": "03 Who's at the Door.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/03 Who's at the Door.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Still a Long Way Off",
+                  "file": "04 Still a Long Way Off.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/04 Still a Long Way Off.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Interrupted",
+                  "file": "05 Interrupted.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/05 Interrupted.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Porch Light On",
+                  "file": "06 Porch Light On.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/06 Porch Light On.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Case Dismissed",
+                  "file": "07 Case Dismissed.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/07 Case Dismissed.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Seven Times Up",
+                  "file": "08 Seven Times Up.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/08 Seven Times Up.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Heaven Threw Confetti",
+                  "file": "09 Heaven Threw Confetti.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/09 Heaven Threw Confetti.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Dancing Shoes",
+                  "file": "10 Dancing Shoes.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/10 Dancing Shoes.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Grace Got Loud",
+                  "file": "11 Grace Got Loud.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/11 Grace Got Loud.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Welcome Home",
+                  "file": "12 Welcome Home.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/12 Welcome Home.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "JEIM1078EN",
+              "title": "On Purpose On Beat",
+              "folder": "JEIM1078EN-on-purpose-on-beat",
+              "path": "albums/inspire/jubilee-inspire/JEIM1078EN-on-purpose-on-beat",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1079EN",
+              "title": "Realest Thing In The Room",
+              "folder": "JEIM1079EN-realest-thing-in-the-room",
+              "path": "albums/inspire/jubilee-inspire/JEIM1079EN-realest-thing-in-the-room",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1080EN",
+              "title": "Forever On Repeat",
+              "folder": "JEIM1080EN-forever-on-repeat",
+              "path": "albums/inspire/jubilee-inspire/JEIM1080EN-forever-on-repeat",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "JEIM1081EN",
+              "title": "Midnight Confetti",
+              "folder": "JEIM1081EN-midnight-confetti",
+              "path": "albums/inspire/jubilee-inspire/JEIM1081EN-midnight-confetti",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
             }
           ],
           "genres": [
@@ -28944,9 +29889,94 @@
               "title": "Pastorul Sufletului Meu",
               "folder": "NVIM1024RO-pastorul-sufletului-meu",
               "path": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "A Venit Pentru Cea Una",
+                  "file": "01 A Venit Pentru Cea Una.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/01 A Venit Pentru Cea Una.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "A Suta Oaie",
+                  "file": "02 A Suta Oaie.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/02 A Suta Oaie.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Oaia Pășunii Lui",
+                  "file": "03 Oaia Pășunii Lui.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/03 Oaia Pășunii Lui.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Psalmul 23 Cu Glas Tare",
+                  "file": "04 Psalmul 23 Cu Glas Tare.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/04 Psalmul 23 Cu Glas Tare.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Ape Liniștite",
+                  "file": "05 Ape Liniștite.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/05 Ape Liniștite.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Du-mă Pe Calea Cea Bună",
+                  "file": "06 Du-mă Pe Calea Cea Bună.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/06 Du-mă Pe Calea Cea Bună.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Chiar Și-n Vale, El Cântă",
+                  "file": "07 Chiar Și-n Vale, El Cântă.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/07 Chiar Și-n Vale, El Cântă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Masă În Câmpul Deschis",
+                  "file": "08 Masă În Câmpul Deschis.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/08 Masă În Câmpul Deschis.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Toiagul Ce M-a Purtat",
+                  "file": "09 Toiagul Ce M-a Purtat.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/09 Toiagul Ce M-a Purtat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Bunătate Și Îndurare Mă Urmează",
+                  "file": "10 Bunătate Și Îndurare Mă Urmează.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/10 Bunătate Și Îndurare Mă Urmează.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Spune Celor Pierduți Că Păstorul Caută",
+                  "file": "11 Spune Celor Pierduți Că Păstorul Caută.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/11 Spune Celor Pierduți Că Păstorul Caută.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Turma Cântă Spre Casă",
+                  "file": "12 Turma Cântă Spre Casă.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/12 Turma Cântă Spre Casă.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "NVIM1025EN",
@@ -29158,9 +30188,94 @@
               "title": "องค์สันติราช",
               "folder": "NVIM1026TH-ong-santi-rat",
               "path": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "พระองค์คือสันติของเรา",
+                  "file": "01 พระองค์คือสันติของเรา.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/01 พระองค์คือสันติของเรา.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "องค์สันติราชอยู่ที่ประตู",
+                  "file": "02 องค์สันติราชอยู่ที่ประตู.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/02 องค์สันติราชอยู่ที่ประตู.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "สันติเสด็จเข้ามา",
+                  "file": "03 สันติเสด็จเข้ามา.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/03 สันติเสด็จเข้ามา.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "สันติในห้องที่ฉันเคยกลัว",
+                  "file": "04 สันติในห้องที่ฉันเคยกลัว.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/04 สันติในห้องที่ฉันเคยกลัว.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Princeps Pacis",
+                  "file": "05 Princeps Pacis.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/05 Princeps Pacis.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Tighearna Síocháin",
+                  "file": "06 Tighearna Síocháin.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/06 Tighearna Síocháin.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "สันติที่รู้จักชื่อฉัน",
+                  "file": "07 สันติที่รู้จักชื่อฉัน.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/07 สันติที่รู้จักชื่อฉัน.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "สันติที่เกินจะเข้าใจ",
+                  "file": "08 สันติที่เกินจะเข้าใจ.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/08 สันติที่เกินจะเข้าใจ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "สันติในค่ำคืนยาวนาน",
+                  "file": "09 สันติในค่ำคืนยาวนาน.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/09 สันติในค่ำคืนยาวนาน.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "สันติในไขกระดูก",
+                  "file": "10 สันติในไขกระดูก.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/10 สันติในไขกระดูก.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "จงพาองค์สันติราชไป",
+                  "file": "11 จงพาองค์สันติราชไป.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/11 จงพาองค์สันติราชไป.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "เราพาองค์สันติราชไป",
+                  "file": "12 เราพาองค์สันติราชไป.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/12 เราพาองค์สันติราชไป.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "NVIM1027EN",
@@ -29800,9 +30915,94 @@
               "title": "Stai Linistit si Cunoaste",
               "folder": "NVIM1038RO-stai-linistit-si-cunoaste",
               "path": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Zarva ce N-o Mai Pot Purta",
+                  "file": "01 Zarva ce N-o Mai Pot Purta.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/01 Zarva ce N-o Mai Pot Purta.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Opriți-vă din Trudă",
+                  "file": "02 Opriți-vă din Trudă.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/02 Opriți-vă din Trudă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Telefonul Intră în Sertar",
+                  "file": "03 Telefonul Intră în Sertar.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/03 Telefonul Intră în Sertar.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Ceainicul și Tăcerea",
+                  "file": "04 Ceainicul și Tăcerea.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/04 Ceainicul și Tăcerea.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Las-o Jos",
+                  "file": "05 Las-o Jos.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/05 Las-o Jos.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Pasul Făcătorului",
+                  "file": "06 Pasul Făcătorului.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/06 Pasul Făcătorului.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Selah",
+                  "file": "07 Selah.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/07 Selah.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Un Singur Ton Curat",
+                  "file": "08 Un Singur Ton Curat.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/08 Un Singur Ton Curat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Odihnind în Barcă",
+                  "file": "09 Odihnind în Barcă.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/09 Odihnind în Barcă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Grădina în Seară",
+                  "file": "10 Grădina în Seară.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/10 Grădina în Seară.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "El Îmi Înviorează Sufletul",
+                  "file": "11 El Îmi Înviorează Sufletul.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/11 El Îmi Înviorează Sufletul.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Stai Liniștit și Cunoaște",
+                  "file": "12 Stai Liniștit și Cunoaște.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/12 Stai Liniștit și Cunoaște.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "NVIM1039EN",
@@ -29957,6 +31157,69 @@
                 "Electronic",
                 "Praise & Worship"
               ]
+            },
+            {
+              "code": "NVIM1051EN",
+              "title": "Peace In The Static",
+              "folder": "NVIM1051EN-peace-in-the-static",
+              "path": "albums/inspire/nova-inspire/NVIM1051EN-peace-in-the-static",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1052EN",
+              "title": "Named In Neon",
+              "folder": "NVIM1052EN-named-in-neon",
+              "path": "albums/inspire/nova-inspire/NVIM1052EN-named-in-neon",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1053EN",
+              "title": "You Walk Me Home",
+              "folder": "NVIM1053EN-you-walk-me-home",
+              "path": "albums/inspire/nova-inspire/NVIM1053EN-you-walk-me-home",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1054EN",
+              "title": "Low Power Mode",
+              "folder": "NVIM1054EN-low-power-mode",
+              "path": "albums/inspire/nova-inspire/NVIM1054EN-low-power-mode",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1055EN",
+              "title": "I Ask You Stay",
+              "folder": "NVIM1055EN-i-ask-you-stay",
+              "path": "albums/inspire/nova-inspire/NVIM1055EN-i-ask-you-stay",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1056EN",
+              "title": "Caught Mid Fall",
+              "folder": "NVIM1056EN-caught-mid-fall",
+              "path": "albums/inspire/nova-inspire/NVIM1056EN-caught-mid-fall",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "NVIM1057EN",
+              "title": "Wired On Purpose",
+              "folder": "NVIM1057EN-wired-on-purpose",
+              "path": "albums/inspire/nova-inspire/NVIM1057EN-wired-on-purpose",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
             }
           ],
           "genres": [
@@ -36547,6 +37810,351 @@
               "genres": [
                 "Praise & Worship",
                 "Cinematic"
+              ]
+            },
+            {
+              "code": "SAIM1042EN",
+              "title": "Royal Blood Barrio Streets",
+              "folder": "SAIM1042EN-royal-blood-barrio-streets",
+              "path": "albums/inspire/santiago-inspire/SAIM1042EN-royal-blood-barrio-streets",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1043EN",
+              "title": "The Debts Already Paid",
+              "folder": "SAIM1043EN-the-debts-already-paid",
+              "path": "albums/inspire/santiago-inspire/SAIM1043EN-the-debts-already-paid",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1044EN",
+              "title": "Dance Through the Storm",
+              "folder": "SAIM1044EN-dance-through-the-storm",
+              "path": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Dance Through the Storm",
+                  "file": "01 Dance Through the Storm.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/01 Dance Through the Storm.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Joy Is My Weapon",
+                  "file": "02 Joy Is My Weapon.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/02 Joy Is My Weapon.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Peace in the Pressure",
+                  "file": "03 Peace in the Pressure.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/03 Peace in the Pressure.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Anchor in the Waves",
+                  "file": "04 Anchor in the Waves.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/04 Anchor in the Waves.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Victory in the Valley",
+                  "file": "05 Victory in the Valley.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/05 Victory in the Valley.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Feet on the Water",
+                  "file": "06 Feet on the Water.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/06 Feet on the Water.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "The Fire Won't Burn",
+                  "file": "07 The Fire Won't Burn.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/07 The Fire Won't Burn.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Hands Up in the Rain",
+                  "file": "08 Hands Up in the Rain.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/08 Hands Up in the Rain.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Sunday in the Struggle",
+                  "file": "09 Sunday in the Struggle.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/09 Sunday in the Struggle.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Break of Day",
+                  "file": "10 Break of Day.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/10 Break of Day.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Turned My Mourning",
+                  "file": "11 Turned My Mourning.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/11 Turned My Mourning.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "We Danced It Through",
+                  "file": "12 We Danced It Through.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/12 We Danced It Through.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "SAIM1045EN",
+              "title": "Fly The Flag",
+              "folder": "SAIM1045EN-fly-the-flag",
+              "path": "albums/inspire/santiago-inspire/SAIM1045EN-fly-the-flag",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1046EN",
+              "title": "No Lone Rangers",
+              "folder": "SAIM1046EN-no-lone-rangers",
+              "path": "albums/inspire/santiago-inspire/SAIM1046EN-no-lone-rangers",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1047EN",
+              "title": "Never Thirsty Again",
+              "folder": "SAIM1047EN-never-thirsty-again",
+              "path": "albums/inspire/santiago-inspire/SAIM1047EN-never-thirsty-again",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1048EN",
+              "title": "Truth Wears A Smile",
+              "folder": "SAIM1048EN-truth-wears-a-smile",
+              "path": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Truth Wears a Smile",
+                  "file": "01 Truth Wears a Smile.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/01 Truth Wears a Smile.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Steelpan Says His Name",
+                  "file": "02 Steelpan Says His Name.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/02 Steelpan Says His Name.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Loud in the Daylight",
+                  "file": "03 Loud in the Daylight.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/03 Loud in the Daylight.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Who Told You That Lie",
+                  "file": "04 Who Told You That Lie.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/04 Who Told You That Lie.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Cynic Turned Believer",
+                  "file": "05 Cynic Turned Believer.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/05 Cynic Turned Believer.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "The Comedian's Confession",
+                  "file": "06 The Comedian's Confession.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/06 The Comedian's Confession.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Light Switch in My Chest",
+                  "file": "07 Light Switch in My Chest.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/07 Light Switch in My Chest.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Same Joke, Sober Now",
+                  "file": "08 Same Joke, Sober Now.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/08 Same Joke, Sober Now.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Carnival of the Redeemed",
+                  "file": "09 Carnival of the Redeemed.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/09 Carnival of the Redeemed.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Bad News Ran Out of Road",
+                  "file": "10 Bad News Ran Out of Road.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/10 Bad News Ran Out of Road.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Grin That Won't Come Off",
+                  "file": "11 Grin That Won't Come Off.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/11 Grin That Won't Come Off.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Last Laugh Belongs to Jesus",
+                  "file": "12 Last Laugh Belongs to Jesus.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/12 Last Laugh Belongs to Jesus.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
+              "code": "SAIM1049EN",
+              "title": "Called And Chosen",
+              "folder": "SAIM1049EN-called-and-chosen",
+              "path": "albums/inspire/santiago-inspire/SAIM1049EN-called-and-chosen",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1050EN",
+              "title": "Come Away And Rest",
+              "folder": "SAIM1050EN-come-away-and-rest",
+              "path": "albums/inspire/santiago-inspire/SAIM1050EN-come-away-and-rest",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "SAIM1051EN",
+              "title": "One Floor Under Heaven",
+              "folder": "SAIM1051EN-one-floor-under-heaven",
+              "path": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "No More Wall",
+                  "file": "01 No More Wall.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/01 No More Wall.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Everybody Come",
+                  "file": "02 Everybody Come.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/02 Everybody Come.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "One Blood",
+                  "file": "03 One Blood.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/03 One Blood.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Manos Arriba",
+                  "file": "04 Manos Arriba.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/04 Manos Arriba.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Same Family Now",
+                  "file": "05 Same Family Now.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/05 Same Family Now.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "The Whole Floor Testify",
+                  "file": "06 The Whole Floor Testify.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/06 The Whole Floor Testify.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Different Rhythms One Song",
+                  "file": "07 Different Rhythms One Song.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/07 Different Rhythms One Song.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "In The Middle Of The Floor",
+                  "file": "08 In The Middle Of The Floor.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/08 In The Middle Of The Floor.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "One Body Moving",
+                  "file": "09 One Body Moving.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/09 One Body Moving.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "We Belong To Each Other",
+                  "file": "10 We Belong To Each Other.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/10 We Belong To Each Other.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Carry It Out The Doors",
+                  "file": "11 Carry It Out The Doors.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/11 Carry It Out The Doors.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "One Family Forever",
+                  "file": "12 One Family Forever.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/12 One Family Forever.mp3",
+                  "audio": true
+                }
               ]
             }
           ],
@@ -47701,9 +49309,94 @@
               "title": "Du-mă acasă",
               "folder": "MDIM1005RO-du-ma-acasa",
               "path": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Du-mă acasă",
+                  "file": "01 Du-mă acasă.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/01 Du-mă acasă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "N-aș fi reușit de una singură",
+                  "file": "02 N-aș fi reușit de una singură.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/02 N-aș fi reușit de una singură.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Ține-te strâns",
+                  "file": "03 Ține-te strâns.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/03 Ține-te strâns.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Apel la două noaptea",
+                  "file": "04 Apel la două noaptea.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/04 Apel la două noaptea.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Rămâi chiar aici",
+                  "file": "05 Rămâi chiar aici.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/05 Rămâi chiar aici.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Brațele mamei",
+                  "file": "06 Brațele mamei.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/06 Brațele mamei.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Cea care duce",
+                  "file": "07 Cea care duce.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/07 Cea care duce.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Un loc moale de aterizat",
+                  "file": "08 Un loc moale de aterizat.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/08 Un loc moale de aterizat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Mulțumire târzie",
+                  "file": "09 Mulțumire târzie.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/09 Mulțumire târzie.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Dă iubirea mai departe",
+                  "file": "10 Dă iubirea mai departe.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/10 Dă iubirea mai departe.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Masa pentru familie",
+                  "file": "11 Masa pentru familie.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/11 Masa pentru familie.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Lumina verandei aprinsă",
+                  "file": "12 Lumina verandei aprinsă.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/12 Lumina verandei aprinsă.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "MDIM1006EN",
@@ -48004,9 +49697,94 @@
               "title": "Minuni Obișnuite",
               "folder": "MDIM1008RO-minuni-obisnuite",
               "path": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Minuni Obișnuite",
+                  "file": "01 Minuni Obișnuite.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/01 Minuni Obișnuite.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Lucrurile Mici Contează",
+                  "file": "02 Lucrurile Mici Contează.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/02 Lucrurile Mici Contează.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Dacă Privești",
+                  "file": "03 Dacă Privești.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/03 Dacă Privești.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Cafeaua De Marți",
+                  "file": "04 Cafeaua De Marți.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/04 Cafeaua De Marți.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Râsul Surorii Mele",
+                  "file": "05 Râsul Surorii Mele.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/05 Râsul Surorii Mele.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Străinul Cel Bun",
+                  "file": "06 Străinul Cel Bun.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/06 Străinul Cel Bun.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Număr Drumul Spre Casă",
+                  "file": "07 Număr Drumul Spre Casă.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/07 Număr Drumul Spre Casă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Câinele Care A Știut",
+                  "file": "08 Câinele Care A Știut.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/08 Câinele Care A Știut.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Apus În Curte",
+                  "file": "09 Apus În Curte.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/09 Apus În Curte.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Dăruiește Minunea Mai Departe",
+                  "file": "10 Dăruiește Minunea Mai Departe.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/10 Dăruiește Minunea Mai Departe.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Murmurul De Duminică",
+                  "file": "11 Murmurul De Duminică.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/11 Murmurul De Duminică.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Aleluia De Pe Pridvor",
+                  "file": "12 Aleluia De Pe Pridvor.mp3",
+                  "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/12 Aleluia De Pe Pridvor.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "MDIM1009EN",
@@ -51663,6 +53441,87 @@
                 "Pop",
                 "Praise & Worship"
               ]
+            },
+            {
+              "code": "MDIM1081EN",
+              "title": "Do Not Disturb",
+              "folder": "MDIM1081EN-do-not-disturb",
+              "path": "albums/inspire/melody-inspire/MDIM1081EN-do-not-disturb",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1082EN",
+              "title": "You Wrote My Bio",
+              "folder": "MDIM1082EN-you-wrote-my-bio",
+              "path": "albums/inspire/melody-inspire/MDIM1082EN-you-wrote-my-bio",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1083EN",
+              "title": "Plus One Forever",
+              "folder": "MDIM1083EN-plus-one-forever",
+              "path": "albums/inspire/melody-inspire/MDIM1083EN-plus-one-forever",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1084EN",
+              "title": "Out Of Office",
+              "folder": "MDIM1084EN-out-of-office",
+              "path": "albums/inspire/melody-inspire/MDIM1084EN-out-of-office",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1085EN",
+              "title": "Twenty Questions",
+              "folder": "MDIM1085EN-twenty-questions",
+              "path": "albums/inspire/melody-inspire/MDIM1085EN-twenty-questions",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1086EN",
+              "title": "You Kept My Seat",
+              "folder": "MDIM1086EN-you-kept-my-seat",
+              "path": "albums/inspire/melody-inspire/MDIM1086EN-you-kept-my-seat",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1088EN",
+              "title": "Filter Off",
+              "folder": "MDIM1088EN-filter-off",
+              "path": "albums/inspire/melody-inspire/MDIM1088EN-filter-off",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1089EN",
+              "title": "Never Left On Read",
+              "folder": "MDIM1089EN-never-left-on-read",
+              "path": "albums/inspire/melody-inspire/MDIM1089EN-never-left-on-read",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
+            },
+            {
+              "code": "MDIM1090EN",
+              "title": "Confetti At Midnight",
+              "folder": "MDIM1090EN-confetti-at-midnight",
+              "path": "albums/inspire/melody-inspire/MDIM1090EN-confetti-at-midnight",
+              "playable": 0,
+              "trackCount": 0,
+              "tracks": []
             }
           ],
           "genres": [
