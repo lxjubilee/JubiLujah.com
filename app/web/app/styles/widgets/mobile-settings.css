@@ -138,6 +138,7 @@ img.mas-tile { object-fit: cover; display: block; background: var(--surface-2); 
 .mas-slide { display: flex; align-items: center; gap: 14px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); margin-bottom: 8px; }
 .mas-slide .mas-tile { width: 46px; height: 46px; }
 .mas-slide .mas-sfields { flex: 1; min-width: 0; }
+.mas-slide .mas-stitle { font-weight: 600; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
 .mas-slide .mas-smeta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
 .mas-slide .mas-sside { display: flex; flex-direction: row; align-items: center; gap: 6px; }
 .mas-slide.mas-drag { opacity: .4; }

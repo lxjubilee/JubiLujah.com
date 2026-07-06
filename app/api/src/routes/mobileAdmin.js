@@ -62,18 +62,25 @@ router.get('/config', ah(async (req, res) => {
   const secByCat = group(sections.rows, 'category_id');
   const heroByCat = group(hero.rows, 'category_id');
   const mtAlbumsByType = group(mtAlbums.rows, 'music_type_id');
-  // Resolve each music-type album's code → title/artist from the FULL manifest so
-  // the admin sees album names for any curated ref, not just codes.
+  // Resolve each curated album's code → title/artist (persona) from the FULL
+  // manifest so the admin UI shows album names + persona, never bare codes.
+  // Music-type and hero rows key on `album_ref`; section items key on `item_ref`
+  // and only resolve for album items (artist items carry a persona slug, not a code).
   const mfst = getFullManifest();
+  const albumByRef = (ref) => mfst.byAlbumCode.get(String(ref || '').toUpperCase());
   const withNames = (rows) => rows.map((a) => {
-    const al = mfst.byAlbumCode.get(String(a.album_ref).toUpperCase());
+    const al = albumByRef(a.album_ref);
     return { ...a, title: al?.title || a.album_ref, artist: al?.artistName || null };
+  });
+  const withItemNames = (rows) => rows.map((it) => {
+    const al = it.item_type === 'album' ? albumByRef(it.item_ref) : null;
+    return { ...it, title: it.title || al?.title || it.item_ref, artist: al?.artistName || null };
   });
   res.json({
     categories: cats.rows.map((c) => ({
       ...c,
-      hero: heroByCat.get(c.id) || [],
-      sections: (secByCat.get(c.id) || []).map((s) => ({ ...s, items: itemsBySection.get(s.id) || [] })),
+      hero: withNames(heroByCat.get(c.id) || []),
+      sections: (secByCat.get(c.id) || []).map((s) => ({ ...s, items: withItemNames(itemsBySection.get(s.id) || []) })),
     })),
     musicTypes: mtypes.rows.map((m) => ({ ...m, albums: withNames(mtAlbumsByType.get(m.id) || []) })),
     settings: { min_album_count: settings.rows[0]?.min_album_count ?? 12 },

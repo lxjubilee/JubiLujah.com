@@ -18,14 +18,15 @@ import { api } from '@/lib/api';
 
 interface SectionItem {
   id: number; item_type: 'album' | 'artist'; item_ref: string;
-  title: string | null; display_order: number; is_active: boolean;
+  title: string | null; artist?: string | null; display_order: number; is_active: boolean;
 }
 interface Section {
   id: number; category_id: number; name: string; kind: 'artists' | 'albums';
   display_order: number; is_active: boolean; items: SectionItem[];
 }
 interface HeroSlide {
-  id: number; album_ref: string; headline: string | null; subtitle: string | null;
+  id: number; album_ref: string; title?: string | null; artist?: string | null;
+  headline: string | null; subtitle: string | null;
   display_order: number; is_active: boolean; starts_at: string | null; ends_at: string | null;
 }
 interface Page {
@@ -338,11 +339,12 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
               <span className="mas-grip" draggable title="Drag to reorder"
                 onDragStart={(e) => { setDragIdx(i); e.dataTransfer.effectAllowed = 'move'; }}
                 onDragEnd={() => { setDragIdx(null); setOverIdx(null); }}>⠿</span>
-              <Thumb shape="sq" code={s.album_ref} seed={s.album_ref} />
+              <Thumb shape="sq" code={s.album_ref} seed={s.title || s.album_ref} />
               <div className="mas-sfields">
+                <div className="mas-stitle">{s.title || s.album_ref}</div>
                 <div className="mas-smeta">
                   <Switch checked={s.is_active} onChange={(v) => void patchSlide(s.id, { is_active: v }, 'Updated')} label="Active" />
-                  <span>·</span><span style={{ fontFamily: 'monospace' }}>{s.album_ref}</span>
+                  <span>·</span><span>{s.artist || '—'}</span>
                 </div>
               </div>
               <div className="mas-sside">
@@ -518,7 +520,7 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
               <Thumb shape="sq" code={it.item_ref} seed={it.title || it.item_ref} />
               <div style={{ minWidth: 0 }}>
                 <div className="mas-it-title">{it.title || it.item_ref}</div>
-                <div className="mas-it-sub" style={{ fontFamily: 'monospace' }}>{it.item_ref}</div>
+                <div className="mas-it-sub">{it.artist || '—'}</div>
               </div>
               <button className="mm-btn sm" onClick={() => void act(api.del(`/api/admin/mobile/items/${it.id}`), 'Removed')}>Remove</button>
             </div>
