@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-03T18:23:48.222Z",
+  "generated": "2026-07-04T21:31:19.813Z",
   "totalArtists": 33,
   "totalAlbums": 981,
-  "totalPlayableAlbums": 388,
-  "totalPlayableTracks": 4874,
+  "totalPlayableAlbums": 395,
+  "totalPlayableTracks": 4958,
   "categories": [
     {
       "key": "inspire",
@@ -217,9 +217,94 @@
               "title": "Eve Dönüş",
               "folder": "AMIM1008TR-eve-donus",
               "path": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Gurbetten Dönen",
+                  "file": "01 Gurbetten Dönen.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/01 Gurbetten Dönen.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Kucaklayan Baba",
+                  "file": "02 Kucaklayan Baba.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/02 Kucaklayan Baba.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Tanıdık ve Yeni",
+                  "file": "03 Tanıdık ve Yeni.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/03 Tanıdık ve Yeni.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Aradaki Boşluk",
+                  "file": "04 Aradaki Boşluk.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/04 Aradaki Boşluk.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Besili Buzağı",
+                  "file": "05 Besili Buzağı.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/05 Besili Buzağı.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Büyük Kardeş",
+                  "file": "06 Büyük Kardeş.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/06 Büyük Kardeş.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Yüzük",
+                  "file": "07 Yüzük.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/07 Yüzük.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Kaftan",
+                  "file": "08 Kaftan.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/08 Kaftan.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Yolculuk İçin Ayakkabılar",
+                  "file": "09 Yolculuk İçin Ayakkabılar.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/09 Yolculuk İçin Ayakkabılar.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Sofrada Oturmak",
+                  "file": "10 Sofrada Oturmak.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/10 Sofrada Oturmak.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Ezgi ve Sevinç",
+                  "file": "11 Ezgi ve Sevinç.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/11 Ezgi ve Sevinç.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Sonunda Evde",
+                  "file": "12 Sonunda Evde.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/12 Sonunda Evde.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "AMIM1009EN",
@@ -433,9 +518,94 @@
               "title": "Ekmek ve Selam",
               "folder": "AMIM1016TR-ekmek-ve-selam",
               "path": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Ekmek ve Selam",
+                  "file": "01 Ekmek ve Selam.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/01 Ekmek ve Selam.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Kahveyi Dök",
+                  "file": "02 Kahveyi Dök.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/02 Kahveyi Dök.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Safran Sabahı",
+                  "file": "03 Safran Sabahı.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/03 Safran Sabahı.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Sedirler Ellerini Kaldırır",
+                  "file": "04 Sedirler Ellerini Kaldırır.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/04 Sedirler Ellerini Kaldırır.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Uzun Sofra",
+                  "file": "05 Uzun Sofra.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/05 Uzun Sofra.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Çivit Gece Yarısı",
+                  "file": "06 Çivit Gece Yarısı.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/06 Çivit Gece Yarısı.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Açık Avlu",
+                  "file": "07 Açık Avlu.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/07 Açık Avlu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Kına ve Sevinç",
+                  "file": "08 Kına ve Sevinç.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/08 Kına ve Sevinç.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Ekmek, Yağ ve Bal",
+                  "file": "09 Ekmek, Yağ ve Bal.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/09 Ekmek, Yağ ve Bal.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Fanustaki Kandil",
+                  "file": "10 Fanustaki Kandil.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/10 Fanustaki Kandil.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Altın Harfler",
+                  "file": "11 Altın Harfler.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/11 Altın Harfler.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Çarşıda Hallelujah",
+                  "file": "12 Çarşıda Hallelujah.mp3",
+                  "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/12 Çarşıda Hallelujah.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "AMIM1017EN",
@@ -2441,9 +2611,94 @@
               "title": "Chữa Lành Vết Thương",
               "folder": "CAIM1009VI-chua-lanh-vet-thuong",
               "path": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Vết Thương Vẫn Còn Đây",
+                  "file": "01 Vết Thương Vẫn Còn Đây.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/01 Vết Thương Vẫn Còn Đây.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Lòng Thương Xót Chậm Rãi",
+                  "file": "02 Lòng Thương Xót Chậm Rãi.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/02 Lòng Thương Xót Chậm Rãi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Ba Giờ Bốn Mươi Bảy",
+                  "file": "03 Ba Giờ Bốn Mươi Bảy.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/03 Ba Giờ Bốn Mươi Bảy.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Lòng Thương Xót Dài Lâu",
+                  "file": "04 Lòng Thương Xót Dài Lâu.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/04 Lòng Thương Xót Dài Lâu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Xin Ở Lại Cùng Con",
+                  "file": "05 Xin Ở Lại Cùng Con.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/05 Xin Ở Lại Cùng Con.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Những Chỗ Yếu Mềm",
+                  "file": "06 Những Chỗ Yếu Mềm.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/06 Những Chỗ Yếu Mềm.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Nhựa Thơm Ga-la-át",
+                  "file": "07 Nhựa Thơm Ga-la-át.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/07 Nhựa Thơm Ga-la-át.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Căn Phòng Quanh Con",
+                  "file": "08 Căn Phòng Quanh Con.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/08 Căn Phòng Quanh Con.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Con Không Giả Vờ",
+                  "file": "09 Con Không Giả Vờ.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/09 Con Không Giả Vờ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Sê-la",
+                  "file": "10 Sê-la.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/10 Sê-la.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Vết Sẹo Hóa Bài Ca",
+                  "file": "11 Vết Sẹo Hóa Bài Ca.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/11 Vết Sẹo Hóa Bài Ca.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Con Đường Về Nhà",
+                  "file": "12 Con Đường Về Nhà.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/12 Con Đường Về Nhà.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "CAIM1010EN",
@@ -30696,9 +30951,94 @@
               "title": "แสงสว่างทะลุความมืด",
               "folder": "NVIM1031TH-saeng-sawang-talu-khwam-muet",
               "path": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "ค่ำคืนอันยาวนาน",
+                  "file": "01 ค่ำคืนอันยาวนาน.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/01 ค่ำคืนอันยาวนาน.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "ตะเกียงในทางเดิน",
+                  "file": "02 ตะเกียงในทางเดิน.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/02 ตะเกียงในทางเดิน.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "ตีสามยามดึก",
+                  "file": "03 ตีสามยามดึก.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/03 ตีสามยามดึก.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "คุกแห่งความไม่เชื่อ",
+                  "file": "04 คุกแห่งความไม่เชื่อ.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/04 คุกแห่งความไม่เชื่อ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "ลำแสงแรก",
+                  "file": "05 ลำแสงแรก.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/05 ลำแสงแรก.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "พระคริสต์คือรุ่งอรุณ",
+                  "file": "06 พระคริสต์คือรุ่งอรุณ.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/06 พระคริสต์คือรุ่งอรุณ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "โฮซันนาแสงนีออน",
+                  "file": "07 โฮซันนาแสงนีออน.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/07 โฮซันนาแสงนีออน.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "แสงสว่างทะลุความมืด",
+                  "file": "08 แสงสว่างทะลุความมืด.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/08 แสงสว่างทะลุความมืด.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "ครัวยามเช้า",
+                  "file": "09 ครัวยามเช้า.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/09 ครัวยามเช้า.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "ถนนที่ถูกสร้างใหม่",
+                  "file": "10 ถนนที่ถูกสร้างใหม่.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/10 ถนนที่ถูกสร้างใหม่.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "ส่งต่อตะเกียง",
+                  "file": "11 ส่งต่อตะเกียง.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/11 ส่งต่อตะเกียง.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "แสงชนะเสมอมา",
+                  "file": "12 แสงชนะเสมอมา.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/12 แสงชนะเสมอมา.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "NVIM1032EN",
@@ -35834,9 +36174,94 @@
               "title": "Doar Tu, Isus",
               "folder": "SAIM1022RO-doar-tu-isus",
               "path": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Doar Tu, Isus (Only You)",
+                  "file": "01 Doar Tu, Isus (Only You).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/01 Doar Tu, Isus (Only You).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Cale, Adevăr, Viață (Way, Truth, Life)",
+                  "file": "02 Cale, Adevăr, Viață (Way, Truth, Life).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/02 Cale, Adevăr, Viață (Way, Truth, Life).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "În Cartier Numele Tău (Your Name in the Barrio)",
+                  "file": "03 În Cartier Numele Tău (Your Name in the Barrio).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/03 În Cartier Numele Tău (Your Name in the Barrio).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Ușa Păstorului (The Shepherd's Door)",
+                  "file": "04 Ușa Păstorului (The Shepherd's Door).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/04 Ușa Păstorului (The Shepherd's Door).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "O Singură Ușă (One Door Only)",
+                  "file": "05 O Singură Ușă (One Door Only).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/05 O Singură Ușă (One Door Only).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Regi Care Cad (Kings That Fall)",
+                  "file": "06 Regi Care Cad (Kings That Fall).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/06 Regi Care Cad (Kings That Fall).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Altar pe Stradă (Altar in the Street)",
+                  "file": "07 Altar pe Stradă (Altar in the Street).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/07 Altar pe Stradă (Altar in the Street).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Nume Mai Presus de Orice Nume (Name Above All Names)",
+                  "file": "08 Nume Mai Presus de Orice Nume (Name Above All Names).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/08 Nume Mai Presus de Orice Nume (Name Above All Names).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Doar Tu Mă Cunoști (Only You Know Me)",
+                  "file": "09 Doar Tu Mă Cunoști (Only You Know Me).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/09 Doar Tu Mă Cunoști (Only You Know Me).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Port Numele Tău cu Mine (Carry Your Name)",
+                  "file": "10 Port Numele Tău cu Mine (Carry Your Name).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/10 Port Numele Tău cu Mine (Carry Your Name).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Lumea Te Va Cunoaște (The World Will Know You)",
+                  "file": "11 Lumea Te Va Cunoaște (The World Will Know You).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/11 Lumea Te Va Cunoaște (The World Will Know You).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Doar Tu pe Vecie (Only You Forever)",
+                  "file": "12 Doar Tu pe Vecie (Only You Forever).mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/12 Doar Tu pe Vecie (Only You Forever).mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "SAIM1023EN",
@@ -36146,9 +36571,94 @@
               "title": "Cat de Mult Te Ador",
               "folder": "SAIM1025RO-cat-de-mult-te-ador",
               "path": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Cât de Mult Te Ador",
+                  "file": "01 Cât de Mult Te Ador.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/01 Cât de Mult Te Ador.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Sfânt, Sfânt, Sfânt",
+                  "file": "02 Sfânt, Sfânt, Sfânt.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/02 Sfânt, Sfânt, Sfânt.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Vreau Să Te Cunosc",
+                  "file": "03 Vreau Să Te Cunosc.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/03 Vreau Să Te Cunosc.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Lacrimi Peste Picioarele Tale",
+                  "file": "04 Lacrimi Peste Picioarele Tale.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/04 Lacrimi Peste Picioarele Tale.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Vasul de Alabastru",
+                  "file": "05 Vasul de Alabastru.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/05 Vasul de Alabastru.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Îți Sărut Picioarele",
+                  "file": "06 Îți Sărut Picioarele.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/06 Îți Sărut Picioarele.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "În Prezența Ta Mă Odihnesc",
+                  "file": "07 În Prezența Ta Mă Odihnesc.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/07 În Prezența Ta Mă Odihnesc.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Tu Ești Domnul Meu",
+                  "file": "08 Tu Ești Domnul Meu.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/08 Tu Ești Domnul Meu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Tăcere Înaintea Ta",
+                  "file": "09 Tăcere Înaintea Ta.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/09 Tăcere Înaintea Ta.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Doar Tu Ești Vrednic",
+                  "file": "10 Doar Tu Ești Vrednic.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/10 Doar Tu Ești Vrednic.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Cade Orice Coroană",
+                  "file": "11 Cade Orice Coroană.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/11 Cade Orice Coroană.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Pe Vecie Te Voi Adora",
+                  "file": "12 Pe Vecie Te Voi Adora.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/12 Pe Vecie Te Voi Adora.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "SAIM1026EN",
@@ -40601,9 +41111,94 @@
               "title": "Îndurare ca Mareea",
               "folder": "THIM1028RO-indurare-ca-mareea",
               "path": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Îndurare ca Mareea",
+                  "file": "01 Îndurare ca Mareea.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/01 Îndurare ca Mareea.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Aloha de pe Cruce",
+                  "file": "02 Aloha de pe Cruce.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/02 Aloha de pe Cruce.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Inimă Nouă pe Plajă",
+                  "file": "03 Inimă Nouă pe Plajă.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/03 Inimă Nouă pe Plajă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Râul Îndurării Nu Seacă Nicicând",
+                  "file": "04 Râul Îndurării Nu Seacă Nicicând.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/04 Râul Îndurării Nu Seacă Nicicând.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Harul ca Vântul Alizeu",
+                  "file": "05 Harul ca Vântul Alizeu.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/05 Harul ca Vântul Alizeu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Sângele a Răscumpărat Plaja",
+                  "file": "06 Sângele a Răscumpărat Plaja.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/06 Sângele a Răscumpărat Plaja.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Ke Aloha Se Revarsă",
+                  "file": "07 Ke Aloha Se Revarsă.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/07 Ke Aloha Se Revarsă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Îndurare la Lūʻau-ul Familiei",
+                  "file": "08 Îndurare la Lūʻau-ul Familiei.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/08 Îndurare la Lūʻau-ul Familiei.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Curățat de Valul Recifului",
+                  "file": "09 Curățat de Valul Recifului.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/09 Curățat de Valul Recifului.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Tūtū Wahine a Cântat Îndurarea",
+                  "file": "10 Tūtū Wahine a Cântat Îndurarea.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/10 Tūtū Wahine a Cântat Îndurarea.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Aleluia pe Ritmul One-Drop",
+                  "file": "11 Aleluia pe Ritmul One-Drop.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/11 Aleluia pe Ritmul One-Drop.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Îndurare ca Mareea (Reprise — Lanțurile Se Desfac)",
+                  "file": "12 Îndurare ca Mareea (Reprise — Lanțurile Se Desfac).mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/12 Îndurare ca Mareea (Reprise — Lanțurile Se Desfac).mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "THIM1029EN",
