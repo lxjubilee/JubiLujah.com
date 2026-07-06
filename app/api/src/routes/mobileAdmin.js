@@ -14,7 +14,7 @@ import { query, withTransaction } from '../db.js';
 import { HttpError, requireRole } from '../middleware/rbac.js';
 import { validate } from '../middleware/validate.js';
 import { logger } from '../logger.js';
-import { getManifest, listArtists } from '../manifest.js';
+import { getManifest, getFullManifest, listArtists } from '../manifest.js';
 
 const router = Router();
 router.use(requireRole('admin'));
@@ -62,9 +62,9 @@ router.get('/config', ah(async (req, res) => {
   const secByCat = group(sections.rows, 'category_id');
   const heroByCat = group(hero.rows, 'category_id');
   const mtAlbumsByType = group(mtAlbums.rows, 'music_type_id');
-  // Resolve each music-type album's code → title/artist from the manifest so the
-  // admin sees album names, not just codes.
-  const mfst = getManifest();
+  // Resolve each music-type album's code → title/artist from the FULL manifest so
+  // the admin sees album names for any curated ref, not just codes.
+  const mfst = getFullManifest();
   const withNames = (rows) => rows.map((a) => {
     const al = mfst.byAlbumCode.get(String(a.album_ref).toUpperCase());
     return { ...a, title: al?.title || a.album_ref, artist: al?.artistName || null };
@@ -526,14 +526,14 @@ router.patch('/settings', validate(z.object({ min_album_count: z.number().int().
 // ---- Pickers (manifest-backed) ---------------------------------------------
 router.get('/pick/artists', ah(async (req, res) => {
   const category = typeof req.query.category === 'string' ? req.query.category : undefined;
-  res.json(listArtists(category).map((a) => ({ slug: a.slug, name: a.name, category: a.category, albumCount: a.albumCount })));
+  res.json(listArtists(category, { full: true }).map((a) => ({ slug: a.slug, name: a.name, category: a.category, albumCount: a.albumCount })));
 }));
 
 router.get('/pick/albums', ah(async (req, res) => {
   const q = String(req.query.q || '').trim().toLowerCase();
   const page = Math.max(1, parseInt(req.query.page, 10) || 1);
   const pageSize = Math.min(100, Math.max(1, parseInt(req.query.pageSize, 10) || 100));
-  const m = getManifest();
+  const m = getFullManifest();
   const matches = [];
   for (const [code, al] of m.byAlbumCode) {
     if (q && !(`${al.title} ${code} ${al.artistName}`.toLowerCase().includes(q))) continue;

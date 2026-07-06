@@ -18,6 +18,8 @@ function withCoverVersion(url, code) {
 // ============================================================================
 let cache = null;
 let mtimeMs = 0;
+let fullCache = null;    // unsanitized manifest, for the admin CMS (getFullManifest)
+let fullMtimeMs = 0;
 
 // Artists retired from the public catalog at the API layer. The manifest is
 // folder-scan-generated from J:, so a plain rebuild would re-add these — filtering
@@ -172,6 +174,26 @@ export function getManifest() {
   return cache;
 }
 
+// Full (UNSANITIZED) manifest: every artist and album exactly as generated from
+// the catalog — no artist exclusions, no children-category merge. The admin CMS
+// uses this so an operator can curate from the ENTIRE catalog and decide what the
+// mobile app shows; the public/mobile-facing getManifest() above stays sanitized.
+export function getFullManifest() {
+  try {
+    const stat = fs.statSync(config.manifestPath);
+    if (!fullCache || stat.mtimeMs !== fullMtimeMs) {
+      const raw = JSON.parse(fs.readFileSync(config.manifestPath, 'utf8'));
+      fullCache = build(raw);
+      fullMtimeMs = stat.mtimeMs;
+      logger.info({ albums: raw.totalAlbums, generated: raw.generated }, 'Full catalog manifest loaded (admin)');
+    }
+  } catch (err) {
+    logger.error({ err, path: config.manifestPath }, 'Failed to load full catalog manifest');
+    if (!fullCache) fullCache = build({ categories: [], totalAlbums: 0 });
+  }
+  return fullCache;
+}
+
 export function listCategories() {
   const m = getManifest();
   return (m.raw.categories || []).map((c) => ({
@@ -182,8 +204,8 @@ export function listCategories() {
   }));
 }
 
-export function listArtists(categoryKey) {
-  const m = getManifest();
+export function listArtists(categoryKey, { full = false } = {}) {
+  const m = full ? getFullManifest() : getManifest();
   const out = [];
   for (const c of m.raw.categories || []) {
     if (categoryKey && c.key !== categoryKey) continue;

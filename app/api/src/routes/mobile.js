@@ -8,14 +8,14 @@
 // the public catalog routes.
 //
 // The catalog MANIFEST stays the source of album/artist/track/genre data; this
-// endpoint only carries curation. When a category has no explicit admin items,
-// sensible defaults are derived from the manifest (personas, children, etc.) so
-// the five categories work out of the box before any curation.
+// endpoint only carries curation. A category the admin hasn't curated (no
+// sections) is returned with an empty `sections` list — the mobile app hides
+// such pages — so only admin-curated categories appear in the app.
 // ============================================================================
 import { Router } from 'express';
 import { ah } from '../util/async.js';
 import { query } from '../db.js';
-import { getManifest, listArtists } from '../manifest.js';
+import { getManifest } from '../manifest.js';
 
 const router = Router();
 
@@ -64,29 +64,6 @@ function buildMusicTypes(rows, minCount, albumsByType) {
   return out;
 }
 
-// Default membership derived from the manifest when a category has no admin items.
-function defaultItems(key) {
-  const m = getManifest();
-  if (key === 'inspire_family') {
-    return listArtists('inspire').map((a, i) => ({ type: 'artist', ref: a.slug, order: i + 1 }));
-  }
-  if (key === 'children') {
-    const cat = (m.raw.categories || []).find((c) => c.key === 'children');
-    const codes = [];
-    for (const a of cat?.artists || []) for (const al of a.albums || []) codes.push(al.code);
-    return codes.map((code, i) => ({ type: 'album', ref: code, order: i + 1 }));
-  }
-  if (key === 'family_friendly') {
-    return m.byArtist.has('melody-inspire') ? [{ type: 'artist', ref: 'melody-inspire', order: 1 }] : [];
-  }
-  if (key === 'home') {
-    return ['jubilee-inspire', 'melody-inspire']
-      .filter((s) => m.byArtist.has(s))
-      .map((s, i) => ({ type: 'artist', ref: s, order: i + 1 }));
-  }
-  return [];
-}
-
 function toItem(it, i) {
   const base = { type: it.item_type, ref: it.item_ref, order: it.display_order ?? i + 1 };
   if (it.item_type === 'collection') {
@@ -97,8 +74,8 @@ function toItem(it, i) {
 
 // Nested config (v2): each page carries an optional per-page `hero` and an
 // ordered list of typed `sections`, each holding its items. A page with no admin
-// sections falls back to one manifest-derived default section so it works out of
-// the box. The `music_type` page keeps its `musicTypes` list.
+// sections returns an empty `sections` list (no manifest defaults), so the app
+// hides it. The `music_type` page keeps its `musicTypes` list.
 router.get('/config', ah(async (req, res) => {
   const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
     query(`SELECT id, key, label, kind, display_order, hero_enabled
@@ -154,20 +131,14 @@ router.get('/config', ah(async (req, res) => {
     }
 
     const secRows = sectionsByCat.get(c.id) || [];
-    let sectionList;
-    if (secRows.length) {
-      sectionList = secRows.map((s) => ({
-        name: s.name, kind: s.kind, order: s.display_order,
-        items: (itemsBySection.get(s.id) || []).map(toItem),
-      }));
-    } else {
-      // No admin sections yet → one default section from the manifest so the page
-      // is populated out of the box (mirrors the pre-sections default behavior).
-      const def = defaultItems(c.key);
-      sectionList = def.length
-        ? [{ name: c.label, kind: def[0].type === 'artist' ? 'artists' : 'albums', order: 1, items: def }]
-        : [];
-    }
+    // Admin sections ONLY — no manifest-derived defaults. A category the admin
+    // hasn't curated (0 sections) returns no sections, so the mobile app hides it
+    // (a page with 0 admin sections must not appear). music_type is unaffected —
+    // it carries `musicTypes`, not sections, above.
+    const sectionList = secRows.map((s) => ({
+      name: s.name, kind: s.kind, order: s.display_order,
+      items: (itemsBySection.get(s.id) || []).map(toItem),
+    }));
 
     const out = { key: c.key, label: c.label, kind: c.kind, order: c.display_order, sections: sectionList };
     if (c.hero_enabled) {
