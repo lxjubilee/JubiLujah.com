@@ -10,7 +10,7 @@ const CROSS = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 
 
 // Comparison matrix (BRD §Plan Comparison Table). value: true | false | string.
 const COMPARISON: { feature: string; free: boolean | string; individual: boolean | string; family: boolean | string }[] = [
-  { feature: 'Full songs per day', free: '7', individual: 'Unlimited', family: 'Unlimited' },
+  { feature: 'Full songs per day', free: '36', individual: 'Unlimited', family: 'Unlimited' },
   { feature: 'Unlimited streaming', free: false, individual: true, family: true },
   { feature: 'Unlimited albums', free: false, individual: true, family: true },
   { feature: 'Unlimited songs', free: false, individual: true, family: true },

@@ -117,7 +117,7 @@ export default function MySubscription() {
             <div className="acct-card-head">
               <h2 className="acct-card-title">You’re on the Free plan</h2>
               <p className="acct-card-note">
-                You can listen to {entitlement?.dailySongLimit ?? 7} full songs each day. Upgrade for unlimited streaming with no interruptions.
+                You can listen to {entitlement?.dailySongLimit ?? 36} full songs each day. Upgrade for unlimited streaming with no interruptions.
               </p>
             </div>
             <Link className="btn primary" href="/subscription">Upgrade to Unlimited Listening</Link>

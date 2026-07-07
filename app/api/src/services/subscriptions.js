@@ -96,7 +96,7 @@ function entitlement(isPaid, status, source, plan, subscription) {
     source,
     plan: plan ? planView(plan) : null,
     subscription: subscription ? subscriptionView(subscription) : null,
-    dailySongLimit: isPaid ? null : (plan?.daily_song_limit ?? 7),
+    dailySongLimit: isPaid ? null : (plan?.daily_song_limit ?? 36),
     previewSeconds: plan?.preview_seconds ?? 60,
   };
 }
@@ -315,7 +315,7 @@ export async function resolvePlayIntent(userId) {
     return { mode: 'full', unlimited: true, plays_today: null, daily_limit: null, remaining: null, preview_seconds: ent.previewSeconds, status: ent.status };
   }
 
-  const limit = ent.dailySongLimit ?? 7;
+  const limit = ent.dailySongLimit ?? 36;
   const preview = ent.previewSeconds ?? 60;
   const tz = config.listening.timezone;
 
@@ -365,6 +365,6 @@ export async function getListeningStatus(userId) {
     [userId, tz],
   );
   const played = r.rowCount ? r.rows[0].songs_played : 0;
-  const limit = ent.dailySongLimit ?? 7;
+  const limit = ent.dailySongLimit ?? 36;
   return { unlimited: false, plays_today: played, daily_limit: limit, remaining: Math.max(0, limit - played), preview_seconds: ent.previewSeconds };
 }
