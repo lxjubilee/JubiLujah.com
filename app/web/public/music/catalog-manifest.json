@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-04T21:31:19.813Z",
+  "generated": "2026-07-07T04:30:22.544Z",
   "totalArtists": 33,
-  "totalAlbums": 981,
-  "totalPlayableAlbums": 395,
-  "totalPlayableTracks": 4958,
+  "totalAlbums": 982,
+  "totalPlayableAlbums": 403,
+  "totalPlayableTracks": 5054,
   "categories": [
     {
       "key": "inspire",
@@ -2196,9 +2196,94 @@
               "title": "Basbas ng Pamilya",
               "folder": "CAIM1006TL-basbas-ng-pamilya",
               "path": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Lahi at Dugo",
+                  "file": "01 Lahi at Dugo.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/01 Lahi at Dugo.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Ang Tinig na Ipinangako Kong 'Di Gagamitin",
+                  "file": "02 Ang Tinig na Ipinangako Kong 'Di Gagamitin.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/02 Ang Tinig na Ipinangako Kong 'Di Gagamitin.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Bakanteng Upuan",
+                  "file": "03 Bakanteng Upuan.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/03 Bakanteng Upuan.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Ipasa sa Susunod",
+                  "file": "04 Ipasa sa Susunod.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/04 Ipasa sa Susunod.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Pangalan ng Ina",
+                  "file": "05 Pangalan ng Ina.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/05 Pangalan ng Ina.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Sariling Pangalan",
+                  "file": "06 Sariling Pangalan.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/06 Sariling Pangalan.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Bumabali ang Sumpa",
+                  "file": "07 Bumabali ang Sumpa.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/07 Bumabali ang Sumpa.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Mahaba ang Hapag",
+                  "file": "08 Mahaba ang Hapag.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/08 Mahaba ang Hapag.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Malugod ang mga Alibughang Anak",
+                  "file": "09 Malugod ang mga Alibughang Anak.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/09 Malugod ang mga Alibughang Anak.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "'Di Pa Tapos na Pagpapatawad",
+                  "file": "10 'Di Pa Tapos na Pagpapatawad.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/10 'Di Pa Tapos na Pagpapatawad.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Naaalala ng Tahanan",
+                  "file": "11 Naaalala ng Tahanan.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/11 Naaalala ng Tahanan.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Sumusulong ang Basbas",
+                  "file": "12 Sumusulong ang Basbas.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/12 Sumusulong ang Basbas.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "CAIM1007EN",
@@ -2303,9 +2388,94 @@
               "title": "Buong Bilog",
               "folder": "CAIM1007TL-buong-bilog",
               "path": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Nang Ako'y Umalis",
+                  "file": "01 Nang Ako'y Umalis.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/01 Nang Ako'y Umalis.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Mga Taon sa Ilang",
+                  "file": "02 Mga Taon sa Ilang.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/02 Mga Taon sa Ilang.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Pag-ikot ng Manibela Pauwi",
+                  "file": "03 Pag-ikot ng Manibela Pauwi.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/03 Pag-ikot ng Manibela Pauwi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Natanaw ang Tahanan",
+                  "file": "04 Natanaw ang Tahanan.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/04 Natanaw ang Tahanan.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Paglakad Pabalik",
+                  "file": "05 Paglakad Pabalik.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/05 Paglakad Pabalik.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Pagtanggap na 'Di Nagtatanong",
+                  "file": "06 Pagtanggap na 'Di Nagtatanong.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/06 Pagtanggap na 'Di Nagtatanong.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Hapag na Inihanda Pa Rin",
+                  "file": "07 Hapag na Inihanda Pa Rin.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/07 Hapag na Inihanda Pa Rin.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Naibalik ang Pagkabilang (Album Peak)",
+                  "file": "08 Naibalik ang Pagkabilang (Album Peak).mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/08 Naibalik ang Pagkabilang (Album Peak).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Buksan ang Pinto sa Susunod",
+                  "file": "09 Buksan ang Pinto sa Susunod.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/09 Buksan ang Pinto sa Susunod.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Pag-alis at Pag-uwi'y Pinabanal",
+                  "file": "10 Pag-alis at Pag-uwi'y Pinabanal.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/10 Pag-alis at Pag-uwi'y Pinabanal.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Lumalawak ang Bilog",
+                  "file": "11 Lumalawak ang Bilog.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/11 Lumalawak ang Bilog.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Buong Bilog Magpakailanman (Benediction Finale)",
+                  "file": "12 Buong Bilog Magpakailanman (Benediction Finale).mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/12 Buong Bilog Magpakailanman (Benediction Finale).mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "CAIM1008DE",
@@ -3102,9 +3272,94 @@
               "title": "Nơi Nương Náu",
               "folder": "CAIM1012VI-noi-nuong-nau",
               "path": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Nơi Nương Náu Và Thành Lũy",
+                  "file": "01 Nơi Nương Náu Và Thành Lũy.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/01 Nơi Nương Náu Và Thành Lũy.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "An Toàn Trong Bóng Ngài",
+                  "file": "02 An Toàn Trong Bóng Ngài.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/02 An Toàn Trong Bóng Ngài.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Dưới Cánh Của Ngài",
+                  "file": "03 Dưới Cánh Của Ngài.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/03 Dưới Cánh Của Ngài.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Tháp Vững Bền",
+                  "file": "04 Tháp Vững Bền.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/04 Tháp Vững Bền.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Khi Các Dân Cuồng Nộ",
+                  "file": "05 Khi Các Dân Cuồng Nộ.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/05 Khi Các Dân Cuồng Nộ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Hãy Yên Lặng Mà Biết",
+                  "file": "06 Hãy Yên Lặng Mà Biết.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/06 Hãy Yên Lặng Mà Biết.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Khe Đá",
+                  "file": "07 Khe Đá.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/07 Khe Đá.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Được Giấu Trong Ngài",
+                  "file": "08 Được Giấu Trong Ngài.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/08 Được Giấu Trong Ngài.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Dòng Sông Nương Náu",
+                  "file": "09 Dòng Sông Nương Náu.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/09 Dòng Sông Nương Náu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Ngài Là Nơi Cư Ngụ",
+                  "file": "10 Ngài Là Nơi Cư Ngụ.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/10 Ngài Là Nơi Cư Ngụ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Sê-la Nương Náu",
+                  "file": "11 Sê-la Nương Náu.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/11 Sê-la Nương Náu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Nơi Nương Náu Đời Đời",
+                  "file": "12 Nơi Nương Náu Đời Đời.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/12 Nơi Nương Náu Đời Đời.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "CAIM1013EN",
@@ -26478,6 +26733,100 @@
               ]
             },
             {
+              "code": "JEIM1071HI",
+              "title": "Happy fathers day",
+              "folder": "JEIM1071HI-happy fathers day",
+              "path": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Pita Ka Din Mubarak (Happy Father's Day)",
+                  "file": "01 Pita Ka Din Mubarak (Happy Father's Day).mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/01 Pita Ka Din Mubarak (Happy Father's Day).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Father of All Creation",
+                  "file": "02 Father of All Creation.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/02 Father of All Creation.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Above Every Other Father",
+                  "file": "03 Above Every Other Father.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/03 Above Every Other Father.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Abba (Closer Than My Breath)",
+                  "file": "04 Abba (Closer Than My Breath).mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/04 Abba (Closer Than My Breath).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "You've Got Me",
+                  "file": "05 You've Got Me.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/05 You've Got Me.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Best Dad in the Universe",
+                  "file": "06 Best Dad in the Universe.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/06 Best Dad in the Universe.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "The Father Who Runs",
+                  "file": "07 The Father Who Runs.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/07 The Father Who Runs.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "On His Lap (Heaven Holds Its Breath)",
+                  "file": "08 On His Lap (Heaven Holds Its Breath).mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/08 On His Lap (Heaven Holds Its Breath).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Father of Lights",
+                  "file": "09 Father of Lights.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/09 Father of Lights.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Even When I Couldn't See",
+                  "file": "10 Even When I Couldn't See.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/10 Even When I Couldn't See.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Carried",
+                  "file": "11 Carried.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/11 Carried.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Forever Father's Day",
+                  "file": "12 Forever Father's Day.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1071HI-happy fathers day/tracks/12 Forever Father's Day.mp3",
+                  "audio": true
+                }
+              ]
+            },
+            {
               "code": "JEIM1071JA",
               "title": "父の日おめでとう",
               "folder": "JEIM1071JA-chichi-no-hi",
@@ -28280,85 +28629,85 @@
                 {
                   "n": 1,
                   "title": "The Coals Beneath the Ash",
-                  "file": "01_ The Coals Beneath the Ash.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/01_ The Coals Beneath the Ash.mp3",
+                  "file": "01 The Coals Beneath the Ash.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/01 The Coals Beneath the Ash.mp3",
                   "audio": true
                 },
                 {
                   "n": 2,
                   "title": "Gathering Sticks at Twilight",
-                  "file": "02_ Gathering Sticks at Twilight.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/02_ Gathering Sticks at Twilight.mp3",
+                  "file": "02 Gathering Sticks at Twilight.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/02 Gathering Sticks at Twilight.mp3",
                   "audio": true
                 },
                 {
                   "n": 3,
                   "title": "The First Spark",
-                  "file": "03_ The First Spark.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/03_ The First Spark.mp3",
+                  "file": "03 The First Spark.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/03 The First Spark.mp3",
                   "audio": true
                 },
                 {
                   "n": 4,
                   "title": "Slow Burn",
-                  "file": "04_ Slow Burn.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/04_ Slow Burn.mp3",
+                  "file": "04 Slow Burn.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/04 Slow Burn.mp3",
                   "audio": true
                 },
                 {
                   "n": 5,
                   "title": "The Refiner's Patience",
-                  "file": "05_ The Refiner's Patience.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/05_ The Refiner's Patience.mp3",
+                  "file": "05 The Refiner's Patience.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/05 The Refiner's Patience.mp3",
                   "audio": true
                 },
                 {
                   "n": 6,
                   "title": "Burning Off the Dross",
-                  "file": "06_ Burning Off the Dross.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/06_ Burning Off the Dross.mp3",
+                  "file": "06 Burning Off the Dross.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/06 Burning Off the Dross.mp3",
                   "audio": true
                 },
                 {
                   "n": 7,
                   "title": "The Fire That Doesn't Consume",
-                  "file": "07_ The Fire That Doesn't Consume.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/07_ The Fire That Doesn't Consume.mp3",
+                  "file": "07 The Fire That Doesn't Consume.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/07 The Fire That Doesn't Consume.mp3",
                   "audio": true
                 },
                 {
                   "n": 8,
                   "title": "Light to See By",
-                  "file": "08_ Light to See By.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/08_ Light to See By.mp3",
+                  "file": "08 Light to See By.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/08 Light to See By.mp3",
                   "audio": true
                 },
                 {
                   "n": 9,
                   "title": "Carrying the Coal",
-                  "file": "09_ Carrying the Coal.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/09_ Carrying the Coal.mp3",
+                  "file": "09 Carrying the Coal.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/09 Carrying the Coal.mp3",
                   "audio": true
                 },
                 {
                   "n": 10,
                   "title": "The Bonfire Becomes a Beacon",
-                  "file": "10_ The Bonfire Becomes a Beacon.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/10_ The Bonfire Becomes a Beacon.mp3",
+                  "file": "10 The Bonfire Becomes a Beacon.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/10 The Bonfire Becomes a Beacon.mp3",
                   "audio": true
                 },
                 {
                   "n": 11,
                   "title": "Pass the Flame",
-                  "file": "11_ Pass the Flame.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/11_ Pass the Flame.mp3",
+                  "file": "11 Pass the Flame.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/11 Pass the Flame.mp3",
                   "audio": true
                 },
                 {
                   "n": 12,
                   "title": "Gathering Fire",
-                  "file": "12_ Gathering Fire.mp3",
-                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/12_ Gathering Fire.mp3",
+                  "file": "12 Gathering Fire.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1009EN-gathering-fire/tracks/12 Gathering Fire.mp3",
                   "audio": true
                 }
               ],
@@ -44929,9 +45278,94 @@
               "title": "Mai Mult Decât Biruitori",
               "folder": "ZHIM1023RO-mai-mult-decat-biruitori",
               "path": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Mai Mult Decât Biruitori",
+                  "file": "01 Mai Mult Decât Biruitori.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/01 Mai Mult Decât Biruitori.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Atacul N-a Învins",
+                  "file": "02 Atacul N-a Învins.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/02 Atacul N-a Învins.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Stau în Picioare",
+                  "file": "03 Stau în Picioare.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/03 Stau în Picioare.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Iubirea Ce Nu Mă Lasă",
+                  "file": "04 Iubirea Ce Nu Mă Lasă.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/04 Iubirea Ce Nu Mă Lasă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Prin Cel Ce Ne-a Iubit",
+                  "file": "05 Prin Cel Ce Ne-a Iubit.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/05 Prin Cel Ce Ne-a Iubit.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Mai Mare E El",
+                  "file": "06 Mai Mare E El.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/06 Mai Mare E El.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Din Groapă m-a Scos",
+                  "file": "07 Din Groapă m-a Scos.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/07 Din Groapă m-a Scos.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Diavolul Sub Picioare",
+                  "file": "08 Diavolul Sub Picioare.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/08 Diavolul Sub Picioare.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Strigăt de Biruință",
+                  "file": "09 Strigăt de Biruință.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/09 Strigăt de Biruință.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Nicio Armă Făurită",
+                  "file": "10 Nicio Armă Făurită.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/10 Nicio Armă Făurită.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Spuneți_ Am Învins",
+                  "file": "11 Spuneți_ Am Învins.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/11 Spuneți_ Am Învins.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Biruință în Sânge",
+                  "file": "12 Biruință în Sânge.mp3",
+                  "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/12 Biruință în Sânge.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "ZHIM1024EN",
@@ -48192,9 +48626,94 @@
               "title": "Yevarechecha",
               "folder": "ZEIM1015HE-yevarechecha",
               "path": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "יְבָרֶכְךָ (הַבְּרָכָה יוֹרֶדֶת)",
+                  "file": "01 יְבָרֶכְךָ (הַבְּרָכָה יוֹרֶדֶת).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/01 יְבָרֶכְךָ (הַבְּרָכָה יוֹרֶדֶת).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "יָהוּאָה מְבָרֵךְ, יָהוּאָה שׁוֹמֵר",
+                  "file": "02 יָהוּאָה מְבָרֵךְ, יָהוּאָה שׁוֹמֵר.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/02 יָהוּאָה מְבָרֵךְ, יָהוּאָה שׁוֹמֵר.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "שׁוֹמֵר (הוּא שׁוֹמֵר עָלַי)",
+                  "file": "03 שׁוֹמֵר (הוּא שׁוֹמֵר עָלַי).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/03 שׁוֹמֵר (הוּא שׁוֹמֵר עָלַי).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "יָאֵר פָּנָיו (פָּנָיו מְאִירוֹת)",
+                  "file": "04 יָאֵר פָּנָיו (פָּנָיו מְאִירוֹת).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/04 יָאֵר פָּנָיו (פָּנָיו מְאִירוֹת).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "וִיחֻנֶּךָּ (חֶסֶד כְּמוֹ נָהָר)",
+                  "file": "05 וִיחֻנֶּךָּ (חֶסֶד כְּמוֹ נָהָר).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/05 וִיחֻנֶּךָּ (חֶסֶד כְּמוֹ נָהָר).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "הוּא הוֹלֵךְ אִתִּי בְּכָל דֶּרֶךְ",
+                  "file": "06 הוּא הוֹלֵךְ אִתִּי בְּכָל דֶּרֶךְ.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/06 הוּא הוֹלֵךְ אִתִּי בְּכָל דֶּרֶךְ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "אָבִי הִנִּיחַ עָלַי אֶת הַבְּרָכָה",
+                  "file": "07 אָבִי הִנִּיחַ עָלַי אֶת הַבְּרָכָה.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/07 אָבִי הִנִּיחַ עָלַי אֶת הַבְּרָכָה.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "אֲנַחְנוּ הַבְּרָכָה עַכְשָׁו",
+                  "file": "08 אֲנַחְנוּ הַבְּרָכָה עַכְשָׁו.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/08 אֲנַחְנוּ הַבְּרָכָה עַכְשָׁו.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "בָּרֵךְ אֶת הַבָּא, בָּרֵךְ אֶת הַבָּא",
+                  "file": "09 בָּרֵךְ אֶת הַבָּא, בָּרֵךְ אֶת הַבָּא.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/09 בָּרֵךְ אֶת הַבָּא, בָּרֵךְ אֶת הַבָּא.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "שְׂאוּ אֶת הַבְּרָכָה אֶל מֵעֵבֶר לַדֶּלֶת",
+                  "file": "10 שְׂאוּ אֶת הַבְּרָכָה אֶל מֵעֵבֶר לַדֶּלֶת.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/10 שְׂאוּ אֶת הַבְּרָכָה אֶל מֵעֵבֶר לַדֶּלֶת.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "שָׁלוֹם בֵּין הַגּוֹיִם",
+                  "file": "11 שָׁלוֹם בֵּין הַגּוֹיִם.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/11 שָׁלוֹם בֵּין הַגּוֹיִם.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "יִשָּׂא שָׁלוֹם (שָׁלוֹם לָעַד)",
+                  "file": "12 יִשָּׂא שָׁלוֹם (שָׁלוֹם לָעַד).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/12 יִשָּׂא שָׁלוֹם (שָׁלוֹם לָעַד).mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "ZEIM1016EN",
@@ -48789,9 +49308,94 @@
               "title": "Yeshua Înviat Peste Noi",
               "folder": "ZEIM1021RO-yeshua-inviat-peste-noi",
               "path": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Yeshua Înviat Peste Noi",
+                  "file": "01 Yeshua Înviat Peste Noi.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/01 Yeshua Înviat Peste Noi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Piatra S-a Rostogolit",
+                  "file": "02 Piatra S-a Rostogolit.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/02 Piatra S-a Rostogolit.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "El E Înviat Peste Mine",
+                  "file": "03 El E Înviat Peste Mine.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/03 El E Înviat Peste Mine.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Cele Dintâi Roade în Pustiu",
+                  "file": "04 Cele Dintâi Roade în Pustiu.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/04 Cele Dintâi Roade în Pustiu.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "HaMashiach, Tu Domnești",
+                  "file": "05 HaMashiach, Tu Domnești.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/05 HaMashiach, Tu Domnești.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Cale Prin Nisip",
+                  "file": "06 Cale Prin Nisip.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/06 Cale Prin Nisip.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Piatra S-a Dat de pe Inimi",
+                  "file": "07 Piatra S-a Dat de pe Inimi.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/07 Piatra S-a Dat de pe Inimi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "A Ieșit din Mormânt în Zori",
+                  "file": "08 A Ieșit din Mormânt în Zori.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/08 A Ieșit din Mormânt în Zori.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Grădina Înainte de Soare",
+                  "file": "09 Grădina Înainte de Soare.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/09 Grădina Înainte de Soare.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Poartă Numele Înviat",
+                  "file": "10 Poartă Numele Înviat.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/10 Poartă Numele Înviat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Casa Sub Soarele Înviat",
+                  "file": "11 Casa Sub Soarele Înviat.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/11 Casa Sub Soarele Înviat.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Învie Iar Peste Noi Mâine",
+                  "file": "12 Învie Iar Peste Noi Mâine.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/12 Învie Iar Peste Noi Mâine.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "ZEIM1022EN",
@@ -48896,9 +49500,94 @@
               "title": "Hesed Care Nu Se Oprește",
               "folder": "ZEIM1022RO-hesed-care-nu-se-opreste",
               "path": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Hesed Care Nu Se Oprește",
+                  "file": "01 Hesed Care Nu Se Oprește.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/01 Hesed Care Nu Se Oprește.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Credincios — Credincios — Credincios",
+                  "file": "02 Credincios — Credincios — Credincios.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/02 Credincios — Credincios — Credincios.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Hesedul Tău Nu S-a Oprit din Mine",
+                  "file": "03 Hesedul Tău Nu S-a Oprit din Mine.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/03 Hesedul Tău Nu S-a Oprit din Mine.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Legământul Pe Care Nu-l Poate Frânge",
+                  "file": "04 Legământul Pe Care Nu-l Poate Frânge.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/04 Legământul Pe Care Nu-l Poate Frânge.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Saltă Înaintea Chivotului",
+                  "file": "05 Saltă Înaintea Chivotului.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/05 Saltă Înaintea Chivotului.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Furtună de Hesed Peste Generații",
+                  "file": "06 Furtună de Hesed Peste Generații.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/06 Furtună de Hesed Peste Generații.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Hesedul Vine Pășind",
+                  "file": "07 Hesedul Vine Pășind.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/07 Hesedul Vine Pășind.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Adonai a Ținut Fiecare Promisiune",
+                  "file": "08 Adonai a Ținut Fiecare Promisiune.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/08 Adonai a Ținut Fiecare Promisiune.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Când Muzica S-a Oprit",
+                  "file": "09 Când Muzica S-a Oprit.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/09 Când Muzica S-a Oprit.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Dansează Hesedul pe Stradă",
+                  "file": "10 Dansează Hesedul pe Stradă.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/10 Dansează Hesedul pe Stradă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Podeaua de Sub Picioarele Noastre",
+                  "file": "11 Podeaua de Sub Picioarele Noastre.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/11 Podeaua de Sub Picioarele Noastre.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Dansează-ne Acasă Mâine",
+                  "file": "12 Dansează-ne Acasă Mâine.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/12 Dansează-ne Acasă Mâine.mp3",
+                  "audio": true
+                }
+              ]
             },
             {
               "code": "ZEIM1023EN",
