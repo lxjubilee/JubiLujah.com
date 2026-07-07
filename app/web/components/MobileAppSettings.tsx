@@ -6,8 +6,7 @@
 // as three dynamic levels: PAGES (the app's top nav) → each page has an optional
 // per-page HERO banner + any number of SECTIONS → each section is typed
 // (Artists or Albums) and holds the items you pick. Layout is fixed by type
-// (artists render as circles, albums as square covers). A second tab manages the
-// Music Type genres + threshold.
+// (artists render as circles, albums as square covers).
 //
 // Reads/writes /api/admin/mobile/*; the app reads the resulting /api/mobile/config.
 // No optimistic updates — every write re-fetches the whole config.
@@ -34,12 +33,7 @@ interface Page {
   display_order: number; is_active: boolean; is_visible: boolean; hero_enabled: boolean;
   hero: HeroSlide[]; sections: Section[];
 }
-interface MusicTypeAlbum { id: number; music_type_id: number; album_ref: string; display_order: number; is_active: boolean; title?: string; artist?: string | null; }
-interface MusicType {
-  id: number; genre: string; label: string; display_order: number; is_pinned: boolean; is_active: boolean;
-  albums?: MusicTypeAlbum[];
-}
-interface AdminConfig { categories: Page[]; musicTypes: MusicType[]; settings: { min_album_count: number }; }
+interface AdminConfig { categories: Page[]; }
 interface PickArtist { slug: string; name: string; category: string; albumCount: number }
 interface PickAlbum { code: string; title: string; artist: string; category: string }
 
@@ -141,7 +135,6 @@ function Modal({ dialog, onResolve }: { dialog: DialogState | null; onResolve: (
 export default function MobileAppSettings() {
   const { loading, authenticated, hasRole } = useAuth();
   const [cfg, setCfg] = useState<AdminConfig | null>(null);
-  const [tab, setTab] = useState<'pages' | 'music'>('pages');
   const [selKey, setSelKey] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null);
   const [pageDragIdx, setPageDragIdx] = useState<number | null>(null);
@@ -208,17 +201,7 @@ export default function MobileAppSettings() {
       </p>
       {msg && <div className={`mas-flash ${msg.kind}`}>{msg.text}</div>}
 
-      <div className="mas-tabs" role="tablist" aria-label="Mobile settings sections">
-        <button className={`mas-tab${tab === 'pages' ? ' sel' : ''}`} onClick={() => setTab('pages')}>
-          Pages <span className="mas-badge">{pages.length}</span>
-        </button>
-        <button className={`mas-tab${tab === 'music' ? ' sel' : ''}`} onClick={() => setTab('music')}>
-          Music Types <span className="mas-badge">{cfg?.musicTypes.length ?? 0}</span>
-        </button>
-      </div>
-
-      {tab === 'pages' ? (
-        <div className="mas-layout">
+      <div className="mas-layout">
           <div>
             <p className="mas-eyebrow">Category · the app&apos;s top nav</p>
             <div className="mas-pages">
@@ -254,10 +237,7 @@ export default function MobileAppSettings() {
               ? <PageEditor key={selectedPage.key} page={selectedPage} act={act} />
               : <p className="muted">No pages yet — add one to start.</p>}
           </div>
-        </div>
-      ) : (
-        cfg ? <MusicTab musicTypes={cfg.musicTypes} settings={cfg.settings} act={act} /> : null
-      )}
+      </div>
       <Modal dialog={dialog} onResolve={resolveDialog} />
     </DialogContext.Provider>
   );
@@ -608,127 +588,6 @@ function Picker({ kind, existing, onAdd, addLabel }: {
           <button className="mm-btn sm" disabled={page >= pages} onClick={() => setPage((p) => p + 1)}>Next</button>
         </div>
       )}
-    </div>
-  );
-}
-
-// ---- Music Types tab -------------------------------------------------------
-
-function MusicTab({ musicTypes, settings, act }: {
-  musicTypes: MusicType[]; settings: { min_album_count: number }; act: Act;
-}) {
-  const [genre, setGenre] = useState('');
-  const [minCount, setMinCount] = useState(String(settings.min_album_count));
-  const [selId, setSelId] = useState<number | null>(null);
-  const selMt = musicTypes.find((m) => m.id === selId) ?? musicTypes[0] ?? null;
-
-  // Drag-and-drop reorder of the genre list (grip handle; row click selects).
-  const [genreDragIdx, setGenreDragIdx] = useState<number | null>(null);
-  const [genreOverIdx, setGenreOverIdx] = useState<number | null>(null);
-  const dropReorderGenres = (to: number) => {
-    if (genreDragIdx === null || genreDragIdx === to) return;
-    const ids = musicTypes.map((m) => m.id);
-    const [moved] = ids.splice(genreDragIdx, 1);
-    ids.splice(to, 0, moved);
-    void act(api.patch('/api/admin/mobile/music-types-order', { ids }), 'Order saved');
-  };
-
-  return (
-    <>
-      <div className="mas-card" style={{ marginBottom: 16 }}>
-        <p className="mas-label" style={{ marginBottom: 12 }}>Threshold</p>
-        <div className="mas-addbar" style={{ marginTop: 0 }}>
-          <span style={{ fontSize: 13 }}>Auto-show a genre once it has at least</span>
-          <input className="mas-input" style={{ width: 80 }} type="number" min={1} value={minCount}
-            onChange={(e) => setMinCount(e.target.value)} />
-          <span style={{ fontSize: 13 }}>albums.</span>
-          <button className="mm-btn primary sm"
-            onClick={() => void act(api.patch('/api/admin/mobile/settings', { min_album_count: Number(minCount) }), 'Saved')}>Save</button>
-        </div>
-      </div>
-
-      <div className="mas-card">
-        <p className="mas-label" style={{ marginBottom: 12 }}>Genres · pinned first, then auto by album count</p>
-        {musicTypes.map((m, i) => (
-          <div key={m.id} onClick={() => setSelId(m.id)} style={{ cursor: 'pointer' }}
-            className={`mas-genrerow${selMt && m.id === selMt.id ? ' sel' : ''}${genreDragIdx === i ? ' mas-drag' : ''}${genreOverIdx === i && genreDragIdx !== null && genreDragIdx !== i ? ' mas-over' : ''}`}
-            onDragOver={(e) => { e.preventDefault(); if (genreOverIdx !== i) setGenreOverIdx(i); }}
-            onDragLeave={() => setGenreOverIdx((o) => (o === i ? null : o))}
-            onDrop={(e) => { e.preventDefault(); dropReorderGenres(i); setGenreDragIdx(null); setGenreOverIdx(null); }}>
-            <span className="mas-grip" draggable title="Drag to reorder"
-              onClick={(e) => e.stopPropagation()}
-              onDragStart={(e) => { e.stopPropagation(); setGenreDragIdx(i); e.dataTransfer.effectAllowed = 'move'; }}
-              onDragEnd={() => { setGenreDragIdx(null); setGenreOverIdx(null); }}>⠿</span>
-            <div className="mas-gnm">{m.label}<span className="mas-gcount"> · {(m.albums ?? []).length} albums</span></div>
-            <span className={`mas-pill ${m.is_pinned ? 'gold' : 'mute'}`}>{m.is_pinned ? 'Pinned' : 'Auto'}</span>
-            <span onClick={(e) => e.stopPropagation()}>
-              <Switch checked={m.is_active} onChange={(v) => void act(api.patch(`/api/admin/mobile/music-types/${m.id}`, { is_active: v }), 'Updated')} label="" />
-            </span>
-            {m.is_pinned
-              ? <span />
-              : <button className="mm-btn sm" onClick={(e) => { e.stopPropagation(); void act(api.del(`/api/admin/mobile/music-types/${m.id}`), 'Removed'); }}>Remove</button>}
-          </div>
-        ))}
-        <div className="mas-addbar">
-          <input className="mas-input" style={{ flex: 1 }} placeholder="Add a genre (e.g. Hymns)" value={genre}
-            onChange={(e) => setGenre(e.target.value)} />
-          <button className="mm-btn primary sm" disabled={!genre.trim()}
-            onClick={() => { void act(api.post('/api/admin/mobile/music-types', { genre: genre.trim() }), 'Added'); setGenre(''); }}>Add</button>
-        </div>
-      </div>
-
-      {selMt && <MusicTypeAlbums key={selMt.id} mt={selMt} act={act} />}
-    </>
-  );
-}
-
-// Per-genre album editor: the admin picks exactly which albums appear under this
-// Music Type (with an "Auto-fill from genre" shortcut to seed from catalog tags).
-function MusicTypeAlbums({ mt, act }: { mt: MusicType; act: Act }) {
-  const albums = mt.albums ?? [];
-  const existing = new Set(albums.map((a) => a.album_ref));
-  const [dragIdx, setDragIdx] = useState<number | null>(null);
-  const [overIdx, setOverIdx] = useState<number | null>(null);
-  const dropReorder = (to: number) => {
-    if (dragIdx === null || dragIdx === to) return;
-    const ids = albums.map((a) => a.id);
-    const [moved] = ids.splice(dragIdx, 1);
-    ids.splice(to, 0, moved);
-    void act(api.patch(`/api/admin/mobile/music-types/${mt.id}/albums-order`, { ids }), 'Order saved');
-  };
-  return (
-    <div className="mas-card" style={{ marginTop: 16 }}>
-      <div className="mas-head" style={{ marginBottom: 12 }}>
-        <p className="mas-label" style={{ margin: 0 }}>
-          Albums in “{mt.label}” · {albums.length}{albums.length > 1 ? ' · drag to reorder' : ''}
-        </p>
-        <button className="mm-btn sm" title="Add every album tagged with this genre in the catalog"
-          onClick={() => void act(api.post(`/api/admin/mobile/music-types/${mt.id}/autofill`, {}), 'Filled from genre tag')}>Auto-fill from genre</button>
-      </div>
-      {albums.length === 0 && <p className="mas-empty">No albums yet — add albums below, or auto-fill from the genre tag.</p>}
-      {albums.length > 0 && (
-        <div className="mas-itemlist jv-scroll">
-          {albums.map((a, i) => (
-            <div key={a.id}
-              className={`mas-itemrow${dragIdx === i ? ' mas-drag' : ''}${overIdx === i && dragIdx !== null && dragIdx !== i ? ' mas-over' : ''}`}
-              onDragOver={(e) => { e.preventDefault(); if (overIdx !== i) setOverIdx(i); }}
-              onDragLeave={() => setOverIdx((o) => (o === i ? null : o))}
-              onDrop={(e) => { e.preventDefault(); dropReorder(i); setDragIdx(null); setOverIdx(null); }}>
-              <span className="mas-grip" draggable title="Drag to reorder"
-                onDragStart={(e) => { setDragIdx(i); e.dataTransfer.effectAllowed = 'move'; }}
-                onDragEnd={() => { setDragIdx(null); setOverIdx(null); }}>⠿</span>
-              <Thumb shape="sq" code={a.album_ref} seed={a.title || a.album_ref} />
-              <div style={{ minWidth: 0 }}>
-                <div className="mas-it-title">{a.title || a.album_ref}</div>
-                {a.artist && <div className="mas-it-sub">{a.artist}</div>}
-              </div>
-              <button className="mm-btn sm" onClick={() => void act(api.del(`/api/admin/mobile/music-type-albums/${a.id}`), 'Removed')}>Remove</button>
-            </div>
-          ))}
-        </div>
-      )}
-      <Picker kind="albums" existing={existing} addLabel="Add albums"
-        onAdd={(ref) => void act(api.post(`/api/admin/mobile/music-types/${mt.id}/albums`, { album_ref: ref }), 'Added')} />
     </div>
   );
 }
