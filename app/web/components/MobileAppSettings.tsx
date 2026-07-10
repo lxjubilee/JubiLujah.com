@@ -17,11 +17,12 @@ import { api } from '@/lib/api';
 
 interface SectionItem {
   id: number; item_type: 'album' | 'artist'; item_ref: string;
-  title: string | null; artist?: string | null; display_order: number; is_active: boolean;
+  title: string | null; artist?: string | null; genre?: string | null;
+  display_order: number; is_active: boolean;
 }
 interface Section {
   id: number; category_id: number; name: string; kind: 'artists' | 'albums';
-  display_order: number; is_active: boolean; items: SectionItem[];
+  display_order: number; is_active: boolean; show_genre: boolean; items: SectionItem[];
 }
 interface HeroSlide {
   id: number; album_ref: string; title?: string | null; artist?: string | null;
@@ -452,6 +453,11 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
           <Switch checked={section.is_active}
             onChange={(v) => void act(api.patch(`/api/admin/mobile/sections/${section.id}`, { is_active: v }), 'Updated')}
             label="Active" />
+          {!isArtists && (
+            <Switch checked={section.show_genre}
+              onChange={(v) => void act(api.patch(`/api/admin/mobile/sections/${section.id}`, { show_genre: v }), 'Updated')}
+              label="Genre" />
+          )}
           <button className="mas-icon" title="Move left" disabled={index === 0} onClick={() => onMove(index, -1)}>◀</button>
           <button className="mas-icon" title="Move right" disabled={index === count - 1} onClick={() => onMove(index, 1)}>▶</button>
           <button className="mas-icon mas-icon--danger" title="Delete section" onClick={() => void del()}>🗑</button>
@@ -499,7 +505,10 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
                 onDragEnd={() => { setDragIdx(null); setOverIdx(null); }}>⠿</span>
               <Thumb shape="sq" code={it.item_ref} seed={it.title || it.item_ref} />
               <div style={{ minWidth: 0 }}>
-                <div className="mas-it-title">{it.title || it.item_ref}</div>
+                {/* Mirrors what the app captions the cover with: the primary genre
+                    when this section shows genres, falling back to the album name
+                    for the albums the catalog gives no genre. */}
+                <div className="mas-it-title">{(section.show_genre && it.genre) || it.title || it.item_ref}</div>
                 <div className="mas-it-sub">{it.artist || '—'}</div>
               </div>
               <button className="mm-btn sm" onClick={() => void act(api.del(`/api/admin/mobile/items/${it.id}`), 'Removed')}>Remove</button>

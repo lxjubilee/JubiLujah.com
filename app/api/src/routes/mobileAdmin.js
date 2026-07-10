@@ -41,7 +41,7 @@ router.get('/config', ah(async (req, res) => {
   const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
     query(`SELECT id, key, label, kind, display_order, is_active, is_visible, hero_enabled
              FROM production.mobile_categories ORDER BY display_order, id`),
-    query(`SELECT id, category_id, name, kind, display_order, is_active
+    query(`SELECT id, category_id, name, kind, display_order, is_active, show_genre
              FROM production.mobile_sections ORDER BY display_order, id`),
     query(`SELECT id, section_id, category_id, item_type, item_ref, title, album_refs, display_order, is_active
              FROM production.mobile_category_items WHERE section_id IS NOT NULL ORDER BY display_order, id`),
@@ -72,9 +72,11 @@ router.get('/config', ah(async (req, res) => {
     const al = albumByRef(a.album_ref);
     return { ...a, title: al?.title || a.album_ref, artist: al?.artistName || null };
   });
+  // `genre` is the album's primary genre — what a show_genre section captions its
+  // covers with. Null for artist items and for albums the catalog gives no genre.
   const withItemNames = (rows) => rows.map((it) => {
     const al = it.item_type === 'album' ? albumByRef(it.item_ref) : null;
-    return { ...it, title: it.title || al?.title || it.item_ref, artist: al?.artistName || null };
+    return { ...it, title: it.title || al?.title || it.item_ref, artist: al?.artistName || null, genre: al?.genres?.[0] || null };
   });
   res.json({
     categories: cats.rows.map((c) => ({
@@ -244,19 +246,23 @@ const sectionPatch = z.object({
   name: z.string().trim().min(1).max(80).optional(),
   kind: z.enum(['artists', 'albums']).optional(),
   is_active: z.boolean().optional(),
+  show_genre: z.boolean().optional(),
 });
 router.patch('/sections/:id', validate(sectionPatch), ah(async (req, res) => {
   const sec = await sectionById(req.params.id);
   const fields = [];
   const vals = [];
-  for (const k of ['name', 'kind', 'is_active']) {
+  for (const k of ['name', 'kind', 'is_active', 'show_genre']) {
     if (req.body[k] !== undefined) { vals.push(req.body[k]); fields.push(`${k} = $${vals.length}`); }
   }
   if (!fields.length) return res.json(sec);
   // Switching a section's type clears its items — they no longer match (an album
-  // can't live in an "artists" section, and vice-versa).
+  // can't live in an "artists" section, and vice-versa). show_genre is meaningless
+  // without albums, so it resets too — otherwise it would lie dormant and switch
+  // itself back on if the section ever returned to 'albums'.
   if (req.body.kind && req.body.kind !== sec.kind) {
     await query('DELETE FROM production.mobile_category_items WHERE section_id = $1', [sec.id]);
+    if (req.body.show_genre === undefined) { vals.push(false); fields.push(`show_genre = $${vals.length}`); }
   }
   vals.push(req.auth.user.id);
   vals.push(sec.id);

@@ -64,10 +64,17 @@ function buildMusicTypes(rows, minCount, albumsByType) {
   return out;
 }
 
-function toItem(it, i) {
+// `genreFor` is passed only for album sections with show_genre on; it resolves an
+// album's primary genre. The key is OMITTED when the album has none (the catalog
+// leaves ~12% ungenred), so the app falls back to the album name on its own.
+function toItem(it, i, genreFor) {
   const base = { type: it.item_type, ref: it.item_ref, order: it.display_order ?? i + 1 };
   if (it.item_type === 'collection') {
     return { ...base, title: it.title || 'Collection', albums: it.album_refs || [] };
+  }
+  if (genreFor && it.item_type === 'album') {
+    const g = genreFor(it.item_ref);
+    if (g) base.genre = g;
   }
   return base;
 }
@@ -82,7 +89,7 @@ router.get('/config', ah(async (req, res) => {
              FROM production.mobile_categories
             WHERE is_active
             ORDER BY display_order, id`),
-    query(`SELECT id, category_id, name, kind, display_order
+    query(`SELECT id, category_id, name, kind, display_order, show_genre
              FROM production.mobile_sections
             WHERE is_active
             ORDER BY display_order, id`),
@@ -108,6 +115,8 @@ router.get('/config', ah(async (req, res) => {
   ]);
 
   const minCount = settings.rows[0]?.min_album_count ?? 12;
+  const mfst = getManifest();
+  const genreFor = (ref) => mfst.byAlbumCode.get(String(ref || '').toUpperCase())?.genres?.[0];
   const groupBy = (rows, key) => {
     const m = new Map();
     for (const r of rows) { if (!m.has(r[key])) m.set(r[key], []); m.get(r[key]).push(r); }
@@ -135,10 +144,17 @@ router.get('/config', ah(async (req, res) => {
     // hasn't curated (0 sections) returns no sections, so the mobile app hides it
     // (a page with 0 admin sections must not appear). music_type is unaffected —
     // it carries `musicTypes`, not sections, above.
-    const sectionList = secRows.map((s) => ({
-      name: s.name, kind: s.kind, order: s.display_order,
-      items: (itemsBySection.get(s.id) || []).map(toItem),
-    }));
+    // `showGenre` captions this section's covers with each album's primary genre
+    // instead of its name. Gated on kind — artists have no genre — so a stray flag
+    // on an artists section emits nothing.
+    const sectionList = secRows.map((s) => {
+      const showGenre = s.kind === 'albums' && !!s.show_genre;
+      return {
+        name: s.name, kind: s.kind, order: s.display_order,
+        ...(showGenre ? { showGenre: true } : {}),
+        items: (itemsBySection.get(s.id) || []).map((it, i) => toItem(it, i, showGenre ? genreFor : null)),
+      };
+    });
 
     const out = { key: c.key, label: c.label, kind: c.kind, order: c.display_order, sections: sectionList };
     if (c.hero_enabled) {
@@ -156,7 +172,7 @@ router.get('/config', ah(async (req, res) => {
   });
 
   res.set('Cache-Control', 'public, max-age=60');
-  res.json({ version: 2, generated: getManifest().raw?.generated || null, categories });
+  res.json({ version: 2, generated: mfst.raw?.generated || null, categories });
 }));
 
 export default router;
