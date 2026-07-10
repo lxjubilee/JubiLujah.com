@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { listArtists } from '@/lib/manifest';
-import { personaImage, avatarKey, isPersona } from '@/lib/personas';
+import { personaCardImage, avatarKey, isPersona } from '@/lib/personas';
 import StatusCountsBar from './StatusCountsBar';
 
 interface Props {
@@ -39,7 +39,7 @@ export default function CategoryView({ eyebrow, title, intro, categoryKeys, scop
         <div className="container">
           <div className="persona-grid">
             {artists.map((a) => {
-              const img = personaImage(a.slug);
+              const img = personaCardImage(a.slug);
               return (
                 <Link key={a.slug} href={`/artist/${a.slug}`} className="persona-card">
                   <div className={`avatar ${avatarKey(a.slug)}`}>

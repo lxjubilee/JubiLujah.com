@@ -12,3 +12,6 @@ out/
 Thumbs.db
 *.bak
 *.bak-*
+
+# Large artwork masters (persona ZIPs) — live on J:/CDN, exceed GitHub's 100MB limit
+artwork/

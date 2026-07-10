@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { personaRows } from '@/lib/manifest';
 import { hasCover } from '@/lib/covers';
-import { isPersona } from '@/lib/personas';
+import { isPersona, INSPIRE_ORDER } from '@/lib/personas';
 import { albumRating } from '@/lib/album-ratings';
 import MediaRow, { TileData } from '@/components/MediaRow';
 
@@ -12,24 +12,11 @@ export const metadata: Metadata = {
   description: 'Twelve rated personas singing Christ-centered worship across every culture and craft.',
 };
 
-// Persona sections are listed in birth order. Gabriel Inspire is excluded.
-const ORDER = [
-  'jubilee-inspire',
-  'melody-inspire',
-  'zariah-inspire',
-  'elias-inspire',
-  'eliana-inspire',
-  'caleb-inspire',
-  'imani-inspire',
-  'zev-inspire',
-  'amir-inspire',
-  'nova-inspire',
-  'santiago-inspire',
-  'tahoma-inspire',
-];
+// Persona sections are listed in birth order (INSPIRE_ORDER, shared with the Home
+// "Featured Artists" strip). Gabriel Inspire is excluded.
 const rank = (slug: string) => {
-  const i = ORDER.indexOf(slug);
-  return i === -1 ? ORDER.length : i;
+  const i = INSPIRE_ORDER.indexOf(slug);
+  return i === -1 ? INSPIRE_ORDER.length : i;
 };
 
 // Flagship album pinned to the front of its persona row so it is the very first
@@ -38,7 +25,7 @@ const FEATURED_ALBUM_CODE = 'JEIM1069EN';
 
 export default function InspirePage() {
   const rows = personaRows()
-    .filter((r) => r.category === 'inspire' && isPersona(r.slug) && r.albums.length > 0 && ORDER.includes(r.slug))
+    .filter((r) => r.category === 'inspire' && isPersona(r.slug) && r.albums.length > 0 && INSPIRE_ORDER.includes(r.slug))
     .sort((a, b) => rank(a.slug) - rank(b.slug));
 
   return (

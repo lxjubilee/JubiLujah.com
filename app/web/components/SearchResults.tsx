@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from './AuthProvider';
 import { usePlayer } from '@/stores/player';
-import { personaImage, avatarKey } from '@/lib/personas';
+import { personaCardImage, avatarKey } from '@/lib/personas';
 import { listMyPlaylists, type UserPlaylist } from '@/lib/playlists';
 import { useT } from '@/lib/useT';
 import { albumBcp47 } from '@/lib/languages';
@@ -119,7 +119,7 @@ export default function SearchResults({ data }: { data: SR }) {
 
   const ArtistCard = ({ a }: { a: SR['artists'][number] }) => (
     <Link href={`/artist/${a.slug}`} className="sr-card sr-card--artist">
-      <div className={`sr-card-art sr-card-art--round ${avatarKey(a.slug)}`}><Cover src={personaImage(a.slug)} alt={a.name} round /></div>
+      <div className={`sr-card-art sr-card-art--round ${avatarKey(a.slug)}`}><Cover src={personaCardImage(a.slug)} alt={a.name} round /></div>
       <div className="sr-card-title">{a.name}</div>
       <div className="sr-card-sub">{a.role || t('kind.artist')}</div>
     </Link>
@@ -147,7 +147,7 @@ export default function SearchResults({ data }: { data: SR }) {
       const a = topResult.v;
       return (
         <Link href={`/artist/${a.slug}`} className="sr-top-card">
-          <div className={`sr-top-art sr-top-art--round ${avatarKey(a.slug)}`}><Cover src={personaImage(a.slug)} alt={a.name} round /></div>
+          <div className={`sr-top-art sr-top-art--round ${avatarKey(a.slug)}`}><Cover src={personaCardImage(a.slug)} alt={a.name} round /></div>
           <div className="sr-top-name">{a.name}</div>
           <div className="sr-top-kind">{a.role || t('kind.artist')}</div>
         </Link>

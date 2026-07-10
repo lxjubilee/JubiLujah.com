@@ -8,6 +8,7 @@ import { albumLanguage, LANG_COOKIE, DEFAULT_LANG, isSupportedLang } from '@/lib
 import { LangProvider } from '@/lib/useLang';
 import MediaRow, { TileData } from '@/components/MediaRow';
 import LanguageHome from '@/components/LanguageHome';
+import FeaturedArtists from '@/components/FeaturedArtists';
 
 // Dynamic (not ISR): we read the jv_lang cookie ON THE SERVER so the first render
 // is already in the selected language — no flash of the English Home before the
@@ -125,10 +126,11 @@ export default function HomePage() {
           {THEMES.filter((t) => buckets[t.key].length > 0).map((t) => (
             <MediaRow key={t.key} title={t.label} items={buckets[t.key]} />
           ))}
-          {/* Always last: the Family-Friendly Popular Music catch-all. */}
+          {/* The Family-Friendly Popular Music catch-all, then the Featured Artists strip last. */}
           {buckets[FAMILY_POPULAR.key].length > 0 && (
             <MediaRow key={FAMILY_POPULAR.key} title={FAMILY_POPULAR.label} items={buckets[FAMILY_POPULAR.key]} />
           )}
+          <FeaturedArtists />
         </div>
       </LanguageHome>
     </LangProvider>

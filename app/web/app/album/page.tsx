@@ -28,17 +28,20 @@ export function generateMetadata({ searchParams }: { searchParams: { c?: string;
 }
 
 // Hero (x-hero) background: a wide banner from /public/images/hero banner/,
-// chosen per persona (e.g. "zariah-inspire" -> slide-Zariah.jpg). The available
+// chosen per persona (e.g. "zariah-inspire" -> Slide-Zariah.webp). The available
 // banners are detected from the folder at startup, keyed by the persona's first
-// name (the avatarKey), so dropping a new `slide-<Name>.jpg` in there wires it
-// up automatically — no code edit needed. A persona with no matching file falls
-// back to the Jubilee banner.
+// name (the avatarKey), so dropping a new `Slide-<Name>.<ext>` in there wires it
+// up automatically. The match is extension-agnostic (webp/jpg/png/avif), so
+// swapping image formats needs no code edit. A persona with no matching file
+// falls back to the default Inspire banner. A couple of slides are filed under a
+// different base name than the avatarKey (Jubilee -> Slide-Inspire, Eliana ->
+// Slide-Elina); HERO_ALIAS bridges those.
 const HERO_DIR = path.join(process.cwd(), 'public', 'images', 'hero banner');
 const HERO_BANNERS: Map<string, string> = (() => {
   const m = new Map<string, string>();
   try {
     for (const f of fs.readdirSync(HERO_DIR)) {
-      const match = /^slide-(.+)\.jpg$/i.exec(f);
+      const match = /^slide-(.+)\.(?:webp|jpe?g|png|avif)$/i.exec(f);
       if (match) m.set(match[1].toLowerCase(), f);
     }
   } catch {
@@ -46,9 +49,14 @@ const HERO_BANNERS: Map<string, string> = (() => {
   }
   return m;
 })();
+const HERO_ALIAS: Record<string, string> = { jubilee: 'inspire', eliana: 'elina' };
 function heroImage(slug: string): string {
   const key = avatarKey(slug);
-  const file = HERO_BANNERS.get(key) || HERO_BANNERS.get('jubilee') || 'slide-Jubilee.jpg';
+  const file =
+    HERO_BANNERS.get(key) ||
+    HERO_BANNERS.get(HERO_ALIAS[key]) ||
+    HERO_BANNERS.get('inspire') ||
+    'Slide-Inspire.webp';
   return `/images/hero%20banner/${encodeURIComponent(file)}`;
 }
 

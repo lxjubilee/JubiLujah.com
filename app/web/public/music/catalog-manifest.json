@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-07T04:30:22.544Z",
+  "generated": "2026-07-07T22:35:43.217Z",
   "totalArtists": 33,
   "totalAlbums": 982,
-  "totalPlayableAlbums": 403,
-  "totalPlayableTracks": 5054,
+  "totalPlayableAlbums": 411,
+  "totalPlayableTracks": 5150,
   "categories": [
     {
       "key": "inspire",
@@ -158,7 +158,11 @@
               "path": "albums/inspire/amir-inspire/AMIM1004ID-pulang-ke-rumah",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Arabic Praise",
+                "Worship Ballad"
+              ]
             },
             {
               "code": "AMIM1005EN",
@@ -304,6 +308,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1008TR-eve-donus/tracks/12 Sonunda Evde.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Gospel"
               ]
             },
             {
@@ -424,6 +432,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1011AR-maqam-al-qalb/tracks/12 عائِدٌ إِلَيْكَ.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Worship Ballad"
               ]
             },
             {
@@ -459,7 +471,11 @@
               "path": "albums/inspire/amir-inspire/AMIM1012HI-taron-ka-parda",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Arabic Praise",
+                "Worship Ballad"
+              ]
             },
             {
               "code": "AMIM1013EN",
@@ -605,6 +621,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1016TR-ekmek-ve-selam/tracks/12 Çarşıda Hallelujah.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Praise & Worship"
               ]
             },
             {
@@ -692,7 +712,11 @@
               "path": "albums/inspire/amir-inspire/AMIM1022ID-segala-milikku-milik-mu",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Arabic Praise",
+                "Folk"
+              ]
             },
             {
               "code": "AMIM1023EN",
@@ -805,7 +829,11 @@
               "path": "albums/inspire/amir-inspire/AMIM1030HI-meri-aatma-teri-pyaasi",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Arabic Praise",
+                "Pop"
+              ]
             },
             {
               "code": "AMIM1031EN",
@@ -951,6 +979,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1034RO-alergand-acasa-la-tatal/tracks/12 Rămâi Aproape De Casă.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Praise & Worship"
               ]
             },
             {
@@ -1045,6 +1077,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1035AR-al-ism-fawqa-kulli-ism/tracks/12 يَسُوعُ، الاسْمُ إِلى الأَبَدِ (بَرَكَةُ خِتَامٍ).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Praise & Worship"
               ]
             },
             {
@@ -1165,6 +1201,10 @@
                   "url": "albums/inspire/amir-inspire/AMIM1036RO-noua-in-fiecare-dimineata/tracks/12 Nouă Iar în Zori.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Arabic Praise",
+                "Worship Ballad"
               ]
             },
             {
@@ -1993,7 +2033,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1004HR-pozvan-i-izabran",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Folk",
+                "Cinematic"
+              ]
             },
             {
               "code": "CAIM1005EN",
@@ -2283,6 +2327,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1006TL-basbas-ng-pamilya/tracks/12 Sumusulong ang Basbas.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Folk",
+                "Gospel Soul"
               ]
             },
             {
@@ -2475,6 +2523,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1007TL-buong-bilog/tracks/12 Buong Bilog Magpakailanman (Benediction Finale).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel Soul",
+                "Cinematic"
               ]
             },
             {
@@ -2569,6 +2621,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1008DE-gnade-erloest/tracks/12 Gnade für immer.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel Soul",
+                "Cinematic"
               ]
             },
             {
@@ -2774,7 +2830,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1009UR-zakhmon-ki-shifa",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel Soul",
+                "Gospel"
+              ]
             },
             {
               "code": "CAIM1009VI",
@@ -2868,6 +2928,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1009VI-chua-lanh-vet-thuong/tracks/12 Con Đường Về Nhà.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel Soul",
+                "Contemporary"
               ]
             },
             {
@@ -3060,6 +3124,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1010ZH-yuan-ni-guo-jiang-lin/tracks/12 直到那日.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Gospel Soul"
               ]
             },
             {
@@ -3265,7 +3333,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1012MS-perlindungan",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Pop"
+              ]
             },
             {
               "code": "CAIM1012VI",
@@ -3359,6 +3431,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1012VI-noi-nuong-nau/tracks/12 Nơi Nương Náu Đời Đời.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Cinematic",
+                "Pop"
               ]
             },
             {
@@ -3564,7 +3640,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1014IT-speranza-di-risurrezione",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Folk"
+              ]
             },
             {
               "code": "CAIM1014RO",
@@ -3658,6 +3738,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1014RO-nadejdea-invierii/tracks/12 Ridică-te.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Folk"
               ]
             },
             {
@@ -3850,6 +3934,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1015IT-domenica-di-risurrezione/tracks/12 Perché Egli Vive.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
               ]
             },
             {
@@ -3859,7 +3947,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1015TA-uyirttezhuthal-nyayiru",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "CAIM1016AF",
@@ -3868,7 +3960,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1016AF-oorgawe",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Worship Ballad",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "CAIM1016DA",
@@ -3877,7 +3973,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1016DA-overgivelse",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Worship Ballad",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "CAIM1016EN",
@@ -3899,7 +3999,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1017BN-ontorbhuktir-sushomachar",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "CAIM1017EN",
@@ -4091,6 +4195,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1017PT-o-evangelho-do-pertencer/tracks/12 A Família Não Pára de Cantar.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Pop"
               ]
             },
             {
@@ -4492,7 +4600,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1021PT-celebra-jesus-ja",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Latin Pop",
+                "Pop"
+              ]
             },
             {
               "code": "CAIM1022EN",
@@ -5187,7 +5299,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1029AF-geen-groter-liefde",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel Soul",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "CAIM1029EN",
@@ -5294,7 +5410,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1029HR-nema-vece-ljubavi",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel Soul",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "CAIM1030EN",
@@ -5401,7 +5521,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1030FA-mahbub-ta-abad",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "CAIM1030PL",
@@ -5495,6 +5619,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1030PL-kochani-na-wieki/tracks/12_ Kotwica Trzymała (Dom, Kochani Na Wieki).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Gospel Soul"
               ]
             },
             {
@@ -5517,7 +5645,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1031UR-wahid-naam",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Contemporary"
+              ]
             },
             {
               "code": "CAIM1031ZH",
@@ -5611,6 +5743,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1031ZH-wei-yi-de-ming/tracks/12 超乎万名之上.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Contemporary"
               ]
             },
             {
@@ -5705,6 +5841,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1032DE-alte-worte-sprechen-noch/tracks/12 Alte Worte sprechen noch (Finale).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Contemporary",
+                "Folk"
               ]
             },
             {
@@ -5727,7 +5867,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1032LA-verba-antiqua-adhuc-loquuntur",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Folk"
+              ]
             },
             {
               "code": "CAIM1033EN",
@@ -5834,6 +5978,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1033FR-plus-que-la-religion/tracks/12 Plus Que La Religion (Reprise — Sealed).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Contemporary",
+                "Gospel Soul"
               ]
             },
             {
@@ -5843,7 +5991,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1033YUE-chiu-yuet-jung-gaau",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "CAIM1034EN",
@@ -5878,16 +6030,109 @@
               "path": "albums/inspire/caleb-inspire/CAIM1035FA-feyzi-ke-mara-yaft",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Contemporary"
+              ]
             },
             {
               "code": "CAIM1035FR",
               "title": "La Grâce Qui M'a Trouvé",
               "folder": "CAIM1035FR-la-grace-qui-ma-trouve",
               "path": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Fatigué d'Essayer",
+                  "file": "01 Fatigué d'Essayer.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/01 Fatigué d'Essayer.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "La Cage Que J'ai Bâtie",
+                  "file": "02 La Cage Que J'ai Bâtie.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/02 La Cage Que J'ai Bâtie.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Les Mains Vides",
+                  "file": "03 Les Mains Vides.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/03 Les Mains Vides.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Là Où le Péché Abonde",
+                  "file": "04 Là Où le Péché Abonde.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/04 Là Où le Péché Abonde.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Le Jour Où la Grâce Est Entrée",
+                  "file": "05 Le Jour Où la Grâce Est Entrée.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/05 Le Jour Où la Grâce Est Entrée.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Bien Plus Encore",
+                  "file": "06 Bien Plus Encore.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/06 Bien Plus Encore.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "La Grâce M'Enseigne",
+                  "file": "07 La Grâce M'Enseigne.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/07 La Grâce M'Enseigne.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Vraiment Libre",
+                  "file": "08 Vraiment Libre.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/08 Vraiment Libre.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Avec Assurance au Trône",
+                  "file": "09 Avec Assurance au Trône.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/09 Avec Assurance au Trône.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Fort dans la Faiblesse",
+                  "file": "10 Fort dans la Faiblesse.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/10 Fort dans la Faiblesse.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "La Grâce Me Fait Grandir",
+                  "file": "11 La Grâce Me Fait Grandir.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/11 La Grâce Me Fait Grandir.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "La Grâce Qui M'a Trouvé",
+                  "file": "12 La Grâce Qui M'a Trouvé.mp3",
+                  "url": "albums/inspire/caleb-inspire/CAIM1035FR-la-grace-qui-ma-trouve/tracks/12 La Grâce Qui M'a Trouvé.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Gospel",
+                "Contemporary"
+              ]
             },
             {
               "code": "CAIM1035RO",
@@ -5981,6 +6226,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1035RO-harul-care-m-a-gasit/tracks/12 Harul Care M-a Găsit.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Contemporary"
               ]
             },
             {
@@ -6088,6 +6337,10 @@
                   "url": "albums/inspire/caleb-inspire/CAIM1036PL-umilowany/tracks/12 Umiłowany.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Contemporary",
+                "Praise & Worship"
               ]
             },
             {
@@ -6110,7 +6363,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1038DA-fred-bag-stormen",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "CAIM1038EN",
@@ -6132,7 +6389,11 @@
               "path": "albums/inspire/caleb-inspire/CAIM1038YUE-fung-bou-zi-soeng-dik-ping-on",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "CAIM1039EN",
@@ -6719,6 +6980,10 @@
                   "url": "albums/inspire/eliana-inspire/EAIM1001RO-singurul-nume-de-care-vei-avea-nevoie/tracks/12 Singurul Nume de Care Vei Avea Nevoie.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Country",
+                "Bluegrass"
               ]
             },
             {
@@ -8978,6 +9243,10 @@
                   "url": "albums/inspire/eliana-inspire/EAIM1024RO-lasa-le-la-cruce/tracks/12 Eliberat la Piciorul Crucii.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Country",
+                "Honky-Tonk"
               ]
             },
             {
@@ -13144,9 +13413,98 @@
               "title": "Harul M-a Chemat Acasă",
               "folder": "ELIM1028RO-harul-m-a-chemat-acasa",
               "path": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Harul M-a Chemat Acasă",
+                  "file": "01 Harul M-a Chemat Acasă.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/01 Harul M-a Chemat Acasă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Eram Pierdut",
+                  "file": "02 Eram Pierdut.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/02 Eram Pierdut.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Mâini Sus pe Drumul de Piatră",
+                  "file": "03 Mâini Sus pe Drumul de Piatră.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/03 Mâini Sus pe Drumul de Piatră.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Moştenirea în Buzunar",
+                  "file": "04 Moştenirea în Buzunar.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/04 Moştenirea în Buzunar.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Am Risipit Tot",
+                  "file": "05 Am Risipit Tot.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/05 Am Risipit Tot.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Oglinda din Cocină",
+                  "file": "06 Oglinda din Cocină.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/06 Oglinda din Cocină.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "A Alergat Când Eram Departe",
+                  "file": "07 A Alergat Când Eram Departe.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/07 A Alergat Când Eram Departe.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Haina şi Inelul pe Drum",
+                  "file": "08 Haina şi Inelul pe Drum.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/08 Haina şi Inelul pe Drum.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Mergând Ultima Milă",
+                  "file": "09 Mergând Ultima Milă.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/09 Mergând Ultima Milă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Întâia Privire a Pridvorului",
+                  "file": "10 Întâia Privire a Pridvorului.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/10 Întâia Privire a Pridvorului.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Fratele Vine Acasă în Seara Asta",
+                  "file": "11 Fratele Vine Acasă în Seara Asta.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/11 Fratele Vine Acasă în Seara Asta.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Haină şi Inel şi Ospăţ",
+                  "file": "12 Haină şi Inel şi Ospăţ.mp3",
+                  "url": "albums/inspire/elias-inspire/ELIM1028RO-harul-m-a-chemat-acasa/tracks/12 Haină şi Inel şi Ospăţ.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Bluegrass",
+                "Worship Ballad"
+              ]
             },
             {
               "code": "ELIM1029EN",
@@ -13429,6 +13787,10 @@
                   "url": "albums/inspire/elias-inspire/ELIM1030RO-prin-valea-umbrei/tracks/12 Dimineață Pe Țărmul Celălalt.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Worship Ballad",
+                "Bluegrass"
               ]
             },
             {
@@ -18336,6 +18698,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1034KO-naege-imhan-gireumbueusim/tracks/12 가는 길 위해 기름부음받아.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Pentecostal Shout",
+                "Gospel"
               ]
             },
             {
@@ -18345,7 +18711,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1034SW-upako-uko-juu-yangu",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pentecostal Shout",
+                "Gospel"
+              ]
             },
             {
               "code": "IMIM1035EN",
@@ -18452,7 +18822,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1035KO-gido-ro-ttulhko",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pentecostal Shout",
+                "Gospel"
+              ]
             },
             {
               "code": "IMIM1036EN",
@@ -18644,6 +19018,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1036RO-el-tot-deschide-calea/tracks/12 El Tot Deschide Calea (Mereu).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Pentecostal Shout",
+                "Gospel"
               ]
             },
             {
@@ -18653,7 +19031,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1036SW-bado-mfungua-njia",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pentecostal Shout",
+                "Gospel"
+              ]
             },
             {
               "code": "IMIM1037EN",
@@ -18845,6 +19227,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1037RO-bucuria-vine-dimineata/tracks/12 Dimineața A Răzbătut.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Honky-Tonk"
               ]
             },
             {
@@ -18854,7 +19240,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1037TA-kaalaiyil-magizhchi-varugiradu",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Honky-Tonk"
+              ]
             },
             {
               "code": "IMIM1038EN",
@@ -19255,7 +19645,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1043EN-chains-hit-the-floor",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Reggae",
+                "Hip-Hop"
+              ]
             },
             {
               "code": "IMIM1044EN",
@@ -19349,6 +19743,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1044EN-pit-to-the-party/tracks/12 Dance Out the Door.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hip-Hop",
+                "Reggae"
               ]
             },
             {
@@ -19443,6 +19841,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1045EN-streets-of-gold-jump-up/tracks/12 Endless Jubilee.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hip-Hop",
+                "Caribbean Praise"
               ]
             },
             {
@@ -19452,7 +19854,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1046EN-he-ran-the-whole-way",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "IMIM1047EN",
@@ -19546,6 +19952,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1047EN-ashes-into-gold/tracks/12 Dance in the Gold.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Caribbean Praise",
+                "Afrobeat"
               ]
             },
             {
@@ -19555,7 +19965,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1048EN-throne-dont-shake",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Caribbean Praise",
+                "Hip-Hop"
+              ]
             },
             {
               "code": "IMIM1049EN",
@@ -19564,7 +19978,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1049EN-one-table-wide",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Caribbean Praise"
+              ]
             },
             {
               "code": "IMIM1050EN",
@@ -19573,7 +19991,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1050EN-grateful-anyway",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Caribbean Praise",
+                "Hip-Hop"
+              ]
             },
             {
               "code": "IMIM1051EN",
@@ -19667,6 +20089,10 @@
                   "url": "albums/inspire/imani-inspire/IMIM1051EN-any-day-now/tracks/12_ The King Returns.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hip-Hop",
+                "Reggae"
               ]
             },
             {
@@ -19676,7 +20102,11 @@
               "path": "albums/inspire/imani-inspire/IMIM1052EN-made-on-purpose",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Caribbean Praise",
+                "Latin Pop"
+              ]
             }
           ],
           "genres": [
@@ -20964,7 +21394,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1013HU-gyasz-es-vagyakozas",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Worship Ballad",
+                "Contemporary"
+              ]
             },
             {
               "code": "JEIM1014EN",
@@ -21071,7 +21505,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1015CS-milost-bez-zkousky",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Worship Ballad"
+              ]
             },
             {
               "code": "JEIM1015EN",
@@ -21367,7 +21805,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1017HU-kerdesek-a-tuzbe",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Cinematic"
+              ]
             },
             {
               "code": "JEIM1018CS",
@@ -21376,7 +21818,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1018CS-pisen-spasy",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Cinematic"
+              ]
             },
             {
               "code": "JEIM1018EN",
@@ -21679,7 +22125,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1021BG-spasitelyat-caruva",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Gospel"
+              ]
             },
             {
               "code": "JEIM1021EN",
@@ -21786,7 +22236,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1022EL-doxa-stin-aithousa-tou-thronou",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Gospel"
+              ]
             },
             {
               "code": "JEIM1022EN",
@@ -21978,6 +22432,10 @@
                   "url": "albums/inspire/jubilee-inspire/JEIM1022RU-slava-tronnogo-zala/tracks/12 Слава и честь вовек.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Cinematic",
+                "Gospel"
               ]
             },
             {
@@ -22085,7 +22543,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1024BG-isus-vazkrasva",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Contemporary"
+              ]
             },
             {
               "code": "JEIM1024EL",
@@ -22094,7 +22556,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1024EL-o-iisous-anastainetai",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Contemporary"
+              ]
             },
             {
               "code": "JEIM1024EN",
@@ -22985,7 +23451,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1032LA-coronatio-caeli",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Gospel"
+              ]
             },
             {
               "code": "JEIM1032RU",
@@ -23079,6 +23549,10 @@
                   "url": "albums/inspire/jubilee-inspire/JEIM1032RU-venchanie-nebes/tracks/12 Увенчан навек.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Cinematic",
+                "Gospel"
               ]
             },
             {
@@ -26538,6 +27012,10 @@
                   "url": "albums/inspire/jubilee-inspire/JEIM1069RO-jubilujah/tracks/12 Jubilujah Pe Veci.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Gospel"
               ]
             },
             {
@@ -27021,7 +27499,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1072EN-peace-got-loud",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "JEIM1073EN",
@@ -27030,7 +27512,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1073EN-named-before-the-likes",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "JEIM1074EN",
@@ -27039,7 +27525,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1074EN-never-a-solo",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Pop"
+              ]
             },
             {
               "code": "JEIM1075EN",
@@ -27048,7 +27538,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1075EN-kick-off-your-shoes",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Celtic"
+              ]
             },
             {
               "code": "JEIM1076EN",
@@ -27142,6 +27636,10 @@
                   "url": "albums/inspire/jubilee-inspire/JEIM1076EN-questions-still-clap/tracks/12 Louder Than the Doubt.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Rock"
               ]
             },
             {
@@ -27236,6 +27734,10 @@
                   "url": "albums/inspire/jubilee-inspire/JEIM1077EN-shame-missed-the-party/tracks/12 Welcome Home.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Gospel"
               ]
             },
             {
@@ -27245,7 +27747,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1078EN-on-purpose-on-beat",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Rock"
+              ]
             },
             {
               "code": "JEIM1079EN",
@@ -27254,7 +27760,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1079EN-realest-thing-in-the-room",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Folk"
+              ]
             },
             {
               "code": "JEIM1080EN",
@@ -27263,7 +27773,11 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1080EN-forever-on-repeat",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Gospel"
+              ]
             },
             {
               "code": "JEIM1081EN",
@@ -27272,12 +27786,16 @@
               "path": "albums/inspire/jubilee-inspire/JEIM1081EN-midnight-confetti",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
+              ]
             }
           ],
           "genres": [
             "Praise & Worship",
-            "Contemporary"
+            "Gospel"
           ]
         },
         {
@@ -28313,7 +28831,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1005UK-ponesu-yih-dodomu",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Folk"
+              ]
             },
             {
               "code": "NVIM1006EN",
@@ -28516,9 +29038,98 @@
               "title": "Hela igen",
               "folder": "NVIM1007SV-hela-igen",
               "path": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Den långa vägen hem",
+                  "file": "01 Den långa vägen hem.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/01 Den långa vägen hem.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Jag lägger ner bitarna",
+                  "file": "02 Jag lägger ner bitarna.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/02 Jag lägger ner bitarna.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Spegeln ljuger inte mer",
+                  "file": "03 Spegeln ljuger inte mer.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/03 Spegeln ljuger inte mer.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Den dag jag kunde skratta igen",
+                  "file": "04 Den dag jag kunde skratta igen.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/04 Den dag jag kunde skratta igen.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Samtalet jag var redo för",
+                  "file": "05 Samtalet jag var redo för.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/05 Samtalet jag var redo för.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Att nämna det som nästan tog mig",
+                  "file": "06 Att nämna det som nästan tog mig.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/06 Att nämna det som nästan tog mig.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Förbi det gamla huset",
+                  "file": "07 Förbi det gamla huset.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/07 Förbi det gamla huset.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Sången jag slutat sjunga",
+                  "file": "08 Sången jag slutat sjunga.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/08 Sången jag slutat sjunga.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Han gottgör åren",
+                  "file": "09 Han gottgör åren.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/09 Han gottgör åren.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Hela igen",
+                  "file": "10 Hela igen.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/10 Hela igen.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Berättelsen jag får berätta",
+                  "file": "11 Berättelsen jag får berätta.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/11 Berättelsen jag får berätta.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Hemkomst",
+                  "file": "12 Hemkomst.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1007SV-hela-igen/tracks/12 Hemkomst.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Gospel",
+                "Pop"
+              ]
             },
             {
               "code": "NVIM1008EN",
@@ -29115,7 +29726,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1013FI-kuuntelun-paikka",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Folk"
+              ]
             },
             {
               "code": "NVIM1013JA",
@@ -29202,6 +29817,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1013JA-kiku-basho/tracks/12 聴く場所.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Pop",
+                "Folk"
               ]
             },
             {
@@ -29688,6 +30307,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1017JA-usuki-basho/tracks/12 天が降りてくる.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Celtic",
+                "Folk"
               ]
             },
             {
@@ -29697,7 +30320,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1017NO-tynne-steder",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Celtic",
+                "Folk"
+              ]
             },
             {
               "code": "NVIM1018EN",
@@ -30294,7 +30921,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1024BN-amar-atmar-meshpalok",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Celtic"
+              ]
             },
             {
               "code": "NVIM1024EN",
@@ -30486,6 +31117,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1024NL-herder-van-mijn-ziel/tracks/12 De Kudde Zingt Naar Huis.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Contemporary",
+                "Celtic"
               ]
             },
             {
@@ -30580,6 +31215,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1024RO-pastorul-sufletului-meu/tracks/12 Turma Cântă Spre Casă.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Celtic",
+                "Contemporary"
               ]
             },
             {
@@ -30785,7 +31424,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1026MS-raja-damai",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Contemporary"
+              ]
             },
             {
               "code": "NVIM1026TH",
@@ -30879,6 +31522,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1026TH-ong-santi-rat/tracks/12 เราพาองค์สันติราชไป.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Contemporary"
               ]
             },
             {
@@ -31182,7 +31829,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1029UK-zcilennya-vertaietsya-dodomu",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Contemporary",
+                "Bluegrass"
+              ]
             },
             {
               "code": "NVIM1030EN",
@@ -31387,6 +32038,10 @@
                   "url": "albums/inspire/nova-inspire/NVIM1031TH-saeng-sawang-talu-khwam-muet/tracks/12 แสงชนะเสมอมา.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Electronic",
+                "Praise & Worship"
               ]
             },
             {
@@ -31460,16 +32115,109 @@
               "path": "albums/inspire/nova-inspire/NVIM1036NO-din-veldighet",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic",
+                "Cinematic"
+              ]
             },
             {
               "code": "NVIM1036SV",
               "title": "Din väldighet",
               "folder": "NVIM1036SV-din-valdighet",
               "path": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Vad är en människa",
+                  "file": "01 Vad är en människa.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/01 Vad är en människa.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Du vet var stjärnas namn",
+                  "file": "02 Du vet var stjärnas namn.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/02 Du vet var stjärnas namn.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Himlarna förkunnar",
+                  "file": "03 Himlarna förkunnar.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/03 Himlarna förkunnar.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Mindre än ett stoft och älskad",
+                  "file": "04 Mindre än ett stoft och älskad.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/04 Mindre än ett stoft och älskad.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Krona av härlighet och ära",
+                  "file": "05 Krona av härlighet och ära.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/05 Krona av härlighet och ära.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Galaxernas Gud",
+                  "file": "06 Galaxernas Gud.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/06 Galaxernas Gud.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Orion och Plejaderna",
+                  "file": "07 Orion och Plejaderna.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/07 Orion och Plejaderna.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Under den vida himlen",
+                  "file": "08 Under den vida himlen.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/08 Under den vida himlen.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Du satte gränser för havet",
+                  "file": "09 Du satte gränser för havet.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/09 Du satte gränser för havet.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Bortom det synliga",
+                  "file": "10 Bortom det synliga.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/10 Bortom det synliga.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Skaparen böjer sig ned",
+                  "file": "11 Skaparen böjer sig ned.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/11 Skaparen böjer sig ned.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Väldighet",
+                  "file": "12 Väldighet.mp3",
+                  "url": "albums/inspire/nova-inspire/NVIM1036SV-din-valdighet/tracks/12 Väldighet.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Electronic",
+                "Cinematic"
+              ]
             },
             {
               "code": "NVIM1037EN",
@@ -31503,7 +32251,10 @@
               "path": "albums/inspire/nova-inspire/NVIM1038FI-ole-hiljaa-ja-tieda",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic"
+              ]
             },
             {
               "code": "NVIM1038NL",
@@ -31597,6 +32348,9 @@
                   "url": "albums/inspire/nova-inspire/NVIM1038NL-wees-stil-en-weet/tracks/12 Wees Stil En Weet.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Electronic"
               ]
             },
             {
@@ -31691,6 +32445,9 @@
                   "url": "albums/inspire/nova-inspire/NVIM1038RO-stai-linistit-si-cunoaste/tracks/12 Stai Liniștit și Cunoaște.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Electronic"
               ]
             },
             {
@@ -31854,7 +32611,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1051EN-peace-in-the-static",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Cinematic",
+                "Electronic"
+              ]
             },
             {
               "code": "NVIM1052EN",
@@ -31863,7 +32624,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1052EN-named-in-neon",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic",
+                "Pop"
+              ]
             },
             {
               "code": "NVIM1053EN",
@@ -31872,7 +32637,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1053EN-you-walk-me-home",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic",
+                "Celtic"
+              ]
             },
             {
               "code": "NVIM1054EN",
@@ -31881,7 +32650,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1054EN-low-power-mode",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic",
+                "Cinematic"
+              ]
             },
             {
               "code": "NVIM1055EN",
@@ -31890,7 +32663,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1055EN-i-ask-you-stay",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Electronic",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "NVIM1056EN",
@@ -31899,7 +32676,11 @@
               "path": "albums/inspire/nova-inspire/NVIM1056EN-caught-mid-fall",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Electronic"
+              ]
             },
             {
               "code": "NVIM1057EN",
@@ -31908,12 +32689,16 @@
               "path": "albums/inspire/nova-inspire/NVIM1057EN-wired-on-purpose",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Praise & Worship",
+                "Synth-Pop"
+              ]
             }
           ],
           "genres": [
-            "Cinematic",
-            "Folk"
+            "Electronic",
+            "Cinematic"
           ]
         },
         {
@@ -34743,6 +35528,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1005BR-coracao-latino-bate-por-ti/tracks/12 Para Sempre Para Ti (Forever for You).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Latin"
               ]
             },
             {
@@ -36416,92 +37205,92 @@
               "title": "Solo Tú, Jesús (Only You)",
               "folder": "SAIM1022EN-solo-tu-jesus",
               "path": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus",
-              "playable": 0,
+              "playable": 12,
               "trackCount": 12,
               "tracks": [
                 {
                   "n": 1,
-                  "title": "Solo Tú, Jesús (Only You)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Solo Tú, Jesús",
+                  "file": "01 Solo Tú, Jesús.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/01 Solo Tú, Jesús.mp3",
+                  "audio": true
                 },
                 {
                   "n": 2,
-                  "title": "Camino, Verdad, Vida (Way, Truth, Life)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Camino, Verdad, Vida",
+                  "file": "02 Camino, Verdad, Vida.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/02 Camino, Verdad, Vida.mp3",
+                  "audio": true
                 },
                 {
                   "n": 3,
-                  "title": "En el Barrio Tu Nombre (Your Name in the Barrio)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "En el Barrio Tu Nombre",
+                  "file": "03 En el Barrio Tu Nombre.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/03 En el Barrio Tu Nombre.mp3",
+                  "audio": true
                 },
                 {
                   "n": 4,
-                  "title": "La Puerta del Pastor (The Shepherd's Door)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "La Puerta del Pastor",
+                  "file": "04 La Puerta del Pastor.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/04 La Puerta del Pastor.mp3",
+                  "audio": true
                 },
                 {
                   "n": 5,
-                  "title": "Una Sola Puerta (One Door Only)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Una Sola Puerta",
+                  "file": "05 Una Sola Puerta.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/05 Una Sola Puerta.mp3",
+                  "audio": true
                 },
                 {
                   "n": 6,
-                  "title": "Reyes Que Caen (Kings That Fall)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Reyes Que Caen",
+                  "file": "06 Reyes Que Caen.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/06 Reyes Que Caen.mp3",
+                  "audio": true
                 },
                 {
                   "n": 7,
-                  "title": "Altar en la Calle (Altar in the Street)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Altar en la Calle",
+                  "file": "07 Altar en la Calle.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/07 Altar en la Calle.mp3",
+                  "audio": true
                 },
                 {
                   "n": 8,
-                  "title": "Nombre Sobre Todo Nombre (Name Above All Names)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Nombre Sobre Todo Nombre",
+                  "file": "08 Nombre Sobre Todo Nombre.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/08 Nombre Sobre Todo Nombre.mp3",
+                  "audio": true
                 },
                 {
                   "n": 9,
-                  "title": "Solo Tú Me Conoces (Only You Know Me)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Solo Tú Me Conoces",
+                  "file": "09 Solo Tú Me Conoces.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/09 Solo Tú Me Conoces.mp3",
+                  "audio": true
                 },
                 {
                   "n": 10,
-                  "title": "Lleva Tu Nombre Conmigo (Carry Your Name)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Lleva Tu Nombre Conmigo",
+                  "file": "10 Lleva Tu Nombre Conmigo.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/10 Lleva Tu Nombre Conmigo.mp3",
+                  "audio": true
                 },
                 {
                   "n": 11,
-                  "title": "El Mundo Te Conocerá (The World Will Know You)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "El Mundo Te Conocerá",
+                  "file": "11 El Mundo Te Conocerá.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/11 El Mundo Te Conocerá.mp3",
+                  "audio": true
                 },
                 {
                   "n": 12,
-                  "title": "Solo Tú Por Siempre (Only You Forever)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Solo Tú Por Siempre",
+                  "file": "12 Solo Tú Por Siempre.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1022EN-solo-tu-jesus/tracks/12 Solo Tú Por Siempre.mp3",
+                  "audio": true
                 }
               ],
               "genres": [
@@ -36516,7 +37305,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1022ES-solo-tu-jesus",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Latin Pop",
+                "Reggae"
+              ]
             },
             {
               "code": "SAIM1022RO",
@@ -36610,6 +37403,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1022RO-doar-tu-isus/tracks/12 Doar Tu pe Vecie (Only You Forever).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Latin Pop",
+                "Reggae"
               ]
             },
             {
@@ -36813,92 +37610,92 @@
               "title": "Cuánto Te Adoro (How I Adore You)",
               "folder": "SAIM1025EN-cuanto-te-adoro",
               "path": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro",
-              "playable": 0,
+              "playable": 12,
               "trackCount": 12,
               "tracks": [
                 {
                   "n": 1,
-                  "title": "Cuánto Te Adoro (How I Adore You)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Cuánto Te Adoro",
+                  "file": "01 Cuánto Te Adoro.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/01 Cuánto Te Adoro.mp3",
+                  "audio": true
                 },
                 {
                   "n": 2,
-                  "title": "Santo, Santo, Santo (Holy, Holy, Holy)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Santo, Santo, Santo",
+                  "file": "02 Santo, Santo, Santo.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/02 Santo, Santo, Santo.mp3",
+                  "audio": true
                 },
                 {
                   "n": 3,
-                  "title": "Quiero Conocerte (I Want to Know You)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Quiero Conocerte",
+                  "file": "03 Quiero Conocerte.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/03 Quiero Conocerte.mp3",
+                  "audio": true
                 },
                 {
                   "n": 4,
-                  "title": "Lágrimas Sobre Tus Pies (Tears Upon Your Feet)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Lágrimas Sobre Tus Pies",
+                  "file": "04 Lágrimas Sobre Tus Pies.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/04 Lágrimas Sobre Tus Pies.mp3",
+                  "audio": true
                 },
                 {
                   "n": 5,
-                  "title": "El Frasco de Alabastro (The Alabaster Jar)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "El Frasco de Alabastro",
+                  "file": "05 El Frasco de Alabastro.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/05 El Frasco de Alabastro.mp3",
+                  "audio": true
                 },
                 {
                   "n": 6,
-                  "title": "Beso Tus Pies (I Kiss Your Feet)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Beso Tus Pies",
+                  "file": "06 Beso Tus Pies.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/06 Beso Tus Pies.mp3",
+                  "audio": true
                 },
                 {
                   "n": 7,
-                  "title": "En Tu Pecho Descanso (I Rest on Your Chest)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "En Tu Pecho Descanso",
+                  "file": "07 En Tu Pecho Descanso.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/07 En Tu Pecho Descanso.mp3",
+                  "audio": true
                 },
                 {
                   "n": 8,
-                  "title": "Eres Mi Amado (You Are My Beloved)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Eres Mi Amado",
+                  "file": "08 Eres Mi Amado.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/08 Eres Mi Amado.mp3",
+                  "audio": true
                 },
                 {
                   "n": 9,
-                  "title": "Silencio Ante Ti (Silent Before You)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Silencio Ante Ti",
+                  "file": "09 Silencio Ante Ti.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/09 Silencio Ante Ti.mp3",
+                  "audio": true
                 },
                 {
                   "n": 10,
-                  "title": "Solo Tú Mereces (Only You Are Worthy)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Solo Tú Mereces",
+                  "file": "10 Solo Tú Mereces.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/10 Solo Tú Mereces.mp3",
+                  "audio": true
                 },
                 {
                   "n": 11,
-                  "title": "Cae Toda Corona (Every Crown Falls)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Cae Toda Corona",
+                  "file": "11 Cae Toda Corona.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/11 Cae Toda Corona.mp3",
+                  "audio": true
                 },
                 {
                   "n": 12,
-                  "title": "Eternamente Te Adoraré (I Will Adore You Forever)",
-                  "file": null,
-                  "url": null,
-                  "audio": false
+                  "title": "Eternamente Te Adoraré",
+                  "file": "12 Eternamente Te Adoraré.mp3",
+                  "url": "albums/inspire/santiago-inspire/SAIM1025EN-cuanto-te-adoro/tracks/12 Eternamente Te Adoraré.mp3",
+                  "audio": true
                 }
               ],
               "genres": [
@@ -36913,7 +37710,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1025ES-cuanto-te-adoro",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Latin Bolero",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "SAIM1025RO",
@@ -37007,6 +37808,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1025RO-cat-de-mult-te-ador/tracks/12 Pe Vecie Te Voi Adora.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Latin Bolero",
+                "Praise & Worship"
               ]
             },
             {
@@ -38081,6 +38886,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1036BR-samba-da-festa-santa/tracks/12 A Festa Não Termina.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Praise & Worship",
+                "Cinematic"
               ]
             },
             {
@@ -38678,7 +39487,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1042EN-royal-blood-barrio-streets",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Reggae",
+                "Latin Pop"
+              ]
             },
             {
               "code": "SAIM1043EN",
@@ -38687,7 +39500,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1043EN-the-debts-already-paid",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Reggae"
+              ]
             },
             {
               "code": "SAIM1044EN",
@@ -38781,6 +39598,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1044EN-dance-through-the-storm/tracks/12 We Danced It Through.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Caribbean Praise",
+                "Hip-Hop"
               ]
             },
             {
@@ -38790,7 +39611,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1045EN-fly-the-flag",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Reggae",
+                "Hip-Hop"
+              ]
             },
             {
               "code": "SAIM1046EN",
@@ -38799,7 +39624,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1046EN-no-lone-rangers",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Caribbean Praise"
+              ]
             },
             {
               "code": "SAIM1047EN",
@@ -38808,7 +39637,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1047EN-never-thirsty-again",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Caribbean Praise",
+                "Afrobeat"
+              ]
             },
             {
               "code": "SAIM1048EN",
@@ -38902,6 +39735,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1048EN-truth-wears-a-smile/tracks/12 Last Laugh Belongs to Jesus.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Caribbean Praise",
+                "Hip-Hop"
               ]
             },
             {
@@ -38911,7 +39748,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1049EN-called-and-chosen",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Caribbean Praise"
+              ]
             },
             {
               "code": "SAIM1050EN",
@@ -38920,7 +39761,11 @@
               "path": "albums/inspire/santiago-inspire/SAIM1050EN-come-away-and-rest",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Hip-Hop",
+                "Gospel Soul"
+              ]
             },
             {
               "code": "SAIM1051EN",
@@ -39014,6 +39859,10 @@
                   "url": "albums/inspire/santiago-inspire/SAIM1051EN-one-floor-under-heaven/tracks/12 One Family Forever.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Caribbean Praise",
+                "Hip-Hop"
               ]
             }
           ],
@@ -41547,6 +42396,10 @@
                   "url": "albums/inspire/tahoma-inspire/THIM1028RO-indurare-ca-mareea/tracks/12 Îndurare ca Mareea (Reprise — Lanțurile Se Desfac).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hawaiian",
+                "Reggae"
               ]
             },
             {
@@ -42490,9 +43343,98 @@
               "title": "A Umblat Printre Noi",
               "folder": "THIM1040RO-a-umblat-printre-noi",
               "path": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "A Umblat Printre Noi",
+                  "file": "01 A Umblat Printre Noi.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/01 A Umblat Printre Noi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Emanuel pe Orice Drum",
+                  "file": "02 Emanuel pe Orice Drum.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/02 Emanuel pe Orice Drum.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Născut în Staul, Născut Printre Noi",
+                  "file": "03 Născut în Staul, Născut Printre Noi.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/03 Născut în Staul, Născut Printre Noi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "A Umblat pe Drumul Prăfuit",
+                  "file": "04 A Umblat pe Drumul Prăfuit.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/04 A Umblat pe Drumul Prăfuit.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "A Atins pe Cel de Neatins",
+                  "file": "05 A Atins pe Cel de Neatins.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/05 A Atins pe Cel de Neatins.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Cunună de Spini (Cunună de Slavă)",
+                  "file": "06 Cunună de Spini (Cunună de Slavă).mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/06 Cunună de Spini (Cunună de Slavă).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Piatra S-a Rostogolit",
+                  "file": "07 Piatra S-a Rostogolit.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/07 Piatra S-a Rostogolit.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Înviat și Încă Umblă Printre Noi",
+                  "file": "08 Înviat și Încă Umblă Printre Noi.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/08 Înviat și Încă Umblă Printre Noi.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Orice Seminție la Tron",
+                  "file": "09 Orice Seminție la Tron.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/09 Orice Seminție la Tron.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "M-am Întors Acasă la Isus (O Mărturie)",
+                  "file": "10 M-am Întors Acasă la Isus (O Mărturie).mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/10 M-am Întors Acasă la Isus (O Mărturie).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Creatorul Printre Noi, Mielul pe Tron",
+                  "file": "11 Creatorul Printre Noi, Mielul pe Tron.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/11 Creatorul Printre Noi, Mielul pe Tron.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Cântă Înaintea Lui din Nou",
+                  "file": "12 Cântă Înaintea Lui din Nou.mp3",
+                  "url": "albums/inspire/tahoma-inspire/THIM1040RO-a-umblat-printre-noi/tracks/12 Cântă Înaintea Lui din Nou.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
+              ]
             },
             {
               "code": "THIM1041EN",
@@ -45365,6 +46307,10 @@
                   "url": "albums/inspire/zariah-inspire/ZHIM1023RO-mai-mult-decat-biruitori/tracks/12 Biruință în Sânge.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
               ]
             },
             {
@@ -46060,7 +47006,11 @@
               "path": "albums/inspire/zariah-inspire/ZHIM1030RO-bucuria-vine-dimineata",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Cinematic"
+              ]
             },
             {
               "code": "ZHIM1031EN",
@@ -48713,6 +49663,10 @@
                   "url": "albums/inspire/zev-inspire/ZEIM1015HE-yevarechecha/tracks/12 יִשָּׂא שָׁלוֹם (שָׁלוֹם לָעַד).mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hebraic Worship",
+                "Caribbean Praise"
               ]
             },
             {
@@ -49395,6 +50349,10 @@
                   "url": "albums/inspire/zev-inspire/ZEIM1021RO-yeshua-inviat-peste-noi/tracks/12 Învie Iar Peste Noi Mâine.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hebraic Worship",
+                "Gospel"
               ]
             },
             {
@@ -49491,7 +50449,6 @@
                 }
               ],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49587,6 +50544,9 @@
                   "url": "albums/inspire/zev-inspire/ZEIM1022RO-hesed-care-nu-se-opreste/tracks/12 Dansează-ne Acasă Mâine.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Hebraic Worship"
               ]
             },
             {
@@ -49683,7 +50643,6 @@
                 }
               ],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49781,7 +50740,7 @@
                 }
               ],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Pop"
               ]
             },
@@ -49879,7 +50838,7 @@
                 }
               ],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Praise & Worship"
               ]
             },
@@ -49888,9 +50847,97 @@
               "title": "אֶחָד, יָהוּאָה אֶחָד",
               "folder": "ZEIM1025HE-echad-hashem-echad",
               "path": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad",
-              "playable": 0,
-              "trackCount": 0,
-              "tracks": []
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "שְׁמַע יִשְׂרָאֵל",
+                  "file": "01 שְׁמַע יִשְׂרָאֵל.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/01 שְׁמַע יִשְׂרָאֵל.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "בְּרִית אַחַת, שֵׁם אֶחָד",
+                  "file": "02 בְּרִית אַחַת, שֵׁם אֶחָד.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/02 בְּרִית אַחַת, שֵׁם אֶחָד.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "בְּכָל לְבָבִי, בְּכָל נַפְשִׁי, בְּכָל מְאֹדִי",
+                  "file": "03 בְּכָל לְבָבִי, בְּכָל נַפְשִׁי, בְּכָל מְאֹדִי.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/03 בְּכָל לְבָבִי, בְּכָל נַפְשִׁי, בְּכָל מְאֹדִי.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "הַשֵּׁם הוּא אֶחָד",
+                  "file": "04 הַשֵּׁם הוּא אֶחָד.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/04 הַשֵּׁם הוּא אֶחָד.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "אַחְדּוּת מְרֻכֶּבֶת (הָאָב, הַבֵּן, וְהָרוּחַ)",
+                  "file": "05 אַחְדּוּת מְרֻכֶּבֶת (הָאָב, הַבֵּן, וְהָרוּחַ).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/05 אַחְדּוּת מְרֻכֶּבֶת (הָאָב, הַבֵּן, וְהָרוּחַ).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "אֵין עוֹד (הַדִּבְּרָה הָרִאשׁוֹנָה בְּשִׁיר)",
+                  "file": "06 אֵין עוֹד (הַדִּבְּרָה הָרִאשׁוֹנָה בְּשִׁיר).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/06 אֵין עוֹד (הַדִּבְּרָה הָרִאשׁוֹנָה בְּשִׁיר).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "מְזוּזָה עַל הַמַּשְׁקוֹף, מְזוּזָה עַל הַלֵּב",
+                  "file": "07 מְזוּזָה עַל הַמַּשְׁקוֹף, מְזוּזָה עַל הַלֵּב.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/07 מְזוּזָה עַל הַמַּשְׁקוֹף, מְזוּזָה עַל הַלֵּב.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "אֶחָד — שִׁמְעוּ אוֹתִי לוֹחֵשׁ אֶת שְׁמוֹ",
+                  "file": "08 אֶחָד — שִׁמְעוּ אוֹתִי לוֹחֵשׁ אֶת שְׁמוֹ.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/08 אֶחָד — שִׁמְעוּ אוֹתִי לוֹחֵשׁ אֶת שְׁמוֹ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "בְּלִי מַחֲלֹקֶת (הַשֵּׁם בְּכָל מַעֲשָׂיו)",
+                  "file": "09 בְּלִי מַחֲלֹקֶת (הַשֵּׁם בְּכָל מַעֲשָׂיו).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/09 בְּלִי מַחֲלֹקֶת (הַשֵּׁם בְּכָל מַעֲשָׂיו).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "שְׁמַע לֵיל (הַמִּלָּה הָאַחֲרוֹנָה הַלַּיְלָה)",
+                  "file": "10 שְׁמַע לֵיל (הַמִּלָּה הָאַחֲרוֹנָה הַלַּיְלָה).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/10 שְׁמַע לֵיל (הַמִּלָּה הָאַחֲרוֹנָה הַלַּיְלָה).mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "לַמְּדוּ אֶת הַיְלָדִים אֶת שְׁמוֹ",
+                  "file": "11 לַמְּדוּ אֶת הַיְלָדִים אֶת שְׁמוֹ.mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/11 לַמְּדוּ אֶת הַיְלָדִים אֶת שְׁמוֹ.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "אֲדֹנָי אֶחָד (נִשָּׂא אֶת הַשֵּׁם הַבַּיְתָה)",
+                  "file": "12 אֲדֹנָי אֶחָד (נִשָּׂא אֶת הַשֵּׁם הַבַּיְתָה).mp3",
+                  "url": "albums/inspire/zev-inspire/ZEIM1025HE-echad-hashem-echad/tracks/12 אֲדֹנָי אֶחָד (נִשָּׂא אֶת הַשֵּׁם הַבַּיְתָה).mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Hebraic Worship"
+              ]
             },
             {
               "code": "ZEIM1026EN",
@@ -49901,7 +50948,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Praise & Worship"
               ]
             },
@@ -49914,7 +50961,6 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49927,7 +50973,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Pop"
               ]
             },
@@ -49940,7 +50986,6 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49953,7 +50998,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Praise & Worship"
               ]
             },
@@ -49966,7 +51011,6 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49979,7 +51023,6 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
                 "Hebraic Worship"
               ]
             },
@@ -49992,7 +51035,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Praise & Worship"
               ]
             },
@@ -50005,7 +51048,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Rock"
               ]
             },
@@ -50018,8 +51061,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Hebraic Worship",
-                "Arabic Praise"
+                "Hebraic Worship"
               ]
             },
             {
@@ -50031,7 +51073,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Electronic"
               ]
             },
@@ -50044,7 +51086,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Hip-Hop"
               ]
             },
@@ -50057,7 +51099,7 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Pop"
               ]
             },
@@ -50071,7 +51113,7 @@
               "tracks": [],
               "genres": [
                 "Folk",
-                "Arabic Praise"
+                "Hebraic Worship"
               ]
             },
             {
@@ -50083,14 +51125,14 @@
               "trackCount": 0,
               "tracks": [],
               "genres": [
-                "Arabic Praise",
+                "Hebraic Worship",
                 "Hip-Hop"
               ]
             }
           ],
           "genres": [
             "Hebraic Worship",
-            "Arabic Praise"
+            "Praise & Worship"
           ]
         },
         {
@@ -50680,6 +51722,10 @@
                   "url": "albums/inspire/melody-inspire/MDIM1005RO-du-ma-acasa/tracks/12 Lumina verandei aprinsă.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Gospel Soul",
+                "Pop"
               ]
             },
             {
@@ -51068,6 +52114,10 @@
                   "url": "albums/inspire/melody-inspire/MDIM1008RO-minuni-obisnuite/tracks/12 Aleluia De Pe Pridvor.mp3",
                   "audio": true
                 }
+              ],
+              "genres": [
+                "Pop",
+                "Bluegrass"
               ]
             },
             {
@@ -54733,7 +55783,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1081EN-do-not-disturb",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Synth-Pop"
+              ]
             },
             {
               "code": "MDIM1082EN",
@@ -54742,7 +55796,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1082EN-you-wrote-my-bio",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Gospel",
+                "Pop"
+              ]
             },
             {
               "code": "MDIM1083EN",
@@ -54751,7 +55809,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1083EN-plus-one-forever",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Afrobeat",
+                "Pop"
+              ]
             },
             {
               "code": "MDIM1084EN",
@@ -54760,7 +55822,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1084EN-out-of-office",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Reggae"
+              ]
             },
             {
               "code": "MDIM1085EN",
@@ -54769,7 +55835,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1085EN-twenty-questions",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Jazz",
+                "Pop"
+              ]
             },
             {
               "code": "MDIM1086EN",
@@ -54778,7 +55848,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1086EN-you-kept-my-seat",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Country",
+                "Pop"
+              ]
             },
             {
               "code": "MDIM1088EN",
@@ -54787,7 +55861,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1088EN-filter-off",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Synth-Pop"
+              ]
             },
             {
               "code": "MDIM1089EN",
@@ -54796,7 +55874,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1089EN-never-left-on-read",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Dance-Pop"
+              ]
             },
             {
               "code": "MDIM1090EN",
@@ -54805,7 +55887,11 @@
               "path": "albums/inspire/melody-inspire/MDIM1090EN-confetti-at-midnight",
               "playable": 0,
               "trackCount": 0,
-              "tracks": []
+              "tracks": [],
+              "genres": [
+                "Pop",
+                "Latin Pop"
+              ]
             }
           ],
           "genres": [

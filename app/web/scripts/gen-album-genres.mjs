@@ -80,6 +80,28 @@ const OVERRIDES = {
   JEIM1004EN: ['Praise & Worship', 'Global Worship'],
 };
 
+// Persona-scoped genre corrections, applied AFTER scoring. Several instrument
+// cues are shared across traditions (oud/maqam/darbuka/ney appear in BOTH Arabic
+// AND Jewish/Mizrahi worship), so the keyword scorer can stamp a persona with the
+// wrong culture's lane. Keyed by a persona-path substring; each map remaps a
+// wrongly-assigned label to the persona-correct one (dedup preserves order). This
+// is why the fix lives in the GENERATOR, not the JSON — a re-gen would otherwise
+// re-introduce the mislabel every time.
+const PERSONA_GENRE_REMAP = {
+  // Zev is the Messianic/Hebraic persona. His Mizrahi instrumentation must never
+  // read as "Arabic Praise" (that lane belongs to Amir) — map it to Hebraic Worship.
+  'zev-inspire': { 'Arabic Praise': 'Hebraic Worship' },
+};
+
+function applyPersonaRemap(list, albumPath) {
+  const entry = Object.entries(PERSONA_GENRE_REMAP).find(([slug]) => albumPath.includes(slug));
+  if (!entry) return list;
+  const remap = entry[1];
+  const out = [];
+  for (const g of list) { const r = remap[g] || g; if (!out.includes(r)) out.push(r); }
+  return out;
+}
+
 // Genres in the same family collapse to one label (the most specific present),
 // so a card never shows e.g. "Latin · Latin Pop". Distinct relatives like
 // Country/Bluegrass or Pop/Synth-Pop are intentionally NOT familied.
@@ -167,7 +189,8 @@ async function main() {
     const batch = albums.slice(i, i + CONCURRENCY);
     await Promise.all(batch.map(async (al) => {
       const code = al.code.toUpperCase();
-      const g = OVERRIDES[code] || (() => { const t = styleTextFor(al.path); return t ? normalizeGenres(t) : []; })();
+      let g = OVERRIDES[code] || (() => { const t = styleTextFor(al.path); return t ? normalizeGenres(t) : []; })();
+      g = applyPersonaRemap(g, al.path);
       if (g.length) { genres[al.code] = g; withData++; }
     }));
     done += batch.length;

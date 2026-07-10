@@ -324,6 +324,31 @@ body.jv-has-player { padding-bottom: 84px; }
 .nf-row-arrow.left { left: 0; } .nf-row-arrow.right { right: 0; }
 .nf-row-arrow:hover { background: rgba(0, 0, 0, 0.78); }
 
+/* ===== FEATURED ARTISTS — circular avatar grid, exactly 6 per row =====
+   Wraps like .nf-row-track: each card is 1/6 of the row width (6 cards + 5×16px
+   gaps == 100%), so the 12 Inspire personas land as two rows of six. The circle
+   scales with the card but is capped and centered so it never gets oversized. */
+.fa-track { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 24px 16px; padding: 4px 36px 8px; }
+.fa-card {
+  flex: 0 0 calc((100% - 80px) / 6);
+  max-width: calc((100% - 80px) / 6);
+  text-align: center; text-decoration: none;
+}
+.fa-avatar {
+  position: relative; width: 100%; max-width: 200px; aspect-ratio: 1 / 1; margin: 0 auto;
+  border-radius: 50%; overflow: hidden;
+  background: var(--surface-2, #243355);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fa-card:hover .fa-avatar { transform: scale(1.06); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6); }
+.fa-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.fa-initial { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 40px; font-weight: 700; color: #fff; }
+.fa-name {
+  margin-top: 10px; font-size: 13px; font-weight: 600; color: #e5e5e5;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
 /* ---- Netflix-style hover preview (rendered in a portal at <body>) -------- */
 .nf-preview {
   position: fixed; z-index: 1500; background: #181818; border-radius: 6px;
