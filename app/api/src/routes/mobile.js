@@ -17,6 +17,7 @@ import { ah } from '../util/async.js';
 import { query } from '../db.js';
 import { getManifest } from '../manifest.js';
 import { dailyHeroAlbums } from '../services/heroRotation.js';
+import { dailyShuffle } from '../services/sectionOrder.js';
 
 const router = Router();
 
@@ -90,7 +91,7 @@ router.get('/config', ah(async (req, res) => {
              FROM production.mobile_categories
             WHERE is_active
             ORDER BY display_order, id`),
-    query(`SELECT id, category_id, name, kind, display_order, show_genre
+    query(`SELECT id, category_id, name, kind, display_order, show_genre, auto_order
              FROM production.mobile_sections
             WHERE is_active
             ORDER BY display_order, id`),
@@ -148,12 +149,25 @@ router.get('/config', ah(async (req, res) => {
     // `showGenre` captions this section's covers with each album's primary genre
     // instead of its name. Gated on kind — artists have no genre — so a stray flag
     // on an artists section emits nothing.
+    // `autoOrder` reshuffles an albums section's covers once a day (deterministic
+    // per section, stable all day — see services/sectionOrder.js). It's a pure
+    // permutation over the curated items; because the app RE-SORTS items by `order`,
+    // each emitted item's `order` is renumbered to its shuffled position (1..N) so
+    // the daily order actually sticks.
     const sectionList = secRows.map((s) => {
       const showGenre = s.kind === 'albums' && !!s.show_genre;
+      const autoOrder = s.kind === 'albums' && !!s.auto_order;
+      const rows = itemsBySection.get(s.id) || [];
+      const ordered = autoOrder ? dailyShuffle(rows, String(s.id)) : rows;
       return {
         name: s.name, kind: s.kind, order: s.display_order,
         ...(showGenre ? { showGenre: true } : {}),
-        items: (itemsBySection.get(s.id) || []).map((it, i) => toItem(it, i, showGenre ? genreFor : null)),
+        ...(autoOrder ? { autoOrder: true } : {}),
+        items: ordered.map((it, i) => {
+          const item = toItem(it, i, showGenre ? genreFor : null);
+          if (autoOrder) item.order = i + 1; // reflect the shuffled position
+          return item;
+        }),
       };
     });
 

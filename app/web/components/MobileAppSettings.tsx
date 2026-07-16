@@ -22,7 +22,7 @@ interface SectionItem {
 }
 interface Section {
   id: number; category_id: number; name: string; kind: 'artists' | 'albums';
-  display_order: number; is_active: boolean; show_genre: boolean; items: SectionItem[];
+  display_order: number; is_active: boolean; show_genre: boolean; auto_order: boolean; items: SectionItem[];
 }
 interface HeroSlide {
   id: number; album_ref: string; title?: string | null; artist?: string | null;
@@ -475,6 +475,11 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
               onChange={(v) => void act(api.patch(`/api/admin/mobile/sections/${section.id}`, { show_genre: v }), 'Updated')}
               label="Genre" />
           )}
+          {!isArtists && (
+            <Switch checked={section.auto_order}
+              onChange={(v) => void act(api.patch(`/api/admin/mobile/sections/${section.id}`, { auto_order: v }), 'Updated')}
+              label="Auto Order" />
+          )}
           <button className="mas-icon" title="Move left" disabled={index === 0} onClick={() => onMove(index, -1)}>◀</button>
           <button className="mas-icon" title="Move right" disabled={index === count - 1} onClick={() => onMove(index, 1)}>▶</button>
           <button className="mas-icon mas-icon--danger" title="Delete section" onClick={() => void del()}>🗑</button>
@@ -489,8 +494,11 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
 
       <p className="mas-label" style={{ margin: '18px 0 12px' }}>
         In this section — {items.length} {isArtists ? 'artist' : 'album'}{items.length === 1 ? '' : 's'}
-        {items.length > 1 ? ' · drag to reorder' : ''}
+        {!isArtists && section.auto_order ? ' · auto-ordered daily' : (items.length > 1 ? ' · drag to reorder' : '')}
       </p>
+      {!isArtists && section.auto_order && (
+        <p className="mas-hint">Auto Order is on — these covers reshuffle automatically every 24 hours; every album stays visible, only the order changes. Your manual order is saved and resumes when you turn it off.</p>
+      )}
       {items.length === 0 && <p className="mas-empty">Nothing yet — add {isArtists ? 'artists' : 'albums'} below.</p>}
 
       {isArtists ? (
@@ -510,15 +518,16 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
           ))}
         </div>
       ) : (
-        <div className="mas-itemlist jv-scroll">
+        <div className="mas-itemlist jv-scroll" style={section.auto_order ? { opacity: 0.55 } : undefined}>
           {items.map((it, i) => (
             <div key={it.id}
               className={`mas-itemrow${dragIdx === i ? ' mas-drag' : ''}${overIdx === i && dragIdx !== null && dragIdx !== i ? ' mas-over' : ''}`}
-              onDragOver={(e) => { e.preventDefault(); if (overIdx !== i) setOverIdx(i); }}
+              onDragOver={(e) => { if (section.auto_order) return; e.preventDefault(); if (overIdx !== i) setOverIdx(i); }}
               onDragLeave={() => setOverIdx((o) => (o === i ? null : o))}
-              onDrop={(e) => { e.preventDefault(); dropReorder(i); setDragIdx(null); setOverIdx(null); }}>
-              <span className="mas-grip" draggable title="Drag to reorder"
-                onDragStart={(e) => { setDragIdx(i); e.dataTransfer.effectAllowed = 'move'; }}
+              onDrop={(e) => { if (section.auto_order) return; e.preventDefault(); dropReorder(i); setDragIdx(null); setOverIdx(null); }}>
+              <span className="mas-grip" draggable={!section.auto_order}
+                title={section.auto_order ? 'Auto Order is on' : 'Drag to reorder'}
+                onDragStart={(e) => { if (section.auto_order) return; setDragIdx(i); e.dataTransfer.effectAllowed = 'move'; }}
                 onDragEnd={() => { setDragIdx(null); setOverIdx(null); }}>⠿</span>
               <Thumb shape="sq" code={it.item_ref} seed={it.title || it.item_ref} />
               <div style={{ minWidth: 0 }}>

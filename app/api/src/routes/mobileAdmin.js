@@ -41,7 +41,7 @@ router.get('/config', ah(async (req, res) => {
   const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
     query(`SELECT id, key, label, kind, display_order, is_active, is_visible, hero_enabled, hero_autorotate
              FROM production.mobile_categories ORDER BY display_order, id`),
-    query(`SELECT id, category_id, name, kind, display_order, is_active, show_genre
+    query(`SELECT id, category_id, name, kind, display_order, is_active, show_genre, auto_order
              FROM production.mobile_sections ORDER BY display_order, id`),
     query(`SELECT id, section_id, category_id, item_type, item_ref, title, album_refs, display_order, is_active
              FROM production.mobile_category_items WHERE section_id IS NOT NULL ORDER BY display_order, id`),
@@ -248,22 +248,24 @@ const sectionPatch = z.object({
   kind: z.enum(['artists', 'albums']).optional(),
   is_active: z.boolean().optional(),
   show_genre: z.boolean().optional(),
+  auto_order: z.boolean().optional(),
 });
 router.patch('/sections/:id', validate(sectionPatch), ah(async (req, res) => {
   const sec = await sectionById(req.params.id);
   const fields = [];
   const vals = [];
-  for (const k of ['name', 'kind', 'is_active', 'show_genre']) {
+  for (const k of ['name', 'kind', 'is_active', 'show_genre', 'auto_order']) {
     if (req.body[k] !== undefined) { vals.push(req.body[k]); fields.push(`${k} = $${vals.length}`); }
   }
   if (!fields.length) return res.json(sec);
   // Switching a section's type clears its items — they no longer match (an album
-  // can't live in an "artists" section, and vice-versa). show_genre is meaningless
-  // without albums, so it resets too — otherwise it would lie dormant and switch
-  // itself back on if the section ever returned to 'albums'.
+  // can't live in an "artists" section, and vice-versa). show_genre and auto_order
+  // are meaningless without albums, so they reset too — otherwise they'd lie dormant
+  // and switch themselves back on if the section ever returned to 'albums'.
   if (req.body.kind && req.body.kind !== sec.kind) {
     await query('DELETE FROM production.mobile_category_items WHERE section_id = $1', [sec.id]);
     if (req.body.show_genre === undefined) { vals.push(false); fields.push(`show_genre = $${vals.length}`); }
+    if (req.body.auto_order === undefined) { vals.push(false); fields.push(`auto_order = $${vals.length}`); }
   }
   vals.push(req.auth.user.id);
   vals.push(sec.id);
