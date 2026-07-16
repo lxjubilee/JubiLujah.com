@@ -39,7 +39,7 @@ async function categoryByKey(key) {
 // ---- Admin config view (everything: pages → hero + sections → items) --------
 router.get('/config', ah(async (req, res) => {
   const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
-    query(`SELECT id, key, label, kind, display_order, is_active, is_visible, hero_enabled
+    query(`SELECT id, key, label, kind, display_order, is_active, is_visible, hero_enabled, hero_autorotate
              FROM production.mobile_categories ORDER BY display_order, id`),
     query(`SELECT id, category_id, name, kind, display_order, is_active, show_genre
              FROM production.mobile_sections ORDER BY display_order, id`),
@@ -95,12 +95,13 @@ const catPatch = z.object({
   is_active: z.boolean().optional(),
   is_visible: z.boolean().optional(),
   hero_enabled: z.boolean().optional(),
+  hero_autorotate: z.boolean().optional(),
 });
 router.patch('/categories/:key', validate(catPatch), ah(async (req, res) => {
   const cat = await categoryByKey(req.params.key);
   const fields = [];
   const vals = [];
-  for (const k of ['label', 'is_active', 'is_visible', 'hero_enabled']) {
+  for (const k of ['label', 'is_active', 'is_visible', 'hero_enabled', 'hero_autorotate']) {
     if (req.body[k] !== undefined) { vals.push(req.body[k]); fields.push(`${k} = $${vals.length}`); }
   }
   if (!fields.length) return res.json(cat);

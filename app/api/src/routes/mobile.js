@@ -16,6 +16,7 @@ import { Router } from 'express';
 import { ah } from '../util/async.js';
 import { query } from '../db.js';
 import { getManifest } from '../manifest.js';
+import { dailyHeroAlbums } from '../services/heroRotation.js';
 
 const router = Router();
 
@@ -85,7 +86,7 @@ function toItem(it, i, genreFor) {
 // hides it. The `music_type` page keeps its `musicTypes` list.
 router.get('/config', ah(async (req, res) => {
   const [cats, sections, items, hero, settings, mtypes, mtAlbums] = await Promise.all([
-    query(`SELECT id, key, label, kind, display_order, hero_enabled
+    query(`SELECT id, key, label, kind, display_order, hero_enabled, hero_autorotate
              FROM production.mobile_categories
             WHERE is_active
             ORDER BY display_order, id`),
@@ -158,15 +159,29 @@ router.get('/config', ah(async (req, res) => {
 
     const out = { key: c.key, label: c.label, kind: c.kind, order: c.display_order, sections: sectionList };
     if (c.hero_enabled) {
-      out.hero = {
-        enabled: true,
-        slides: (heroByCat.get(c.id) || []).map((h, i) => ({
-          ref: h.album_ref,
-          order: h.display_order ?? i + 1,
-          headline: h.headline || null,
-          subtitle: h.subtitle || null,
-        })),
-      };
+      // Auto-rotate: ignore the admin's manual slides and serve a hero carousel of
+      // one slide PER persona (12), each showing that persona's album-of-the-day —
+      // every persona advances to a new album every 24h (see services/heroRotation.js).
+      // If nothing is eligible right now, fall through to the manual slides so the hero
+      // is never empty. When auto is off, serve the curated slide carousel as before.
+      const autoCodes = c.hero_autorotate ? dailyHeroAlbums() : null;
+      if (autoCodes && autoCodes.length) {
+        out.hero = {
+          enabled: true,
+          autoRotate: true,
+          slides: autoCodes.map((ref, i) => ({ ref, order: i + 1, headline: null, subtitle: null })),
+        };
+      } else {
+        out.hero = {
+          enabled: true,
+          slides: (heroByCat.get(c.id) || []).map((h, i) => ({
+            ref: h.album_ref,
+            order: h.display_order ?? i + 1,
+            headline: h.headline || null,
+            subtitle: h.subtitle || null,
+          })),
+        };
+      }
     }
     return out;
   });

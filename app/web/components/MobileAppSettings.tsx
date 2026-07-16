@@ -32,7 +32,7 @@ interface HeroSlide {
 interface Page {
   id: number; key: string; label: string; kind: string;
   display_order: number; is_active: boolean; is_visible: boolean; hero_enabled: boolean;
-  hero: HeroSlide[]; sections: Section[];
+  hero_autorotate: boolean; hero: HeroSlide[]; sections: Section[];
 }
 interface AdminConfig { categories: Page[]; }
 interface PickArtist { slug: string; name: string; category: string; albumCount: number }
@@ -298,15 +298,31 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
     <div className="mas-card">
       <div className="mas-head">
         <p className="mas-label">Hero banner · this page</p>
-        <Switch checked={page.hero_enabled}
-          onChange={(v) => void act(api.patch(`/api/admin/mobile/categories/${page.key}`, { hero_enabled: v }), 'Updated')}
-          label="Active" />
+        <span style={{ display: 'flex', alignItems: 'center', gap: '.85rem' }}>
+          <Switch checked={page.hero_enabled}
+            onChange={(v) => void act(api.patch(`/api/admin/mobile/categories/${page.key}`, { hero_enabled: v }), 'Updated')}
+            label="Active" />
+          {page.hero_enabled && (
+            <Switch checked={page.hero_autorotate}
+              onChange={(v) => void act(api.patch(`/api/admin/mobile/categories/${page.key}`, { hero_autorotate: v }), 'Updated')}
+              label="Auto rotate" />
+          )}
+        </span>
       </div>
 
       {!page.hero_enabled ? (
         <p className="mas-hint">Turn on to show a full-width hero carousel at the top of this page.</p>
       ) : (
         <>
+          {page.hero_autorotate && (
+            <p className="mas-hint">
+              Auto rotate is on — the hero shows one slide per Inspire Persona (Melody → Amir →
+              Jubilee → …), and every 24 hours each persona's slide moves to a new album of that
+              persona. Only albums with a cover and a playable track are shown. The manual slides
+              below are paused and resume when you turn Auto rotate off.
+            </p>
+          )}
+          <div style={page.hero_autorotate ? { opacity: 0.5 } : undefined}>
           <p className="mas-hint">Full-width carousel at the top of this page{slides.length > 1 ? ' · drag the grip to reorder' : ', in this order'}.</p>
           {slides.length === 0 && <p className="mas-empty">No slides yet — add an album below.</p>}
           {slides.length > 0 && (
@@ -337,6 +353,7 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
           )}
           <Picker kind="albums" existing={existing} addLabel="Add hero slide"
             onAdd={(ref) => void act(api.post(`/api/admin/mobile/categories/${page.key}/hero-slides`, { album_ref: ref }), 'Hero slide added')} />
+          </div>
         </>
       )}
     </div>
