@@ -12,7 +12,7 @@ import {
 } from '../auth/session.js';
 import { hashPassword, verifyPassword } from '../auth/password.js';
 import { sendPasswordResetEmail, sendLoginVerificationEmail, sendSignupVerificationEmail } from '../services/email.js';
-import { syncPasswordToJI, provisionUserToJI } from '../services/jiSync.js';
+import { syncPasswordToJI, provisionUserToJI, checkEmailOnJI } from '../services/jiSync.js';
 import { jiLogin } from '../services/jiLogin.js';
 import { logger } from '../logger.js';
 
@@ -279,6 +279,17 @@ router.post('/signup', validate(signupSchema), ah(async (req, res) => {
 
   const existing = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [emailNorm]);
   if (existing.rowCount) throw new HttpError(409, 'An account with this email already exists. Please sign in.');
+
+  // Local Postgres is authoritative for our own users but blind to the shared SSO:
+  // an email registered on JubileeInspire will collide at first sign-in even though
+  // it is absent here. Ask JI before issuing a code. Fail open — a JI outage (or an
+  // unconfigured dev box) must not halt registration.
+  const ji = await checkEmailOnJI(emailNorm);
+  if (ji.ok && ji.exists) {
+    logger.info({ email: emailNorm, platform: ji.platform }, 'Signup blocked: email exists on JI');
+    throw new HttpError(409, 'An account with this email already exists. Please sign in.');
+  }
+  if (!ji.ok) logger.warn({ email: emailNorm, ji }, 'JI check-email unavailable; allowing signup');
 
   const code = genOtpCode();
   const guid = await withTransaction(async (client) => {

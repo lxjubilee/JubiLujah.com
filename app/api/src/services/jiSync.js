@@ -1,5 +1,6 @@
 // ============================================================================
-// Outbound password sync -> JubileeInspire (shared SSO credential).
+// Outbound service calls -> JubileeInspire (shared SSO credential): password sync,
+// user provisioning, and pre-signup email-existence checks.
 //
 // When a Jubilujah user changes or resets their password, we mirror it to
 // JubileeInspire so a single credential works on both platforms. Two-step,
@@ -25,6 +26,7 @@ import { logger } from '../logger.js';
 const TOKEN_PATH = '/api/auth/service/token';
 const SET_PASSWORD_PATH = '/api/auth/admin/set-password';
 const PROVISION_PATH = '/api/auth/admin/provision-user';
+const CHECK_EMAIL_PATH = '/api/auth/check-email';
 const SKEW_MS = 30_000; // refresh a little before the real expiry
 
 let cached = null; // { token: string, expiresAt: number(ms epoch) }
@@ -33,12 +35,13 @@ export function jiSyncEnabled() {
   return Boolean(config.jiSync.clientId && config.jiSync.clientSecret);
 }
 
-async function fetchToken() {
+async function fetchToken(signal) {
   const { baseUrl, clientId, clientSecret } = config.jiSync;
   const res = await fetch(`${baseUrl}${TOKEN_PATH}`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ client_id: clientId, client_secret: clientSecret }),
+    signal,
   });
   if (!res.ok) {
     const body = await res.text().catch(() => '');
@@ -52,9 +55,9 @@ async function fetchToken() {
   return token;
 }
 
-async function getToken(forceRefresh = false) {
+async function getToken(forceRefresh = false, signal) {
   if (!forceRefresh && cached && cached.expiresAt > Date.now()) return cached.token;
-  return fetchToken();
+  return fetchToken(signal);
 }
 
 async function postSetPassword(token, email, newPassword) {
@@ -165,6 +168,65 @@ export async function provisionUserToJI({ email, password, displayName, role, em
     return { ok: false, status: res.status };
   } catch (err) {
     logger.error({ err, email }, 'JI provision-user error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+function getCheckEmail(token, email, signal) {
+  const url = `${config.jiSync.baseUrl}${CHECK_EMAIL_PATH}?email=${encodeURIComponent(email)}`;
+  const headers = {};
+  if (token) headers.authorization = `Bearer ${token}`;
+  return fetch(url, { headers, signal });
+}
+
+/**
+ * Ask JubileeInspire whether an email is already registered anywhere on the shared
+ * SSO. Called before a Jubilujah signup issues an OTP: JI is the credential
+ * authority, so an email it already knows will collide at sign-in even when it is
+ * absent from our local identity.users.
+ *
+ * Auth differs by environment: the endpoint is public on UAT and requires a service
+ * Bearer in prod. So — unlike syncPasswordToJI/provisionUserToJI, which no-op when
+ * unconfigured — this still calls out without credentials, otherwise the check would
+ * be dead weight on UAT and in local dev.
+ *
+ * Resolves to a result object; never rejects. Any { ok:false } means "could not
+ * determine" and the caller should fail open.
+ *   { ok:true,  exists:true, platform }  — JI knows this email
+ *   { ok:true,  exists:false }           — JI does not
+ *   { ok:false, status }                 — JI returned non-2xx
+ *   { ok:false, error }                  — network / timeout / token failure
+ */
+export async function checkEmailOnJI(email) {
+  if (!email) return { ok: false, error: 'missing email' };
+
+  // One deadline for the whole exercise, token fetch included.
+  const signal = AbortSignal.timeout(config.jiSync.checkEmailTimeoutMs);
+  const authed = jiSyncEnabled();
+
+  try {
+    let token = authed ? await getToken(false, signal) : null;
+    let res = await getCheckEmail(token, email, signal);
+
+    // Token expired/revoked between cache and use -> refresh once and retry.
+    // Only meaningful when we sent one; an unauthenticated 401 just means this
+    // deployment requires the Bearer we do not have.
+    if (res.status === 401 && authed) {
+      cached = null;
+      token = await getToken(true, signal);
+      res = await getCheckEmail(token, email, signal);
+    }
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      logger.warn({ email, status: res.status, body: body.slice(0, 300) }, 'JI check-email failed');
+      return { ok: false, status: res.status };
+    }
+
+    const data = await res.json();
+    return { ok: true, exists: data.exists === true, platform: data.platform ?? null };
+  } catch (err) {
+    logger.warn({ err, email }, 'JI check-email error');
     return { ok: false, error: String(err?.message || err) };
   }
 }

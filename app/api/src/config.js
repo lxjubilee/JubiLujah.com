@@ -110,6 +110,9 @@ export const config = {
     baseUrl: (process.env.JI_API_BASE || 'https://api.jubileeinspire.com').replace(/\/$/, ''),
     clientId: process.env.JI_SERVICE_CLIENT_ID || '',
     clientSecret: process.env.JI_SERVICE_CLIENT_SECRET || '',
+    // Pre-signup /api/auth/check-email sits in the user's synchronous request path
+    // (unlike the best-effort password push), so it gets a hard deadline.
+    checkEmailTimeoutMs: Number(process.env.JI_CHECK_EMAIL_TIMEOUT_MS || 4000),
   },
 
   // Inbound credential delegation -> JubileeInspire (the mirror of jiSync's outbound
