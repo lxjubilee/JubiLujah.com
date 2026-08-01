@@ -34,10 +34,16 @@ export const config = {
   //   'local' (default) — verify against identity.credentials in our own DB
   //                        (the dev / localhost behavior).
   //   'ji'              — delegate to JubileeInspire's POST /api/auth/login
-  //                        (production): JI is the credential authority, we just
+  //                        (legacy): JI is the credential authority, we just
   //                        upsert the returned user locally + mint our own session.
+  //   'sso'             — delegate to the Jubilee Identity Authority
+  //                        (sso.jubileeinspire.com): the SSO holds the (scrypt)
+  //                        credential; we verify there, upsert the returned user
+  //                        locally, and mint our own session. See services/ssoClient.js.
   // Gated on an explicit env var (not NODE_ENV) so each mode is testable anywhere.
-  loginMode: (process.env.AUTH_LOGIN_MODE || 'local').toLowerCase() === 'ji' ? 'ji' : 'local',
+  loginMode: (['ji', 'sso'].includes((process.env.AUTH_LOGIN_MODE || 'local').toLowerCase())
+    ? (process.env.AUTH_LOGIN_MODE || '').toLowerCase()
+    : 'local'),
 
   databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah'),
 
@@ -122,6 +128,19 @@ export const config = {
   jiLogin: {
     baseUrl: (process.env.JI_LOGIN_BASE || process.env.JI_API_BASE || 'https://api.jubileeinspire.com').replace(/\/$/, ''),
     source: process.env.JI_LOGIN_SOURCE || 'jubilujah',
+  },
+
+  // SSO delegation -> the Jubilee Identity Authority (sso.jubileeinspire.com), used
+  // when loginMode === 'sso'. The SSO is the SINGLE credential store (scrypt, the same
+  // KDF Jubilujah uses), reached with a client-credentials service token (client_id +
+  // client_secret -> short-lived bearer). Jubilujah stays the SESSION authority: it
+  // verifies at the SSO, upserts the returned user, and mints its own tokens. `site`
+  // tags which family site the identity is signing in on. See services/ssoClient.js.
+  sso: {
+    baseUrl: (process.env.SSO_API_BASE || 'https://sso.jubileeinspire.com').replace(/\/$/, ''),
+    clientId: process.env.SSO_CLIENT_ID || 'jubilujah',
+    clientSecret: process.env.SSO_CLIENT_SECRET || '',
+    site: process.env.SSO_SITE || 'jubilujah',
   },
 
   // ---- Subscriptions & billing ---------------------------------------------

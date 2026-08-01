@@ -17,6 +17,13 @@
 // ============================================================================
 import { getAccessToken, getRefreshToken, setTokens, clearTokens, type AuthTokens } from '@/lib/auth';
 
+// In LOCAL DEV the Next.js `/api/*` rewrite proxy can 500 on some Windows/Node
+// combos, so when NEXT_PUBLIC_API_BASE is set we call the backend DIRECTLY (the API
+// CORS-allows the dev origins). Gated to development only — production stays
+// same-origin (empty base => relative paths, proxied by the platform as before).
+const API_BASE =
+  process.env.NODE_ENV === 'development' ? (process.env.NEXT_PUBLIC_API_BASE || '') : '';
+
 export class ApiError extends Error {
   status: number;
   body: any;
@@ -40,7 +47,7 @@ async function tryRefresh(): Promise<RefreshResult> {
       const refreshToken = getRefreshToken();
       if (!refreshToken) return 'invalid';
       try {
-        const res = await fetch(REFRESH_PATH, {
+        const res = await fetch(API_BASE + REFRESH_PATH, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           credentials: 'omit',
@@ -65,7 +72,7 @@ async function doFetch(method: string, path: string, body?: unknown): Promise<Re
   if (body !== undefined) headers['content-type'] = 'application/json';
   const token = getAccessToken();
   if (token) headers['authorization'] = `Bearer ${token}`;
-  return fetch(path, {
+  return fetch(API_BASE + path, {
     method,
     headers,
     credentials: 'omit',

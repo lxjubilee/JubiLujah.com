@@ -14,23 +14,35 @@ const Eye = ({ on, toggle }: { on: boolean; toggle: () => void }) => (
   </button>
 );
 
+// Email-first signup (JI pattern, JubiLujah look):
+//   email → look up on the shared authority (SSO)
+//     • exists  → 'password' : you already have a Jubilee ID, just sign in
+//     • new     → 'form'     : full details, then the email-verification 'code' step
+type Step = 'email' | 'password' | 'form' | 'code';
+
 function SignUpInner() {
   const params = useSearchParams();
   const returnTo = params.get('returnTo') || '/';
 
-  // Step 1 (details)
+  const [step, setStep] = useState<Step>('email');
+  const [email, setEmail] = useState(params.get('email') || '');
+  const [rememberMe, setRememberMe] = useState(true);
+
+  // Existing-account (Screen 2A) state
+  const [existingPw, setExistingPw] = useState('');
+  const [showExisting, setShowExisting] = useState(false);
+
+  // New-account form (Screen 2B) state
   const [first, setFirst] = useState('');
   const [last, setLast] = useState('');
   const [dob, setDob] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [showPw, setShowPw] = useState(false);
   const [showCf, setShowCf] = useState(false);
   const [agree, setAgree] = useState(false);
 
-  // Step 2 (email verification code)
-  const [step, setStep] = useState<'details' | 'code'>('details');
+  // OTP (email verification) state
   const [guid, setGuid] = useState('');
   const [otp, setOtp] = useState('');
   const [cooldown, setCooldown] = useState(0);
@@ -39,7 +51,6 @@ function SignUpInner() {
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Resend cooldown ticker.
   useEffect(() => {
     if (cooldown <= 0) return;
     const t = setInterval(() => setCooldown((c) => (c <= 1 ? 0 : c - 1)), 1000);
@@ -47,41 +58,76 @@ function SignUpInner() {
   }, [cooldown]);
 
   const errMsg = (e: unknown, fallback: string) => (e instanceof ApiError ? e.message : fallback);
+  const finish = (res: any) => { setTokens(res?.tokens); window.location.href = returnTo; };
 
-  // ---- Step 1: submit details -> email a verification code ----
-  const submitDetails = async (e: React.FormEvent) => {
+  // ---- Step 1: email → does a Jubilee ID exist? ----
+  const submitEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr(null); setInfo(null);
+    const addr = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr)) { setErr('Please enter a valid email address.'); return; }
+    setLoading(true);
+    try {
+      const res: any = await api.get(`/api/auth/lookup?email=${encodeURIComponent(addr)}`);
+      setStep(res?.exists ? 'password' : 'form');
+    } catch (e) {
+      setErr(errMsg(e, 'Could not check that email. Please try again.'));
+    } finally { setLoading(false); }
+  };
+
+  // ---- Step 2A: existing Jubilee ID → verify password (sign in) ----
+  const submitExisting = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErr(null); setInfo(null);
+    if (!existingPw) { setErr('Please enter your password.'); return; }
+    setLoading(true);
+    try {
+      // provision:true — this is a sign-up for an existing Jubilee ID, so it MAY
+      // create the local Jubilujah account (plain sign-in cannot).
+      const res: any = await api.post('/api/auth/signin', { email: email.trim(), password: existingPw, rememberMe, provision: true });
+      finish(res);
+    } catch (e) {
+      setErr(errMsg(e, "That password doesn't match. Try again."));
+      setLoading(false);
+    }
+  };
+
+  // ---- Step 2B: new account → email a verification code ----
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErr(null); setInfo(null);
+    if (!first.trim() || !last.trim()) { setErr('Please enter your full name.'); return; }
     if (password.length < 8) { setErr('Password must be at least 8 characters.'); return; }
     if (password !== confirm) { setErr('Passwords do not match.'); return; }
     if (!agree) { setErr('Please agree to the Terms of Service and Privacy Policy.'); return; }
     setLoading(true);
     try {
-      const res: any = await api.post('/api/auth/signup', { name: `${first} ${last}`.trim(), email, password });
+      const res: any = await api.post('/api/auth/signup', { name: `${first} ${last}`.trim(), email: email.trim(), password });
       if (res?.requiresVerification) {
         setGuid(res.verificationGuid);
         setStep('code');
         setCooldown(60);
         setInfo('We emailed a 6-digit code to verify your email. Enter it below to finish creating your account.');
-        setLoading(false); // land on the code step idle, not mid-"Verifying…"
+        setLoading(false);
       } else {
-        window.location.href = returnTo;
+        finish(res);
       }
     } catch (e) {
-      setErr(errMsg(e, 'Sign up failed'));
+      // Race: the email was taken between the lookup and here → send them to sign in.
+      if (e instanceof ApiError && e.status === 409) { setStep('password'); setErr('You already have an account — enter your password to sign in.'); }
+      else setErr(errMsg(e, 'Sign up failed'));
       setLoading(false);
     }
   };
 
-  // ---- Step 2: verify the code -> create the account ----
+  // ---- Step 3: verify the OTP → create the account ----
   const submitCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr(null); setInfo(null);
     setLoading(true);
     try {
       const res: any = await api.post('/api/auth/verify-signup', { verificationGuid: guid, verificationCode: otp });
-      setTokens(res?.tokens);
-      window.location.href = returnTo;
+      finish(res);
     } catch (e) {
       setErr(errMsg(e, 'Could not verify the code'));
       setLoading(false);
@@ -116,12 +162,46 @@ function SignUpInner() {
             {info && <div className="auth-err" style={{ borderColor: '#1f9d57', color: '#bfe6cf' }}>{info}</div>}
             {err && <div className="auth-err">{err}</div>}
 
-            {step === 'details' ? (
-              <form onSubmit={submitDetails}>
+            {/* ── Step 1: email ── */}
+            {step === 'email' && (
+              <form onSubmit={submitEmail}>
+                <p className="auth-foot" style={{ marginBottom: 10 }}>Enter your email to get started.</p>
+                <div className="auth-input">
+                  <label htmlFor="email">Email Address</label>
+                  <input id="email" type="email" autoComplete="email" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Checking…' : 'Continue'}</button>
+              </form>
+            )}
+
+            {/* ── Step 2A: existing Jubilee ID → password ── */}
+            {step === 'password' && (
+              <form onSubmit={submitExisting}>
+                <p className="auth-foot" style={{ marginBottom: 10 }}>You already have a Jubilee ID. Enter your password to sign in.</p>
+                <div className="auth-input">
+                  <label htmlFor="acct-email">Email Address</label>
+                  <input id="acct-email" type="email" value={email} readOnly style={{ opacity: 0.7 }} />
+                </div>
+                <div className="auth-input">
+                  <label htmlFor="existing-pw">Password</label>
+                  <input id="existing-pw" type={showExisting ? 'text' : 'password'} autoComplete="current-password" autoFocus required value={existingPw} onChange={(e) => setExistingPw(e.target.value)} />
+                  <Eye on={showExisting} toggle={() => setShowExisting(!showExisting)} />
+                </div>
+                <div className="auth-forgot"><Link href={`/forgot-password?email=${encodeURIComponent(email.trim())}`}>Forgot password?</Link></div>
+                <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Signing up…' : 'Continue'}</button>
+                <div className="auth-forgot" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setExistingPw(''); setErr(null); }}>Use a different email</button>
+                </div>
+              </form>
+            )}
+
+            {/* ── Step 2B: new account → full form ── */}
+            {step === 'form' && (
+              <form onSubmit={submitForm}>
                 <div className="auth-name-row">
                   <div className="auth-input">
                     <label htmlFor="first">First Name</label>
-                    <input id="first" type="text" autoComplete="given-name" required value={first} onChange={(e) => setFirst(e.target.value)} />
+                    <input id="first" type="text" autoComplete="given-name" autoFocus required value={first} onChange={(e) => setFirst(e.target.value)} />
                   </div>
                   <div className="auth-input">
                     <label htmlFor="last">Last Name</label>
@@ -133,8 +213,8 @@ function SignUpInner() {
                   <input id="dob" type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
                 </div>
                 <div className="auth-input">
-                  <label htmlFor="email">Email Address</label>
-                  <input id="email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <label htmlFor="new-email">Email Address</label>
+                  <input id="new-email" type="email" value={email} readOnly style={{ opacity: 0.7 }} />
                 </div>
                 <div className="auth-input">
                   <label htmlFor="password">Password</label>
@@ -145,9 +225,14 @@ function SignUpInner() {
                   <label htmlFor="confirm">Confirm Password</label>
                   <input id="confirm" type={showCf ? 'text' : 'password'} autoComplete="new-password" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
                   <Eye on={showCf} toggle={() => setShowCf(!showCf)} />
+                  {confirm && (
+                    <div style={{ fontSize: 12, marginTop: 4, color: password === confirm ? '#4ade80' : '#ff6b6b' }}>
+                      {password === confirm ? 'Passwords matched' : "Passwords don't match"}
+                    </div>
+                  )}
                 </div>
                 <label className="auth-check">
-                  <input type="checkbox" defaultChecked />
+                  <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
                   <span>Keep me signed in on this device</span>
                 </label>
                 <label className="auth-check">
@@ -155,8 +240,14 @@ function SignUpInner() {
                   <span>I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></span>
                 </label>
                 <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Sending code…' : 'Sign Up for Free'}</button>
+                <div className="auth-forgot" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setErr(null); }}>Use a different email</button>
+                </div>
               </form>
-            ) : (
+            )}
+
+            {/* ── Step 3: OTP verification ── */}
+            {step === 'code' && (
               <form onSubmit={submitCode}>
                 <p className="auth-foot" style={{ marginBottom: 8 }}>Verifying <strong>{email}</strong></p>
                 <div className="auth-input">
@@ -169,7 +260,7 @@ function SignUpInner() {
                   <button type="button" className="auth-linkbtn" onClick={resend} disabled={cooldown > 0}>
                     {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
                   </button>
-                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('details'); setOtp(''); setErr(null); setInfo(null); }}>Edit details</button>
+                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('form'); setOtp(''); setErr(null); setInfo(null); }}>Edit details</button>
                 </div>
               </form>
             )}

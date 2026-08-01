@@ -121,6 +121,27 @@ function SignInInner() {
         window.location.href = returnTo;
       }
     } catch (e) {
+      // No Jubilujah account for this email (SSO verified but no local account —
+      // deleted or never joined) → show an inline "please sign up" message. We do
+      // NOT auto-redirect; the "Sign Up." link above stays available to click.
+      if (e instanceof ApiError && (e.status === 404 || e.body?.needsSignup)) {
+        setErr('No Jubilujah account found for this email. Please sign up.');
+        setLoading(false);
+        return;
+      }
+      // 401 is uniform for unknown-email OR wrong-password. Disambiguate with a
+      // lookup so an unknown email gets a clear "please sign up" hint (still inline,
+      // no redirect); a known email with a bad password shows the generic error.
+      if (e instanceof ApiError && e.status === 401) {
+        try {
+          const look: any = await api.get(`/api/auth/lookup?email=${encodeURIComponent(email.trim())}`);
+          if (look && look.exists === false && look.available) {
+            setErr('No account found for this email. Please sign up.');
+            setLoading(false);
+            return;
+          }
+        } catch { /* fall through to the generic error below */ }
+      }
       setErr(errMsg(e, 'Sign in failed'));
       resetTurnstile();
       setLoading(false);

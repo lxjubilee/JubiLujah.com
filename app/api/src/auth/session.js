@@ -125,6 +125,63 @@ export async function upsertUserFromJI(jiUser) {
 }
 
 // ----------------------------------------------------------------------------
+// Upsert a user the SSO (Jubilee Identity Authority) just authenticated
+// (loginMode === 'sso'). Keys on EMAIL like upsertUserFromJI. The SSO is the
+// CREDENTIAL authority only — NOT the role authority — so we seed a baseline role
+// on the FIRST sign-in but never grant/revoke on return logins (Jubilujah-native
+// roles survive). SSO user shape is snake_case: { id, email, first_name, last_name }.
+// ----------------------------------------------------------------------------
+const SSO_DEFAULT_ROLE = 'content_editor';
+
+export async function upsertUserFromSSO(ssoUser) {
+  const email = ssoUser?.email;
+  if (!email) throw new Error('SSO login response missing email');
+  const sub = `sso|${ssoUser.id ?? email}`;
+  const firstName = (ssoUser.first_name ?? ssoUser.firstName ?? '').trim() || null;
+  const lastName = (ssoUser.last_name ?? ssoUser.lastName ?? '').trim() || null;
+  const name =
+    [firstName, lastName].filter(Boolean).join(' ').trim() ||
+    ssoUser.display_name ||
+    email;
+
+  return withTransaction(async (client) => {
+    // First sign-in seeds display_name + first/last; return logins only refresh
+    // liveness (names stay locally authoritative once the row exists).
+    const up = await client.query(
+      `INSERT INTO identity.users (external_subject, email, display_name, first_name, last_name, last_login_at, first_signin_completed)
+         VALUES ($1, $2, $3, $4, $5, NOW(), TRUE)
+       ON CONFLICT (email) DO UPDATE
+         SET last_login_at = NOW(), is_active = TRUE
+       RETURNING id, external_subject, email, display_name`,
+      [sub, email, name, firstName, lastName]
+    );
+    const user = up.rows[0];
+
+    // Baseline role on the very first sign-in only — the SSO is not the role
+    // authority, so return logins never touch roles.
+    const has = await client.query('SELECT 1 FROM identity.user_roles WHERE user_id = $1 LIMIT 1', [user.id]);
+    let roles;
+    if (has.rowCount === 0) {
+      await client.query(
+        `INSERT INTO identity.user_roles (user_id, role, granted_by) VALUES ($1, $2, $1) ON CONFLICT DO NOTHING`,
+        [user.id, SSO_DEFAULT_ROLE]
+      );
+      await client.query(
+        `INSERT INTO identity.audit_log (actor_user_id, action, target_type, target_id, payload)
+           VALUES ($1, 'role.grant', 'user', $2, $3)`,
+        [user.id, user.id, JSON.stringify({ role: SSO_DEFAULT_ROLE, source: 'sso_login' })]
+      );
+      roles = [SSO_DEFAULT_ROLE];
+    } else {
+      const cur = await client.query('SELECT role FROM identity.user_roles WHERE user_id = $1', [user.id]);
+      roles = cur.rows.map((r) => r.role);
+    }
+
+    return { user, roles };
+  });
+}
+
+// ----------------------------------------------------------------------------
 // User access tokens — JubileeInspire-format tokens (see auth/token.js):
 // `base64url(JSON).base64url(HMAC-SHA256)` signed with the shared JWT_SECRET,
 // carrying { userId, email, displayName, role, roles, type:'access', exp(ms),
