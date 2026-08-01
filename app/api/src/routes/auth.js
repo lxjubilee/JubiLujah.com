@@ -384,7 +384,12 @@ router.post('/verify-signup', validate(verifySignupSchema), ah(async (req, res) 
       [sub, row.email, row.display_name]
     );
     const newUser = u.rows[0];
-    await client.query('INSERT INTO identity.credentials (user_id, password_hash) VALUES ($1, $2)', [newUser.id, row.password_hash]);
+    // In SSO mode the credential lives ONLY in the Identity Authority (provisioned
+    // after this tx by ssoProvisionHash). Do NOT store a local copy — the SSO is the
+    // single credential store; sign-in never checks a local credential here.
+    if (config.loginMode !== 'sso') {
+      await client.query('INSERT INTO identity.credentials (user_id, password_hash) VALUES ($1, $2)', [newUser.id, row.password_hash]);
+    }
     await client.query(
       `INSERT INTO identity.user_roles (user_id, role, granted_by) VALUES ($1, $2, $1) ON CONFLICT DO NOTHING`,
       [newUser.id, DEFAULT_SIGNUP_ROLE]
@@ -708,12 +713,16 @@ router.post('/reset-password', validate(resetSchema), ah(async (req, res) => {
     );
     if (!pr.rowCount) throw new HttpError(400, 'This reset link is invalid or has expired.');
     const { id: resetId, user_id, email } = pr.rows[0];
-    // Upsert — SSO/JI users may not have a credentials row yet (sets a password).
-    await client.query(
-      `INSERT INTO identity.credentials (user_id, password_hash) VALUES ($1, $2)
-       ON CONFLICT (user_id) DO UPDATE SET password_hash = EXCLUDED.password_hash`,
-      [user_id, hashPassword(password)]
-    );
+    // In SSO mode the new password is set at the Identity Authority (ssoSetPassword,
+    // after this tx) — the SINGLE credential store. Do NOT write a local copy. In
+    // local/ji mode, upsert the local credential (SSO/JI users may not have one yet).
+    if (config.loginMode !== 'sso') {
+      await client.query(
+        `INSERT INTO identity.credentials (user_id, password_hash) VALUES ($1, $2)
+         ON CONFLICT (user_id) DO UPDATE SET password_hash = EXCLUDED.password_hash`,
+        [user_id, hashPassword(password)]
+      );
+    }
     await client.query('UPDATE identity.password_resets SET used_at = NOW() WHERE id = $1', [resetId]);
     // Burn any other outstanding reset tokens; a successful reset proves email
     // control, so also clear any login lockout.
