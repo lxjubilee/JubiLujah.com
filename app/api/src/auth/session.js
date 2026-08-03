@@ -145,13 +145,18 @@ export async function upsertUserFromSSO(ssoUser) {
     email;
 
   return withTransaction(async (client) => {
-    // First sign-in seeds display_name + first/last; return logins only refresh
-    // liveness (names stay locally authoritative once the row exists).
+    // First sign-in seeds display_name + first/last; return logins REFRESH the
+    // name fields from the SSO (the single source of truth for identity), so a
+    // name changed on any family site propagates here on the next login. COALESCE
+    // keeps the local value if the SSO ever returns null, so a name is never blanked.
     const up = await client.query(
       `INSERT INTO identity.users (external_subject, email, display_name, first_name, last_name, last_login_at, first_signin_completed)
          VALUES ($1, $2, $3, $4, $5, NOW(), TRUE)
        ON CONFLICT (email) DO UPDATE
-         SET last_login_at = NOW(), is_active = TRUE
+         SET last_login_at = NOW(), is_active = TRUE,
+             first_name   = COALESCE(EXCLUDED.first_name, users.first_name),
+             last_name    = COALESCE(EXCLUDED.last_name, users.last_name),
+             display_name = COALESCE(EXCLUDED.display_name, users.display_name)
        RETURNING id, external_subject, email, display_name`,
       [sub, email, name, firstName, lastName]
     );
