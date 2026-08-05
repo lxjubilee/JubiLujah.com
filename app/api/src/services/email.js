@@ -6,11 +6,28 @@ import { logger } from '../logger.js';
 // reset). One branded, email-client-safe HTML template (table layout + inline
 // styles + preheader) is shared across all three for a consistent look.
 //
-// Transport is chosen by env: when SENDGRID_API_KEY is set we send via SendGrid
-// (lazy-imported so the API boots/builds without the dep when unused); otherwise
-// a dev/log transport just logs the message — so the whole flow is testable with
-// no provider configured.
+// Transport is chosen by env (see resolveProvider): Mailgun when MAILGUN_API_KEY
+// + MAILGUN_DOMAIN are set, else SendGrid when SENDGRID_API_KEY is set, else a
+// dev/log transport that just logs the message — so the whole flow is testable
+// with no provider configured. EMAIL_PROVIDER forces one explicitly. The SendGrid
+// SDK is lazy-imported so the API boots/builds without the dep when unused; the
+// Mailgun transport uses the global fetch (no extra dependency).
 // ============================================================================
+
+// Explicit EMAIL_PROVIDER wins; otherwise prefer Mailgun when configured, then
+// SendGrid, else the dev/log transport.
+function resolveProvider() {
+  const { provider, mailgun, sendgridApiKey } = config.email;
+  if (provider === 'mailgun' || provider === 'sendgrid' || provider === 'log') return provider;
+  if (mailgun.apiKey && mailgun.domain) return 'mailgun';
+  if (sendgridApiKey) return 'sendgrid';
+  return 'log';
+}
+
+// These are transactional security emails (one-time reset link / OTP). We disable
+// click + open tracking on every provider so the sending service never rewrites
+// our links through its branded-link redirector — that would both hide the real
+// jubilujah.com URL and route the one-time token through a third-party tracker.
 
 let sgMail = null;
 let sgReady = false;
@@ -24,35 +41,62 @@ async function getSendgrid() {
   return sgMail;
 }
 
+async function sendViaSendgrid({ to, subject, text, html }) {
+  const sg = await getSendgrid();
+  await sg.send({
+    to,
+    from: config.email.from,
+    subject,
+    text,
+    html,
+    trackingSettings: {
+      clickTracking: { enable: false, enableText: false },
+      openTracking: { enable: false },
+      subscriptionTracking: { enable: false },
+    },
+  });
+}
+
+async function sendViaMailgun({ to, subject, text, html }) {
+  const { apiKey, domain, apiBase } = config.email.mailgun;
+  const form = new URLSearchParams();
+  form.set('from', config.email.from);
+  form.set('to', Array.isArray(to) ? to.join(',') : to);
+  form.set('subject', subject);
+  if (text) form.set('text', text);
+  if (html) form.set('html', html);
+  form.set('o:tracking', 'no');
+  form.set('o:tracking-clicks', 'no');
+  form.set('o:tracking-opens', 'no');
+
+  const res = await fetch(`${apiBase}/v3/${domain}/messages`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${Buffer.from(`api:${apiKey}`).toString('base64')}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: form,
+  });
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => '')).slice(0, 300);
+    throw new Error(`mailgun send failed: ${res.status} ${detail}`);
+  }
+}
+
 async function send({ to, subject, text, html }) {
-  if (!config.email.sendgridApiKey) {
+  const provider = resolveProvider();
+  if (provider === 'log') {
     // Dev/log transport: never send, just surface the content in the server log.
-    logger.info({ to, subject, text }, '[email:dev] not sent (no SENDGRID_API_KEY)');
+    logger.info({ to, subject, text }, '[email:dev] not sent (no email provider configured)');
     return;
   }
   try {
-    const sg = await getSendgrid();
-    await sg.send({
-      to,
-      from: config.email.from,
-      subject,
-      text,
-      html,
-      // These are transactional security emails (reset link / OTP). Disable
-      // SendGrid click tracking so it doesn't rewrite our links through the
-      // account's branded-link domain (url####.jubileeinspire.com) — that
-      // both hides the real jubilujah.com URL and routes the one-time reset
-      // token through SendGrid's redirector. Open tracking pixel off too.
-      trackingSettings: {
-        clickTracking: { enable: false, enableText: false },
-        openTracking: { enable: false },
-        subscriptionTracking: { enable: false },
-      },
-    });
-    logger.info({ to, subject }, 'email sent (sendgrid)');
+    if (provider === 'mailgun') await sendViaMailgun({ to, subject, text, html });
+    else await sendViaSendgrid({ to, subject, text, html });
+    logger.info({ to, subject, provider }, 'email sent');
   } catch (err) {
     // Surface to the caller; auth routes decide whether to swallow (anti-enum).
-    logger.error({ err, to, subject }, 'email send failed');
+    logger.error({ err, to, subject, provider }, 'email send failed');
     throw err;
   }
 }

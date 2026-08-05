@@ -74,12 +74,23 @@ export const config = {
     secret: process.env.TURNSTILE_SECRET_KEY || '',
   },
 
-  // Outbound email (password reset + login OTP). When `sendgridApiKey` is empty
-  // the email service falls back to a dev/log transport that just logs the
+  // Outbound email (password reset + login OTP). Transport is auto-selected:
+  // Mailgun when MAILGUN_API_KEY + MAILGUN_DOMAIN are set, else SendGrid when
+  // SENDGRID_API_KEY is set, else a dev/log transport that just logs the
   // link/code instead of sending — so the flows are testable with no provider.
+  // EMAIL_PROVIDER ('mailgun' | 'sendgrid' | 'log') forces one explicitly.
+  // NOTE: `from` must be on the Mailgun sending domain (jubilujah.com) or Mailgun
+  // rejects the message / it fails SPF+DKIM alignment.
   email: {
+    provider: (process.env.EMAIL_PROVIDER || '').trim().toLowerCase(),
     sendgridApiKey: process.env.SENDGRID_API_KEY || '',
-    from: process.env.EMAIL_FROM || 'Jubilujah <no-reply@jubilujah.com>',
+    mailgun: {
+      apiKey: process.env.MAILGUN_API_KEY || '',
+      domain: process.env.MAILGUN_DOMAIN || '',
+      // US region = https://api.mailgun.net (default); EU = https://api.eu.mailgun.net
+      apiBase: (process.env.MAILGUN_API_BASE || 'https://api.mailgun.net').replace(/\/$/, ''),
+    },
+    from: process.env.EMAIL_FROM || 'Jubilujah <noreply@jubilujah.com>',
     resetTtlMinutes: Number(process.env.PASSWORD_RESET_TTL_MIN || 60),
   },
 
@@ -189,6 +200,29 @@ export const config = {
   revalidate: {
     secret: process.env.REVALIDATE_SECRET || '',
     webUrl: process.env.WEB_INTERNAL_URL || 'http://127.0.0.1:3000',
+  },
+
+  // Redirector engine (software/redirector.md). The public /r/<token> route in
+  // the web app calls the internal resolve endpoint with this shared key so the
+  // resolve surface (which returns destinations) is not publicly harvestable.
+  redirector: {
+    internalKey: process.env.REDIRECTOR_INTERNAL_KEY || 'dev-redirector-internal-key',
+    baseUrl: (process.env.REDIRECTOR_BASE_URL || process.env.WEB_BASE_URL || 'http://localhost:3000').replace(/\/$/, ''),
+    // §9.6 flat-file failover: nightly snapshot dir + append-only scan buffer.
+    snapshotDir: process.env.REDIRECTOR_SNAPSHOT_DIR
+      || path.join(__dirname, '..', 'data', 'redirector', 'snapshot'),
+    scanBufferPath: process.env.REDIRECTOR_SCAN_BUFFER
+      || path.join(__dirname, '..', 'data', 'redirector', 'scan-buffer.ndjson'),
+    // §16 health watcher: HEAD timeout, per-host throttle, checksum size cap.
+    health: {
+      concurrency: Number(process.env.REDIRECTOR_HEALTH_CONCURRENCY || 4),
+      perHostRps: Number(process.env.REDIRECTOR_HEALTH_HOST_RPS || 10),        // §16.3
+      timeoutMs: Number(process.env.REDIRECTOR_HEALTH_TIMEOUT_MS || 10_000),   // §16.1
+      checksumMaxBytes: Number(process.env.REDIRECTOR_HEALTH_CHECKSUM_MAX || 100 * 1024 * 1024), // §16.1 skip >100MB
+      batchSize: Number(process.env.REDIRECTOR_HEALTH_BATCH || 200),
+    },
+    // Opt-in per instance (like the music scheduler) to avoid duplicate runs.
+    scheduler: String(process.env.REDIRECTOR_SCHEDULER || '').toLowerCase() === 'on',
   },
 
   manifestPath: process.env.MANIFEST_PATH
