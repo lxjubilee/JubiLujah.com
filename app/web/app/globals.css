@@ -531,6 +531,11 @@ a { color: inherit; }
 .auth-check a { color: #f0ad4e; text-decoration: none; }
 .auth-forgot { text-align: right; margin: -6px 0 14px; }
 .auth-forgot a { color: #f0ad4e; font-size: 13px; text-decoration: none; }
+/* Same link row, but placed BELOW the submit button (resend code / use a
+   different email / edit details). The base rule's -6px top margin exists to
+   tuck "Forgot password?" up under the password input; under a button it pulls
+   the links onto the button instead. Restore a positive gap there. */
+.auth-forgot.auth-forgot-below { margin: 14px 0 0; }
 
 /* Cloudflare Turnstile widget. The widget itself is a FIXED 300px box; signin
    page.tsx measures the outer wrapper and CSS-scales the inner box to match it,

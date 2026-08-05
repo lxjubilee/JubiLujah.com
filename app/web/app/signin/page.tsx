@@ -243,7 +243,7 @@ function SignInInner() {
                     value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))} />
                 </div>
                 <button className="auth-submit" type="submit" disabled={loading || locked || code.length !== 6}>{loading ? 'Verifying…' : 'Verify & sign in'}</button>
-                <div className="auth-forgot" style={{ justifyContent: 'space-between', display: 'flex' }}>
+                <div className="auth-forgot auth-forgot-below" style={{ justifyContent: 'space-between', display: 'flex' }}>
                   <button type="button" className="auth-linkbtn" onClick={resend} disabled={cooldown > 0 || locked}>
                     {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
                   </button>

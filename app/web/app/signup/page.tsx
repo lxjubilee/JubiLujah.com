@@ -189,7 +189,7 @@ function SignUpInner() {
                 </div>
                 <div className="auth-forgot"><Link href={`/forgot-password?email=${encodeURIComponent(email.trim())}`}>Forgot password?</Link></div>
                 <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Signing up…' : 'Continue'}</button>
-                <div className="auth-forgot" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div className="auth-forgot auth-forgot-below" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setExistingPw(''); setErr(null); }}>Use a different email</button>
                 </div>
               </form>
@@ -240,7 +240,7 @@ function SignUpInner() {
                   <span>I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></span>
                 </label>
                 <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Sending code…' : 'Sign Up for Free'}</button>
-                <div className="auth-forgot" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div className="auth-forgot auth-forgot-below" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setErr(null); }}>Use a different email</button>
                 </div>
               </form>
@@ -256,7 +256,7 @@ function SignUpInner() {
                     value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))} />
                 </div>
                 <button className="auth-submit" type="submit" disabled={loading || otp.length !== 6}>{loading ? 'Verifying…' : 'Verify & create account'}</button>
-                <div className="auth-forgot" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div className="auth-forgot auth-forgot-below" style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <button type="button" className="auth-linkbtn" onClick={resend} disabled={cooldown > 0}>
                     {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
                   </button>
