@@ -56,6 +56,26 @@ function SignUpInner() {
     return () => clearInterval(t);
   }, [cooldown]);
 
+  // Handed off from the sign-in page: a valid Jubilee ID with no local account.
+  // Read the one-shot pre-fill (email + verified password + profile), then land
+  // straight on the pre-filled create form.
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem('jlj_signup_prefill');
+      if (raw) {
+        sessionStorage.removeItem('jlj_signup_prefill');
+        const d = JSON.parse(raw);
+        if (d.email) setEmail(d.email);
+        if (d.password) setPassword(d.password);
+        if (d.first_name) setFirst(d.first_name);
+        if (d.last_name) setLast(d.last_name);
+        if (d.date_of_birth) setDob(String(d.date_of_birth).slice(0, 10));
+        setStep('confirm');
+      }
+    } catch { /* ignore a malformed hand-off */ }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const errMsg = (e: unknown, fallback: string) => (e instanceof ApiError ? e.message : fallback);
   const finish = (res: any) => { setTokens(res?.tokens); window.location.href = returnTo; };
 

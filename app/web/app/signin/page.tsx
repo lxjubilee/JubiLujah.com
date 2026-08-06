@@ -116,10 +116,24 @@ function SignInInner() {
         // Land on the code step idle — only show "Verifying…" once the user
         // actually submits the code (otherwise the button looks stuck verifying).
         setLoading(false);
-      } else {
-        setTokens(res?.tokens);
-        window.location.href = returnTo;
+        return;
       }
+      if (res?.needsProfile) {
+        // Valid Jubilee ID with no local Jubilujah account → hand off to the
+        // pre-filled signup (a deliberate re-join), carrying the verified password.
+        try {
+          sessionStorage.setItem('jlj_signup_prefill', JSON.stringify({
+            email, password,
+            first_name: res.profile?.first_name || '',
+            last_name: res.profile?.last_name || '',
+            date_of_birth: res.profile?.date_of_birth || '',
+          }));
+        } catch { /* storage disabled — the signup entry will re-verify */ }
+        window.location.href = `/signup?prefill=1&returnTo=${encodeURIComponent(returnTo)}`;
+        return;
+      }
+      setTokens(res?.tokens);
+      window.location.href = returnTo;
     } catch (e) {
       // No Jubilujah account for this email (SSO verified but no local account —
       // deleted or never joined) → show an inline "please sign up" message. We do

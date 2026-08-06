@@ -531,11 +531,20 @@ router.post('/signin', validate(signinSchema), ah(async (req, res) => {
       if (status === 401) throw new HttpError(401, 'Invalid email or password');
       throw new HttpError(status >= 400 && status < 600 ? status : 502, 'Sign in failed');
     }
-    // Only complete the sign-in if a LOCAL Jubilujah account exists — unless this is
-    // an explicit sign-up. This makes "delete account" stick.
+    // A valid Jubilee ID with no local Jubilujah account → route to the PRE-FILLED
+    // signup (a deliberate re-join) instead of a dead-end "please sign up" error.
     const local = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [emailNorm]);
     if (local.rowCount === 0 && !allowProvision) {
-      throw new HttpError(404, 'No Jubilujah account for this email. Please sign up.', { needsSignup: true });
+      const u = body.user;
+      return res.json({
+        success: false,
+        needsProfile: true,
+        profile: {
+          first_name: u.first_name ?? u.firstName ?? '',
+          last_name: u.last_name ?? u.lastName ?? '',
+          date_of_birth: toYmd(u.date_of_birth ?? u.dateOfBirth ?? null),
+        },
+      });
     }
 
     // On the create from the pre-filled form, honor edited First/Last/DOB: sync the
