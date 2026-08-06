@@ -116,6 +116,21 @@ export async function ssoProvisionHash({ email, firstName, lastName, passwordHas
   }
 }
 
+// Update an existing identity's profile (first/last/DOB) at the SSO, by email.
+// Used when a person edits the pre-filled details while joining a new family site,
+// so the change propagates to the shared Jubilee ID.
+//   { ok:true, user } | { ok:false, status|error }
+export async function ssoUpdateProfile(email, patch) {
+  try {
+    const { status, body } = await callSso('/api/auth/service/profile', { email, ...patch });
+    if (status === 200) return { ok: true, user: body.user };
+    return { ok: false, status };
+  } catch (err) {
+    logger.error({ err, email }, 'SSO update-profile error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
 // Set/overwrite a user's password in the SSO (forgot-reset and change-password).
 //   { ok:true } | { ok:false, status|error }
 export async function ssoSetPassword(email, newPassword) {

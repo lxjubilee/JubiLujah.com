@@ -14,7 +14,7 @@ import { hashPassword, verifyPassword } from '../auth/password.js';
 import { sendPasswordResetEmail, sendLoginVerificationEmail, sendSignupVerificationEmail } from '../services/email.js';
 import { syncPasswordToJI, provisionUserToJI, checkEmailOnJI } from '../services/jiSync.js';
 import { jiLogin } from '../services/jiLogin.js';
-import { ssoLogin, ssoLookup, ssoProvisionHash, ssoSetPassword } from '../services/ssoClient.js';
+import { ssoLogin, ssoLookup, ssoProvisionHash, ssoSetPassword, ssoUpdateProfile } from '../services/ssoClient.js';
 import { logger } from '../logger.js';
 
 // Default role for self-service sign-ups (configurable). content_editor lets a
@@ -448,6 +448,18 @@ router.post('/send-signup-verification', validate(resendSignupSchema), ah(async 
   res.json({ success: true, ...out });
 }));
 
+// Normalize the SSO's date_of_birth (a Postgres DATE serialized to ISO shifts by the
+// box's UTC offset) to YYYY-MM-DD via LOCAL date parts, for a pre-filled date input.
+function toYmd(v) {
+  if (!v) return '';
+  const d = new Date(v);
+  if (Number.isNaN(d.getTime())) return String(v).slice(0, 10);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
 // ---- Sign in (email/password, with Turnstile + first-signin OTP gate) ------
 const signinSchema = z.object({
   email: z.string().trim().email().max(254),
@@ -459,6 +471,13 @@ const signinSchema = z.object({
   // SSO mode only: set by the sign-up flow (existing Jubilee ID) to allow creating
   // the local account. Plain sign-in omits it, so deleted accounts aren't resurrected.
   provision: z.boolean().optional(),
+  // Sign-up ENTRY (email+password) preview: verify the credential and ROUTE without
+  // committing (returns needsProfile + the SSO profile, or redirect:'signup').
+  preview: z.boolean().optional(),
+  // Edited pre-filled details carried from the confirm screen, applied on provision.
+  first_name: z.string().trim().max(120).optional(),
+  last_name: z.string().trim().max(120).optional(),
+  date_of_birth: z.string().trim().max(20).optional(),
 });
 router.post('/signin', validate(signinSchema), ah(async (req, res) => {
   // SSO mode: the Jubilee Identity Authority owns the credential. Verify the
@@ -466,25 +485,79 @@ router.post('/signin', validate(signinSchema), ah(async (req, res) => {
   // returned user and mint our own session.
   if (config.loginMode === 'sso') {
     const { email, password } = req.body;
-    // `provision:true` is sent ONLY by the sign-up flow (email-first, existing
-    // Jubilee ID). Plain sign-in never provisions, so a deleted Jubilujah account
-    // is NOT resurrected just because the SSO still holds the credential.
+    const emailNorm = String(email).trim().toLowerCase();
+    // `provision:true` is sent ONLY by the sign-up flow (existing Jubilee ID). Plain
+    // sign-in never provisions, so a deleted Jubilujah account is NOT resurrected
+    // just because the SSO still holds the credential.
     const allowProvision = req.body.provision === true;
+    const preview = req.body.preview === true;
+
+    // Sign-up ENTRY preview (email + password): route WITHOUT committing —
+    //   no Jubilee ID for this email        → { redirect:'signup' } (full registration)
+    //   valid + already a Jubilujah member  → sign in
+    //   valid + new to Jubilujah            → { needsProfile, profile } (pre-filled form)
+    //   wrong password                      → 401
+    if (preview) {
+      const lk = await ssoLookup(email);
+      if (lk.ok && !lk.exists) return res.json({ success: false, redirect: 'signup' });
+      const { status, body } = await ssoLogin({ email, password });
+      if (status === 401) throw new HttpError(401, 'Invalid email or password');
+      if (status !== 200 || !body?.user) throw new HttpError(status >= 400 && status < 600 ? status : 502, 'Sign in failed');
+      const localP = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [emailNorm]);
+      if (localP.rowCount > 0) {
+        const { user, tokens } = await establishSessionFromSSO(req, body.user);
+        return res.json({
+          success: true,
+          user: { id: user.id, email: user.email, displayName: user.display_name },
+          tokens: tokenPayload(tokens.accessToken, tokens.refreshToken, tokens.expiresAt),
+          trustToken: null,
+        });
+      }
+      const u = body.user;
+      return res.json({
+        success: false,
+        needsProfile: true,
+        profile: {
+          first_name: u.first_name ?? u.firstName ?? '',
+          last_name: u.last_name ?? u.lastName ?? '',
+          date_of_birth: toYmd(u.date_of_birth ?? u.dateOfBirth ?? null),
+        },
+      });
+    }
+
+    // Plain sign-in / provision-create. Verify the credential at the SSO.
     const { status, body } = await ssoLogin({ email, password });
     if (status !== 200 || !body?.user) {
       if (status === 401) throw new HttpError(401, 'Invalid email or password');
       throw new HttpError(status >= 400 && status < 600 ? status : 502, 'Sign in failed');
     }
-    // SSO verified the credential. Only complete the sign-in if a LOCAL Jubilujah
-    // account exists — unless this is an explicit sign-up. This makes "delete
-    // account" stick: the SSO Jubilee ID survives, but the user must sign up again
-    // to rejoin Jubilujah.
-    const emailNorm = String(email).trim().toLowerCase();
+    // Only complete the sign-in if a LOCAL Jubilujah account exists — unless this is
+    // an explicit sign-up. This makes "delete account" stick.
     const local = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [emailNorm]);
     if (local.rowCount === 0 && !allowProvision) {
       throw new HttpError(404, 'No Jubilujah account for this email. Please sign up.', { needsSignup: true });
     }
-    const { user, tokens } = await establishSessionFromSSO(req, body.user);
+
+    // On the create from the pre-filled form, honor edited First/Last/DOB: sync the
+    // change to the shared Jubilee ID, then provision the local row with that name.
+    let ssoUser = body.user;
+    if (allowProvision) {
+      const f = String(req.body.first_name ?? '').trim();
+      const l = String(req.body.last_name ?? '').trim();
+      const d = String(req.body.date_of_birth ?? '').trim();
+      const curF = String(ssoUser.first_name ?? ssoUser.firstName ?? '').trim();
+      const curL = String(ssoUser.last_name ?? ssoUser.lastName ?? '').trim();
+      const curD = toYmd(ssoUser.date_of_birth ?? ssoUser.dateOfBirth ?? null);
+      if ((f && f !== curF) || (l && l !== curL) || (d && d !== curD)) {
+        await ssoUpdateProfile(emailNorm, {
+          ...(f ? { first_name: f } : {}),
+          ...(l ? { last_name: l } : {}),
+          ...(d ? { date_of_birth: d } : {}),
+        });
+        ssoUser = { ...ssoUser, first_name: f || curF, last_name: l || curL };
+      }
+    }
+    const { user, tokens } = await establishSessionFromSSO(req, ssoUser);
     return res.json({
       success: true,
       user: { id: user.id, email: user.email, displayName: user.display_name },

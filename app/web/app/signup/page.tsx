@@ -14,11 +14,11 @@ const Eye = ({ on, toggle }: { on: boolean; toggle: () => void }) => (
   </button>
 );
 
-// Email-first signup (JI pattern, JubiLujah look):
-//   email → look up on the shared authority (SSO)
-//     • exists  → 'password' : you already have a Jubilee ID, just sign in
-//     • new     → 'form'     : full details, then the email-verification 'code' step
-type Step = 'email' | 'password' | 'form' | 'code';
+// Combined-entry signup (JI parity): email + password →
+//   already a member    → sign in
+//   existing Jubilee ID → 'confirm' : pre-filled First/Last/DOB, just create the local account
+//   new                 → 'form'    : full details, then the email-verification 'code' step
+type Step = 'email' | 'confirm' | 'form' | 'code';
 
 function SignUpInner() {
   const params = useSearchParams();
@@ -28,8 +28,7 @@ function SignUpInner() {
   const [email, setEmail] = useState(params.get('email') || '');
   const [rememberMe, setRememberMe] = useState(true);
 
-  // Existing-account (Screen 2A) state
-  const [existingPw, setExistingPw] = useState('');
+  // Existing-account confirm-screen password visibility
   const [showExisting, setShowExisting] = useState(false);
 
   // New-account form (Screen 2B) state
@@ -60,31 +59,50 @@ function SignUpInner() {
   const errMsg = (e: unknown, fallback: string) => (e instanceof ApiError ? e.message : fallback);
   const finish = (res: any) => { setTokens(res?.tokens); window.location.href = returnTo; };
 
-  // ---- Step 1: email → does a Jubilee ID exist? ----
-  const submitEmail = async (e: React.FormEvent) => {
+  // ---- Step 1: email + password → verify at the SSO, then route (JI parity) ----
+  //   already a Jubilujah member    → sign in
+  //   existing Jubilee ID, new here → pre-filled create form ('confirm')
+  //   no Jubilee ID for this email  → full registration ('form')
+  //   wrong password                → error
+  const submitEntry = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr(null); setInfo(null);
     const addr = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr)) { setErr('Please enter a valid email address.'); return; }
+    if (!password) { setErr('Please enter your password.'); return; }
     setLoading(true);
     try {
-      const res: any = await api.get(`/api/auth/lookup?email=${encodeURIComponent(addr)}`);
-      setStep(res?.exists ? 'password' : 'form');
+      const res: any = await api.post('/api/auth/signin', { email: addr, password, rememberMe, preview: true });
+      if (res?.success && res?.tokens) { finish(res); return; }   // already a member → signed in
+      if (res?.needsProfile) {                                     // existing Jubilee ID, new here
+        setFirst(res.profile?.first_name || '');
+        setLast(res.profile?.last_name || '');
+        setDob(String(res.profile?.date_of_birth || '').slice(0, 10));
+        setStep('confirm');
+      } else {                                                     // no Jubilee ID → full registration
+        setConfirm(password);
+        setStep('form');
+      }
+      setLoading(false);
     } catch (e) {
-      setErr(errMsg(e, 'Could not check that email. Please try again.'));
-    } finally { setLoading(false); }
+      setErr(errMsg(e, "That password doesn't match. Try again."));
+      setLoading(false);
+    }
   };
 
-  // ---- Step 2A: existing Jubilee ID → verify password (sign in) ----
-  const submitExisting = async (e: React.FormEvent) => {
+  // ---- Step 2A: existing Jubilee ID → confirm pre-filled details → create ----
+  const submitConfirm = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr(null); setInfo(null);
-    if (!existingPw) { setErr('Please enter your password.'); return; }
+    if (!first.trim() || !last.trim()) { setErr('Please enter your first and last name.'); return; }
     setLoading(true);
     try {
-      // provision:true — this is a sign-up for an existing Jubilee ID, so it MAY
-      // create the local Jubilujah account (plain sign-in cannot).
-      const res: any = await api.post('/api/auth/signin', { email: email.trim(), password: existingPw, rememberMe, provision: true });
+      // provision:true creates the local JubiLujah account; the edited First/Last/DOB
+      // sync to the shared Jubilee ID server-side.
+      const res: any = await api.post('/api/auth/signin', {
+        email: email.trim(), password, rememberMe, provision: true,
+        first_name: first.trim(), last_name: last.trim(), date_of_birth: dob || undefined,
+      });
       finish(res);
     } catch (e) {
       setErr(errMsg(e, "That password doesn't match. Try again."));
@@ -114,7 +132,7 @@ function SignUpInner() {
       }
     } catch (e) {
       // Race: the email was taken between the lookup and here → send them to sign in.
-      if (e instanceof ApiError && e.status === 409) { setStep('password'); setErr('You already have an account — enter your password to sign in.'); }
+      if (e instanceof ApiError && e.status === 409) { setStep('email'); setErr('You already have an account — enter your password to sign in.'); }
       else setErr(errMsg(e, 'Sign up failed'));
       setLoading(false);
     }
@@ -162,35 +180,57 @@ function SignUpInner() {
             {info && <div className="auth-err" style={{ borderColor: '#1f9d57', color: '#bfe6cf' }}>{info}</div>}
             {err && <div className="auth-err">{err}</div>}
 
-            {/* ── Step 1: email ── */}
+            {/* ── Step 1: email + password ── */}
             {step === 'email' && (
-              <form onSubmit={submitEmail}>
-                <p className="auth-foot" style={{ marginBottom: 10 }}>Enter your email to get started.</p>
+              <form onSubmit={submitEntry}>
+                <p className="auth-foot" style={{ marginBottom: 10 }}>Enter your email and password to get started.</p>
                 <div className="auth-input">
                   <label htmlFor="email">Email Address</label>
                   <input id="email" type="email" autoComplete="email" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="auth-input">
+                  <label htmlFor="entry-pw">Password</label>
+                  <input id="entry-pw" type={showPw ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <Eye on={showPw} toggle={() => setShowPw(!showPw)} />
                 </div>
                 <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Checking…' : 'Continue'}</button>
               </form>
             )}
 
-            {/* ── Step 2A: existing Jubilee ID → password ── */}
-            {step === 'password' && (
-              <form onSubmit={submitExisting}>
-                <p className="auth-foot" style={{ marginBottom: 10 }}>You already have a Jubilee ID. Enter your password to sign in.</p>
-                <div className="auth-input">
-                  <label htmlFor="acct-email">Email Address</label>
-                  <input id="acct-email" type="email" value={email} readOnly style={{ opacity: 0.7 }} />
+            {/* ── Step 2A: existing Jubilee ID → pre-filled create form ── */}
+            {step === 'confirm' && (
+              <form onSubmit={submitConfirm}>
+                <p className="auth-foot" style={{ marginBottom: 10 }}>You already have a Jubilee ID — confirm your details to set up JubiLujah.</p>
+                <div className="auth-name-row">
+                  <div className="auth-input">
+                    <label htmlFor="c-first">First Name</label>
+                    <input id="c-first" type="text" autoComplete="given-name" required value={first} onChange={(e) => setFirst(e.target.value)} />
+                  </div>
+                  <div className="auth-input">
+                    <label htmlFor="c-last">Last Name</label>
+                    <input id="c-last" type="text" autoComplete="family-name" required value={last} onChange={(e) => setLast(e.target.value)} />
+                  </div>
                 </div>
                 <div className="auth-input">
-                  <label htmlFor="existing-pw">Password</label>
-                  <input id="existing-pw" type={showExisting ? 'text' : 'password'} autoComplete="current-password" autoFocus required value={existingPw} onChange={(e) => setExistingPw(e.target.value)} />
+                  <label htmlFor="c-dob">Date of Birth</label>
+                  <input id="c-dob" type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
+                </div>
+                <div className="auth-input">
+                  <label htmlFor="c-email">Email Address</label>
+                  <input id="c-email" type="email" value={email} readOnly style={{ opacity: 0.7 }} />
+                </div>
+                <div className="auth-input">
+                  <label htmlFor="c-pw">Jubilee ID password</label>
+                  <input id="c-pw" type={showExisting ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                   <Eye on={showExisting} toggle={() => setShowExisting(!showExisting)} />
                 </div>
-                <div className="auth-forgot"><Link href={`/forgot-password?email=${encodeURIComponent(email.trim())}`}>Forgot password?</Link></div>
-                <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Signing up…' : 'Continue'}</button>
+                <label className="auth-check">
+                  <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+                  <span>Keep me signed in on this device</span>
+                </label>
+                <button className="auth-submit" type="submit" disabled={loading}>{loading ? 'Creating…' : 'Create account'}</button>
                 <div className="auth-forgot auth-forgot-below" style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setExistingPw(''); setErr(null); }}>Use a different email</button>
+                  <button type="button" className="auth-linkbtn" onClick={() => { setStep('email'); setErr(null); }}>Use a different email</button>
                 </div>
               </form>
             )}
