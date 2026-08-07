@@ -47,8 +47,9 @@ const doorStyles = `
     background: none; border: none; color: #f0ad4e; font-size: 12.5px; cursor: pointer;
     text-decoration: underline; white-space: nowrap; padding: 0;
   }
-  .door-tn { display: flex; justify-content: center; margin: 6px 0 16px; }
+  .door-tn { width: 100%; margin: 6px 0 16px; overflow: hidden; }
   .door-tn:empty { margin: 0; }
+  .door-tn-inner { width: 300px; transform-origin: top left; }
   .door-match { font-size: 12px; margin-top: 4px; }
 `;
 
@@ -93,14 +94,15 @@ function JubileeDoor() {
   // if the widget can't render (e.g. domain not allow-listed) it never blocks.
   const [tnToken, setTnToken] = useState('');
   const [tnFailed, setTnFailed] = useState(false);
-  const tnRef = useRef<HTMLDivElement>(null);
+  const tnRef = useRef<HTMLDivElement>(null);       // inner 300px render target (scaled)
+  const tnBoxRef = useRef<HTMLDivElement>(null);    // outer full-width wrapper (measured)
   const widgetId = useRef<string | null>(null);
   const renderTurnstile = useCallback(() => {
     if (!SITE_KEY || !tnRef.current || !window.turnstile || widgetId.current) return;
     widgetId.current = window.turnstile.render(tnRef.current, {
       sitekey: SITE_KEY,
       theme: 'dark',
-      size: 'flexible',
+      size: 'normal',
       callback: (t: string) => { setTnToken(t); setTnFailed(false); },
       'error-callback': () => { setTnToken(''); setTnFailed(true); },
       'expired-callback': () => setTnToken(''),
@@ -120,6 +122,24 @@ function JubileeDoor() {
     widgetId.current = null;
     setTnToken(''); setTnFailed(false);
   }, [step, renderTurnstile]);
+
+  // The 'normal' widget is a fixed 300px; CSS-scale it to the measured container
+  // width so the captcha is exactly as wide as the email textbox at any viewport.
+  useEffect(() => {
+    if (!SITE_KEY || step !== 'email') return;
+    const box = tnBoxRef.current, inner = tnRef.current;
+    if (!box || !inner) return;
+    const TN_W = 300, TN_H = 65;
+    const apply = () => {
+      const s = box.clientWidth / TN_W;
+      inner.style.transform = `scale(${s})`;
+      box.style.height = `${TN_H * s}px`;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(box);
+    return () => ro.disconnect();
+  }, [step]);
 
   // ---- Resend cooldown ticker ----
   useEffect(() => {
@@ -315,7 +335,11 @@ function JubileeDoor() {
                   <label htmlFor="email">Email Address</label>
                   <input id="email" type="email" autoComplete="email" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                {SITE_KEY && <div className="door-tn" ref={tnRef} />}
+                {SITE_KEY && (
+                  <div className="door-tn" ref={tnBoxRef}>
+                    <div className="door-tn-inner" ref={tnRef} />
+                  </div>
+                )}
                 <button className="auth-submit" type="submit" disabled={emailLoading}>{emailLoading ? 'Checking…' : 'Continue'}</button>
                 <p className="door-disc">No account yet? We&apos;ll set one up for you.</p>
               </form>
