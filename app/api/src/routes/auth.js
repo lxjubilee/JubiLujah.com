@@ -287,10 +287,14 @@ router.get('/lookup', ah(async (req, res) => {
   }
   if (config.loginMode === 'sso') {
     const found = await ssoLookup(email);
-    return res.json({ exists: found.ok ? found.exists : false, available: found.ok });
+    const inSso = found.ok && found.exists === true;
+    // Also report LOCAL presence so the one-door can pick Screen 2A (returning member)
+    // vs 2B (existing Jubilee ID, new here) before asking for the password.
+    const local = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [email]);
+    return res.json({ exists: inSso, existsInSso: inSso, existsLocally: local.rowCount > 0, available: found.ok });
   }
   const r = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [email]);
-  res.json({ exists: r.rowCount > 0, available: true });
+  res.json({ exists: r.rowCount > 0, existsInSso: r.rowCount > 0, existsLocally: r.rowCount > 0, available: true });
 }));
 
 // ---- Sign up — phase 1: collect details, email a verification code ---------

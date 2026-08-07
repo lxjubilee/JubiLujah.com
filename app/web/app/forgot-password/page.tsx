@@ -1,11 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import AuthHero from '@/components/AuthHero';
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
+function ForgotPasswordInner() {
+  const params = useSearchParams();
+  const [email, setEmail] = useState(params.get('email') || '');
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -63,4 +65,8 @@ export default function ForgotPasswordPage() {
       </div>
     </>
   );
+}
+
+export default function ForgotPasswordPage() {
+  return <Suspense fallback={<div className="auth-split" />}><ForgotPasswordInner /></Suspense>;
 }
