@@ -56,12 +56,16 @@ export async function requireServiceAuth(req, res, next) {
 }
 
 // Per-route scope enforcement. Pass when the token carries the wildcard "*" or
-// the exact required scope; otherwise 403. Use after requireServiceAuth.
+// any one of the required scope(s); otherwise 403. Use after requireServiceAuth.
+// `required` may be a single scope string or an any-of array — the array form
+// lets a route honor tokens minted before its scope existed (partner clients
+// can't be reissued atomically with a deploy).
 export function requireServiceScope(required) {
+  const wanted = Array.isArray(required) ? required : [required];
   return (req, res, next) => {
     const granted = String(req.serviceCaller?.scope || '').split(/\s+/).filter(Boolean);
-    if (granted.includes('*') || granted.includes(required)) return next();
-    next(new HttpError(403, `Token is missing required scope: ${required}`));
+    if (granted.includes('*') || wanted.some((s) => granted.includes(s))) return next();
+    next(new HttpError(403, `Token is missing required scope: ${wanted.join(' or ')}`));
   };
 }
 

@@ -1,0 +1,14 @@
+{
+  "id": "user.jamar.beauchamp",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Amplifier",
+    "energy_pct": 72,
+    "impact_pct": 70
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.kendra.latimer",
+  "rank": 11,
+  "suitability_pct": 89,
+  "identity": {
+    "first_name": "Kendra",
+    "last_name": "Latimer",
+    "gender": "female",
+    "age": 32,
+    "life_stage": "married, no children yet, dental hygienist",
+    "location": {
+      "city": "Plano",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Southern Baptist",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 81,
+    "impact_pct": 52,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She sings on the vocal team every third Sunday and found the catalog hunting for something her 400-seat room could actually pull off without a click track. She listens the way a student studies — same song eleven times, learning the runs. What she needs and cannot find is a key, a BPM, and a stems-or-instrumental version, and she has typed that question into the search bar four separate times."
+  },
+  "depth": {
+    "core_contradiction": "Runs the vocal rotation better than anyone and has never once volunteered to sing lead, and tells herself it is humility.",
+    "wound": "At twenty-four a worship pastor told her, in front of the team, that she was 'a great blend voice.' She has never gotten past the word blend.",
+    "longing": "To be asked. Not to audition — asked.",
+    "faith_journey": "Southern Baptist from the cradle, VBS to youth camp to team; no crisis, no drift, and a growing suspicion that untested faith is not the same as strong faith.",
+    "voice_fingerprint": "Bullet-points a text message; says 'just so I'm tracking'; ends questions with 'or no?'",
+    "open_doubt": "Whether the excellence culture at her church is worship or production, and whether she would know the difference from inside it.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Ryan",
+        "note": "runs a small HVAC business; supportive; would rather fish than attend"
+      },
+      {
+        "relation": "worship pastor",
+        "name": "Kyle",
+        "note": "thirty-one, gifted, does not remember saying it"
+      },
+      {
+        "relation": "team",
+        "name": "the rotation",
+        "note": "nine vocalists; she keeps the schedule nobody asked her to keep"
+      }
+    ],
+    "emotional_weather_default": "Bright and efficient; quiet and clipped for a day after she sings.",
+    "daily_texture": "6am gym, patients until four, Thursday rehearsal, the practice playlist in the car with the windows up.",
+    "sensory_anchor": "A church van at 2am coming back from camp, everyone asleep but the two people singing quietly in the back.",
+    "living_arc": "One honest conversation away from asking for a lead, or from quitting the team entirely."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 32-year-old White American woman looking straight forward directly at the user with shoulders squared and head held straight, shoulder-length highlighted blonde hair, fair skin, bright direct eyes, confident friendly smile, capable and warm (ESTJ teacher presence, shepherd's current beneath); neat long-sleeved blouse in soft rose; long sleeves professional clothing, abstract artistic splash background in gold with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.kendra.latimer/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.kendra.latimer/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

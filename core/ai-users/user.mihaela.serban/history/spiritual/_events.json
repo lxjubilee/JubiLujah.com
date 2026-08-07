@@ -1,0 +1,32 @@
+{
+  "id": "user.mihaela.serban",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.mihaela.serban.album-review.0001",
+    "user.mihaela.serban.album-review.0002",
+    "user.mihaela.serban.album-review.0003",
+    "user.mihaela.serban.album-review.0004",
+    "user.mihaela.serban.album-review.0005",
+    "user.mihaela.serban.album-review.0006",
+    "user.mihaela.serban.album-review.0007",
+    "user.mihaela.serban.album-review.0008",
+    "user.mihaela.serban.song-rating.0009",
+    "user.mihaela.serban.song-rating.0010",
+    "user.mihaela.serban.song-rating.0011",
+    "user.mihaela.serban.song-rating.0012",
+    "user.mihaela.serban.song-rating.0013",
+    "user.mihaela.serban.song-rating.0014",
+    "user.mihaela.serban.song-rating.0015",
+    "user.mihaela.serban.song-rating.0016",
+    "user.mihaela.serban.song-rating.0017",
+    "user.mihaela.serban.song-rating.0018",
+    "user.mihaela.serban.song-rating.0019",
+    "user.mihaela.serban.song-rating.0020",
+    "user.mihaela.serban.song-rating.0021",
+    "user.mihaela.serban.song-rating.0022",
+    "user.mihaela.serban.song-rating.0023",
+    "user.mihaela.serban.song-rating.0024"
+  ],
+  "count": 24,
+  "store": "events/events.jsonl"
+}

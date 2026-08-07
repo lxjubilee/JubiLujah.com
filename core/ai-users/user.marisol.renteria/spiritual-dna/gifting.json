@@ -1,0 +1,15 @@
+{
+  "id": "user.marisol.renteria",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 76,
+    "impact_pct": 34,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

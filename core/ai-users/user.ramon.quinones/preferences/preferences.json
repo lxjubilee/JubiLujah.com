@@ -1,0 +1,14 @@
+{
+  "id": "user.ramon.quinones",
+  "synthetic": true,
+  "primary_language": "Spanish",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 64,
+    "impact_pct": 58
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

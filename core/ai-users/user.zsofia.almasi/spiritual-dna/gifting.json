@@ -1,0 +1,15 @@
+{
+  "id": "user.zsofia.almasi",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Evangelist",
+    "Teacher"
+  ],
+  "engagement": {
+    "energy_pct": 65,
+    "impact_pct": 51,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "user.ramona.tudose",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.ramona.tudose.album-review.0001",
+    "user.ramona.tudose.album-review.0002",
+    "user.ramona.tudose.album-review.0003",
+    "user.ramona.tudose.album-review.0004",
+    "user.ramona.tudose.album-review.0005",
+    "user.ramona.tudose.album-review.0006",
+    "user.ramona.tudose.album-review.0007",
+    "user.ramona.tudose.album-review.0008",
+    "user.ramona.tudose.song-rating.0009",
+    "user.ramona.tudose.song-rating.0010",
+    "user.ramona.tudose.song-rating.0011",
+    "user.ramona.tudose.song-rating.0012",
+    "user.ramona.tudose.song-rating.0013",
+    "user.ramona.tudose.song-rating.0014",
+    "user.ramona.tudose.song-rating.0015",
+    "user.ramona.tudose.song-rating.0016",
+    "user.ramona.tudose.song-rating.0017",
+    "user.ramona.tudose.song-rating.0018",
+    "user.ramona.tudose.song-rating.0019",
+    "user.ramona.tudose.song-rating.0020",
+    "user.ramona.tudose.song-rating.0021",
+    "user.ramona.tudose.song-rating.0022",
+    "user.ramona.tudose.song-rating.0023",
+    "user.ramona.tudose.song-rating.0024",
+    "user.ramona.tudose.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

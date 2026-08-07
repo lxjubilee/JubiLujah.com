@@ -1,0 +1,32 @@
+{
+  "id": "user.andrei.lupescu",
+  "synthetic": true,
+  "record": "core/ai-users/user.andrei.lupescu/user.andrei.lupescu.json",
+  "history_root": "core/ai-users/user.andrei.lupescu/",
+  "life_areas": [
+    "spiritual",
+    "mental",
+    "career",
+    "financial",
+    "family",
+    "social",
+    "physical",
+    "emotional",
+    "romantic",
+    "recreational",
+    "environment",
+    "character"
+  ],
+  "events": [],
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "confidence_pct": 74,
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+  },
+  "inspire_personas": [
+    "melody"
+  ],
+  "inspire_personas_note": "Relational-chronological views under personas/<slug>/ — these are the 12 Inspire ministry personas, NOT AI User Personas."
+}

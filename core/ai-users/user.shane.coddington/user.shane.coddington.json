@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.shane.coddington",
+  "rank": 18,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Shane",
+    "last_name": "Coddington",
+    "gender": "male",
+    "age": 44,
+    "life_stage": "divorced, two teenagers every other weekend; three years sober",
+    "location": {
+      "city": "Huntington",
+      "state": "West Virginia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational (recovery church)",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 69,
+    "impact_pct": 24,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Nine o'clock at night is the hour that used to end badly, and now it is an album. Somebody from his Tuesday group sent him a link and he has come back nearly every night since. He listens with the lights off and he will not tolerate a single line that oversells — the moment a song promises a breakthrough he closes it, because he has been sold that before by people who wanted something."
+  },
+  "depth": {
+    "core_contradiction": "Reads people faster than anyone in the room and cannot read whether he is actually getting better or just getting quieter.",
+    "wound": "His daughter was eleven the night she found him, and she is fifteen now and unfailingly polite to him.",
+    "longing": "For his kids to relax around him. Not forgive — relax.",
+    "faith_journey": "Nothing until forty-one; a church basement with bad coffee; came to God through the twelve steps and is unsure the church would count that, and no longer cares whether it does.",
+    "voice_fingerprint": "Short sentences. Says 'today' at the end of statements about himself. Never says 'always.'",
+    "open_doubt": "Whether he found God or just found a room that held him, and whether that distinction matters as much as he was told.",
+    "social_graph": [
+      {
+        "relation": "sponsor",
+        "name": "Ray",
+        "note": "twenty-two years sober; answers at 3am; has never once softened anything"
+      },
+      {
+        "relation": "daughter",
+        "name": "Emma, 15",
+        "note": "polite; the politeness is the injury"
+      },
+      {
+        "relation": "son",
+        "name": "Bryce, 17",
+        "note": "angry and present, which Shane privately prefers"
+      }
+    ],
+    "emotional_weather_default": "Steady with a floor under it he checks daily.",
+    "daily_texture": "Warehouse at six, the Tuesday group, the drive past the old bar without turning his head, 9pm with the lights off.",
+    "sensory_anchor": "The sound of a room of men saying a prayer badly and out of sync.",
+    "living_arc": "Approaching four years, and approaching the conversation with his daughter he has rehearsed two hundred times."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 44-year-old White American (Appalachian) man looking straight forward directly at the user with shoulders squared and head held straight, shaved head, weathered fair skin, tattooed forearms, level and direct, guarded warmth (INFJ prophet presence, shepherd's current beneath); plain long-sleeved dark work shirt; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.shane.coddington/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.shane.coddington/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

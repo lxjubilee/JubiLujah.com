@@ -1,0 +1,10 @@
+{
+  "id": "user.keisha.rowlett",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.keisha.rowlett.album-review.0008",
+    "user.keisha.rowlett.song-rating.0026"
+  ],
+  "count": 2,
+  "store": "events/events.jsonl"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "user.roxana.feraru",
+  "life_area": "family",
+  "event_ids": [
+    "user.roxana.feraru.notice.0001",
+    "user.roxana.feraru.album-review.0002",
+    "user.roxana.feraru.album-review.0003",
+    "user.roxana.feraru.album-review.0004",
+    "user.roxana.feraru.album-review.0005",
+    "user.roxana.feraru.album-review.0006",
+    "user.roxana.feraru.album-review.0007",
+    "user.roxana.feraru.album-review.0008",
+    "user.roxana.feraru.song-rating.0010",
+    "user.roxana.feraru.song-rating.0011",
+    "user.roxana.feraru.song-rating.0012",
+    "user.roxana.feraru.song-rating.0013",
+    "user.roxana.feraru.song-rating.0014",
+    "user.roxana.feraru.song-rating.0015",
+    "user.roxana.feraru.song-rating.0016",
+    "user.roxana.feraru.song-rating.0017",
+    "user.roxana.feraru.song-rating.0018",
+    "user.roxana.feraru.song-rating.0019",
+    "user.roxana.feraru.song-rating.0020",
+    "user.roxana.feraru.song-rating.0021",
+    "user.roxana.feraru.song-rating.0022",
+    "user.roxana.feraru.song-rating.0023",
+    "user.roxana.feraru.song-rating.0024",
+    "user.roxana.feraru.song-rating.0025",
+    "user.roxana.feraru.song-rating.0026"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

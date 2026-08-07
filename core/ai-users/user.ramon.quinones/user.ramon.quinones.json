@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ramon.quinones",
+  "rank": 37,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Ramon",
+    "last_name": "Quiñones",
+    "gender": "male",
+    "age": 38,
+    "life_stage": "married, four children, dispatcher",
+    "location": {
+      "city": "Jersey City",
+      "state": "New Jersey",
+      "country": "United States"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "English",
+    "denomination": "Pentecostal (Spanish-language)",
+    "mbti": "ESTP (\"the Entrepreneur\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 58,
+    "quadrant": "Devotee",
+    "interaction_backstory": "His church of a hundred and forty runs entirely in Spanish and he leads music there with two guitars and no budget. He came here for the Latin worship catalog and found twenty traditions he actually recognizes, which almost nothing else online gets right. He cannot afford the subscription and he has done the math twice."
+  },
+  "depth": {
+    "core_contradiction": "The most generous man in his congregation and privately keeps a ledger of who has never paid him back.",
+    "wound": "He was undocumented until he was twenty-six and there are eight years he does not talk about.",
+    "longing": "For his kids to have nothing to be careful about.",
+    "faith_journey": "Pentecostal since childhood in Ponce; the faith and the language are the same thing to him and English worship feels like a translation of a translation.",
+    "voice_fingerprint": "Talks fast; switches to Spanish for anything that matters; \"mira\" to start.",
+    "open_doubt": "Whether God blessed him or he just got lucky before the rules changed.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "runs the children's ministry; the actual engine of the church"
+      },
+      {
+        "relation": "pastor",
+        "note": "70; brought him in at nineteen; slowing down and not admitting it"
+      }
+    ],
+    "emotional_weather_default": "Up and quick; anxious the last week of the month.",
+    "daily_texture": "Dispatch board, two guitars in the trunk, Thursday rehearsal, the rent due on the first.",
+    "sensory_anchor": "His father's guitar with the cracked back, and a hundred people in a storefront.",
+    "living_arc": "The pastor is going to ask him to take the church and he is not ready."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 38-year-old Puerto Rican man looking straight forward directly at the user with shoulders squared and head held straight, short dark hair, warm brown skin, close beard, quick warm grin, alert (ESTP evangelist presence, apostle's current beneath); long-sleeved button-down in dark red; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.ramon.quinones/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ramon.quinones/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

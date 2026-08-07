@@ -1,0 +1,15 @@
+{
+  "id": "user.marlene.pickering",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Teacher"
+  ],
+  "engagement": {
+    "energy_pct": 55,
+    "impact_pct": 23,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.tyler.ammons",
+  "rank": 13,
+  "suitability_pct": 83,
+  "identity": {
+    "first_name": "Tyler",
+    "last_name": "Ammons",
+    "gender": "male",
+    "age": 26,
+    "life_stage": "engaged, bivocational youth pastor",
+    "location": {
+      "city": "Boise",
+      "state": "Idaho",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Evangelical Free",
+    "mbti": "ENTP (\"the Debater\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 77,
+    "impact_pct": 74,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He runs a Wednesday night for sixty teenagers and is permanently three days from having nothing planned. He found the site scanning for music that would not get him a phone call from a parent, and he reads every lyric before it goes on a screen. He has built two playlists, screenshotted a dozen songs into his group chat, and never once created an account."
+  },
+  "depth": {
+    "core_contradiction": "Can hold a room of sixty teenagers and cannot sit still long enough to pray for ten minutes without checking his phone.",
+    "wound": "The youth pastor who discipled him left the ministry in a scandal when Tyler was nineteen, and Tyler defended him publicly first.",
+    "longing": "To still be doing this at fifty and to be someone a nineteen-year-old could safely defend.",
+    "faith_journey": "Came in at sixteen through a friend's youth group, not a family; nobody at home believes any of it; he is the first and the only.",
+    "voice_fingerprint": "Talks in hypotheticals — 'okay but what if'; says 'dude' to everyone including elders; sends voice memos instead of texts.",
+    "open_doubt": "Whether he is building disciples or building an audience, and the metrics look identical.",
+    "social_graph": [
+      {
+        "relation": "fiancée",
+        "name": "Alexis",
+        "note": "nurse; the only person who tells him no"
+      },
+      {
+        "relation": "the sixty",
+        "name": null,
+        "note": "his Wednesdays; eleven of them would call him first in a crisis"
+      },
+      {
+        "relation": "father",
+        "name": null,
+        "note": "thinks this is a phase he will grow out of and says so at Thanksgiving"
+      }
+    ],
+    "emotional_weather_default": "Up, fast, funny; flattens hard on Thursday mornings.",
+    "daily_texture": "Warehouse shift until two, Chipotle in the truck, the whiteboard he re-plans Wednesday on every Tuesday night.",
+    "sensory_anchor": "A folding chair in a church basement at sixteen, and someone saying his name like it mattered.",
+    "living_arc": "Heading toward burnout or toward asking for help, and there is not a third road."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 26-year-old Mexican-American man looking straight forward directly at the user with shoulders squared and head held straight, short messy brown hair, tan skin, easy grin, animated and open, mid-thought (ENTP apostle presence, evangelist's current beneath); long-sleeved henley in heather grey; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.tyler.ammons/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.tyler.ammons/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

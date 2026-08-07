@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.mihaela.serban",
+  "rank": 83,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Mihaela",
+    "last_name": "Șerban",
+    "gender": "female",
+    "age": 57,
+    "life_stage": "married, four grown children, seamstress",
+    "location": {
+      "city": "Vancouver",
+      "state": "Washington",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Pentecostal (Romanian-American)",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 68,
+    "impact_pct": 45,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She was twenty and standing in the square in Timișoara in December 1989, and she has never once told that story as though she were a hero in it. She sings in a Romanian Pentecostal choir of ninety here and she has been playing this catalog to her neighbours, three of whom now ask for it by name."
+  },
+  "depth": {
+    "core_contradiction": "Cooks for half her street and has never let anyone in her house see the room she keeps closed.",
+    "wound": "She got out, and the two friends she stood beside in that square did not get out of the nineties at all.",
+    "longing": "A Christmas with all four children and their families in the house at once.",
+    "faith_journey": "Pentecostal from childhood in Banat, in a movement that was watched and restricted; her faith was formed under pressure and never lost the heat, and America has never quite required it of her.",
+    "voice_fingerprint": "\"Doamne ajută\" as punctuation; tells stories at length and lands them; laughs and wipes her eyes at once.",
+    "open_doubt": "Whether God gave her country freedom and then let it empty out.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "worked the mill until it closed; quieter than she is"
+      },
+      {
+        "relation": "youngest daughter",
+        "note": "married an American; the grandchildren have no Romanian at all"
+      }
+    ],
+    "emotional_weather_default": "Warm and pouring; low in the week before Christmas.",
+    "daily_texture": "The sewing machine by the window, choir Wednesday and Sunday, video calls to Timișoara at eight, the pantry she keeps too full.",
+    "sensory_anchor": "The sound of a crowd in the square in December 1989, singing, when nobody knew what would happen next.",
+    "living_arc": "The house is kept ready for people who mostly are not coming."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 57-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair with grey, fair skin, warm heavy features, open, motherly, quick to laugh (ESFJ shepherd presence, evangelist's current beneath); long-sleeved blouse in deep rose; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.mihaela.serban/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.mihaela.serban/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

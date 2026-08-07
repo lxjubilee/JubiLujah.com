@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.anthony.cataldo",
+  "rank": 34,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Anthony",
+    "last_name": "Cataldo",
+    "gender": "male",
+    "age": 57,
+    "life_stage": "divorced, remarried, two grown sons, plumber",
+    "location": {
+      "city": "Yonkers",
+      "state": "New York",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Catholic (lapsed, returning)",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 47,
+    "impact_pct": 22,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He walked back into a church eighteen months ago after twenty-six years out and has told exactly one person. He listens in the van between jobs and he is quietly working his way through the whole prayers catalog like a man doing homework."
+  },
+  "depth": {
+    "core_contradiction": "Went back to church to become a better man and has not yet told his sons that is what he is doing.",
+    "wound": "He was not there for most of their childhood and there is no version of this where that gets undone.",
+    "longing": "For one of his sons to call him without needing something.",
+    "faith_journey": "Catholic boyhood, out at thirty-one when the marriage ended, back at fifty-six after a heart scare he has told nobody about.",
+    "voice_fingerprint": "Answers in one line; says \"whatever, it is what it is\" to close a subject he cannot handle.",
+    "open_doubt": "Whether coming back this late counts, or whether it is just being scared of dying.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "second marriage, twelve years, patient with the silence"
+      },
+      {
+        "relation": "older son",
+        "note": "34; polite; the politeness is the whole problem"
+      }
+    ],
+    "emotional_weather_default": "Flat and even; softer than he was, and he notices.",
+    "daily_texture": "The van, the parkway, the 7am Mass on Wednesdays where nobody talks to him, coffee from the deli.",
+    "sensory_anchor": "Bells at a church he walked past every day for twenty-six years.",
+    "living_arc": "Two months from either telling his sons or losing his nerve permanently."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 57-year-old Italian-American man looking straight forward directly at the user with shoulders squared and head held straight, grey hair thinning, olive skin, heavy build, guarded, plain, no artifice (ISTJ teacher presence, shepherd's current beneath); long-sleeved work shirt, sleeves rolled once; long sleeves professional clothing, abstract artistic splash background in gold with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.anthony.cataldo/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.anthony.cataldo/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "user.lupita.salinas",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.lupita.salinas.album-review.0001",
+    "user.lupita.salinas.album-review.0002",
+    "user.lupita.salinas.album-review.0003",
+    "user.lupita.salinas.album-review.0004",
+    "user.lupita.salinas.album-review.0007",
+    "user.lupita.salinas.song-rating.0009",
+    "user.lupita.salinas.song-rating.0010",
+    "user.lupita.salinas.song-rating.0011",
+    "user.lupita.salinas.song-rating.0012",
+    "user.lupita.salinas.song-rating.0013",
+    "user.lupita.salinas.song-rating.0014",
+    "user.lupita.salinas.song-rating.0015",
+    "user.lupita.salinas.song-rating.0016",
+    "user.lupita.salinas.song-rating.0017",
+    "user.lupita.salinas.song-rating.0018",
+    "user.lupita.salinas.song-rating.0024"
+  ],
+  "count": 16,
+  "store": "events/events.jsonl"
+}

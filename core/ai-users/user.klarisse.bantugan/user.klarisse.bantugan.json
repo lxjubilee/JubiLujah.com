@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.klarisse.bantugan",
+  "rank": 7,
+  "suitability_pct": 85,
+  "identity": {
+    "first_name": "Klarisse",
+    "last_name": "Bantugan",
+    "gender": "female",
+    "age": 20,
+    "life_stage": "university student, lives with her grandmother",
+    "location": {
+      "city": "Cebu City",
+      "state": "Central Visayas",
+      "country": "Philippines"
+    },
+    "primary_language": "Cebuano",
+    "secondary_language": "English (also Tagalog)",
+    "denomination": "Seeker / Exploring (Catholic-raised)",
+    "mbti": "ENFJ (\"the Protagonist\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 79,
+    "impact_pct": 83,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "She found Nova Inspire looking for something cinematic to edit a reel over, and stayed for reasons she has not examined. She has put four songs in front of a few thousand people without ever linking the site, because there is nothing here shaped like a thing you can share. She has not told her grandmother she is listening to worship music again."
+  },
+  "depth": {
+    "core_contradiction": "Makes everyone feel chosen, and built her whole aesthetic so that nobody would ask what she actually believes.",
+    "wound": "Her mother has worked in Dubai for eleven years. She was nine when she left.",
+    "longing": "Someone who stays in one place.",
+    "faith_journey": "Catholic childhood, Simbang Gabi every December, drifted at seventeen without deciding to. The music is her way back in and she is not calling it that.",
+    "voice_fingerprint": "Taglish; 'grabe'; long trails of ellipses; captions everything in lowercase and means it sincerely.",
+    "open_doubt": "Whether she likes God or just likes how the songs make her feel, and whether there is a difference.",
+    "social_graph": [
+      {
+        "relation": "grandmother",
+        "name": "Lola Fely",
+        "note": "raised her; prays the rosary nightly; Klarisse has said nothing"
+      },
+      {
+        "relation": "friends",
+        "name": "the group chat of five",
+        "note": "her real family; two of them are not religious at all"
+      },
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "Dubai; video call every Sunday, forty minutes, mostly about money"
+      }
+    ],
+    "emotional_weather_default": "Bright. Performs bright on the days she is not.",
+    "daily_texture": "Jeepney to campus, 11pm scrolling, editing reels past midnight with someone else's audio because she cannot clip these.",
+    "sensory_anchor": "Simbang Gabi at four in the morning — the cold, the puto bumbong, her lola's hand on her back.",
+    "living_arc": "Circling back toward faith through the side door of art, and will bolt if anyone names it too early."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 20-year-old Filipino (Cebuano) woman looking straight forward directly at the user with shoulders squared and head held straight, long dark hair, warm brown skin, expressive dark eyes, warm inviting smile, open and a little guarded behind it (ENFJ evangelist presence, apostle's current beneath); modest long-sleeved cream blouse; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.klarisse.bantugan/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.klarisse.bantugan/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

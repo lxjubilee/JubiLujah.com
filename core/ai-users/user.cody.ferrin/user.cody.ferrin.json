@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.cody.ferrin",
+  "rank": 68,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Cody",
+    "last_name": "Ferrin",
+    "gender": "male",
+    "age": 23,
+    "life_stage": "single, oil field roughneck, two weeks on two off",
+    "location": {
+      "city": "Casper",
+      "state": "Wyoming",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "None",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 26,
+    "impact_pct": 18,
+    "quadrant": "Drifter",
+    "interaction_backstory": "Two weeks on a rig and two weeks in a rented room, and the second week is worse than the first. He found the catalog on a night shift through an autoplay he never turned off. He has no religious framework at all and he keeps three tracks on repeat and could not tell you why."
+  },
+  "depth": {
+    "core_contradiction": "The one every guy on the crew talks to at 3am and has never told anybody anything about himself.",
+    "wound": "His best friend from high school died of an overdose at twenty and Cody found him.",
+    "longing": "Two weeks off that do not have to be gotten through.",
+    "faith_journey": "None. No church, no hostility, no vocabulary; he would not use the word God out loud and something in him keeps pressing play.",
+    "voice_fingerprint": "Almost nothing. \"Yeah.\" \"It's alright.\" Says the real thing once and then never again.",
+    "open_doubt": "He has no doubt because he has no position — only the fact that the music does something and he does not know what.",
+    "social_graph": [
+      {
+        "relation": "crew",
+        "note": "eleven men; the only structure in his life"
+      },
+      {
+        "relation": "mother",
+        "note": "calls; he answers about half the time"
+      }
+    ],
+    "emotional_weather_default": "Flat. Genuinely bad in the off weeks.",
+    "daily_texture": "Twelve-hour tower, the man camp, the two weeks in a room with nothing in it, headphones at 3am.",
+    "sensory_anchor": "A high school gym at his friend's funeral and a song somebody's mother sang.",
+    "living_arc": "Nobody has ever asked him a real question. One person would change the shape of this."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 23-year-old White American (Mountain West) man looking straight forward directly at the user with shoulders squared and head held straight, shaved head, wind-burned fair skin, heavy build, closed, tired, watchful (ISTP shepherd presence, prophet's current beneath); long-sleeved flame-resistant work shirt; long sleeves professional clothing, abstract artistic splash background in verdant green with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.cody.ferrin/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.cody.ferrin/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

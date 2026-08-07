@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.andrei.lupescu",
+  "rank": 95,
+  "suitability_pct": 80,
+  "identity": {
+    "first_name": "Andrei",
+    "last_name": "Lupescu",
+    "gender": "male",
+    "age": 27,
+    "life_stage": "single, doctoral student in history",
+    "location": {
+      "city": "Iași",
+      "state": "Iași",
+      "country": "Romania"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Orthodox (non-practising)",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 41,
+    "impact_pct": 61,
+    "quadrant": "Signal",
+    "interaction_backstory": "He researches the Church under the communist regime, which means he knows exactly what the hierarchy did and did not do, and he cannot unknow it. He found this catalog through a friend abroad and listens while he works, which he finds absurd and has not stopped. He writes a widely-read blog about religion in Romania and has never mentioned it once."
+  },
+  "depth": {
+    "core_contradiction": "Spends his working life proving the Church compromised and cannot get through the Easter service without his throat closing.",
+    "wound": "He found his own grandfather's name in a file, on the wrong side of it.",
+    "longing": "For the tradition to be true independently of the men who ran it.",
+    "faith_journey": "Baptised, taken to church by his grandmother, out at twenty when the archives started making sense; not an atheist, and not going back on the current terms.",
+    "voice_fingerprint": "Long, precise, footnoted sentences; sardonic; \"din păcate\" — unfortunately — used constantly.",
+    "open_doubt": "Whether an institution that collaborated can still carry the thing it claims to carry.",
+    "social_graph": [
+      {
+        "relation": "grandmother",
+        "note": "92; took him to church every Sunday of his childhood; he has not told her about the file"
+      },
+      {
+        "relation": "supervisor",
+        "note": "an older historian, himself devout, who has never once pressed him"
+      }
+    ],
+    "emotional_weather_default": "Dry and level; genuinely stricken about twice a year, both times in Holy Week.",
+    "daily_texture": "The archive reading room, index cards, coffee at the university, a flat with too many books, blog drafts at 1am.",
+    "sensory_anchor": "The Denia service on Holy Friday, the flowers, the whole church bending to pass under the epitaph.",
+    "living_arc": "He is writing a chapter he knows will hurt people he loves."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 27-year-old Romanian (Moldavian) man looking straight forward directly at the user with shoulders squared and head held straight, dark hair unkempt, pale skin, glasses, thin, sceptical, tired, quick-eyed (INTP prophet presence, teacher's current beneath); long-sleeved shirt in faded black; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.andrei.lupescu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.andrei.lupescu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

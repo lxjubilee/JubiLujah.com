@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.cassidy.hollis",
+  "rank": 16,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Cassidy",
+    "last_name": "Hollis",
+    "gender": "female",
+    "age": 29,
+    "life_stage": "married to an active-duty soldier, two children under five",
+    "location": {
+      "city": "Fayetteville",
+      "state": "North Carolina",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Church of Christ",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 66,
+    "impact_pct": 38,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Third duty station in six years, third church, third set of people who do not know her yet. She found the site during a deployment and it became the one thing that did not change when the address did. She keeps a bedtime playlist that has crossed three states, and she has quietly sent it to four other spouses on post the week their husbands left."
+  },
+  "depth": {
+    "core_contradiction": "The one everyone leans on at every new post, and she has not had a friend who knew her for more than twenty-six months since she was twenty-two.",
+    "wound": "She stopped unpacking the good dishes in 2023 and has not admitted why.",
+    "longing": "A church where somebody notices when she is not there.",
+    "faith_journey": "Church of Christ, a cappella, her grandparents' congregation; the tradition is the only continuous address she has, and she guards it more fiercely with every move.",
+    "voice_fingerprint": "Says 'we're good' before anyone asks; organizes everything into 'the plan'; ends hard sentences with 'so.'",
+    "open_doubt": "Whether God moves them or the Army does, and whether she has been calling one the other for six years.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Marcus",
+        "note": "deployed; nine weeks out; they talk when they can"
+      },
+      {
+        "relation": "spouses on post",
+        "name": null,
+        "note": "four women; the deepest they get is casseroles, and it is not nothing"
+      },
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "in Alabama; wants them home; says so every call"
+      }
+    ],
+    "emotional_weather_default": "Steady and capable; hollowed out the first two weeks after a move.",
+    "daily_texture": "Nap schedule taped to the fridge, the commissary run, boxes still in the garage, bedtime playlist at 7:30 sharp.",
+    "sensory_anchor": "Four-part harmony with no instruments, in a small hot building in Alabama, at eight years old.",
+    "living_arc": "Coming up on a decision about whether to stay in, and it is her decision as much as his."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 29-year-old Black American woman looking straight forward directly at the user with shoulders squared and head held straight, dark curly hair pulled back, warm brown skin, steady eyes, composed and kind, tired around the edges (ISTJ shepherd presence, apostle's current beneath); long-sleeved navy top, simple; long sleeves professional clothing, abstract artistic splash background in verdant green with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.cassidy.hollis/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.cassidy.hollis/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "user.dimitris.anagnostou",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.dimitris.anagnostou.album-review.0001",
+    "user.dimitris.anagnostou.album-review.0002",
+    "user.dimitris.anagnostou.album-review.0003",
+    "user.dimitris.anagnostou.album-review.0004",
+    "user.dimitris.anagnostou.album-review.0005",
+    "user.dimitris.anagnostou.album-review.0006",
+    "user.dimitris.anagnostou.album-review.0007",
+    "user.dimitris.anagnostou.album-review.0008",
+    "user.dimitris.anagnostou.song-rating.0009",
+    "user.dimitris.anagnostou.song-rating.0010",
+    "user.dimitris.anagnostou.song-rating.0011",
+    "user.dimitris.anagnostou.song-rating.0012",
+    "user.dimitris.anagnostou.song-rating.0013",
+    "user.dimitris.anagnostou.song-rating.0014",
+    "user.dimitris.anagnostou.song-rating.0015",
+    "user.dimitris.anagnostou.song-rating.0016",
+    "user.dimitris.anagnostou.song-rating.0017",
+    "user.dimitris.anagnostou.song-rating.0018",
+    "user.dimitris.anagnostou.song-rating.0019",
+    "user.dimitris.anagnostou.song-rating.0020",
+    "user.dimitris.anagnostou.song-rating.0021",
+    "user.dimitris.anagnostou.song-rating.0022",
+    "user.dimitris.anagnostou.song-rating.0023",
+    "user.dimitris.anagnostou.song-rating.0024"
+  ],
+  "count": 24,
+  "store": "events/events.jsonl"
+}

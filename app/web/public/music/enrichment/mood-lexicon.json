@@ -1,0 +1,31 @@
+{
+  "_comment": "LLM-authored lexicon. Title/theme keyword groups that refine the genre-prior baseline for a track: each group nudges energy up/down and adds mood tags. Consumed by scripts/enrich-tracks.mjs. Matching is case-insensitive, word-boundary, against the track title + album title + album free-text theme.",
+  "_vocabulary": [
+    "joy", "triumph", "thanksgiving", "exuberance", "victory", "celebration", "jubilant",
+    "hope", "gratitude", "peace", "awe", "wonder", "reverence", "tenderness", "intimacy",
+    "comfort", "courage", "determination", "surrender", "longing", "reflective", "gentle",
+    "warfare", "lament", "mourning", "sorrow", "contemplative", "somber", "repentance", "intercession"
+  ],
+  "groups": [
+    { "energy": 14, "moods": ["celebration", "exuberance", "triumph"],
+      "words": ["praise", "shout", "dance", "celebrate", "celebration", "victory", "victorious", "alive", "fire", "rise", "arise", "joy", "joyful", "hallelujah", "glory", "unstoppable", "roar", "anthem", "clap", "jump", "party", "festival", "loud", "lifted", "hands high"] },
+    { "energy": 8, "moods": ["hope", "courage", "determination"],
+      "words": ["overcome", "overcomer", "conquer", "stand", "strong", "mighty", "unshakable", "unashamed", "bold", "march", "run", "chase", "forward", "brave"] },
+    { "energy": -18, "moods": ["tenderness", "surrender", "reverence", "peace", "contemplative"],
+      "words": ["still", "rest", "quiet", "gentle", "peace", "lullaby", "softly", "abide", "secret place", "whisper", "holy", "sacred", "calm", "slow", "breathe", "sabbath", "soaking", "linger", "dwell"] },
+    { "energy": -10, "moods": ["intimacy", "tenderness", "longing"],
+      "words": ["closer", "near", "beloved", "heart", "embrace", "hold", "tender", "sweet", "gaze", "yearn", "long for", "hunger", "thirst"] },
+    { "energy": -22, "moods": ["lament", "mourning", "sorrow", "contemplative", "somber"],
+      "words": ["lament", "mourn", "mourning", "sorrow", "tears", "ashes", "broken", "brokenness", "wilderness", "valley", "cry", "weep", "grief", "dust", "night", "shadow", "wound", "ache"] },
+    { "energy": -6, "moods": ["intercession", "repentance", "surrender"],
+      "words": ["intercede", "intercession", "cry out", "mercy", "forgive", "forgiveness", "repent", "repentance", "return", "kneel", "plea", "prostrate", "humble", "contrite", "search me"] },
+    { "energy": 2, "moods": ["comfort", "hope", "tenderness"],
+      "words": ["heal", "healing", "restore", "restoration", "comfort", "balm", "mend", "whole", "wholeness", "carry", "shepherd", "refuge", "shelter"] },
+    { "energy": 12, "moods": ["warfare", "victory", "triumph", "courage", "determination"],
+      "words": ["war", "battle", "chains", "freedom", "free", "breakthrough", "stronghold", "strongholds", "overcome", "weapon", "army", "roar", "shake", "tremble", "banner"] },
+    { "energy": 6, "moods": ["thanksgiving", "gratitude", "joy"],
+      "words": ["thank", "thanks", "thankful", "thanksgiving", "grateful", "gratitude", "goodness", "faithful", "blessing", "blessed", "provision", "harvest"] },
+    { "energy": 4, "moods": ["awe", "wonder", "reverence"],
+      "words": ["awe", "wonder", "wonderful", "majesty", "majestic", "throne", "heaven", "eternal", "everlasting", "king", "reign", "worthy", "glorious"] }
+  ]
+}

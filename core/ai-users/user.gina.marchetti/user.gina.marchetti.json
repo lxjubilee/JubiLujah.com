@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.gina.marchetti",
+  "rank": 31,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Gina",
+    "last_name": "Marchetti",
+    "gender": "female",
+    "age": 49,
+    "life_stage": "married, two teenagers, school administrator",
+    "location": {
+      "city": "Staten Island",
+      "state": "New York",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Italian",
+    "denomination": "Catholic",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 70,
+    "impact_pct": 52,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She found the prayers catalog looking for something to play at her mother-in-law's wake and it has stayed on in the house since. She is the person in her parish everyone calls about a funeral, and she has sent the same album to eleven grieving families this year."
+  },
+  "depth": {
+    "core_contradiction": "Runs everybody else's grief with total competence and has not sat down in her own.",
+    "wound": "Her father died on a Tuesday and she planned the entire funeral before she cried.",
+    "longing": "To fall apart somewhere it would be allowed.",
+    "faith_journey": "Catholic, unbroken, unexamined and deeply held; the rosary is muscle memory and the belief is real.",
+    "voice_fingerprint": "Talks over you affectionately; \"listen to me for a second\"; ends calls with \"you need anything\".",
+    "open_doubt": "Whether her faith is faith or family loyalty wearing its clothes.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "sanitation, twenty-six years; they are solid and they do not talk about the deep things"
+      },
+      {
+        "relation": "sister",
+        "note": "in Jersey; the one who does cry, and Gina resents it slightly"
+      }
+    ],
+    "emotional_weather_default": "Warm and fast; hits a wall around 9pm.",
+    "daily_texture": "School office by seven, the Verrazzano, Sunday sauce, the group text of forty cousins.",
+    "sensory_anchor": "Incense and her grandmother's coat.",
+    "living_arc": "The next funeral is going to be one she cannot manage her way through."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 49-year-old Italian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair with highlights, olive skin, strong features, warm and direct, mid-sentence (ESFJ shepherd presence, evangelist's current beneath); long-sleeved wine-colored blouse; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.gina.marchetti/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.gina.marchetti/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

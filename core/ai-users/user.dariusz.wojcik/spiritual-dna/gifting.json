@@ -1,0 +1,15 @@
+{
+  "id": "user.dariusz.wojcik",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Apostle"
+  ],
+  "engagement": {
+    "energy_pct": 50,
+    "impact_pct": 24,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

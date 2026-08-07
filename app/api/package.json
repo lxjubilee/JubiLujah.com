@@ -8,7 +8,20 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "qr:verify": "node scripts/redirector-qr-verify.mjs",
+    "redirector:check": "node scripts/redirector-logic-check.mjs",
+    "redirector:smoke": "node scripts/redirector-api-smoke.mjs",
+    "redirector:rules": "node scripts/redirector-rules-check.mjs",
+    "redirector:landing": "node scripts/redirector-landing-check.mjs",
+    "redirector:resume": "node scripts/redirector-resume-check.mjs",
+    "redirector:ephemeral": "node scripts/redirector-ephemeral-check.mjs",
+    "redirector:reports": "node scripts/redirector-reports-check.mjs",
+    "redirector:landing-html": "node scripts/redirector-landing-html-check.ts",
+    "redirector:failover": "node scripts/redirector-failover-check.mjs",
+    "redirector:health-check": "node scripts/redirector-health-check.mjs",
+    "redirector:snapshot": "node scripts/redirector-snapshot.mjs",
+    "redirector:health": "node scripts/redirector-health.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1075.0",
@@ -20,9 +33,11 @@
     "express-rate-limit": "^7.4.0",
     "helmet": "^7.1.0",
     "jose": "^5.6.3",
+    "jsqr": "^1.4.0",
     "pg": "^8.12.0",
     "pino": "^9.3.2",
     "pino-http": "^10.3.0",
+    "qrcode": "^1.5.4",
     "stripe": "^16.12.0",
     "uuid": "^9.0.1",
     "zod": "^3.23.8"

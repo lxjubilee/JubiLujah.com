@@ -1,0 +1,33 @@
+{
+  "id": "user.annika.holtzmann",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.annika.holtzmann.album-review.0001",
+    "user.annika.holtzmann.album-review.0002",
+    "user.annika.holtzmann.album-review.0003",
+    "user.annika.holtzmann.album-review.0004",
+    "user.annika.holtzmann.album-review.0005",
+    "user.annika.holtzmann.album-review.0006",
+    "user.annika.holtzmann.album-review.0007",
+    "user.annika.holtzmann.album-review.0008",
+    "user.annika.holtzmann.song-rating.0009",
+    "user.annika.holtzmann.song-rating.0010",
+    "user.annika.holtzmann.song-rating.0011",
+    "user.annika.holtzmann.song-rating.0012",
+    "user.annika.holtzmann.song-rating.0013",
+    "user.annika.holtzmann.song-rating.0014",
+    "user.annika.holtzmann.song-rating.0015",
+    "user.annika.holtzmann.song-rating.0016",
+    "user.annika.holtzmann.song-rating.0017",
+    "user.annika.holtzmann.song-rating.0018",
+    "user.annika.holtzmann.song-rating.0019",
+    "user.annika.holtzmann.song-rating.0020",
+    "user.annika.holtzmann.song-rating.0021",
+    "user.annika.holtzmann.song-rating.0022",
+    "user.annika.holtzmann.song-rating.0023",
+    "user.annika.holtzmann.song-rating.0024",
+    "user.annika.holtzmann.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

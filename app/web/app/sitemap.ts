@@ -1,11 +1,17 @@
 import type { MetadataRoute } from 'next';
 import { listArtists, allAlbumCodes } from '@/lib/manifest';
+import { backstageSlugs } from '@/lib/backstage';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ['', '/inspire', '/children', '/faith-based', '/general', '/prayers', '/playlists', '/privacy', '/terms']
+  const staticRoutes = ['', '/inspire', '/children', '/faith-based', '/general', '/prayers', '/playlists', '/backstage', '/privacy', '/terms']
     .map((p) => ({ url: `${SITE}${p}`, changeFrequency: 'weekly' as const, priority: p === '' ? 1 : 0.8 }));
+
+  // Backstage articles — long-form editorial, worth indexing individually.
+  const backstage = backstageSlugs().map((slug) => ({
+    url: `${SITE}/backstage/${slug}`, changeFrequency: 'monthly' as const, priority: 0.6,
+  }));
 
   const artists = listArtists().map((a) => ({
     url: `${SITE}/artist/${a.slug}`, changeFrequency: 'weekly' as const, priority: 0.6,
@@ -16,5 +22,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE}/album?c=${code}`, changeFrequency: 'monthly' as const, priority: 0.5,
   }));
 
-  return [...staticRoutes, ...artists, ...albums];
+  return [...staticRoutes, ...backstage, ...artists, ...albums];
 }

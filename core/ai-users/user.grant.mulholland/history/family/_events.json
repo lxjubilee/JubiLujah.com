@@ -1,0 +1,14 @@
+{
+  "id": "user.grant.mulholland",
+  "life_area": "family",
+  "event_ids": [
+    "user.grant.mulholland.album-review.0001",
+    "user.grant.mulholland.album-review.0006",
+    "user.grant.mulholland.song-rating.0009",
+    "user.grant.mulholland.song-rating.0010",
+    "user.grant.mulholland.song-rating.0011",
+    "user.grant.mulholland.song-rating.0024"
+  ],
+  "count": 6,
+  "store": "events/events.jsonl"
+}

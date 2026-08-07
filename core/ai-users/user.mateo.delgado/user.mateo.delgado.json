@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.mateo.delgado",
+  "rank": 54,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Mateo",
+    "last_name": "Delgado",
+    "gender": "male",
+    "age": 24,
+    "life_stage": "single, muralist and part-time barista",
+    "location": {
+      "city": "Chicago (Pilsen)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "English",
+    "denomination": "Catholic (culturally) / seeking",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 41,
+    "impact_pct": 63,
+    "quadrant": "Signal",
+    "interaction_backstory": "He paints murals with headphones in and a wall takes forty hours, which is a lot of listening. He found the catalog through a friend and it went straight into his work playlist and then into his stories, where nine hundred people saw it. He has never opened an account and he has never once looked at the artist page."
+  },
+  "depth": {
+    "core_contradiction": "Paints saints on public walls for a neighborhood that raised him and has not been inside a church since his abuela's funeral.",
+    "wound": "The building he grew up in sold, and the family scattered across three states in one summer.",
+    "longing": "A neighborhood that stays put long enough to belong to.",
+    "faith_journey": "Catholic by inheritance and imagery, not by practice; the iconography is in his hands and the belief is unresolved.",
+    "voice_fingerprint": "Quiet in person, expansive in captions; answers with an image instead of a sentence.",
+    "open_doubt": "Whether he believes any of it or just loves how it looks, and whether the second thing is a smaller thing.",
+    "social_graph": [
+      {
+        "relation": "abuela",
+        "note": "dead four years; the reason for every saint he paints"
+      },
+      {
+        "relation": "crew",
+        "note": "three other muralists; the closest thing to a congregation he has"
+      }
+    ],
+    "emotional_weather_default": "Even and absorbed; low in February.",
+    "daily_texture": "Scaffold by nine, forty-hour walls, the cafe shift, 2am edits, paint under the nails permanently.",
+    "sensory_anchor": "Copal smoke and marigolds on a kitchen table on the second of November.",
+    "living_arc": "Painting his way back toward something and refusing to name it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 24-year-old Mexican-American (Chicago) man looking straight forward directly at the user with shoulders squared and head held straight, black hair tied back, warm brown skin, paint-flecked hands, quiet, observant, unhurried (ISFP evangelist presence, prophet's current beneath); long-sleeved work shirt in faded indigo; long sleeves professional clothing, abstract artistic splash background in azure blue with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.mateo.delgado/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.mateo.delgado/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

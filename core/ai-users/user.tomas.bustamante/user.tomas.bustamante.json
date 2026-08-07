@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.tomas.bustamante",
+  "rank": 47,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Tomás",
+    "last_name": "Bustamante",
+    "gender": "male",
+    "age": 42,
+    "life_stage": "married, three children, general contractor",
+    "location": {
+      "city": "Mesa",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Spanish",
+    "denomination": "Non-Denominational (formerly Catholic)",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 70,
+    "impact_pct": 67,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He plants small groups the way he frames houses — fast, square, and he does not stop to admire them. Four groups in three years, all still running. He uses your catalog as the soundtrack for every launch and he has never given the site credit because it never occurred to him that anyone was watching."
+  },
+  "depth": {
+    "core_contradiction": "Starts everything and finishes almost nothing, and calls it faith.",
+    "wound": "His father was a deacon in a parish that protected a man it should not have, and Tomás found out at thirty-one.",
+    "longing": "To build something that will not have to be taken apart later.",
+    "faith_journey": "Catholic to thirty-one, out fast and hard, non-denominational since; the anger has cooled into architecture.",
+    "voice_fingerprint": "Decisive; \"here is the play\"; interrupts and apologizes for interrupting.",
+    "open_doubt": "Whether he left for the truth or for the pleasure of being the one who left.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "still misses the Mass; goes with him anyway"
+      },
+      {
+        "relation": "father",
+        "note": "82; they see each other and do not discuss it"
+      }
+    ],
+    "emotional_weather_default": "Fast and warm; short-tempered when a project stalls.",
+    "daily_texture": "Job sites by six, the truck as an office, Thursday groups, three kids' schedules on the dash.",
+    "sensory_anchor": "Incense and his mother's hand on his back at a funeral Mass.",
+    "living_arc": "One of the four groups is failing and he wants to start a fifth instead of fixing it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 42-year-old Mexican-American (Sonoran Desert) man looking straight forward directly at the user with shoulders squared and head held straight, dark hair, deep tan, close beard, thick build, decisive, engaged, direct (ENTJ apostle presence, prophet's current beneath); long-sleeved work shirt in dark grey; long sleeves professional clothing, abstract artistic splash background in royal purple with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.tomas.bustamante/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.tomas.bustamante/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

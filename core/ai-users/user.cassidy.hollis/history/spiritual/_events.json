@@ -1,0 +1,23 @@
+{
+  "id": "user.cassidy.hollis",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.cassidy.hollis.album-review.0003",
+    "user.cassidy.hollis.album-review.0004",
+    "user.cassidy.hollis.album-review.0006",
+    "user.cassidy.hollis.album-review.0007",
+    "user.cassidy.hollis.album-review.0008",
+    "user.cassidy.hollis.song-rating.0015",
+    "user.cassidy.hollis.song-rating.0016",
+    "user.cassidy.hollis.song-rating.0017",
+    "user.cassidy.hollis.song-rating.0018",
+    "user.cassidy.hollis.song-rating.0019",
+    "user.cassidy.hollis.song-rating.0023",
+    "user.cassidy.hollis.song-rating.0024",
+    "user.cassidy.hollis.song-rating.0025",
+    "user.cassidy.hollis.song-rating.0026",
+    "user.cassidy.hollis.song-rating.0027"
+  ],
+  "count": 15,
+  "store": "events/events.jsonl"
+}

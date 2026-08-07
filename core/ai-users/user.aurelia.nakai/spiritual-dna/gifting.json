@@ -1,0 +1,15 @@
+{
+  "id": "user.aurelia.nakai",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Teacher"
+  ],
+  "engagement": {
+    "energy_pct": 53,
+    "impact_pct": 43,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

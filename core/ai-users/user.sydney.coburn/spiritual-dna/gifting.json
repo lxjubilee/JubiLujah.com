@@ -1,0 +1,15 @@
+{
+  "id": "user.sydney.coburn",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Evangelist",
+    "Prophet"
+  ],
+  "engagement": {
+    "energy_pct": 43,
+    "impact_pct": 27,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

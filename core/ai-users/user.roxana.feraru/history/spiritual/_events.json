@@ -1,0 +1,11 @@
+{
+  "id": "user.roxana.feraru",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.roxana.feraru.album-review.0009",
+    "user.roxana.feraru.song-rating.0027",
+    "user.roxana.feraru.song-rating.0028"
+  ],
+  "count": 3,
+  "store": "events/events.jsonl"
+}

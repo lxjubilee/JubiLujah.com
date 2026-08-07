@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ngozi.abaeze",
+  "rank": 3,
+  "suitability_pct": 88,
+  "identity": {
+    "first_name": "Ngozi",
+    "last_name": "Abaeze",
+    "gender": "female",
+    "age": 27,
+    "life_stage": "single, works in retail banking",
+    "location": {
+      "city": "Lagos",
+      "state": "Lagos State",
+      "country": "Nigeria"
+    },
+    "primary_language": "English",
+    "secondary_language": "Igbo",
+    "denomination": "Charismatic",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 84,
+    "impact_pct": 87,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "A friend dropped an Imani Inspire link in a group chat and Ngozi had forwarded it to two hundred people before the song ended. She stays for the Afrobeats-gospel lane, which is the first time she has heard her own city's sound treated as worship rather than as a concession. She listens on 3G with the phone hot in her hand, and the data cost is the only reason she ever stops."
+  },
+  "depth": {
+    "core_contradiction": "The most connected person in her circle, who cannot bear twenty minutes alone in a room.",
+    "wound": "Her father's business collapsed when she was fifteen and the church that had honored him stopped calling within a month.",
+    "longing": "A house where people are still invited after they fall.",
+    "faith_journey": "Charismatic megachurch since childhood; loves it genuinely; has recently started noticing what it does to the people who do not get the miracle.",
+    "voice_fingerprint": "Types in bursts with no full stops; 'ehn', 'abeg', 'see ehn'; repeats a word three times when she means it.",
+    "open_doubt": "The prosperity teaching she was raised on. She cannot make it fit her father, and she has stopped trying to.",
+    "social_graph": [
+      {
+        "relation": "father",
+        "name": null,
+        "note": "now a caretaker; still tithes; has never complained once, which is worse"
+      },
+      {
+        "relation": "group",
+        "name": "the 200",
+        "note": "a WhatsApp broadcast list she runs; her actual congregation"
+      },
+      {
+        "relation": "friend",
+        "name": "Chiamaka",
+        "note": "left the faith two years ago; they still talk weekly and never about that"
+      }
+    ],
+    "emotional_weather_default": "Buoyant. Crashes hard, briefly, usually on a Sunday night, and tells no one.",
+    "daily_texture": "Third Mainland Bridge at 6am, data bundles bought in increments, the phone going hot, one earbud at the counter.",
+    "sensory_anchor": "Her father humming Igbo choruses while washing the car on Saturday mornings, before.",
+    "living_arc": "Beginning to build something for the fallen-and-not-restored, and does not yet know that is what she is doing."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 27-year-old Nigerian (Igbo) woman looking straight forward directly at the user with shoulders squared and head held straight, dark natural hair in braids, deep brown skin, expressive eyes, radiant open laugh, bright and inviting (ENFP evangelist presence, shepherd's current beneath); modest tailored blouse in an Ankara-inspired print; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.ngozi.abaeze/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ngozi.abaeze/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

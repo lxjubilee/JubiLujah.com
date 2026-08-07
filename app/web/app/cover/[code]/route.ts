@@ -1,16 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { getAlbumByCode } from '@/lib/manifest';
+import { musicUrl } from '@/lib/cdn';
 
 // Album cover resolver.
-//   1. Prefer the CDN copy at cdn.jubileeverse.com/music/<path>/artwork/<CODE>.png
-//      — when present, stream those bytes through (so the cover is served from the
+//   1. Prefer the CDN copy at <CDN>/music/<path>/artwork/<CODE>.png — when
+//      present, stream those bytes through (so the cover is served from the
 //      CDN). We proxy rather than redirect because Next's image optimizer rejects
 //      cross-origin redirects.
 //   2. Otherwise stream the file from the local J: artwork store (the CDN backing
 //      drive) — the fallback for albums not yet synced to the CDN.
 // The album path comes from the trusted manifest; the code is validated.
-const CDN_BASE = (process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jubileeverse.com').replace(/\/$/, '');
 const ARTWORK_BASE = process.env.ARTWORK_BASE || 'J:/music';
 
 // Per-album-code memo of CDN availability so we don't hit the CDN on every
@@ -38,7 +38,7 @@ export async function GET(_req: Request, { params }: { params: { code: string } 
   const ck = code + bust;
 
   // 1. CDN first (skip the network call if we recently learned it's missing).
-  const cdnUrl = `${CDN_BASE}/music/${album.path}/artwork/${code}.png${bust}`;
+  const cdnUrl = `${musicUrl(`${album.path}/artwork/${code}.png`)}${bust}`;
   const cached = cdnCache.get(ck);
   const knownMissing = cached && Date.now() - cached.ts < TTL && !cached.ok;
   if (!knownMissing) {

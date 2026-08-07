@@ -1,0 +1,14 @@
+{
+  "id": "user.zsofia.almasi",
+  "synthetic": true,
+  "primary_language": "Hungarian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 65,
+    "impact_pct": 51
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

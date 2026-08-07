@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.tanisha.culpepper",
+  "rank": 57,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Tanisha",
+    "last_name": "Culpepper",
+    "gender": "female",
+    "age": 45,
+    "life_stage": "married, two teenagers, city planner",
+    "location": {
+      "city": "Decatur",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "AME",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 66,
+    "impact_pct": 39,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She runs the hospitality ministry, which in practice means she notices who came alone. She uses the catalog for the fellowship hall and for her own car, and the two lists have nothing in common. Nobody has ever asked her what she plays and why."
+  },
+  "depth": {
+    "core_contradiction": "Notices everyone who is alone in the room and has been the loneliest person in her own house for two years.",
+    "wound": "Her marriage went quiet after her mother moved in, and nobody has said a word about it since.",
+    "longing": "To be noticed by the person who is supposed to notice.",
+    "faith_journey": "AME from birth, class leader, steward; the tradition is her spine and it does not require her to be honest.",
+    "voice_fingerprint": "\"Now you know\"; warm formality; asks three questions before offering an opinion.",
+    "open_doubt": "Whether God cares about a marriage that is not failing, just empty.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "82; lives with them; the axis everything reorganized around"
+      },
+      {
+        "relation": "husband",
+        "note": "present, decent, silent"
+      }
+    ],
+    "emotional_weather_default": "Warm and attentive; hollow on Saturday mornings.",
+    "daily_texture": "Zoning hearings, the fellowship hall at 8am, her mother's medication schedule, the car radio.",
+    "sensory_anchor": "The AME hymn her grandmother lined out, one line at a time, with the whole church answering.",
+    "living_arc": "One honest sentence away from a conversation she has been not-having for two years."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 45-year-old Black American (Atlanta) woman looking straight forward directly at the user with shoulders squared and head held straight, natural hair in a low twist-out, deep brown skin, warm face, gracious, attentive, composed (ESFJ shepherd presence, teacher's current beneath); long-sleeved blouse in soft gold; long sleeves professional clothing, abstract artistic splash background in verdant green with gold smudge accents.",
+    "image_path": "core/ai-users/user.tanisha.culpepper/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.tanisha.culpepper/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

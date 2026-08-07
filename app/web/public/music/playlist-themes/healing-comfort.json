@@ -1,0 +1,17 @@
+{
+  "theme_id": "healing-comfort",
+  "theme_name": "Healing & Comfort",
+  "theme_statement": "A gospel of rest for fractured hearts. Songs that carry, mend, and steady — hope spoken gently.",
+  "emotional_profile": ["comfort", "hope", "tenderness", "peace", "gratitude", "reverence"],
+  "energy_range": { "min": 28, "max": 72 },
+  "tempo_range": { "min": 60, "max": 108 },
+  "excluded_moods": ["warfare", "exuberance", "somber", "mourning"],
+  "target_track_count": 120,
+  "max_tracks_per_album": 4,
+  "min_distinct_albums": 30,
+  "eligible_personas": "ALL_TWELVE",
+  "testimony_categories": ["healing", "deliverance", "provision"],
+  "supported_arcs": ["steady", "worship_set"],
+  "default_arc": "steady",
+  "hero_image": null, "accent": "#4a9d8e", "related_theme_ids": ["intimate-worship"]
+}

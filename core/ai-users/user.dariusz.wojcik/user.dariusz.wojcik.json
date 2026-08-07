@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.dariusz.wojcik",
+  "rank": 52,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Dariusz",
+    "last_name": "Wójcik",
+    "gender": "male",
+    "age": 51,
+    "life_stage": "married, two teenagers, tool-and-die machinist",
+    "location": {
+      "city": "Chicago (Jefferson Park)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "Polish",
+    "secondary_language": "English",
+    "denomination": "Catholic (Polish parish)",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 50,
+    "impact_pct": 24,
+    "quadrant": "Drifter",
+    "interaction_backstory": "His parish still runs a Polish Mass and his children will not go to it. He found the site looking for something in between — worship his kids would tolerate that would not feel to him like a betrayal of the thing his mother handed him. He has not found it and he keeps checking."
+  },
+  "depth": {
+    "core_contradiction": "Came here for his children's future and spends every Sunday trying to hand them his past.",
+    "wound": "His mother died in Kraków while he was on a shift he could not leave.",
+    "longing": "For his son to say one prayer in Polish, once, without being asked.",
+    "faith_journey": "Polish Catholic, the whole architecture — Advent wreaths, Wigilia, the Częstochowa print in the hall; unquestioned and increasingly lonely.",
+    "voice_fingerprint": "Short, formal English; drops into Polish when angry or tender; says \"so\" as a period.",
+    "open_doubt": "Whether faith survives a language change, and whether his did.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "17; polite refusal; the fight has gone quiet, which is worse"
+      },
+      {
+        "relation": "wife",
+        "note": "goes to the English Mass with the kids; a small daily grief"
+      }
+    ],
+    "emotional_weather_default": "Even and closed; sentimental at Christmas.",
+    "daily_texture": "Second shift, the shop floor, Sunday 9am Polish Mass with the older people, sausage on Saturdays.",
+    "sensory_anchor": "His mother's voice in a hymn he can still sing every word of.",
+    "living_arc": "The Polish Mass has eleven attendees and will not survive the pastor's retirement."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 51-year-old Polish-American man looking straight forward directly at the user with shoulders squared and head held straight, greying blond hair cropped short, fair skin, heavy hands, reserved, level, unshowy (ISTJ teacher presence, apostle's current beneath); long-sleeved dark work shirt; long sleeves professional clothing, abstract artistic splash background in gold with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.dariusz.wojcik/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.dariusz.wojcik/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

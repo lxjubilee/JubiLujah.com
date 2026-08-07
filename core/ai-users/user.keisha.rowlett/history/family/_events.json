@@ -1,0 +1,32 @@
+{
+  "id": "user.keisha.rowlett",
+  "life_area": "family",
+  "event_ids": [
+    "user.keisha.rowlett.album-review.0001",
+    "user.keisha.rowlett.album-review.0002",
+    "user.keisha.rowlett.album-review.0003",
+    "user.keisha.rowlett.album-review.0004",
+    "user.keisha.rowlett.album-review.0005",
+    "user.keisha.rowlett.album-review.0006",
+    "user.keisha.rowlett.album-review.0007",
+    "user.keisha.rowlett.song-rating.0009",
+    "user.keisha.rowlett.song-rating.0010",
+    "user.keisha.rowlett.song-rating.0011",
+    "user.keisha.rowlett.song-rating.0012",
+    "user.keisha.rowlett.song-rating.0013",
+    "user.keisha.rowlett.song-rating.0014",
+    "user.keisha.rowlett.song-rating.0015",
+    "user.keisha.rowlett.song-rating.0016",
+    "user.keisha.rowlett.song-rating.0017",
+    "user.keisha.rowlett.song-rating.0018",
+    "user.keisha.rowlett.song-rating.0019",
+    "user.keisha.rowlett.song-rating.0020",
+    "user.keisha.rowlett.song-rating.0021",
+    "user.keisha.rowlett.song-rating.0022",
+    "user.keisha.rowlett.song-rating.0023",
+    "user.keisha.rowlett.song-rating.0024",
+    "user.keisha.rowlett.song-rating.0025"
+  ],
+  "count": 24,
+  "store": "events/events.jsonl"
+}

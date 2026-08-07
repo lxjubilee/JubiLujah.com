@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.beata.nowicka",
+  "rank": 71,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Beata",
+    "last_name": "Nowicka",
+    "gender": "female",
+    "age": 43,
+    "life_stage": "married, two children, pharmacist",
+    "location": {
+      "city": "Kraków",
+      "state": "Lesser Poland",
+      "country": "Poland"
+    },
+    "primary_language": "Polish",
+    "secondary_language": "English",
+    "denomination": "Catholic",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 55,
+    "impact_pct": 32,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She teaches a children's catechism group at her parish and came to the site looking for anything her group could sing that was not from 1985. Everything is in English, which her ten-year-olds do not have. She uses it anyway, at home, alone."
+  },
+  "depth": {
+    "core_contradiction": "Teaches thirty children the faith of her country and is watching her own two leave it.",
+    "wound": "Her generation was told the Church was the resistance, and her children were told it was the establishment, and both were true.",
+    "longing": "To hand her daughter something that is hers and not just Poland's.",
+    "faith_journey": "Catholic, unbroken, formed under a Pope her country considered its own; the faith and the nation are tangled and she is starting to want them separated.",
+    "voice_fingerprint": "Formal English, precise; apologizes for her English, which is excellent.",
+    "open_doubt": "Whether Polish Catholicism can survive being the majority.",
+    "social_graph": [
+      {
+        "relation": "daughter",
+        "note": "16; stopped going and was honest about why, which Beata respects and cannot answer"
+      },
+      {
+        "relation": "mother",
+        "note": "78; would not survive hearing about it"
+      }
+    ],
+    "emotional_weather_default": "Composed and careful; grieved in a way she treats as private.",
+    "daily_texture": "The pharmacy counter, catechism Saturdays, Sunday Mass with two empty seats, Advent candles.",
+    "sensory_anchor": "A hundred thousand people singing in a field in 1991.",
+    "living_arc": "Beginning to separate her faith from her nation and finding almost nobody to do it with."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 43-year-old Polish woman looking straight forward directly at the user with shoulders squared and head held straight, ash-blonde hair to the shoulder, fair skin, fine features, composed, warm, watchful (ISFJ teacher presence, shepherd's current beneath); long-sleeved blouse in soft grey; long sleeves professional clothing, abstract artistic splash background in gold with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.beata.nowicka/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.beata.nowicka/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

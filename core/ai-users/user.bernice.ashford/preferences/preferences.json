@@ -1,0 +1,14 @@
+{
+  "id": "user.bernice.ashford",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 57,
+    "impact_pct": 33
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

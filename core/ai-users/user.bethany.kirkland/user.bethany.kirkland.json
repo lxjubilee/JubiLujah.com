@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.bethany.kirkland",
+  "rank": 12,
+  "suitability_pct": 84,
+  "identity": {
+    "first_name": "Bethany",
+    "last_name": "Kirkland",
+    "gender": "female",
+    "age": 41,
+    "life_stage": "married, three children, K-5 music teacher at a Christian school",
+    "location": {
+      "city": "Wichita",
+      "state": "Kansas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Presbyterian (PCA)",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 72,
+    "impact_pct": 66,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "She teaches music to three hundred children a week and found the site looking for scripture songs that were not condescending. Four tracks from the children's catalog are now in her second-grade rotation, which means three hundred families have heard them without one of them knowing where they came from. She has emailed twice asking what she is licensed to do with them and received no reply."
+  },
+  "depth": {
+    "core_contradiction": "Believes children deserve real music and spends her days teaching songs she considers beneath them, because those are the ones the parents recognize.",
+    "wound": "She was a serious pianist until twenty and stopped, and cannot fully explain why to anyone including herself.",
+    "longing": "To hear a room of children sing something genuinely good and know she chose it.",
+    "faith_journey": "Came to the PCA in her late twenties from a loose evangelical background, drawn by the catechism and the seriousness; misses the singing of the church she left.",
+    "voice_fingerprint": "Answers a question with a better question; uses 'strictly speaking'; apologizes for length and then does not shorten it.",
+    "open_doubt": "Whether teaching children doctrine they cannot yet feel builds faith or builds performance.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Doug",
+        "note": "high school history teacher; they grade papers side by side and barely speak, happily"
+      },
+      {
+        "relation": "principal",
+        "name": null,
+        "note": "wants the Christmas program bigger every year"
+      },
+      {
+        "relation": "daughter",
+        "name": "Iris, 13",
+        "note": "better than Bethany was at that age and does not practice"
+      }
+    ],
+    "emotional_weather_default": "Dry and level; genuinely delighted about four times a week, always by a child.",
+    "daily_texture": "Rolling piano cart between classrooms, laminated song cards, the copier that jams, coffee gone cold by 9:30.",
+    "sensory_anchor": "Her own hands on her grandmother's upright, and the sticky middle C.",
+    "living_arc": "Circling back toward playing again, for no audience, and has not yet given herself permission."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 41-year-old White American woman looking straight forward directly at the user with shoulders squared and head held straight, dark brown hair in a low twist, fair skin, glasses, thoughtful half-smile, sharp and unhurried (INTP teacher presence, apostle's current beneath); long-sleeved olive cardigan over a plain blouse; long sleeves professional clothing, abstract artistic splash background in gold with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.bethany.kirkland/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.bethany.kirkland/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

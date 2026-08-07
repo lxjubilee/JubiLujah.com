@@ -11,12 +11,11 @@
 // ============================================================================
 import fs from 'node:fs';
 import path from 'node:path';
-
-const CDN = (process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jubileeverse.com').replace(/\/$/, '');
+import { musicUrl } from './cdn';
 
 // Direct CDN url for an album's published cover art (cache-busted when replaced).
 export function cdnCoverUrl(code: string, albumPath: string): string {
-  return withVersion(`${CDN}/music/${albumPath}/artwork/${code}.png`, code);
+  return withVersion(musicUrl(`${albumPath}/artwork/${code}.png`), code);
 }
 
 let coverSet: Set<string> | null = null;

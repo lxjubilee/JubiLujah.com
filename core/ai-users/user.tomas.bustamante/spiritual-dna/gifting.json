@@ -1,0 +1,15 @@
+{
+  "id": "user.tomas.bustamante",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Prophet"
+  ],
+  "engagement": {
+    "energy_pct": 70,
+    "impact_pct": 67,
+    "quadrant": "Amplifier"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

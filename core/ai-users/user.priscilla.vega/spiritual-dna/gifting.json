@@ -1,0 +1,15 @@
+{
+  "id": "user.priscilla.vega",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 31,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

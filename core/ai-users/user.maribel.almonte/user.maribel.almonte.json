@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.maribel.almonte",
+  "rank": 40,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Maribel",
+    "last_name": "Almonte",
+    "gender": "female",
+    "age": 30,
+    "life_stage": "married, two children, medical biller",
+    "location": {
+      "city": "Paterson",
+      "state": "New Jersey",
+      "country": "United States"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "English",
+    "denomination": "Catholic (charismatic renewal)",
+    "mbti": "ENFJ (\"the Protagonist\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 69,
+    "impact_pct": 47,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She runs a Wednesday prayer group of fifteen women in her apartment and the music is half of what makes it work. She switches between Spanish and English worship depending on who is in the room, and she has to leave the site to do the Spanish half."
+  },
+  "depth": {
+    "core_contradiction": "Leads fifteen women in prayer every week and cannot pray out loud in English without her voice shaking.",
+    "wound": "She came here at nine and spent a decade being the family's translator at every appointment, including the bad ones.",
+    "longing": "A room where she is not the one interpreting.",
+    "faith_journey": "Dominican Catholic, lit up in a charismatic retreat at twenty-four, still fully in the parish and privately more Pentecostal than she lets on.",
+    "voice_fingerprint": "Warm and rapid; \"ay, mira\"; prays in Spanish mid-English-sentence without noticing.",
+    "open_doubt": "Whether the intensity she felt on that retreat was permanent or something she has been trying to reproduce ever since.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "works two jobs; supportive, absent, and fine with it"
+      },
+      {
+        "relation": "the fifteen",
+        "note": "her women; three of them are in real trouble and she is carrying it"
+      }
+    ],
+    "emotional_weather_default": "Bright and pouring out; empties on Thursdays.",
+    "daily_texture": "Billing codes all day, the apartment rearranged Wednesday nights, the kids asleep in the back room.",
+    "sensory_anchor": "A retreat chapel at 2am and fifty women crying at once.",
+    "living_arc": "The group needs more than she has and she has not admitted it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 30-year-old Dominican-American woman looking straight forward directly at the user with shoulders squared and head held straight, long dark wavy hair, warm brown skin, expressive face, radiant, engaged, leaning in (ENFJ shepherd presence, apostle's current beneath); long-sleeved blouse in soft yellow; long sleeves professional clothing, abstract artistic splash background in verdant green with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.maribel.almonte/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.maribel.almonte/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

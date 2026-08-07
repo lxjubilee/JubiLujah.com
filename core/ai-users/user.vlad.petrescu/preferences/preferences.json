@@ -1,0 +1,14 @@
+{
+  "id": "user.vlad.petrescu",
+  "synthetic": true,
+  "primary_language": "Romanian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 57,
+    "impact_pct": 35
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

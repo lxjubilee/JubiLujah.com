@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.wendell.prine",
+  "rank": 22,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Wendell",
+    "last_name": "Prine",
+    "gender": "male",
+    "age": 63,
+    "life_stage": "married, bivocational pastor of a sixty-member church",
+    "location": {
+      "city": "Tupelo",
+      "state": "Mississippi",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Church of God (Cleveland)",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 61,
+    "impact_pct": 31,
+    "quadrant": "Devotee",
+    "interaction_backstory": "His last musician moved to Memphis in 2024 and he has led singing from the pulpit ever since, badly. He came here looking for something he could play through a speaker without it sounding like a funeral home, and he has built four services around albums off this site."
+  },
+  "depth": {
+    "core_contradiction": "Preaches on rest every January and has not taken a Sunday off since 2019.",
+    "wound": "Sixty members, down from a hundred and ninety, and he has preached every one of those funerals.",
+    "longing": "One young family to stay past the second visit.",
+    "faith_journey": "Church of God, called at twenty-four, never doubted the call and doubts the results daily.",
+    "voice_fingerprint": "Says \"now\" to start a paragraph; quotes King James from memory and never announces it.",
+    "open_doubt": "Whether faithfulness in a shrinking place is obedience or stubbornness.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "plays piano poorly and gladly; the only other constant"
+      },
+      {
+        "relation": "deacon",
+        "note": "82; has buried two pastors and is not worried"
+      }
+    ],
+    "emotional_weather_default": "Even and dry; heavy Sunday nights.",
+    "daily_texture": "Insurance adjusting Monday to Friday, sermon Saturday, the church van he keeps running himself.",
+    "sensory_anchor": "A packed tent revival in 1978 and the sound of a hundred people standing up at once.",
+    "living_arc": "Deciding whether to tell the congregation he is tired."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 63-year-old White American (Deep South) man looking straight forward directly at the user with shoulders squared and head held straight, thin grey hair, fair weathered skin, wire glasses, steady kind gaze, unhurried (ISTJ teacher presence, apostle's current beneath); long-sleeved white dress shirt, no tie; long sleeves professional clothing, abstract artistic splash background in gold with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.wendell.prine/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.wendell.prine/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

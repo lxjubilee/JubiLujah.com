@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.danika.osorio",
+  "rank": 44,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Danika",
+    "last_name": "Osorio",
+    "gender": "female",
+    "age": 27,
+    "life_stage": "single, veterinary technician",
+    "location": {
+      "city": "Tucson",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Spanish",
+    "denomination": "Dechurched (raised Catholic)",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 33,
+    "impact_pct": 21,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She stopped going at twenty-two and she still cannot sleep without something on. She found the contemplative end of the catalog through a sleep playlist and she has not investigated any further than that on purpose. If the site ever pushes her toward a church she will leave and not come back."
+  },
+  "depth": {
+    "core_contradiction": "Wants nothing to do with the church and has three saints' cards in her glovebox.",
+    "wound": "She came out to her family at twenty-one and her parish handled it in a way that ended her twenties differently than they were going to go.",
+    "longing": "Somewhere she does not have to leave a piece of herself at the door.",
+    "faith_journey": "Catholic through childhood, out at twenty-two, and she has not replaced it with anything; she is not an atheist and she is not going back.",
+    "voice_fingerprint": "Careful; hedges hard; deflects a personal question with a question about your dog.",
+    "open_doubt": "Whether God was in that building or just the people who told her He was.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "they talk weekly and never about this"
+      },
+      {
+        "relation": "friend",
+        "note": "a coworker who is quietly Christian and has never once brought it up, which is why they are friends"
+      }
+    ],
+    "emotional_weather_default": "Low and even; bad in the week before Christmas.",
+    "daily_texture": "Overnight emergency shifts, the desert cool at 4am, the drive home with the windows down, sleep music at seven.",
+    "sensory_anchor": "Her grandmother's rosary beads clicking in the next room.",
+    "living_arc": "The door is not closed. Anyone who pushes it will close it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 27-year-old Mexican-American (Sonoran) woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair cut short, warm brown skin, tired eyes, guarded, gentle, unconvinced (INFP prophet presence, teacher's current beneath); long-sleeved olive scrub top; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.danika.osorio/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.danika.osorio/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

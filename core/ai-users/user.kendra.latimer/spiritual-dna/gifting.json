@@ -1,0 +1,15 @@
+{
+  "id": "user.kendra.latimer",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Shepherd"
+  ],
+  "engagement": {
+    "energy_pct": 81,
+    "impact_pct": 52,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

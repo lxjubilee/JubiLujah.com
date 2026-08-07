@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.anish.varughese",
+  "rank": 9,
+  "suitability_pct": 80,
+  "identity": {
+    "first_name": "Anish",
+    "last_name": "Varughese",
+    "gender": "male",
+    "age": 35,
+    "life_stage": "married, one child, logistics manager",
+    "location": {
+      "city": "Kochi",
+      "state": "Kerala",
+      "country": "India"
+    },
+    "primary_language": "Malayalam",
+    "secondary_language": "English",
+    "denomination": "Orthodox (Malankara / St. Thomas)",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 73,
+    "impact_pct": 58,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He administers a 4:45am prayer rotation for forty people and came here hunting for material to fill the twenty minutes his group could never fill well. He built a schedule around the prayers catalog inside a week. He would pay for a shared playlist that his whole group could open at once, and the platform has no idea he exists."
+  },
+  "depth": {
+    "core_contradiction": "Builds structures for prayer because unstructured prayer frightens him.",
+    "wound": "His father's illness — eighteen months, prayed over by half a state, and it ended anyway.",
+    "longing": "To hand someone a form that holds when their feeling gives out.",
+    "faith_journey": "Ancient liturgy, the Nasrani inheritance, genuinely proud of it. His cousins went Pentecostal and he resents how alive they look.",
+    "voice_fingerprint": "Bullet points in chat messages; 'kindly note'; sends a calendar invite for a conversation.",
+    "open_doubt": "Whether the liturgy is a vessel or a hiding place. He has never phrased it that way out loud.",
+    "social_graph": [
+      {
+        "relation": "prayer group",
+        "name": "the 4:45",
+        "note": "forty people, a spreadsheet, six years without a missed morning"
+      },
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "lives with them; keeps his father's photograph lit"
+      },
+      {
+        "relation": "cousin",
+        "name": "Sajan",
+        "note": "left for a charismatic church; they are warm and there is a wall"
+      }
+    ],
+    "emotional_weather_default": "Contained and forward-moving; monsoon-heavy in June.",
+    "daily_texture": "4:45 alarm, the rotation spreadsheet, the ferry to Ernakulam, tea at the desk at 11.",
+    "sensory_anchor": "Incense and Syriac chant at his father's funeral — the one time the form held him.",
+    "living_arc": "Beginning to suspect the group needs less structure and he needs more, and resisting the thought."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 35-year-old Indian (Malayali) man looking straight forward directly at the user with shoulders squared and head held straight, thick dark hair, brown skin, neatly trimmed moustache, direct, purposeful, warm at the edges (ENTJ apostle presence, teacher's current beneath); pressed long-sleeved shirt in deep indigo; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.anish.varughese/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.anish.varughese/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

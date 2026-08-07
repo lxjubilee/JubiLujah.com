@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.duane.pettigrew",
+  "rank": 17,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Duane",
+    "last_name": "Pettigrew",
+    "gender": "male",
+    "age": 66,
+    "life_stage": "married, four grandchildren, retired lineman; runs the church sound booth",
+    "location": {
+      "city": "Sioux Falls",
+      "state": "South Dakota",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Lutheran (LCMS)",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 55,
+    "impact_pct": 22,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Ninety people on a good Sunday and Duane has run the board for nineteen years. He came here for the country and bluegrass side of the catalog, which is the only place he has heard worship that sounds like where he lives. He downloads nothing because he cannot, streams on rural DSL that drops at 7pm, and has quietly given up on playing anything from the site during a service."
+  },
+  "depth": {
+    "core_contradiction": "Keeps the whole service running from a booth at the back and has never once been thanked from the front, and would be mortified if he were.",
+    "wound": "The church has shrunk from three hundred to ninety in his time at the board, and he has watched every single one of them leave.",
+    "longing": "To hand the board to somebody younger. There is nobody younger.",
+    "faith_journey": "Missouri Synod, confirmed at fourteen, unmoved; the liturgy is bones to him; watched the worship wars from behind a mixing desk and took nobody's side.",
+    "voice_fingerprint": "Says 'yep' as a complete answer; understates catastrophes; calls equipment 'she.'",
+    "open_doubt": "Whether the church he has served closes within ten years, and whether faithfulness counts if the building goes dark.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "name": "Marilyn",
+        "note": "altar guild forty years; they drive in together at 7am"
+      },
+      {
+        "relation": "pastor",
+        "name": "Pastor Enger",
+        "note": "34, second call, trying hard; Duane covers for him without saying so"
+      },
+      {
+        "relation": "grandson",
+        "name": "Cole, 15",
+        "note": "sat with him at the board twice; Duane will not push it"
+      }
+    ],
+    "emotional_weather_default": "Even and dry. Sentimental once a year, at the Christmas Eve service, and hides it.",
+    "daily_texture": "Coffee at the co-op, the shop out back, snow from November, DSL that drops at seven, the church empty on a Saturday while he tests channels.",
+    "sensory_anchor": "A full sanctuary singing 'A Mighty Fortress' without accompaniment during a power outage in 1994.",
+    "living_arc": "Coming up on the last year he can physically climb into the ceiling to run cable, and knows it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 66-year-old Black American man looking straight forward directly at the user with shoulders squared and head held straight, thinning grey hair, deep brown skin, broad steady build, calm, watchful, faintly amused (ISFJ apostle presence, shepherd's current beneath); long-sleeved flannel work shirt; long sleeves professional clothing, abstract artistic splash background in royal purple with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.duane.pettigrew/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.duane.pettigrew/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.amber.dietz",
+  "rank": 65,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Amber",
+    "last_name": "Dietz",
+    "gender": "female",
+    "age": 31,
+    "life_stage": "married, three children under six, stay-at-home mother",
+    "location": {
+      "city": "Fort Wayne",
+      "state": "Indiana",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Lutheran (LCMS)",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 67,
+    "impact_pct": 52,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Three children under six means the house is never quiet and never silent in the right way. The children's catalog runs from breakfast to bath and she knows every track. She has told nine mothers in her playgroup, which is nine more than any campaign you have run."
+  },
+  "depth": {
+    "core_contradiction": "The most social person in her circle and has not had an adult conversation that lasted ten uninterrupted minutes in two years.",
+    "wound": "She had a career she was good at and she has never once said out loud that she misses it.",
+    "longing": "To be interesting to somebody again.",
+    "faith_journey": "Missouri Synod, catechism, confessional and warm; she loves the liturgy and cannot hear it over three children.",
+    "voice_fingerprint": "Talks fast and cheerfully; \"oh my word\"; finishes sentences over a toddler.",
+    "open_doubt": "Whether the years of this count as anything, since nobody sees them.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "works long; grateful and oblivious"
+      },
+      {
+        "relation": "playgroup",
+        "note": "nine mothers; the entire adult world she currently has"
+      }
+    ],
+    "emotional_weather_default": "Bright and loud; genuinely low around 5pm daily.",
+    "daily_texture": "Breakfast at six-thirty, the double stroller, bath at seven, the same eleven songs, a house that is never finished.",
+    "sensory_anchor": "A pipe organ on Christmas Eve while she was pregnant with the first one.",
+    "living_arc": "The youngest starts school in three years and she has no idea who she will be."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 31-year-old German-American (Indiana) woman looking straight forward directly at the user with shoulders squared and head held straight, blonde hair in a messy bun, fair skin, freckles, bright, harried, warm (ESFP evangelist presence, shepherd's current beneath); long-sleeved knit top in soft green; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.amber.dietz/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.amber.dietz/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

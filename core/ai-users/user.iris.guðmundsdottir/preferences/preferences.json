@@ -1,0 +1,14 @@
+{
+  "id": "user.iris.guðmundsdottir",
+  "synthetic": true,
+  "primary_language": "Icelandic",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 31,
+    "impact_pct": 25
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

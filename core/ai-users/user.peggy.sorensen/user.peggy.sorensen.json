@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.peggy.sorensen",
+  "rank": 67,
+  "suitability_pct": 68,
+  "identity": {
+    "first_name": "Peggy",
+    "last_name": "Sorensen",
+    "gender": "female",
+    "age": 63,
+    "life_stage": "married, five grandchildren, retired school cook",
+    "location": {
+      "city": "Bemidji",
+      "state": "Minnesota",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Free Lutheran (AFLC)",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 52,
+    "impact_pct": 19,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She listens in the kitchen and in the car to the lake, and she found the catalog through a church newsletter. She plays the hymn-leaning albums and stops anything that starts building. She has never told anyone she listens, because in her congregation that would be a conversation."
+  },
+  "depth": {
+    "core_contradiction": "The most generous woman in the county and physically unable to accept a casserole from anyone.",
+    "wound": "They lost the farm in the eighties and the whole family reorganized around not talking about it.",
+    "longing": "For one of the grandchildren to ask about the farm.",
+    "faith_journey": "Free Lutheran, plain, unfussy, deeply held; the emotional register of her faith is a quiet certainty and nothing else.",
+    "voice_fingerprint": "\"Oh, you bet\"; says \"different\" when she means bad; understates everything.",
+    "open_doubt": "Whether God was in the eighties, and if so, what He was doing.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "drove truck thirty years; they can sit for an hour without speaking, happily"
+      },
+      {
+        "relation": "granddaughter",
+        "note": "16; the only one who asks questions"
+      }
+    ],
+    "emotional_weather_default": "Steady and mild; quiet in the dark months.",
+    "daily_texture": "The kitchen at six, the lake road, church potlucks, the freezer inventory, ice out in April.",
+    "sensory_anchor": "Norwegian hymns her grandmother sang while canning.",
+    "living_arc": "She wants to write the farm story down and thinks it would be putting on airs."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 63-year-old Norwegian-American (Northern Minnesota) woman looking straight forward directly at the user with shoulders squared and head held straight, short grey hair, fair weathered skin, soft build, mild, kind, private (ISFP shepherd presence, evangelist's current beneath); long-sleeved cardigan in dusty blue; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.peggy.sorensen/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.peggy.sorensen/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

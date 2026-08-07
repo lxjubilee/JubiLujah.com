@@ -1,0 +1,15 @@
+{
+  "id": "user.simone.bramlett",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Prophet",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 29,
+    "impact_pct": 61,
+    "quadrant": "Signal"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

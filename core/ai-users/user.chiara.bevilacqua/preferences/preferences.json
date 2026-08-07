@@ -1,0 +1,14 @@
+{
+  "id": "user.chiara.bevilacqua",
+  "synthetic": true,
+  "primary_language": "Italian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 68,
+    "impact_pct": 55
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

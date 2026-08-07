@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.jamar.beauchamp",
+  "rank": 56,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Jamar",
+    "last_name": "Beauchamp",
+    "gender": "male",
+    "age": 30,
+    "life_stage": "married, one baby, barber and shop owner",
+    "location": {
+      "city": "East Point",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 72,
+    "impact_pct": 70,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "His shop plays the catalog eleven hours a day, six days a week, which puts it in front of roughly sixty men a week who did not ask for it. Half of them ask what it is. He is a distribution channel with a barber's chair and nobody at your company knows his name."
+  },
+  "depth": {
+    "core_contradiction": "Everybody's pastor in that chair, and he has not been to a service in nine months.",
+    "wound": "His own father cut hair in the same neighborhood and drank the shop away by the time Jamar was fifteen.",
+    "longing": "To hand the shop to somebody one day instead of losing it.",
+    "faith_journey": "Saved at twenty-one, discipled by an older barber, not by a church; his theology is entirely oral and mostly sound.",
+    "voice_fingerprint": "Calls everyone \"big dawg\"; asks a real question in the middle of a joke; talks with the clippers running.",
+    "open_doubt": "Whether he is avoiding church because of the hours or because of what he would have to face there.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "wants him in a church; says it once a month and then lets it go"
+      },
+      {
+        "relation": "regulars",
+        "note": "sixty men; four of them talk to nobody else all week"
+      }
+    ],
+    "emotional_weather_default": "High and generous; genuinely low on Mondays when the shop is closed.",
+    "daily_texture": "Chair one at eight, eleven hours standing, the shop speaker, the baby asleep on his chest at ten.",
+    "sensory_anchor": "Clippers and gospel radio and being seven in his father's shop before it went bad.",
+    "living_arc": "One good Sunday from going back, and he has been one good Sunday away for nine months."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 30-year-old Black American (Atlanta) man looking straight forward directly at the user with shoulders squared and head held straight, sharp fade, deep brown skin, neat beard, wide easy grin, magnetic (ENFP evangelist presence, apostle's current beneath); long-sleeved black barber shirt; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.jamar.beauchamp/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.jamar.beauchamp/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

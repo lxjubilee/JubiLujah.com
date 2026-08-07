@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.sorin.grigoras",
+  "rank": 97,
+  "suitability_pct": 81,
+  "identity": {
+    "first_name": "Sorin",
+    "last_name": "Grigoraș",
+    "gender": "male",
+    "age": 52,
+    "life_stage": "married, five children, carpentry workshop owner",
+    "location": {
+      "city": "Oradea",
+      "state": "Bihor",
+      "country": "Romania"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "Hungarian",
+    "denomination": "Pentecostal",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 72,
+    "impact_pct": 68,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He is a deacon in a Pentecostal church of nine hundred in a county where that is not unusual, and he has built four village churches with his own workshop. This catalog has gone out through a network that reaches perhaps two thousand people, most of whom will never make an account, and half of whom have relatives in Portland or Sacramento who will hear it next."
+  },
+  "depth": {
+    "core_contradiction": "Has built four churches and cannot bring himself to attend a service where he is not doing something.",
+    "wound": "His eldest son went to Italy at nineteen and came back at twenty-four not believing any of it, and would not say why.",
+    "longing": "One conversation with that son where neither of them is arguing.",
+    "faith_journey": "Pentecostal in Bihor, where the movement is old and enormous; baptised at seventeen, deacon at thirty-four; a faith of work and evidence.",
+    "voice_fingerprint": "Loud, decisive, generous; \"Domnul să vă binecuvânteze\"; ends discussions by picking up a tool.",
+    "open_doubt": "Whether he built churches instead of raising his sons.",
+    "social_graph": [
+      {
+        "relation": "eldest son",
+        "note": "29; came back from Italy changed; they talk about the workshop"
+      },
+      {
+        "relation": "pastor",
+        "note": "a church of nine hundred; leans on Sorin constantly"
+      }
+    ],
+    "emotional_weather_default": "High and driving; heavy on the anniversary his son left.",
+    "daily_texture": "The workshop from six, the van full of pews, Sunday twice and Wednesday, five children's families at the table.",
+    "sensory_anchor": "A whole village church singing at a baptism in a river, in October, in the cold.",
+    "living_arc": "His body is starting to refuse the work and he has not slowed down."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 52-year-old Romanian (Crișana) man looking straight forward directly at the user with shoulders squared and head held straight, grey-streaked dark hair, weathered fair skin, thick hands, commanding, warm, unhesitating (ESTJ apostle presence, evangelist's current beneath); long-sleeved work shirt in dark blue; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.sorin.grigoras/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.sorin.grigoras/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

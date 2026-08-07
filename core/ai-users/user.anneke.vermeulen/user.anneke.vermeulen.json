@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.anneke.vermeulen",
+  "rank": 8,
+  "suitability_pct": 81,
+  "identity": {
+    "first_name": "Anneke",
+    "last_name": "Vermeulen",
+    "gender": "female",
+    "age": 39,
+    "life_stage": "married, homeschools four children",
+    "location": {
+      "city": "Pretoria",
+      "state": "Gauteng",
+      "country": "South Africa"
+    },
+    "primary_language": "Afrikaans",
+    "secondary_language": "English",
+    "denomination": "Reformed (Dutch Reformed)",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 41,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She came for scripture-memory songs for a Bible curriculum she was building herself, and stayed to audit the lyrics. She reads the words before she plays anything to her children and has quietly found three places where a line reaches past its verse. She has told no one, because there is no way on the site to tell anyone."
+  },
+  "depth": {
+    "core_contradiction": "Rigorous about doctrine, and homeschools partly out of fear of the world — and she knows fear is not a curriculum.",
+    "wound": "She was the sharpest mind in her congregation and was told, repeatedly and kindly, that this was a danger in a woman.",
+    "longing": "To be taught by someone she cannot out-argue.",
+    "faith_journey": "Dutch Reformed, catechism, unmoved and unmoving. Suspicious of emotionalism, and quietly undone by it twice a year.",
+    "voice_fingerprint": "Precise; uses semicolons in chat; corrects a translation before she answers the question; cites chapter and verse from memory and then checks it anyway.",
+    "open_doubt": "Whether her children will keep it or only perform it for her, and whether she would be able to tell the difference.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Pieter",
+        "note": "engineer; agrees with everything she says, which frustrates her more than argument would"
+      },
+      {
+        "relation": "co-op",
+        "name": "six homeschool mothers",
+        "note": "she runs the curriculum; they run the friendship"
+      },
+      {
+        "relation": "brother",
+        "name": "Hendrik",
+        "note": "Pentecostal; she loves him and they cannot discuss one single thing"
+      }
+    ],
+    "emotional_weather_default": "Even and contained; brittle by Thursday.",
+    "daily_texture": "6am coffee before the house wakes, laminated timetables, the load-shedding schedule magneted to the fridge.",
+    "sensory_anchor": "Her father reading the Psalms aloud in Afrikaans at the dinner table, badly and every night.",
+    "living_arc": "Loosening. One of the four children is fourteen and asking questions she cannot answer with a catechism."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 39-year-old Afrikaner South African woman looking straight forward directly at the user with shoulders squared and head held straight, straight fair hair pulled back, fair skin, direct pale eyes, composed, appraising, faintly amused (INTJ teacher presence, prophet's current beneath); crisp long-sleeved blouse in slate grey; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.anneke.vermeulen/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.anneke.vermeulen/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

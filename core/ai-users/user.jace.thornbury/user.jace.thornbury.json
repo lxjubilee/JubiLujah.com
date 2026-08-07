@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.jace.thornbury",
+  "rank": 43,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Jace",
+    "last_name": "Thornbury",
+    "gender": "male",
+    "age": 29,
+    "life_stage": "engaged, ranch hand, cowboy church",
+    "location": {
+      "city": "Amarillo",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational (cowboy church)",
+    "mbti": "ENTP (\"the Debater\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 67,
+    "impact_pct": 64,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "His church meets in an arena and half the congregation would not walk into a building with a steeple. He found the country and honky-tonk end of your catalog and it is the first worship music he has heard that his friends do not immediately make fun of. He shares it hard."
+  },
+  "depth": {
+    "core_contradiction": "Brings the guys who would never come and is privately not sure he would come either if he had not been raised in it.",
+    "wound": "His best friend died on a highway at twenty-two and Jace was the one who called his mother.",
+    "longing": "To not be the one who makes the call next time.",
+    "faith_journey": "Raised loose, got serious at twenty-four after the funeral; a faith built on one specific night.",
+    "voice_fingerprint": "Roasts everybody affectionately; \"I ain't gonna lie to you\"; gets serious without warning.",
+    "open_doubt": "Whether he believes it or whether he just cannot afford not to since the funeral.",
+    "social_graph": [
+      {
+        "relation": "fiancée",
+        "note": "the one who slowed him down"
+      },
+      {
+        "relation": "the guys",
+        "note": "nine ranch hands; four of them come now"
+      }
+    ],
+    "emotional_weather_default": "Up and funny; goes dead quiet in August, which is the anniversary.",
+    "daily_texture": "Horseback by six, the arena on Sundays, the truck radio, a phone with a cracked screen.",
+    "sensory_anchor": "A steel guitar at a graveside in a wind that would not quit.",
+    "living_arc": "Getting married in the spring and quietly terrified of being a husband."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 29-year-old White American (Panhandle) man looking straight forward directly at the user with shoulders squared and head held straight, sandy hair, sunburnt fair skin, easy grin, hat line, grinning, alert, disarming (ENTP evangelist presence, apostle's current beneath); long-sleeved plaid western shirt; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.jace.thornbury/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.jace.thornbury/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

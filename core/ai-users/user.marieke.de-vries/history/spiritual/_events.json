@@ -1,0 +1,33 @@
+{
+  "id": "user.marieke.de-vries",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.marieke.de-vries.album-review.0001",
+    "user.marieke.de-vries.album-review.0002",
+    "user.marieke.de-vries.album-review.0003",
+    "user.marieke.de-vries.album-review.0004",
+    "user.marieke.de-vries.album-review.0005",
+    "user.marieke.de-vries.album-review.0006",
+    "user.marieke.de-vries.album-review.0007",
+    "user.marieke.de-vries.album-review.0008",
+    "user.marieke.de-vries.song-rating.0009",
+    "user.marieke.de-vries.song-rating.0010",
+    "user.marieke.de-vries.song-rating.0011",
+    "user.marieke.de-vries.song-rating.0012",
+    "user.marieke.de-vries.song-rating.0013",
+    "user.marieke.de-vries.song-rating.0014",
+    "user.marieke.de-vries.song-rating.0015",
+    "user.marieke.de-vries.song-rating.0016",
+    "user.marieke.de-vries.song-rating.0017",
+    "user.marieke.de-vries.song-rating.0018",
+    "user.marieke.de-vries.song-rating.0019",
+    "user.marieke.de-vries.song-rating.0020",
+    "user.marieke.de-vries.song-rating.0021",
+    "user.marieke.de-vries.song-rating.0022",
+    "user.marieke.de-vries.song-rating.0023",
+    "user.marieke.de-vries.song-rating.0024",
+    "user.marieke.de-vries.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

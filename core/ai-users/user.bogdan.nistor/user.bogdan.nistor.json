@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.bogdan.nistor",
+  "rank": 98,
+  "suitability_pct": 83,
+  "identity": {
+    "first_name": "Bogdan",
+    "last_name": "Nistor",
+    "gender": "male",
+    "age": 30,
+    "life_stage": "married, one baby, worship leader and graphic designer",
+    "location": {
+      "city": "Arad",
+      "state": "Arad",
+      "country": "Romania"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Baptist",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 66,
+    "impact_pct": 61,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He leads worship for a church of three hundred and he is the exact person this catalog was built for and cannot serve. Everything is in English. His congregation sings in Romanian. He has translated four choruses himself, unpaid and probably not permitted, and he uses them anyway."
+  },
+  "depth": {
+    "core_contradiction": "Leads three hundred people in worship every week and has not worshipped himself, from the floor, in four years.",
+    "wound": "He was told at twenty-four by a visiting American team that his arrangements were \"very good, for here.\"",
+    "longing": "For Romanian worship to be treated as a source and not a mission field.",
+    "faith_journey": "Romanian Baptist — the four-part singing, the seriousness; he loves the tradition, is trying to move it, and gets called worldly for it about twice a year.",
+    "voice_fingerprint": "Enthusiastic and self-mocking; \"băi, frate\"; sends voice notes at midnight with an idea.",
+    "open_doubt": "Whether he is contextualising the gospel or importing somebody else's.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "sings; the honest ear he actually trusts"
+      },
+      {
+        "relation": "old choir director",
+        "note": "72; thinks the drums are a mistake and says so kindly, every week"
+      }
+    ],
+    "emotional_weather_default": "Up and generous; deflated on Monday mornings.",
+    "daily_texture": "Design work until two, Thursday rehearsal, Sunday twice, the baby asleep on his chest during mixdowns.",
+    "sensory_anchor": "Four-part Romanian harmony from a congregation with no instruments at all — the sound he is trying to keep while changing everything else.",
+    "living_arc": "He will either be given room to lead or he will leave for a church that gives it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 30-year-old Romanian (Crișana) man looking straight forward directly at the user with shoulders squared and head held straight, dark hair, beard, fair skin, slight build, animated, warm, quick to smile (ENFP evangelist presence, apostle's current beneath); long-sleeved knit in mustard; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.bogdan.nistor/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.bogdan.nistor/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

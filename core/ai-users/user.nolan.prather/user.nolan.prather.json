@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.nolan.prather",
+  "rank": 58,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Nolan",
+    "last_name": "Prather",
+    "gender": "male",
+    "age": 58,
+    "life_stage": "married, three grown children, former pastor, now sells insurance",
+    "location": {
+      "city": "Marietta",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Southern Baptist (non-attending)",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 35,
+    "impact_pct": 27,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He pastored for twenty-two years and left in 2023 and has not been in a service since, except at Christmas, in the back. He listens to the catalog in the car and cannot listen to anything with a worship-leader's cadence in it. The moment a track sounds like a stage, he turns it off."
+  },
+  "depth": {
+    "core_contradiction": "Gave twenty-two years to the church and cannot walk into one, and can quote you the passage that says he should.",
+    "wound": "The deacon board pushed him out over a building program he opposed, and eleven families he had buried people for said nothing.",
+    "longing": "To be able to pray out loud again without hearing himself perform.",
+    "faith_journey": "Called at nineteen, seminary, twenty-two years, and then it broke; he still believes every word and cannot be in the building.",
+    "voice_fingerprint": "Careful, slow, exact; never uses a preacher cadence anymore, on purpose; long silences.",
+    "open_doubt": "Whether he was wounded or whether he was wrong, and he cannot get a clean answer from anyone who was there.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "lost her whole social world in the same week he lost his job"
+      },
+      {
+        "relation": "old deacon",
+        "note": "calls twice a year; Nolan has never picked up"
+      }
+    ],
+    "emotional_weather_default": "Quiet and low; unexpectedly moved by music, which annoys him.",
+    "daily_texture": "Policy renewals, the drive between appointments, the study he has not entered in two years, Christmas Eve in the back row.",
+    "sensory_anchor": "Two hundred people singing a hymn he announced, in the building he is not allowed to miss.",
+    "living_arc": "A small church twenty minutes away needs an interim and has not asked him yet."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 58-year-old White American (Georgia) man looking straight forward directly at the user with shoulders squared and head held straight, grey hair, fair skin, deep lines, thinner than he was, still, sad, entirely present (INFJ prophet presence, teacher's current beneath); long-sleeved shirt in muted blue, no tie; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.nolan.prather/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.nolan.prather/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

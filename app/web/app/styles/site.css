@@ -48,7 +48,14 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+/* Smooth scrolling for user-initiated jumps (anchor links), but NOT during
+   browser back/forward: `scroll-behavior: smooth` makes the router's scroll
+   restoration animate from the top down to the saved position, so returning to
+   the Backstage grid visibly scrolls instead of landing steady on the card.
+   `[data-nav-restoring]` (set on <html> around popstate by ScrollRestoreGuard)
+   forces an instant jump for that one restore. */
 html { scroll-behavior: smooth; }
+html[data-nav-restoring] { scroll-behavior: auto; }
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, -apple-system, BlinkMacSystemFont, sans-serif;
   background:

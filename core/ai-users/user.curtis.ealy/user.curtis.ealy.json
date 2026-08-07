@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.curtis.ealy",
+  "rank": 45,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Curtis",
+    "last_name": "Ealy",
+    "gender": "male",
+    "age": 61,
+    "life_stage": "married, four grandchildren, retired school principal",
+    "location": {
+      "city": "Waco",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Southern Baptist",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 59,
+    "impact_pct": 38,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He teaches an adult Sunday school class of thirty-five and he uses a song the way he used to use a film clip — one, at the right moment, to make a point land. He is precise about it. He needs the lyrics as text and there are none."
+  },
+  "depth": {
+    "core_contradiction": "Ran a school of nine hundred and cannot get his own class to talk.",
+    "wound": "He retired six months early after an incident he still calls \"the thing in 2021\" and will not describe.",
+    "longing": "To be useful to somebody at a scale that matters again.",
+    "faith_journey": "Southern Baptist, deacon, Sunday school teacher for thirty-one years; unshaken faith and a badly shaken confidence.",
+    "voice_fingerprint": "Structures everything into points; \"here is what I would say to that\"; overprepares.",
+    "open_doubt": "Whether his years of teaching formed anybody or just filled an hour.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "retired nurse; ready to travel; he is not"
+      },
+      {
+        "relation": "former student",
+        "note": "now 40, writes at Christmas; the proof he keeps in a drawer"
+      }
+    ],
+    "emotional_weather_default": "Even and controlled; restless.",
+    "daily_texture": "The lesson prepared by Wednesday for Sunday, the workshop, the grandkids on Fridays, too much time.",
+    "sensory_anchor": "A gym full of students standing for the alma mater.",
+    "living_arc": "Needs a job and will not call it that."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 61-year-old White American (Central Texas) man looking straight forward directly at the user with shoulders squared and head held straight, silver hair neatly cut, fair skin, square build, assured, formal, kind at the edges (ESTJ teacher presence, apostle's current beneath); long-sleeved dress shirt in light blue; long sleeves professional clothing, abstract artistic splash background in gold with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.curtis.ealy/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.curtis.ealy/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

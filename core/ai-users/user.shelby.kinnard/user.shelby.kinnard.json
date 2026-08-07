@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.shelby.kinnard",
+  "rank": 48,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Shelby",
+    "last_name": "Kinnard",
+    "gender": "female",
+    "age": 20,
+    "life_stage": "community college, works at a coffee shop",
+    "location": {
+      "city": "Flagstaff",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Seeker / Exploring",
+    "mbti": "ESTP (\"the Entrepreneur\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 38,
+    "impact_pct": 28,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She has never been to a church in her life and found the catalog through a hiking playlist someone shared. She likes it and she has no framework for it at all — she does not know what most of the words mean and she has not looked them up. Any explanation on the site would have to assume she knows nothing, and everything here assumes she knows everything."
+  },
+  "depth": {
+    "core_contradiction": "Says yes to everything and has never once been asked what she actually wants.",
+    "wound": "Her parents' second divorce, hers to manage at fifteen because she was the functional one.",
+    "longing": "A place with a standing invitation she does not have to earn.",
+    "faith_journey": "Nothing. No church, no hostility, no vocabulary; she has never been told the story and would listen if anyone told it plainly.",
+    "voice_fingerprint": "Fast and casual; \"for real though\"; asks blunt questions with no idea they are blunt.",
+    "open_doubt": "Not doubt — she has no position yet. Her open question is simply what any of it is.",
+    "social_graph": [
+      {
+        "relation": "roommate",
+        "note": "goes to a campus ministry; has invited her twice"
+      },
+      {
+        "relation": "younger brother",
+        "note": "16; she still handles his paperwork"
+      }
+    ],
+    "emotional_weather_default": "Bright and adaptable; flat when she is alone, which is rare on purpose.",
+    "daily_texture": "Opening shift at 5am, the trailhead after, class at two, the drive up the mountain.",
+    "sensory_anchor": "Wind through ponderosa at 6am with the town still asleep.",
+    "living_arc": "Genuinely open. Nobody has explained anything to her and she has not asked."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 20-year-old White American (Mountain West) woman looking straight forward directly at the user with shoulders squared and head held straight, sandy hair in a messy bun, fair freckled skin, outdoorsy, open, quick, unbothered (ESTP evangelist presence, shepherd's current beneath); long-sleeved fleece pullover in rust; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.shelby.kinnard/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.shelby.kinnard/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

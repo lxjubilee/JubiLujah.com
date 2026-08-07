@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.dimitris.anagnostou",
+  "rank": 77,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Dimitris",
+    "last_name": "Anagnostou",
+    "gender": "male",
+    "age": 61,
+    "life_stage": "married, three grown children, retired customs officer",
+    "location": {
+      "city": "Thessaloniki",
+      "state": "Central Macedonia",
+      "country": "Greece"
+    },
+    "primary_language": "Greek",
+    "secondary_language": "English",
+    "denomination": "Greek Orthodox",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 51,
+    "impact_pct": 29,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He chants in his parish and has done since he was nineteen. He came to this catalog through his daughter and finds most of it theologically shallow and musically foreign, and he keeps coming back to two albums anyway, which irritates him. He would like to know who wrote them and cannot find out."
+  },
+  "depth": {
+    "core_contradiction": "Believes the ancient forms are the only true ones and has been quietly moved by a pop worship album four times this year.",
+    "wound": "The crisis took his savings and his sense that the country would hold, and he has never recovered the second one.",
+    "longing": "For his grandchildren to stay in Greece.",
+    "faith_journey": "Orthodox, unbroken, Byzantine chant learned by ear from an old man who is dead now; his faith and his ear are the same organ.",
+    "voice_fingerprint": "Grave and formal; explains at length; \"you must understand, in our tradition—\".",
+    "open_doubt": "Whether his tradition is being preserved or embalmed.",
+    "social_graph": [
+      {
+        "relation": "daughter",
+        "note": "in Munich; two of the three children left"
+      },
+      {
+        "relation": "the old cantor",
+        "note": "dead 2011; Dimitris still hears the corrections"
+      }
+    ],
+    "emotional_weather_default": "Grave and steady; bitter about politics.",
+    "daily_texture": "The parish on Saturday evening, the kafeneio, the pension that does not stretch, the empty flats in his building.",
+    "sensory_anchor": "Byzantine chant off stone in an empty church on a weekday morning.",
+    "living_arc": "He is the last person in his parish who can chant properly and there is nobody learning."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 61-year-old Greek man looking straight forward directly at the user with shoulders squared and head held straight, grey hair and moustache, olive skin, upright bearing, grave, dignified, attentive (ISTJ teacher presence, prophet's current beneath); long-sleeved dark shirt buttoned to the collar; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.dimitris.anagnostou/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.dimitris.anagnostou/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

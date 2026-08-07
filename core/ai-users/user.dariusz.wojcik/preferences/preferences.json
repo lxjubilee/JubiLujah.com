@@ -1,0 +1,14 @@
+{
+  "id": "user.dariusz.wojcik",
+  "synthetic": true,
+  "primary_language": "Polish",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 50,
+    "impact_pct": 24
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

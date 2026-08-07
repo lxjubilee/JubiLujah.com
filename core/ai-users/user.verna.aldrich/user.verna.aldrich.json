@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.verna.aldrich",
+  "rank": 61,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Verna",
+    "last_name": "Aldrich",
+    "gender": "female",
+    "age": 69,
+    "life_stage": "widowed, four grandchildren, retired postmistress",
+    "location": {
+      "city": "Grand Island",
+      "state": "Nebraska",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Nazarene",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 60,
+    "impact_pct": 25,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She calls eleven people every week, most of them older than she is, and she plays music while she does it. The catalog came to her from a niece and she has been working through it album by album in order for six months. She has never used a search box in her life and does not intend to start."
+  },
+  "depth": {
+    "core_contradiction": "Checks on eleven people weekly and has not told any of them that the house is too quiet.",
+    "wound": "Her husband's decline took nine years and by the end nobody visited either of them.",
+    "longing": "For somebody to call her first.",
+    "faith_journey": "Nazarene, holiness tradition, camp meetings; a sincere unfussy faith that has never needed a crisis to prove itself.",
+    "voice_fingerprint": "\"Oh, honey\"; asks about your family before her own subject; never complains directly.",
+    "open_doubt": "Whether the nine years counted for anything, since nobody saw them.",
+    "social_graph": [
+      {
+        "relation": "niece",
+        "note": "set up the tablet; calls monthly"
+      },
+      {
+        "relation": "the eleven",
+        "note": "her list; she keeps it on paper by the phone"
+      }
+    ],
+    "emotional_weather_default": "Cheerful and steady; low around their anniversary in March.",
+    "daily_texture": "The list by the phone, the church circle on Tuesdays, the freezer full of things for other people.",
+    "sensory_anchor": "A camp meeting tabernacle with the sides rolled up and the sound going out into the dark.",
+    "living_arc": "The list is getting shorter every year and she keeps the names on it anyway."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 69-year-old White American (Great Plains) woman looking straight forward directly at the user with shoulders squared and head held straight, white hair set weekly, fair skin, small frame, kind, bright-eyed, unhurried (ISFJ shepherd presence, prophet's current beneath); long-sleeved blouse in periwinkle; long sleeves professional clothing, abstract artistic splash background in verdant green with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.verna.aldrich/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.verna.aldrich/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

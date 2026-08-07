@@ -7,15 +7,19 @@
 // ============================================================================
 import { useEffect, useState } from 'react';
 
-// Images live in /public/images/slider. Add more "HappyPeopleN.jpg" files and
-// they slot straight in here.
+// Images live in /public/images/backstage. Add more .webp files and they slot
+// straight in here.
 const DEFAULT_SLIDES = [
-  '/images/slider/HappyPeople1.jpg',
-  '/images/slider/HappyPeople2.jpg',
-  '/images/slider/HappyPeople3.jpg',
-  '/images/slider/HappyPeople4.jpg',
-  '/images/slider/HappyPeople5.jpg',
-  '/images/slider/HappyPeople6.jpg',
+  '/images/backstage/praise-is-the-sound-a-cancelled-debt-makes.webp',
+  '/images/backstage/the-tambourine-on-the-far-shore.webp',
+  '/images/backstage/the-sense-that-opens-first-and-closes-last.webp',
+  '/images/backstage/the-song-that-remembers-you.webp',
+  '/articles/images/0gJVzRrjz3fF.webp',
+  '/articles/images/hqLQ8tsFzNRu.webp',
+  '/images/backstage/a-new-star-is-just-an-old-one-catching-fire.webp',
+  '/images/backstage/the-new-name-no-one-else-can-pronounce.webp',
+  '/images/backstage/the-songs-a-holy-god-asked-to-stop.webp',
+  '/images/backstage/the-same-song-in-a-lower-key.webp',
 ];
 
 const INTERVAL_MS = 5500;

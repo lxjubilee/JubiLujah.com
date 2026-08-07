@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.chad.lindgren",
+  "rank": 62,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Chad",
+    "last_name": "Lindgren",
+    "gender": "male",
+    "age": 41,
+    "life_stage": "married, four children, agronomist",
+    "location": {
+      "city": "Fargo",
+      "state": "North Dakota",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Evangelical Covenant",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 63,
+    "impact_pct": 44,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He plants small groups in a town where nobody admits to needing one, and he uses the catalog to fill the awkward first ten minutes when men arrive and will not speak. He has started five groups. Three survived. He talks about the two that did not."
+  },
+  "depth": {
+    "core_contradiction": "Builds places for men to be honest in a culture that considers that indulgent, and is exactly as reticent as the men he is trying to open up.",
+    "wound": "His brother took his own life at twenty-six and the whole town handled it by not mentioning it.",
+    "longing": "A conversation in this state where somebody says the true thing first.",
+    "faith_journey": "Covenant church, quietly serious, low on emotion and high on follow-through; his faith looks like showing up.",
+    "voice_fingerprint": "Understates catastrophically; \"could be worse\"; says the important thing at the door on the way out.",
+    "open_doubt": "Whether he could have said something to his brother, and whether God expected him to.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "the one who says the true thing first, at home"
+      },
+      {
+        "relation": "the group",
+        "note": "nine men; two of them are in trouble and will not use the word"
+      }
+    ],
+    "emotional_weather_default": "Level and hardy; heavy in the last week of February.",
+    "daily_texture": "Field calls, the co-op, forty below in January, Thursday nights in a church basement.",
+    "sensory_anchor": "A congregation singing in a plain room with the wind audible through the wall.",
+    "living_arc": "Wants to name his brother out loud in the group and has not managed it in six years."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 41-year-old Scandinavian-American (Upper Midwest) man looking straight forward directly at the user with shoulders squared and head held straight, blond hair going grey, fair weathered skin, tall, steady, plain, capable (ENTJ apostle presence, teacher's current beneath); long-sleeved flannel over a work tee; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.chad.lindgren/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.chad.lindgren/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

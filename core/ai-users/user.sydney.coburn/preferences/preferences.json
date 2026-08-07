@@ -1,0 +1,14 @@
+{
+  "id": "user.sydney.coburn",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 43,
+    "impact_pct": 27
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

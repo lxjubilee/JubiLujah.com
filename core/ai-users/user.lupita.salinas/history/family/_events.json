@@ -1,0 +1,18 @@
+{
+  "id": "user.lupita.salinas",
+  "life_area": "family",
+  "event_ids": [
+    "user.lupita.salinas.album-review.0005",
+    "user.lupita.salinas.album-review.0006",
+    "user.lupita.salinas.album-review.0008",
+    "user.lupita.salinas.song-rating.0019",
+    "user.lupita.salinas.song-rating.0020",
+    "user.lupita.salinas.song-rating.0021",
+    "user.lupita.salinas.song-rating.0022",
+    "user.lupita.salinas.song-rating.0023",
+    "user.lupita.salinas.song-rating.0025",
+    "user.lupita.salinas.song-rating.0026"
+  ],
+  "count": 10,
+  "store": "events/events.jsonl"
+}

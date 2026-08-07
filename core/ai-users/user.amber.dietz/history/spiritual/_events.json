@@ -1,0 +1,12 @@
+{
+  "id": "user.amber.dietz",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.amber.dietz.album-review.0005",
+    "user.amber.dietz.song-rating.0020",
+    "user.amber.dietz.song-rating.0021",
+    "user.amber.dietz.song-rating.0026"
+  ],
+  "count": 4,
+  "store": "events/events.jsonl"
+}

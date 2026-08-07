@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.grant.mulholland",
+  "rank": 14,
+  "suitability_pct": 82,
+  "identity": {
+    "first_name": "Grant",
+    "last_name": "Mulholland",
+    "gender": "male",
+    "age": 33,
+    "life_stage": "married, two young children, software QA analyst",
+    "location": {
+      "city": "Portland",
+      "state": "Oregon",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Deconstructing (still attending, Evangelical)",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 29,
+    "impact_pct": 61,
+    "quadrant": "Signal",
+    "interaction_backstory": "He still goes, for his kids and for his wife, and he vets everything that enters the house. He found the catalog through a children's playlist his daughter was given and immediately went looking for who made it — the artist pages, the bios, the credits. He could not find a human being anywhere. He has not shared it and he has not deleted it, and he is waiting to see whether the site will say plainly how this music is made."
+  },
+  "depth": {
+    "core_contradiction": "Tests software for a living by assuming everything is broken, and desperately wants one thing in his life he does not have to test.",
+    "wound": "A church he gave eight years to covered for a leader, and he was the one who found the paperwork.",
+    "longing": "To hand his daughter something he has not first taken apart.",
+    "faith_journey": "Raised evangelical, all in through his twenties, cracked at twenty-eight; has not left, has not returned, sits in the back and stands during the songs.",
+    "voice_fingerprint": "Precise and quiet; asks one question that reframes everything; says 'I'm not trying to be difficult' immediately before being difficult.",
+    "open_doubt": "Whether faith survives finding out how the machinery works. He has not yet found a piece of it that did.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "name": "Erin",
+        "note": "still believes plainly; the marriage is good and this is the one closed room in it"
+      },
+      {
+        "relation": "daughter",
+        "name": "Nora, 6",
+        "note": "sings the songs in the bath; the entire question, in one small person"
+      },
+      {
+        "relation": "friend",
+        "name": "Dev",
+        "note": "left the faith entirely; Grant is not ready to follow him and cannot argue with him"
+      }
+    ],
+    "emotional_weather_default": "Contained and quiet; three or four times a year, genuinely angry.",
+    "daily_texture": "Standing desk, rain nine months a year, the 6:30 bedtime routine, the podcast he listens to and would not admit to.",
+    "sensory_anchor": "His father singing the doxology in a nearly empty sanctuary while stacking chairs.",
+    "living_arc": "One honest answer away from trusting again — or one evasion away from being done."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 33-year-old White American man looking straight forward directly at the user with shoulders squared and head held straight, short dark hair, fair skin, close beard, glasses, steady, appraising, unflinching (INTJ prophet presence, teacher's current beneath); plain long-sleeved charcoal shirt; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.grant.mulholland/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.grant.mulholland/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.colton.vestal",
+  "rank": 28,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Colton",
+    "last_name": "Vestal",
+    "gender": "male",
+    "age": 22,
+    "life_stage": "senior in college, campus ministry leader",
+    "location": {
+      "city": "Chattanooga",
+      "state": "Tennessee",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational (campus ministry)",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 74,
+    "impact_pct": 69,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He runs a Tuesday night for ninety students out of a dorm common room and he is the reason four hundred people on that campus have heard your catalog. He shares links constantly, cites nothing, and has never made an account. He is your highest-volume distributor and you cannot see him at all."
+  },
+  "depth": {
+    "core_contradiction": "Can get ninety people in a room and has not had a real conversation since August.",
+    "wound": "His father's affair became public in his hometown when he was seventeen and he became the family's public face.",
+    "longing": "A friendship where he is not the one holding it up.",
+    "faith_journey": "Raised in it, owned it at seventeen out of necessity; a faith built in a crisis and never tested in peace.",
+    "voice_fingerprint": "\"Okay okay okay\"; talks with his hands; texts in fragments at 1am.",
+    "open_doubt": "Whether he actually likes God or just likes being needed by people who do.",
+    "social_graph": [
+      {
+        "relation": "co-leader",
+        "note": "the one who does the work he forgets"
+      },
+      {
+        "relation": "father",
+        "note": "they text about football"
+      }
+    ],
+    "emotional_weather_default": "High and generous; crashes flat for a day, roughly weekly.",
+    "daily_texture": "Dorm common room, 1am pizza, a Google doc of ninety names, class at eight he misses.",
+    "sensory_anchor": "A hundred students singing in a gym with the lights off, freshman year.",
+    "living_arc": "Graduating in ten months into a life with no built-in ninety people."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 22-year-old White American (Appalachian) man looking straight forward directly at the user with shoulders squared and head held straight, shaggy light-brown hair, fair skin, easy grin, bright and generous, mid-laugh (ENFP evangelist presence, apostle's current beneath); long-sleeved crewneck in forest green; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.colton.vestal/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.colton.vestal/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

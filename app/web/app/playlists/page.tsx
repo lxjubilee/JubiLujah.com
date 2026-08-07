@@ -81,14 +81,11 @@ export default function PlaylistsPage() {
     open(id);
   };
 
-  // Hide the auto-provisioned "My Favorites" default from this grid.
-  const visible = mine.filter((pl) => !pl.is_default);
-
   return (
     <>
       <section className="plx-hero">
         <div className="container">
-          <h1 className="plx-hero-title">My Favorites</h1>
+          <h1 className="plx-hero-title">Playlists</h1>
           <p className="plx-hero-lead">
             Build your own mixes from any album or straight from the player — name them, play them,
             and keep them saved to your account.
@@ -100,7 +97,7 @@ export default function PlaylistsPage() {
         <div className="container">
           <div className="plx-section-head">
             <h2 className="plx-section-title">My Playlists</h2>
-            {authenticated && visible.length > 0 && <span className="plx-section-count">{visible.length}</span>}
+            {authenticated && mine.length > 0 && <span className="plx-section-count">{mine.length}</span>}
           </div>
 
           {!loading && !authenticated && (
@@ -122,13 +119,13 @@ export default function PlaylistsPage() {
           )}
           {err && <p className="notice pl-error">{err}</p>}
 
-          {authenticated && mineLoaded && visible.length === 0 && (
+          {authenticated && mineLoaded && mine.length === 0 && (
             <p className="plx-empty">No Playlists yet. Name one above to get started.</p>
           )}
 
-          {authenticated && visible.length > 0 && (
+          {authenticated && mine.length > 0 && (
             <div className="plx-grid">
-              {visible.map((pl) => {
+              {mine.map((pl) => {
                 const count = pl.item_count ?? 0;
                 return (
                   <article key={pl.id} className="plx-card">

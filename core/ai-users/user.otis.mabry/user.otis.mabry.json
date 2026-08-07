@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.otis.mabry",
+  "rank": 24,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Otis",
+    "last_name": "Mabry",
+    "gender": "male",
+    "age": 47,
+    "life_stage": "married, two teenagers, runs a county prison ministry",
+    "location": {
+      "city": "Mobile",
+      "state": "Alabama",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "AME Zion",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 58,
+    "impact_pct": 44,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He runs a Thursday chapel service inside a county facility with no wifi, no streaming, and a CD player from 2004. He downloads nothing because the site will not let him, so he plays what he can off his phone through a speaker before the signal drops. He would pay for offline tomorrow."
+  },
+  "depth": {
+    "core_contradiction": "Tells forty incarcerated men every week that they are more than their worst thing, and has never told them his brother is three counties over doing eleven years.",
+    "wound": "He testified. It was right and it cost him the family.",
+    "longing": "One Thanksgiving where nobody leaves the table.",
+    "faith_journey": "AME Zion, usher board at twelve, trustee at thirty; the tradition holds him and the questions come at 2am.",
+    "voice_fingerprint": "Says \"look here\" before a hard truth; never raises his voice.",
+    "open_doubt": "Whether he forgave his brother or just filed him.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "runs the finances and the household; the steadier of the two"
+      },
+      {
+        "relation": "brother",
+        "note": "eleven years in; writes monthly; Otis has answered twice"
+      }
+    ],
+    "emotional_weather_default": "Controlled and warm; silent for a day after visiting hours.",
+    "daily_texture": "Shipyard shift, Thursday chapel, the speaker that eats batteries, forty folding chairs.",
+    "sensory_anchor": "The lock buzzing shut behind him, every single week.",
+    "living_arc": "Working up to answering the third letter."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 47-year-old Black American (Gulf Coast) man looking straight forward directly at the user with shoulders squared and head held straight, shaved head, deep brown skin, broad shoulders, firm and warm, direct (ESTJ apostle presence, teacher's current beneath); long-sleeved navy button-down; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.otis.mabry/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.otis.mabry/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

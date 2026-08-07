@@ -1,0 +1,14 @@
+{
+  "id": "user.junie.ferrell",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 63,
+    "impact_pct": 26
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

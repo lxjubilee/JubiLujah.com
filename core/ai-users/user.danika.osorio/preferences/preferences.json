@@ -1,0 +1,14 @@
+{
+  "id": "user.danika.osorio",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": "Spanish",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 33,
+    "impact_pct": 21
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

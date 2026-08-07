@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.loretta.brandt",
+  "rank": 19,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Loretta",
+    "last_name": "Brandt",
+    "gender": "female",
+    "age": 52,
+    "life_stage": "married, grown children, long-haul owner-operator",
+    "location": {
+      "city": "Zanesville",
+      "state": "Ohio",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Assemblies of God",
+    "mbti": "ESTP (\"the Entrepreneur\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 71,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "Eleven hours a day in a cab and the radio runs out of things to say. She found the site at a truck stop on free wifi, and she runs a Facebook group of four hundred Christian drivers where she posts what she is listening to every Monday. Coverage drops across half of Wyoming, there is no offline download, and she has said so in the group, which means four hundred drivers have heard it."
+  },
+  "depth": {
+    "core_contradiction": "Preaches to four hundred drivers about not running yourself into the ground and has taken nine days off in three years.",
+    "wound": "She was in Nevada when her mother died in Ohio, and she was twenty-two hours out.",
+    "longing": "To be there for the next one, whoever it is.",
+    "faith_journey": "Assemblies of God, saved at nineteen at a revival, the real kind; forty-six weekends a year on the road and no home church for a decade, and she feels the hole.",
+    "voice_fingerprint": "Types in all caps when happy; 'listen here'; signs off every post with the same three words.",
+    "open_doubt": "Whether you can be a Christian without a congregation. She has been arguing herself out of it for ten years.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Curt",
+        "note": "drove until his back went; home now; they text at every stop"
+      },
+      {
+        "relation": "the group",
+        "name": "400 drivers",
+        "note": "her actual church; she knows which ones are struggling"
+      },
+      {
+        "relation": "daughter",
+        "name": "Jess, 27",
+        "note": "in Columbus; wants her mother off the road; says it every call"
+      }
+    ],
+    "emotional_weather_default": "Loud and up; genuinely lonely between midnight and four.",
+    "daily_texture": "Truck stop showers, the log book, the CB, coffee that has been in the pot too long, coverage dropping in the mountains.",
+    "sensory_anchor": "A tent revival in August, the sawdust, and being nineteen and certain.",
+    "living_arc": "Two years from selling the truck and does not know who she is without it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 52-year-old White American woman looking straight forward directly at the user with shoulders squared and head held straight, shoulder-length dyed auburn hair, sun-lined fair skin, strong jaw, broad frank grin, unbothered (ESTP evangelist presence, teacher's current beneath); long-sleeved denim shirt, sleeves buttoned; long sleeves professional clothing, abstract artistic splash background in azure blue with gold smudge accents.",
+    "image_path": "core/ai-users/user.loretta.brandt/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.loretta.brandt/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

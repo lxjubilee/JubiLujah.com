@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.keisha.rowlett",
+  "rank": 53,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Keisha",
+    "last_name": "Rowlett",
+    "gender": "female",
+    "age": 33,
+    "life_stage": "married, two children, nonprofit program director",
+    "location": {
+      "city": "Chicago (Auburn Gresham)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 58,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She runs after-school programming for two hundred kids and she builds every single event on a playlist. She found the children's catalog and put it in three sites within a month. She wants to know what she is licensed to do with it in a public program and there is no page that tells her."
+  },
+  "depth": {
+    "core_contradiction": "Fights for two hundred other people's children and outsources her own two to a schedule.",
+    "wound": "She got out of this neighborhood and came back on purpose, and half the people she grew up with read that as pity.",
+    "longing": "To be from here and not have to prove it constantly.",
+    "faith_journey": "Came to faith at nineteen in a campus ministry, not at home; a chosen faith, and she still feels slightly like a guest in it.",
+    "voice_fingerprint": "\"Let me be clear\"; makes a bullet list out loud; laughs suddenly and fully.",
+    "open_doubt": "Whether her work is ministry or whether she just prefers being useful to being known.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "teaches at the high school; the calm one"
+      },
+      {
+        "relation": "program kids",
+        "note": "200; she knows about forty by name and it bothers her that it is not all of them"
+      }
+    ],
+    "emotional_weather_default": "Driven and warm; flat on Sunday nights.",
+    "daily_texture": "Grant deadlines, the Red Line, two hundred permission slips, dinner at 8:15.",
+    "sensory_anchor": "A gym full of kids singing something they did not know they knew.",
+    "living_arc": "A funding cliff in March that she has told nobody about."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 33-year-old Black American (Chicago) woman looking straight forward directly at the user with shoulders squared and head held straight, braids pulled back, deep brown skin, sharp bright eyes, focused, warm, in motion (ENTJ apostle presence, evangelist's current beneath); long-sleeved blouse in emerald; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.keisha.rowlett/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.keisha.rowlett/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

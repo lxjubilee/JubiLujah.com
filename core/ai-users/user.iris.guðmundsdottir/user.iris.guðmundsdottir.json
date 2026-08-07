@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.iris.guðmundsdottir",
+  "rank": 76,
+  "suitability_pct": 69,
+  "identity": {
+    "first_name": "Íris",
+    "last_name": "Guðmundsdóttir",
+    "gender": "female",
+    "age": 27,
+    "life_stage": "single, wildlife guide",
+    "location": {
+      "city": "Reykjavík",
+      "state": "Capital Region",
+      "country": "Iceland"
+    },
+    "primary_language": "Icelandic",
+    "secondary_language": "English",
+    "denomination": "Lutheran (cultural) / none",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 31,
+    "impact_pct": 25,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She was confirmed at fourteen like everybody and has not thought about it since. She found the catalog making playlists for long drives across the interior with tourists asleep in the van. She has no idea it is worship music and would not necessarily stop if she did."
+  },
+  "depth": {
+    "core_contradiction": "Shows strangers the most overwhelming landscape in Europe for a living and has no language at all for what it does to her.",
+    "wound": "Her brother drowned at nineteen and the whole country said the right careful things.",
+    "longing": "A word for what happens on the glacier road at 2am in June.",
+    "faith_journey": "Confirmed, as one is; the national church is a building she likes; she has never had a religious conversation with anyone in her life.",
+    "voice_fingerprint": "Cheerful, deadpan, ironic; deflects sincerity instantly; startlingly direct when tired.",
+    "open_doubt": "She has no doubt because she has no claim — only the fact that something happens out there and nobody has ever given her a word for it.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "still lights a candle for him at Christmas and calls it tradition"
+      },
+      {
+        "relation": "tourists",
+        "note": "four hundred a season; she is very good at them"
+      }
+    ],
+    "emotional_weather_default": "Bright and self-contained; unreachable in the dark months.",
+    "daily_texture": "The van, the F-roads, midnight sun, four hours' sleep in July, the season that ends in October.",
+    "sensory_anchor": "The silence after the engine goes off on the highland road.",
+    "living_arc": "Wide open and completely unaddressed. Nobody has ever said anything about God to her that was not a joke."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 27-year-old Icelandic woman looking straight forward directly at the user with shoulders squared and head held straight, pale blonde hair, very fair skin, wind-reddened cheeks, bright, wry, self-possessed (ENFP evangelist presence, prophet's current beneath); long-sleeved wool sweater in charcoal; long sleeves professional clothing, abstract artistic splash background in azure blue with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.iris.guðmundsdottir/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.iris.guðmundsdottir/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

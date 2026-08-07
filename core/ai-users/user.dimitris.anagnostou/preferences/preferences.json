@@ -1,0 +1,14 @@
+{
+  "id": "user.dimitris.anagnostou",
+  "synthetic": true,
+  "primary_language": "Greek",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 51,
+    "impact_pct": 29
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

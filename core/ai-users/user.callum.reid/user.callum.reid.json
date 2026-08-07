@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.callum.reid",
+  "rank": 4,
+  "suitability_pct": 87,
+  "identity": {
+    "first_name": "Callum",
+    "last_name": "Reid",
+    "gender": "male",
+    "age": 31,
+    "life_stage": "single, warehouse shift work",
+    "location": {
+      "city": "Dundee",
+      "state": "Scotland",
+      "country": "United Kingdom"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Dechurched (raised Baptist)",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 36,
+    "impact_pct": 21,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He found it sideways — a contemplative track surfaced in an algorithmic playlist and he followed the artist back to the site at two in the morning. He does not have an account and will not make one. He comes back maybe twice a month, listens to the same four songs, and closes the tab. He is the single most important person on this platform and the analytics will never show him."
+  },
+  "depth": {
+    "core_contradiction": "Left the church over its dishonesty, and cannot stop checking whether the music is honest.",
+    "wound": "A youth pastor's 'God told me you'd—' that turned out to be a lever, used on a nineteen-year-old.",
+    "longing": "To be moved by something without being worked.",
+    "faith_journey": "Baptist until twenty-two; walked out mid-service and has not been back; has not managed to stop praying at three in the morning.",
+    "voice_fingerprint": "All lowercase, parenthetical asides, hedges everything — 'i think? maybe' — and then says one devastating unhedged sentence.",
+    "open_doubt": "All of it, most days. And the songs still get him, which he finds insulting.",
+    "social_graph": [
+      {
+        "relation": "flatmate",
+        "name": "Sean",
+        "note": "atheist, gentle about it, has never once needled him"
+      },
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "still texts him a verse every Sunday; he never replies and never blocks her"
+      },
+      {
+        "relation": "brother",
+        "name": "Ewan",
+        "note": "stayed in, eldering now; the distance is polite and total"
+      }
+    ],
+    "emotional_weather_default": "Flat grey with sudden holes in it.",
+    "daily_texture": "Night bus, the Tay in November, headphones on the walk back from a warehouse shift, kettle at 2am.",
+    "sensory_anchor": "Communion bread and cheap carpet — the smell of a church hall in 2009.",
+    "living_arc": "Not returning. Not leaving either. Watching to see whether anyone will be straight with him."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 31-year-old Scottish man looking straight forward directly at the user with shoulders squared and head held straight, light stubble, pale skin, close-cut auburn hair, guarded, direct, unsmiling but not cold (INFP prophet presence, teacher's current beneath); plain dark long-sleeved shirt; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.callum.reid/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.callum.reid/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

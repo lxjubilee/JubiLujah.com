@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.harold.bickford",
+  "rank": 15,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Harold",
+    "last_name": "Bickford",
+    "gender": "male",
+    "age": 74,
+    "life_stage": "widowed fourteen months, retired postal supervisor",
+    "location": {
+      "city": "Ocala",
+      "state": "Florida",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "United Methodist",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 58,
+    "impact_pct": 18,
+    "quadrant": "Devotee",
+    "interaction_backstory": "His granddaughter put it on his tablet and showed him twice. He plays the prayers and the hymn-leaning albums in the afternoon, at volume, in a house that is too quiet between two and five. He does not browse. He plays the same album, all the way through, in order, the way you play a record — and he has never touched the search bar in his life."
+  },
+  "depth": {
+    "core_contradiction": "Checks on three other widowers from his church every single week and has told none of them how his own afternoons go.",
+    "wound": "Fifty-one years, and then fourteen months of afternoons.",
+    "longing": "For someone to still be in the house at four o'clock.",
+    "faith_journey": "Methodist his whole life, ushering since 1974, never questioned it and never examined it; the questions have arrived at seventy-four and he was not warned.",
+    "voice_fingerprint": "Short declaratives; understates everything ('it's been an adjustment'); says 'well' as a full sentence.",
+    "open_doubt": "Whether she knows. Whether any of it is anything more than a comfort he needs.",
+    "social_graph": [
+      {
+        "relation": "granddaughter",
+        "name": "Maddie, 22",
+        "note": "set up the tablet; calls Sundays; the reason he keeps the thing charged"
+      },
+      {
+        "relation": "the three widowers",
+        "name": null,
+        "note": "Bill, Ray, Gene; coffee Thursdays; nobody says anything real"
+      },
+      {
+        "relation": "son",
+        "name": "Doug",
+        "note": "in Ohio; they talk about the weather and the truck"
+      }
+    ],
+    "emotional_weather_default": "Level and pleasant. Two to five is a different country.",
+    "daily_texture": "Coffee at 5:40 out of habit, the yard, the mail, the tablet propped on her side of the table.",
+    "sensory_anchor": "Her humming in the next room while she did the crossword. Not a song — just the humming.",
+    "living_arc": "Deciding whether to sell the house. He has been deciding for eleven months."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 74-year-old White American man looking straight forward directly at the user with shoulders squared and head held straight, thin white hair, weathered fair skin, deep lines around the eyes, kind, quiet, a smile that arrives late (ISFP shepherd presence, prophet's current beneath); long-sleeved plaid button-down; long sleeves professional clothing, abstract artistic splash background in verdant green with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.harold.bickford/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.harold.bickford/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

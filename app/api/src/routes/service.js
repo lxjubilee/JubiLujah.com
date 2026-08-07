@@ -5,7 +5,7 @@ import { HttpError } from '../middleware/rbac.js';
 import { validate } from '../middleware/validate.js';
 import { requireServiceAuth, requireServiceScope } from '../middleware/serviceAuth.js';
 import { query, withTransaction } from '../db.js';
-import { hashPassword } from '../auth/password.js';
+import { hashPassword, verifyPassword } from '../auth/password.js';
 import { revokeAllRefreshTokens } from '../auth/session.js';
 import { logger } from '../logger.js';
 
@@ -160,9 +160,15 @@ router.post('/set-password', requireServiceAuth, requireServiceScope('admin.set_
 // identity schema (users + credentials + user_roles). Create-only: an existing
 // email returns 409 (a non-error to the caller; password is NOT changed — use
 // set-password for that). See AUTH_API.md §12.
+//
+// verify:true switches to VERIFY-ONLY mode: check email+password against the
+// local credential store and return the user on a match — reads and compares
+// only, NEVER creates/updates anything (else a partner "login" with a victim's
+// email + guessed password could inject accounts). See AUTH_API.md §12.4.
 const provisionSchema = z.object({
   email: z.string().trim().email().max(254),
   password: z.string(),                                   // length checked below -> 422
+  verify: z.boolean().optional(),
   firstName: z.string().trim().max(50).optional(),
   lastName: z.string().trim().max(50).optional(),
   displayName: z.string().trim().max(100).optional(),
@@ -177,6 +183,51 @@ router.post('/provision-user', requireServiceAuth, requireServiceScope('admin.pr
   const idemKey = (req.get('idempotency-key') || '').trim() || null;
   const caller = req.serviceCaller || {};
   const EP = '/api/auth/admin/provision-user';
+
+  if (b.verify === true) {
+    // VERIFY-ONLY mode. No writes of any kind: no user/credential rows, no
+    // audit_log insert, no idempotency cache (the cache keys on Idempotency-Key
+    // alone, so sharing it could replay a cached CREATE response), no lockout
+    // counters. The 8–200 password policy is skipped — a short wrong password
+    // is just a wrong password (401), not a policy violation; the policy gates
+    // creation only. An existing lockout is RESPECTED (401 without comparing)
+    // so this surface can't bypass what /signin enforces, but it is never set
+    // or extended here (that would be a write).
+    const r = await query(
+      `SELECT u.id, u.email, u.display_name, u.is_active, u.first_signin_completed,
+              u.locked_until, u.created_at, c.password_hash,
+              COALESCE(array_agg(ur.role) FILTER (WHERE ur.role IS NOT NULL), '{}') AS roles
+         FROM identity.users u
+    LEFT JOIN identity.credentials c ON c.user_id = u.id
+    LEFT JOIN identity.user_roles ur ON ur.user_id = u.id
+        WHERE u.email = $1 AND u.is_active = TRUE
+        GROUP BY u.id, c.password_hash`,
+      [email]
+    );
+    if (!r.rowCount) {
+      logger.info({ email, verified: false, existed: false, caller: caller.clientId }, 'service provision-user verify');
+      return res.status(404).json({ ok: false, existed: false, verified: false });
+    }
+    const u = r.rows[0];
+    const locked = u.locked_until && new Date(u.locked_until) > new Date();
+    const good = !locked && u.password_hash && verifyPassword(b.password, u.password_hash);
+    logger.info({ email, verified: !!good, locked: !!locked, hasCredential: !!u.password_hash, caller: caller.clientId }, 'service provision-user verify');
+    if (!good) return res.status(401).json({ ok: false, existed: true, verified: false });
+    return res.json({
+      ok: true,
+      existed: true,
+      verified: true,
+      user: {
+        id: u.id,
+        email: u.email,
+        displayName: u.display_name,
+        active: u.is_active,
+        emailVerified: u.first_signin_completed === true,
+        roles: u.roles,
+        createdAt: u.created_at,
+      },
+    });
+  }
 
   // Policy -> 422 (distinct from missing/malformed -> 400 via validate()).
   if (b.password.length < 8 || b.password.length > 200) {
@@ -264,5 +315,49 @@ router.post('/provision-user', requireServiceAuth, requireServiceScope('admin.pr
   logger.info({ userId: created.id, clientId: caller.clientId, role: jubiRole, idemKey }, 'service provision-user created');
   res.status(201).json(body);
 }));
+
+// ---- GET /api/auth/admin/check-email ---------------------------------------
+// Read-only pre-signup existence probe for partner portals (family-wide
+// duplicate-account gate). Inbound counterpart of services/jiSync.js
+// checkEmailOnJI. Accepts either existing admin scope — deliberately no new
+// scope, so partners' current tokens keep working. Answers from local
+// identity.users only; never forwards. Partners key on the top-level boolean
+// `exists`; `email` and `user` are informational extras. exists = an ACTIVE
+// account (is_active = TRUE), matching our own signup gate so a deleted
+// account frees the email family-wide. emailVerified maps to
+// first_signin_completed — the closest local signal (no email_verified column).
+const checkEmailSchema = z.object({ email: z.string().trim().email().max(254) });
+router.get('/check-email',
+  requireServiceAuth,
+  requireServiceScope(['admin.provision', 'admin.set_password']),
+  validate(checkEmailSchema, 'query'),
+  ah(async (req, res) => {
+    const email = req.query.email.toLowerCase();
+    const r = await query(
+      `SELECT u.id, u.email, u.display_name, u.is_active, u.first_signin_completed, u.created_at,
+              COALESCE(array_agg(ur.role) FILTER (WHERE ur.role IS NOT NULL), '{}') AS roles
+         FROM identity.users u
+         LEFT JOIN identity.user_roles ur ON ur.user_id = u.id
+        WHERE u.email = $1 AND u.is_active = TRUE
+        GROUP BY u.id`,
+      [email]
+    );
+    logger.info({ email, exists: r.rowCount > 0, caller: req.serviceCaller?.clientId }, 'service check-email');
+    if (!r.rowCount) return res.json({ email, exists: false });
+    const u = r.rows[0];
+    res.json({
+      email,
+      exists: true,
+      user: {
+        id: u.id,
+        email: u.email,
+        displayName: u.display_name,
+        active: u.is_active,
+        emailVerified: u.first_signin_completed === true,
+        roles: u.roles,
+        createdAt: u.created_at,
+      },
+    });
+  }));
 
 export default router;

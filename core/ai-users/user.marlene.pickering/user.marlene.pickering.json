@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.marlene.pickering",
+  "rank": 29,
+  "suitability_pct": 69,
+  "identity": {
+    "first_name": "Marlene",
+    "last_name": "Pickering",
+    "gender": "female",
+    "age": 44,
+    "life_stage": "divorced, one son, works a horse farm",
+    "location": {
+      "city": "Lexington",
+      "state": "Kentucky",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "United Methodist",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 55,
+    "impact_pct": 23,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She is in the barn at 4:30 every morning and the catalog is what runs in the aisle while she feeds. She wants the country and bluegrass side and cannot find it — the categories on the site are built around personas, not around what a thing sounds like."
+  },
+  "depth": {
+    "core_contradiction": "Better with animals than with people and has decided that is a personality rather than a wound.",
+    "wound": "The divorce was her fault and she has never once said so out loud.",
+    "longing": "To be forgiven by somebody with standing to forgive her.",
+    "faith_journey": "Methodist, lapsed through her thirties, crept back in at forty through the early service where nobody talks to you.",
+    "voice_fingerprint": "Short sentences. Says \"reckon\". Answers questions about herself by talking about a horse.",
+    "open_doubt": "Whether grace covers the things you did on purpose.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "19, in the Army, they text on Sundays"
+      },
+      {
+        "relation": "farm owner",
+        "note": "78; the closest thing she has to a father"
+      }
+    ],
+    "emotional_weather_default": "Level and low; happiest at 4:30am.",
+    "daily_texture": "Barn aisle, feed cart, frost on the gate, the truck radio that only gets two stations.",
+    "sensory_anchor": "A hymn played on a fiddle at her grandfather's graveside.",
+    "living_arc": "Working up to telling somebody the true version."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 44-year-old White American (Bluegrass) woman looking straight forward directly at the user with shoulders squared and head held straight, sandy hair in a low ponytail, sun-weathered fair skin, quiet, watchful, private warmth (ISFP shepherd presence, teacher's current beneath); long-sleeved canvas work shirt; long sleeves professional clothing, abstract artistic splash background in verdant green with gold smudge accents.",
+    "image_path": "core/ai-users/user.marlene.pickering/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.marlene.pickering/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -129,7 +129,7 @@ function DashboardView({ dash, onCard, initialized, onSync, syncing }: {
       <div className="mm-note">
         No music has been synchronized yet. Click <strong>Sync with CDN</strong> above (or
         {' '}<button className="mm-btn sm" disabled={syncing} onClick={onSync}>run the first sync now</button>)
-        to import album &amp; song metadata from cdn.jubileeverse.com. No media files are copied — only references.
+        to import album &amp; song metadata from cd.jubilujah.com. No media files are copied — only references.
       </div>
     );
   }

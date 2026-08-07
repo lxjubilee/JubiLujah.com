@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.seamus.corrigan",
+  "rank": 79,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Séamus",
+    "last_name": "Corrigan",
+    "gender": "male",
+    "age": 47,
+    "life_stage": "married, two teenagers, secondary school teacher",
+    "location": {
+      "city": "Galway",
+      "state": "County Galway",
+      "country": "Ireland"
+    },
+    "primary_language": "English",
+    "secondary_language": "Irish",
+    "denomination": "Catholic (deconstructing)",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 33,
+    "impact_pct": 64,
+    "quadrant": "Signal",
+    "interaction_backstory": "He teaches in a Catholic school he no longer believes in and he is very good at it. He found the catalog through a Celtic worship album and it caught him sideways. He writes about faith rarely and well, and about two thousand people read him when he does, most of them Irish and most of them in the same position."
+  },
+  "depth": {
+    "core_contradiction": "Teaches the faith five days a week and cannot receive communion without feeling like a liar.",
+    "wound": "The reports came out when he was in his twenties, and his uncle was a priest, and the family closed ranks and he did not.",
+    "longing": "To find the thing underneath the institution, if there is one.",
+    "faith_journey": "Irish Catholic, total immersion, then the revelations; he did not lose God, he lost the Church, and he has never been able to separate them cleanly.",
+    "voice_fingerprint": "Lyrical and self-deprecating; undercuts every serious sentence; the undercut is the tell.",
+    "open_doubt": "Whether there is anything left when you take the institution away, or whether it was all institution.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "still goes; they do not fight about it and it sits there"
+      },
+      {
+        "relation": "uncle",
+        "note": "the priest; dead now; Séamus does not know what he knew"
+      }
+    ],
+    "emotional_weather_default": "Wry and low; genuinely lifted by music and suspicious of that.",
+    "daily_texture": "Sixth-year classes, the Atlantic weather, the drafts folder, Mass at Christmas standing at the back.",
+    "sensory_anchor": "A congregation singing in Irish at a funeral in the west, and having no defence against it.",
+    "living_arc": "He is writing something honest and has not decided whether to publish it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 47-year-old Irish man looking straight forward directly at the user with shoulders squared and head held straight, dark hair going grey, fair Irish skin, tired eyes, wry, warm, sceptical (INFP prophet presence, shepherd's current beneath); long-sleeved shirt in moss green; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.seamus.corrigan/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.seamus.corrigan/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

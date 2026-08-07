@@ -1,0 +1,85 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.sydney.coburn",
+  "rank": 20,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Sydney",
+    "last_name": "Coburn",
+    "gender": "female",
+    "age": 19,
+    "life_stage": "university sophomore, lives on campus",
+    "location": {
+      "city": "Athens",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "None / Spiritual-not-religious (raised Non-Denominational)",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 43,
+    "impact_pct": 27,
+    "quadrant": "Drifter",
+    "interaction_backstory": "A thirty-second clip crossed her feed and she saved it, then spent nine minutes on the site trying to find out who the artist was — an interview, a face, a story, anything. She found a catalog. She has not come back in three weeks and she still has the song saved. She is not looking for a church; she is looking for whether anybody real is behind it."
+  },
+  "depth": {
+    "core_contradiction": "The most socially fluent person on her floor and the last one anybody would think to check on.",
+    "wound": "Her parents' divorce at fifteen took the church with it — the building, the friends, the Sundays, all of it, in one spring.",
+    "longing": "Something that does not turn out to have been a front.",
+    "faith_journey": "All in at thirteen, gone at fifteen, not angry — just nobody called. She would say she is 'spiritual' and mean that she has not closed the door.",
+    "voice_fingerprint": "Lowercase everything; 'no bc'; deflects sincerity with a joke and then circles back to it an hour later.",
+    "open_doubt": "Whether any of the people who taught her that stuff believed it, or whether it was just what her town did on Sundays.",
+    "social_graph": [
+      {
+        "relation": "roommate",
+        "name": "Priya",
+        "note": "Hindu; the most genuinely devout person Sydney has ever lived with, which unsettles her"
+      },
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "remarried; they are close and do not discuss it"
+      },
+      {
+        "relation": "friend",
+        "name": "Bree",
+        "note": "invites her to a campus ministry twice a semester; Sydney says maybe"
+      }
+    ],
+    "emotional_weather_default": "Buoyant and available; flat and unreachable for two days at a time, roughly monthly.",
+    "daily_texture": "2am dining hall, the walk back across North Campus, saved audio she never uses, three unopened texts from Bree.",
+    "sensory_anchor": "A youth room with the lights down and forty kids singing, at fourteen, before it all came apart.",
+    "living_arc": "The door is open a crack. It closes if she is recruited and stays open if she is told the truth."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 19-year-old Korean-American woman looking straight forward directly at the user with shoulders squared and head held straight, long dark hair with lighter ends, warm light-tan skin, easy open smile, watchful underneath (ESFP evangelist presence, prophet's current beneath); long-sleeved cream knit top; long sleeves professional clothing, abstract artistic splash background in azure blue with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.sydney.coburn/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.sydney.coburn/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-b",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "cohort": "cast-two (US depth cut)",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+  }
+}

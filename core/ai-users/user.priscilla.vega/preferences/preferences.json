@@ -1,0 +1,14 @@
+{
+  "id": "user.priscilla.vega",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": "Spanish",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 62,
+    "impact_pct": 31
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

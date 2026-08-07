@@ -1,0 +1,15 @@
+{
+  "id": "user.bernice.ashford",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Prophet",
+    "Shepherd"
+  ],
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 33,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

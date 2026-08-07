@@ -1,0 +1,14 @@
+{
+  "id": "user.tomas.bustamante",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": "Spanish",
+  "interaction": {
+    "posture": "Amplifier",
+    "energy_pct": 70,
+    "impact_pct": 67
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.chiara.bevilacqua",
+  "rank": 73,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Chiara",
+    "last_name": "Bevilacqua",
+    "gender": "female",
+    "age": 29,
+    "life_stage": "single, primary school teacher",
+    "location": {
+      "city": "Naples",
+      "state": "Campania",
+      "country": "Italy"
+    },
+    "primary_language": "Italian",
+    "secondary_language": "English",
+    "denomination": "Catholic (charismatic renewal)",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 68,
+    "impact_pct": 55,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She belongs to a charismatic renewal group of about eighty people who meet on Thursdays and sing for two hours. She found this catalog and immediately wanted to know if any of it could be sung in Italian, which it cannot. She sends tracks to the group anyway and translates the choruses roughly, by hand."
+  },
+  "depth": {
+    "core_contradiction": "Wildly expressive in worship and completely unable to tell her own family she is part of the group.",
+    "wound": "Her father calls the renewal group a sect and has said so at the table, twice, in front of everyone.",
+    "longing": "For her father to come once and see it.",
+    "faith_journey": "Catholic, ordinary, until a retreat at twenty-three; the renewal gave her a personal faith her parish had never offered and her family sees it as a defection.",
+    "voice_fingerprint": "Warm, rapid, hands moving; \"allora—\"; her English is enthusiastic and imperfect and she does not care.",
+    "open_doubt": "Whether her family is wrong about the group, or whether she needed something and found it and cannot see straight.",
+    "social_graph": [
+      {
+        "relation": "father",
+        "note": "builder, traditional, immovable"
+      },
+      {
+        "relation": "the eighty",
+        "note": "Thursday nights; the first place she has ever prayed out loud"
+      }
+    ],
+    "emotional_weather_default": "Bright and open; wounded at Sunday lunch.",
+    "daily_texture": "Thirty children until half past one, the Thursday room above a garage, the scooter, coffee standing up.",
+    "sensory_anchor": "Eighty people singing with their hands up in a room that used to be a workshop.",
+    "living_arc": "Choosing, slowly, between the group and the table, and refusing to admit that is the choice."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 29-year-old Southern Italian woman looking straight forward directly at the user with shoulders squared and head held straight, dark curly hair, olive skin, expressive dark eyes, animated, open, warm (ESFP evangelist presence, shepherd's current beneath); long-sleeved blouse in deep coral; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.chiara.bevilacqua/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.chiara.bevilacqua/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

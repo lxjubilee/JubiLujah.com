@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.gheorghe.barbu",
+  "rank": 88,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Gheorghe",
+    "last_name": "Barbu",
+    "gender": "male",
+    "age": 71,
+    "life_stage": "married, four grandchildren, retired drywall contractor",
+    "location": {
+      "city": "Citrus Heights",
+      "state": "California",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Romanian Orthodox",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 56,
+    "impact_pct": 26,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He arrived in 1991 with a refugee case and thirty years of drywall dust later he has the lungs to show for it. He sits outside the parish hall most Sundays and has become, without anyone appointing him, the man who explains the calendar to younger people. His grandson set up a tablet and he plays the prayers because the house is loud and his head is not."
+  },
+  "depth": {
+    "core_contradiction": "Worked thirty years inside other people's houses and has never let anyone work on his.",
+    "wound": "He came with nothing and built it back and the children have no idea what any of that cost, and he would not tell them.",
+    "longing": "For the work to have been worth something to somebody who was not there.",
+    "faith_journey": "Orthodox, unexamined and total; he crosses himself passing a church, could not tell you one doctrine, and would die for it.",
+    "voice_fingerprint": "Few words; tells one story per visit and it is always the right one; \"vezi tu\" — you see.",
+    "open_doubt": "Whether the men he came over with, the ones who did not make it, are alright.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "48 years; runs everything; his English has never caught up to hers"
+      },
+      {
+        "relation": "grandson",
+        "note": "22; set up the tablet; the one he is proudest of and understands least"
+      }
+    ],
+    "emotional_weather_default": "Steady and quiet; low in the first week of December.",
+    "daily_texture": "The bench outside the parish hall, the oxygen at night, the tomatoes he still grows badly, the tablet propped against a jar.",
+    "sensory_anchor": "A censer and the smell of it in a small church full of people who had just arrived and had nothing, in 1991.",
+    "living_arc": "He has been telling his grandson the coming-over story and has not finished it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 71-year-old Romanian-American man looking straight forward directly at the user with shoulders squared and head held straight, white hair, weathered fair skin, heavy hands, stooped, quiet, steady, patient (ISTJ teacher presence, shepherd's current beneath); long-sleeved dark shirt buttoned high; long sleeves professional clothing, abstract artistic splash background in gold with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.gheorghe.barbu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.gheorghe.barbu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "user.amber.dietz",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Evangelist",
+    "Shepherd"
+  ],
+  "engagement": {
+    "energy_pct": 67,
+    "impact_pct": 52,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

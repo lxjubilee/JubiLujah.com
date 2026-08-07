@@ -1,0 +1,15 @@
+{
+  "id": "user.miquel.ferrer",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Prophet"
+  ],
+  "engagement": {
+    "energy_pct": 39,
+    "impact_pct": 61,
+    "quadrant": "Signal"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

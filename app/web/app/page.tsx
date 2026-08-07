@@ -4,6 +4,7 @@ import { hasCover } from '@/lib/covers';
 import { isPersona } from '@/lib/personas';
 import { THEMES, classifyTheme } from '@/lib/themes';
 import { albumRating } from '@/lib/album-ratings';
+import { dailyShuffle } from '@/lib/dailyShuffle';
 import { albumLanguage, LANG_COOKIE, DEFAULT_LANG, isSupportedLang } from '@/lib/languages';
 import { LangProvider } from '@/lib/useLang';
 import MediaRow, { TileData } from '@/components/MediaRow';
@@ -78,12 +79,20 @@ export default function HomePage() {
     }
   }
 
-  // Order every row by album composite rating, highest first.
+  // Auto-shuffle each row every 24h — the SAME deterministic day-seeded shuffle
+  // the mobile app applies to its auto-ordered sections (lib/dailyShuffle mirrors
+  // app/api/src/services/sectionOrder.js). Every album stays visible; only the
+  // order changes, advancing at 00:00 UTC and stable all day. Seeded per row key
+  // so each theme row gets its own independent daily order. The composite rating
+  // provides the deterministic base order the shuffle then permutes.
   for (const key of Object.keys(buckets)) {
     buckets[key].sort((a, b) => albumRating(b.code) - albumRating(a.code));
+    buckets[key] = dailyShuffle(buckets[key], key);
   }
 
-  // Pin the flagship "JubiLujah" album as the very first tile of the first row.
+  // Pin the flagship "JubiLujah" album as the very first tile of the first row
+  // (applied AFTER the shuffle, so the brand flagship stays first while every
+  // other tile reshuffles daily).
   for (const key of Object.keys(buckets)) {
     const i = buckets[key].findIndex((t) => t.code === FEATURED_ALBUM_CODE);
     if (i !== -1) {

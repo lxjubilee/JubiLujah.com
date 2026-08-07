@@ -1,0 +1,20 @@
+{
+  "id": "user.marisol.renteria",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.marisol.renteria.album-review.0001",
+    "user.marisol.renteria.album-review.0005",
+    "user.marisol.renteria.album-review.0008",
+    "user.marisol.renteria.song-rating.0009",
+    "user.marisol.renteria.song-rating.0010",
+    "user.marisol.renteria.song-rating.0011",
+    "user.marisol.renteria.song-rating.0012",
+    "user.marisol.renteria.song-rating.0020",
+    "user.marisol.renteria.song-rating.0021",
+    "user.marisol.renteria.song-rating.0022",
+    "user.marisol.renteria.song-rating.0026",
+    "user.marisol.renteria.song-rating.0027"
+  ],
+  "count": 12,
+  "store": "events/events.jsonl"
+}

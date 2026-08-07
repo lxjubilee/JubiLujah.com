@@ -1,0 +1,14 @@
+{
+  "id": "user.tyler.ammons",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Amplifier",
+    "energy_pct": 77,
+    "impact_pct": 74
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

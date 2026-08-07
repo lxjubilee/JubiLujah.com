@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.annika.holtzmann",
+  "rank": 75,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Annika",
+    "last_name": "Holtzmann",
+    "gender": "female",
+    "age": 34,
+    "life_stage": "married, one child, physiotherapist",
+    "location": {
+      "city": "Leipzig",
+      "state": "Saxony",
+      "country": "Germany"
+    },
+    "primary_language": "German",
+    "secondary_language": "English",
+    "denomination": "Evangelical Free (Freikirche)",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 47,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She lives in one of the least religious cities in Europe and belongs to a free church of ninety people. She uses the catalog for a young-adults group she runs, translating on the fly. Everyone she works with thinks her faith is a personality quirk and she has stopped explaining it."
+  },
+  "depth": {
+    "core_contradiction": "Utterly certain in private and permanently apologetic in public.",
+    "wound": "Her grandparents were church people under the DDR and lost careers for it; her parents dropped it entirely; she picked it back up and her mother took it as a judgment.",
+    "longing": "To be believed rather than tolerated.",
+    "faith_journey": "Converted at twenty-one in a student group, into a family with two generations of deliberate atheism behind it; her faith is a rupture, not an inheritance.",
+    "voice_fingerprint": "Direct to the point of bluntness; \"let us be honest\"; laughs rarely and completely.",
+    "open_doubt": "Whether a church of ninety in a city of six hundred thousand is a remnant or a hobby.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "reads the conversion as a verdict on her own life"
+      },
+      {
+        "relation": "group",
+        "note": "fourteen young adults; the only religious people most of them have ever met"
+      }
+    ],
+    "emotional_weather_default": "Contained and strong; genuinely lonely on Sunday afternoons.",
+    "daily_texture": "Clinic hours, the tram, Wednesday group in a rented room, a city with more empty churches than full ones.",
+    "sensory_anchor": "Bach sung in the Thomaskirche by people who mostly did not believe it, and being undone anyway.",
+    "living_arc": "The group is growing and she does not have a second leader."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 34-year-old German (Saxon) woman looking straight forward directly at the user with shoulders squared and head held straight, dark blonde hair cut short, fair skin, direct gaze, serious, warm underneath, unflinching (ENTJ apostle presence, teacher's current beneath); long-sleeved shirt in deep green; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.annika.holtzmann/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.annika.holtzmann/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

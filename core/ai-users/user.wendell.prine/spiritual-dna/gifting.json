@@ -1,0 +1,15 @@
+{
+  "id": "user.wendell.prine",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Apostle"
+  ],
+  "engagement": {
+    "energy_pct": 61,
+    "impact_pct": 31,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

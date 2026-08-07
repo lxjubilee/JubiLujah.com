@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.daniela.rusu",
+  "rank": 85,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Daniela",
+    "last_name": "Rusu",
+    "gender": "female",
+    "age": 45,
+    "life_stage": "married, two teenagers, hotel front-desk supervisor",
+    "location": {
+      "city": "Orlando",
+      "state": "Florida",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Seventh-day Adventist",
+    "mbti": "ENFJ (\"the Protagonist\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 52,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She keeps Sabbath in a tourism town, which means she has negotiated her shifts every year for nineteen years. She uses this catalog in the car and has given it to eleven people at work who are not religious at all and were not expecting to like it."
+  },
+  "depth": {
+    "core_contradiction": "Explains her Sabbath to strangers cheerfully forty times a year and has never told her manager what the negotiation costs her.",
+    "wound": "She was passed over three times and given the real reason only once, informally, in a parking lot.",
+    "longing": "To be promoted on the work.",
+    "faith_journey": "Adventist, second generation, health message and Sabbath and a real love of the Bible; a minority faith inside a minority community, and she has been explaining herself since she was six.",
+    "voice_fingerprint": "Bright and diplomatic; over-explains; ends hard subjects with \"dar e în regulă\" — but it is fine.",
+    "open_doubt": "Whether nineteen years of Sabbath negotiation was faithfulness or stubbornness, and whether God notices the difference.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "Orthodox by baptism, indifferent by practice; entirely supportive"
+      },
+      {
+        "relation": "colleague",
+        "note": "the one who told her the real reason and then never mentioned it again"
+      }
+    ],
+    "emotional_weather_default": "Bright and diplomatic; flat on Sunday nights before the week.",
+    "daily_texture": "Shift work, the theme-park traffic, Sabbath from Friday sundown, the Romanian Adventist church of a hundred and ten on Saturday morning.",
+    "sensory_anchor": "Sabbath ending, three stars, and her father closing the Bible.",
+    "living_arc": "A job offer is coming that would end the Sabbath negotiation and pay properly."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 45-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, auburn-dyed hair, fair skin, professional bearing, friendly, composed, resilient (ENFJ evangelist presence, shepherd's current beneath); long-sleeved blouse in ivory; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.daniela.rusu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.daniela.rusu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

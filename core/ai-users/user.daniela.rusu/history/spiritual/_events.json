@@ -1,0 +1,33 @@
+{
+  "id": "user.daniela.rusu",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.daniela.rusu.album-review.0001",
+    "user.daniela.rusu.album-review.0002",
+    "user.daniela.rusu.album-review.0003",
+    "user.daniela.rusu.album-review.0004",
+    "user.daniela.rusu.album-review.0005",
+    "user.daniela.rusu.album-review.0006",
+    "user.daniela.rusu.album-review.0007",
+    "user.daniela.rusu.album-review.0008",
+    "user.daniela.rusu.song-rating.0009",
+    "user.daniela.rusu.song-rating.0010",
+    "user.daniela.rusu.song-rating.0011",
+    "user.daniela.rusu.song-rating.0012",
+    "user.daniela.rusu.song-rating.0013",
+    "user.daniela.rusu.song-rating.0014",
+    "user.daniela.rusu.song-rating.0015",
+    "user.daniela.rusu.song-rating.0016",
+    "user.daniela.rusu.song-rating.0017",
+    "user.daniela.rusu.song-rating.0018",
+    "user.daniela.rusu.song-rating.0019",
+    "user.daniela.rusu.song-rating.0020",
+    "user.daniela.rusu.song-rating.0021",
+    "user.daniela.rusu.song-rating.0022",
+    "user.daniela.rusu.song-rating.0023",
+    "user.daniela.rusu.song-rating.0024",
+    "user.daniela.rusu.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

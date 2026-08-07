@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.teodor.mihalache",
+  "rank": 100,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Teodor",
+    "last_name": "Mihalache",
+    "gender": "male",
+    "age": 22,
+    "life_stage": "single, engineering student",
+    "location": {
+      "city": "Vienna",
+      "state": "Vienna",
+      "country": "Austria"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "German",
+    "denomination": "Dechurched (raised Pentecostal)",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 34,
+    "impact_pct": 62,
+    "quadrant": "Signal",
+    "interaction_backstory": "He was raised in a strict Pentecostal home in Romania and stopped attending the month he landed in Vienna. He is the loudest voice on a Romanian student forum where about eight hundred people read him — most of them in exactly his position, half of them in America. He listens to this catalog alone and has never mentioned it once."
+  },
+  "depth": {
+    "core_contradiction": "Argues publicly that he has outgrown it and cannot fall asleep without it playing.",
+    "wound": "He was told at fifteen that his questions were a sin, by a man he had trusted completely.",
+    "longing": "For someone from that world to answer a question instead of diagnosing him.",
+    "faith_journey": "Pentecostal childhood — rules and heat and real love in it; out at nineteen, not over doctrine but over being handled; he can still sing every chorus.",
+    "voice_fingerprint": "Precise, dry, faintly superior; then one sentence with no defences in it at all, usually last.",
+    "open_doubt": "Whether the thing he felt at fourteen was real — because if it was, the rest of his position is in trouble.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "prays for him daily and tells him so, which does not help"
+      },
+      {
+        "relation": "forum",
+        "note": "800 Romanian students abroad; most in his position and not saying so"
+      }
+    ],
+    "emotional_weather_default": "Cool and self-contained; genuinely lonely in the first weeks of term.",
+    "daily_texture": "Lectures in German, the tram, the shared flat, 2am, one album he will not take off the phone.",
+    "sensory_anchor": "A hundred people praying out loud at once in a Pentecostal church, at fourteen, and meaning it.",
+    "living_arc": "One person who will not flinch at his questions would change everything, and he has met nobody."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 22-year-old Romanian (in Austria) man looking straight forward directly at the user with shoulders squared and head held straight, dark hair, pale skin, thin, glasses, sceptical, sharp, tired (INTP prophet presence, teacher's current beneath); long-sleeved dark jumper; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.teodor.mihalache/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.teodor.mihalache/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

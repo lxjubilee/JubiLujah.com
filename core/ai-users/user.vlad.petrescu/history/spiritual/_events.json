@@ -1,0 +1,32 @@
+{
+  "id": "user.vlad.petrescu",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.vlad.petrescu.album-review.0001",
+    "user.vlad.petrescu.album-review.0002",
+    "user.vlad.petrescu.album-review.0003",
+    "user.vlad.petrescu.album-review.0004",
+    "user.vlad.petrescu.album-review.0005",
+    "user.vlad.petrescu.album-review.0006",
+    "user.vlad.petrescu.album-review.0007",
+    "user.vlad.petrescu.album-review.0008",
+    "user.vlad.petrescu.song-rating.0009",
+    "user.vlad.petrescu.song-rating.0010",
+    "user.vlad.petrescu.song-rating.0011",
+    "user.vlad.petrescu.song-rating.0012",
+    "user.vlad.petrescu.song-rating.0013",
+    "user.vlad.petrescu.song-rating.0014",
+    "user.vlad.petrescu.song-rating.0015",
+    "user.vlad.petrescu.song-rating.0016",
+    "user.vlad.petrescu.song-rating.0017",
+    "user.vlad.petrescu.song-rating.0018",
+    "user.vlad.petrescu.song-rating.0019",
+    "user.vlad.petrescu.song-rating.0020",
+    "user.vlad.petrescu.song-rating.0021",
+    "user.vlad.petrescu.song-rating.0022",
+    "user.vlad.petrescu.song-rating.0023",
+    "user.vlad.petrescu.song-rating.0024"
+  ],
+  "count": 24,
+  "store": "events/events.jsonl"
+}

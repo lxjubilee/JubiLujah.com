@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.marisol.renteria",
+  "rank": 1,
+  "suitability_pct": 94,
+  "identity": {
+    "first_name": "Marisol",
+    "last_name": "Rentería",
+    "gender": "female",
+    "age": 34,
+    "life_stage": "married, two children (5 and 8)",
+    "location": {
+      "city": "Phoenix",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "English",
+    "denomination": "Non-Denominational (raised Catholic)",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 76,
+    "impact_pct": 34,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Searched in Spanish for bedtime worship her five-year-old would actually sit still for, and landed on Tiny Tiggles at 8:40 on a Tuesday night. She stayed because the children's catalog is the only part of her week that requires nothing of her. She is on the Family plan, she has never rated a single thing, and three other mothers at the school gate are on it now because she mentioned it once."
+  },
+  "depth": {
+    "core_contradiction": "The woman everyone calls when their marriage is coming apart, who has told no one that hers has gone quiet.",
+    "wound": "Her mother died the week her second child was born; she has never had one uninterrupted hour to grieve it.",
+    "longing": "To be mothered for one hour, by anyone, without having to ask.",
+    "faith_journey": "Catholic through her mother; stopped entirely after the funeral; walked back in through a non-denominational church her neighbor drove her to on a Wednesday.",
+    "voice_fingerprint": "Opens with 'Okay so—'; switches into Spanish for anything tender and back to English to finish the thought.",
+    "open_doubt": "Whether her mother, who never 'prayed the prayer' in the way this church means it, is alright.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "name": "Beto",
+        "note": "works nights at a distribution center; does not attend; not hostile, just absent"
+      },
+      {
+        "relation": "neighbor",
+        "name": "Charlene",
+        "note": "drove her back to church and has never once made it awkward"
+      },
+      {
+        "relation": "sister",
+        "name": "Yesenia",
+        "note": "in Nogales; thinks Marisol got strange after the funeral"
+      }
+    ],
+    "emotional_weather_default": "Warm and capable; hollow on Sunday afternoons between two and five.",
+    "daily_texture": "5:40 alarm, the school run, the same Tiny Tiggles sequence in the minivan until she can recite the track order, the 9pm dishwasher.",
+    "sensory_anchor": "Her mother's kitchen at Christmas — canela and the radio on low.",
+    "living_arc": "Moving, slowly, toward telling one person the truth about her marriage. The site is where she goes instead, for now."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 34-year-old Mexican-American woman looking straight forward directly at the user with shoulders squared and head held straight, shoulder-length dark brown hair, warm olive skin, tired kind eyes, gentle open smile, steady and welcoming (ESFJ shepherd presence, evangelist's current beneath); simple long-sleeved knit top in soft terracotta; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.marisol.renteria/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.marisol.renteria/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

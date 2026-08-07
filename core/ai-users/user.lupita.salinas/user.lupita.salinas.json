@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.lupita.salinas",
+  "rank": 42,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Lupita",
+    "last_name": "Salinas",
+    "gender": "female",
+    "age": 44,
+    "life_stage": "married, five children, school cafeteria manager",
+    "location": {
+      "city": "El Paso",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "English",
+    "denomination": "Catholic",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 71,
+    "impact_pct": 54,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She feeds six hundred children a day and comes home to five of her own, and the house runs on music from four o'clock onward. She found the Latin worship catalog and heard traditions from both sides of the river treated as equals, which she has never seen on an English-language site."
+  },
+  "depth": {
+    "core_contradiction": "Feeds everybody and eats standing up at the counter.",
+    "wound": "Her oldest crossed a line at nineteen and there was a year nobody in the family will describe.",
+    "longing": "All five of them at the same table without anybody watching the door.",
+    "faith_journey": "Catholic, Guadalupana, the whole calendar; her faith is her mother's and she has never wanted a different one.",
+    "voice_fingerprint": "\"Mija\" to everyone including men her own age; laughs before delivering bad news.",
+    "open_doubt": "Whether the year of prayer worked or the boy just got tired.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "drives a route; home late; steady"
+      },
+      {
+        "relation": "oldest son",
+        "note": "23; back home; they do not talk about it"
+      }
+    ],
+    "emotional_weather_default": "Warm and busy; quiet on the drive to work.",
+    "daily_texture": "Cafeteria at 5:30, six hundred trays, the house at four, rosary in the car.",
+    "sensory_anchor": "The Guadalupe hymn sung at 5am on the twelfth of December by a whole neighborhood.",
+    "living_arc": "Learning to let the oldest be an adult, badly and slowly."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 44-year-old Mexican-American (Borderlands) woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair pulled back, warm brown skin, kind broad face, welcoming, capable, warm (ESFJ shepherd presence, evangelist's current beneath); long-sleeved blouse in bright turquoise; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.lupita.salinas/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.lupita.salinas/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

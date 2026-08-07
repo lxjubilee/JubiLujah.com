@@ -1,0 +1,23 @@
+{
+  "id": "user.marisol.renteria",
+  "life_area": "family",
+  "event_ids": [
+    "user.marisol.renteria.album-review.0002",
+    "user.marisol.renteria.album-review.0003",
+    "user.marisol.renteria.album-review.0004",
+    "user.marisol.renteria.album-review.0006",
+    "user.marisol.renteria.album-review.0007",
+    "user.marisol.renteria.song-rating.0013",
+    "user.marisol.renteria.song-rating.0014",
+    "user.marisol.renteria.song-rating.0015",
+    "user.marisol.renteria.song-rating.0016",
+    "user.marisol.renteria.song-rating.0017",
+    "user.marisol.renteria.song-rating.0018",
+    "user.marisol.renteria.song-rating.0019",
+    "user.marisol.renteria.song-rating.0023",
+    "user.marisol.renteria.song-rating.0024",
+    "user.marisol.renteria.song-rating.0025"
+  ],
+  "count": 15,
+  "store": "events/events.jsonl"
+}

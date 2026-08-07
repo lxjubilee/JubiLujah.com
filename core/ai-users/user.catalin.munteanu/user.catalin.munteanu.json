@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.catalin.munteanu",
+  "rank": 82,
+  "suitability_pct": 82,
+  "identity": {
+    "first_name": "Cătălin",
+    "last_name": "Munteanu",
+    "gender": "male",
+    "age": 41,
+    "life_stage": "married, three children, civil engineer and lay leader",
+    "location": {
+      "city": "Portland",
+      "state": "Oregon",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Baptist (Romanian-American)",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 70,
+    "impact_pct": 66,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He runs the young-adults ministry at a Romanian Baptist church of six hundred, and he has held it together for nine years. He found this catalog and put it in front of eighty people inside a month. The problem he keeps hitting is that the parents want Romanian, the young adults want English, and he is the person standing in the middle of that every single week."
+  },
+  "depth": {
+    "core_contradiction": "Builds everything and cannot sit through a service without evaluating it.",
+    "wound": "His father was interrogated twice in the eighties for holding meetings in the house, and has never once described it.",
+    "longing": "To do something that costs him the way it cost his father.",
+    "faith_journey": "Historic Romanian Baptist — a family that met in houses when it was illegal, then came here in 1991; he inherited the seriousness and raised his kids in the comfort, and the gap bothers him constantly.",
+    "voice_fingerprint": "Rapid and organised; three points to everything; \"hai să fim serioși\" — let us be serious.",
+    "open_doubt": "Whether a church that survived Ceaușescu can survive the suburbs.",
+    "social_graph": [
+      {
+        "relation": "father",
+        "note": "76; a deacon here; still will not talk about the interrogations"
+      },
+      {
+        "relation": "the eighty",
+        "note": "young adults; most of them think in English and are told to worship in Romanian"
+      }
+    ],
+    "emotional_weather_default": "Driven and warm; frustrated most Sundays.",
+    "daily_texture": "Site inspections, the drive over the river, Friday night group in the church basement, three children who answer him in English.",
+    "sensory_anchor": "Two hundred people singing in four parts in a house of prayer in Oradea with the windows open.",
+    "living_arc": "The English service he wants to start would split the church and he knows it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 41-year-old Romanian-American man looking straight forward directly at the user with shoulders squared and head held straight, short dark hair, fair skin, strong build, decisive, warm, focused (ENTJ apostle presence, evangelist's current beneath); long-sleeved shirt in slate blue; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.catalin.munteanu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.catalin.munteanu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

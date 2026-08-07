@@ -1,0 +1,33 @@
+{
+  "id": "user.seamus.corrigan",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.seamus.corrigan.album-review.0001",
+    "user.seamus.corrigan.album-review.0002",
+    "user.seamus.corrigan.album-review.0003",
+    "user.seamus.corrigan.album-review.0004",
+    "user.seamus.corrigan.album-review.0005",
+    "user.seamus.corrigan.album-review.0006",
+    "user.seamus.corrigan.album-review.0007",
+    "user.seamus.corrigan.album-review.0008",
+    "user.seamus.corrigan.song-rating.0009",
+    "user.seamus.corrigan.song-rating.0010",
+    "user.seamus.corrigan.song-rating.0011",
+    "user.seamus.corrigan.song-rating.0012",
+    "user.seamus.corrigan.song-rating.0013",
+    "user.seamus.corrigan.song-rating.0014",
+    "user.seamus.corrigan.song-rating.0015",
+    "user.seamus.corrigan.song-rating.0016",
+    "user.seamus.corrigan.song-rating.0017",
+    "user.seamus.corrigan.song-rating.0018",
+    "user.seamus.corrigan.song-rating.0019",
+    "user.seamus.corrigan.song-rating.0020",
+    "user.seamus.corrigan.song-rating.0021",
+    "user.seamus.corrigan.song-rating.0022",
+    "user.seamus.corrigan.song-rating.0023",
+    "user.seamus.corrigan.song-rating.0024",
+    "user.seamus.corrigan.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.marieke.de-vries",
+  "rank": 78,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Marieke",
+    "last_name": "de Vries",
+    "gender": "female",
+    "age": 39,
+    "life_stage": "married, three children, midwife",
+    "location": {
+      "city": "Utrecht",
+      "state": "Utrecht",
+      "country": "Netherlands"
+    },
+    "primary_language": "Dutch",
+    "secondary_language": "English",
+    "denomination": "Reformed (PKN)",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 38,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She has been at about nine hundred births and she has a very short list of music that is right for the room. Almost nothing on this site qualifies — too built, too swelling, too much arrival. She uses three tracks and she has used them at more than forty births, which is a kind of endorsement no analytics dashboard will ever capture."
+  },
+  "depth": {
+    "core_contradiction": "Present at the most sacred moments in strangers' lives and cannot pray out loud in her own house.",
+    "wound": "A birth that went wrong in 2019, which was nobody's fault, and she has been at four hundred since and thinks about that one.",
+    "longing": "To be sure again the way she was at twenty-six.",
+    "faith_journey": "Reformed, PKN, a Dutch faith that is intellectually honest and emotionally reserved; she believes and she does not feel much, and she has stopped expecting to.",
+    "voice_fingerprint": "Direct in the Dutch way; asks a blunt question kindly; long silences that are not awkward to her.",
+    "open_doubt": "Whether God is present in the room or whether she has been assigning meaning to biology for twenty years.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "not religious; came to the christenings and nothing since"
+      },
+      {
+        "relation": "colleague",
+        "note": "a Muslim midwife who prays before her shifts and whom Marieke envies"
+      }
+    ],
+    "emotional_weather_default": "Calm and grounded; very low after a hard one.",
+    "daily_texture": "Nights on call, the bicycle in the rain, the bag by the door, coffee at 4am in someone else's kitchen.",
+    "sensory_anchor": "A psalm sung in Genevan meter by a whole congregation, slow, which she found unbearable as a child and now cannot get through.",
+    "living_arc": "Considering stopping, and cannot imagine who she is without it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 39-year-old Dutch woman looking straight forward directly at the user with shoulders squared and head held straight, blonde hair pinned back, fair skin, tall and calm, steady, unhurried, present (INFJ apostle presence, prophet's current beneath); long-sleeved tunic in slate blue; long sleeves professional clothing, abstract artistic splash background in royal purple with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.marieke.de-vries/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.marieke.de-vries/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

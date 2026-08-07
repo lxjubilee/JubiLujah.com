@@ -1,0 +1,164 @@
+{
+  "id": "user.lupita.salinas",
+  "synthetic": true,
+  "record": "core/ai-users/user.lupita.salinas/user.lupita.salinas.json",
+  "history_root": "core/ai-users/user.lupita.salinas/",
+  "life_areas": [
+    "spiritual",
+    "mental",
+    "career",
+    "financial",
+    "family",
+    "social",
+    "physical",
+    "emotional",
+    "romantic",
+    "recreational",
+    "environment",
+    "character"
+  ],
+  "events": [
+    {
+      "id": "user.lupita.salinas.album-review.0001",
+      "type": "album_rating_review",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0002",
+      "type": "album_rating_review",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0003",
+      "type": "album_rating_review",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0004",
+      "type": "album_rating_review",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0005",
+      "type": "album_rating_review",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0006",
+      "type": "album_rating_review",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0007",
+      "type": "album_rating_review",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.album-review.0008",
+      "type": "album_rating_review",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0009",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0010",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0011",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0012",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0013",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0014",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0015",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0016",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0017",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0018",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0019",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0020",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0021",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0022",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0023",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0024",
+      "type": "song_rating",
+      "life_area": "spiritual"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0025",
+      "type": "song_rating",
+      "life_area": "family"
+    },
+    {
+      "id": "user.lupita.salinas.song-rating.0026",
+      "type": "song_rating",
+      "life_area": "family"
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "confidence_pct": 74,
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+  },
+  "inspire_personas": [
+    "melody"
+  ],
+  "inspire_personas_note": "Relational-chronological views under personas/<slug>/ — these are the 12 Inspire ministry personas, NOT AI User Personas.",
+  "event_store": "events/events.jsonl"
+}

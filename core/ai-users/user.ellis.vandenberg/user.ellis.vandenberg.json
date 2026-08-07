@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ellis.vandenberg",
+  "rank": 66,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Ellis",
+    "last_name": "Vandenberg",
+    "gender": "male",
+    "age": 47,
+    "life_stage": "married, four children, high school teacher and elder",
+    "location": {
+      "city": "Grand Rapids",
+      "state": "Michigan",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Christian Reformed",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 59,
+    "impact_pct": 37,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He serves on a worship committee that argues for three hours about one song, and he is usually the one arguing. He came to this catalog skeptical and has changed his mind about four of the albums, which for him is a significant event. He wants the theological sourcing behind the lyrics and there is none published."
+  },
+  "depth": {
+    "core_contradiction": "Argues for depth in worship and has not been genuinely moved in a service in five years.",
+    "wound": "He wanted to teach at the seminary and did not get in, twice, and teaches ninth-grade history instead.",
+    "longing": "For his mind to be used at the level he trained it for.",
+    "faith_journey": "Christian Reformed, Dutch, catechism and Kuyper; a rigorous inherited faith he has never doubted and rarely felt.",
+    "voice_fingerprint": "\"To be precise\"; qualifies everything; genuinely delighted by a good argument.",
+    "open_doubt": "Whether his dryness is a season, a temperament, or the truth about him.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "feels things easily and does not understand why he cannot"
+      },
+      {
+        "relation": "fellow elder",
+        "note": "disagrees with him about everything and is his closest friend"
+      }
+    ],
+    "emotional_weather_default": "Dry and consistent; unexpectedly emotional at his children's concerts.",
+    "daily_texture": "Lesson plans, the committee, the Heidelberg on the shelf, lake-effect grey from November to March.",
+    "sensory_anchor": "A psalm sung in four parts by a full congregation with no instruments.",
+    "living_arc": "His oldest is leaving the faith politely and Ellis cannot argue him back."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 47-year-old Dutch-American (West Michigan) man looking straight forward directly at the user with shoulders squared and head held straight, dark hair receding, fair skin, glasses, tall, grave, attentive, dry (INTJ teacher presence, prophet's current beneath); long-sleeved shirt in charcoal with a plain sweater; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.ellis.vandenberg/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ellis.vandenberg/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

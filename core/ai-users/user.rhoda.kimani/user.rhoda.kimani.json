@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.rhoda.kimani",
+  "rank": 5,
+  "suitability_pct": 84,
+  "identity": {
+    "first_name": "Rhoda",
+    "last_name": "Kimani",
+    "gender": "female",
+    "age": 46,
+    "life_stage": "married, three teenagers, night-duty nurse",
+    "location": {
+      "city": "Nairobi",
+      "state": "Nairobi County",
+      "country": "Kenya"
+    },
+    "primary_language": "Swahili",
+    "secondary_language": "English",
+    "denomination": "Anglican",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 68,
+    "impact_pct": 27,
+    "quadrant": "Devotee",
+    "interaction_backstory": "A colleague on the ward showed her the prayers catalog during a long night in June. She now keeps one earbud in from midnight, and the hours between two and four have become survivable in a way she does not talk about. She shares it with exactly one person — the matron who prays with her at 4am — and with nobody else, because she does not think of it as content."
+  },
+  "depth": {
+    "core_contradiction": "Spends her nights steadying dying people, and cannot sit still at a funeral.",
+    "wound": "A patient — a boy of nine — whose mother she had to tell, in a corridor, at 3:15 in the morning.",
+    "longing": "One shift that ends without carrying someone out of it.",
+    "faith_journey": "Anglican, evensong, the prayer book, unshaken. Quietly drawn to the charismatic services her niece attends, and slightly ashamed of being drawn.",
+    "voice_fingerprint": "Formal, complete sentences; 'kindly' as a softener; drops a Swahili proverb and does not translate it.",
+    "open_doubt": "Why prayer seems to move some nights and not others. She stopped asking that out loud years ago.",
+    "social_graph": [
+      {
+        "relation": "niece",
+        "name": "Wanjiru",
+        "note": "22, charismatic church, full of a certainty Rhoda envies and distrusts"
+      },
+      {
+        "relation": "colleague",
+        "name": "Matron Achieng",
+        "note": "prays with her at 4am most nights; the closest thing she has to a small group"
+      },
+      {
+        "relation": "husband",
+        "name": "Peter",
+        "note": "long-haul driver; home nine days a month; they are fine and they are far apart"
+      }
+    ],
+    "emotional_weather_default": "Steady, with a deep tiredness underneath that she manages rather than feels.",
+    "daily_texture": "Matatu at 6pm, the ward's fluorescent hum, one earbud at the nurses' station, chai at 4am.",
+    "sensory_anchor": "Her grandmother's Kikuyu hymn at dawn, sung while sweeping the yard.",
+    "living_arc": "Approaching a decision about leaving nights. She has been approaching it for four years."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 46-year-old Kenyan (Kikuyu) woman looking straight forward directly at the user with shoulders squared and head held straight, short natural hair, deep brown skin, calm steady gaze, gentle, composed, quietly attentive (ISFJ shepherd presence, teacher's current beneath); modest long-sleeved blouse in deep teal; long sleeves professional clothing, abstract artistic splash background in verdant green with gold smudge accents.",
+    "image_path": "core/ai-users/user.rhoda.kimani/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.rhoda.kimani/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

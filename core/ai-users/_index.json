@@ -1,0 +1,1042 @@
+{
+  "registry": "ai-users",
+  "synthetic": true,
+  "project": "JubiLujah.com",
+  "terminology": {
+    "AI User Persona": "A synthetic member of the AUDIENCE — one of the 100 modelled listeners in this directory. Never a real person. Registry key: user_personas.",
+    "Inspire Persona": "One of the 12 AI ministry personas of Jubilee Ministries (jubilee, melody, amir, imani, santiago, tahoma, elias, eliana, caleb, nova, zariah, zev). Per-user key: inspire_personas.",
+    "note": "These are NOT the same thing and the word \"persona\" alone is ambiguous. Always qualify it."
+  },
+  "seed": "jubilujah-2026-07-22-a",
+  "generated_at": "2026-07-22T00:00:00Z",
+  "generated_by": "Melody Inspire · skill_create.ai-user.personas v1.4",
+  "theological_mode": "Blend",
+  "layout_note": "Record lives INSIDE its history folder (founder directive 2026-07-22) — diverges from skill_create.ai-user.personas v1.4 §10.1, which places it beside the folder.",
+  "cohorts": {
+    "cast-one": {
+      "seed": "jubilujah-2026-07-22-a",
+      "ranks": "1-10",
+      "note": "global audience cut"
+    },
+    "cast-two": {
+      "seed": "jubilujah-2026-07-22-b",
+      "ranks": "11-20",
+      "note": "US depth cut — founder directive: American names"
+    },
+    "cast-three (US regional: South · NY tri-state · TX/AZ)": {
+      "seed": "jubilujah-2026-07-22-c",
+      "ranks": "21-50",
+      "count": 30,
+      "depth_tier": "engine-assembled",
+      "confidence_pct": 74
+    },
+    "cast-four (Chicago & Atlanta · Middle states · Europe)": {
+      "seed": "jubilujah-2026-07-22-d",
+      "ranks": "51-80",
+      "count": 30,
+      "depth_tier": "engine-assembled",
+      "confidence_pct": 74
+    },
+    "cast-five (Romanian — mostly US-based, plus Romania and Europe)": {
+      "seed": "jubilujah-2026-07-22-e",
+      "ranks": "81-100",
+      "count": 20,
+      "depth_tier": "engine-assembled",
+      "confidence_pct": 74
+    }
+  },
+  "names_taken": [
+    "Marisol Rentería",
+    "Terrance Whitfield",
+    "Ngozi Abaeze",
+    "Callum Reid",
+    "Rhoda Kimani",
+    "Willa Mae Cranston",
+    "Klarisse Bantugan",
+    "Anneke Vermeulen",
+    "Anish Varughese",
+    "Emerson Tavares",
+    "Kendra Latimer",
+    "Bethany Kirkland",
+    "Tyler Ammons",
+    "Grant Mulholland",
+    "Harold Bickford",
+    "Cassidy Hollis",
+    "Duane Pettigrew",
+    "Shane Coddington",
+    "Loretta Brandt",
+    "Sydney Coburn",
+    "Delia Rayburn",
+    "Wendell Prine",
+    "Charlaine Thibodeaux",
+    "Otis Mabry",
+    "Raylene Dupree",
+    "Beau Stanfield",
+    "Junie Ferrell",
+    "Colton Vestal",
+    "Marlene Pickering",
+    "Travis Ogletree",
+    "Gina Marchetti",
+    "Devon Whitaker",
+    "Rosalind Pierre-Louis",
+    "Anthony Cataldo",
+    "Shanice Beckford",
+    "Bridget Halloran",
+    "Ramon Quiñones",
+    "Joanne Kiriakis",
+    "Terrell Bass",
+    "Maribel Almonte",
+    "Rusty Callahan",
+    "Lupita Salinas",
+    "Jace Thornbury",
+    "Danika Osorio",
+    "Curtis Ealy",
+    "Priscilla Vega",
+    "Tomás Bustamante",
+    "Shelby Kinnard",
+    "Denton Rusk",
+    "Aurelia Nakai",
+    "Bernice Ashford",
+    "Dariusz Wójcik",
+    "Keisha Rowlett",
+    "Mateo Delgado",
+    "Ingrid Halvorsen",
+    "Jamar Beauchamp",
+    "Tanisha Culpepper",
+    "Nolan Prather",
+    "Simone Bramlett",
+    "Danny Sohn",
+    "Verna Aldrich",
+    "Chad Lindgren",
+    "Rochelle Ptáček",
+    "Wade Hollenbeck",
+    "Amber Dietz",
+    "Ellis Vandenberg",
+    "Peggy Sorensen",
+    "Cody Ferrin",
+    "Doreen Kruse",
+    "Lyle Bergstrom",
+    "Beata Nowicka",
+    "Lars Ottesen",
+    "Chiara Bevilacqua",
+    "Miquel Ferrer",
+    "Annika Holtzmann",
+    "Íris Guðmundsdóttir",
+    "Dimitris Anagnostou",
+    "Marieke de Vries",
+    "Séamus Corrigan",
+    "Zsófia Almási",
+    "Ioana Predoiu",
+    "Cătălin Munteanu",
+    "Mihaela Șerban",
+    "Vlad Petrescu",
+    "Daniela Rusu",
+    "Ramona Tudose",
+    "Lăcrămioara Enache",
+    "Gheorghe Barbu",
+    "Alina Cozma",
+    "Marius Dobre",
+    "Denisa Ardelean",
+    "Nicu Stancu",
+    "Roxana Feraru",
+    "Corina Balaș",
+    "Andrei Lupescu",
+    "Elena Ciobanu",
+    "Sorin Grigoraș",
+    "Bogdan Nistor",
+    "Simona Vasilescu",
+    "Teodor Mihalache"
+  ],
+  "user_personas": [
+    {
+      "id": "user.marisol.renteria",
+      "rank": 1,
+      "name": "Marisol Rentería",
+      "suitability_pct": 94,
+      "record": "core/ai-users/user.marisol.renteria/user.marisol.renteria.json",
+      "history_root": "core/ai-users/user.marisol.renteria/"
+    },
+    {
+      "id": "user.terrance.whitfield",
+      "rank": 2,
+      "name": "Terrance Whitfield",
+      "suitability_pct": 92,
+      "record": "core/ai-users/user.terrance.whitfield/user.terrance.whitfield.json",
+      "history_root": "core/ai-users/user.terrance.whitfield/"
+    },
+    {
+      "id": "user.ngozi.abaeze",
+      "rank": 3,
+      "name": "Ngozi Abaeze",
+      "suitability_pct": 88,
+      "record": "core/ai-users/user.ngozi.abaeze/user.ngozi.abaeze.json",
+      "history_root": "core/ai-users/user.ngozi.abaeze/"
+    },
+    {
+      "id": "user.callum.reid",
+      "rank": 4,
+      "name": "Callum Reid",
+      "suitability_pct": 87,
+      "record": "core/ai-users/user.callum.reid/user.callum.reid.json",
+      "history_root": "core/ai-users/user.callum.reid/"
+    },
+    {
+      "id": "user.rhoda.kimani",
+      "rank": 5,
+      "name": "Rhoda Kimani",
+      "suitability_pct": 84,
+      "record": "core/ai-users/user.rhoda.kimani/user.rhoda.kimani.json",
+      "history_root": "core/ai-users/user.rhoda.kimani/"
+    },
+    {
+      "id": "user.willa-mae.cranston",
+      "rank": 6,
+      "name": "Willa Mae Cranston",
+      "suitability_pct": 82,
+      "record": "core/ai-users/user.willa-mae.cranston/user.willa-mae.cranston.json",
+      "history_root": "core/ai-users/user.willa-mae.cranston/"
+    },
+    {
+      "id": "user.klarisse.bantugan",
+      "rank": 7,
+      "name": "Klarisse Bantugan",
+      "suitability_pct": 85,
+      "record": "core/ai-users/user.klarisse.bantugan/user.klarisse.bantugan.json",
+      "history_root": "core/ai-users/user.klarisse.bantugan/"
+    },
+    {
+      "id": "user.anneke.vermeulen",
+      "rank": 8,
+      "name": "Anneke Vermeulen",
+      "suitability_pct": 81,
+      "record": "core/ai-users/user.anneke.vermeulen/user.anneke.vermeulen.json",
+      "history_root": "core/ai-users/user.anneke.vermeulen/"
+    },
+    {
+      "id": "user.anish.varughese",
+      "rank": 9,
+      "name": "Anish Varughese",
+      "suitability_pct": 80,
+      "record": "core/ai-users/user.anish.varughese/user.anish.varughese.json",
+      "history_root": "core/ai-users/user.anish.varughese/"
+    },
+    {
+      "id": "user.emerson.tavares",
+      "rank": 10,
+      "name": "Emerson Tavares",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.emerson.tavares/user.emerson.tavares.json",
+      "history_root": "core/ai-users/user.emerson.tavares/"
+    },
+    {
+      "id": "user.kendra.latimer",
+      "rank": 11,
+      "name": "Kendra Latimer",
+      "suitability_pct": 89,
+      "record": "core/ai-users/user.kendra.latimer/user.kendra.latimer.json",
+      "history_root": "core/ai-users/user.kendra.latimer/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.bethany.kirkland",
+      "rank": 12,
+      "name": "Bethany Kirkland",
+      "suitability_pct": 84,
+      "record": "core/ai-users/user.bethany.kirkland/user.bethany.kirkland.json",
+      "history_root": "core/ai-users/user.bethany.kirkland/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.tyler.ammons",
+      "rank": 13,
+      "name": "Tyler Ammons",
+      "suitability_pct": 83,
+      "record": "core/ai-users/user.tyler.ammons/user.tyler.ammons.json",
+      "history_root": "core/ai-users/user.tyler.ammons/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.grant.mulholland",
+      "rank": 14,
+      "name": "Grant Mulholland",
+      "suitability_pct": 82,
+      "record": "core/ai-users/user.grant.mulholland/user.grant.mulholland.json",
+      "history_root": "core/ai-users/user.grant.mulholland/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.harold.bickford",
+      "rank": 15,
+      "name": "Harold Bickford",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.harold.bickford/user.harold.bickford.json",
+      "history_root": "core/ai-users/user.harold.bickford/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.cassidy.hollis",
+      "rank": 16,
+      "name": "Cassidy Hollis",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.cassidy.hollis/user.cassidy.hollis.json",
+      "history_root": "core/ai-users/user.cassidy.hollis/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.duane.pettigrew",
+      "rank": 17,
+      "name": "Duane Pettigrew",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.duane.pettigrew/user.duane.pettigrew.json",
+      "history_root": "core/ai-users/user.duane.pettigrew/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.shane.coddington",
+      "rank": 18,
+      "name": "Shane Coddington",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.shane.coddington/user.shane.coddington.json",
+      "history_root": "core/ai-users/user.shane.coddington/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.loretta.brandt",
+      "rank": 19,
+      "name": "Loretta Brandt",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.loretta.brandt/user.loretta.brandt.json",
+      "history_root": "core/ai-users/user.loretta.brandt/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.sydney.coburn",
+      "rank": 20,
+      "name": "Sydney Coburn",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.sydney.coburn/user.sydney.coburn.json",
+      "history_root": "core/ai-users/user.sydney.coburn/",
+      "cohort": "cast-two"
+    },
+    {
+      "id": "user.delia.rayburn",
+      "rank": 21,
+      "name": "Delia Rayburn",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.delia.rayburn/user.delia.rayburn.json",
+      "history_root": "core/ai-users/user.delia.rayburn/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.wendell.prine",
+      "rank": 22,
+      "name": "Wendell Prine",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.wendell.prine/user.wendell.prine.json",
+      "history_root": "core/ai-users/user.wendell.prine/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.charlaine.thibodeaux",
+      "rank": 23,
+      "name": "Charlaine Thibodeaux",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.charlaine.thibodeaux/user.charlaine.thibodeaux.json",
+      "history_root": "core/ai-users/user.charlaine.thibodeaux/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.otis.mabry",
+      "rank": 24,
+      "name": "Otis Mabry",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.otis.mabry/user.otis.mabry.json",
+      "history_root": "core/ai-users/user.otis.mabry/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.raylene.dupree",
+      "rank": 25,
+      "name": "Raylene Dupree",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.raylene.dupree/user.raylene.dupree.json",
+      "history_root": "core/ai-users/user.raylene.dupree/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.beau.stanfield",
+      "rank": 26,
+      "name": "Beau Stanfield",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.beau.stanfield/user.beau.stanfield.json",
+      "history_root": "core/ai-users/user.beau.stanfield/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.junie.ferrell",
+      "rank": 27,
+      "name": "Junie Ferrell",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.junie.ferrell/user.junie.ferrell.json",
+      "history_root": "core/ai-users/user.junie.ferrell/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.colton.vestal",
+      "rank": 28,
+      "name": "Colton Vestal",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.colton.vestal/user.colton.vestal.json",
+      "history_root": "core/ai-users/user.colton.vestal/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.marlene.pickering",
+      "rank": 29,
+      "name": "Marlene Pickering",
+      "suitability_pct": 69,
+      "record": "core/ai-users/user.marlene.pickering/user.marlene.pickering.json",
+      "history_root": "core/ai-users/user.marlene.pickering/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.travis.ogletree",
+      "rank": 30,
+      "name": "Travis Ogletree",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.travis.ogletree/user.travis.ogletree.json",
+      "history_root": "core/ai-users/user.travis.ogletree/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.gina.marchetti",
+      "rank": 31,
+      "name": "Gina Marchetti",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.gina.marchetti/user.gina.marchetti.json",
+      "history_root": "core/ai-users/user.gina.marchetti/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.devon.whitaker",
+      "rank": 32,
+      "name": "Devon Whitaker",
+      "suitability_pct": 80,
+      "record": "core/ai-users/user.devon.whitaker/user.devon.whitaker.json",
+      "history_root": "core/ai-users/user.devon.whitaker/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.rosalind.pierre-louis",
+      "rank": 33,
+      "name": "Rosalind Pierre-Louis",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.rosalind.pierre-louis/user.rosalind.pierre-louis.json",
+      "history_root": "core/ai-users/user.rosalind.pierre-louis/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.anthony.cataldo",
+      "rank": 34,
+      "name": "Anthony Cataldo",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.anthony.cataldo/user.anthony.cataldo.json",
+      "history_root": "core/ai-users/user.anthony.cataldo/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.shanice.beckford",
+      "rank": 35,
+      "name": "Shanice Beckford",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.shanice.beckford/user.shanice.beckford.json",
+      "history_root": "core/ai-users/user.shanice.beckford/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.bridget.halloran",
+      "rank": 36,
+      "name": "Bridget Halloran",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.bridget.halloran/user.bridget.halloran.json",
+      "history_root": "core/ai-users/user.bridget.halloran/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.ramon.quinones",
+      "rank": 37,
+      "name": "Ramon Quiñones",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.ramon.quinones/user.ramon.quinones.json",
+      "history_root": "core/ai-users/user.ramon.quinones/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.joanne.kiriakis",
+      "rank": 38,
+      "name": "Joanne Kiriakis",
+      "suitability_pct": 69,
+      "record": "core/ai-users/user.joanne.kiriakis/user.joanne.kiriakis.json",
+      "history_root": "core/ai-users/user.joanne.kiriakis/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.terrell.bass",
+      "rank": 39,
+      "name": "Terrell Bass",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.terrell.bass/user.terrell.bass.json",
+      "history_root": "core/ai-users/user.terrell.bass/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.maribel.almonte",
+      "rank": 40,
+      "name": "Maribel Almonte",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.maribel.almonte/user.maribel.almonte.json",
+      "history_root": "core/ai-users/user.maribel.almonte/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.rusty.callahan",
+      "rank": 41,
+      "name": "Rusty Callahan",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.rusty.callahan/user.rusty.callahan.json",
+      "history_root": "core/ai-users/user.rusty.callahan/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.lupita.salinas",
+      "rank": 42,
+      "name": "Lupita Salinas",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.lupita.salinas/user.lupita.salinas.json",
+      "history_root": "core/ai-users/user.lupita.salinas/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.jace.thornbury",
+      "rank": 43,
+      "name": "Jace Thornbury",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.jace.thornbury/user.jace.thornbury.json",
+      "history_root": "core/ai-users/user.jace.thornbury/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.danika.osorio",
+      "rank": 44,
+      "name": "Danika Osorio",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.danika.osorio/user.danika.osorio.json",
+      "history_root": "core/ai-users/user.danika.osorio/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.curtis.ealy",
+      "rank": 45,
+      "name": "Curtis Ealy",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.curtis.ealy/user.curtis.ealy.json",
+      "history_root": "core/ai-users/user.curtis.ealy/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.priscilla.vega",
+      "rank": 46,
+      "name": "Priscilla Vega",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.priscilla.vega/user.priscilla.vega.json",
+      "history_root": "core/ai-users/user.priscilla.vega/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.tomas.bustamante",
+      "rank": 47,
+      "name": "Tomás Bustamante",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.tomas.bustamante/user.tomas.bustamante.json",
+      "history_root": "core/ai-users/user.tomas.bustamante/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.shelby.kinnard",
+      "rank": 48,
+      "name": "Shelby Kinnard",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.shelby.kinnard/user.shelby.kinnard.json",
+      "history_root": "core/ai-users/user.shelby.kinnard/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.denton.rusk",
+      "rank": 49,
+      "name": "Denton Rusk",
+      "suitability_pct": 69,
+      "record": "core/ai-users/user.denton.rusk/user.denton.rusk.json",
+      "history_root": "core/ai-users/user.denton.rusk/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.aurelia.nakai",
+      "rank": 50,
+      "name": "Aurelia Nakai",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.aurelia.nakai/user.aurelia.nakai.json",
+      "history_root": "core/ai-users/user.aurelia.nakai/",
+      "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)"
+    },
+    {
+      "id": "user.bernice.ashford",
+      "rank": 51,
+      "name": "Bernice Ashford",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.bernice.ashford/user.bernice.ashford.json",
+      "history_root": "core/ai-users/user.bernice.ashford/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.dariusz.wojcik",
+      "rank": 52,
+      "name": "Dariusz Wójcik",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.dariusz.wojcik/user.dariusz.wojcik.json",
+      "history_root": "core/ai-users/user.dariusz.wojcik/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.keisha.rowlett",
+      "rank": 53,
+      "name": "Keisha Rowlett",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.keisha.rowlett/user.keisha.rowlett.json",
+      "history_root": "core/ai-users/user.keisha.rowlett/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.mateo.delgado",
+      "rank": 54,
+      "name": "Mateo Delgado",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.mateo.delgado/user.mateo.delgado.json",
+      "history_root": "core/ai-users/user.mateo.delgado/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.ingrid.halvorsen",
+      "rank": 55,
+      "name": "Ingrid Halvorsen",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.ingrid.halvorsen/user.ingrid.halvorsen.json",
+      "history_root": "core/ai-users/user.ingrid.halvorsen/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.jamar.beauchamp",
+      "rank": 56,
+      "name": "Jamar Beauchamp",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.jamar.beauchamp/user.jamar.beauchamp.json",
+      "history_root": "core/ai-users/user.jamar.beauchamp/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.tanisha.culpepper",
+      "rank": 57,
+      "name": "Tanisha Culpepper",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.tanisha.culpepper/user.tanisha.culpepper.json",
+      "history_root": "core/ai-users/user.tanisha.culpepper/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.nolan.prather",
+      "rank": 58,
+      "name": "Nolan Prather",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.nolan.prather/user.nolan.prather.json",
+      "history_root": "core/ai-users/user.nolan.prather/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.simone.bramlett",
+      "rank": 59,
+      "name": "Simone Bramlett",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.simone.bramlett/user.simone.bramlett.json",
+      "history_root": "core/ai-users/user.simone.bramlett/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.danny.sohn",
+      "rank": 60,
+      "name": "Danny Sohn",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.danny.sohn/user.danny.sohn.json",
+      "history_root": "core/ai-users/user.danny.sohn/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.verna.aldrich",
+      "rank": 61,
+      "name": "Verna Aldrich",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.verna.aldrich/user.verna.aldrich.json",
+      "history_root": "core/ai-users/user.verna.aldrich/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.chad.lindgren",
+      "rank": 62,
+      "name": "Chad Lindgren",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.chad.lindgren/user.chad.lindgren.json",
+      "history_root": "core/ai-users/user.chad.lindgren/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.rochelle.ptacek",
+      "rank": 63,
+      "name": "Rochelle Ptáček",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.rochelle.ptacek/user.rochelle.ptacek.json",
+      "history_root": "core/ai-users/user.rochelle.ptacek/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.wade.hollenbeck",
+      "rank": 64,
+      "name": "Wade Hollenbeck",
+      "suitability_pct": 69,
+      "record": "core/ai-users/user.wade.hollenbeck/user.wade.hollenbeck.json",
+      "history_root": "core/ai-users/user.wade.hollenbeck/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.amber.dietz",
+      "rank": 65,
+      "name": "Amber Dietz",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.amber.dietz/user.amber.dietz.json",
+      "history_root": "core/ai-users/user.amber.dietz/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.ellis.vandenberg",
+      "rank": 66,
+      "name": "Ellis Vandenberg",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.ellis.vandenberg/user.ellis.vandenberg.json",
+      "history_root": "core/ai-users/user.ellis.vandenberg/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.peggy.sorensen",
+      "rank": 67,
+      "name": "Peggy Sorensen",
+      "suitability_pct": 68,
+      "record": "core/ai-users/user.peggy.sorensen/user.peggy.sorensen.json",
+      "history_root": "core/ai-users/user.peggy.sorensen/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.cody.ferrin",
+      "rank": 68,
+      "name": "Cody Ferrin",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.cody.ferrin/user.cody.ferrin.json",
+      "history_root": "core/ai-users/user.cody.ferrin/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.doreen.kruse",
+      "rank": 69,
+      "name": "Doreen Kruse",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.doreen.kruse/user.doreen.kruse.json",
+      "history_root": "core/ai-users/user.doreen.kruse/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.lyle.bergstrom",
+      "rank": 70,
+      "name": "Lyle Bergstrom",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.lyle.bergstrom/user.lyle.bergstrom.json",
+      "history_root": "core/ai-users/user.lyle.bergstrom/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.beata.nowicka",
+      "rank": 71,
+      "name": "Beata Nowicka",
+      "suitability_pct": 72,
+      "record": "core/ai-users/user.beata.nowicka/user.beata.nowicka.json",
+      "history_root": "core/ai-users/user.beata.nowicka/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.lars.ottesen",
+      "rank": 72,
+      "name": "Lars Ottesen",
+      "suitability_pct": 71,
+      "record": "core/ai-users/user.lars.ottesen/user.lars.ottesen.json",
+      "history_root": "core/ai-users/user.lars.ottesen/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.chiara.bevilacqua",
+      "rank": 73,
+      "name": "Chiara Bevilacqua",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.chiara.bevilacqua/user.chiara.bevilacqua.json",
+      "history_root": "core/ai-users/user.chiara.bevilacqua/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.miquel.ferrer",
+      "rank": 74,
+      "name": "Miquel Ferrer",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.miquel.ferrer/user.miquel.ferrer.json",
+      "history_root": "core/ai-users/user.miquel.ferrer/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.annika.holtzmann",
+      "rank": 75,
+      "name": "Annika Holtzmann",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.annika.holtzmann/user.annika.holtzmann.json",
+      "history_root": "core/ai-users/user.annika.holtzmann/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.iris.guðmundsdottir",
+      "rank": 76,
+      "name": "Íris Guðmundsdóttir",
+      "suitability_pct": 69,
+      "record": "core/ai-users/user.iris.guðmundsdottir/user.iris.guðmundsdottir.json",
+      "history_root": "core/ai-users/user.iris.guðmundsdottir/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.dimitris.anagnostou",
+      "rank": 77,
+      "name": "Dimitris Anagnostou",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.dimitris.anagnostou/user.dimitris.anagnostou.json",
+      "history_root": "core/ai-users/user.dimitris.anagnostou/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.marieke.de-vries",
+      "rank": 78,
+      "name": "Marieke de Vries",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.marieke.de-vries/user.marieke.de-vries.json",
+      "history_root": "core/ai-users/user.marieke.de-vries/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.seamus.corrigan",
+      "rank": 79,
+      "name": "Séamus Corrigan",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.seamus.corrigan/user.seamus.corrigan.json",
+      "history_root": "core/ai-users/user.seamus.corrigan/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.zsofia.almasi",
+      "rank": 80,
+      "name": "Zsófia Almási",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.zsofia.almasi/user.zsofia.almasi.json",
+      "history_root": "core/ai-users/user.zsofia.almasi/",
+      "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)"
+    },
+    {
+      "id": "user.ioana.predoiu",
+      "rank": 81,
+      "name": "Ioana Predoiu",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.ioana.predoiu/user.ioana.predoiu.json",
+      "history_root": "core/ai-users/user.ioana.predoiu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.catalin.munteanu",
+      "rank": 82,
+      "name": "Cătălin Munteanu",
+      "suitability_pct": 82,
+      "record": "core/ai-users/user.catalin.munteanu/user.catalin.munteanu.json",
+      "history_root": "core/ai-users/user.catalin.munteanu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.mihaela.serban",
+      "rank": 83,
+      "name": "Mihaela Șerban",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.mihaela.serban/user.mihaela.serban.json",
+      "history_root": "core/ai-users/user.mihaela.serban/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.vlad.petrescu",
+      "rank": 84,
+      "name": "Vlad Petrescu",
+      "suitability_pct": 73,
+      "record": "core/ai-users/user.vlad.petrescu/user.vlad.petrescu.json",
+      "history_root": "core/ai-users/user.vlad.petrescu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.daniela.rusu",
+      "rank": 85,
+      "name": "Daniela Rusu",
+      "suitability_pct": 75,
+      "record": "core/ai-users/user.daniela.rusu/user.daniela.rusu.json",
+      "history_root": "core/ai-users/user.daniela.rusu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.ramona.tudose",
+      "rank": 86,
+      "name": "Ramona Tudose",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.ramona.tudose/user.ramona.tudose.json",
+      "history_root": "core/ai-users/user.ramona.tudose/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.lacramioara.enache",
+      "rank": 87,
+      "name": "Lăcrămioara Enache",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.lacramioara.enache/user.lacramioara.enache.json",
+      "history_root": "core/ai-users/user.lacramioara.enache/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.gheorghe.barbu",
+      "rank": 88,
+      "name": "Gheorghe Barbu",
+      "suitability_pct": 70,
+      "record": "core/ai-users/user.gheorghe.barbu/user.gheorghe.barbu.json",
+      "history_root": "core/ai-users/user.gheorghe.barbu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.alina.cozma",
+      "rank": 89,
+      "name": "Alina Cozma",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.alina.cozma/user.alina.cozma.json",
+      "history_root": "core/ai-users/user.alina.cozma/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.marius.dobre",
+      "rank": 90,
+      "name": "Marius Dobre",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.marius.dobre/user.marius.dobre.json",
+      "history_root": "core/ai-users/user.marius.dobre/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.denisa.ardelean",
+      "rank": 91,
+      "name": "Denisa Ardelean",
+      "suitability_pct": 77,
+      "record": "core/ai-users/user.denisa.ardelean/user.denisa.ardelean.json",
+      "history_root": "core/ai-users/user.denisa.ardelean/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.nicu.stancu",
+      "rank": 92,
+      "name": "Nicu Stancu",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.nicu.stancu/user.nicu.stancu.json",
+      "history_root": "core/ai-users/user.nicu.stancu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.roxana.feraru",
+      "rank": 93,
+      "name": "Roxana Feraru",
+      "suitability_pct": 76,
+      "record": "core/ai-users/user.roxana.feraru/user.roxana.feraru.json",
+      "history_root": "core/ai-users/user.roxana.feraru/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.corina.balas",
+      "rank": 94,
+      "name": "Corina Balaș",
+      "suitability_pct": 79,
+      "record": "core/ai-users/user.corina.balas/user.corina.balas.json",
+      "history_root": "core/ai-users/user.corina.balas/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.andrei.lupescu",
+      "rank": 95,
+      "name": "Andrei Lupescu",
+      "suitability_pct": 80,
+      "record": "core/ai-users/user.andrei.lupescu/user.andrei.lupescu.json",
+      "history_root": "core/ai-users/user.andrei.lupescu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.elena.ciobanu",
+      "rank": 96,
+      "name": "Elena Ciobanu",
+      "suitability_pct": 74,
+      "record": "core/ai-users/user.elena.ciobanu/user.elena.ciobanu.json",
+      "history_root": "core/ai-users/user.elena.ciobanu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.sorin.grigoras",
+      "rank": 97,
+      "name": "Sorin Grigoraș",
+      "suitability_pct": 81,
+      "record": "core/ai-users/user.sorin.grigoras/user.sorin.grigoras.json",
+      "history_root": "core/ai-users/user.sorin.grigoras/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.bogdan.nistor",
+      "rank": 98,
+      "name": "Bogdan Nistor",
+      "suitability_pct": 83,
+      "record": "core/ai-users/user.bogdan.nistor/user.bogdan.nistor.json",
+      "history_root": "core/ai-users/user.bogdan.nistor/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.simona.vasilescu",
+      "rank": 99,
+      "name": "Simona Vasilescu",
+      "suitability_pct": 80,
+      "record": "core/ai-users/user.simona.vasilescu/user.simona.vasilescu.json",
+      "history_root": "core/ai-users/user.simona.vasilescu/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    },
+    {
+      "id": "user.teodor.mihalache",
+      "rank": 100,
+      "name": "Teodor Mihalache",
+      "suitability_pct": 78,
+      "record": "core/ai-users/user.teodor.mihalache/user.teodor.mihalache.json",
+      "history_root": "core/ai-users/user.teodor.mihalache/",
+      "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)"
+    }
+  ]
+}

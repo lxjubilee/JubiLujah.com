@@ -1,0 +1,14 @@
+{
+  "id": "user.denisa.ardelean",
+  "synthetic": true,
+  "primary_language": "Romanian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 63,
+    "impact_pct": 50
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

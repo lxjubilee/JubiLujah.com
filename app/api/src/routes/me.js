@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { Router } from 'express';
 import { z } from 'zod';
 import { ah } from '../util/async.js';
@@ -292,6 +293,170 @@ router.delete('/likes/:type/:id', ah(async (req, res) => {
     [req.auth.user.id, type, id]
   );
   res.json({ liked: false, target_type: type, target_id: id });
+}));
+
+// ===========================================================================
+// Theme-playlist persistence. Per-(user, theme) saved settings, a served-track
+// rotation log (repeat-avoidance), and shareable tokened snapshots. Backed by
+// production.playlist_preferences / playlist_rotation / playlist_sends
+// (migration 0029). See routes/playlistShare.js for the PUBLIC share read.
+// ===========================================================================
+
+// Shape a preferences row (or nulls) into the fixed API response.
+function prefsResponse(themeId, row) {
+  return {
+    themeId,
+    personas: row?.personas ?? null,
+    language: row?.language ?? null,
+    arc: row?.arc ?? null,
+    durationSeconds: row?.duration_seconds ?? null,
+    testimonyOn: row ? row.testimony_on : true,
+    introsOn: row ? row.intros_on : false,
+    mood: row?.mood ?? null,
+    moodAt: row?.mood_at ? new Date(row.mood_at).toISOString() : null,
+  };
+}
+
+// ---- Read saved theme-playlist preferences (defaults when no row) ----------
+router.get('/playlist-prefs/:themeId', ah(async (req, res) => {
+  const r = await query(
+    'SELECT * FROM production.playlist_preferences WHERE user_id = $1 AND theme_id = $2',
+    [req.auth.user.id, req.params.themeId]
+  );
+  res.json(prefsResponse(req.params.themeId, r.rows[0] || null));
+}));
+
+// ---- Upsert theme-playlist preferences -------------------------------------
+const prefsSchema = z.object({
+  personas: z.array(z.string()).optional(),
+  language: z.string().min(1).max(32).optional(),
+  arc: z.enum(['steady', 'build', 'worship_set']).optional(),
+  durationSeconds: z.number().int().positive().nullable().optional(),
+  testimonyOn: z.boolean().optional(),
+  introsOn: z.boolean().optional(),
+  mood: z.string().max(200).nullable().optional(),
+});
+router.put('/playlist-prefs/:themeId', validate(prefsSchema), ah(async (req, res) => {
+  const { personas, language, arc, durationSeconds, testimonyOn, introsOn, mood } = req.body;
+  const moodProvided = Object.prototype.hasOwnProperty.call(req.body, 'mood');
+  const r = await query(
+    `INSERT INTO production.playlist_preferences
+        (user_id, theme_id, personas, language, arc, duration_seconds,
+         testimony_on, intros_on, mood, mood_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6,
+              COALESCE($7, TRUE), COALESCE($8, FALSE), $9,
+              CASE WHEN $10 THEN NOW() ELSE NULL END, NOW())
+     ON CONFLICT (user_id, theme_id) DO UPDATE SET
+        personas         = COALESCE(EXCLUDED.personas, production.playlist_preferences.personas),
+        language         = COALESCE(EXCLUDED.language, production.playlist_preferences.language),
+        arc              = COALESCE(EXCLUDED.arc, production.playlist_preferences.arc),
+        duration_seconds = CASE WHEN $11 THEN EXCLUDED.duration_seconds ELSE production.playlist_preferences.duration_seconds END,
+        testimony_on     = COALESCE($7, production.playlist_preferences.testimony_on),
+        intros_on        = COALESCE($8, production.playlist_preferences.intros_on),
+        mood             = CASE WHEN $10 THEN EXCLUDED.mood ELSE production.playlist_preferences.mood END,
+        mood_at          = CASE WHEN $10 THEN NOW() ELSE production.playlist_preferences.mood_at END,
+        updated_at       = NOW()
+     RETURNING *`,
+    [
+      req.auth.user.id,
+      req.params.themeId,
+      personas ?? null,
+      language ?? null,
+      arc ?? null,
+      durationSeconds ?? null,
+      testimonyOn ?? null,
+      introsOn ?? null,
+      mood ?? null,
+      moodProvided,
+      Object.prototype.hasOwnProperty.call(req.body, 'durationSeconds'),
+    ]
+  );
+  res.json(prefsResponse(req.params.themeId, r.rows[0]));
+}));
+
+// ---- Read the served-track rotation for a (theme, language) ----------------
+const rotationQuery = z.object({ lang: z.string().min(1).max(32).optional() });
+router.get('/playlist-rotation/:themeId', validate(rotationQuery, 'query'), ah(async (req, res) => {
+  const lang = req.query.lang ?? null;
+  const r = await query(
+    `SELECT song_id FROM production.playlist_rotation
+      WHERE user_id = $1 AND theme_id = $2 AND language IS NOT DISTINCT FROM $3
+      ORDER BY served_at DESC`,
+    [req.auth.user.id, req.params.themeId, lang]
+  );
+  res.json({ themeId: req.params.themeId, language: lang, served: r.rows.map((x) => x.song_id) });
+}));
+
+// ---- Append served tracks to the rotation (dedupe) -------------------------
+const rotationAppendSchema = z.object({
+  language: z.string().min(1).max(32),
+  songIds: z.array(z.string().uuid()).max(1000),
+});
+router.post('/playlist-rotation/:themeId', validate(rotationAppendSchema), ah(async (req, res) => {
+  const { language, songIds } = req.body;
+  const userId = req.auth.user.id;
+  const themeId = req.params.themeId;
+  await withTransaction(async (client) => {
+    for (const sid of songIds) {
+      await client.query(
+        `INSERT INTO production.playlist_rotation (user_id, theme_id, language, song_id)
+           SELECT $1, $2, $3, $4
+            WHERE NOT EXISTS (
+              SELECT 1 FROM production.playlist_rotation
+               WHERE user_id = $1 AND theme_id = $2
+                 AND language IS NOT DISTINCT FROM $3 AND song_id = $4
+            )`,
+        [userId, themeId, language, sid]
+      );
+    }
+  });
+  const total = await query(
+    `SELECT COUNT(*)::int AS n FROM production.playlist_rotation
+      WHERE user_id = $1 AND theme_id = $2 AND language IS NOT DISTINCT FROM $3`,
+    [userId, themeId, language]
+  );
+  res.json({ ok: true, served: total.rows[0].n });
+}));
+
+// ---- Reset the rotation for a (theme, language) ----------------------------
+router.delete('/playlist-rotation/:themeId', validate(rotationQuery, 'query'), ah(async (req, res) => {
+  const lang = req.query.lang ?? null;
+  const r = await query(
+    `DELETE FROM production.playlist_rotation
+      WHERE user_id = $1 AND theme_id = $2 AND language IS NOT DISTINCT FROM $3`,
+    [req.auth.user.id, req.params.themeId, lang]
+  );
+  res.json({ ok: true, cleared: r.rowCount });
+}));
+
+// ---- Create a shareable tokened snapshot of a themed mix -------------------
+const sendSchema = z.object({
+  themeId: z.string().min(1).max(200),
+  language: z.string().min(1).max(32).optional(),
+  personas: z.array(z.string()).optional(),
+  arc: z.enum(['steady', 'build', 'worship_set']).optional(),
+  note: z.string().max(2000).optional(),
+});
+router.post('/playlist-sends', validate(sendSchema), ah(async (req, res) => {
+  const { themeId, language, personas, arc, note } = req.body;
+  const token = crypto.randomBytes(16).toString('base64url'); // ~22 url-safe chars
+  const r = await query(
+    `INSERT INTO production.playlist_sends
+        (token, sender_id, sender_name, theme_id, language, personas, arc, note)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+     RETURNING id, token`,
+    [
+      token,
+      req.auth.user.id,
+      req.auth.user.displayName ?? null,
+      themeId,
+      language ?? null,
+      personas ?? null,
+      arc ?? null,
+      note ?? null,
+    ]
+  );
+  res.status(201).json({ id: r.rows[0].id, token: r.rows[0].token, url: '/playlist/share/' + r.rows[0].token });
 }));
 
 export default router;

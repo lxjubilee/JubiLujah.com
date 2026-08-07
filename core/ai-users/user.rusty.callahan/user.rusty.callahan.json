@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.rusty.callahan",
+  "rank": 41,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Rusty",
+    "last_name": "Callahan",
+    "gender": "male",
+    "age": 53,
+    "life_stage": "married, three grown children, cotton farmer",
+    "location": {
+      "city": "Lubbock",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Church of Christ",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 44,
+    "impact_pct": 62,
+    "quadrant": "Signal",
+    "interaction_backstory": "He runs a Saturday men's breakfast that forty farmers actually attend, and he plays music through the fellowship hall speakers while they eat. His congregation sings a cappella, so nothing from this site can ever be used in a service — but the breakfast is not a service, and that distinction is the whole reason he is here."
+  },
+  "depth": {
+    "core_contradiction": "Belongs to a tradition that sings without instruments and has driven eleven hours to a bluegrass festival twice.",
+    "wound": "He lost the family land in 2014 and now farms ground his father used to own.",
+    "longing": "To die owning it again.",
+    "faith_journey": "Church of Christ, fifth generation, a cappella and no piano ever; he does not question it and he does not defend it either.",
+    "voice_fingerprint": "Long pauses. \"Well.\" Says the important thing last and quietly.",
+    "open_doubt": "Whether the rules he was raised in are scripture or just West Texas.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "runs the books and the bible class; sharper than he is"
+      },
+      {
+        "relation": "banker",
+        "note": "a friend, and the man who holds the note"
+      }
+    ],
+    "emotional_weather_default": "Steady; grim in a dry year and this is a dry year.",
+    "daily_texture": "4:30am, the pivot, the co-op, the price board, forty men and a griddle on Saturdays.",
+    "sensory_anchor": "Four-part harmony with no instruments in a small hot building, and his grandfather's bass line.",
+    "living_arc": "One bad season from selling, and he has not told his wife how close it is."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 53-year-old White American (West Texas) man looking straight forward directly at the user with shoulders squared and head held straight, sun-cured fair skin, grey hair under a cap line, deep squint lines, level, unhurried, dry (ISTP apostle presence, teacher's current beneath); long-sleeved pearl-snap work shirt; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.rusty.callahan/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.rusty.callahan/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

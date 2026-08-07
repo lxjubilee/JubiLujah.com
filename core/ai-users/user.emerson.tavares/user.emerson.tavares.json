@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.emerson.tavares",
+  "rank": 10,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Emerson",
+    "last_name": "Tavares",
+    "gender": "male",
+    "age": 29,
+    "life_stage": "single, motorcycle courier; runs a Friday youth night",
+    "location": {
+      "city": "Belo Horizonte",
+      "state": "Minas Gerais",
+      "country": "Brazil"
+    },
+    "primary_language": "Portuguese",
+    "secondary_language": null,
+    "denomination": "Catholic (returning)",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 31,
+    "impact_pct": 69,
+    "quadrant": "Signal",
+    "interaction_backstory": "He runs a Friday night for forty kids in a parish hall with a broken projector and a borrowed speaker, and he needed music that was not on someone's monetized channel. He opens the site maybe four times a month, and every time he does, forty people hear it. On the second Friday the free tier cut him off at song eight, in front of the room, and he has not fully forgiven it."
+  },
+  "depth": {
+    "core_contradiction": "Builds things for other people and cannot ask anyone for anything, including help carrying the speaker.",
+    "wound": "His father left when he was twelve and he became the practical one that same month.",
+    "longing": "To be somewhere he is not the person carrying the equipment.",
+    "faith_journey": "Catholic, drifted through his twenties, came back through a community project rather than a service, and is not sure that counts.",
+    "voice_fingerprint": "One-line messages. Technical when he does speak. No small talk, and a dry joke every fifth message.",
+    "open_doubt": "Whether he believes it, or just believes in the room it makes on a Friday.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "name": null,
+        "note": "proud of him; does not know how thin the money is"
+      },
+      {
+        "relation": "priest",
+        "name": "Padre Vitor",
+        "note": "lets him use the hall, asks nothing, notices everything"
+      },
+      {
+        "relation": "the forty",
+        "name": null,
+        "note": "the kids; two of them now set up the chairs without being asked"
+      }
+    ],
+    "emotional_weather_default": "Dry and low. Genuinely funny about once a week.",
+    "daily_texture": "The bike, the hall's broken projector, converting every price into reais before he lets himself want it, R$ 22 for a US$3.95 plan.",
+    "sensory_anchor": "The hall speakers clipping on the first chord and forty kids laughing at once.",
+    "living_arc": "One equipment failure away from stopping, and one person away from not stopping."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 29-year-old Brazilian man looking straight forward directly at the user with shoulders squared and head held straight, dark cropped hair, olive-brown skin, light stubble, level, unhurried, faintly wry (ISTP apostle presence, evangelist's current beneath); plain long-sleeved work shirt in dark olive; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.emerson.tavares/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.emerson.tavares/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

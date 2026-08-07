@@ -1,0 +1,14 @@
+{
+  "id": "user.travis.ogletree",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Signal",
+    "energy_pct": 42,
+    "impact_pct": 61
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

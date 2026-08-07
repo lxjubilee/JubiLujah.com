@@ -1,0 +1,18 @@
+{
+  "theme_id": "global-anthems",
+  "theme_name": "Global Anthems",
+  "theme_statement": "Every tribe and tongue, full-throated. Big, bright, cross-cultural songs of joy and victory.",
+  "emotional_profile": ["celebration", "joy", "triumph", "exuberance", "hope", "victory"],
+  "energy_range": { "min": 60, "max": 98 },
+  "tempo_range": { "min": 95, "max": 150 },
+  "excluded_moods": ["lament", "mourning", "somber", "contemplative", "repentance"],
+  "target_track_count": 120,
+  "max_tracks_per_album": 4,
+  "min_distinct_albums": 30,
+  "eligible_personas": "ALL_TWELVE",
+  "testimony_categories": ["healing", "provision", "breakthrough", "deliverance"],
+  "supported_arcs": ["steady", "build", "worship_set"],
+  "default_arc": "steady",
+  "sequencing": { "open_min_energy": 82, "max_consecutive_below_energy": 72, "max_consecutive_below_count": 2, "distribute_peaks": true },
+  "hero_image": null, "accent": "#2f7fd0", "related_theme_ids": ["praise-celebration"]
+}

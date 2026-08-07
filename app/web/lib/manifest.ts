@@ -2,13 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { albumUuid, songUuid } from './ids';
 import { coverFor } from './covers';
+import { musicUrl } from './cdn';
 import type { Album, Artist, CategorySummary, StatusCounts, Track } from './types';
 
 // ============================================================================
 // Server-side catalog loader. Reads the authoritative manifest from
 // public/music/catalog-manifest.json. Used by Server Components for SSG/ISR.
 // ============================================================================
-const CDN_BASE = process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jubileeverse.com';
 const MANIFEST_FILE = path.join(process.cwd(), 'public', 'music', 'catalog-manifest.json');
 
 interface RawTrack { n: number; title: string; file?: string; url?: string; audio?: boolean }
@@ -95,7 +95,7 @@ function decorate(al: RawAlbum, ctx: { artistSlug: string; artistName: string; c
     title: t.title,
     file: t.file,
     audio: !!t.audio,
-    url: t.url ? `${CDN_BASE}/music/${t.url}` : null,
+    url: t.url ? musicUrl(t.url) : null,
   }));
   return {
     id: albumUuid(al.code),
@@ -223,7 +223,7 @@ export function searchCatalog(q: string, limit = 60): SearchResults {
             songs.push({
               id: songUuid(al.code, t.n), n: t.n, title: t.title,
               albumCode: al.code, albumTitle: al.title, artistSlug: a.slug, artistName: a.name,
-              status, url: t.url ? `${CDN_BASE}/music/${t.url}` : null, cover: coverFor(al.code, al.path),
+              status, url: t.url ? musicUrl(t.url) : null, cover: coverFor(al.code, al.path),
             });
           }
         }

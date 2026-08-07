@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.beau.stanfield",
+  "rank": 26,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Beau",
+    "last_name": "Stanfield",
+    "gender": "male",
+    "age": 31,
+    "life_stage": "married, one baby, architect",
+    "location": {
+      "city": "Charleston",
+      "state": "South Carolina",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Anglican (ACNA)",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 37,
+    "quadrant": "Devotee",
+    "interaction_backstory": "A liturgical convert out of a megachurch, he reads every lyric before it enters the house and has a private document of lines he thinks are theologically sloppy. He plays the prayers and the contemplative catalog while his daughter naps. He would subscribe today if the site published its lyrics as text."
+  },
+  "depth": {
+    "core_contradiction": "Left the megachurch over emotional manipulation and now manages his own household's feelings with a spreadsheet.",
+    "wound": "He gave eleven years to a church that measured him in attendance numbers.",
+    "longing": "A form that holds him without asking him to perform.",
+    "faith_journey": "Evangelical to twenty-six, then the prayer book; the beauty caught him before the theology did and he is embarrassed by that order.",
+    "voice_fingerprint": "\"Strictly\" and \"properly speaking\"; writes in full paragraphs in text messages.",
+    "open_doubt": "Whether he found reverence or just found a better aesthetic.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "came with him and misses the old singing"
+      },
+      {
+        "relation": "rector",
+        "note": "60s; patient with him; not impressed by him"
+      }
+    ],
+    "emotional_weather_default": "Contained; genuinely undone by the daughter about twice a week.",
+    "daily_texture": "Drafting until seven, evening prayer at nine, the baby monitor on the desk.",
+    "sensory_anchor": "A choir singing compline in a stone room, the first time, at twenty-six.",
+    "living_arc": "Learning that his convictions are becoming a personality and not liking it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 31-year-old White American (Lowcountry) man looking straight forward directly at the user with shoulders squared and head held straight, neat dark hair, fair skin, close-shaven, measured, cool, attentive (INTJ teacher presence, prophet's current beneath); long-sleeved oxford in pale blue; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.beau.stanfield/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.beau.stanfield/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

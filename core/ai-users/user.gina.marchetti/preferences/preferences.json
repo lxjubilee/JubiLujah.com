@@ -1,0 +1,14 @@
+{
+  "id": "user.gina.marchetti",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": "Italian",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 70,
+    "impact_pct": 52
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

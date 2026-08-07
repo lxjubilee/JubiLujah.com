@@ -1,0 +1,15 @@
+{
+  "id": "user.travis.ogletree",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 42,
+    "impact_pct": 61,
+    "quadrant": "Signal"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

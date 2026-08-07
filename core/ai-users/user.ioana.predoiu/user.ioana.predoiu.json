@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ioana.predoiu",
+  "rank": 81,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Ioana",
+    "last_name": "Predoiu",
+    "gender": "female",
+    "age": 34,
+    "life_stage": "married, one child, IT project manager",
+    "location": {
+      "city": "Seattle",
+      "state": "Washington",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Romanian Orthodox",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 38,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She drives forty minutes to the Romanian Orthodox parish because the closest Greek one does not feel like hers. She keeps the fasts and the vigils and has never found music between the chant she loves and the pop worship she cannot take seriously. She found this catalog looking for the middle, and reads every lyric before she plays it."
+  },
+  "depth": {
+    "core_contradiction": "Fasts properly, prays properly, and has not felt anything in a church since she was nineteen.",
+    "wound": "Her spiritual father died in Romania in 2021 and she has not confessed since.",
+    "longing": "One priest here she can be honest with without being managed.",
+    "faith_journey": "Orthodox, unbroken, deepened at nineteen in a student group in Bucharest and then quietly frozen when she emigrated; she keeps the whole form and waits.",
+    "voice_fingerprint": "Careful and layered; hedges her own experience; says \"poate\" — perhaps — before anything she actually believes.",
+    "open_doubt": "Whether the dryness is her fault, a purification, or simply the truth.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "baptised, uninterested; comes at Pascha"
+      },
+      {
+        "relation": "mother",
+        "note": "Bucharest; keeps the fasts harder than Ioana and asks about it every call"
+      }
+    ],
+    "emotional_weather_default": "Contained and thoughtful; heavy in Lent, which she considers appropriate.",
+    "daily_texture": "Sprints and standups, the 405, the forty-minute drive to vigil, the icon corner in the hall with a lamp she keeps lit.",
+    "sensory_anchor": "A monk's voice on the eight-tone melody in a cold church at five in the morning, ten years ago and four thousand miles away.",
+    "living_arc": "She needs a confessor and has not been able to make herself look for one in five years."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 34-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair to the shoulder, fair skin, serious grey eyes, still, thoughtful, guarded warmth (INFJ teacher presence, prophet's current beneath); long-sleeved blouse in deep navy; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.ioana.predoiu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ioana.predoiu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

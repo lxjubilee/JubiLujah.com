@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.rochelle.ptacek",
+  "rank": 63,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Rochelle",
+    "last_name": "Ptáček",
+    "gender": "female",
+    "age": 37,
+    "life_stage": "married, two children, dental office manager",
+    "location": {
+      "city": "Cedar Rapids",
+      "state": "Iowa",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Catholic",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 54,
+    "impact_pct": 30,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She runs the parish faith-formation program on a volunteer basis with a budget of four hundred dollars a year. She found the children's catalog and it solved a problem she had been solving badly with a CD from 2009. She needs to know what she can legally play to sixty children and there is no page for that."
+  },
+  "depth": {
+    "core_contradiction": "Runs everything on a shoestring and cannot ask the parish for money without feeling like she is asking for herself.",
+    "wound": "They lost a pregnancy at twenty-two weeks and the parish sent a card.",
+    "longing": "For somebody in that building to say the baby's name out loud.",
+    "faith_journey": "Catholic, Czech-Midwestern, practical rather than mystical; she does the work and does not talk about the interior.",
+    "voice_fingerprint": "Efficient; makes lists; says \"not a problem\" to things that are problems.",
+    "open_doubt": "Whether God was in that hospital room and just quiet, or not there.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "handled it by working more; they have never really talked about it"
+      },
+      {
+        "relation": "DRE",
+        "note": "the volunteer coordinator; the only one who says the baby's name"
+      }
+    ],
+    "emotional_weather_default": "Even and competent; brittle in October.",
+    "daily_texture": "Insurance claims, sixty kids on Wednesdays, laminated name tags, the budget spreadsheet nobody reads.",
+    "sensory_anchor": "A Czech hymn at her grandmother's funeral that half the room still knew.",
+    "living_arc": "Wants a third child and is frightened, and has told no one."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 37-year-old Czech-American (Iowa) woman looking straight forward directly at the user with shoulders squared and head held straight, brown hair in a practical bob, fair skin, brisk, kind, contained (ISTJ teacher presence, shepherd's current beneath); long-sleeved blouse in dusty rose; long sleeves professional clothing, abstract artistic splash background in gold with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.rochelle.ptacek/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.rochelle.ptacek/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -67,8 +67,6 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
 
   const artist = getArtist(album.artistSlug);
   const artistAlbums = artist?.albums || [];
-  const totalTracks = artistAlbums.reduce((n, a) => n + (a.trackCount || 0), 0);
-  const readyCount = artistAlbums.filter((a) => a.status === 'ready').length;
 
   const albums: AlbumLink[] = artistAlbums.map((a) => ({
     code: a.code, title: a.title, cover: `/cover/${a.code}.png`, status: a.status,
@@ -92,18 +90,7 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
       <header className="x-hero" style={heroStyle}>
         <div className="x-container">
           <div className="x-inner">
-            <div className="x-eyebrow">{album.categoryLabel} · Persona Executive Summary</div>
-            <h1>{album.artistName}<em>&mdash; {artist?.role || 'Inspire Family'} · {artistAlbums.length} albums anchoring the {album.categoryLabel} catalog.</em></h1>
-            <p className="x-sub">
-              {artistAlbums.length} albums. <strong>{totalTracks.toLocaleString()} tracks.</strong> {artist?.role || 'Inspire Family'} —
-              browse the library on the left, press play, and the music keeps going as you move through the site.
-            </p>
-            <div className="x-meta">
-              <div><span className="label">Albums</span><span className="val">{artistAlbums.length}</span></div>
-              <div><span className="label">Tracks</span><span className="val">{totalTracks.toLocaleString()}</span></div>
-              <div><span className="label">Ready</span><span className="val ok">{readyCount}</span></div>
-              <div><span className="label">Studio</span><span className="val accent">{artistAlbums.length - readyCount}</span></div>
-            </div>
+            <h1>{album.artistName}<em>{artist?.role || 'Inspire Family'}</em></h1>
           </div>
         </div>
       </header>

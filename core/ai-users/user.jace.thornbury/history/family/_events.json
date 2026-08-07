@@ -1,0 +1,11 @@
+{
+  "id": "user.jace.thornbury",
+  "life_area": "family",
+  "event_ids": [
+    "user.jace.thornbury.album-review.0005",
+    "user.jace.thornbury.song-rating.0020",
+    "user.jace.thornbury.song-rating.0021"
+  ],
+  "count": 3,
+  "store": "events/events.jsonl"
+}

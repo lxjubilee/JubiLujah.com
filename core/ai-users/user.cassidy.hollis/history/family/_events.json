@@ -1,0 +1,20 @@
+{
+  "id": "user.cassidy.hollis",
+  "life_area": "family",
+  "event_ids": [
+    "user.cassidy.hollis.album-review.0001",
+    "user.cassidy.hollis.album-review.0002",
+    "user.cassidy.hollis.album-review.0005",
+    "user.cassidy.hollis.song-rating.0009",
+    "user.cassidy.hollis.song-rating.0010",
+    "user.cassidy.hollis.song-rating.0011",
+    "user.cassidy.hollis.song-rating.0012",
+    "user.cassidy.hollis.song-rating.0013",
+    "user.cassidy.hollis.song-rating.0014",
+    "user.cassidy.hollis.song-rating.0020",
+    "user.cassidy.hollis.song-rating.0021",
+    "user.cassidy.hollis.song-rating.0022"
+  ],
+  "count": 12,
+  "store": "events/events.jsonl"
+}

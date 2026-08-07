@@ -1,0 +1,116 @@
+/* ============================================================================
+   Theme Playlist (spec §4 layout). Semantic .tpl-* classes, theme-aware via the
+   site's CSS variables. --tpl-accent is set per-theme inline on .tpl.
+   ============================================================================ */
+.tpl { --tpl-accent: #f5a623; max-width: 1100px; margin: 0 auto; padding: 0 16px 64px; }
+
+/* 1 — Hero */
+.tpl-hero {
+  position: relative; border-radius: 18px; margin: 12px 0 20px; padding: 40px 28px;
+  background: radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--tpl-accent) 34%, transparent), transparent 60%),
+              linear-gradient(135deg, #1b1e2b, #0d0f17);
+  background-size: cover; background-position: center; overflow: hidden;
+}
+.tpl-hero-inner { max-width: 760px; }
+.tpl-kicker { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; color: var(--tpl-accent); margin: 0 0 6px; font-weight: 700; }
+.tpl-title { font-family: var(--font-orbitron, inherit); font-size: clamp(28px, 5vw, 46px); line-height: 1.05; margin: 0 0 10px; color: #fff; }
+.tpl-statement { font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.82); margin: 0 0 12px; max-width: 60ch; }
+.tpl-shared-note { font-style: italic; color: rgba(255,255,255,.9); margin: 0 0 8px; }
+.tpl-meta { font-size: 14px; color: rgba(255,255,255,.72); margin: 6px 0 0; }
+
+/* 2 — Controls */
+.tpl-controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 14px; }
+.tpl-btn {
+  appearance: none; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: inherit;
+  padding: 10px 18px; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 14px;
+}
+.tpl-btn:hover:not(:disabled) { background: rgba(255,255,255,.12); }
+.tpl-btn:disabled { opacity: .45; cursor: default; }
+.tpl-btn-primary { background: var(--tpl-accent); border-color: var(--tpl-accent); color: #14161f; }
+.tpl-btn-primary:hover:not(:disabled) { filter: brightness(1.06); background: var(--tpl-accent); }
+
+.tpl-warn { font-size: 13px; color: #ffcf7a; background: rgba(245,166,35,.12); border: 1px solid rgba(245,166,35,.3);
+  padding: 8px 12px; border-radius: 10px; margin: 0 0 14px; }
+
+/* 3 — Session shapers */
+.tpl-shapers { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px 20px; margin: 0 0 22px; }
+.tpl-shaper { display: flex; flex-direction: column; gap: 8px; }
+.tpl-shaper-label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; font-weight: 700; }
+.tpl-select { padding: 9px 12px; border-radius: 10px; border: 1px solid rgba(128,128,128,.35); background: rgba(128,128,128,.08); color: inherit; font-size: 14px; }
+.tpl-segmented { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.tpl-seg { padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(128,128,128,.3); background: transparent; color: inherit; cursor: pointer; font-size: 13px; }
+.tpl-seg.is-on { background: var(--tpl-accent); border-color: var(--tpl-accent); color: #14161f; font-weight: 700; }
+.tpl-toggles { gap: 10px; }
+.tpl-toggle { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.tpl-chip { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(128,128,128,.35); background: transparent; color: inherit; cursor: pointer; font-size: 13px; }
+.tpl-chip:disabled { opacity: .45; cursor: default; }
+
+/* 4 — Artist selector (§3) */
+.tpl-section { margin: 0 0 22px; }
+.tpl-livecount { font-weight: 700; color: var(--tpl-accent); margin: 0 0 8px; }
+.tpl-artists-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.tpl-artists-title { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; font-weight: 700; }
+.tpl-artists-actions { display: flex; gap: 8px; }
+.tpl-artists-notice { font-size: 13px; color: #ffcf7a; margin: 0 0 8px; }
+.tpl-artist-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.tpl-artist-card { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 6px;
+  border-radius: 14px; border: 1px solid rgba(128,128,128,.28); background: rgba(128,128,128,.06); color: inherit; cursor: pointer; }
+.tpl-artist-card.is-on { border-color: var(--tpl-accent); background: color-mix(in srgb, var(--tpl-accent) 16%, transparent); }
+.tpl-artist-art { position: relative; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg,#3a3f55,#20232f);
+  background-size: cover; background-position: center; display: grid; place-items: center; }
+.tpl-artist-initial { font-size: 26px; font-weight: 700; opacity: .8; }
+.tpl-artist-check { position: absolute; right: -2px; bottom: -2px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--tpl-accent); color: #14161f; font-size: 13px; display: grid; place-items: center; font-weight: 800; }
+.tpl-artist-card:not(.is-on) .tpl-artist-check { display: none; }
+.tpl-artist-name { font-size: 13px; font-weight: 600; text-align: center; line-height: 1.15; }
+.tpl-artist-anchor { font-size: 11px; opacity: .6; text-align: center; }
+
+/* 5 — Track list */
+.tpl-tracks { list-style: none; margin: 0; padding: 0; }
+.tpl-row { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 10px; }
+.tpl-row:hover { background: rgba(128,128,128,.1); }
+.tpl-row-interlude { background: color-mix(in srgb, var(--tpl-accent) 8%, transparent); }
+.tpl-row-idx { width: 26px; text-align: center; opacity: .6; font-variant-numeric: tabular-nums; font-size: 13px; }
+.tpl-row-art { width: 40px; height: 40px; border-radius: 6px; background: linear-gradient(135deg,#3a3f55,#20232f); background-size: cover; background-position: center; flex: none; }
+.tpl-row-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.tpl-row-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tpl-row-sub { font-size: 12px; opacity: .65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tpl-row-dur { font-variant-numeric: tabular-nums; opacity: .65; font-size: 13px; }
+.tpl-row-story, .tpl-row-decl { border: 1px solid rgba(128,128,128,.35); background: transparent; color: inherit; border-radius: 999px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+.tpl-row-story:hover, .tpl-row-decl:hover { border-color: var(--tpl-accent); color: var(--tpl-accent); }
+.tpl-row-play { border: none; background: var(--tpl-accent); color: #14161f; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 13px; flex: none; }
+
+/* Overlays / modals */
+.tpl-mood-scrim, .tpl-bs-scrim, .tpl-send-scrim { position: fixed; inset: 0; z-index: 60; background: rgba(6,7,12,.62);
+  display: grid; place-items: center; padding: 20px; backdrop-filter: blur(3px); }
+.tpl-mood, .tpl-send { position: relative; width: min(460px, 100%); background: #1a1d29; color: #fff; border-radius: 16px; padding: 26px; border: 1px solid rgba(255,255,255,.1); }
+.tpl-mood-x { position: absolute; top: 12px; right: 14px; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; line-height: 1; }
+.tpl-mood-q { margin: 0 0 6px; font-size: 20px; }
+.tpl-mood-sub, .tpl-send-sub { margin: 0 0 16px; opacity: .7; font-size: 14px; }
+.tpl-mood-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.tpl-mood-opt { padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05); color: #fff; cursor: pointer; }
+.tpl-mood-opt:hover { background: var(--tpl-accent); border-color: var(--tpl-accent); color: #14161f; }
+.tpl-send-title { margin: 0 0 6px; }
+.tpl-send-note { width: 100%; min-height: 84px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05); color: #fff; padding: 10px; resize: vertical; margin-bottom: 12px; }
+.tpl-send-linkrow { display: flex; gap: 8px; }
+.tpl-send-link { flex: 1; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05); color: #fff; padding: 9px 10px; }
+.tpl-send-err { color: #ff9a9a; font-size: 13px; margin: 10px 0 0; }
+
+.tpl-bs { position: relative; width: min(880px, 100%); height: min(80vh, 820px); background: #14161f; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.1); }
+.tpl-bs-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(0,0,0,.3); }
+.tpl-bs-tag { text-transform: uppercase; letter-spacing: .1em; font-size: 12px; font-weight: 700; color: var(--tpl-accent); }
+.tpl-bs-bar-actions { display: flex; gap: 8px; }
+.tpl-bs-frame { border: 0; width: 100%; flex: 1; background: #fff; }
+
+/* Declaration mode (§13) — full screen */
+.tpl-decl { position: fixed; inset: 0; z-index: 70; background: #05060a; color: #fff; display: grid; place-items: center; padding: 24px; }
+.tpl-decl-x { position: absolute; top: 18px; right: 20px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: #fff; border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.tpl-decl-body { text-align: center; max-width: 40ch; }
+.tpl-decl-song { font-family: var(--font-orbitron, inherit); font-size: clamp(28px, 6vw, 52px); margin: 0 0 6px; }
+.tpl-decl-artist { opacity: .7; margin: 0 0 28px; }
+.tpl-decl-empty { opacity: .6; font-size: 15px; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .tpl-row-story, .tpl-row-decl { display: none; }
+  .tpl-hero { padding: 28px 18px; }
+}

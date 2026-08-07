@@ -1,0 +1,14 @@
+{
+  "id": "user.peggy.sorensen",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 52,
+    "impact_pct": 19
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

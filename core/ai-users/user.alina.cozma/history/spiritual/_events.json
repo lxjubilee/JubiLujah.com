@@ -1,0 +1,32 @@
+{
+  "id": "user.alina.cozma",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.alina.cozma.album-review.0001",
+    "user.alina.cozma.album-review.0002",
+    "user.alina.cozma.album-review.0003",
+    "user.alina.cozma.album-review.0004",
+    "user.alina.cozma.album-review.0005",
+    "user.alina.cozma.album-review.0006",
+    "user.alina.cozma.album-review.0007",
+    "user.alina.cozma.album-review.0008",
+    "user.alina.cozma.song-rating.0009",
+    "user.alina.cozma.song-rating.0010",
+    "user.alina.cozma.song-rating.0011",
+    "user.alina.cozma.song-rating.0012",
+    "user.alina.cozma.song-rating.0013",
+    "user.alina.cozma.song-rating.0014",
+    "user.alina.cozma.song-rating.0015",
+    "user.alina.cozma.song-rating.0016",
+    "user.alina.cozma.song-rating.0017",
+    "user.alina.cozma.song-rating.0018",
+    "user.alina.cozma.song-rating.0019",
+    "user.alina.cozma.song-rating.0020",
+    "user.alina.cozma.song-rating.0021",
+    "user.alina.cozma.song-rating.0022",
+    "user.alina.cozma.song-rating.0023",
+    "user.alina.cozma.song-rating.0024"
+  ],
+  "count": 24,
+  "store": "events/events.jsonl"
+}

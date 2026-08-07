@@ -1,0 +1,14 @@
+{
+  "id": "user.lars.ottesen",
+  "synthetic": true,
+  "primary_language": "Norwegian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 28,
+    "impact_pct": 22
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

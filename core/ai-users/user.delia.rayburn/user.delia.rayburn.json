@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.delia.rayburn",
+  "rank": 21,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Delia",
+    "last_name": "Rayburn",
+    "gender": "female",
+    "age": 58,
+    "life_stage": "married, three grown children, runs the women's ministry",
+    "location": {
+      "city": "Birmingham",
+      "state": "Alabama",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Southern Baptist",
+    "mbti": "ENFJ (\"the Protagonist\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 72,
+    "impact_pct": 48,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She plans forty women's events a year and started using the catalog for the quiet-table music because the licensed playlists all sounded like a mall. She listens while she sets up chairs, alone, two hours before anyone arrives."
+  },
+  "depth": {
+    "core_contradiction": "Builds the room where every woman gets to be honest, and has not been honest in that room once.",
+    "wound": "Her middle son has not spoken to her in four years and nobody at church knows.",
+    "longing": "To be asked how she is by somebody who will wait for the second answer.",
+    "faith_journey": "Southern Baptist from birth, forty years of service, and the questions started at fifty-five with no warning.",
+    "voice_fingerprint": "Says \"bless it\" for both good and bad news; ends serious sentences with \"anyway\".",
+    "open_doubt": "Whether all this service was love or just the only way she knew to stay busy.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "deacon, kind, has never once asked a follow-up question"
+      },
+      {
+        "relation": "son",
+        "note": "four years silent; she still sets a place at Thanksgiving"
+      }
+    ],
+    "emotional_weather_default": "Warm and moving; goes very quiet driving home.",
+    "daily_texture": "Setting up chairs at 6am, the fellowship hall coffee urn, forty text threads.",
+    "sensory_anchor": "Her mother's alto on the second verse of a hymn nobody sings anymore.",
+    "living_arc": "Approaching either a collapse or a confession, and she can feel it coming."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 58-year-old White American (Deep South) woman looking straight forward directly at the user with shoulders squared and head held straight, chin-length dyed brown hair, fair skin, warm crow's feet, radiant welcoming smile, tired underneath (ENFJ shepherd presence, evangelist's current beneath); long-sleeved blouse in soft coral; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.delia.rayburn/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.delia.rayburn/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

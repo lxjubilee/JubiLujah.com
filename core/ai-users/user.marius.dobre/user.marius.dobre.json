@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.marius.dobre",
+  "rank": 90,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Marius",
+    "last_name": "Dobre",
+    "gender": "male",
+    "age": 44,
+    "life_stage": "married, three children, construction foreman",
+    "location": {
+      "city": "Atlanta (Norcross)",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Romanian Orthodox",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 60,
+    "impact_pct": 47,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He helped build the Romanian Orthodox parish in his county — literally, with his crew, on weekends, for two years. He found this catalog through a nephew and plays it in the truck with four men in it. It has never occurred to him that a company might want to know that."
+  },
+  "depth": {
+    "core_contradiction": "Built a church with his own hands and stands at the back of it every Sunday.",
+    "wound": "Eighteen years here and he still says he is going home next year.",
+    "longing": "A house in Romania with somebody living in it.",
+    "faith_journey": "Orthodox, transported; the parish abroad is more intense than the one at home ever was, because here it is the only Romanian thing there is.",
+    "voice_fingerprint": "Says little; solves things instead of discussing them; \"lasă că mă ocup eu\" — leave it, I will handle it.",
+    "open_doubt": "Whether the house he is building in Vâlcea will ever be more than a building.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "cleans houses; wants to stay; they do not discuss it"
+      },
+      {
+        "relation": "the crew",
+        "note": "four Romanians; the truck is the closest thing to a small group they have"
+      }
+    ],
+    "emotional_weather_default": "Flat and capable; sentimental at the parish feast day.",
+    "daily_texture": "Six a.m. sites, Georgia heat, the truck, money sent home monthly, the unfinished house in Vâlcea.",
+    "sensory_anchor": "Bells at the parish he built, ringing for the first time.",
+    "living_arc": "The unfinished house is eighteen years old and he has stopped setting a date."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 44-year-old Romanian-American man looking straight forward directly at the user with shoulders squared and head held straight, close-cropped greying hair, deeply tanned, heavy build, level, unhurried, capable (ISTP apostle presence, shepherd's current beneath); long-sleeved work shirt in dust-grey; long sleeves professional clothing, abstract artistic splash background in royal purple with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.marius.dobre/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.marius.dobre/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

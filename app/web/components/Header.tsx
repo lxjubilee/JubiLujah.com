@@ -26,7 +26,6 @@ const NAV: { href: string; key: TKey }[] = [
 
 // Cross-property quick links in the top row.
 const MEDIA: { href: string; key: TKey; ext: boolean }[] = [
-  { href: 'https://www.jubileeverse.com', key: 'media.articles', ext: true },
   { href: 'https://www.jubileeinspire.com', key: 'media.bibleChat', ext: true },
 ];
 
@@ -180,13 +179,23 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
             ))}
           </nav>
 
-          {/* Language picker trigger — right-justified on the nav row (JubileeVerse-style) */}
-          {showLangPicker && (
-            <button className="jvh-lang-btn" onClick={() => setLangOpen(true)} title={t('lang.choose')} aria-label={t('lang.choose')}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="jvh-lang-flag" src={langFlagUrl(lang)} alt={langName(lang)} />
-            </button>
-          )}
+          {/* Right side of the nav row: Backstage, then the language flag. */}
+          <div className="jvh-nav-right">
+            <Link
+              href="/backstage"
+              className={`jvh-backstage${isActive('/backstage') ? ' active' : ''}`}
+            >
+              {t('nav.backstage')}
+            </Link>
+
+            {/* Language picker trigger — right-justified on the nav row (JubileeVerse-style) */}
+            {showLangPicker && (
+              <button className="jvh-lang-btn" onClick={() => setLangOpen(true)} title={t('lang.choose')} aria-label={t('lang.choose')}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="jvh-lang-flag" src={langFlagUrl(lang)} alt={langName(lang)} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

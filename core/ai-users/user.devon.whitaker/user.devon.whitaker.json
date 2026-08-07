@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.devon.whitaker",
+  "rank": 32,
+  "suitability_pct": 80,
+  "identity": {
+    "first_name": "Devon",
+    "last_name": "Whitaker",
+    "gender": "male",
+    "age": 34,
+    "life_stage": "married, one child, physical therapist",
+    "location": {
+      "city": "Newark",
+      "state": "New Jersey",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Baptist",
+    "mbti": "ENTJ (\"the Commander\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 76,
+    "impact_pct": 72,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He started a men's group of thirty out of his living room and built its whole rhythm on music he found here. He is organized, relentless and generous, and he has personally put your catalog in front of more men than your marketing has. He wants a shareable group playlist and there is not one."
+  },
+  "depth": {
+    "core_contradiction": "Built a room where thirty men tell the truth, and chairs it so tightly that nobody can say anything he did not schedule.",
+    "wound": "Nobody built a room like that for him at twenty-two and he nearly did not make it through.",
+    "longing": "A seat in the circle instead of the chair at the front.",
+    "faith_journey": "Came to faith at twenty-three, after; the intensity of a convert with a decade of discipline behind it now.",
+    "voice_fingerprint": "\"Real talk\"; frames everything as a plan with three parts; says \"I hear you\" and then keeps going.",
+    "open_doubt": "Whether he is discipling men or managing them.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "tells him the truth and he does not always take it"
+      },
+      {
+        "relation": "the thirty",
+        "note": "his men; four of them would be homeless without the group"
+      }
+    ],
+    "emotional_weather_default": "Driven and up; short with people on Thursdays.",
+    "daily_texture": "Clinic all day, the living room chairs on Tuesday, a spreadsheet of thirty men and their situations.",
+    "sensory_anchor": "A man twice his age putting a hand on his shoulder in a parking lot in 2015.",
+    "living_arc": "The group is bigger than his living room and he cannot delegate."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 34-year-old Black American man looking straight forward directly at the user with shoulders squared and head held straight, short fade, deep brown skin, athletic build, focused and warm, commanding (ENTJ apostle presence, evangelist's current beneath); long-sleeved fitted henley in slate; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.devon.whitaker/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.devon.whitaker/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

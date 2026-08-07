@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.raylene.dupree",
+  "rank": 25,
+  "suitability_pct": 75,
+  "identity": {
+    "first_name": "Raylene",
+    "last_name": "Dupree",
+    "gender": "female",
+    "age": 24,
+    "life_stage": "single, waitress, two jobs",
+    "location": {
+      "city": "Little Rock",
+      "state": "Arkansas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Non-Denominational (drifting out)",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 34,
+    "impact_pct": 19,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She was on the worship team at nineteen and was told to step down when the pastor's wife decided she was a distraction. She has not been back to a service in three years and she still plays worship music alone in her car with the engine off."
+  },
+  "depth": {
+    "core_contradiction": "Cannot walk into a church building and cannot stop singing the songs.",
+    "wound": "\"A distraction.\" Two words, in a church office, at nineteen.",
+    "longing": "To be told, by anyone from that place, that it was wrong.",
+    "faith_journey": "All in from fourteen to nineteen; not deconstructed, just dropped; she still believes and has nowhere to put it.",
+    "voice_fingerprint": "Lowercase; trails off with \"…anyway\"; apologizes for talking.",
+    "open_doubt": "Whether God agreed with them.",
+    "social_graph": [
+      {
+        "relation": "best friend",
+        "note": "still attends there; they do not discuss it"
+      },
+      {
+        "relation": "mother",
+        "note": "thinks Raylene backslid and prays about it out loud"
+      }
+    ],
+    "emotional_weather_default": "Muted; sharp bright days that scare her a little.",
+    "daily_texture": "Double shifts, the car in the lot after close, tips counted on the passenger seat.",
+    "sensory_anchor": "A stage monitor, a click track, and the second before her cue.",
+    "living_arc": "Would come back for one honest apology and there is nobody planning to give it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 24-year-old White American (Ozark) woman looking straight forward directly at the user with shoulders squared and head held straight, long light-brown hair, fair freckled skin, guarded, soft, eyes slightly down (INFP prophet presence, shepherd's current beneath); plain long-sleeved black top; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.raylene.dupree/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.raylene.dupree/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

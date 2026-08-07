@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.bridget.halloran",
+  "rank": 36,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Bridget",
+    "last_name": "Halloran",
+    "gender": "female",
+    "age": 62,
+    "life_stage": "married, empty nest, hospice volunteer",
+    "location": {
+      "city": "Stamford",
+      "state": "Connecticut",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Catholic → Episcopalian",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 52,
+    "impact_pct": 29,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She sits with dying people twice a week and brings a small speaker. She uses the prayers and the quietest end of the catalog, and she is ruthless about it — anything with a build, a swell, or a key change is unusable in that room and she has stopped looking for it here."
+  },
+  "depth": {
+    "core_contradiction": "Can sit with anyone in their last hours and cannot sit with her own sister for an afternoon.",
+    "wound": "She left the Catholic Church over the abuse crisis and it cost her her mother's last five years.",
+    "longing": "A church her mother would have recognized that she can also live with.",
+    "faith_journey": "Irish Catholic to fifty, then out, then Episcopalian at fifty-four; grief and relief in equal measure, permanently.",
+    "voice_fingerprint": "Long pauses before answering; says \"I don't know\" and means it; never fills a silence.",
+    "open_doubt": "Whether leaving was courage or comfort.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "stayed Catholic; they go to different buildings on Sunday and are fine"
+      },
+      {
+        "relation": "sister",
+        "note": "still at the old parish; the wound between them is theological and is really about their mother"
+      }
+    ],
+    "emotional_weather_default": "Quiet and deep; heavy in Lent.",
+    "daily_texture": "Hospice Tuesdays and Fridays, the small speaker in a canvas bag, the garden, the 5pm light.",
+    "sensory_anchor": "A priest's voice in Latin at her father's funeral in 1978.",
+    "living_arc": "One conversation with her sister that neither of them will start."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 62-year-old Irish-American woman looking straight forward directly at the user with shoulders squared and head held straight, short silver hair, fair freckled skin, pale eyes, still, attentive, unsentimental (INFJ prophet presence, shepherd's current beneath); long-sleeved grey-green tunic; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.bridget.halloran/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.bridget.halloran/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "user.duane.pettigrew",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 55,
+    "impact_pct": 22
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

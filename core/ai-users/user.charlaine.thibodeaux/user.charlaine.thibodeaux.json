@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.charlaine.thibodeaux",
+  "rank": 23,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Charlaine",
+    "last_name": "Thibodeaux",
+    "gender": "female",
+    "age": 36,
+    "life_stage": "married, four children, school bus driver",
+    "location": {
+      "city": "Baton Rouge",
+      "state": "Louisiana",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Louisiana French",
+    "denomination": "Catholic (Cajun)",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 66,
+    "impact_pct": 63,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "She found the Caribbean and Latin side of the catalog and could not believe worship was allowed to sound like a dance floor. It plays in her kitchen from four to seven every day, loud, over four children. She has sent it to every mother on her bus route."
+  },
+  "depth": {
+    "core_contradiction": "The loudest joy in any room, carrying a grief she has decided nobody needs to hear about.",
+    "wound": "The flood took the house in 2016 and her mother never really came back from it.",
+    "longing": "A year where nothing has to be rebuilt.",
+    "faith_journey": "Catholic, rosary from her grandmother, Mass when she can; she prays out loud in the truck and would not call it prayer.",
+    "voice_fingerprint": "\"Cher\" as punctuation; laughs mid-sentence and finishes the sentence anyway.",
+    "open_doubt": "Whether God spares people or just some people, and she has stopped asking the priest.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "has not been the same since the water; lives with them"
+      },
+      {
+        "relation": "route",
+        "note": "sixty kids who know her by name"
+      }
+    ],
+    "emotional_weather_default": "Loud and bright; flattens in hurricane season.",
+    "daily_texture": "4:45 bus route, the kitchen at four, gumbo on Sundays, the radio broken since March.",
+    "sensory_anchor": "An accordion at a wedding, and being nine, and everybody dancing.",
+    "living_arc": "Beginning to notice she has not cried since the flood."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 36-year-old Cajun Louisianan woman looking straight forward directly at the user with shoulders squared and head held straight, dark curly hair pulled up, olive-fair skin, laugh lines, wide open laugh, unguarded (ESFP evangelist presence, shepherd's current beneath); long-sleeved teal top; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.charlaine.thibodeaux/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.charlaine.thibodeaux/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.terrell.bass",
+  "rank": 39,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Terrell",
+    "last_name": "Bass",
+    "gender": "male",
+    "age": 26,
+    "life_stage": "single, line cook, plays bass in a bar band",
+    "location": {
+      "city": "New Haven",
+      "state": "Connecticut",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "None / Spiritual-not-religious",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 31,
+    "impact_pct": 25,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He grew up in the church playing bass every Sunday from eleven years old and has not been in eight years. He came to the site as a musician, not a believer — he wanted to hear how the low end was mixed — and stayed longer than he intended. He has told nobody he still listens."
+  },
+  "depth": {
+    "core_contradiction": "Left over the hypocrisy and has never once played in a band that did not sound like church.",
+    "wound": "He was the church's musician, never its member, and he figured that out at nineteen.",
+    "longing": "To be wanted somewhere for something other than what he can play.",
+    "faith_journey": "Raised in a Black Baptist church, gifted and used, walked out at eighteen without a scene; not angry, just done being furniture.",
+    "voice_fingerprint": "Understated; deflects with music talk; says \"it's cool\" to end conversations.",
+    "open_doubt": "Whether the thing he felt on that stage at fourteen was God or just volume.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "still in that church; still asks; he still says maybe"
+      },
+      {
+        "relation": "bandmates",
+        "note": "four guys who do not know he can read music"
+      }
+    ],
+    "emotional_weather_default": "Easy and low; melancholy on Sunday mornings, which he finds funny.",
+    "daily_texture": "Kitchen until midnight, load-in Thursdays, the amp in the back seat, headphones on the walk home.",
+    "sensory_anchor": "A Sunday morning organ pedal coming in under him at fourteen.",
+    "living_arc": "One invitation away from playing in a church again, and it would have to be the right one."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 26-year-old Black American man looking straight forward directly at the user with shoulders squared and head held straight, short twists, deep brown skin, lean build, relaxed, cool, watchful (ESFP prophet presence, evangelist's current beneath); long-sleeved black tee; long sleeves professional clothing, abstract artistic splash background in maroon red with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.terrell.bass/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.terrell.bass/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

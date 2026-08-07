@@ -1,0 +1,30 @@
+{
+  "id": "user.amber.dietz",
+  "life_area": "family",
+  "event_ids": [
+    "user.amber.dietz.album-review.0001",
+    "user.amber.dietz.album-review.0002",
+    "user.amber.dietz.album-review.0003",
+    "user.amber.dietz.album-review.0004",
+    "user.amber.dietz.album-review.0006",
+    "user.amber.dietz.album-review.0007",
+    "user.amber.dietz.album-review.0008",
+    "user.amber.dietz.song-rating.0009",
+    "user.amber.dietz.song-rating.0010",
+    "user.amber.dietz.song-rating.0011",
+    "user.amber.dietz.song-rating.0012",
+    "user.amber.dietz.song-rating.0013",
+    "user.amber.dietz.song-rating.0014",
+    "user.amber.dietz.song-rating.0015",
+    "user.amber.dietz.song-rating.0016",
+    "user.amber.dietz.song-rating.0017",
+    "user.amber.dietz.song-rating.0018",
+    "user.amber.dietz.song-rating.0019",
+    "user.amber.dietz.song-rating.0022",
+    "user.amber.dietz.song-rating.0023",
+    "user.amber.dietz.song-rating.0024",
+    "user.amber.dietz.song-rating.0025"
+  ],
+  "count": 22,
+  "store": "events/events.jsonl"
+}

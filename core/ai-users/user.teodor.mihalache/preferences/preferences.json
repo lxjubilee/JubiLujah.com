@@ -1,0 +1,14 @@
+{
+  "id": "user.teodor.mihalache",
+  "synthetic": true,
+  "primary_language": "Romanian",
+  "secondary_language": "German",
+  "interaction": {
+    "posture": "Signal",
+    "energy_pct": 34,
+    "impact_pct": 62
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

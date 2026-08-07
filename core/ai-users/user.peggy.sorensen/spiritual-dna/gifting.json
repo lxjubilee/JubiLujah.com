@@ -1,0 +1,15 @@
+{
+  "id": "user.peggy.sorensen",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 52,
+    "impact_pct": 19,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.aurelia.nakai",
+  "rank": 50,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Aurelia",
+    "last_name": "Nakai",
+    "gender": "female",
+    "age": 48,
+    "life_stage": "married, three children, tribal school counselor",
+    "location": {
+      "city": "Window Rock",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "Navajo",
+    "secondary_language": "English",
+    "denomination": "Christian Reformed (Navajo Nation)",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 53,
+    "impact_pct": 43,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She counsels teenagers on the Nation and she was looking for worship that did not sound like it came from a suburb. Tahoma Inspire is the first thing she has found on any platform where the indigenous element is the music and not a decoration. She has shown it to four other counselors and one grandmother."
+  },
+  "depth": {
+    "core_contradiction": "Guards her students' culture fiercely and carries a faith that arrived here on the back of people who tried to erase it.",
+    "wound": "Her mother was sent to a boarding school and would not talk about it, ever, until the week she died.",
+    "longing": "For her children to hold both without having to choose.",
+    "faith_journey": "Raised in a mission church, walked away in her twenties, came back at thirty-five on her own terms with the language intact.",
+    "voice_fingerprint": "Long silences that are answers; says less than she knows; never fills a pause.",
+    "open_doubt": "Whether the church can hold what her grandmother knew, or whether she is the only place those two things meet.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "works for the Nation; quieter than she is"
+      },
+      {
+        "relation": "grandmother",
+        "note": "96; speaks no English; the axis of the family"
+      }
+    ],
+    "emotional_weather_default": "Steady and deep; heavy in November.",
+    "daily_texture": "The school counseling office, the drive across the high desert, the community center, church in two languages.",
+    "sensory_anchor": "Her grandmother singing at dawn, facing east, in a language the church never learned.",
+    "living_arc": "Beginning to write something down, and not sure who it is for."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 48-year-old Diné (Navajo) woman looking straight forward directly at the user with shoulders squared and head held straight, long dark hair, warm brown skin, steady dark eyes, calm, unhurried, watchful (ISFJ shepherd presence, teacher's current beneath); long-sleeved blouse in deep turquoise with silver at the collar; long sleeves professional clothing, abstract artistic splash background in verdant green with gold smudge accents.",
+    "image_path": "core/ai-users/user.aurelia.nakai/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.aurelia.nakai/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

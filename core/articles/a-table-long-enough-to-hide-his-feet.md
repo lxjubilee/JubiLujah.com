@@ -1,0 +1,36 @@
+---
+order: 110
+slug: a-table-long-enough-to-hide-his-feet
+title: A Table Long Enough to Hide His Feet
+author: Caleb Inspire
+office: Pastor & Evangelist
+personaSlug: caleb
+excerpt: A crippled man who called himself a dead dog was carried to a king's table and seated there like a son, every day, for the rest of his life. I think about him whenever someone slips into the back of worship, sure they don't belong.
+imagePrompt: A large, diverse family and friends gathered around a long candlelit table in a golden hall at evening, faces glowing with laughter and belonging as one shy newcomer is warmly welcomed into an open seat, abundance and joy and dignity everywhere; luminous warm cinematic film-still, warm gold and amber tones, wide cinematic 16:9 widescreen landscape, no text, no letters, no words, no numerals, no logos, no watermarks.
+---
+
+There is a man who comes into our gatherings late and leaves early, and for a long time I could not figure out why until I finally caught him at the door.
+
+He sits in the very back, near the exit, on the aisle. He never takes off his coat. When the singing starts he stands with everyone else, but he does not really sing; he moves his lips a little and looks at the floor. And the moment the last song ends, before anyone can turn around and greet him, he is gone. I chased him down one Sunday, gently, and asked him to stay for coffee, and what he told me in the parking lot I have heard, in some form, from a hundred people over the years. He said, more or less, that he came because he could not stay away, but that he did not really belong in a room like that. He had a past. He had a limp in his soul that everyone could see, or so he believed. He figured God tolerated him at the back, on the aisle, near the door, and that was already more than a man like him had any right to expect.
+
+I wanted to sit him down and read him the whole strange story of Mephibosheth, so let me tell it to you the way I wanted to tell it to him.
+
+He was a prince who should have been a king, the grandson of Saul and the son of Jonathan. But when he was five years old, the day the news came that his father and grandfather were dead in battle, his nurse snatched him up to flee and dropped him, and the fall crippled both his feet for the rest of his life. So he grew up not in a palace but in hiding, in a place the Scriptures call Lo-debar, a name that carries the sense of a barren place, a place of no pasture, no word, the far end of nowhere. A forgotten man in a forgotten town, lame in both feet, living quietly on someone else's charity, waiting for the new king to remember his family only long enough to have him killed, the way new kings usually did.
+
+And then one day soldiers come for him, and it is the summons he has dreaded his whole life. They carry him. He cannot walk to it, into the presence of David, the most powerful man in the land, the very king whose throne his own grandfather once tried to destroy. And Mephibosheth falls on his face in terror. And listen to how he speaks of himself, because this is the wound talking, this is exactly the man in my parking lot: he calls himself a dead dog. What is your servant, he says, that you should look on such a dead dog as I am? That is not humility. That is a lifetime of being dropped and hidden and forgotten, talking. That is a man who has decided, deep down, that his crippling defines him and his best hope is to not be noticed.
+
+And here is what the king says. He tells him not to be afraid. He tells him he will show him kindness for the sake of Jonathan, the friend he loved. He gives back to him all the land that was his family's. And then he says the sentence that undoes me every time: you will eat bread at my table always. Not once. Not as a guest on a good day. Always. And the Scripture, in case we missed the size of it, tells us plainly that Mephibosheth ate continually at the king's table, like one of the king's own sons.
+
+Now here is the detail I want you to feel, because the Scripture is doing something on purpose. At the very end of the story, after the land is restored and the honor is given and the crippled prince has been made a permanent son of the house, the last thing the text tells us, the note it chooses to close on, is that he was lame in both his feet. It does not let us forget the limp. He is seated at the king's table like a son, and he is still, that whole time, a man who cannot walk. Both things are true at once. The dignity did not erase the disability. He was welcomed as he was, not as he wished he were.
+
+And I have imagined that table a thousand times, and here is what I see. When Mephibosheth was seated at it, down the length of it, in the place of a son, among the whole family of the king, the tablecloth fell over the edge and covered his feet. Everyone else at that table walked to their seats. He was carried to his. But once he was seated, once the meal was laid and the cloth hung down, you could not tell. The very thing he had spent his whole life ashamed of, the crippling he was sure everyone could see, was hidden under the table of the king who had chosen him. He looked, at that table, exactly like a son. Because that is what he now was.
+
+The Scriptures do not spell that image out; that part is my own imagining, and I hold it loosely. But I hold it, because I have watched it happen in worship more times than I can count.
+
+Here is what I want the man at the back of the room to hear, and maybe you are him. Worship is not an audition. It is a table. And the table has been set by a King who went looking through the whole barren country of Lo-debar for exactly the people the world dropped and hid and forgot, not despite the limp, but with the limp fully in view, and welcomed anyway. You do not have to walk in on your own two feet. Half the people at that table were carried. You do not have to hide your past well enough to earn a seat near the front; the seat is already yours, down the length of the table, in the place of a son, and the tablecloth of the King's own welcome is long enough to fall over everything you were sure disqualified you.
+
+That is the mercy hidden inside the gathered song. When we sing together, we are laying that cloth. We are making a table where the crippled prince and the loud old farmer and the woman who cannot feel anything anymore and the man who comes late and leaves early are all, for one hour, seated as sons and daughters of the same King, and no one can tell, in the singing, who walked in and who was carried, because the song hangs down over all of it like a cloth that hides the feet.
+
+So do not stand at the back with your coat on, doing the math on how soon you can slip out. You have read your own name into the wrong story. You are not the dead dog you called yourself in the dark years. You are the one the King sent soldiers to find, in the far end of nowhere, for the sake of a love you had nothing to do with earning. And He did not bring you all that way to seat you near the exit. He brought you to the table, the long one, the family one, the one with your place already set and your name already on it.
+
+Come and sit down. Let the singing be the cloth that covers what you were sure everyone could see. You will eat bread at His table always. He said always, and He is not a King who takes it back.

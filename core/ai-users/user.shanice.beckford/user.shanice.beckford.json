@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.shanice.beckford",
+  "rank": 35,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Shanice",
+    "last_name": "Beckford",
+    "gender": "female",
+    "age": 28,
+    "life_stage": "single, high school teacher",
+    "location": {
+      "city": "Mount Vernon",
+      "state": "New York",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Jamaican Patois",
+    "denomination": "Seventh-day Adventist",
+    "mbti": "ENFP (\"the Campaigner\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 73,
+    "impact_pct": 66,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "She plays music in her classroom during independent work and thirty ninth-graders a period have heard your catalog without anyone calling it worship. She posts about it constantly. She keeps Sabbath, which means the entire product experience is wrong for her from Friday sundown to Saturday night and nobody has thought about that."
+  },
+  "depth": {
+    "core_contradiction": "The most encouraging adult in her students' lives and cannot take a compliment without deflecting it.",
+    "wound": "She was tracked into the \"not college material\" group at fifteen by a teacher who never learned her name.",
+    "longing": "To be the reason one kid does not believe that about themselves.",
+    "faith_journey": "Adventist, third generation, Sabbath kept properly; loves it and is tired of explaining it.",
+    "voice_fingerprint": "\"Listen—\"; switches to Patois when she is delighted or furious; heavy exclamation points.",
+    "open_doubt": "Whether her denomination's carefulness is holiness or fear wearing holiness.",
+    "social_graph": [
+      {
+        "relation": "grandmother",
+        "note": "Kingston-born; the one whose Sabbath it originally was"
+      },
+      {
+        "relation": "student",
+        "note": "a 15-year-old she has decided will not fall through"
+      }
+    ],
+    "emotional_weather_default": "Bright and fast; empty on Sunday afternoons.",
+    "daily_texture": "First bell 7:40, papers on the Metro-North, Friday sundown, the classroom speaker.",
+    "sensory_anchor": "Sabbath candles and her grandmother's hands.",
+    "living_arc": "Two years from either a masters and administration or burning out entirely."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 28-year-old Jamaican-American woman looking straight forward directly at the user with shoulders squared and head held straight, natural hair in a high puff, deep brown skin, bright eyes, animated and warm, mid-laugh (ENFP evangelist presence, teacher's current beneath); long-sleeved mustard blouse; long sleeves professional clothing, abstract artistic splash background in azure blue with gold smudge accents.",
+    "image_path": "core/ai-users/user.shanice.beckford/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.shanice.beckford/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

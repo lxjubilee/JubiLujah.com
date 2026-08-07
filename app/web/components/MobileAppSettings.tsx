@@ -57,12 +57,12 @@ function initials(s: string) {
   return (s || '?').slice(0, 2).toUpperCase();
 }
 
-const CDN_BASE = (process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jubileeverse.com').replace(/\/$/, '');
-// Persona avatars live at <CDN>/personas/<Firstname>.png (matches the API's
-// personaImage()); non-personas 404 and fall back to the gradient tile.
+// Persona avatars are bundled with the site at /public/personas/<Firstname>.png
+// (the same art lib/personas.ts uses). The media CDN doesn't carry personas, so
+// these are served locally; non-personas 404 and fall back to the gradient tile.
 function personaUrl(slug: string) {
   const f = slug.split('-')[0] || slug;
-  return `${CDN_BASE}/personas/${f.charAt(0).toUpperCase()}${f.slice(1)}.png`;
+  return `/personas/${f.charAt(0).toUpperCase()}${f.slice(1)}.png`;
 }
 
 // Cover/avatar thumbnail. Albums resolve through the same-origin /cover/<code>

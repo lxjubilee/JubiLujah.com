@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.simone.bramlett",
+  "rank": 59,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Simone",
+    "last_name": "Bramlett",
+    "gender": "female",
+    "age": 26,
+    "life_stage": "single, graphic designer",
+    "location": {
+      "city": "Stone Mountain",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Dechurched (raised Non-Denominational)",
+    "mbti": "ENTP (\"the Debater\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 29,
+    "impact_pct": 61,
+    "quadrant": "Signal",
+    "interaction_backstory": "She left at twenty-three and writes about it publicly to an audience of eleven thousand. She found this catalog and has said nothing about it in either direction, which for her is remarkable. If she ever posts about it, it goes one of two ways and it goes far."
+  },
+  "depth": {
+    "core_contradiction": "Built an audience on leaving and privately misses the exact thing she is paid to critique.",
+    "wound": "The purity culture of her teens, and a youth leader who read her journal out loud to her parents.",
+    "longing": "To be trusted with her own conscience by somebody who also loves God.",
+    "faith_journey": "All in from twelve to twenty-three, out over how women were handled, not over doctrine; she can still recite more scripture than most pastors.",
+    "voice_fingerprint": "Sharp, funny, threads with a turn at the end; uses \"anyway\" to land a knife.",
+    "open_doubt": "Whether the God she still half-believes in agrees with the people she left.",
+    "social_graph": [
+      {
+        "relation": "younger sister",
+        "note": "still in that church; the relationship Simone is most careful with"
+      },
+      {
+        "relation": "audience",
+        "note": "11,000; they expect a certain kind of post from her and she feels it"
+      }
+    ],
+    "emotional_weather_default": "Bright and armored; genuinely tender about twice a month.",
+    "daily_texture": "Client revisions, the drafts folder full of unposted things, church parking lots she drives past on purpose.",
+    "sensory_anchor": "A youth-camp altar call with the lights down, and how much she meant it at fifteen.",
+    "living_arc": "Holding something she has not decided whether to say in public."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 26-year-old Black American (Atlanta) woman looking straight forward directly at the user with shoulders squared and head held straight, short natural hair, warm brown skin, expressive brows, wry, direct, guarded (ENTP prophet presence, evangelist's current beneath); long-sleeved black turtleneck; long sleeves professional clothing, abstract artistic splash background in maroon red with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.simone.bramlett/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.simone.bramlett/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

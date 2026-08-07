@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.wade.hollenbeck",
+  "rank": 64,
+  "suitability_pct": 69,
+  "identity": {
+    "first_name": "Wade",
+    "last_name": "Hollenbeck",
+    "gender": "male",
+    "age": 55,
+    "life_stage": "married, two grown children, auto body shop owner",
+    "location": {
+      "city": "Springfield",
+      "state": "Missouri",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Independent Baptist",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 48,
+    "impact_pct": 21,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He has strong opinions about most of this catalog and would not describe himself as a fan. He listens anyway, in the shop, because his church sings out of a 1974 hymnal and there is nothing else. He would turn it off if anybody asked him about it."
+  },
+  "depth": {
+    "core_contradiction": "Distrusts anything that sounds produced and has the shop radio on ten hours a day.",
+    "wound": "His daughter married a man he warned her about and was right, and being right cost him the relationship.",
+    "longing": "To be wrong about something for once and be glad about it.",
+    "faith_journey": "Independent Baptist, King James, suspicious of anything after 1950; the convictions are sincere and increasingly lonely.",
+    "voice_fingerprint": "Says almost nothing; when he does it is one flat sentence and it lands hard.",
+    "open_doubt": "Whether his standards are conviction or whether he just does not like change and found verses for it.",
+    "social_graph": [
+      {
+        "relation": "daughter",
+        "note": "divorced now; they speak at Christmas"
+      },
+      {
+        "relation": "pastor",
+        "note": "younger; Wade tolerates him and shows up every week"
+      }
+    ],
+    "emotional_weather_default": "Flat and closed; softer around his grandson.",
+    "daily_texture": "The bay, bondo dust, the AM radio, church Sunday morning Sunday night and Wednesday.",
+    "sensory_anchor": "Congregational singing out of a hymnal with no instruments except a piano slightly out of tune.",
+    "living_arc": "His daughter is thinking about calling and he does not know it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 55-year-old White American (Ozarks) man looking straight forward directly at the user with shoulders squared and head held straight, grey buzz cut, fair skin, heavy forearms, flat, appraising, unimpressed (ISTP prophet presence, apostle's current beneath); long-sleeved shop shirt with a name patch; long sleeves professional clothing, abstract artistic splash background in maroon red with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.wade.hollenbeck/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "environment",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.wade.hollenbeck/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -25,6 +25,7 @@ import awardsRouter from './routes/awards.js';
 import pipelineRouter from './routes/pipeline.js';
 import radioRouter from './routes/radio.js';
 import meRouter from './routes/me.js';
+import playlistShareRouter from './routes/playlistShare.js';
 import adminRouter from './routes/admin.js';
 import serviceRouter from './routes/service.js';
 import serviceTokenRouter from './routes/serviceToken.js';
@@ -37,8 +38,11 @@ import tracksRouter from './routes/tracks.js';
 import appVersionRouter from './routes/appVersion.js';
 import mobileRouter from './routes/mobile.js';
 import mobileAdminRouter from './routes/mobileAdmin.js';
+import redirectorRouter from './routes/redirector.js';
 import { serviceRateKey } from './middleware/serviceAuth.js';
+import { redirectorRateKey } from './middleware/redirectorAuth.js';
 import { startMusicScheduler } from './services/musicScheduler.js';
+import { startRedirectorScheduler } from './services/redirectorScheduler.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -87,6 +91,14 @@ const serviceLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, max: config.service.rateLimitMax,
   standardHeaders: true, legacyHeaders: false, keyGenerator: serviceRateKey,
 });
+// Automation API limiter: 300 req/min (§14), keyed by caller identity (API key /
+// SSO subject / IP). Skips the cached public QR images and the internal resolve
+// path so image loads and redirects are never throttled by automation traffic.
+const redirectorLimiter = rateLimit({
+  windowMs: 60 * 1000, max: 300, standardHeaders: true, legacyHeaders: false,
+  keyGenerator: redirectorRateKey,
+  skip: (req) => req.path.includes('/qr/') || req.path.includes('/resolve/'),
+});
 
 // ---- Health + OpenAPI -------------------------------------------------------
 app.get('/health', async (req, res) => {
@@ -113,6 +125,7 @@ app.use('/api/auth', authLimiter, authRouter);
 app.use('/api', catalogRouter);                  // public catalog (manifest-backed)
 app.use('/api/app-version', appVersionRouter);   // public mobile update-check
 app.use('/api/mobile', mobileRouter);            // public mobile app config (categories)
+app.use('/api/playlist-share', playlistShareRouter); // public tokened theme-playlist share read
 app.use('/api/ratings', writeLimiter, ratingsRouter);
 app.use('/api/comments', writeLimiter, commentsRouter);
 // Public Rating & Review module. /api/admin/reviews is mounted BEFORE the
@@ -136,6 +149,7 @@ app.use('/api/admin/mobile', writeLimiter, mobileAdminRouter);
 app.use('/api/admin/publish', writeLimiter, publishRouter);
 app.use('/api/admin/tracks', writeLimiter, tracksRouter);
 app.use('/api/admin', writeLimiter, adminRouter);
+app.use('/api/redirector', redirectorLimiter, redirectorRouter);  // token→asset indirection (software/redirector.md)
 
 // ---- 404 + error handler ----------------------------------------------------
 app.use(notFound);
@@ -147,6 +161,8 @@ app.listen(config.port, () => {
   import('./manifest.js').then((m) => m.getManifest()).catch(() => {});
   // Manage Music scheduled CDN sync (opt-in via MUSIC_SYNC_SCHEDULER=on).
   startMusicScheduler();
+  // Redirector failover snapshot + health watcher (opt-in via REDIRECTOR_SCHEDULER=on).
+  startRedirectorScheduler();
 });
 
 export default app;

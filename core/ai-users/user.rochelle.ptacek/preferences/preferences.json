@@ -1,0 +1,14 @@
+{
+  "id": "user.rochelle.ptacek",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 54,
+    "impact_pct": 30
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

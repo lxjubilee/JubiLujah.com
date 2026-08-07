@@ -1,0 +1,15 @@
+{
+  "id": "user.catalin.munteanu",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 70,
+    "impact_pct": 66,
+    "quadrant": "Amplifier"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

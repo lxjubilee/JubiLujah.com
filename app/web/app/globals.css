@@ -5,6 +5,7 @@
 @import './styles/widgets/nominations.css';
 @import './styles/widgets/reviews.css';
 @import './styles/widgets/playlists.css';
+@import './styles/widgets/theme-playlist.css';
 @import './styles/widgets/analytics.css';
 @import './styles/widgets/footer-player.css';
 @import './styles/widgets/subscription.css';
@@ -144,6 +145,13 @@ body.jv-has-player { padding-bottom: 84px; }
   .jvh-media-links { display: none; }
   .jvh-search input { width: 96px; }
   .jvh-personalize span { display: none; }
+}
+
+/* Phones: drop the search box entirely so the top bar fits with no horizontal
+   scroll (search is still reachable from the Search page / nav). */
+@media (max-width: 640px) {
+  .jvh-search { display: none; }
+  .jvh-inner { overflow: hidden; }
 }
 
 /* Footer player's animated top border lives in styles/widgets/footer-player.css
@@ -654,7 +662,7 @@ a { color: inherit; }
 .album-exec .jv-center-title { font-family: Georgia, serif; font-size: 24px; line-height: 1.15; font-weight: 700; margin: 8px 0 12px; }
 .album-exec .jv-center-sub { font-size: 14px; color: var(--xink-soft); display: flex; align-items: center; flex-wrap: wrap; gap: 2px; }
 .album-exec .jv-center-sub .dot { color: var(--xink-muted); margin: 0 8px; }
-.album-exec .jv-center-actions { display: flex; align-items: center; gap: 18px; padding: 14px 28px 18px; }
+.album-exec .jv-center-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; padding: 14px 28px 18px; }
 .album-exec .jv-bigplay { width: 54px; height: 54px; border-radius: 50%; border: none; cursor: pointer; background: var(--xaccent); color: #0a0e14; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.1s, background 0.15s; }
 .album-exec .jv-bigplay:hover { background: var(--xaccent-warm); transform: scale(1.05); }
 .album-exec .jv-follow { background: none; border: 1px solid var(--xink-soft); color: var(--xink); border-radius: 999px; padding: 8px 22px; font-size: 13px; font-weight: 600; cursor: pointer; }
@@ -739,6 +747,10 @@ a { color: inherit; }
   .album-exec .x-inner { max-width: 100%; }
   .album-exec .x-hero h1 { font-size: 30px; }
   .album-exec .jv-app-grid { grid-template-columns: 1fr; }
+  /* Mobile: the album itself comes right after the hero; Similar Music follows. */
+  .album-exec .jv-center { order: -1; }
+  .album-exec .jv-center-head { padding: 16px 16px 8px; gap: 14px; }
+  .album-exec .jv-center-actions { padding: 12px 16px 16px; gap: 10px; }
   .album-exec .jv-lib { max-height: none; } .album-exec .jv-lib-list { max-height: 320px; }
   .album-exec .jv-center-title { font-size: 30px; }
   .album-exec .jv-cover-wrap { width: 120px; }
@@ -1040,3 +1052,521 @@ a { color: inherit; }
 .lang-empty { text-align: center; padding: 64px 20px; }
 .lang-empty h2 { font-size: 24px; color: var(--ink); margin-bottom: 10px; }
 .lang-empty p { max-width: 540px; margin: 0 auto; color: var(--ink-muted); line-height: 1.6; }
+
+/* ========================= BACKSTAGE ACCESS ==============================
+   The article library (/backstage) and its cards. The grid + card rules are
+   JubileeVerse's home-page `content-card` / `content-grid` system ported here
+   under a `bs-` namespace, matching how the `jvh-` header was ported: same
+   300x304 card, 16:9 image, gold uppercase category, 20/26 two-line title.
+   JubileeVerse's charcoal card colours are used literally (not the navy
+   site.css surfaces) so the two properties read as one family. */
+
+/* Nav-row link, sitting immediately left of the language flag. */
+.jvh-nav-right { gap: 10px; }
+.jvh-backstage {
+  padding: 6px 12px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: .4px; color: #fff;
+  white-space: nowrap; text-decoration: none; transition: all 0.2s; flex-shrink: 0;
+}
+.jvh-backstage:hover { color: #E6AC00; border-color: #E6AC00; background: rgba(230, 172, 0, 0.08); }
+.jvh-backstage.active { color: #E6AC00; border-color: #E6AC00; background: transparent; }
+
+/* ---- Index page --------------------------------------------------------- */
+/* Backstage runs on a flat black canvas — override the site's fixed navy
+   gradient, scoped to the route via :has so no other page is affected. */
+body:has(.bs-page) { background: #000; }
+.bs-page { max-width: var(--site-max); margin: 0 auto; padding: 24px 0 48px; }
+
+.bs-hero { padding: 8px 0 28px; }
+.bs-hero-eyebrow {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.6px;
+  text-transform: uppercase; color: #E6AC00; margin-bottom: 8px;
+}
+.bs-hero-title { font-size: 32px; line-height: 1.2; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.bs-hero-blurb { max-width: 720px; font-size: 14px; line-height: 1.65; color: #c4c4c4; }
+
+.bs-section { margin-bottom: 32px; }
+.bs-section-header {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.bs-section-title { font-size: 16px; font-weight: 600; color: #fff; }
+.bs-section-blurb { font-size: 12px; color: #8a8a8a; }
+
+/* content-grid — mirrors JubileeVerse's .content-grid (covenant-identity page):
+   a centered flex-wrap row capped at 1548px (5 cards × 300 + 4 × 12 gap). The
+   max-width steps down at each breakpoint so the row holds 5 → 4 → 3 → 2 → 1
+   fixed-width cards; the section header rides the same ladder so it stays
+   aligned with the grid's edges. */
+.bs-section-header,
+.bs-grid { max-width: 1548px; margin-left: auto; margin-right: auto; }
+.bs-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
+@media (max-width: 1567px) { .bs-section-header, .bs-grid { max-width: 1236px; } } /* 4 per row */
+@media (max-width: 1267px) { .bs-section-header, .bs-grid { max-width: 924px; } }  /* 3 per row */
+@media (max-width: 955px)  { .bs-section-header, .bs-grid { max-width: 612px; } }  /* 2 per row */
+@media (max-width: 643px)  { .bs-section-header, .bs-grid { max-width: 300px; } }  /* 1 per row */
+
+.bs-card {
+  flex: 0 0 300px; width: 300px; height: 274px;
+  background: #2d2d2d; border-radius: 8px; overflow: hidden;
+  display: flex; flex-direction: column; text-decoration: none;
+  transition: background 0.2s ease;
+}
+.bs-card:hover { background: #3a3a3a; }
+
+/* Featured "wide" cards — a large card the width of two cards, appearing ONLY
+   when a row holds at least 5 cards (the ≥1568px / 5-per-row layout). A wide
+   card = two 300px cards + the 12px gap = 612px, so `wide + 3 normal` fills a
+   5-col row exactly (612 + 3×300 + 3×12 = 1548). Marked on cards at index 0, 6
+   & 11 of each 12-card (3-row) block, so the wide card walks across the grid:
+   row 1 → cols 1-2, row 2 → cols 3-4, row 3 → cols 4-5 (every 3rd row combines
+   the last two cards). The wide card keeps the SAME height as a normal card —
+   only its width and image crop change. Below 1568px the class is inert. */
+@media (min-width: 1568px) {
+  .bs-card-wide {
+    flex: 0 0 612px; width: 612px;             /* two 300px cards + the 12px gap; height stays 304px, same as a normal card */
+  }
+  .bs-card-wide .bs-card-image {
+    aspect-ratio: auto; height: 169px;         /* match a normal card's 16:9 image height so the wide card is NOT taller — just a wider crop */
+  }
+}
+.bs-card-image { aspect-ratio: 16 / 9; background: #242424; overflow: hidden; position: relative; }
+.bs-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.bs-card:hover .bs-card-image img { transform: scale(1.02); }
+.bs-card-image-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  padding: 0 16px; text-align: center; font-size: 13px; color: #8a8a8a;
+}
+
+/* Admin-only "regenerate image" control, top-right of a Backstage card image. */
+.bs-card-regen {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff; backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.2s, background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.bs-card:hover .bs-card-regen, .bs-card-regen.is-busy, .bs-card-regen.is-error, .bs-card-regen.is-offline { opacity: 1; }
+.bs-card-regen:hover { background: rgba(198, 40, 40, 0.92); border-color: rgba(198, 40, 40, 0.92); color: #fff; }
+.bs-card-regen:active { transform: scale(0.94); }
+.bs-card-regen:disabled { cursor: default; }
+.bs-card-regen.is-busy { background: rgba(230, 172, 0, 0.9); border-color: #E6AC00; color: #1b1b1b; opacity: 1; }
+.bs-card-regen.is-done { background: #2e7d32; border-color: #2e7d32; color: #fff; opacity: 1; }
+.bs-card-regen.is-offline { background: #c77800; border-color: #c77800; color: #fff; opacity: 1; }
+.bs-card-regen.is-error { background: #b3261e; border-color: #b3261e; color: #fff; }
+.bs-card-regen svg { width: 17px; height: 17px; }
+.bs-card-regen .bs-spin { animation: bs-spin 0.9s linear infinite; transform-origin: 50% 50%; }
+@keyframes bs-spin { to { transform: rotate(360deg); } }
+.bs-card-body { padding: 8px 12px; display: flex; flex-direction: column; flex: 1 1; }
+.bs-card-category {
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px;
+  color: #E6AC00; margin-bottom: 4px;
+}
+.bs-card-title {
+  font-size: 20px; font-weight: 600; line-height: 24px; color: #fff; margin-bottom: 1px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* Single line, always: a long credit ("Radiant Stones (Jubilee · Melody ·
+   Zariah)") would otherwise wrap and push the meta out of the fixed-height
+   card. Both names truncate; the separator never does. */
+.bs-card-meta {
+  display: flex; align-items: center; flex-wrap: nowrap; gap: 6px; margin-top: auto;
+  font-size: 11px; color: #8a8a8a; min-width: 0; white-space: nowrap;
+}
+.bs-card-meta > span { overflow: hidden; text-overflow: ellipsis; }
+.bs-card-dot { flex: 0 0 auto; color: #6a6a6a; }
+.bs-card-song { flex: 1 1 auto; }
+
+.bs-empty { padding: 48px 0; text-align: center; color: #8a8a8a; font-size: 14px; }
+
+/* ---- Article page ======================================================== */
+/* Ported from JubileeVerse's long-form article template (covenant-identity):
+   a full-bleed hero whose bottom gradient carries the headline, a 1fr + 300px
+   body/sidebar grid, justified serif-accented prose with a drop cap, a gold
+   callout and byline. The article runs on the same flat-black canvas as the
+   Backstage index. */
+body:has(.bsa-article) { background: #000; }
+.bsa-article { display: block; }
+
+/* -- Hero -- */
+/* Full viewport height minus the sticky jvh-header (48px) + jvh-nav-bar (50px). */
+.bsa-hero { position: relative; width: 100%; height: calc(100vh - 48px - 50px); overflow: hidden; background: #1b1b1b; }
+.bsa-hero-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Admin-only hero reposition control (top-right of the hero). */
+.bsa-hero-reposition {
+  position: absolute; top: 16px; right: 16px; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 8px 6px; border-radius: 10px;
+  background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px);
+}
+.bsa-hero-move {
+  width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+.bsa-hero-move:hover { background: rgba(198, 40, 40, 0.92); border-color: rgba(198, 40, 40, 0.92); color: #fff; }
+.bsa-hero-move:active { transform: scale(0.92); }
+.bsa-hero-move svg { width: 18px; height: 18px; }
+.bsa-hero-pos {
+  font-size: 11px; font-weight: 700; color: #fff; min-width: 34px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.bsa-hero-fallback {
+  display: flex; align-items: center; justify-content: center; padding: 0 24px; text-align: center;
+  background: radial-gradient(ellipse at center, #2d2d2d, #141414);
+  color: #6a6a6a; font-size: 22px; font-weight: 600;
+}
+.bsa-hero-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 50px 24px 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.96));
+}
+.bsa-hero-content { max-width: var(--site-max); margin: 0 auto; padding: 0 16px; }
+.bsa-meta-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.bsa-category {
+  display: inline-block; padding: 4px 10px; border-radius: 4px; background: #E6AC00; color: #1b1b1b;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+}
+.bsa-hero-title {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: 40px; line-height: 1.18; font-weight: 700; color: #fff; margin-bottom: 16px; max-width: 100%;
+}
+.bsa-meta-bottom {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 13px; color: #b7b7b7;
+}
+/* Meta items rendered as yellow tabs (mirrors .bsa-category). */
+.bsa-meta-item {
+  display: inline-block; padding: 4px 10px; border-radius: 4px; background: #E6AC00; color: #1b1b1b;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+}
+.bsa-meta-song { color: #1b1b1b; text-decoration: none; }
+a.bsa-meta-song:hover { color: #1b1b1b; text-decoration: underline; }
+.bsa-meta-dot { color: #6a6a6a; }
+
+/* -- Two-column body -- */
+.bsa-container {
+  max-width: var(--site-max); margin: 0 auto; padding: 40px 16px 56px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; align-items: start;
+}
+.bsa-main { min-width: 0; }
+
+/* Representative-account framing (§9.2). Deliberately prominent — this notice
+   is a covenant obligation, not a footnote. */
+.bsa-banner {
+  margin: 0 0 28px; padding: 14px 18px; border-radius: 8px;
+  background: rgba(230, 172, 0, 0.08); border: 1px solid rgba(230, 172, 0, 0.3);
+  font-size: 13px; line-height: 1.6; color: #d8d2c6;
+}
+.bsa-banner strong { color: #E6AC00; }
+
+/* Prose (BackstageProse renders into .bsa-body) */
+.bsa-body { font-size: 18px; line-height: 1.8; color: #e0e0e0; text-align: justify; }
+.bsa-body p { margin-bottom: 22px; }
+.bsa-body p:first-of-type::first-letter {
+  float: left; font-family: 'Playfair Display', Georgia, serif; font-size: 4rem; line-height: 0.8;
+  padding: 4px 12px 0 0; color: #E6AC00;
+}
+.bsa-body strong { color: #fff; font-weight: 700; }
+.bsa-body em { color: #eaeaea; font-style: italic; }
+.bsa-body h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px; line-height: 1.3; font-weight: 700; color: #fff; margin: 40px 0 14px;
+}
+.bsa-body h3 { font-size: 20px; line-height: 1.4; font-weight: 600; color: #fff; margin: 30px 0 10px; }
+.bsa-body blockquote {
+  margin: 28px 0; padding: 16px 22px; border-left: 3px solid #E6AC00;
+  background: #1c1c1c; border-radius: 0 8px 8px 0; color: #cfcfcf; font-style: italic; text-align: left;
+}
+.bsa-body hr { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.12); margin: 36px 0; width: 100%; }
+.bs-rule { border: 0; height: 1px; background: rgba(255, 255, 255, 0.12); margin: 36px 0; width: 100%; }
+
+/* Principle callout */
+.bsa-callout {
+  margin: 36px 0 0; padding: 22px 24px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(230, 172, 0, 0.1), rgba(230, 172, 0, 0.04));
+  border: 1px solid rgba(230, 172, 0, 0.3);
+}
+.bsa-callout-title {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  font-size: 15px; font-weight: 600; color: #E6AC00;
+}
+.bsa-callout-title svg { width: 18px; height: 18px; }
+.bsa-callout-text { font-size: 15px; line-height: 1.65; color: #d2d2d2; font-style: italic; }
+
+/* Byline */
+.bsa-byline {
+  display: flex; align-items: flex-start; gap: 14px; margin: 36px 0 0; padding: 18px;
+  background: #161616; border: 1px solid rgba(255, 255, 255, 0.06); border-left: 3px solid #E6AC00; border-radius: 8px;
+}
+.bsa-byline-avatar {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #E6AC00, #b9860b); color: #1b1b1b; font-size: 15px; font-weight: 700;
+}
+.bsa-byline-text { min-width: 0; }
+.bsa-byline-credit { font-size: 12px; color: #8a8a8a; margin-bottom: 2px; }
+.bsa-byline-name { font-size: 15px; font-weight: 600; color: #fff; }
+.bsa-byline-role { font-size: 12px; color: #9a9a9a; margin-top: 2px; }
+
+/* -- Listen CTA — prominent play prompt at the foot of the article body -- */
+.bsa-listen-cta {
+  display: flex; align-items: center; gap: 22px; text-decoration: none;
+  /* 32px = the 16px inline padding on either side of .bsa-container, so the panel lines up with the body. */
+  max-width: min(var(--site-max), calc(100% - 32px)); margin: 8px auto 0;
+  padding: 24px 28px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(230, 172, 0, 0.16), rgba(230, 172, 0, 0.05));
+  border: 1px solid rgba(230, 172, 0, 0.35); border-left: 3px solid #E6AC00;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.bsa-listen-cta:hover {
+  background: linear-gradient(135deg, rgba(230, 172, 0, 0.24), rgba(230, 172, 0, 0.08));
+  border-color: rgba(230, 172, 0, 0.6);
+}
+.bsa-listen-cta:active { transform: translateY(1px); }
+.bsa-listen-cta-play {
+  flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #E6AC00; color: #1b1b1b; box-shadow: 0 6px 20px rgba(230, 172, 0, 0.35);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.bsa-listen-cta:hover .bsa-listen-cta-play { transform: scale(1.06); box-shadow: 0 8px 26px rgba(230, 172, 0, 0.5); }
+.bsa-listen-cta-play svg { width: 30px; height: 30px; margin-left: 3px; } /* nudge the triangle optically centered */
+.bsa-listen-cta-text { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.bsa-listen-cta-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #E6AC00;
+}
+.bsa-listen-cta-title { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; }
+.bsa-listen-cta-sub { font-size: 13px; color: #b7b7b7; }
+.bsa-listen-cta-arrow { flex-shrink: 0; width: 22px; height: 22px; color: #E6AC00; margin-left: auto; opacity: 0.85; transition: transform 0.2s; }
+.bsa-listen-cta:hover .bsa-listen-cta-arrow { transform: translateX(4px); opacity: 1; }
+@media (max-width: 560px) {
+  .bsa-listen-cta { gap: 16px; padding: 18px 18px; }
+  .bsa-listen-cta-play { width: 52px; height: 52px; }
+  .bsa-listen-cta-play svg { width: 24px; height: 24px; }
+  .bsa-listen-cta-title { font-size: 18px; }
+  .bsa-listen-cta-arrow { display: none; }
+}
+
+/* -- Sidebar -- */
+.bsa-sidebar { position: sticky; top: 64px; display: flex; flex-direction: column; gap: 16px; }
+.bsa-widget { background: #161616; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 18px; }
+.bsa-widget-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+  color: #E6AC00; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.bsa-facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0 0 16px; }
+.bsa-facts dt { font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; color: #8a8a8a; }
+.bsa-facts dd { margin: 0; font-size: 13px; color: #e0e0e0; }
+.bsa-listen {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  padding: 11px 16px; border-radius: 6px; border: 1px solid #E6AC00; color: #E6AC00;
+  font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s;
+}
+.bsa-listen svg { width: 15px; height: 15px; }
+.bsa-listen:hover { background: #E6AC00; color: #1b1b1b; }
+
+/* -- Read Aloud (TTS) widget — ported from JubileeVerse's .tts-* controls -- */
+.tts-widget .widget-title {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #fff;
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tts-widget .widget-title svg { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.65; }
+
+.tts-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+
+.tts-play-btn {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+  background: #E6AC00; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.1s, background 0.2s;
+}
+.tts-play-btn:hover { background: #F5C518; transform: scale(1.06); }
+.tts-play-btn svg { width: 18px; height: 18px; fill: #000; color: #000; }
+
+.tts-stop-btn {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+  background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); color: #8a8a8a;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.tts-stop-btn:hover { background: #2d2d2d; color: #fff; }
+.tts-stop-btn svg { width: 14px; height: 14px; }
+
+.tts-speed-btn {
+  background: rgba(255, 255, 255, 0.08); border: none; color: #c4c4c4; cursor: pointer;
+  padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; font-family: inherit;
+  transition: all 0.15s;
+}
+.tts-speed-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+
+.tts-gender-toggle { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.tts-gender-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; cursor: pointer;
+  padding: 0; display: flex; align-items: center; justify-content: center; color: #fff;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+.tts-gender-btn:active { transform: scale(0.85); }
+.tts-gender-btn svg { width: 36px; height: 36px; pointer-events: none; transition: filter 0.3s ease, transform 0.3s ease, color 0.3s ease; }
+.tts-gender-btn:not(.active) { opacity: 0.25; }
+.tts-gender-btn:not(.active):hover { opacity: 0.5; }
+.tts-gender-btn:not(.active):hover svg { transform: scale(1.1); }
+.tts-gender-btn.active { opacity: 1; color: #E6AC00; }
+.tts-gender-btn.active svg { filter: drop-shadow(0 0 5px rgba(230, 172, 0, 0.5)); transform: scale(1.05); }
+
+.tts-progress-bar {
+  width: 100%; height: 4px; border-radius: 2px; cursor: pointer; position: relative;
+  background: rgba(255, 255, 255, 0.1); margin-bottom: 6px; transition: height 0.15s;
+}
+.tts-progress-bar:hover { height: 6px; }
+.tts-progress-fill { height: 100%; width: 0%; background: #E6AC00; border-radius: 2px; transition: width 0.2s linear; }
+
+.tts-time-display {
+  display: flex; align-items: center; justify-content: flex-end; gap: 3px;
+  font-size: 11px; font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  color: #8a8a8a; letter-spacing: 0.5px;
+}
+.tts-time-sep { opacity: 0.4; }
+.tts-elapsed { color: #E6AC00; }
+.tts-duration { color: #8a8a8a; }
+
+/* Word-by-word highlight in the article body while Read Aloud is speaking. */
+.bsa-body .tts-word { cursor: pointer; border-radius: 2px; transition: background 0.15s ease, color 0.15s ease; }
+.bsa-body .tts-word:hover { background: rgba(230, 172, 0, 0.15); }
+.bsa-body .tts-word.tts-word-active { background: rgba(230, 172, 0, 0.35); color: #fff; }
+
+/* -- Translate Article widget — ported from JubileeVerse's .translate-* -- */
+.translate-widget .widget-title {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #fff;
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.translate-widget .widget-title svg { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.65; }
+
+.translate-dropdown { position: relative; }
+.translate-dropdown-trigger {
+  width: 100%; padding: 9px 11px; border-radius: 6px; cursor: pointer; user-select: none;
+  background: #2d2d2d; border: 1px solid rgba(255, 255, 255, 0.1); color: #c4c4c4; font-size: 13px;
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.translate-dropdown-trigger:hover { border-color: rgba(255, 255, 255, 0.2); color: #fff; }
+.translate-dropdown.open .translate-dropdown-trigger { border-color: #E6AC00; color: #fff; }
+.translate-dropdown-label { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.translate-dropdown-arrow { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; transition: transform 0.2s, opacity 0.2s; }
+.translate-dropdown.open .translate-dropdown-arrow { transform: rotate(180deg); opacity: 1; }
+
+.translate-dropdown-panel {
+  display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 1000;
+  background: #2d2d2d; border: 1px solid rgba(230, 172, 0, 0.5); border-radius: 6px;
+  max-height: 320px; overflow-y: auto; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  scrollbar-width: thin; scrollbar-color: rgba(230, 172, 0, 0.6) transparent;
+}
+.translate-dropdown.open .translate-dropdown-panel { display: block; }
+.translate-dropdown-panel::-webkit-scrollbar { width: 5px; }
+.translate-dropdown-panel::-webkit-scrollbar-thumb { background: rgba(230, 172, 0, 0.6); border-radius: 4px; }
+.translate-search-wrap { position: sticky; top: 0; z-index: 1; padding: 6px 6px 4px; background: #2d2d2d; }
+.translate-search-input {
+  width: 100%; padding: 7px 10px; border-radius: 5px; outline: none; font-family: inherit; font-size: 12px;
+  background: #1b1b1b; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
+}
+.translate-search-input:focus { border-color: #E6AC00; }
+.translate-search-input::placeholder { color: #8a8a8a; }
+.translate-dropdown-option {
+  padding: 8px 11px; font-size: 12px; color: #c4c4c4; cursor: pointer; transition: background 0.1s, color 0.1s;
+}
+.translate-dropdown-option:hover { background: #3a3a3a; color: #fff; }
+.translate-dropdown-option.active { color: #E6AC00; background: rgba(230, 172, 0, 0.07); }
+.translate-no-results { padding: 12px 10px; font-size: 12px; color: #8a8a8a; text-align: center; }
+
+.translate-prev-lang-section { margin-top: 12px; }
+.translate-prev-caption {
+  display: flex; align-items: center; gap: 5px; margin-bottom: 3px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: #8a8a8a;
+}
+.translate-prev-caption svg { width: 12px; height: 12px; color: #E6AC00; }
+.translate-prev-lang-section a {
+  display: block; padding: 1px 0; color: #E6AC00; font-size: 12px; text-decoration: none; cursor: pointer; opacity: 0.9;
+}
+.translate-prev-lang-section a:hover { opacity: 1; text-decoration: underline; }
+
+.translate-status { display: flex; align-items: center; gap: 8px; margin-top: 12px; color: #E6AC00; font-size: 13px; }
+.translate-status.translate-error { color: #ff8a8a; }
+.translate-spinner {
+  width: 14px; height: 14px; flex-shrink: 0; border-radius: 50%;
+  border: 2px solid rgba(230, 172, 0, 0.3); border-top-color: #E6AC00; animation: bsa-spin 0.7s linear infinite;
+}
+@keyframes bsa-spin { to { transform: rotate(360deg); } }
+.translate-restore-btn {
+  margin-top: 12px; padding: 0; background: none; border: none; cursor: pointer; font-size: 12px; color: #8a8a8a;
+}
+.translate-restore-btn:hover { color: #E6AC00; }
+
+/* -- Share This Story widget — ported from JubileeVerse's share card -- */
+.share-widget .widget-title {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #fff;
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.share-widget .widget-title svg { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.65; }
+
+.share-buttons { display: flex; gap: 10px; }
+.share-btn {
+  flex: 1; aspect-ratio: 1; min-width: 0; padding: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: #2d2d2d; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;
+  color: #c4c4c4; transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
+}
+.share-btn svg { width: 18px; height: 18px; }
+.share-btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.25); transform: translateY(-1px); }
+.share-btn:active { transform: translateY(0); }
+.share-facebook:hover { background: #1877f2; border-color: #1877f2; }
+.share-twitter:hover { background: #1d9bf0; border-color: #1d9bf0; }
+.share-linkedin:hover { background: #0a66c2; border-color: #0a66c2; }
+.share-copy:hover { background: #E6AC00; border-color: #E6AC00; color: #1b1b1b; }
+.share-btn.copied { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+
+.share-copied-toast {
+  display: block; overflow: hidden; max-height: 0; margin-top: 0;
+  font-size: 12px; color: #6ec177; text-align: center;
+  opacity: 0; transition: opacity 0.2s, max-height 0.2s, margin-top 0.2s;
+}
+.share-copied-toast.show { max-height: 20px; margin-top: 10px; opacity: 1; }
+
+/* -- Back button, overlaid on the hero -- */
+.bsa-back {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px);
+  color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s;
+}
+.bsa-back svg { width: 16px; height: 16px; }
+.bsa-back:hover { background: rgba(0, 0, 0, 0.8); border-color: #E6AC00; color: #E6AC00; }
+
+/* -- More from Backstage -- */
+.bsa-more { max-width: var(--site-max); margin: 0 auto; padding: 8px 16px 64px; }
+.bsa-more-header {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.bsa-more-title { font-size: 18px; font-weight: 700; color: #fff; }
+.bsa-more-all { font-size: 13px; color: #8a8a8a; text-decoration: none; }
+.bsa-more-all:hover { color: #E6AC00; }
+.bsa-more .bs-grid { justify-content: flex-start; max-width: none; margin: 0; }
+
+@media (max-width: 700px) {
+  /* Card keeps its fixed 300 × 304 footprint at every width (matching the
+     JubileeVerse .content-card); the grid's max-width ladder above is what
+     drops the row to a single centered column on narrow screens. */
+  .bs-hero-title { font-size: 26px; }
+}
+
+/* Article: collapse to a single column and shrink the hero on narrow screens. */
+@media (max-width: 900px) {
+  .bsa-container { grid-template-columns: 1fr; gap: 32px; }
+  .bsa-sidebar { position: static; }
+  .bsa-hero-overlay { padding: 64px 16px 28px; }
+  .bsa-hero-title { font-size: 30px; }
+  .bsa-body { font-size: 17px; }
+}

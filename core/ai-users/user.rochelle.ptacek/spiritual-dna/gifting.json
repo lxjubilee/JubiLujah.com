@@ -1,0 +1,15 @@
+{
+  "id": "user.rochelle.ptacek",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Shepherd"
+  ],
+  "engagement": {
+    "energy_pct": 54,
+    "impact_pct": 30,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

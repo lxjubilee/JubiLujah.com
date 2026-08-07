@@ -35,6 +35,8 @@ export const EN = {
   'nav.christmas': 'CHRISTMAS',
   'nav.playlists': 'PLAYLISTS',
   'nav.upgrade': 'UPGRADE',
+  // Backstage Access — right side of the nav row, beside the language flag
+  'nav.backstage': 'BACKSTAGE',
   // Language picker panel
   'lang.title': 'Languages',
   'lang.search': 'Search languages...',

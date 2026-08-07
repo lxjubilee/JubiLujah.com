@@ -1,0 +1,14 @@
+{
+  "id": "user.jace.thornbury",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Amplifier",
+    "energy_pct": 67,
+    "impact_pct": 64
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

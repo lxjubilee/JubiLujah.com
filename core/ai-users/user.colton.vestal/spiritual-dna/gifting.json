@@ -1,0 +1,15 @@
+{
+  "id": "user.colton.vestal",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Evangelist",
+    "Apostle"
+  ],
+  "engagement": {
+    "energy_pct": 74,
+    "impact_pct": 69,
+    "quadrant": "Amplifier"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

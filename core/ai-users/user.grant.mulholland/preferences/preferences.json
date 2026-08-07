@@ -1,0 +1,14 @@
+{
+  "id": "user.grant.mulholland",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Signal",
+    "energy_pct": 29,
+    "impact_pct": 61
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

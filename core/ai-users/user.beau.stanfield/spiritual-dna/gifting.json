@@ -1,0 +1,15 @@
+{
+  "id": "user.beau.stanfield",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Prophet"
+  ],
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 37,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.nicu.stancu",
+  "rank": 92,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Nicu",
+    "last_name": "Stancu",
+    "gender": "male",
+    "age": 49,
+    "life_stage": "married, three children, trucking company owner",
+    "location": {
+      "city": "Chicago (Norridge)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Romanian Orthodox",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 60,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "He came in 1998 and drove for eleven years before he owned anything. His parish of six hundred is the centre of Romanian Chicago and he sits on the council. This catalog reached him through a cousin and went around the parish fast. He wants a Romanian-language version and assumes, correctly, that nobody has thought about it."
+  },
+  "depth": {
+    "core_contradiction": "Provides for everybody and has never once let his wife see the accounts.",
+    "wound": "He drove for eleven years and missed his daughter's entire childhood, and she is polite to him now.",
+    "longing": "To be needed by his family for something other than money.",
+    "faith_journey": "Orthodox, and in Chicago the parish is nation, language and church in one building; his faith and his Romanian-ness have never been separable and he has never tried.",
+    "voice_fingerprint": "Decisive; talks about money easily and feelings never; \"asta e\" — that is that.",
+    "open_doubt": "Whether the eleven years bought anything that mattered.",
+    "social_graph": [
+      {
+        "relation": "daughter",
+        "note": "24; born here; polite; the whole grief in one word"
+      },
+      {
+        "relation": "parish priest",
+        "note": "runs the only Romanian-speaking room in Nicu's week"
+      }
+    ],
+    "emotional_weather_default": "Solid and forward; heavy at the parish Christmas.",
+    "daily_texture": "Dispatch at five, the yard, parish council Tuesdays, the Romanian shop on Harlem Avenue, colinde in December.",
+    "sensory_anchor": "A parish hall full of Romanians singing colinde in Chicago in the snow, sounding exactly like home.",
+    "living_arc": "He wants to hand the company to his son, who does not want it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 49-year-old Romanian-American man looking straight forward directly at the user with shoulders squared and head held straight, greying hair cut short, fair skin, broad build, assured, direct, unsentimental (ESTJ apostle presence, teacher's current beneath); long-sleeved shirt in dark charcoal; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.nicu.stancu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.nicu.stancu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

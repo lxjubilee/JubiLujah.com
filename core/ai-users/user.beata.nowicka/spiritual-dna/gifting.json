@@ -1,0 +1,15 @@
+{
+  "id": "user.beata.nowicka",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Shepherd"
+  ],
+  "engagement": {
+    "energy_pct": 55,
+    "impact_pct": 32,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

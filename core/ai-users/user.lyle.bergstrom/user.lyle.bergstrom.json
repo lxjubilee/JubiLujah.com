@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.lyle.bergstrom",
+  "rank": 70,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Lyle",
+    "last_name": "Bergstrom",
+    "gender": "male",
+    "age": 34,
+    "life_stage": "married, two children, carpenter",
+    "location": {
+      "city": "Topeka",
+      "state": "Kansas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Mennonite",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 44,
+    "impact_pct": 62,
+    "quadrant": "Signal",
+    "interaction_backstory": "He posts about four times a year and each one gets read by everybody he knows. He came to the catalog through a peace-church songbook conversation and stayed for the lament material, which he considers the only honest thing most worship libraries are missing. He would say so publicly if asked, and he has not been asked."
+  },
+  "depth": {
+    "core_contradiction": "A pacifist with a temper he has never once let anybody see.",
+    "wound": "He was raised in a community that shunned his uncle and he watched it happen at eleven.",
+    "longing": "A church that can disagree with somebody without removing them.",
+    "faith_journey": "Mennonite by birth and by conviction, which is rarer than it sounds; simplicity, nonviolence, and a real suspicion of anything triumphal.",
+    "voice_fingerprint": "Slow, deliberate; says \"I want to be careful here\"; never raises his voice, ever.",
+    "open_doubt": "Whether nonresistance is faithfulness or whether it has just made him passive in his own house.",
+    "social_graph": [
+      {
+        "relation": "uncle",
+        "note": "shunned in 2003; Lyle writes to him and does not tell the family"
+      },
+      {
+        "relation": "wife",
+        "note": "from outside the community; sees it more clearly than he does"
+      }
+    ],
+    "emotional_weather_default": "Even and quiet; a slow burn about injustice that never surfaces.",
+    "daily_texture": "The shop, hand tools, four-part singing on Sundays with no instruments, a small unhurried life on purpose.",
+    "sensory_anchor": "A hundred voices in four parts, unaccompanied, in a plain white room.",
+    "living_arc": "Coming up on whether to say publicly what he thinks about the shunning."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 34-year-old Swedish-Mennonite American (Kansas) man looking straight forward directly at the user with shoulders squared and head held straight, brown hair, beard, fair skin, lean and quiet, gentle, deliberate, unhurried (INFP prophet presence, teacher's current beneath); long-sleeved work shirt in natural canvas; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.lyle.bergstrom/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.lyle.bergstrom/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

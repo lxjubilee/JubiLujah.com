@@ -1,0 +1,33 @@
+{
+  "id": "user.chiara.bevilacqua",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.chiara.bevilacqua.album-review.0001",
+    "user.chiara.bevilacqua.album-review.0002",
+    "user.chiara.bevilacqua.album-review.0003",
+    "user.chiara.bevilacqua.album-review.0004",
+    "user.chiara.bevilacqua.album-review.0005",
+    "user.chiara.bevilacqua.album-review.0006",
+    "user.chiara.bevilacqua.album-review.0007",
+    "user.chiara.bevilacqua.album-review.0008",
+    "user.chiara.bevilacqua.song-rating.0009",
+    "user.chiara.bevilacqua.song-rating.0010",
+    "user.chiara.bevilacqua.song-rating.0011",
+    "user.chiara.bevilacqua.song-rating.0012",
+    "user.chiara.bevilacqua.song-rating.0013",
+    "user.chiara.bevilacqua.song-rating.0014",
+    "user.chiara.bevilacqua.song-rating.0015",
+    "user.chiara.bevilacqua.song-rating.0016",
+    "user.chiara.bevilacqua.song-rating.0017",
+    "user.chiara.bevilacqua.song-rating.0018",
+    "user.chiara.bevilacqua.song-rating.0019",
+    "user.chiara.bevilacqua.song-rating.0020",
+    "user.chiara.bevilacqua.song-rating.0021",
+    "user.chiara.bevilacqua.song-rating.0022",
+    "user.chiara.bevilacqua.song-rating.0023",
+    "user.chiara.bevilacqua.song-rating.0024",
+    "user.chiara.bevilacqua.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

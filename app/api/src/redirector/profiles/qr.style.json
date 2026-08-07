@@ -1,0 +1,33 @@
+{
+  "domain": "jubilujah.com",
+  "display_name": "JubiLujah Music",
+  "min_print_cm": 2,
+  "styles": [
+    {
+      "key": "default",
+      "module_shape": "dots",
+      "eye_shape": "rounded_square",
+      "foreground": "#1A1A2E",
+      "background": "#FFFFFF",
+      "eye_color": "#0F3460",
+      "center_mark_monogram": "J",
+      "center_mark_color": "#E6AC00",
+      "center_mark_url": null,
+      "center_mark_scale": 0.18,
+      "error_correction": "H"
+    },
+    {
+      "key": "inverted",
+      "module_shape": "dots",
+      "eye_shape": "rounded_square",
+      "foreground": "#F5F5F5",
+      "background": "#0F0F1E",
+      "eye_color": "#E6AC00",
+      "center_mark_monogram": "J",
+      "center_mark_color": "#E6AC00",
+      "center_mark_url": null,
+      "center_mark_scale": 0.18,
+      "error_correction": "H"
+    }
+  ]
+}

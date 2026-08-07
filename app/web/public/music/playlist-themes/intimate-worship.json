@@ -1,0 +1,18 @@
+{
+  "theme_id": "intimate-worship",
+  "theme_name": "Intimate Worship",
+  "theme_statement": "Close, quiet, unhurried. Songs for the secret place — tenderness, surrender, and stillness before Him.",
+  "emotional_profile": ["tenderness", "intimacy", "surrender", "reverence", "peace", "comfort", "awe"],
+  "energy_range": { "min": 12, "max": 58 },
+  "tempo_range": { "min": 55, "max": 96 },
+  "excluded_moods": ["exuberance", "celebration", "warfare", "triumph", "victory"],
+  "target_track_count": 120,
+  "max_tracks_per_album": 4,
+  "min_distinct_albums": 30,
+  "eligible_personas": "ALL_TWELVE",
+  "testimony_categories": ["healing", "provision"],
+  "supported_arcs": ["steady", "worship_set"],
+  "default_arc": "worship_set",
+  "sequencing": { "distribute_peaks": false },
+  "hero_image": null, "accent": "#8b6fb0", "related_theme_ids": ["healing-comfort"]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "user.beata.nowicka",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.beata.nowicka.album-review.0001",
+    "user.beata.nowicka.album-review.0002",
+    "user.beata.nowicka.album-review.0003",
+    "user.beata.nowicka.album-review.0004",
+    "user.beata.nowicka.album-review.0005",
+    "user.beata.nowicka.album-review.0006",
+    "user.beata.nowicka.album-review.0007",
+    "user.beata.nowicka.album-review.0008",
+    "user.beata.nowicka.song-rating.0009",
+    "user.beata.nowicka.song-rating.0010",
+    "user.beata.nowicka.song-rating.0011",
+    "user.beata.nowicka.song-rating.0012",
+    "user.beata.nowicka.song-rating.0013",
+    "user.beata.nowicka.song-rating.0014",
+    "user.beata.nowicka.song-rating.0015",
+    "user.beata.nowicka.song-rating.0016",
+    "user.beata.nowicka.song-rating.0017",
+    "user.beata.nowicka.song-rating.0018",
+    "user.beata.nowicka.song-rating.0019",
+    "user.beata.nowicka.song-rating.0020",
+    "user.beata.nowicka.song-rating.0021",
+    "user.beata.nowicka.song-rating.0022",
+    "user.beata.nowicka.song-rating.0023",
+    "user.beata.nowicka.song-rating.0024",
+    "user.beata.nowicka.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

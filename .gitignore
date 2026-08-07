@@ -15,3 +15,6 @@ Thumbs.db
 
 # Large artwork masters (persona ZIPs) — live on J:/CDN, exceed GitHub's 100MB limit
 artwork/
+
+# Next.js dev build output (JubiLujah web)
+app/web/.next-dev/

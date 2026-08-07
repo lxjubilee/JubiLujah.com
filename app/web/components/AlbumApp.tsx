@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AlbumCover from './AlbumCover';
 import AddToPlaylist from './AddToPlaylist';
@@ -69,6 +69,9 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
   // ---- Public ratings (§2/§3/§6): album + per-song summaries -------------
   const [summaries, setSummaries] = useState<Record<string, ReviewSummary>>({});
   const [compose, setCompose] = useState<{ type: TargetType; id: string; label: string } | null>(null);
+  const [qrOpen, setQrOpen] = useState(false);
+  const [codes, setCodes] = useState<{ album: { token: string } | null; songs: { n: number; token: string }[] } | null>(null);
+  const didAutoplay = useRef(false);
 
   const loadSummaries = useCallback(() => {
     const targets = [
@@ -145,6 +148,28 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
     playQueue(playable, Math.max(0, playable.findIndex((x) => x.id === all[i].id)));
   };
 
+  // Song QR deep-link: /album?c=<code>&t=<n> auto-plays track n on arrival. Album
+  // QR codes carry no `t`, so they just open the album (no autoplay). Best-effort:
+  // browsers may require a tap, after which the track is already cued.
+  useEffect(() => {
+    if (didAutoplay.current) return;
+    const raw = new URLSearchParams(window.location.search).get('t');
+    if (!raw) return;
+    const n = parseInt(raw, 10);
+    if (!Number.isFinite(n)) return;
+    const idx = current.tracks.findIndex((x) => x.n === n);
+    const i = idx >= 0 ? idx : n - 1;
+    if (i >= 0 && i < current.tracks.length && current.tracks[i]?.url) { didAutoplay.current = true; playFrom(i); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Show the album's scannable QR (+ per-song QRs). Public endpoint, no auth.
+  const openQr = () => {
+    setQrOpen(true); setCodes(null);
+    fetch(`/api/redirector/codes/${encodeURIComponent(current.code)}`)
+      .then((r) => (r.ok ? r.json() : null)).then((d) => d && setCodes(d)).catch(() => {});
+  };
+
   // Studio albums are hidden from signed-out visitors and plain viewers; only
   // admins/reviewers see them in the library and discovery rails.
   const visibleAlbums = (canSeeStudio ? albums : albums.filter((a) => a.status === 'ready'))
@@ -211,7 +236,8 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
               </div>
               <div className="jv-center-meta">
                 <div className="jv-eyebrow-sm">Album</div>
-                <div className="jv-center-title" lang={albumBcp47(current.code)}>{current.title}</div>
+                <div className="jv-center-title" lang={albumBcp47(current.code)} onClick={openQr}
+                  title="Show this album's QR code" style={{ cursor: 'pointer' }}>{current.title}</div>
                 <div className="jv-center-sub">
                   <span>{artist}</span><span className="dot">·</span>
                   <span>{current.trackCount} songs</span><span className="dot">·</span>
@@ -229,6 +255,7 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
             <div className="jv-center-actions">
               <button className={`jv-bigplay${bigPlayPaused ? '' : ' playing'}`} onClick={onBigPlay} title={bigPlayPaused ? 'Play album' : 'Pause'} aria-label={bigPlayPaused ? 'Play album' : 'Pause'}><TransportIcon paused={bigPlayPaused} /></button>
               <AddToPlaylist songIds={current.tracks.map((t) => t.id)} label="Add to Playlist" />
+              <button className="jv-follow" type="button" onClick={openQr} title="Show album QR code">◧ QR</button>
               <button className="jv-follow" type="button">Follow</button>
             </div>
             <div className="jv-tracks">
@@ -276,6 +303,54 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
           onSaved={() => loadSummaries()}
           onDeleted={() => loadSummaries()}
         />
+      )}
+
+      {qrOpen && (
+        <div onClick={() => setQrOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, zIndex: 1000 }}>
+          <div onClick={(e) => e.stopPropagation()}
+            style={{ background: '#161622', border: '1px solid rgba(255,255,255,.1)', borderRadius: 14, padding: 20, maxWidth: 460, width: '100%', maxHeight: '85vh', overflowY: 'auto', color: '#e8e8e8' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+              <h3 style={{ margin: 0, fontSize: 16 }}>QR code — {current.title}</h3>
+              <button onClick={() => setQrOpen(false)} aria-label="Close" style={{ background: 'transparent', border: 'none', color: '#b7b7b7', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>×</button>
+            </div>
+            {!codes && <p className="notice">Loading…</p>}
+            {codes && !codes.album && <p className="notice">This album doesn’t have a QR code yet.</p>}
+            {codes && codes.album && (
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/qr/${codes.album.token}.svg`} alt="Album QR code" width={150} height={150} style={{ background: '#fff', borderRadius: 8, padding: 6 }} />
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <p style={{ fontSize: 13, color: '#b7b7b7', margin: '2px 0 8px' }}>Scan to open this album — it won’t auto-play.</p>
+                  <div style={{ display: 'flex', gap: 12, fontSize: 12, flexWrap: 'wrap' }}>
+                    <a href={`/qr/${codes.album.token}.svg`} download>SVG</a>
+                    <a href={`/qr/${codes.album.token}.png?size=1024`} download>PNG</a>
+                  </div>
+                </div>
+              </div>
+            )}
+            {codes && codes.songs.length > 0 && (
+              <>
+                <div style={{ margin: '18px 0 8px', fontSize: 12, textTransform: 'uppercase', letterSpacing: '.5px', color: '#8f8f9f' }}>Song QR codes — scan to play that song</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(84px,1fr))', gap: 12 }}>
+                  {codes.songs.map((s) => {
+                    const tr = current.tracks.find((x) => x.n === s.n);
+                    return (
+                      <div key={s.token} style={{ textAlign: 'center', minWidth: 0 }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={`/qr/${s.token}.svg`} alt="" width={72} height={72} style={{ background: '#fff', borderRadius: 6, padding: 3, width: '100%', height: 'auto' }} />
+                        <div style={{ fontSize: 11, color: '#b7b7b7', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.n}. {tr?.title || ''}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {codes && codes.album && codes.songs.length === 0 && (
+              <p className="notice" style={{ marginTop: 14, fontSize: 12 }}>Per-song QR codes are being minted.</p>
+            )}
+          </div>
+        </div>
       )}
     </>
   );

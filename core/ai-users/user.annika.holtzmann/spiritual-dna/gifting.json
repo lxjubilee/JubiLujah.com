@@ -1,0 +1,15 @@
+{
+  "id": "user.annika.holtzmann",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Teacher"
+  ],
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 47,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

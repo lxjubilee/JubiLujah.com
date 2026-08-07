@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.bernice.ashford",
+  "rank": 51,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Bernice",
+    "last_name": "Ashford",
+    "gender": "female",
+    "age": 66,
+    "life_stage": "widowed, retired CTA operator, church mother",
+    "location": {
+      "city": "Chicago (South Shore)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Missionary Baptist",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 33,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She sat in the second pew for thirty-one years and she can tell you the exact Sunday the singing changed. Her niece put the site on her tablet and she plays the gospel catalog every afternoon, loudly, with the door open so the hallway gets it too."
+  },
+  "depth": {
+    "core_contradiction": "The one who tells the pastor the truth to his face, and has never told her own children how much she needs them to visit.",
+    "wound": "The neighborhood emptied out around her — the church, the school, the corner store, all of it, over twenty years.",
+    "longing": "One Sunday with the building full again.",
+    "faith_journey": "Missionary Baptist, usher board to mother board, unshakable; her complaint is with the volume, never with the Lord.",
+    "voice_fingerprint": "\"Mm-hm\" as a full rebuttal; starts stories in the middle; calls people by their full name when serious.",
+    "open_doubt": "Whether the church she gave her life to will outlive her, and whether that would mean anything.",
+    "social_graph": [
+      {
+        "relation": "niece",
+        "note": "set up the tablet; the family's connector"
+      },
+      {
+        "relation": "pastor",
+        "note": "48; she likes him and lets him know she is watching"
+      }
+    ],
+    "emotional_weather_default": "Warm and firm; melancholy on the first of the month.",
+    "daily_texture": "The tablet on the kitchen table, the hallway door open, Wednesday bible study, the bus she rode for twenty-nine years.",
+    "sensory_anchor": "Four hundred people and a Hammond in a full sanctuary in 1988.",
+    "living_arc": "Deciding whether to move near her daughter in Milwaukee and leave the pew."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 66-year-old Black American (South Side Chicago) woman looking straight forward directly at the user with shoulders squared and head held straight, silver hair pressed neat, deep brown skin, strong bearing, shrewd, warm, entirely unbothered (ESFJ prophet presence, shepherd's current beneath); long-sleeved blouse in deep plum; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.bernice.ashford/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.bernice.ashford/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

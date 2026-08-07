@@ -1,0 +1,14 @@
+{
+  "id": "user.joanne.kiriakis",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": "Greek",
+  "interaction": {
+    "posture": "Drifter",
+    "energy_pct": 49,
+    "impact_pct": 33
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

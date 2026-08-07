@@ -23,6 +23,8 @@ import PlaybackGate from '@/components/PlaybackGate';
 import UpgradeModal from '@/components/UpgradeModal';
 import CoverUploadModal from '@/components/CoverUploadModal';
 import TrackManagerModal from '@/components/TrackManagerModal';
+import ScrollRestoreGuard from '@/components/ScrollRestoreGuard';
+import NavTracker from '@/components/NavTracker';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -69,6 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LangProvider value={lang}>
           <AuthProvider>
+            <ScrollRestoreGuard />
+            <NavTracker />
             <Particles />
             <Header defaultMusicHref={defaultMusicHref} langWithContent={languagesWithContent()} />
             <main>{children}</main>

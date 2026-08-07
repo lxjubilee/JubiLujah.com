@@ -1,0 +1,14 @@
+{
+  "id": "user.klarisse.bantugan",
+  "synthetic": true,
+  "primary_language": "Cebuano",
+  "secondary_language": "English (also Tagalog)",
+  "interaction": {
+    "posture": "Amplifier",
+    "energy_pct": 79,
+    "impact_pct": 83
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

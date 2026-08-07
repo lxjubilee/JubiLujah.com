@@ -1,0 +1,33 @@
+{
+  "id": "user.gheorghe.barbu",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.gheorghe.barbu.album-review.0001",
+    "user.gheorghe.barbu.album-review.0002",
+    "user.gheorghe.barbu.album-review.0003",
+    "user.gheorghe.barbu.album-review.0004",
+    "user.gheorghe.barbu.album-review.0005",
+    "user.gheorghe.barbu.album-review.0006",
+    "user.gheorghe.barbu.album-review.0007",
+    "user.gheorghe.barbu.album-review.0008",
+    "user.gheorghe.barbu.song-rating.0009",
+    "user.gheorghe.barbu.song-rating.0010",
+    "user.gheorghe.barbu.song-rating.0011",
+    "user.gheorghe.barbu.song-rating.0012",
+    "user.gheorghe.barbu.song-rating.0013",
+    "user.gheorghe.barbu.song-rating.0014",
+    "user.gheorghe.barbu.song-rating.0015",
+    "user.gheorghe.barbu.song-rating.0016",
+    "user.gheorghe.barbu.song-rating.0017",
+    "user.gheorghe.barbu.song-rating.0018",
+    "user.gheorghe.barbu.song-rating.0019",
+    "user.gheorghe.barbu.song-rating.0020",
+    "user.gheorghe.barbu.song-rating.0021",
+    "user.gheorghe.barbu.song-rating.0022",
+    "user.gheorghe.barbu.song-rating.0023",
+    "user.gheorghe.barbu.song-rating.0024",
+    "user.gheorghe.barbu.song-rating.0025"
+  ],
+  "count": 25,
+  "store": "events/events.jsonl"
+}

@@ -1,0 +1,135 @@
+'use client';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+import { api } from '@/lib/api';
+import { getAccessToken } from '@/lib/auth';
+
+// The article hero image, plus an admin-only vertical reposition control.
+//
+// Admins see up/down arrows on the hero; each click nudges the image's
+// object-position Y (framing) by STEP%, live, and auto-saves after a short
+// pause via /api/backstage/hero-position. The saved value is read back into
+// piece.heroY, so the chosen framing shows for every visitor on reload.
+//
+// "Move up" reveals more of the LOWER part of the image (object-position Y →
+// higher %); "Move down" reveals more of the TOP.
+
+const STEP = 5; // % per click
+const SAVE_DELAY = 700;
+
+function clamp(v: number): number {
+  return Math.max(0, Math.min(100, v));
+}
+
+export default function BackstageHeroImage({
+  slug,
+  src,
+  song,
+  initialY,
+}: {
+  slug: string;
+  src: string;
+  song: string;
+  initialY: number;
+}) {
+  const { hasRole } = useAuth();
+  const isAdmin = hasRole('admin');
+
+  const [y, setY] = useState(clamp(initialY));
+  const [status, setStatus] = useState<'idle' | 'saving' | 'ok' | 'err'>('idle');
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Latest nudged value that has NOT yet been confirmed saved (null when nothing
+  // is pending). Lets us flush it on unmount so a quick reload/navigation right
+  // after nudging still persists the framing.
+  const pendingRef = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      const pending = pendingRef.current;
+      if (pending == null) return; // nothing unsaved
+      // Flush with keepalive so the request survives the page unload; keepalive
+      // supports the Bearer header (unlike navigator.sendBeacon).
+      const token = getAccessToken();
+      try {
+        fetch('/backstage/hero-position', {
+          method: 'POST',
+          keepalive: true,
+          credentials: 'omit',
+          headers: { 'content-type': 'application/json', ...(token ? { authorization: `Bearer ${token}` } : {}) },
+          body: JSON.stringify({ slug, y: pending }),
+        });
+      } catch {
+        /* best-effort on teardown */
+      }
+    },
+    [slug],
+  );
+
+  const scheduleSave = useCallback(
+    (val: number) => {
+      setStatus('saving');
+      pendingRef.current = val;
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      saveTimer.current = setTimeout(async () => {
+        try {
+          await api.post('/backstage/hero-position', { slug, y: val });
+          if (pendingRef.current === val) pendingRef.current = null; // confirmed saved
+          setStatus('ok');
+          setTimeout(() => setStatus('idle'), 1500);
+        } catch {
+          setStatus('err');
+        }
+      }, SAVE_DELAY);
+    },
+    [slug],
+  );
+
+  const nudge = useCallback(
+    (delta: number) => (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setY((prev) => {
+        const next = clamp(prev + delta);
+        if (next !== prev) scheduleSave(next);
+        return next;
+      });
+    },
+    [scheduleSave],
+  );
+
+  const badge =
+    status === 'saving' ? '…' : status === 'ok' ? '✓' : status === 'err' ? '✗' : '';
+
+  return (
+    <>
+      {src ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img className="bsa-hero-image" src={src} alt="" style={{ objectPosition: `50% ${y}%` }} />
+      ) : (
+        <div className="bsa-hero-image bsa-hero-fallback">
+          <span>{song}</span>
+        </div>
+      )}
+
+      {isAdmin && src && (
+        <div className="bsa-hero-reposition" role="group" aria-label="Reposition hero image">
+          <button type="button" className="bsa-hero-move" onClick={nudge(STEP)} title="Move image up" aria-label="Move image up">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+              <polyline points="6 15 12 9 18 15" />
+            </svg>
+          </button>
+          <span className="bsa-hero-pos">
+            {Math.round(y)}%{badge ? ` ${badge}` : ''}
+          </span>
+          <button type="button" className="bsa-hero-move" onClick={nudge(-STEP)} title="Move image down" aria-label="Move image down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
+      )}
+    </>
+  );
+}

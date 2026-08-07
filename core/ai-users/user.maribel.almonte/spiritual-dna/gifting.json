@@ -1,0 +1,15 @@
+{
+  "id": "user.maribel.almonte",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Apostle"
+  ],
+  "engagement": {
+    "energy_pct": 69,
+    "impact_pct": 47,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

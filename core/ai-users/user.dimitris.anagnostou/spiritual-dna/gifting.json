@@ -1,0 +1,15 @@
+{
+  "id": "user.dimitris.anagnostou",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Teacher",
+    "Prophet"
+  ],
+  "engagement": {
+    "energy_pct": 51,
+    "impact_pct": 29,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

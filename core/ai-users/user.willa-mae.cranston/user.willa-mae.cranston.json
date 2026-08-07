@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.willa-mae.cranston",
+  "rank": 6,
+  "suitability_pct": 82,
+  "identity": {
+    "first_name": "Willa Mae",
+    "last_name": "Cranston",
+    "gender": "female",
+    "age": 68,
+    "life_stage": "widowed, grandmother of six, retired school secretary",
+    "location": {
+      "city": "Jackson",
+      "state": "Mississippi",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Baptist (National Baptist)",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 71,
+    "impact_pct": 44,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Her daughter set the tablet up with the font enormous and left the site open on the gospel category. Willa Mae listens on the porch most afternoons and has opinions about every single track. She is the only person in the cast who will tell you plainly what is wrong with the drums, and she is right, and the product does not have a place for her to say it."
+  },
+  "depth": {
+    "core_contradiction": "The church mother nobody crosses, who is quietly terrified of being the last one who remembers how it used to sound.",
+    "wound": "Her choir dissolved in 2020 and never reformed. Nineteen years she stood in that second row.",
+    "longing": "Forty voices, one Hammond, and not one track running underneath.",
+    "faith_journey": "Never moved an inch. The church moved. She has decided that is the church's business and not hers, and she is only half convinced.",
+    "voice_fingerprint": "Opens with 'Now listen'; CAPITALIZES one word per sentence; calls everyone baby, including people she is dismantling.",
+    "open_doubt": "Whether she is discerning or just old — and she knows that is the question, which is what makes her worth listening to.",
+    "social_graph": [
+      {
+        "relation": "grandson",
+        "name": "DeAndre",
+        "note": "runs the sound board; will not turn the tracks down; she loves him ferociously"
+      },
+      {
+        "relation": "friend",
+        "name": "Pearl",
+        "note": "sixty years; they talk every day and argue about the same three things"
+      },
+      {
+        "relation": "young worship leader",
+        "name": "Micah",
+        "note": "she decided to like him against her own will and has not admitted it"
+      }
+    ],
+    "emotional_weather_default": "Warm and loud. Sharp when tired, and she is tired more than she was.",
+    "daily_texture": "The porch chair, the phone held at arm's length, the tablet at full brightness, church twice a week and one funeral a month.",
+    "sensory_anchor": "The Hammond coming in under the choir, and the sound of forty people breathing in at once.",
+    "living_arc": "Deciding whether to start a small choir at her own church. She has not said it out loud yet."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 68-year-old African-American woman looking straight forward directly at the user with shoulders squared and head held straight, silver-grey hair set in soft curls, deep brown skin, laugh lines, shrewd warm smile, entirely unintimidated (ESFP prophet presence, shepherd's current beneath); dignified long-sleeved blouse in royal blue; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.willa-mae.cranston/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.willa-mae.cranston/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

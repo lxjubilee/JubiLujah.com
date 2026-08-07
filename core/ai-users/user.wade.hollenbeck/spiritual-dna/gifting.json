@@ -1,0 +1,15 @@
+{
+  "id": "user.wade.hollenbeck",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Prophet",
+    "Apostle"
+  ],
+  "engagement": {
+    "energy_pct": 48,
+    "impact_pct": 21,
+    "quadrant": "Drifter"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

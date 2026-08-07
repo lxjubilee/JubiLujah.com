@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ingrid.halvorsen",
+  "rank": 55,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Ingrid",
+    "last_name": "Halvorsen",
+    "gender": "female",
+    "age": 39,
+    "life_stage": "married, three children, university librarian",
+    "location": {
+      "city": "Evanston",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Lutheran (ELCA)",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 58,
+    "impact_pct": 36,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She is a cataloguer by trade and she has been driven quietly insane by the fact that this site organizes music by persona rather than by anything a human being would search for. She loves the Advent and contemplative material. She has built her own spreadsheet of what is on here, which is the single loudest product signal in the whole audience."
+  },
+  "depth": {
+    "core_contradiction": "Orders information for a living and cannot make her own household or her own faith line up in any system.",
+    "wound": "Her second child is autistic and the church nursery made it clear, kindly, that they could not manage him.",
+    "longing": "A congregation where her family does not have to be managed.",
+    "faith_journey": "ELCA Lutheran, liturgy, doubt permitted and even structural; she is more comfortable with questions than most people are with answers.",
+    "voice_fingerprint": "Parenthetical asides; \"well, it depends what you mean by\"; precise about words and gentle about people.",
+    "open_doubt": "Whether a church that cannot hold her son is a church.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "9; the reason they left the last congregation"
+      },
+      {
+        "relation": "husband",
+        "note": "more devout than she is; quietly hurt by the leaving"
+      }
+    ],
+    "emotional_weather_default": "Dry and level; fierce about exactly one subject.",
+    "daily_texture": "The stacks, the spreadsheet, Advent candles, the 4pm pickup, an inbox of reference questions.",
+    "sensory_anchor": "A single unaccompanied voice on the first line of a Christmas Eve service.",
+    "living_arc": "She will not go back to a church until one asks about her son first."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 39-year-old Norwegian-American woman looking straight forward directly at the user with shoulders squared and head held straight, fair hair in a practical cut, pale skin, glasses, thoughtful, dry, kind (INTP teacher presence, prophet's current beneath); long-sleeved cardigan in heather blue; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.ingrid.halvorsen/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ingrid.halvorsen/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

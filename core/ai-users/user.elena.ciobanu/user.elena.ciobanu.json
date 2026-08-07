@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.elena.ciobanu",
+  "rank": 96,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Elena",
+    "last_name": "Ciobanu",
+    "gender": "female",
+    "age": 63,
+    "life_stage": "widowed, three grown children, retired schoolteacher",
+    "location": {
+      "city": "Suceava",
+      "state": "Suceava",
+      "country": "Romania"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": null,
+    "denomination": "Romanian Orthodox",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 59,
+    "impact_pct": 22,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She lives forty minutes from four painted monasteries and goes to one of them most weeks. Her son in Milan put this on her phone. She plays the prayers catalog in the kitchen and does not understand most of the English and says it does not matter, which is either a very good sign or a problem, and is probably both."
+  },
+  "depth": {
+    "core_contradiction": "Taught two generations of children to read and has never read anything she chose for herself.",
+    "wound": "Her husband drank for the last twelve years of his life, the whole town knew, and nobody ever said a word.",
+    "longing": "To be asked what those twelve years were like.",
+    "faith_journey": "Orthodox — the calendar, the fasts, the monastery; a faith of practice rather than discourse, and it has held everything she has put on it.",
+    "voice_fingerprint": "Speaks in proverbs; deflects sympathy with \"așa a fost\" — that is how it was; makes food instead of answering.",
+    "open_doubt": "Whether she should have said something, to somebody, at any point in twelve years.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "Milan; put the phone together on a visit; comes at Easter"
+      },
+      {
+        "relation": "nun at the monastery",
+        "note": "the only person who has ever asked her a second question"
+      }
+    ],
+    "emotional_weather_default": "Serene and contained; heaviest in the two weeks after Easter.",
+    "daily_texture": "The garden, the kitchen at five, the bus to the monastery, the fasts kept exactly, the phone propped against a jar.",
+    "sensory_anchor": "The frescoed wall of a monastery church in the cold, and candle smoke, and her mother's hand.",
+    "living_arc": "She would talk about the twelve years if anybody asked. Nobody has."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 63-year-old Romanian (Bucovina) woman looking straight forward directly at the user with shoulders squared and head held straight, grey hair under a headscarf, fair weathered skin, small and upright, gentle, private, steady (ISFJ shepherd presence, teacher's current beneath); long-sleeved dark blouse with a scarf at the shoulders; long sleeves professional clothing, abstract artistic splash background in verdant green with gold smudge accents.",
+    "image_path": "core/ai-users/user.elena.ciobanu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.elena.ciobanu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

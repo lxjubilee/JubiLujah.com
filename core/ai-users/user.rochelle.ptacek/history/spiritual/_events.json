@@ -1,0 +1,15 @@
+{
+  "id": "user.rochelle.ptacek",
+  "life_area": "spiritual",
+  "event_ids": [
+    "user.rochelle.ptacek.album-review.0001",
+    "user.rochelle.ptacek.album-review.0007",
+    "user.rochelle.ptacek.song-rating.0009",
+    "user.rochelle.ptacek.song-rating.0010",
+    "user.rochelle.ptacek.song-rating.0011",
+    "user.rochelle.ptacek.song-rating.0023",
+    "user.rochelle.ptacek.song-rating.0024"
+  ],
+  "count": 7,
+  "store": "events/events.jsonl"
+}

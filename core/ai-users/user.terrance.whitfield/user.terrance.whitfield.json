@@ -1,0 +1,84 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.terrance.whitfield",
+  "rank": 2,
+  "suitability_pct": 92,
+  "identity": {
+    "first_name": "Terrance",
+    "last_name": "Whitfield",
+    "gender": "male",
+    "age": 41,
+    "life_stage": "married, minister of music",
+    "location": {
+      "city": "Memphis",
+      "state": "Tennessee",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Church of God in Christ (Pentecostal)",
+    "mbti": "ISTJ (\"the Logistician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 89,
+    "impact_pct": 81,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "Came looking for a Pentecostal Shout arrangement he could teach a choir in one rehearsal, found the catalog, and has been mining it every Tuesday since. He builds Sunday's set from it and sends the album links to eleven other music ministers across two states. He is the single highest-leverage listener on the platform and he has never once written a review — he sends corrections by email instead."
+  },
+  "depth": {
+    "core_contradiction": "Runs the most orderly rehearsal in the city, and privately believes he has never once been carried the way his father was.",
+    "wound": "At nineteen his father told him he 'plays like a man reading.' He has never repeated it to anyone.",
+    "longing": "To lose track of himself at the organ, once, in front of people.",
+    "faith_journey": "Born into COGIC and never left. Never had the crisis. Half-envies people who did, and knows that is a strange thing to envy.",
+    "voice_fingerprint": "Numbers his points ('three things'); never uses an exclamation point; says 'respectfully' immediately before disagreeing.",
+    "open_doubt": "Whether excellence has quietly become his substitute for surrender.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "name": "Danielle",
+        "note": "the actual singer in the family; sings twice a year and undoes the room"
+      },
+      {
+        "relation": "mentee",
+        "name": "Jaylen, 17",
+        "note": "drummer; talented, unreliable; Terrance has not given up on him"
+      },
+      {
+        "relation": "father",
+        "name": null,
+        "note": "78, a COGIC musician, largely silent now; the approval never came"
+      }
+    ],
+    "emotional_weather_default": "Level. Goes flat and short for two days after a bad Sunday.",
+    "daily_texture": "Charts printed Tuesday, rehearsal Thursday at 7, the choir room thermostat that has been broken since 2019.",
+    "sensory_anchor": "Hammond drawbar smell, and the click of his father's shoe on the swell pedal.",
+    "living_arc": "Approaching a decision about whether to record his own material or keep serving other people's."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 41-year-old African-American man looking straight forward directly at the user with shoulders squared and head held straight, close-cropped hair, trimmed beard, deep brown skin, measured, attentive, the beginning of a smile withheld (ISTJ teacher presence, apostle's current beneath); charcoal button-down, collar buttoned; long sleeves professional clothing, abstract artistic splash background in gold with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.terrance.whitfield/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.terrance.whitfield/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-a",
+    "confidence_pct": 86,
+    "synthetic": true,
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+  }
+}

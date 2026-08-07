@@ -1,9 +1,9 @@
 {
   "generated": "2026-07-07T22:35:43.217Z",
   "totalArtists": 33,
-  "totalAlbums": 982,
-  "totalPlayableAlbums": 411,
-  "totalPlayableTracks": 5150,
+  "totalAlbums": 983,
+  "totalPlayableAlbums": 412,
+  "totalPlayableTracks": 5162,
   "categories": [
     {
       "key": "inspire",
@@ -26918,6 +26918,104 @@
               "genres": [
                 "Praise & Worship",
                 "Contemporary"
+              ]
+            },
+            {
+              "code": "JEIM1002RO",
+              "title": "Piatra Răsturnată",
+              "folder": "JEIM1002RO-piatra-rasturnata",
+              "path": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata",
+              "playable": 12,
+              "trackCount": 12,
+              "tracks": [
+                {
+                  "n": 1,
+                  "title": "Piatra Răsturnată",
+                  "file": "01 Piatra Răsturnată.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/01 Piatra Răsturnată.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 2,
+                  "title": "Miresme în Întuneric",
+                  "file": "02 Miresme în Întuneric.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/02 Miresme în Întuneric.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 3,
+                  "title": "Nu Este Aici",
+                  "file": "03 Nu Este Aici.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/03 Nu Este Aici.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 4,
+                  "title": "Alergând spre Mormânt",
+                  "file": "04 Alergând spre Mormânt.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/04 Alergând spre Mormânt.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 5,
+                  "title": "Numele Lui Mi-a Rostit Numele",
+                  "file": "05 Numele Lui Mi-a Rostit Numele.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/05 Numele Lui Mi-a Rostit Numele.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 6,
+                  "title": "Ardea Inima pe Drum",
+                  "file": "06 Ardea Inima pe Drum.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/06 Ardea Inima pe Drum.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 7,
+                  "title": "Pace — Am Trecut prin Ușă",
+                  "file": "07 Pace — Am Trecut prin Ușă.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/07 Pace — Am Trecut prin Ușă.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 8,
+                  "title": "Duminică prin Toată Săptămâna",
+                  "file": "08 Duminică prin Toată Săptămâna.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/08 Duminică prin Toată Săptămâna.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 9,
+                  "title": "Atinge Locul Rănii",
+                  "file": "09 Atinge Locul Rănii.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/09 Atinge Locul Rănii.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 10,
+                  "title": "Micul Dejun pe Țărm",
+                  "file": "10 Micul Dejun pe Țărm.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/10 Micul Dejun pe Țărm.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 11,
+                  "title": "Oamenii Învierii",
+                  "file": "11 Oamenii Învierii.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/11 Oamenii Învierii.mp3",
+                  "audio": true
+                },
+                {
+                  "n": 12,
+                  "title": "Piatra Rămâne Răsturnată",
+                  "file": "12 Piatra Rămâne Răsturnată.mp3",
+                  "url": "albums/inspire/jubilee-inspire/JEIM1002RO-piatra-rasturnata/tracks/12 Piatra Rămâne Răsturnată.mp3",
+                  "audio": true
+                }
+              ],
+              "genres": [
+                "Gospel",
+                "Praise & Worship"
               ]
             },
             {

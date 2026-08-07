@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.ramona.tudose",
+  "rank": 86,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Ramona",
+    "last_name": "Tudose",
+    "gender": "female",
+    "age": 23,
+    "life_stage": "single, art student, works in a café",
+    "location": {
+      "city": "Chicago (Albany Park)",
+      "state": "Illinois",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Romanian",
+    "denomination": "None / seeking (baptised Orthodox)",
+    "mbti": "INFP (\"the Mediator\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 31,
+    "impact_pct": 24,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She came at seven, thinks in English, and was baptised as a baby like everyone. She has been inside a church maybe eight times, all funerals and weddings. She found this catalog on a playlist and it has been on while she paints for two months. She would be genuinely alarmed to be called religious."
+  },
+  "depth": {
+    "core_contradiction": "Wants nothing to do with the Church as an institution and cannot walk past an open church door without going in.",
+    "wound": "Her father stayed behind \"for one more year\" when she was seven and that year has now lasted sixteen.",
+    "longing": "For something to be there when she looks for it.",
+    "faith_journey": "Baptised, uncatechised, unhostile; her entire religious formation is her grandmother's icons and one funeral she cannot forget.",
+    "voice_fingerprint": "Quiet, ironic, self-deprecating; deflects everything sincere; then says one very direct thing.",
+    "open_doubt": "Not doubt — absence of instruction. Nobody has ever told her the story who actually believed it.",
+    "social_graph": [
+      {
+        "relation": "grandmother",
+        "note": "the icons, the candles, the only religion she ever saw up close"
+      },
+      {
+        "relation": "father",
+        "note": "still in Romania; sends money; they speak twice a year"
+      }
+    ],
+    "emotional_weather_default": "Low and even; bright when she is working.",
+    "daily_texture": "The studio, the café shift, the Brown Line at midnight, canvases against the wall, headphones always on.",
+    "sensory_anchor": "Candle wax and the cold of a church in winter and being six, before the plane.",
+    "living_arc": "One honest conversation from taking it seriously, and there is nobody in her life who could have it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 23-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair cut short, pale skin, paint on her hands, watchful, wry, unguarded when caught off-guard (INFP prophet presence, shepherd's current beneath); long-sleeved black jumper; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.ramona.tudose/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "recreational",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.ramona.tudose/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "user.marius.dobre",
+  "synthetic": true,
+  "primary_language": "Romanian",
+  "secondary_language": "English",
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 60,
+    "impact_pct": 47
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

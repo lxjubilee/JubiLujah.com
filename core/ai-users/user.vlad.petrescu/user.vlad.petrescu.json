@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.vlad.petrescu",
+  "rank": 84,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Vlad",
+    "last_name": "Petrescu",
+    "gender": "male",
+    "age": 36,
+    "life_stage": "married, two children, mechanical engineer",
+    "location": {
+      "city": "Cleveland",
+      "state": "Ohio",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Brethren (Creștini după Evanghelie)",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 57,
+    "impact_pct": 35,
+    "quadrant": "Devotee",
+    "interaction_backstory": "His assembly has no instruments, no clergy, and a very high view of the text, and he teaches there most months. He came to this catalog as a critic and stayed as a reader — he checks every lyric against the Romanian Cornilescu translation and keeps notes. He has found four he would not use and two he would."
+  },
+  "depth": {
+    "core_contradiction": "Belongs to a tradition that distrusts performance, and privately envies churches where people are allowed to be moved.",
+    "wound": "His brother left the assembly at twenty-two and the community handled it in a way Vlad has never defended and never opposed.",
+    "longing": "To be the kind of man his brother could have talked to.",
+    "faith_journey": "Brethren by birth and by conviction — breaking of bread, no ordained ministry, careful exegesis; genuinely his own, and narrower than he would choose from scratch.",
+    "voice_fingerprint": "Precise, unhurried; \"unde scrie asta?\" — where does it say that; concedes cleanly when he loses a point.",
+    "open_doubt": "Whether their carefulness has kept them faithful or just kept them small.",
+    "social_graph": [
+      {
+        "relation": "brother",
+        "note": "out fourteen years; lives in Michigan; they text about cars"
+      },
+      {
+        "relation": "assembly elder",
+        "note": "78; taught him to read the text; the man he cannot disappoint"
+      }
+    ],
+    "emotional_weather_default": "Even and dry; softer with his daughter than with anyone.",
+    "daily_texture": "The plant, the lake-effect winter, Sunday morning breaking of bread, the notebook of lyric checks.",
+    "sensory_anchor": "A hundred men and women singing unaccompanied in a plain hall with the doors open in summer.",
+    "living_arc": "His daughter is eleven and asking why there is no music, and he does not have a good answer."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 36-year-old Romanian-American man looking straight forward directly at the user with shoulders squared and head held straight, short dark hair, fair skin, glasses, lean, grave, attentive, fair-minded (INTJ teacher presence, prophet's current beneath); long-sleeved shirt in charcoal; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.vlad.petrescu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.vlad.petrescu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

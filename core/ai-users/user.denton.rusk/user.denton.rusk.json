@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.denton.rusk",
+  "rank": 49,
+  "suitability_pct": 69,
+  "identity": {
+    "first_name": "Denton",
+    "last_name": "Rusk",
+    "gender": "male",
+    "age": 36,
+    "life_stage": "married, two children, insurance adjuster",
+    "location": {
+      "city": "Tyler",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Bible Church",
+    "mbti": "INTJ (\"the Architect\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 56,
+    "impact_pct": 35,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He is the guy who checks the citation. He came here from a doctrinally careful church and has been quietly auditing the lyrics against the text for four months. He has found two things he thinks are genuinely wrong and one he was wrong about, and there is nowhere on the site to say any of it."
+  },
+  "depth": {
+    "core_contradiction": "Values truth above comfort and has made his home a place where nobody says a soft thing.",
+    "wound": "He was raised in a church that turned out to be a personality cult, and he was seventeen before anyone told him.",
+    "longing": "To trust a teacher again without a background check.",
+    "faith_journey": "Out of a controlling church at seventeen, into expository Bible-church careful-ness at twenty-four; safety through verification.",
+    "voice_fingerprint": "\"Where does it say that\"; qualifies every statement; never says something he cannot source.",
+    "open_doubt": "Whether his rigor is discipleship or a security system with a Bible on it.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "warmer than he is; occasionally asks him to just enjoy the song"
+      },
+      {
+        "relation": "old pastor",
+        "note": "the man from the first church; still preaching somewhere; Denton checks"
+      }
+    ],
+    "emotional_weather_default": "Cool and consistent; agitated when something cannot be verified.",
+    "daily_texture": "Claims all day, hail season, the study with the commentaries, the kids' bedtime he never misses.",
+    "sensory_anchor": "A room of two hundred people standing when a man walked in, and being nine, and thinking that was normal.",
+    "living_arc": "His nine-year-old is asking questions and he does not want to hand down the vigilance."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 36-year-old White American (East Texas) man looking straight forward directly at the user with shoulders squared and head held straight, short brown hair, fair skin, glasses, lean, analytical, reserved, steady (INTJ teacher presence, prophet's current beneath); long-sleeved button-down in stone grey; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.denton.rusk/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "character",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.denton.rusk/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "user.shanice.beckford",
+  "life_area": "family",
+  "event_ids": [
+    "user.shanice.beckford.album-review.0007",
+    "user.shanice.beckford.song-rating.0024"
+  ],
+  "count": 2,
+  "store": "events/events.jsonl"
+}

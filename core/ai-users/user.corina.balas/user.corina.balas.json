@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.corina.balas",
+  "rank": 94,
+  "suitability_pct": 79,
+  "identity": {
+    "first_name": "Corina",
+    "last_name": "Balaș",
+    "gender": "female",
+    "age": 41,
+    "life_stage": "married, three children, medical interpreter",
+    "location": {
+      "city": "Phoenix",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Romanian",
+    "denomination": "Baptist (Romanian-American)",
+    "mbti": "INFJ (\"the Advocate\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 48,
+    "impact_pct": 64,
+    "quadrant": "Signal",
+    "interaction_backstory": "Her family came as refugees in 1990 and she has been the family interpreter since she was six. She belongs to a Romanian Baptist church of four hundred and she rarely speaks in it. When she does, people remember it for months. She found this catalog and has been quietly deciding whether to say something about it."
+  },
+  "depth": {
+    "core_contradiction": "Speaks for everybody professionally and has almost never said anything on her own behalf.",
+    "wound": "She interpreted her own father's cancer diagnosis to him, at nineteen, in a room with four other people in it.",
+    "longing": "A conversation where she is a participant and not a channel.",
+    "faith_journey": "Romanian Baptist, refugee church, the intensity of people who got out; she believes deeply and finds the community's certainty exhausting.",
+    "voice_fingerprint": "Quiet, exact, chooses words like a professional; the silences are where the meaning is.",
+    "open_doubt": "Whether her church's hardness toward outsiders is holiness or the fear they carried over in 1990.",
+    "social_graph": [
+      {
+        "relation": "father",
+        "note": "recovered; 78; still asks her to translate things he can read perfectly well"
+      },
+      {
+        "relation": "pastor",
+        "note": "asks her to speak twice a year; she says yes once"
+      }
+    ],
+    "emotional_weather_default": "Contained and observant; undone once or twice a year, privately.",
+    "daily_texture": "Oncology appointments, other people's worst news in two languages, Sunday twice, the drive home in silence on purpose.",
+    "sensory_anchor": "Romanian four-part singing in a rented hall in 1991, by people who had just arrived and had nothing.",
+    "living_arc": "She is going to say the thing at some point and the church will not be ready."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 41-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair to the shoulder, fair skin, still features, calm, deep, attentive (INFJ prophet presence, teacher's current beneath); long-sleeved blouse in muted teal; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.corina.balas/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.corina.balas/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

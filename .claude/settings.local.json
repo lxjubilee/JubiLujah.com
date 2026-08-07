@@ -1,6 +1,5 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash",
       "Read",
@@ -376,8 +375,15 @@
       "Bash(npm audit:*)",
       "Bash(npm outdated:*)",
       "Bash(\"C:/Program Files/JubileeEnterprise/ClaudeBrowser/ClaudeBrowser.exe\" --url \"https://www.wwbibleweb.com/pentecostal/home/index.html\" --screenshot \"c:/temp/wwbibleweb_home.png\" --wait 5000 --size 1920x1080)",
-      "Bash(ssh -i * -L 5433:localhost:5432 root@94.72.120.231*)"
-    ]
+      "Bash(ssh -i * -L 5433:localhost:5432 root@94.72.120.231*)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(netstat -ano)",
+      "Bash(powershell -NoProfile -Command \"Get-Process -Id 21820 | Select-Object Id,ProcessName,Path | Format-List\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)"
+    ],
+    "defaultMode": "bypassPermissions"
   },
   "hooks": {
     "UserPromptSubmit": [
@@ -386,6 +392,32 @@
           {
             "type": "command",
             "command": "node -e \"const fs=require('fs');const input=JSON.parse(require('fs').readFileSync(0,'utf8'));const msg={event:'UserPromptSubmit',prompt:input.prompt,session_id:input.session_id,timestamp:Date.now(),cwd:input.cwd};const dir=process.env.CLAUDE_PROJECT_DIR||'.';const file=dir+'/.claude/hook-messages.json';fs.writeFileSync(file,JSON.stringify(msg));\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "w:/JubiLujah.com/.claude/hooks/activate-persona.mjs"
+            ],
+            "statusMessage": "Checking for persona activation..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "w:/JubiLujah.com/.claude/hooks/default-persona.mjs"
+            ],
+            "statusMessage": "Activating workspace default persona (Melody)..."
           }
         ]
       }

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.simona.vasilescu",
+  "rank": 99,
+  "suitability_pct": 80,
+  "identity": {
+    "first_name": "Simona",
+    "last_name": "Vasilescu",
+    "gender": "female",
+    "age": 38,
+    "life_stage": "married, two children, elder care worker",
+    "location": {
+      "city": "Torino",
+      "state": "Piedmont",
+      "country": "Italy"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "Italian",
+    "denomination": "Pentecostal (Romanian diaspora)",
+    "mbti": "ESTP (\"the Entrepreneur\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Apostle"
+    }
+  },
+  "engagement": {
+    "energy_pct": 69,
+    "impact_pct": 63,
+    "quadrant": "Amplifier",
+    "interaction_backstory": "She belongs to a Romanian Pentecostal church in Turin of three hundred people who all arrived the same way. This catalog went through the whole congregation in a fortnight — that community shares everything instantly, and half of them have cousins in Chicago who got it the same week. Her children pray in Italian and sing in Romanian and she is watching the second half go."
+  },
+  "depth": {
+    "core_contradiction": "The connector for three hundred people and has not had a friend from before 2007.",
+    "wound": "She left her son with her mother for the first four years and he was five before he lived with her.",
+    "longing": "For her son to say one day that it was alright.",
+    "faith_journey": "Pentecostal from Romania, transplanted whole into Italy; the church is the village, the language, and the entire social world.",
+    "voice_fingerprint": "Fast, funny, code-switches mid-sentence; \"hai că e bine\"; organises people before they realise it.",
+    "open_doubt": "Whether the leaving was worth it — she has never allowed herself to add it up.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "16; Italian first; polite about Romanian"
+      },
+      {
+        "relation": "mother",
+        "note": "Vaslui; raised him; they have never discussed those four years"
+      }
+    ],
+    "emotional_weather_default": "Loud and warm; heavy on the drive back from the airport.",
+    "daily_texture": "Two elderly clients, the bus across Turin, church three times a week, remittances on the fifth, a freezer full of sarmale.",
+    "sensory_anchor": "The smell of her mother's kitchen, and her son at five not recognising her.",
+    "living_arc": "Considering going back, and knows the children never would."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 38-year-old Romanian (in Italy) woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair pulled back, fair skin, animated features, warm, quick, forthright (ESTP evangelist presence, apostle's current beneath); long-sleeved blouse in bright teal; long sleeves professional clothing, abstract artistic splash background in azure blue with royal purple smudge accents.",
+    "image_path": "core/ai-users/user.simona.vasilescu/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Apostle",
+      "accent_color": "royal purple"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.simona.vasilescu/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

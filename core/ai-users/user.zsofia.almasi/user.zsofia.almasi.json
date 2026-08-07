@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.zsofia.almasi",
+  "rank": 80,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Zsófia",
+    "last_name": "Almási",
+    "gender": "female",
+    "age": 31,
+    "life_stage": "married, one child, translator",
+    "location": {
+      "city": "Debrecen",
+      "state": "Hajdú-Bihar",
+      "country": "Hungary"
+    },
+    "primary_language": "Hungarian",
+    "secondary_language": "English",
+    "denomination": "Hungarian Reformed",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 65,
+    "impact_pct": 51,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She translates for a living and she has been informally translating worship lyrics into Hungarian for her congregation for four years, unpaid and unasked. She found this catalog and translated three songs in a week. She would like to know whether that is allowed, and there is nobody to ask."
+  },
+  "depth": {
+    "core_contradiction": "Spends her life making other people's words available and has never written a word of her own.",
+    "wound": "She was told at nineteen that she had no original talent, by someone who was in a position to know, and she believed it.",
+    "longing": "To make one thing that is hers.",
+    "faith_journey": "Hungarian Reformed, Calvinist, historically embattled and proud of it; a serious faith in a serious tradition, and a personal warmth the tradition does not encourage.",
+    "voice_fingerprint": "Excellent precise English; apologizes for word choices nobody would question; funny in her second language on purpose.",
+    "open_doubt": "Whether translation is service or hiding.",
+    "social_graph": [
+      {
+        "relation": "husband",
+        "note": "engineer; thinks she should be paid for the translations and says so"
+      },
+      {
+        "relation": "pastor",
+        "note": "uses her work every Sunday and has never named her from the front"
+      }
+    ],
+    "emotional_weather_default": "Warm and industrious; deflated after a Sunday where the songs land and nobody knows why.",
+    "daily_texture": "Deadlines, the dictionary open on two screens, choir practice Thursday, the child at nursery.",
+    "sensory_anchor": "The Hungarian psalter sung in a cold church by two hundred people who have sung it since the sixteenth century.",
+    "living_arc": "On the edge of asking to be credited, and it feels enormous to her."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 31-year-old Hungarian woman looking straight forward directly at the user with shoulders squared and head held straight, brown hair to the shoulders, fair skin, warm eyes, friendly, capable, slightly formal (ESFJ evangelist presence, teacher's current beneath); long-sleeved blouse in soft plum; long sleeves professional clothing, abstract artistic splash background in azure blue with gold smudge accents.",
+    "image_path": "core/ai-users/user.zsofia.almasi/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.zsofia.almasi/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.doreen.kruse",
+  "rank": 69,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Doreen",
+    "last_name": "Kruse",
+    "gender": "female",
+    "age": 52,
+    "life_stage": "married, three grown children, ranch bookkeeper",
+    "location": {
+      "city": "Rapid City",
+      "state": "South Dakota",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Wesleyan",
+    "mbti": "ENFJ (\"the Protagonist\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 61,
+    "impact_pct": 56,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She started a women's bible study that grew from four to thirty-one in two years, mostly ranch women who drive forty minutes each way. She uses the catalog before and after, never during, and she has learned exactly which two albums will make thirty-one undemonstrative women actually sing."
+  },
+  "depth": {
+    "core_contradiction": "Gathers thirty-one women into honesty every week and cannot cry in front of any of them.",
+    "wound": "Her son's addiction went on for six years and she led the study straight through it and told nobody.",
+    "longing": "To be one of the thirty-one instead of the one at the front.",
+    "faith_journey": "Wesleyan, holiness, a real second-work conversion at twenty-nine; she is warmer than her denomination and it costs her nothing.",
+    "voice_fingerprint": "\"Alright, ladies\"; laughs at herself first; asks the question everyone is avoiding.",
+    "open_doubt": "Whether the six years of prayer did anything, or whether he just aged out of it.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "30; two years clean; they are careful with each other"
+      },
+      {
+        "relation": "the thirty-one",
+        "note": "her women; four of them drive over an hour"
+      }
+    ],
+    "emotional_weather_default": "Warm and forward; hollow driving home.",
+    "daily_texture": "Ledgers for three ranches, Tuesday nights, forty minutes of gravel each way, coffee in a percolator.",
+    "sensory_anchor": "Thirty women singing badly and meaning it in a church basement in January.",
+    "living_arc": "The study is bigger than her and she has not identified anyone to hand it to."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 52-year-old White American (High Plains) woman looking straight forward directly at the user with shoulders squared and head held straight, sandy grey hair, sun-weathered fair skin, strong hands, warm, direct, unfussy (ENFJ apostle presence, shepherd's current beneath); long-sleeved shirt in slate blue; long sleeves professional clothing, abstract artistic splash background in royal purple with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.doreen.kruse/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "social",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.doreen.kruse/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

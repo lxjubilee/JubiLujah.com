@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.danny.sohn",
+  "rank": 60,
+  "suitability_pct": 78,
+  "identity": {
+    "first_name": "Danny",
+    "last_name": "Sohn",
+    "gender": "male",
+    "age": 37,
+    "life_stage": "married, two children, dentist; runs the English ministry",
+    "location": {
+      "city": "Duluth",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Korean",
+    "denomination": "Presbyterian (Korean-American)",
+    "mbti": "ESTJ (\"the Executive\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 69,
+    "impact_pct": 48,
+    "quadrant": "Devotee",
+    "interaction_backstory": "He runs the English-speaking ministry inside a Korean-speaking church, which means he serves a hundred and forty people who are theologically at home and linguistically homeless. He built a service around your catalog because it is the only worship library he has found that does not assume one culture is the default."
+  },
+  "depth": {
+    "core_contradiction": "Bridges two congregations and belongs completely to neither.",
+    "wound": "He translated for his parents at every hard appointment from the age of eight and nobody ever asked if that was alright.",
+    "longing": "One room where he does not have to explain either side to the other.",
+    "faith_journey": "Korean Presbyterian, early-morning prayer, Friday all-nighters; the discipline is real and the exhaustion is unspoken.",
+    "voice_fingerprint": "Formal and warm; \"let me put it this way\"; apologizes before disagreeing with anyone older.",
+    "open_doubt": "Whether the second generation stays, or whether he is running a very good waiting room.",
+    "social_graph": [
+      {
+        "relation": "senior pastor",
+        "note": "63; Korean-speaking; they respect each other across a gap neither can close"
+      },
+      {
+        "relation": "father",
+        "note": "an elder; proud of him publicly and correcting him privately"
+      }
+    ],
+    "emotional_weather_default": "Steady and driven; genuinely tired in a way he does not report.",
+    "daily_texture": "Chair-side by eight, 5:30am prayer, Friday youth, the drive home rehearsing Korean he half-lost.",
+    "sensory_anchor": "A hundred voices praying out loud at once at dawn in a room with the lights off.",
+    "living_arc": "Two years from either planting an English-speaking church or losing the generation entirely."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 37-year-old Korean-American man looking straight forward directly at the user with shoulders squared and head held straight, short black hair, light brown skin, neat features, composed, warm, purposeful (ESTJ apostle presence, teacher's current beneath); long-sleeved dress shirt in white; long sleeves professional clothing, abstract artistic splash background in royal purple with gold smudge accents.",
+    "image_path": "core/ai-users/user.danny.sohn/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.danny.sohn/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

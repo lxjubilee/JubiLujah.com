@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.miquel.ferrer",
+  "rank": 74,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Miquel",
+    "last_name": "Ferrer",
+    "gender": "male",
+    "age": 52,
+    "life_stage": "divorced, two grown children, restaurant owner",
+    "location": {
+      "city": "Valencia",
+      "state": "Valencian Community",
+      "country": "Spain"
+    },
+    "primary_language": "Spanish",
+    "secondary_language": "Valencian",
+    "denomination": "Catholic (lapsed)",
+    "mbti": "ESTP (\"the Entrepreneur\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 39,
+    "impact_pct": 61,
+    "quadrant": "Signal",
+    "interaction_backstory": "He has not been to Mass since his first communion except for weddings, and he plays music in his restaurant twelve hours a day to about two hundred people. He put two albums from this catalog into the afternoon rotation because they were beautiful and because nobody could understand the words."
+  },
+  "depth": {
+    "core_contradiction": "Plays worship music to two hundred people a day and would be genuinely insulted if you called him religious.",
+    "wound": "The restaurant nearly went under in 2020 and his brother would not lend him the money.",
+    "longing": "To hand the place to his daughter with no debt on it.",
+    "faith_journey": "Baptised, confirmed, gone; Spanish secularity with a Semana Santa exception he does not explain.",
+    "voice_fingerprint": "Loud and funny; interrupts; goes suddenly serious and then covers it with a joke.",
+    "open_doubt": "Whether the thing he feels during the processions in April is culture or something else, and he has decided not to look at it.",
+    "social_graph": [
+      {
+        "relation": "daughter",
+        "note": "27; runs the kitchen; sharper than him"
+      },
+      {
+        "relation": "brother",
+        "note": "they have not spoken properly since 2020"
+      }
+    ],
+    "emotional_weather_default": "Loud and up; grim on Mondays when the books come out.",
+    "daily_texture": "Market at six, service at one and again at nine, the terrace, the till, an hour of sleep in the afternoon.",
+    "sensory_anchor": "A saeta sung a cappella from a balcony during a procession, and being nine and unable to move.",
+    "living_arc": "One of his employees is quietly evangelical and he has started asking her questions."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 52-year-old Spanish (Valencian) man looking straight forward directly at the user with shoulders squared and head held straight, greying dark hair, olive skin, strong build, shrewd, quick, amused (ESTP apostle presence, prophet's current beneath); long-sleeved white shirt, sleeves rolled; long sleeves professional clothing, abstract artistic splash background in royal purple with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.miquel.ferrer/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.miquel.ferrer/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

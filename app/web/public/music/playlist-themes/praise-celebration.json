@@ -1,0 +1,25 @@
+{
+  "theme_id": "praise-celebration",
+  "theme_name": "Praise Celebration",
+  "theme_statement": "High praise, full voice, hands lifted. Songs of triumph, joy, and thanksgiving for the moments you want to celebrate His goodness out loud.",
+  "emotional_profile": ["joy", "triumph", "thanksgiving", "exuberance", "victory", "celebration"],
+  "energy_range": { "min": 65, "max": 100 },
+  "tempo_range": { "min": 100, "max": 165 },
+  "excluded_moods": ["lament", "mourning", "contemplative", "somber", "repentance", "intercession"],
+  "target_track_count": 120,
+  "max_tracks_per_album": 4,
+  "min_distinct_albums": 30,
+  "eligible_personas": "ALL_TWELVE",
+  "testimony_categories": ["healing", "provision", "breakthrough", "deliverance"],
+  "supported_arcs": ["steady", "build", "worship_set"],
+  "default_arc": "steady",
+  "sequencing": {
+    "open_min_energy": 85,
+    "max_consecutive_below_energy": 75,
+    "max_consecutive_below_count": 2,
+    "distribute_peaks": true
+  },
+  "hero_image": null,
+  "accent": "#f5a623",
+  "related_theme_ids": []
+}

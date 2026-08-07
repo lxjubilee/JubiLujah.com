@@ -1,0 +1,19 @@
+{
+  "id": "user.charlaine.thibodeaux",
+  "life_area": "family",
+  "event_ids": [
+    "user.charlaine.thibodeaux.album-review.0004",
+    "user.charlaine.thibodeaux.album-review.0005",
+    "user.charlaine.thibodeaux.album-review.0006",
+    "user.charlaine.thibodeaux.song-rating.0018",
+    "user.charlaine.thibodeaux.song-rating.0019",
+    "user.charlaine.thibodeaux.song-rating.0020",
+    "user.charlaine.thibodeaux.song-rating.0021",
+    "user.charlaine.thibodeaux.song-rating.0022",
+    "user.charlaine.thibodeaux.song-rating.0023",
+    "user.charlaine.thibodeaux.song-rating.0024",
+    "user.charlaine.thibodeaux.song-rating.0025"
+  ],
+  "count": 11,
+  "store": "events/events.jsonl"
+}

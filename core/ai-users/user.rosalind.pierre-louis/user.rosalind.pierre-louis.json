@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.rosalind.pierre-louis",
+  "rank": 33,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Rosalind",
+    "last_name": "Pierre-Louis",
+    "gender": "female",
+    "age": 41,
+    "life_stage": "married, three children, home health aide",
+    "location": {
+      "city": "Brooklyn",
+      "state": "New York",
+      "country": "United States"
+    },
+    "primary_language": "Haitian Creole",
+    "secondary_language": "English",
+    "denomination": "Pentecostal (Haitian)",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 68,
+    "impact_pct": 41,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She works twelve-hour shifts with elderly patients and plays worship softly in their rooms all day, which means the catalog reaches eight people who never chose it. She wishes it were in Creole. She has looked for that twice and given up both times."
+  },
+  "depth": {
+    "core_contradiction": "Carries other people's last months for a living and has not been to a doctor herself in six years.",
+    "wound": "Her mother is in Port-au-Prince and Rosalind has not been able to get her out.",
+    "longing": "To bring her mother here before something happens.",
+    "faith_journey": "Haitian Pentecostal, all-night prayer, a faith with real heat in it; she does not perform it and she does not doubt it.",
+    "voice_fingerprint": "Slips into Creole for prayer and apology; says \"God is good\" as a full stop, not a filler.",
+    "open_doubt": "Why some prayers get answered on the other side of a border and some do not.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "Port-au-Prince; they speak Sundays when the power holds"
+      },
+      {
+        "relation": "patient",
+        "note": "92, dementia, sings along to hymns she otherwise cannot remember"
+      }
+    ],
+    "emotional_weather_default": "Warm and unhurried; heavy after a patient dies.",
+    "daily_texture": "Twelve-hour shifts, the B train, remittances on the first, church Friday night until eleven.",
+    "sensory_anchor": "Her mother's congregation singing in Creole with no instruments at all.",
+    "living_arc": "The immigration paperwork is at a wall and she is running out of patience with God about it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 41-year-old Haitian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair in neat braids, deep brown skin, calm face, gentle, watchful, steady (ISFJ shepherd presence, prophet's current beneath); long-sleeved scrub top in soft blue; long sleeves professional clothing, abstract artistic splash background in verdant green with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.rosalind.pierre-louis/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "spiritual",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.rosalind.pierre-louis/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

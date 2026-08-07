@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.lacramioara.enache",
+  "rank": 87,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Lăcrămioara",
+    "last_name": "Enache",
+    "gender": "female",
+    "age": 68,
+    "life_stage": "widowed, brought over at 63, lives with her son",
+    "location": {
+      "city": "Sterling Heights",
+      "state": "Michigan",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": null,
+    "denomination": "Romanian Orthodox",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 61,
+    "impact_pct": 28,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Her son brought her over five years ago and she has almost no English, no driver's licence, and no bus she can take alone. Her granddaughter loaded this on her phone. It plays most of the day, in a house where nobody speaks to her in her own language until six in the evening."
+  },
+  "depth": {
+    "core_contradiction": "Ran a household and a street for forty years and now cannot buy a bus ticket without help.",
+    "wound": "She agreed to come and has never once said out loud that she wants to go home.",
+    "longing": "To be understood the first time, by somebody, without repeating it.",
+    "faith_journey": "Orthodox, the whole practice — pomeni, prescuri, the fasts, graves tended properly; she has never articulated a doctrine in her life and she prays continuously.",
+    "voice_fingerprint": "Blunt and proverbial; \"vai de mine\"; blesses you and criticises you in one sentence.",
+    "open_doubt": "Whether God is in this country too, or only where the graves are.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "44; works constantly; did a loving thing that is quietly killing her"
+      },
+      {
+        "relation": "granddaughter",
+        "note": "19; loaded the phone; the only one who tries in Romanian"
+      }
+    ],
+    "emotional_weather_default": "Sharp and warm; very low from January to March.",
+    "daily_texture": "The house alone from eight to six, the phone at full volume, the parish twenty-five minutes away she can only reach on Sundays, snow she was not prepared for.",
+    "sensory_anchor": "Colinde sung by children at the door on Christmas Eve, in deep snow, in a village she will probably not see again.",
+    "living_arc": "She wants to go back for a month and nobody has offered to arrange it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 68-year-old Romanian woman looking straight forward directly at the user with shoulders squared and head held straight, grey hair under a headscarf, deeply lined fair skin, small, sharp-eyed, warm, unsentimental (ISFP prophet presence, shepherd's current beneath); long-sleeved dark blouse with a floral scarf; long sleeves professional clothing, abstract artistic splash background in maroon red with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.lacramioara.enache/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "emotional",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.lacramioara.enache/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

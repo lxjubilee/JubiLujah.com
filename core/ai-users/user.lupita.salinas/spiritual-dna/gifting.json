@@ -1,0 +1,15 @@
+{
+  "id": "user.lupita.salinas",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Shepherd",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 71,
+    "impact_pct": 54,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

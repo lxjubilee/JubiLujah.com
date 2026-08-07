@@ -1,0 +1,18 @@
+{
+  "theme_id": "warfare-breakthrough",
+  "theme_name": "Warfare & Breakthrough",
+  "theme_statement": "Declarations for the fight. High, relentless, and sure — songs to stand on when chains are breaking.",
+  "emotional_profile": ["warfare", "victory", "triumph", "courage", "determination", "celebration"],
+  "energy_range": { "min": 70, "max": 100 },
+  "tempo_range": { "min": 100, "max": 165 },
+  "excluded_moods": ["tenderness", "intimacy", "lament", "mourning", "contemplative", "somber"],
+  "target_track_count": 120,
+  "max_tracks_per_album": 4,
+  "min_distinct_albums": 30,
+  "eligible_personas": "ALL_TWELVE",
+  "testimony_categories": ["breakthrough", "deliverance"],
+  "supported_arcs": ["build", "steady"],
+  "default_arc": "build",
+  "sequencing": { "open_min_energy": 88, "max_consecutive_below_energy": 78, "max_consecutive_below_count": 2, "distribute_peaks": true },
+  "hero_image": null, "accent": "#d0492b", "related_theme_ids": ["praise-celebration"]
+}

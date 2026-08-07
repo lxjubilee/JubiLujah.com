@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.travis.ogletree",
+  "rank": 30,
+  "suitability_pct": 72,
+  "identity": {
+    "first_name": "Travis",
+    "last_name": "Ogletree",
+    "gender": "male",
+    "age": 39,
+    "life_stage": "married, three children, HVAC technician; runs a food pantry",
+    "location": {
+      "city": "Roanoke",
+      "state": "Virginia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Free Will Baptist",
+    "mbti": "ISTP (\"the Virtuoso\")",
+    "five_fold": {
+      "primary": "Apostle",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 42,
+    "impact_pct": 61,
+    "quadrant": "Signal",
+    "interaction_backstory": "He opens a church fellowship hall twice a month for a food pantry that serves two hundred families, and he plays music over it because a silent room makes people feel like a case file. He is on the site maybe three times a month, and every time, two hundred people hear it."
+  },
+  "depth": {
+    "core_contradiction": "Feeds two hundred families a month and has never once let his own family accept help.",
+    "wound": "They were the family in that line in 2011 and he remembers exactly how it felt to be looked at.",
+    "longing": "For one person in that line to leave feeling like a guest.",
+    "faith_journey": "Free Will Baptist by marriage, not by conviction; he is not sure he believes it and he is certain about the pantry.",
+    "voice_fingerprint": "One-word answers; fixes something while you talk to him.",
+    "open_doubt": "Whether doing the work counts if the belief underneath is thin.",
+    "social_graph": [
+      {
+        "relation": "wife",
+        "note": "the one who prays; he lets her do it for both of them"
+      },
+      {
+        "relation": "pantry volunteer",
+        "note": "a retired teacher who shows up before he does every time"
+      }
+    ],
+    "emotional_weather_default": "Flat and dependable; irritable in the two weeks before Christmas.",
+    "daily_texture": "Service calls in the heat, crawlspaces, the pantry van, Saturday inventory.",
+    "sensory_anchor": "The sound of a grocery bag handle, and being eleven.",
+    "living_arc": "The pantry is outgrowing him and he will not ask for help."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 39-year-old White American (Appalachian Virginia) man looking straight forward directly at the user with shoulders squared and head held straight, buzzed brown hair, fair skin, forearms scarred from work, flat and steady, no performance (ISTP apostle presence, evangelist's current beneath); long-sleeved work shirt with a name patch; long sleeves professional clothing, abstract artistic splash background in royal purple with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.travis.ogletree/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Apostle",
+      "primary_color": "royal purple",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "financial",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.travis.ogletree/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

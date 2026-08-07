@@ -1,0 +1,14 @@
+{
+  "id": "user.wendell.prine",
+  "synthetic": true,
+  "primary_language": "English",
+  "secondary_language": null,
+  "interaction": {
+    "posture": "Devotee",
+    "energy_pct": 61,
+    "impact_pct": 31
+  },
+  "life_area_anchor": "career",
+  "theological_mode": "Blend",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

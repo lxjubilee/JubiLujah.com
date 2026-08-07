@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.lars.ottesen",
+  "rank": 72,
+  "suitability_pct": 71,
+  "identity": {
+    "first_name": "Lars",
+    "last_name": "Ottesen",
+    "gender": "male",
+    "age": 36,
+    "life_stage": "partnered, one child, marine engineer",
+    "location": {
+      "city": "Bergen",
+      "state": "Vestland",
+      "country": "Norway"
+    },
+    "primary_language": "Norwegian",
+    "secondary_language": "English",
+    "denomination": "Church of Norway (nominal) / seeking",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Prophet",
+      "secondary": "Teacher"
+    }
+  },
+  "engagement": {
+    "energy_pct": 28,
+    "impact_pct": 22,
+    "quadrant": "Drifter",
+    "interaction_backstory": "He is a member of the state church the way most Norwegians are — baptised, confirmed, absent. He found the catalog on a night watch at sea and has listened on every rotation since. He would be embarrassed if anyone he works with found out."
+  },
+  "depth": {
+    "core_contradiction": "Considers religion a sociological artifact and has listened to the same album on eleven consecutive night watches.",
+    "wound": "His father died when Lars was fourteen and the pastor said something at the funeral that was so obviously untrue it ended the whole thing for him.",
+    "longing": "One sentence about God that is not insulting to his intelligence.",
+    "faith_journey": "Culturally Lutheran, functionally secular, privately unresolved; he has never told his partner he thinks about this.",
+    "voice_fingerprint": "Precise, dry, understated to the point of invisibility; asks better questions than he answers.",
+    "open_doubt": "Everything. He does not have a doubt, he has an open file, and he keeps adding to it.",
+    "social_graph": [
+      {
+        "relation": "partner",
+        "note": "entirely secular; this has never come up in nine years"
+      },
+      {
+        "relation": "daughter",
+        "note": "5; will be baptised because her grandmother expects it, and Lars has not objected"
+      }
+    ],
+    "emotional_weather_default": "Flat and analytical; genuinely moved at sea at night, which he attributes to fatigue.",
+    "daily_texture": "Four weeks on, four off, the North Sea, the watch at 0300, rain two hundred days a year.",
+    "sensory_anchor": "A hymn sung badly by two hundred people at his father's funeral, which was the only true thing in the building.",
+    "living_arc": "Nobody has ever offered him a serious conversation about this. He would take one."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a handsome 36-year-old Norwegian man looking straight forward directly at the user with shoulders squared and head held straight, light brown hair, pale skin, close beard, reserved, analytical, quietly tired (INTP prophet presence, teacher's current beneath); long-sleeved technical shirt in navy; long sleeves professional clothing, abstract artistic splash background in maroon red with gold smudge accents.",
+    "image_path": "core/ai-users/user.lars.ottesen/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Prophet",
+      "primary_color": "maroon red",
+      "accent_office": "Teacher",
+      "accent_color": "gold"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.lars.ottesen/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-d",
+    "synthetic": true,
+    "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

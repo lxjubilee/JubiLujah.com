@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.junie.ferrell",
+  "rank": 27,
+  "suitability_pct": 70,
+  "identity": {
+    "first_name": "Junie",
+    "last_name": "Ferrell",
+    "gender": "female",
+    "age": 71,
+    "life_stage": "widowed, homebound, dialysis three days a week",
+    "location": {
+      "city": "Savannah",
+      "state": "Georgia",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": null,
+    "denomination": "Baptist (National Baptist)",
+    "mbti": "ISFJ (\"the Defender\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 63,
+    "impact_pct": 26,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Her nephew put the site on her phone and she plays gospel through the dialysis chair three mornings a week, four hours at a time. She knows the catalog better than most people on staff. She has never once managed to find the same album twice without help."
+  },
+  "depth": {
+    "core_contradiction": "Prays over the whole prayer list by name every morning and has not asked anybody to pray for her since 2021.",
+    "wound": "Fifty-two years married and then a Tuesday.",
+    "longing": "To die at home and not in that chair.",
+    "faith_journey": "National Baptist, missionary board thirty years, never wavered; the wavering is new and she has not told the pastor.",
+    "voice_fingerprint": "Calls everybody \"sugar\"; says \"I thank God\" before the sentence, not after.",
+    "open_doubt": "Why He is taking so long about it.",
+    "social_graph": [
+      {
+        "relation": "nephew",
+        "note": "set up the phone; visits Sundays; the reason she has the thing"
+      },
+      {
+        "relation": "dialysis nurse",
+        "note": "knows all her stories and has not gotten tired of them"
+      }
+    ],
+    "emotional_weather_default": "Serene and warm; angry maybe four times a year and it is something to see.",
+    "daily_texture": "The chair Monday Wednesday Friday, the phone propped on a folded towel, the porch fan.",
+    "sensory_anchor": "A church fan with a funeral home on the back, and the heat, and forty women humming.",
+    "living_arc": "Making peace, slowly, and not telling anybody that is what she is doing."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 71-year-old Black American (Gullah Geechee) woman looking straight forward directly at the user with shoulders squared and head held straight, silver hair under a soft scarf, deep brown skin, delicate frame, serene, knowing, faintly amused (ISFJ shepherd presence, prophet's current beneath); long-sleeved lavender blouse; long sleeves professional clothing, abstract artistic splash background in verdant green with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.junie.ferrell/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.junie.ferrell/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

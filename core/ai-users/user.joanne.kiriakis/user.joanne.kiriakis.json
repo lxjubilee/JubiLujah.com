@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.joanne.kiriakis",
+  "rank": 38,
+  "suitability_pct": 69,
+  "identity": {
+    "first_name": "Joanne",
+    "last_name": "Kiriakis",
+    "gender": "female",
+    "age": 55,
+    "life_stage": "married, two grown children, pharmacist",
+    "location": {
+      "city": "Hempstead",
+      "state": "New York",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Greek",
+    "denomination": "Greek Orthodox",
+    "mbti": "INTP (\"the Logician\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 49,
+    "impact_pct": 33,
+    "quadrant": "Drifter",
+    "interaction_backstory": "She came looking for Byzantine chant and found none, which she considers a reasonable outcome and a real gap. She has stayed for the Messianic and Hebraic side of the catalog, which is the closest thing here to what her ear actually wants. She reads everything and clicks almost nothing."
+  },
+  "depth": {
+    "core_contradiction": "Believes the ancient forms are the true ones and finds herself moved by the modern songs she disapproves of.",
+    "wound": "Her son married outside the church and she handled it badly and cannot undo the six months of coldness.",
+    "longing": "For the family table to be full again at Pascha.",
+    "faith_journey": "Greek Orthodox, unbroken, ethnically inseparable from her identity; her belief has never been separated from her grandmother's kitchen and she is fine with that.",
+    "voice_fingerprint": "Precise; corrects a term before answering; \"well, historically—\".",
+    "open_doubt": "Whether her tradition's beauty is a vessel for God or a substitute she has grown comfortable in.",
+    "social_graph": [
+      {
+        "relation": "son",
+        "note": "married out; they are civil; Pascha is the wound with a date on it"
+      },
+      {
+        "relation": "priest",
+        "note": "younger than her; she does not fully respect him and confesses that"
+      }
+    ],
+    "emotional_weather_default": "Cool and dry; warm in specific bursts nobody predicts.",
+    "daily_texture": "Pharmacy counter, the commute, Saturday vespers, the phone with the Greek keyboard installed.",
+    "sensory_anchor": "A cantor's voice echoing off marble on Holy Friday.",
+    "living_arc": "She wants to apologize to her son and does not have the vocabulary for it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a striking 55-year-old Greek-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair going silver at the temples, olive skin, sharp features, appraising, dry, faintly amused (INTP teacher presence, prophet's current beneath); long-sleeved charcoal blouse; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.joanne.kiriakis/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.joanne.kiriakis/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "user.keisha.rowlett",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 64,
+    "impact_pct": 58,
+    "quadrant": "Devotee"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

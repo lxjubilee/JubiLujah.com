@@ -115,6 +115,7 @@ Errors return a JSON body:
 | Get service token | `POST /api/auth/service/token` | client credentials | no |
 | Admin — set password | `POST /api/auth/admin/set-password` | **service JWT** (`admin.set_password`) | no |
 | Admin — provision user | `POST /api/auth/admin/provision-user` | **service JWT** (`admin.provision`) | no |
+| Admin — check email | `GET /api/auth/admin/check-email` | **service JWT** (`admin.provision` *or* `admin.set_password`) | no |
 
 ---
 
@@ -769,6 +770,7 @@ Content-Type: application/json
 |-------|------|----------|------------------------------------------|
 | `email` | string | ✅ | `users.email` (lowercased, UNIQUE) |
 | `password` | string | ✅ | **plaintext**, 8–200 chars → hashed with Jubilujah's scrypt KDF into `credentials.password_hash` |
+| `verify` | boolean | optional | **`true` switches to verify-only mode** (§12.4): check email+password, return the user, create/change **nothing**. Absent or `false` = normal create behavior below |
 | `firstName`,`lastName` | string | optional | folded into `users.display_name` when `displayName` is omitted |
 | `displayName` | string | optional | `users.display_name` (falls back to `firstName lastName`, then the email local-part) |
 | `role` | `user`\|`admin`\|`guest` | optional (default `user`) | `user_roles.role` — **mapped** to Jubilujah RBAC (see below) |
@@ -807,6 +809,73 @@ curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
        "firstName":"Ada","lastName":"Lovelace","role":"user",
        "emailVerified":true,"sourcePlatform":"jubileeinspire"}'
 # → 201 { "user": { "id":"…","email":"ada@example.com","displayName":"Ada Lovelace","role":"content_editor","emailVerified":true } }
+```
+
+### 12.4 Verify-only mode (`"verify": true`)
+
+Lets a partner portal (JubileeInspire) **log in a user who exists only on Jubilujah**: the partner sends the email + plaintext password (over TLS), Jubilujah — the only holder of the credential — hashes and compares with its own scrypt KDF and returns the user on a match. The partner then creates its own local record. Hashes never cross platforms in either direction; the request is **never forwarded** anywhere (answers from the local DB only, so it cannot loop back into a partner's login the way `/signin` with `AUTH_LOGIN_MODE=ji` can). Same path/auth/scope as create mode.
+
+**The hard rule: verify mode NEVER writes.** No user/credential rows, no `audit_log` insert (structured log line only), no idempotency-cache entry, no lockout counters. A verify call for a non-existent email + any password returns `404` and creates **nothing** — if it created, anyone with a token could inject accounts by "logging in" with a victim's email and a guessed password. Create only ever happens in the no-`verify` path.
+
+**Behavior matrix:**
+
+| Case | Status | Body |
+|---|---|---|
+| exists + password correct | `200` | `{ "ok": true, "existed": true, "verified": true, "user": { "id", "email", "displayName", "active", "emailVerified", "roles", "createdAt" } }` — same `user` shape as `check-email` (§13) |
+| exists + password wrong | `401` | `{ "ok": false, "existed": true, "verified": false }` |
+| exists but **SSO-only** (no credentials row) | `401` | same as password-wrong |
+| exists but **locked** (`locked_until` in the future) | `401` | same as password-wrong — an existing lockout is *respected* (no compare) so this surface can't bypass `/signin`'s lockout, but it is never set/extended here |
+| email not found **or account inactive** | `404` | `{ "ok": false, "existed": false, "verified": false }` — active-only, same `exists` semantics as `check-email` |
+| `verify` present but not a boolean | `400` | standard validation body |
+
+**Differences from create mode:** the 8–200 password policy (422) is **skipped** — a short wrong password is just a wrong password (401), the policy gates creation only. `Idempotency-Key` is **ignored**. `firstName`/`lastName`/`role`/`dateOfBirth`/`sourcePlatform` are accepted by the schema but unused. `emailVerified` in the response maps to `first_signin_completed`, as in `check-email`.
+
+**Partner contract (per JI's spec):** the caller keys ONLY on `HTTP 200` **and** `verified: true` **and** presence of `user`. Everything else (200 without `verified:true` can't occur, 401, 404, 400, timeout) = "not verified" → the partner does not log the user in and creates nothing — fail-safe by construction.
+
+```bash
+# correct password → 200 verified:true + user; wrong → 401; unknown email → 404
+curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
+  -H "Authorization: Bearer $JWT" -H "Content-Type: application/json" \
+  -d '{"email":"ada@example.com","password":"their real password","verify":true}'
+```
+
+---
+
+## 13. Server-to-server: `GET /api/auth/admin/check-email`
+
+Read-only pre-signup existence probe for partner portals — JubileeInspire's family-wide "is this email taken anywhere?" gate calls this at *their* signup time, exactly as Jubilujah calls JI's own `check-email` before issuing a signup code (see `services/jiSync.js` / §3.1). Same auth model as [§11](#114-authentication-service-to-service--client-credentials-jwt); requires **either** `admin.provision` **or** `admin.set_password` (deliberately no new scope, so existing partner tokens keep working). Answers from the local `identity.users` table only — never forwards to other portals.
+
+### 13.1 Request
+```
+GET /api/auth/admin/check-email?email=<url-encoded email>
+Authorization: Bearer <JWT>        # from POST /api/auth/service/token
+Accept: application/json
+```
+
+### 13.2 Responses
+
+| Status | Body |
+|--------|------|
+| `200` (exists) | `{ "email": "<lowercased>", "exists": true, "user": { "id", "email", "displayName", "active", "emailVerified", "roles", "createdAt" } }` |
+| `200` (free) | `{ "email": "<lowercased>", "exists": false }` |
+| `400` | `{ "error": "error", "message": "Validation failed", "issues": [...] }` — missing/malformed `email` |
+| `401` | `{ "error": "unauthorized", "message": "Invalid or missing service token." }` — bad/missing/**expired** JWT (always 401, never 403, so callers can refresh-and-retry) |
+| `403` | missing both qualifying scopes / IP not allow-listed / non-HTTPS |
+| `429` | per-client rate limit |
+
+**Contract notes (per JI's spec):**
+- Callers key on the top-level boolean **`exists`** only; `email` and `user` are informational and may be ignored.
+- **`exists` = an *active* account exists** (`is_active = TRUE`) — the same semantics as Jubilujah's own signup gate, so a deleted account frees the email family-wide.
+- `user.emailVerified` maps to `users.first_signin_completed` (Jubilujah has no `email_verified` column); `user.roles` are Jubilujah RBAC roles.
+- Read-only: no audit row, no idempotency cache (a GET is naturally idempotent).
+
+### 13.3 Example
+```bash
+curl -s "https://api.jubilujah.com/api/auth/admin/check-email?email=ada%40example.com" \
+  -H "Authorization: Bearer $JWT"
+# → 200 { "email":"ada@example.com", "exists":true, "user":{ "id":"…", "email":"ada@example.com",
+#         "displayName":"Ada Lovelace", "active":true, "emailVerified":true,
+#         "roles":["content_editor"], "createdAt":"2026-…" } }
 ```
 
 ---

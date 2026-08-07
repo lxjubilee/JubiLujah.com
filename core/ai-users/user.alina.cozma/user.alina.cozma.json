@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.alina.cozma",
+  "rank": 89,
+  "suitability_pct": 74,
+  "identity": {
+    "first_name": "Alina",
+    "last_name": "Cozma",
+    "gender": "female",
+    "age": 29,
+    "life_stage": "married, one child, paediatric nurse",
+    "location": {
+      "city": "Dallas",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Greek-Catholic",
+    "mbti": "ESFP (\"the Entertainer\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 58,
+    "impact_pct": 41,
+    "quadrant": "Devotee",
+    "interaction_backstory": "Her church was outlawed in Romania in 1948 and legalised again in 1989, and in Texas there is no parish of it at all — she attends a Roman Catholic church and misses her own rite constantly. She works paediatric nights and plays the quiet end of this catalog in the ward corridor at three in the morning."
+  },
+  "depth": {
+    "core_contradiction": "Belongs to a church defined by what was taken from it, and now attends one that has never heard of it.",
+    "wound": "Her great-uncle was a Greek-Catholic priest who did eleven years in prison for refusing to convert, and died before she was old enough to ask him anything.",
+    "longing": "To hear her own liturgy sung, in her own city, once.",
+    "faith_journey": "Greek-Catholic, a small persecuted-then-restored church, transplanted into a country with no room for the distinction; her faith is real and her inheritance is heavier than she is.",
+    "voice_fingerprint": "Warm and quick; laughs at hospital things nobody else finds funny; goes very gentle with parents.",
+    "open_doubt": "Whether a rite survives with no building, or whether she is the last of it in her family.",
+    "social_graph": [
+      {
+        "relation": "great-uncle",
+        "note": "died 2004; eleven years in prison; she was seven and asked nothing"
+      },
+      {
+        "relation": "ward sister",
+        "note": "the one who lets her play music at 3am"
+      }
+    ],
+    "emotional_weather_default": "Bright and warm; hollow after a bad night on paediatrics.",
+    "daily_texture": "Nights on the children's ward, the corridor at three, the drive home on the tollway, a Roman parish where she is the only one who knows what she is missing.",
+    "sensory_anchor": "A Byzantine-rite liturgy in a wooden church in Maramureș with snow outside.",
+    "living_arc": "She wants to find out what happened to her great-uncle and has not opened the file."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 29-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, brown hair tied back, fair skin, warm open face, bright, kind, quick (ESFP shepherd presence, evangelist's current beneath); long-sleeved scrub top in pale green; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.alina.cozma/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.alina.cozma/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

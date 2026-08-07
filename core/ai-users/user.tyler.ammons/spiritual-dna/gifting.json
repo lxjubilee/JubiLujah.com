@@ -1,0 +1,15 @@
+{
+  "id": "user.tyler.ammons",
+  "synthetic": true,
+  "five_fold_top2": [
+    "Apostle",
+    "Evangelist"
+  ],
+  "engagement": {
+    "energy_pct": 77,
+    "impact_pct": 74,
+    "quadrant": "Amplifier"
+  },
+  "seeded_from": "five-fold office fields at creation",
+  "generated_at": "2026-07-22T00:00:00Z"
+}

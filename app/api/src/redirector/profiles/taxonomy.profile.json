@@ -1,0 +1,45 @@
+{
+  "domain": "jubilujah.com",
+  "display_name": "JubiLujah Music",
+  "levels": [
+    {
+      "key": "persona",
+      "label": "Persona",
+      "plural": "Personas",
+      "depth": 0,
+      "tokenizable": false,
+      "metadata_fields": ["bio", "portrait_url"]
+    },
+    {
+      "key": "album",
+      "label": "Album",
+      "plural": "Albums",
+      "depth": 1,
+      "tokenizable": true,
+      "default_token_type": "QR",
+      "default_landing_enabled": true,
+      "resume_eligible": true,
+      "metadata_fields": ["release_date", "cover_url", "genre"]
+    },
+    {
+      "key": "track",
+      "label": "Song",
+      "plural": "Songs",
+      "depth": 2,
+      "tokenizable": true,
+      "default_token_type": "QR",
+      "default_landing_enabled": true,
+      "metadata_fields": ["duration", "track_number", "lyrics_url"]
+    },
+    {
+      "key": "article",
+      "label": "Article",
+      "plural": "Articles",
+      "depth": 2,
+      "tokenizable": true,
+      "default_token_type": "QR",
+      "default_landing_enabled": true,
+      "attaches_to": ["album", "track"]
+    }
+  ]
+}

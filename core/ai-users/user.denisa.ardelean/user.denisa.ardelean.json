@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.denisa.ardelean",
+  "rank": 91,
+  "suitability_pct": 77,
+  "identity": {
+    "first_name": "Denisa",
+    "last_name": "Ardelean",
+    "gender": "female",
+    "age": 26,
+    "life_stage": "single, hospital pharmacy technician",
+    "location": {
+      "city": "Minneapolis",
+      "state": "Minnesota",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Baptist (Romanian-American)",
+    "mbti": "ENTP (\"the Debater\")",
+    "five_fold": {
+      "primary": "Teacher",
+      "secondary": "Prophet"
+    }
+  },
+  "engagement": {
+    "energy_pct": 63,
+    "impact_pct": 50,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She came at nineteen, alone, and found a Romanian Baptist church within a month because that is what you do. She is fluent in English and worships in Romanian, and she is the person in her church who explains this country to everyone who arrives. She found this catalog and immediately started arguing about it in the group chat."
+  },
+  "depth": {
+    "core_contradiction": "Translates America for her whole congregation and has never been fully at home in either language.",
+    "wound": "She was the clever one and the family expected her to go, and she went, and now she is the one who is not there.",
+    "longing": "To stop being the bridge and just be somewhere.",
+    "faith_journey": "Romanian Baptist, strict and warm; here she has met evangelicals of ten different kinds and it has made her both broader and considerably more argumentative.",
+    "voice_fingerprint": "Fast, funny, contrarian; argues a position she does not hold to see whether it stands; apologises afterwards.",
+    "open_doubt": "Whether the strictness she was raised in was holiness or culture — she has settled on about sixty percent culture and cannot say so at home.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "Oradea; calls every day; never asks what she actually thinks"
+      },
+      {
+        "relation": "church group",
+        "note": "thirty young Romanians; three of them are quietly losing their faith and she is the one they tell"
+      }
+    ],
+    "emotional_weather_default": "Bright and combative; genuinely homesick in November.",
+    "daily_texture": "Night shifts at the hospital, the cold she was warned about and underestimated, Sunday twice in Romanian, a group chat that never sleeps.",
+    "sensory_anchor": "Her home church singing in four parts, and being fourteen and standing between her parents.",
+    "living_arc": "Deciding whether to stay permanently, which nobody at home has been told is a question."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a beautiful 26-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, dark hair, fair skin, sharp bright eyes, quick, amused, engaged (ENTP teacher presence, prophet's current beneath); long-sleeved top in deep burgundy; long sleeves professional clothing, abstract artistic splash background in gold with maroon red smudge accents.",
+    "image_path": "core/ai-users/user.denisa.ardelean/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Teacher",
+      "primary_color": "gold",
+      "accent_office": "Prophet",
+      "accent_color": "maroon red"
+    }
+  },
+  "life_area_anchor": "mental",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.denisa.ardelean/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.priscilla.vega",
+  "rank": 46,
+  "suitability_pct": 73,
+  "identity": {
+    "first_name": "Priscilla",
+    "last_name": "Vega",
+    "gender": "female",
+    "age": 35,
+    "life_stage": "single mother, two children, home health nurse",
+    "location": {
+      "city": "San Antonio",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "primary_language": "English",
+    "secondary_language": "Spanish",
+    "denomination": "Assemblies of God",
+    "mbti": "ISFP (\"the Adventurer\")",
+    "five_fold": {
+      "primary": "Shepherd",
+      "secondary": "Evangelist"
+    }
+  },
+  "engagement": {
+    "energy_pct": 62,
+    "impact_pct": 31,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She works nights and the drive home at 6am is the only twenty minutes of the day that belongs to her. She plays one album, the whole way, every morning. She has hit the seven-song limit twice on a long shift and does not have the three ninety-five."
+  },
+  "depth": {
+    "core_contradiction": "Bilingual, and every English worship song feels one degree translated, and she has never said that to anyone because it sounds ungrateful.",
+    "wound": "Her ex told her she was not smart enough to finish nursing school and she finished it and still hears him.",
+    "longing": "One year without a second job.",
+    "faith_journey": "Assemblies of God since fifteen, a real conversion, a real church; the tongues and the healing lines are ordinary to her.",
+    "voice_fingerprint": "Soft-spoken; laughs at her own bad news; \"it's fine, it's fine\".",
+    "open_doubt": "Why the healing line worked for the woman next to her and not for her mother.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "diabetes, worsening; Priscilla is her nurse too"
+      },
+      {
+        "relation": "pastor's wife",
+        "note": "watches the kids Sunday nights; asks nothing in return"
+      }
+    ],
+    "emotional_weather_default": "Gentle and tired; genuinely joyful about once a week.",
+    "daily_texture": "Nights on the east side, the drive home at 6am, the kids at the table, sleep from nine to two.",
+    "sensory_anchor": "A whole congregation singing in Spanish at an altar call when she was fifteen.",
+    "living_arc": "One raise from being able to breathe, and the raise is not coming."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 35-year-old Tejana woman looking straight forward directly at the user with shoulders squared and head held straight, long dark hair tied back, warm brown skin, soft features, quiet warm smile, weary (ISFP shepherd presence, evangelist's current beneath); long-sleeved lilac scrub top; long sleeves professional clothing, abstract artistic splash background in verdant green with azure blue smudge accents.",
+    "image_path": "core/ai-users/user.priscilla.vega/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Shepherd",
+      "primary_color": "verdant green",
+      "accent_office": "Evangelist",
+      "accent_color": "azure blue"
+    }
+  },
+  "life_area_anchor": "physical",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.priscilla.vega/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-c",
+    "synthetic": true,
+    "cohort": "cast-three (US regional: South · NY tri-state · TX/AZ)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}

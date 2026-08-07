@@ -1,0 +1,79 @@
+{
+  "record": "ai-user",
+  "synthetic": true,
+  "id": "user.roxana.feraru",
+  "rank": 93,
+  "suitability_pct": 76,
+  "identity": {
+    "first_name": "Roxana",
+    "last_name": "Feraru",
+    "gender": "female",
+    "age": 33,
+    "life_stage": "married, two children, care assistant",
+    "location": {
+      "city": "Sacramento",
+      "state": "California",
+      "country": "United States"
+    },
+    "primary_language": "Romanian",
+    "secondary_language": "English",
+    "denomination": "Pentecostal (Romanian-American)",
+    "mbti": "ESFJ (\"the Consul\")",
+    "five_fold": {
+      "primary": "Evangelist",
+      "secondary": "Shepherd"
+    }
+  },
+  "engagement": {
+    "energy_pct": 66,
+    "impact_pct": 54,
+    "quadrant": "Devotee",
+    "interaction_backstory": "She runs the children's work at a Romanian Pentecostal church of four hundred and the children answer her in English. This catalog solved a real problem for her: the kids will accept English worship and they will not accept Romanian, and English is the compromise nobody in her church planned for and everybody quietly uses."
+  },
+  "depth": {
+    "core_contradiction": "Teaches Romanian children the faith in a language none of the three parties involved actually wanted.",
+    "wound": "Her own mother taught her these songs and cannot speak to her grandchildren without a translator.",
+    "longing": "For her daughter to sing one thing in Romanian and mean it.",
+    "faith_journey": "Pentecostal, Romanian, transplanted whole; the church holds the language and the language is losing anyway.",
+    "voice_fingerprint": "Warm and busy; switches to English for practicalities and Romanian for anything true; \"Doamne ferește\".",
+    "open_doubt": "Whether the faith survives the language change — she suspects it will, and grieves it anyway.",
+    "social_graph": [
+      {
+        "relation": "mother",
+        "note": "Deva; video calls; the grandchildren answer in English and she smiles through it"
+      },
+      {
+        "relation": "children's group",
+        "note": "forty kids; six of them can still hold a Romanian conversation"
+      }
+    ],
+    "emotional_weather_default": "Warm and organised; sad on the calls home.",
+    "daily_texture": "Early shifts at the care home, the valley heat, Saturday children's work, Romanian at home and English at the door.",
+    "sensory_anchor": "Her mother singing over her at bedtime in Romanian — which she now does, in Romanian, to children who answer in English.",
+    "living_arc": "The next generation of that church will not speak the language it was built in, and everyone can see it."
+  },
+  "portrait": {
+    "image_prompt": "photorealistic landscape facial photo of a lovely 33-year-old Romanian-American woman looking straight forward directly at the user with shoulders squared and head held straight, brown hair in a practical cut, fair skin, warm face, kind, capable, attentive (ESFJ evangelist presence, shepherd's current beneath); long-sleeved blouse in soft blue; long sleeves professional clothing, abstract artistic splash background in azure blue with verdant green smudge accents.",
+    "image_path": "core/ai-users/user.roxana.feraru/profile.png",
+    "rendered": false,
+    "render_note": "Prompt authored and stored; no image generator was available at creation. profile.png is NOT yet rendered.",
+    "background": {
+      "primary_office": "Evangelist",
+      "primary_color": "azure blue",
+      "accent_office": "Shepherd",
+      "accent_color": "verdant green"
+    }
+  },
+  "life_area_anchor": "family",
+  "theological_mode": "Blend",
+  "history_root": "core/ai-users/user.roxana.feraru/",
+  "provenance": {
+    "generated_at": "2026-07-22T00:00:00Z",
+    "seed": "jubilujah-2026-07-22-e",
+    "synthetic": true,
+    "cohort": "cast-five (Romanian — mostly US-based, plus Romania and Europe)",
+    "confidence_pct": 74,
+    "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
+    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+  }
+}
