@@ -291,22 +291,26 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/5a4817eed553c36db47e8b7
   -H "X-Auth-Email: gabe.ungureanu@outlook.com" \
   -H "X-Auth-Key: $CLOUDFLARE_GLOBAL_API_KEY" \
   -H "Content-Type: application/json" \
-  --data '{"files":["https://cdn.jubileeverse.com/music/PATH/TO/FILE.mp3"]}'
+  --data '{"files":["https://cd.jubilujah.com/music/PATH/TO/FILE.mp3"]}'
 ```
 
-**Need to roll back the site** — as of 2026-07-23 `deploy/publish.sh` snapshots prod automatically
-before every deploy (disable with `--no-backup`). To restore the most recent snapshot:
+**Roll back a catalog publish** — every publish backs the manifest up beside itself first. Restore
+the newest snapshot and restart:
 
 ```bash
 ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" root@94.72.120.231 '
-  latest=$(ls -1t /var/www/.backup/Jubilujah.com.*.tgz | head -1);
-  echo "restoring $latest";
-  tar -xzf "$latest" -C /var/www/Jubilujah.com && pm2 restart jubilujah --update-env'
+  M=/var/www/jubilujah.com/web/public/music/catalog-manifest.json
+  latest=$(ls -1t $M.bak-* | head -1)
+  echo "restoring $latest"
+  cp -p "$latest" "$M" && pm2 restart jubilujah-web --update-env'
 ```
 
-**A deploy ships the working tree, not a commit** — `tar` packs the live directory (minus
-`.git`, `.claude`, `node_modules`, `wpf`, logs), so any uncommitted edits go to production.
-Run `git status` before publishing and make that a deliberate choice.
+**The `/var/www/.backup/Jubilujah.com.*.tgz` snapshots referenced by the old rollback do not apply**
+— they belonged to the tar-based deploy that never matched this host. A full source rollback has no
+procedure yet, for the same reason a full source deploy does not (see Step 2).
+
+**Publishing the manifest ships whatever is in the working tree**, not a commit. Run `git status`
+and `node deploy/check-manifest.mjs` before publishing and make it a deliberate choice.
 
 ---
 
@@ -314,11 +318,15 @@ Run `git status` before publishing and make that a deliberate choice.
 
 | | |
 |---|---|
+*(Table re-verified against the live host 2026-08-14 — most rows were wrong.)*
+
+| | |
+|---|---|
 | Host | `root@94.72.120.231` (hostname `SEAIIS01SERVER`, Ubuntu, nginx 1.24, Node 20.20.0, PM2 6.0.14) |
-| Code dir | `/var/www/Jubilujah.com/` |
-| Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` |
-| Nginx logs | `/var/log/nginx/Jubilujah.com_{access,error}.log` |
-| PM2 process | name `jubilujah`, script `/var/www/Jubilujah.com/server.js`, port 3119 |
-| PM2 logs | `/root/.pm2/logs/jubilujah-{out,error}.log` |
+| Code dir | **`/var/www/jubilujah.com/`** — lowercase; **not a git checkout**. Layout is `web/` + `api/`, which does **not** match the repo's `app/web` + `app/api`. |
+| Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` → proxies to `127.0.0.1:3030` (web) and `127.0.0.1:4030` (api) |
+| PM2 processes | **`jubilujah-web`** — Next.js, cwd `/var/www/jubilujah.com/web`, **:3030**<br>**`jubilujah-api`** — `/var/www/jubilujah.com/api/src/index.js`, **:4030**<br>*(there is no process named `jubilujah`)* |
+| Live manifest | `/var/www/jubilujah.com/web/public/music/catalog-manifest.json` (read at runtime by `lib/manifest.ts`, cached in memory — restart `jubilujah-web` after replacing it) |
 | Public URL | https://www.jubilujah.com (also responds at apex https://jubilujah.com) |
-| CDN bucket | R2 bucket `jubileeverse-cdn`, prefix `music/`, public host `cdn.jubileeverse.com` |
+| CDN | public host **`cd.jubilujah.com`**, prefix `music/`, no `albums/` segment. Backed by R2 and staged from `J:\jubilujah.com\music\`. **No credentials for this bucket exist on this machine** — see Step 1. |
+| ⚠ Not this site | **port 3119 is `jubileevibes`** (`/var/www/JubileeVibes.com/server.js`). `cdn.jubileeverse.com` is the **avatars** bucket and 404s for music. Both appeared in this runbook as if they were Jubilujah's. |
