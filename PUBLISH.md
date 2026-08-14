@@ -9,8 +9,8 @@ This document is the source of truth. When the procedure changes, update this fi
 ## What this does
 
 1. **CDN sync** — incremental upload of `J:/jubilujah.com/music/` → the Cloudflare R2 bucket behind **`cd.jubilujah.com`**. Only missing or size-mismatched files are uploaded; nothing on R2 is ever deleted by this flow. **Currently blocked — no credentials for that bucket exist on this machine; see Step 1.** Usually skippable (`--site-only`).
-2. **Site deploy** — tar+ship `W:/Jubilujah.com/` → `root@94.72.120.231:/var/www/Jubilujah.com/` and restart the `jubilujah` PM2 process on port 3119.
-3. **Verify** — sample a CDN MP3, hit the live site, confirm 200s.
+2. **Catalog publish** — back up the prod manifest, ship the reconciled web copy to `root@94.72.120.231:/var/www/jubilujah.com/web/public/music/catalog-manifest.json`, restart the **`jubilujah-web`** PM2 process (Next.js, **:3030**). See Step 2 — the old "tar the working tree and restart `jubilujah` on 3119" was wrong on every count.
+3. **Verify** — hit the origin on :3030, the live site, and a CDN asset; confirm 200s and check the album count moved.
 
 ---
 
@@ -28,8 +28,9 @@ This document is the source of truth. When the procedure changes, update this fi
 | `@aws-sdk/client-s3` | Not installed at this repo root. `deploy/publish.sh` auto-detects it, currently resolving to `W:\JubileeInspire.com\api\node_modules`. To make this repo self-contained: `npm install @aws-sdk/client-s3 @aws-sdk/lib-storage` |
 | Sync script | `W:\JubiLujah.com\_r2-sync-music-inspire.js` (in-repo; supports `--src= --prefix= --bucket= --env=`) |
 | Manifest gate | `W:\JubiLujah.com\deploy\check-manifest.mjs` (read-only staleness check) |
-| Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` on prod (proxies `:80` → `127.0.0.1:3119`) |
-| PM2 process | `jubilujah` (managed by PM2 on prod, persisted via `pm2 save`) |
+| Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` on prod (proxies to `127.0.0.1:3030` for web and `127.0.0.1:4030` for the API — **not** 3119, which is JubileeVibes) |
+| PM2 processes | **`jubilujah-web`** (Next.js, cwd `/var/www/jubilujah.com/web`, :3030) and **`jubilujah-api`** (`/var/www/jubilujah.com/api/src/index.js`, :4030). Persisted via `pm2 save`. There is no process named `jubilujah`. |
+| Prod code dir | `/var/www/jubilujah.com` — **lowercase**, and **not a git checkout** (`no .git`) |
 | DNS | `www.jubilujah.com` and `jubilujah.com` proxied through Cloudflare (TLS terminates at CF edge) |
 
 ---
@@ -219,17 +220,30 @@ verified live at `https://www.jubilujah.com/album?c=…`.
 
 ```bash
 ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" root@94.72.120.231 \
-  'curl -sS -o /dev/null -w "origin:%{http_code} " http://127.0.0.1:3119/ && \
-   curl -sS -o /dev/null -w "public:%{http_code}\n" https://www.jubilujah.com/'
+  'curl -sS -o /dev/null -w "origin:%{http_code}\n" http://127.0.0.1:3030/'
+curl -sS -o /dev/null -w "public:%{http_code}\n" https://www.jubilujah.com/
 ```
 
-Both should return `200`. Also spot-check a CDN MP3:
+Both should return `200`. Then confirm the catalog actually moved — this is the check that
+matters, because a healthy 200 proves nothing about whether the manifest landed:
 
 ```bash
-curl -sS -I 'https://cdn.jubileeverse.com/music/catalog-manifest.json' | head -3
+ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" root@94.72.120.231 \
+  'node -e "const m=require(\"/var/www/jubilujah.com/web/public/music/catalog-manifest.json\");
+            let n=0; for(const c of m.categories||[]) for(const a of c.artists||[]) n+=(a.albums||[]).length;
+            console.log(m.generated, n+\" albums\");"'
+
+# and spot-check a newly surfaced album end-to-end
+curl -sS -o /dev/null -w "album:%{http_code}\n" 'https://www.jubilujah.com/album?c=JEIM1082EN'
 ```
 
-Should return `HTTP/2 200` with a recent `last-modified`.
+Spot-check a CDN asset on the **live** host (`cd.jubilujah.com` — `cdn.jubileeverse.com` 404s for music):
+
+```bash
+curl -sS -I 'https://cd.jubilujah.com/music/inspire/jubilee-inspire/JEIM1001EN-sky-splits-open/artwork/JEIM1001EN.png' | head -3
+```
+
+Should return `HTTP/2 200`.
 
 ---
 
