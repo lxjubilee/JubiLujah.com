@@ -82,11 +82,15 @@ function finderSvg(ox, oy, style) {
   );
 }
 
-export function renderSvg(token, variant = 'standard', styleKey, prefix = 'R') {
+// `quietZone` is a DISPLAY-ONLY override for the on-screen admin thumbnails, which
+// want a tighter white border. It is clamped to [0, QUIET_ZONE] so it can only ever
+// SHRINK the margin, never exceed the spec. The canonical scannable/printable codes
+// (SVG downloads + all PNGs) never pass it and keep the mandatory 4-module quiet zone.
+export function renderSvg(token, variant = 'standard', styleKey, prefix = 'R', quietZone = QUIET_ZONE) {
   const m = buildMatrix(token, variant, styleKey, prefix);
   const { size, style, spec } = m;
-  const total = size + QUIET_ZONE * 2;
-  const q = QUIET_ZONE;
+  const q = Number.isFinite(quietZone) ? Math.max(0, Math.min(QUIET_ZONE, quietZone)) : QUIET_ZONE;
+  const total = size + q * 2;
   // Module shape (§10.5): 'dots' draws each data module as a circle inscribed in
   // its cell (the branded dotted look); 'rounded' softens the square corners;
   // anything else is a crisp square. Finder "eyes" stay solid (drawn separately)

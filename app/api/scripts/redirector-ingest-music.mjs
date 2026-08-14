@@ -34,6 +34,8 @@ const APPLY = argv.includes('--apply');
 const LIMIT = (() => { const i = argv.indexOf('--limit'); return i >= 0 ? parseInt(argv[i + 1], 10) : Infinity; })();
 const ONLY_PERSONA = (() => { const i = argv.indexOf('--persona'); return i >= 0 ? argv[i + 1] : null; })();
 const SONGS = argv.includes('--songs'); // also mint a token per song (autoplay deep-link)
+const ARTICLES = argv.includes('--articles'); // mint a token per article (web-only, no app-gate)
+const doMusic = !ARTICLES; // --articles alone runs articles only
 
 const INSPIRE_ORDER = [
   'jubilee-inspire', 'melody-inspire', 'zariah-inspire', 'elias-inspire',
@@ -54,9 +56,18 @@ const albumUrl = (code) => `${BASE}/album?c=${encodeURIComponent(code)}`;
 const coverUrl = (code) => `${BASE}/cover/${encodeURIComponent(code)}.png`;
 // Song destination: the album page focused on track n, which auto-plays it.
 const songUrl = (code, n) => `${BASE}/album?c=${encodeURIComponent(code)}&t=${n}`;
+// Articles are WEB-ONLY (not in the mobile app): the QR redirects straight to the
+// article page at /backstage/<slug> — no arrival page, no app-gate.
+const ARTICLES_FILE = path.resolve(__dirname, '../../web/public/articles/articles.json');
+const articleUrl = (slug) => `${BASE}/backstage/${encodeURIComponent(slug)}`;
+function loadArticles() {
+  try { const a = JSON.parse(fs.readFileSync(ARTICLES_FILE, 'utf8')); return Array.isArray(a) ? a : (a.articles || Object.values(a).find(Array.isArray) || []); }
+  catch { return []; }
+}
 
 // ---- dry run ---------------------------------------------------------------
 function dryRun() {
+  if (ARTICLES) { const arts = loadArticles(); console.log(`DRY RUN — would mint ${Math.min(arts.length, LIMIT)} article tokens (web-only → /backstage/<slug>). Re-run with --apply --articles.`); return; }
   const personas = loadPersonas();
   let albums = 0;
   console.log(`DRY RUN — base ${BASE}${ONLY_PERSONA ? ` — persona ${ONLY_PERSONA}` : ''}${LIMIT !== Infinity ? ` — limit ${LIMIT}` : ''}`);
@@ -94,15 +105,24 @@ async function apply() {
       [al.title, al.code, albumUrl(al.code), coverUrl(al.code), nodeId, sort]);
     return { id: ins.rows[0].asset_id, created: true };
   }
-  async function ensureToken(assetId, kind = 'album') {
+  async function ensureToken(assetId, kind = 'album', landing = true) {
     const sel = await query("SELECT token FROM redirector.tokens WHERE asset_id=$1 AND resolution_mode='asset' AND state='active' ORDER BY created_at LIMIT 1", [assetId]);
     if (sel.rows[0]) return { token: sel.rows[0].token, created: false };
     const token = await generateUniqueToken(tokenExists);
     await query(
       `INSERT INTO redirector.tokens(token,token_type,resolution_mode,asset_id,content_kind,landing_enabled,state,created_by,created_via,resolve_count)
-       VALUES($1,'QR','asset',$2,$3,true,'active','ingest-script','api',0)`,
-      [token, assetId, kind]);
+       VALUES($1,'QR','asset',$2,$3,$4,'active','ingest-script','api',0)`,
+      [token, assetId, kind, landing]);
     return { token, created: true };
+  }
+  async function upsertArticleAsset(art) {
+    const sel = await query("SELECT asset_id FROM redirector.assets WHERE content_kind='article' AND slug=$1 LIMIT 1", [art.slug]);
+    if (sel.rows[0]) return { id: sel.rows[0].asset_id, created: false };
+    const ins = await query(
+      `INSERT INTO redirector.assets(content_kind,title,slug,storage_url,taxonomy_node_id,is_active)
+       VALUES('article',$1,$2,$3,NULL,true) RETURNING asset_id`,
+      [art.title || art.slug, art.slug, articleUrl(art.slug)]);
+    return { id: ins.rows[0].asset_id, created: true };
   }
   // Album taxonomy node (parent = persona node). Songs hang off it, so a song's
   // breadcrumb is Persona > Album and its "related" is the album's other songs.
@@ -125,10 +145,12 @@ async function apply() {
     return { id: ins.rows[0].asset_id, created: true };
   }
 
-  const personas = loadPersonas();
-  let assetsNew = 0, tokensNew = 0, songsNew = 0, processed = 0;
+  let assetsNew = 0, tokensNew = 0, songsNew = 0, articlesNew = 0, processed = 0;
   const samples = [];
-  console.log(`APPLY${SONGS ? ' +songs' : ''} — base ${BASE}${ONLY_PERSONA ? ` — persona ${ONLY_PERSONA}` : ''}${LIMIT !== Infinity ? ` — limit ${LIMIT}` : ''}`);
+  console.log(`APPLY${doMusic ? (SONGS ? ' music+songs' : ' music') : ''}${ARTICLES ? ' articles' : ''} — base ${BASE}${ONLY_PERSONA ? ` — persona ${ONLY_PERSONA}` : ''}${LIMIT !== Infinity ? ` — limit ${LIMIT}` : ''}`);
+
+  if (doMusic) {
+  const personas = loadPersonas();
   outer:
   for (let pi = 0; pi < personas.length; pi++) {
     const p = personas[pi];
@@ -157,9 +179,28 @@ async function apply() {
       processed++;
     }
   }
-  console.log(`\nDONE — processed ${processed} albums | new assets ${assetsNew} | new tokens ${tokensNew}${SONGS ? ` (of which songs: ${songsNew})` : ''}`);
+  } // end if (doMusic)
+
+  if (ARTICLES) {
+    const arts = loadArticles();
+    let done = 0;
+    for (const art of arts) {
+      if (done >= LIMIT) break;
+      if (!art || !art.slug) continue;
+      try {
+        const aa = await upsertArticleAsset(art);
+        if (aa.created) assetsNew++;
+        const at = await ensureToken(aa.id, 'article', false); // web-only: no landing page / app-gate
+        if (at.created) { tokensNew++; articlesNew++; }
+        if (samples.length < 3) samples.push({ title: art.title || art.slug, code: art.slug, token: at.token });
+        done++;
+      } catch (e) { console.error(`  skip article ${art.slug}: ${e.message}`); }
+    }
+  }
+
+  console.log(`\nDONE — new assets ${assetsNew} | new tokens ${tokensNew}${SONGS ? ` (songs ${songsNew})` : ''}${ARTICLES ? ` (articles ${articlesNew})` : ''}`);
   for (const s of samples) {
-    console.log(`  ${s.title}  [${s.code}]  → ${BASE}/r/${s.token}  (qr: ${BASE}/qr/${s.token}.svg)`);
+    console.log(`  ${s.title}  [${s.code}]  → ${BASE}/r/${s.token}`);
   }
   process.exit(0);
 }

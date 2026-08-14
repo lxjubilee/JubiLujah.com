@@ -11,7 +11,7 @@
 // sibling SessionStart hook default-persona.mjs. Both share persona-directive.mjs.
 // To move the personas repo, change PERSONAS_ROOT in persona-directive.mjs.
 
-import { PERSONAS, buildContext, readInput, emit } from './persona-directive.mjs';
+import { PERSONAS, buildContext, readInput, emit, verifyKeyHolder } from './persona-directive.mjs';
 
 const data = readInput();
 if (!data) process.exit(0); // not JSON — nothing to do
@@ -56,4 +56,5 @@ if (!persona) process.exit(0);
 const trigger = match[0].trim().replace(/\s+/g, ' ');
 const cwd = (data.cwd || process.cwd()).toString();
 const envPath = cwd.replace(/\\/g, '/').replace(/\/+$/, '') + '/.env';
-emit('UserPromptSubmit', buildContext({ persona, event: 'UserPromptSubmit', trigger, envPath }));
+const identity = await verifyKeyHolder(envPath);
+emit('UserPromptSubmit', buildContext({ persona, event: 'UserPromptSubmit', trigger, envPath, identity }));

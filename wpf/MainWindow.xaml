@@ -1,0 +1,1063 @@
+<Window x:Class="JubiLujahStudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="Studio — JubiLujah" Height="900" Width="1560"
+        Background="#1b1e28">
+    <Window.Resources>
+        <!-- Tab chrome that reads on the dark panel. WPF's default tab headers
+             are light grey on light grey and vanish against #232733. -->
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="#9aa0ad" />
+            <!-- FIVE headers share one row inside the narrowed panel. At 11pt
+                 with 9px side padding five of them already totalled ~338px
+                 against 324 available and wrapped onto a second row, so the
+                 smaller size and tighter side padding are both load-bearing.
+                 On a panel dragged near its 260px minimum the strip wraps, which
+                 is harmless: the worklist below is star sized and simply gets one
+                 row shorter, where a pinned-height list would have pushed the
+                 button off the panel. -->
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Padding" Value="3,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="Chrome" Background="#12141c" BorderBrush="#2c3040"
+                                BorderThickness="1,1,1,0" CornerRadius="3,3,0,0" Margin="0,0,2,0">
+                            <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Chrome" Property="Background" Value="#2b3040" />
+                                <Setter Property="Foreground" Value="#E6AC00" />
+                                <Setter Property="FontWeight" Value="SemiBold" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Chrome" Property="Background" Value="#1f2331" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ============================ SCROLLBARS ============================
+             WPF's stock ScrollBar is the Aero one: a wide light-grey trough with
+             two arrow buttons at the ends. On a #12141c panel it is the single
+             brightest thing on screen and it looks like it belongs to a different
+             application, which it does.
+
+             These are implicit styles (no x:Key), so every ScrollViewer, ListBox
+             and TextBox in the window picks them up without being told. The arrow
+             RepeatButtons are kept, because they still page when clicked, but
+             rendered as nothing: removing them from the template entirely breaks
+             the Track's arithmetic in some layouts. -->
+        <Style TargetType="RepeatButton" x:Key="ScrollPageButton">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Thumb" x:Key="ScrollThumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border x:Name="Bar" Background="#39415380" CornerRadius="4" Margin="3" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bar" Property="Background" Value="#4d566c" />
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="Bar" Property="Background" Value="#E6AC00" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="11" />
+            <Setter Property="MinWidth" Value="11" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource ScrollPageButton}" Command="ScrollBar.PageUpCommand" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollThumb}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource ScrollPageButton}" Command="ScrollBar.PageDownCommand" />
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto" />
+                    <Setter Property="MinWidth" Value="0" />
+                    <Setter Property="Height" Value="11" />
+                    <Setter Property="MinHeight" Value="11" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ScrollBar">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Track x:Name="PART_Track" IsDirectionReversed="False">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollPageButton}" Command="ScrollBar.PageLeftCommand" />
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollThumb}" />
+                                        </Track.Thumb>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollPageButton}" Command="ScrollBar.PageRightCommand" />
+                                        </Track.IncreaseRepeatButton>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Worklist rows. Two columns rather than one string, so the tick can be
+             coloured independently of the title: a tick earned in THIS session is
+             green, one inherited from a previous run is muted. A single string
+             cannot carry two colours. -->
+        <Style TargetType="ListBox" x:Key="JobList">
+            <Setter Property="Background" Value="#12141c" />
+            <Setter Property="Foreground" Value="#dfe4ee" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Mark}"
+                                       Foreground="{Binding MarkBrush}" FontWeight="Bold"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="{Binding Title}"
+                                       TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- The rail buttons. RadioButton rather than ToggleButton so the four
+             are mutually exclusive without a line of code: a GroupName does what
+             hand-managed IsChecked juggling would otherwise get wrong the first
+             time a fifth view is added.
+
+             Round is a CornerRadius of exactly half the 40px box. The glyphs come
+             from Segoe MDL2 Assets, which ships with Windows 10 and 11; the app
+             already requires a WebView2 runtime of that vintage, so there is no
+             new dependency here.
+
+             Trigger ORDER is load-bearing. IsMouseOver is declared first and
+             IsChecked second, because the later trigger wins in WPF: reversed,
+             hovering the active button would repaint it as inactive. -->
+        <Style TargetType="RadioButton" x:Key="RailButton">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#9aa0ad" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="Disc" Background="#1b1e28" CornerRadius="20"
+                                BorderBrush="#2c3040" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Disc" Property="Background" Value="#2b3040" />
+                                <Setter Property="Foreground" Value="#dfe4ee" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Disc" Property="Background" Value="#E6AC00" />
+                                <Setter TargetName="Disc" Property="BorderBrush" Value="#E6AC00" />
+                                <Setter Property="Foreground" Value="#12141c" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="RailCaption">
+            <Setter Property="Foreground" Value="#6f7684" />
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,-6,0,10" />
+        </Style>
+
+        <!-- The one action in a view. Templated rather than just given a
+             Background, because WPF's default button chrome repaints itself on
+             hover and would flash the system grey straight back over the yellow.
+             Every state is therefore declared here, disabled included: without it
+             a run in progress leaves a bright yellow button that looks clickable
+             and is not. -->
+        <Style TargetType="Button" x:Key="GenerateButton">
+            <Setter Property="Height" Value="46" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#12141c" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Face" Background="#E6AC00" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Face" Property="Background" Value="#FFC21F" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Face" Property="Background" Value="#C08F00" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Face" Property="Background" Value="#4a442c" />
+                                <Setter Property="Foreground" Value="#8b8570" />
+                                <Setter Property="Cursor" Value="Arrow" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- The round play/stop button on the drop zone. Its glyph is set in
+             code, because the same button is the transport for whichever track is
+             sounding: play when idle, stop while this one is playing. -->
+        <Style TargetType="Button" x:Key="PlayButton">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#12141c" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Content" Value="&#xE768;" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Disc" Background="#E6AC00" CornerRadius="17">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Disc" Property="Background" Value="#FFC21F" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Disc" Property="Background" Value="#C08F00" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="SectionLabel">
+            <Setter Property="Foreground" Value="#9aa0ad" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,3" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="420" />
+            <ColumnDefinition Width="6" />
+            <!-- The DEFAULT, not a fixed width: the splitter to its left resizes
+                 it and the width is remembered in studio.config.json. MinWidth
+                 stops a drag from hiding the panel somewhere unrecoverable. -->
+            <ColumnDefinition x:Name="PanelCol" Width="344" MinWidth="260" />
+            <!-- The rail. Fixed: it holds four 40px discs and nothing else, so
+                 there is nothing in it that a drag could usefully make wider. -->
+            <ColumnDefinition Width="58" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Browser above, log below, splitter between. The log gets the full
+             window width, which is what a log of file paths and prompt fragments
+             actually needs. -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="200" />
+                <RowDefinition Height="6" />
+                <RowDefinition x:Name="LogRow" Height="170" MinHeight="52" />
+            </Grid.RowDefinitions>
+
+            <!-- The real browser, the lyrics reader that replaces it on the music
+                 view, and the live site on the deploy view. Same cell, one
+                 visible at a time.
+
+                 The browser is COLLAPSED rather than covered. A WebView2 is an
+                 airspace window that draws over WPF content regardless of z-order
+                 in some compositing paths, so laying the reader on top of a still
+                 visible browser is not reliable. Collapsing is. -->
+            <Grid Grid.Row="0">
+                <wv2:WebView2 x:Name="Wv" />
+
+                <!-- The live site, on its own browser rather than by navigating
+                     the one above. Reusing Wv would tear down whatever ChatGPT
+                     page a generation run is sitting on, and a deploy check is
+                     exactly the moment someone is most likely to have a run in
+                     flight. Both share the one WebView2 environment and profile,
+                     so the ChatGPT login is not duplicated or disturbed. -->
+                <Grid x:Name="SitePane" Visibility="Collapsed" Background="#12141c">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#1b1e28" BorderBrush="#2c3040" BorderThickness="0,0,0,1" Padding="12,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Foreground="#E6AC00" FontSize="13" FontWeight="Bold" Text="Production" />
+                                <TextBlock x:Name="SiteUrl" Foreground="#6f7684" FontSize="10"
+                                           Text="https://jubilujah.com/" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <Button x:Name="BtnSiteReload" Grid.Column="1" Content="Reload" Height="28" Width="76"
+                                    FontSize="11" Margin="8,0,6,0" Click="BtnSiteReload_Click"
+                                    ToolTip="Reload the live site, bypassing the cache." />
+                            <Button x:Name="BtnSiteOpen" Grid.Column="2" Content="Open in browser" Height="28" Width="118"
+                                    FontSize="11" Click="BtnSiteOpen_Click" />
+                        </Grid>
+                    </Border>
+
+                    <wv2:WebView2 x:Name="WvSite" Grid.Row="1" />
+                </Grid>
+
+                <Grid x:Name="LyricsPane" Visibility="Collapsed" Background="#12141c">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#1b1e28" BorderBrush="#2c3040" BorderThickness="0,0,0,1" Padding="12,8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock x:Name="LyricsTitle" Foreground="#E6AC00" FontSize="13" FontWeight="Bold"
+                                           Text="Pick an album on the right" TextTrimming="CharacterEllipsis" />
+                                <TextBlock x:Name="LyricsPath" Foreground="#6f7684" FontSize="10"
+                                           Text="Its lyrics file opens here, ready to copy into Suno."
+                                           TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <Button x:Name="BtnCopyLyrics" Grid.Column="1" Content="Copy lyrics" Height="28" Width="96"
+                                    FontSize="11" Margin="8,0,6,0" Click="BtnCopyLyrics_Click"
+                                    ToolTip="Copies the whole lyrics file to the clipboard." />
+                            <Button x:Name="BtnExportZip" Grid.Column="2" Content="Export voice as .zip" Height="28" Width="130"
+                                    FontSize="11" Click="BtnExportZip_Click"
+                                    ToolTip="Writes every lyrics file for the selected voice to one zip, one folder per album, so a whole voice can be scored on another machine." />
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="14,10,14,4">
+                            <!-- Says out loud when the mp3s already in tracks/ do
+                                 not match the SONG TITLE lines in the file below.
+                                 Without it the reader shows a re-rendered album
+                                 exactly as it shows a current one, and the only
+                                 thing telling them apart is memory. -->
+                            <Border x:Name="LyricsFlag" Visibility="Collapsed"
+                                    Background="#2a1e12" BorderBrush="#7a5a1e" BorderThickness="1"
+                                    CornerRadius="4" Padding="10,8" Margin="0,0,0,6">
+                                <TextBlock x:Name="LyricsFlagText" Foreground="#E6AC00" FontSize="11"
+                                           TextWrapping="Wrap" Text="" />
+                            </Border>
+
+                            <!-- One Styles row per track, lifted out of the file
+                                 and given its own copy button. That line is what
+                                 goes in Suno's Styles box, and hunting for it
+                                 inside 900 lines of markdown every time is the
+                                 sort of friction that gets a song rendered with
+                                 the wrong sound.
+
+                                 Capped and scrollable: twelve of these would
+                                 otherwise push the lyrics themselves off screen. -->
+                            <ScrollViewer MaxHeight="230" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <ItemsControl x:Name="StyleRows">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#1b1e28" BorderBrush="#2c3040" BorderThickness="1"
+                                                    CornerRadius="4" Padding="10,8" Margin="0,0,0,5">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0">
+                                                        <TextBlock Text="{Binding Head}" Foreground="#E6AC00" FontSize="11"
+                                                                   FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                        <TextBlock Text="{Binding Style}" Foreground="#c9cede" FontSize="11"
+                                                                   TextWrapping="Wrap" Margin="0,3,0,0" MaxHeight="52"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                    </StackPanel>
+                                                    <Button Grid.Column="1" Content="Copy" Width="62" Height="26"
+                                                            FontSize="11" VerticalAlignment="Top" Margin="8,0,0,0"
+                                                            Tag="{Binding Style}" Click="BtnCopyStyle_Click"
+                                                            ToolTip="Copies this track's Styles line, ready for Suno." />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+
+                        <!-- Raw markdown, deliberately. A rendered view would look
+                             nicer and be useless: the job here is to select the text
+                             and paste it into Suno exactly as written. -->
+                        <TextBox x:Name="LyricsText" Grid.Row="1" IsReadOnly="True" BorderThickness="0"
+                                 Background="#12141c" Foreground="#dfe4ee" FontFamily="Consolas" FontSize="12.5"
+                                 Padding="14,6,14,14" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <GridSplitter Grid.Row="1" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          Background="#2c3040" ShowsPreview="False" Cursor="SizeNS"
+                          ToolTip="Drag to resize the log. The height is remembered." />
+
+            <!-- No heading. The panel is unmistakably a log and the label cost a
+                 line of height that the log itself should have. -->
+            <TextBox x:Name="LogBox" Grid.Row="2" IsReadOnly="True"
+                     Background="#12141c" Foreground="#a8f0c0" FontFamily="Consolas" FontSize="11"
+                     BorderThickness="0" Padding="8,4,8,4"
+                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        </Grid>
+
+        <GridSplitter Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      Background="#2c3040" ShowsPreview="False" Cursor="SizeWE"
+                      ToolTip="Drag to resize the control panel. The width is remembered." />
+
+        <!-- Control panel: a title, then whichever view the rail has selected. -->
+        <Grid Grid.Column="2" Background="#232733">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="PanelTitle" Grid.Row="0" Text="Article Images" Foreground="#E6AC00"
+                       FontSize="16" FontWeight="Bold" Margin="10,10,10,8" />
+
+            <!-- ============================ SETTINGS ============================
+                 Everything that configures the tool rather than drives a run. It
+                 is one rail click away, so the working view starts at the
+                 worklist rather than at four text boxes. -->
+            <ScrollViewer x:Name="ViewSettings" Grid.Row="1" Visibility="Collapsed"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+
+                <StackPanel Margin="10,0,10,10">
+                    <TextBlock Style="{StaticResource SectionLabel}"
+                               Text="Repo root, core/ and app/web/ live under this path" />
+                    <TextBox x:Name="RepoRoot" Height="26" Margin="0,0,0,4"
+                             VerticalContentAlignment="Center"
+                             ToolTip="The JubiLujah.com checkout. Articles are read from core/articles and core/backstage; images are written into app/web/public/images." />
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="5"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Button x:Name="BtnScan" Grid.Column="0" Content="Scan sections" Height="26" FontSize="11" Click="BtnScan_Click" />
+                        <Button x:Name="BtnSaveCfg" Grid.Column="2" Content="Save settings" Height="26" FontSize="11" Click="BtnSaveCfg_Click"
+                                ToolTip="Writes studio.config.json next to the tool (git-ignored). Saves the panel and log sizes too." />
+                    </Grid>
+                </StackPanel>
+
+                <!-- The author references. Each article's `personaSlug` picks
+                     <Name>.png out of this folder, and that portrait is attached
+                     to the ChatGPT turn so the generated image carries the person
+                     who wrote the piece. -->
+                <StackPanel Margin="10,0,10,10">
+                    <TextBlock Style="{StaticResource SectionLabel}"
+                               Text="Author reference portraits, &lt;Name&gt;.png, one per Family voice" />
+                    <TextBox x:Name="PersonasRoot" Height="26" Margin="0,0,0,4"
+                             VerticalContentAlignment="Center"
+                             ToolTip="Folder holding Amir.png, Caleb.png and the other ten. Attached to each turn as the likeness reference for that piece's author." />
+                    <CheckBox x:Name="ChkIncludeAuthor" IsChecked="True"
+                              Foreground="#c9cede" FontSize="11" Margin="0,2,0,0"
+                              ToolTip="On: the piece's author is rendered into every image, in clothing that suits the scene. Off: the imagePrompt is sent alone and no reference is attached.">
+                        <TextBlock Text="Put the piece's author in the image" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <TextBlock Text="With this on, a piece whose reference portrait is missing is skipped rather than imaged without its author."
+                               Foreground="#6f7684" FontSize="10" Margin="18,2,0,0" TextWrapping="Wrap" />
+                </StackPanel>
+
+                <StackPanel Margin="10,0,10,10">
+                    <TextBlock Style="{StaticResource SectionLabel}"
+                               Text="Music root, the persona album folders live under this path" />
+                    <TextBox x:Name="MusicRoot" Height="26" Margin="0,0,0,4"
+                             VerticalContentAlignment="Center"
+                             ToolTip="Folder containing amir-inspire, caleb-inspire and the rest. Each holds that voice's albums." />
+                </StackPanel>
+
+                <StackPanel Margin="10,0,10,10">
+                    <TextBlock Style="{StaticResource SectionLabel}"
+                               Text="Generation location, open your Images project in the browser then click below" />
+                    <TextBox x:Name="LocationUrl" Text="https://chatgpt.com/" Height="26" Margin="0,0,0,4"
+                             VerticalContentAlignment="Center" />
+                    <Button x:Name="BtnUseLocation" Content="Use current page as location" Height="26" FontSize="11" Click="BtnUseLocation_Click" />
+                </StackPanel>
+
+                <!-- The site reads compiled JSON, not the .md files. Writing the
+                     image into an article is only half the job; without this the
+                     picture exists on disk and the page still shows the fallback
+                     panel. Shelling out to the repo's own compilers keeps one
+                     source of truth rather than reimplementing them here. -->
+                <StackPanel Margin="10,0,10,10">
+                    <TextBlock Style="{StaticResource SectionLabel}"
+                               Text="Compile the site JSON after a run" />
+                    <Button x:Name="BtnRebuildJson" Content="Rebuild articles.json + backstage.json" Height="26" FontSize="11"
+                            Click="BtnRebuildJson_Click"
+                            ToolTip="Runs core/articles/gen-articles.mjs and app/web/scripts/gen-backstage.mjs. Until this runs, a new image is on disk but the page still shows the fallback panel." />
+                </StackPanel>
+
+                <TextBlock Margin="10,4,10,12" Foreground="#6f7684" FontSize="10" TextWrapping="Wrap"
+                           Text="Log in to ChatGPT in the browser pane, then pick a section on the images view and generate. The panel and log sizes are remembered." />
+            </StackPanel>
+            </ScrollViewer>
+
+            <!-- ============================= IMAGES =============================
+                 Four rows: the controls, the worklist, the preview, the button. -->
+            <Grid x:Name="ViewImages" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" MinHeight="90" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+            <!-- Refresh and Stop together, because they are the two things you
+                 reach for WHILE a run is going. -->
+            <Grid Grid.Row="0" Margin="10,6,10,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnReload" Grid.Column="0" Content="Refresh" Height="28" Width="66"
+                        VerticalAlignment="Top" Click="BtnReload_Click" />
+                <Button x:Name="BtnStop" Grid.Column="2" Content="Stop" Height="28" Width="56"
+                        VerticalAlignment="Top" Click="BtnStop_Click" IsEnabled="False"
+                        ToolTip="Halts after the image currently generating. Nothing in flight is lost." />
+                <CheckBox x:Name="ChkShowAll" Grid.Column="3"
+                          Foreground="#c9cede" FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"
+                          Checked="ChkShowAll_Click" Unchecked="ChkShowAll_Click">
+                    <TextBlock Text="Show pieces that already have an image" TextWrapping="Wrap" />
+                </CheckBox>
+            </Grid>
+
+            <!-- All first, then one tab per source folder. Tag carries the
+                 section key; "__all" is the flattened view and is what the
+                 generate button sweeps when it is selected. -->
+            <TabControl x:Name="Tabs" Grid.Row="1" Margin="10,0,10,8" Background="#2b3040" BorderBrush="#2c3040"
+                        BorderThickness="1" SelectionChanged="Tabs_SelectionChanged">
+                <TabItem Header="All" Tag="__all" ToolTip="Every section, in order">
+                    <ListBox x:Name="LstAll" Style="{StaticResource JobList}"
+                             SelectionChanged="ArticleList_SelectionChanged" />
+                </TabItem>
+                <TabItem Header="Articles" Tag="articles" ToolTip="core/articles — the article library">
+                    <ListBox x:Name="LstArticles" Style="{StaticResource JobList}"
+                             SelectionChanged="ArticleList_SelectionChanged" />
+                </TabItem>
+                <TabItem Header="Interviews" Tag="interviews" ToolTip="core/backstage/interviews">
+                    <ListBox x:Name="LstInterviews" Style="{StaticResource JobList}"
+                             SelectionChanged="ArticleList_SelectionChanged" />
+                </TabItem>
+                <TabItem Header="Stories" Tag="stories" ToolTip="core/backstage/stories">
+                    <ListBox x:Name="LstStories" Style="{StaticResource JobList}"
+                             SelectionChanged="ArticleList_SelectionChanged" />
+                </TabItem>
+                <TabItem Header="Testimonies" Tag="testimonies" ToolTip="core/backstage/testimonies">
+                    <ListBox x:Name="LstTestimonies" Style="{StaticResource JobList}"
+                             SelectionChanged="ArticleList_SelectionChanged" />
+                </TabItem>
+            </TabControl>
+
+            <!-- The preview. Whatever is selected above, shown here. Full panel
+                 width and a 16:9 box, which is the ratio every image is generated
+                 at, so the picture fills the frame exactly and the panel width
+                 alone decides how tall this gets. That is why the worklist row
+                 above carries a MinHeight: as the panel widens the preview grows
+                 with it, and without a floor it would eventually squeeze the list
+                 it is previewing from. -->
+            <Border Grid.Row="2" Margin="10,0,10,8" Background="#12141c"
+                    BorderBrush="#2c3040" BorderThickness="1" CornerRadius="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="0" Stretch="Uniform" StretchDirection="Both">
+                        <Grid Width="320" Height="180">
+                            <!-- Sits under the image so a piece with no render yet
+                                 shows a labelled frame rather than a hole. -->
+                            <TextBlock x:Name="PreviewEmpty" Foreground="#4d566c" FontSize="11"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       TextAlignment="Center" TextWrapping="Wrap" Margin="16,0"
+                                       Text="Select a piece to preview its image" />
+                            <Image x:Name="PreviewImage" Stretch="UniformToFill"
+                                   RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Grid>
+                    </Viewbox>
+
+                    <TextBlock x:Name="PreviewCaption" Grid.Row="1" Foreground="#9aa0ad" FontSize="10"
+                               Margin="8,6,8,7" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                               MaxHeight="46" Text="" />
+                </Grid>
+            </Border>
+
+            <!-- One button, and it does what the selected tab says. The tab is
+                 the only place scope is expressed, so it cannot disagree with a
+                 second control asking the same question. -->
+            <Button x:Name="BtnGenerate" Grid.Row="3" Content="Generate Images"
+                    Style="{StaticResource GenerateButton}" Margin="10,0,10,12"
+                    Click="BtnGenerate_Click"
+                    ToolTip="Generates every piece in the selected tab that is still missing an image. Pick All to sweep every section." />
+
+            </Grid>
+            <!-- ========================== END IMAGES ============================ -->
+
+            <!-- ============================= MUSIC ==============================
+                 The workflow the album lyrics were always heading toward: read
+                 them here, render the audio in Suno, drop the results back into
+                 the album's tracks/ folder. -->
+            <Grid x:Name="ViewMusic" Grid.Row="1" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" MinHeight="80" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" MinHeight="80" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <TextBlock Margin="10,0,10,6" Foreground="#9aa0ad" FontSize="11" TextWrapping="Wrap"
+                               Text="One voice at a time. An album is written and sung by a single persona, so scoring runs a voice at a time and this list never mixes them." />
+
+                    <!-- The voice filter. Deliberately no "All" entry: an album
+                         belongs to one voice, and a mixed list of 937 invites
+                         filing a Caleb take against an Imani album. -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Margin="10,2,10,3" Text="Voice" />
+                    <ComboBox x:Name="CmbPersona" Margin="10,0,10,6" Height="26" FontSize="11"
+                              VerticalContentAlignment="Center"
+                              SelectionChanged="CmbPersona_SelectionChanged"
+                              ToolTip="Whose albums to score. Every album below belongs to this voice." />
+
+                    <Grid Margin="10,0,10,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BtnMusicRefresh" Grid.Column="0" Content="Refresh" Height="26" Width="66"
+                                FontSize="11" Click="BtnMusicRefresh_Click" />
+                        <TextBlock x:Name="MusicSummary" Grid.Column="1" Foreground="#a8f0c0" FontFamily="Consolas"
+                                   FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"
+                                   TextTrimming="CharacterEllipsis" Text="Refresh to see coverage." />
+                    </Grid>
+                </StackPanel>
+
+                <ListBox x:Name="LstAlbums" Grid.Row="1" Style="{StaticResource JobList}" Margin="10,0,10,6"
+                         SelectionChanged="LstAlbums_SelectionChanged" />
+
+                <TextBlock x:Name="TrackHead" Grid.Row="2" Style="{StaticResource SectionLabel}" Margin="10,0,10,3"
+                           Text="Tracks" />
+
+                <!-- The album's songs, in SONG TITLE order off the lyrics file
+                     rather than off the folder, because the folder is the thing
+                     being filled in and an empty one would list nothing. -->
+                <ListBox x:Name="LstTracks" Grid.Row="3" Style="{StaticResource JobList}" Margin="10,0,10,8"
+                         SelectionChanged="LstTracks_SelectionChanged" />
+
+                <!-- One drop target, bound to the SELECTED track. Twelve zones
+                     would not fit and would not help: the thing that stops a take
+                     landing in the wrong slot is the numbered filename it is
+                     saved under, which is derived from the track you picked. -->
+                <StackPanel Grid.Row="4" Margin="10,0,10,12">
+                    <Border x:Name="Drop1" AllowDrop="True" Background="#12141c" BorderBrush="#2c3040"
+                            BorderThickness="1" CornerRadius="4" Height="62" Margin="0,0,0,8"
+                            DragOver="Drop_DragOver" DragLeave="Drop_DragLeave" Drop="Drop1_Drop"
+                            ToolTip="Drop the rendered .mp3 here. Several at once fill consecutive tracks from the one selected.">
+                        <Grid Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock x:Name="Drop1Label" Foreground="#9aa0ad" FontSize="11" FontWeight="SemiBold"
+                                           Text="No track selected" TextTrimming="CharacterEllipsis" />
+                                <TextBlock x:Name="Drop1Hint" Foreground="#6f7684" FontSize="10"
+                                           Text="pick an album and a track first" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <!-- Appears only once the file is on disk. Verification
+                                 is the whole point: the filename is derived, so the
+                                 only way to know the right take landed is to hear it. -->
+                            <Button x:Name="BtnPlay1" Grid.Column="1" Style="{StaticResource PlayButton}"
+                                    Visibility="Collapsed" Click="BtnPlay1_Click"
+                                    ToolTip="Play the file that is on disk for this track." />
+                        </Grid>
+                    </Border>
+
+                    <Button x:Name="BtnMusicOpen" Content="Open this album's folder" Height="26" FontSize="11"
+                            Click="BtnMusicOpen_Click"
+                            ToolTip="Opens the album folder in Explorer." />
+                </StackPanel>
+            </Grid>
+            <!-- =========================== END MUSIC =========================== -->
+
+            <!-- ========================= COVER IMAGES ===========================
+                 Albums on the music drive with no artwork/<CODE>.png, imaged
+                 through the same browser the Article Images view uses.
+
+                 Each prompt is BUILT from two things: the persona's generation
+                 brief in .models/model_<voice>.md, and the album's own title,
+                 theme and song titles. Neither is stored anywhere else, which is
+                 the point — .models is the source of truth for how a persona's
+                 covers look, and a second copy would be free to drift from it.
+
+                 The picture comes back with no lettering on it at all. The border,
+                 the wordmark and the title are drawn afterwards by ApplyChrome,
+                 from the album's own meta file. See the note there for the cover
+                 in the catalogue that proves why. -->
+            <Grid x:Name="ViewCovers" Grid.Row="1" Visibility="Collapsed">
+                <!-- The worklist and the preview are BOTH star rows, and that is
+                     what keeps the Generate button on screen.
+
+                     A Grid gives every Auto row its full desired height first and
+                     lets the last ones fall off the bottom when the total does not
+                     fit. The preview is square — at a 380px panel it wants ~380px
+                     of height, where the Images view's 16:9 box wants ~200 — so
+                     with the preview in an Auto row the panel overflowed by
+                     roughly the height of one button, and the button it lost was
+                     the yellow one.
+
+                     Two star rows share whatever is left AFTER the fixed controls,
+                     so both shrink under pressure and the button is never the
+                     thing that gives. The preview is capped as well, or on a tall
+                     window it would grow to fill the panel and squeeze the list it
+                     is previewing from. -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2*" MinHeight="64" />
+                    <RowDefinition Height="3*" MinHeight="80" MaxHeight="330" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Language scope, and it sits at the very top because it governs
+                     everything below it — the list AND what Generate sweeps.
+
+                     Checked by default. A translated edition is not a new picture:
+                     the house pattern is that the RO/JA/KO twin reuses its English
+                     original's photograph and swaps only the title text, so
+                     generating one from scratch would produce a second, different
+                     cover for the same album and break the pairing. -->
+                <CheckBox x:Name="ChkCoversEnglishOnly" Grid.Row="0" IsChecked="True"
+                          Foreground="#c9cede" FontSize="11" Margin="10,8,10,2"
+                          Checked="ChkCoversEnglishOnly_Click" Unchecked="ChkCoversEnglishOnly_Click"
+                          ToolTip="Lists only albums whose code ends in EN. Untick to include every localised edition (RO, HI, JA, KO and the rest).">
+                    <TextBlock Text="Display English Albums Only" TextWrapping="Wrap" />
+                </CheckBox>
+
+                <!-- Refresh and Stop together, because they are the two things you
+                     reach for WHILE a run is going. Refresh also re-reads .models,
+                     so editing a brief and pressing it changes the next image. -->
+                <Grid Grid.Row="1" Margin="10,6,10,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="BtnCoversRefresh" Grid.Column="0" Content="Refresh" Height="28" Width="66"
+                            VerticalAlignment="Top" Click="BtnCoversRefresh_Click"
+                            ToolTip="Re-reads the music drive and the .models briefs." />
+                    <Button x:Name="BtnCoversStop" Grid.Column="2" Content="Stop" Height="28" Width="56"
+                            VerticalAlignment="Top" Click="BtnStop_Click" IsEnabled="False"
+                            ToolTip="Halts after the cover currently generating. Nothing in flight is lost." />
+                    <CheckBox x:Name="ChkCoversShowAll" Grid.Column="3"
+                              Foreground="#c9cede" FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"
+                              Checked="ChkCoversShowAll_Click" Unchecked="ChkCoversShowAll_Click">
+                        <TextBlock Text="Show albums that already have artwork" TextWrapping="Wrap" />
+                    </CheckBox>
+                </Grid>
+
+                <!-- One persona at a time, or all twelve. Same reasoning as the
+                     Album Music picker: an album belongs to exactly one voice, and
+                     a persona's covers are a single visual system, so generating a
+                     voice at a time is how the set stays coherent. "All personas"
+                     is offered because the missing ones cluster in two voices. -->
+                <StackPanel Grid.Row="2" Margin="10,0,10,8">
+                    <TextBlock Text="Persona" Foreground="#9aa0ad" FontSize="11" Margin="0,0,0,3" />
+                    <ComboBox x:Name="CmbCoverPersona" Height="26" FontSize="12"
+                              SelectionChanged="CmbCoverPersona_SelectionChanged"
+                              ToolTip="Whose albums to list. Each persona's covers are built from its own model file in .models." />
+
+                    <!-- Four by default, because one interpretation of a title is a
+                         coin toss. Each draft attacks the album from a different
+                         angle — celebration, majesty, wonder, intimacy — so the
+                         clever-but-lifeless reading is one of four rather than the
+                         only one. Lower it when a persona's look is settled. -->
+                    <TextBlock Text="Drafts per album" Foreground="#9aa0ad" FontSize="11" Margin="0,8,0,3" />
+                    <ComboBox x:Name="CmbDrafts" Height="26" FontSize="12"
+                              ToolTip="How many different angles to generate per album. Four gives celebration, majesty, wonder and intimacy.">
+                        <ComboBoxItem Content="4 — all four angles" Tag="4" IsSelected="True" />
+                        <ComboBoxItem Content="2 — celebration and majesty" Tag="2" />
+                        <ComboBoxItem Content="1 — celebration only" Tag="1" />
+                    </ComboBox>
+                </StackPanel>
+
+                <ListBox x:Name="LstCovers" Grid.Row="3" Style="{StaticResource JobList}" Margin="10,0,10,8"
+                         SelectionChanged="LstCovers_SelectionChanged" />
+
+                <!-- Square, because covers are. Shows the file on disk, so a run
+                     in flight shows each cover as it lands. -->
+                <Border Grid.Row="4" Margin="10,0,10,8" Background="#12141c"
+                        BorderBrush="#2c3040" BorderThickness="1" CornerRadius="4">
+                    <Grid>
+                        <!-- The picture takes a STAR row, not Auto: inside a
+                             height-capped border an Auto row would still demand
+                             the Viewbox's natural size and push the caption out. -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0" Stretch="Uniform" StretchDirection="DownOnly" Margin="4">
+                            <Grid Width="240" Height="240">
+                                <TextBlock x:Name="CoverPreviewEmpty" Foreground="#4d566c" FontSize="11"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           TextAlignment="Center" TextWrapping="Wrap" Margin="16,0"
+                                           Text="Select an album to preview its cover" />
+                                <Image x:Name="CoverPreviewImage" Stretch="Uniform"
+                                       RenderOptions.BitmapScalingMode="HighQuality" />
+                            </Grid>
+                        </Viewbox>
+                        <TextBlock x:Name="CoverPreviewCaption" Grid.Row="1" Foreground="#9aa0ad" FontSize="10"
+                                   Margin="8,6,8,7" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                   MaxHeight="46" Text="" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Row="5" Margin="10,0,10,8">
+                    <CheckBox x:Name="ChkCoverChrome" IsChecked="True"
+                              Foreground="#c9cede" FontSize="11" Margin="0,0,0,6"
+                              ToolTip="Draws the border, the persona wordmark and the album title onto the finished photograph, using the title from album.meta.json. Untick to save the bare picture.">
+                        <TextBlock Text="Draw the house chrome (border, wordmark, album title)" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <!-- Side by side rather than stacked. Every fixed pixel down
+                         here comes straight off the two star rows above, and the
+                         panel has more controls than the other views. -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BtnCoversOpen" Grid.Column="0" Content="Album folder" Height="26" FontSize="11"
+                                Click="BtnCoversOpen_Click"
+                                ToolTip="Opens the review folder when this album has a cover waiting there, and the album folder otherwise." />
+                        <Button x:Name="BtnReviewOpen" Grid.Column="2" Content="Review folder" Height="26" FontSize="11"
+                                Click="BtnReviewOpen_Click"
+                                ToolTip="Opens review\&lt;Persona&gt;, where generated covers land for approval." />
+                    </Grid>
+                </StackPanel>
+
+                <Button x:Name="BtnCoversGenerate" Grid.Row="6" Content="Generate Covers"
+                        Style="{StaticResource GenerateButton}" Margin="10,0,10,12"
+                        Click="BtnCoversGenerate_Click"
+                        ToolTip="Generates a cover for every listed album that has no artwork yet. Masters land on the music drive; nothing is published." />
+            </Grid>
+            <!-- ======================= END COVER IMAGES ========================= -->
+
+            <!-- ============================ DEPLOY ==============================
+                 Three places hold the site and they drift independently: this
+                 checkout, the VPS, and the CDN bucket. Every number here is
+                 measured by wpf/deploy-status.mjs, production counts included,
+                 which are read off the box over SSH rather than assumed. -->
+            <Grid x:Name="ViewDeploy" Grid.Row="1" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10,0,10,6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BtnDeployRefresh" Grid.Column="0" Content="Refresh" Height="26" Width="66"
+                                FontSize="11" Click="BtnDeployRefresh_Click" />
+                        <TextBlock x:Name="DeployWhen" Grid.Column="1" Foreground="#6f7684" FontSize="10"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"
+                                   TextTrimming="CharacterEllipsis" Text="not measured yet" />
+                    </Grid>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="10,0,10,0">
+
+                        <!-- The counts, local against live, with the gap. -->
+                        <ItemsControl x:Name="DeployTiles">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#12141c" BorderBrush="#2c3040" BorderThickness="1"
+                                            CornerRadius="4" Padding="10,8" Margin="0,0,0,6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Name}" Foreground="#c9cede"
+                                                           FontSize="12" FontWeight="SemiBold" />
+                                                <TextBlock Text="{Binding Detail}" Foreground="#6f7684"
+                                                           FontSize="10" Margin="0,2,0,0" TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding Pending}"
+                                                       Foreground="{Binding Colour}" FontSize="22" FontWeight="Bold"
+                                                       VerticalAlignment="Center" Margin="10,0,2,0" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="Production" Style="{StaticResource SectionLabel}" Margin="0,6,0,3" />
+                        <Border Background="#12141c" BorderBrush="#2c3040" BorderThickness="1" Padding="10,8" Margin="0,0,0,6">
+                            <TextBlock x:Name="DeployProd" Foreground="#a8f0c0" FontFamily="Consolas"
+                                       FontSize="11" TextWrapping="Wrap" Text="not measured yet" />
+                        </Border>
+
+                        <TextBlock Text="Catalogue manifest, the Step 0 gate" Style="{StaticResource SectionLabel}" Margin="0,4,0,3" />
+                        <Border Background="#12141c" BorderBrush="#2c3040" BorderThickness="1" Padding="10,8" Margin="0,0,0,6">
+                            <TextBlock x:Name="DeployManifest" Foreground="#a8f0c0" FontFamily="Consolas"
+                                       FontSize="11" TextWrapping="Wrap" Text="not measured yet" />
+                        </Border>
+
+                        <TextBlock Text="CDN, Cloudflare R2" Style="{StaticResource SectionLabel}" Margin="0,4,0,3" />
+                        <Border Background="#12141c" BorderBrush="#2c3040" BorderThickness="1" Padding="10,8" Margin="0,0,0,10">
+                            <TextBlock x:Name="DeployCdn" Foreground="#a8f0c0" FontFamily="Consolas"
+                                       FontSize="11" TextWrapping="Wrap" Text="not measured yet" />
+                        </Border>
+
+                        <TextBlock Foreground="#6f7684" FontSize="10" TextWrapping="Wrap" Margin="0,0,0,12"
+                                   Text="Deploy runs deploy/publish.sh, which is PUBLISH.md made executable: the Step 0 manifest gate, the R2 music sync, a snapshot of the current production tree, the ship, npm ci and build on the VPS, a PM2 restart, then verification. It stops at the first failure and tells you where the snapshot is. First-publish steps that touch DNS, SSL and the nginx vhost are deliberately not on this button." />
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="2" Margin="10,0,10,12">
+                    <CheckBox x:Name="ChkDeploySiteOnly" Foreground="#6f7684" FontSize="10" Margin="0,0,0,4"
+                              ToolTip="Skips the R2 music sync. Right when nothing new has been rendered since the last publish.">
+                        <TextBlock Text="site only, skip the CDN music sync" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <CheckBox x:Name="ChkDeploySkipManifest" Foreground="#6f7684" FontSize="10" Margin="0,0,0,4"
+                              ToolTip="The manifest gate is mandatory for a reason: publishing over a stale manifest ships a catalogue that does not match the drive.">
+                        <TextBlock Text="skip the Step 0 manifest gate" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <CheckBox x:Name="ChkDeployNoBackup" Foreground="#6f7684" FontSize="10" Margin="0,0,0,6"
+                              ToolTip="Skips the production snapshot. Without it there is nothing to roll back to.">
+                        <TextBlock Text="skip the production snapshot" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <Button x:Name="BtnDeployCheck" Content="Preflight only" Height="28" FontSize="11"
+                            Margin="0,0,0,6" Click="BtnDeployCheck_Click"
+                            ToolTip="Checks the SSH key, the repo, the music drive and the manifest gate. Changes nothing." />
+                    <Button x:Name="BtnDeploy" Content="Deploy" Style="{StaticResource GenerateButton}"
+                            Click="BtnDeploy_Click"
+                            ToolTip="Ships the site to production and pushes music to the CDN. Watch the log below." />
+                </StackPanel>
+            </Grid>
+            <!-- ========================== END DEPLOY =========================== -->
+
+        </Grid>
+
+        <!-- ============================== THE RAIL ==============================
+             Three views at the top, settings pinned at the bottom. DockPanel
+             rather than a Grid with rows, because "top group, bottom group" is
+             exactly what Dock expresses and it survives the rail growing a fifth
+             button without anyone re-numbering rows. -->
+        <Border Grid.Column="3" Background="#12141c" BorderBrush="#2c3040" BorderThickness="1,0,0,0">
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Top" Margin="0,12,0,0">
+                    <RadioButton x:Name="RailImages" GroupName="Rail" Style="{StaticResource RailButton}"
+                                 IsChecked="True" Content="&#xEB9F;" Checked="Rail_Checked"
+                                 ToolTip="Article images. The per-section worklist and the generate button." />
+                    <TextBlock Style="{StaticResource RailCaption}" Text="Images" />
+
+                    <RadioButton x:Name="RailMusic" GroupName="Rail" Style="{StaticResource RailButton}"
+                                 Content="&#xEC4F;" Checked="Rail_Checked"
+                                 ToolTip="Album music. The lyrics reader, the Suno style lines, and the tracks still to be rendered." />
+                    <TextBlock Style="{StaticResource RailCaption}" Text="Music" />
+
+                    <RadioButton x:Name="RailCovers" GroupName="Rail" Style="{StaticResource RailButton}"
+                                 Content="&#xE91B;" Checked="Rail_Checked"
+                                 ToolTip="Cover images. Albums with no artwork, generated from each persona's brief in .models." />
+                    <TextBlock Style="{StaticResource RailCaption}" Text="Covers" />
+
+                    <RadioButton x:Name="RailDeploy" GroupName="Rail" Style="{StaticResource RailButton}"
+                                 Content="&#xE753;" Checked="Rail_Checked"
+                                 ToolTip="Deploy. What is live, what is waiting, and the button that ships it." />
+                    <TextBlock Style="{StaticResource RailCaption}" Text="Deploy" />
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,12">
+                    <RadioButton x:Name="RailSettings" GroupName="Rail" Style="{StaticResource RailButton}"
+                                 Content="&#xE713;" Checked="Rail_Checked" Margin="0,0,0,4"
+                                 ToolTip="Settings. Repo root, author portraits, music root, generation location." />
+                    <TextBlock Style="{StaticResource RailCaption}" Text="Settings" Margin="0,0,0,0" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

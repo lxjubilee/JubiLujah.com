@@ -61,7 +61,9 @@ router.get(
     const variant = typeof req.query.variant === 'string' ? req.query.variant : 'standard';
     const size = req.query.size ? parseInt(String(req.query.size), 10) : 1024;
     const prefix = req.query.rp ? 'RP' : 'R'; // §6.7 ephemeral persona-token QR encodes /rp/
-    const img = await getImage(token, { variant, format, size, prefix });
+    // Display-only tighter quiet zone for admin thumbnails (SVG only); clamped in getImage.
+    const qz = req.query.qz != null ? parseInt(String(req.query.qz), 10) : undefined;
+    const img = await getImage(token, { variant, format, size, prefix, qz });
     res.set('Cache-Control', 'public, max-age=31536000, immutable');
     res.set('X-Robots-Tag', 'noindex');
     if (img.variant === 'print') res.set('X-QR-Min-Print', '2cm'); // §10.3 min physical size
@@ -977,6 +979,35 @@ router.get('/asset-tokens', requireRedirectorAuth('viewer'), ah(async (req, res)
     [kind],
   );
   res.json({ tokens: r.rows });
+}));
+
+// Dashboard stats (viewer) — token counts by kind, alias count, 90-day scan
+// rollups, and the top codes. One call powers the admin dashboard header cards.
+router.get('/stats', requireRedirectorAuth('viewer'), ah(async (req, res) => {
+  const [byKind, aliasCount, scans, top] = await Promise.all([
+    query(`SELECT content_kind, COUNT(*)::int c FROM redirector.tokens WHERE state = 'active' GROUP BY content_kind`),
+    query(`SELECT COUNT(*)::int c FROM redirector.aliases WHERE approval_status = 'approved'`),
+    query(`SELECT
+        COUNT(*)::int total,
+        COUNT(*) FILTER (WHERE occurred_at >= NOW() - INTERVAL '24 hours')::int last24h,
+        COUNT(*) FILTER (WHERE occurred_at >= NOW() - INTERVAL '7 days')::int last7d,
+        COUNT(*) FILTER (WHERE occurred_at::date = CURRENT_DATE)::int today,
+        COUNT(*) FILTER (WHERE landing_shown)::int landings,
+        COUNT(*) FILTER (WHERE is_bot)::int bots
+      FROM redirector.scan_events WHERE occurred_at >= NOW() - INTERVAL '90 days'`),
+    query(`SELECT token, content_kind AS kind, resolve_count::int
+             FROM redirector.tokens WHERE state = 'active'
+            ORDER BY resolve_count DESC NULLS LAST, created_at DESC LIMIT 6`),
+  ]);
+  const kinds = {}; let total = 0;
+  for (const r of byKind.rows) { kinds[r.content_kind] = r.c; total += r.c; }
+  const s = scans.rows[0] || {};
+  res.set('Cache-Control', 'no-store');
+  res.json({
+    tokens: { total, album: kinds.album || 0, track: kinds.track || 0, article: kinds.article || 0, book: kinds.book || 0, alias: aliasCount.rows[0].c },
+    scans: { total: s.total || 0, last24h: s.last24h || 0, last7d: s.last7d || 0, today: s.today || 0, landings: s.landings || 0, bots: s.bots || 0 },
+    topCodes: top.rows,
+  });
 }));
 
 // PUBLIC — the album/song token map for one album code, so the public album page

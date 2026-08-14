@@ -50,6 +50,11 @@ export interface TopToken {
 }
 export interface BreakdownRow { key: string; n: number; }
 export interface AssetToken { slug: string; content_kind: string; token: string; }
+export interface RdrStats {
+  tokens: { total: number; album: number; track: number; article: number; book: number; alias: number };
+  scans: { total: number; last24h: number; last7d: number; today: number; landings: number; bots: number };
+  topCodes: { token: string; kind: string | null; resolve_count: number }[];
+}
 export interface ProbeReport { total: number; series: { day: string; probes: number; sources: number }[]; }
 
 function auditQuery(entityType?: string, entityId?: string): string {
@@ -74,6 +79,7 @@ export const redirector = {
   // admin catalog to render each album/song's actual QR. Optional kind filter.
   assetTokens: (kind?: string) =>
     api.get<{ tokens: AssetToken[] }>(`/api/redirector/asset-tokens${kind ? `?kind=${encodeURIComponent(kind)}` : ''}`),
+  stats: () => api.get<RdrStats>('/api/redirector/stats'),
   createToken: (body: Record<string, unknown>) => api.post<CreatedToken>('/api/redirector/tokens', body),
   retire: (token: string, supersedeWith?: string) =>
     api.post<{ token: string; state: string }>(`/api/redirector/tokens/${token}/retire`, supersedeWith ? { supersede_with: supersedeWith } : {}),

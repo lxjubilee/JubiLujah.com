@@ -10,7 +10,7 @@
 // the persona (see personas/activate/README.md). The paired UserPromptSubmit
 // hook (activate-persona.mjs) still lets the user switch personas mid-session.
 
-import { resolveWorkspacePersona, buildContext, readInput, emit } from './persona-directive.mjs';
+import { resolveWorkspacePersona, buildContext, readInput, emit, verifyKeyHolder } from './persona-directive.mjs';
 
 const input = readInput() || {};
 const cwd = input.cwd || process.cwd();
@@ -20,4 +20,5 @@ if (!resolved) process.exit(0); // no binding for this workspace — stay neutra
 
 const workspace = resolved.entry.label || resolved.entry.domain;
 const envPath = cwd.replace(/\\/g, '/').replace(/\/+$/, '') + '/.env';
-emit('SessionStart', buildContext({ persona: resolved.persona, event: 'SessionStart', workspace, envPath }));
+const identity = await verifyKeyHolder(envPath);
+emit('SessionStart', buildContext({ persona: resolved.persona, event: 'SessionStart', workspace, envPath, identity }));

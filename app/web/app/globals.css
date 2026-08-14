@@ -745,12 +745,21 @@ a { color: inherit; }
 @media (max-width: 1200px) { .album-exec .jv-app-grid { grid-template-columns: 260px minmax(0,1fr); } .album-exec .jv-right { display: none; } }
 @media (max-width: 820px) {
   .album-exec .x-inner { max-width: 100%; }
+  /* Mobile: hide the big cinematic hero banner image; keep only the H1 title.
+     Collapse the 56vh banner to a compact heading band. */
+  .album-exec .x-hero {
+    min-height: 0; padding: 20px 0; background-image: none;
+    align-items: flex-start; justify-content: flex-start;
+  }
   .album-exec .x-hero h1 { font-size: 30px; }
   .album-exec .jv-app-grid { grid-template-columns: 1fr; }
   /* Mobile: the album itself comes right after the hero; Similar Music follows. */
   .album-exec .jv-center { order: -1; }
-  .album-exec .jv-center-head { padding: 16px 16px 8px; gap: 14px; }
-  .album-exec .jv-center-actions { padding: 12px 16px 16px; gap: 10px; }
+  /* Mobile: stack the album head so the cover is centered above the title/meta. */
+  .album-exec .jv-center-head { padding: 16px 16px 8px; gap: 14px; flex-direction: column; align-items: center; text-align: center; }
+  .album-exec .jv-cover-wrap { margin: 0 auto; }
+  .album-exec .jv-center-sub { justify-content: center; }
+  .album-exec .jv-center-actions { padding: 12px 16px 16px; gap: 10px; justify-content: center; }
   .album-exec .jv-lib { max-height: none; } .album-exec .jv-lib-list { max-height: 320px; }
   .album-exec .jv-center-title { font-size: 30px; }
   .album-exec .jv-cover-wrap { width: 120px; }
@@ -1075,7 +1084,7 @@ a { color: inherit; }
 /* Backstage runs on a flat black canvas — override the site's fixed navy
    gradient, scoped to the route via :has so no other page is affected. */
 body:has(.bs-page) { background: #000; }
-.bs-page { max-width: var(--site-max); margin: 0 auto; padding: 24px 0 48px; }
+.bs-page { max-width: none; margin: 0; padding: clamp(28px, 2vw, 52px) 10px 64px; }
 
 .bs-hero { padding: 8px 0 28px; }
 .bs-hero-eyebrow {
@@ -1098,16 +1107,20 @@ body:has(.bs-page) { background: #000; }
    max-width steps down at each breakpoint so the row holds 5 → 4 → 3 → 2 → 1
    fixed-width cards; the section header rides the same ladder so it stays
    aligned with the grid's edges. */
-.bs-section-header,
-.bs-grid { max-width: 1548px; margin-left: auto; margin-right: auto; }
-.bs-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
-@media (max-width: 1567px) { .bs-section-header, .bs-grid { max-width: 1236px; } } /* 4 per row */
-@media (max-width: 1267px) { .bs-section-header, .bs-grid { max-width: 924px; } }  /* 3 per row */
-@media (max-width: 955px)  { .bs-section-header, .bs-grid { max-width: 612px; } }  /* 2 per row */
-@media (max-width: 643px)  { .bs-section-header, .bs-grid { max-width: 300px; } }  /* 1 per row */
+/* Full-width responsive grid: 5 equal columns on desktop that STRETCH to fill the
+   screen (no fixed 300px cards, no centered 1548px cap). A featured "wide" card
+   spans 2 columns; the 12-card block (wide at index 0, 6, 11) tiles exactly into
+   3 rows of 5, the wide card walking across each row. Column count steps down on
+   narrower viewports; below the 5-col layout the wide card is inert (1 column). */
+.bs-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.bs-card-wide { grid-column: span 2; }
+@media (max-width: 1080px) { .bs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .bs-card-wide { grid-column: span 1; } }
+@media (max-width: 900px)  { .bs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 680px)  { .bs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px)  { .bs-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .bs-card {
-  flex: 0 0 300px; width: 300px; height: 274px;
+  width: 100%; min-width: 0;
   background: #2d2d2d; border-radius: 8px; overflow: hidden;
   display: flex; flex-direction: column; text-decoration: none;
   transition: background 0.2s ease;
@@ -1122,15 +1135,11 @@ body:has(.bs-page) { background: #000; }
    row 1 → cols 1-2, row 2 → cols 3-4, row 3 → cols 4-5 (every 3rd row combines
    the last two cards). The wide card keeps the SAME height as a normal card —
    only its width and image crop change. Below 1568px the class is inert. */
-@media (min-width: 1568px) {
-  .bs-card-wide {
-    flex: 0 0 612px; width: 612px;             /* two 300px cards + the 12px gap; height stays 304px, same as a normal card */
-  }
-  .bs-card-wide .bs-card-image {
-    aspect-ratio: auto; height: 169px;         /* match a normal card's 16:9 image height so the wide card is NOT taller — just a wider crop */
-  }
-}
-.bs-card-image { aspect-ratio: 16 / 9; background: #242424; overflow: hidden; position: relative; }
+/* Every card image shares ONE height band, so a wide (2-col) card is never taller
+   than a normal card — it's just a wider crop of the same-height image. The band
+   scales gently with the viewport and stays close to 16:9 at the 5-col desktop
+   widths. object-fit:cover (below) handles the crop at any column width. */
+.bs-card-image { height: clamp(150px, 11vw, 210px); background: #242424; overflow: hidden; position: relative; }
 .bs-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
 .bs-card:hover .bs-card-image img { transform: scale(1.02); }
 .bs-card-image-fallback {
@@ -1553,12 +1562,17 @@ a.bsa-meta-song:hover { color: #1b1b1b; text-decoration: underline; }
 .bsa-more-title { font-size: 18px; font-weight: 700; color: #fff; }
 .bsa-more-all { font-size: 13px; color: #8a8a8a; text-decoration: none; }
 .bsa-more-all:hover { color: #E6AC00; }
-.bsa-more .bs-grid { justify-content: flex-start; max-width: none; margin: 0; }
+/* "More from Backstage" shows up to 4 related cards — give it its own 4-col
+   ladder so the strip fills the width without a stray empty column. Higher
+   specificity than the base .bs-grid media queries, so it needs its own steps. */
+.bsa-more .bs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; margin: 0; }
+@media (max-width: 900px) { .bsa-more .bs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .bsa-more .bs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .bsa-more .bs-grid { grid-template-columns: minmax(0, 1fr); } }
 
 @media (max-width: 700px) {
-  /* Card keeps its fixed 300 × 304 footprint at every width (matching the
-     JubileeVerse .content-card); the grid's max-width ladder above is what
-     drops the row to a single centered column on narrow screens. */
+  /* Cards are fluid grid tracks now; the column-count ladder above drops the row
+     from 5 → 4 → 3 → 2 → 1 as the viewport narrows. */
   .bs-hero-title { font-size: 26px; }
 }
 

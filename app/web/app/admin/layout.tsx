@@ -46,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="container">
         <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
           {/* Left — Operations Console label + vertical nav menu */}
-          <nav style={{
+          <nav className="jv-scroll" style={{
             display: 'flex', flexDirection: 'column', gap: 4,
             flex: '0 0 200px', maxWidth: 200,
             borderRight: '1px solid var(--line)', paddingRight: 12,
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             position: 'sticky', top: 98, alignSelf: 'flex-start',
             maxHeight: 'calc(100vh - 110px)', overflowY: 'auto',
           }}>
-            <div className="eyebrow" style={{ color: 'var(--accent)', padding: '0 14px 10px', fontWeight: 700 }}>Operations Console</div>
+            <div className="eyebrow" style={{ color: 'var(--accent-gold)', padding: '0 14px 10px', fontWeight: 700 }}>Operations Console</div>
             {TABS.map((t) => {
               const active = t.href === '/admin' ? pathname === '/admin' : pathname.startsWith(t.href);
               return (
@@ -63,7 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   padding: '10px 14px', textDecoration: 'none', fontWeight: 600, fontSize: 13, borderRadius: 6,
                   color: active ? 'var(--accent-gold)' : 'var(--ink-soft)',
                   background: active ? 'var(--surface)' : 'transparent',
-                  borderLeft: active ? '3px solid var(--accent)' : '3px solid transparent',
+                  borderLeft: active ? '3px solid var(--accent-gold)' : '3px solid transparent',
                 }}>{t.label}</Link>
               );
             })}

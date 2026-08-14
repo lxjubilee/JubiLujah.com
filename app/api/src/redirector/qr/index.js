@@ -39,20 +39,22 @@ function cachePut(k, val) {
  * @returns {Promise<{ body: string|Buffer, contentType: string, variant: string,
  *   format: 'svg'|'png', pixelSize: number|null }>}
  */
-export async function getImage(token, { variant = 'standard', format = 'svg', size = 1024, prefix = 'R' } = {}) {
+export async function getImage(token, { variant = 'standard', format = 'svg', size = 1024, prefix = 'R', qz } = {}) {
   const v = isVariant(variant) ? variant : 'standard';
   const fmt = format === 'png' ? 'png' : 'svg';
   const px = fmt === 'png' ? (PNG_SIZES.includes(Number(size)) ? Number(size) : 1024) : null;
   const pfx = prefix === 'RP' ? 'RP' : 'R';
+  // Display-only tighter quiet zone (SVG thumbnails only); PNG keeps the spec margin.
+  const quiet = fmt === 'svg' && Number.isFinite(Number(qz)) ? Math.max(0, Math.min(4, Number(qz))) : null;
 
-  const key = cacheKey(token, v, fmt, px, pfx);
+  const key = cacheKey(token, v, fmt, px, pfx) + (quiet !== null ? `:q${quiet}` : '');
   const cached = cacheGet(key);
   if (cached) return { ...cached, variant: v, format: fmt, pixelSize: px };
 
   let body;
   let contentType;
   if (fmt === 'svg') {
-    body = renderSvg(token, v, undefined, pfx);
+    body = renderSvg(token, v, undefined, pfx, quiet === null ? undefined : quiet);
     contentType = 'image/svg+xml; charset=utf-8';
   } else {
     body = await renderPng(token, v, undefined, px, pfx);

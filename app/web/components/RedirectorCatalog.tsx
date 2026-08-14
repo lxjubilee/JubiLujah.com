@@ -1,122 +1,64 @@
 'use client';
 // ============================================================================
-// Redirector catalog navigation — the QR asset tree.
+// Redirector "Browse codes" — a visual master-detail drill-down.
 //
-// Left nav restructured into three asset domains, each of which will carry its
-// own redirector token + QR code:
+//   Left rail:  Music · Articles · Books
+//   Right col:  Music → persona cards (photo + name) → album cards (cover) →
+//               album detail (album QR + a grid of song QR codes).
+//               Articles → persona cards → that persona's articles (QR preview).
 //
-//   Music     → 12 Inspire personas → each persona's albums → each album's songs
-//   Articles  → grouped by persona → each article
-//   Books     → (no data source yet — placeholder)
-//
-// FRONT END ONLY (step 1). Every album and every song shows an INDIVIDUAL QR —
-// currently a deterministic *preview* placeholder (clearly labelled "not minted"),
-// because token minting is the next step. When the redirector API is wired, each
-// leaf's preview is replaced by its real tokened QR (see lib/redirector.ts).
-//
-// Data is read from the same public catalog the site renders from:
-//   /music/catalog-manifest.json   (personas · albums · songs)
-//   /articles/articles.json        (articles, by persona)
+// Real minted tokens render the live dotted QR (/qr/<token>.svg); anything not
+// minted (articles) falls back to a deterministic dotted preview.
 // ============================================================================
 import { useEffect, useMemo, useState } from 'react';
-import { INSPIRE_ORDER, avatarKey } from '@/lib/personas';
+import { INSPIRE_ORDER, avatarKey, personaCardImage } from '@/lib/personas';
 import { redirector } from '@/lib/redirector';
 
-// ---- shapes from the public catalog manifest -------------------------------
-interface MfTrack { n: number; title: string; file?: string; url?: string }
-interface MfAlbum { code: string; title: string; trackCount?: number; playable?: number; tracks?: MfTrack[] }
+interface MfTrack { n: number; title: string; url?: string }
+interface MfAlbum { code: string; title: string; trackCount?: number; tracks?: MfTrack[] }
 interface MfArtist { slug: string; name: string; role?: string; albums?: MfAlbum[] }
 interface MfCategory { key: string; label: string; artists?: MfArtist[] }
 interface Manifest { categories?: MfCategory[] }
 interface Article { slug: string; title: string; author?: string; personaSlug?: string; album?: string; song?: string }
 
-type Kind = 'persona' | 'album' | 'song' | 'article' | 'book';
-interface Selection {
-  kind: Kind;
-  title: string;
-  qrSeed?: string;                 // preview fallback for not-yet-minted leaves
-  token?: string;                  // real minted token → live QR (when present)
-  cover?: string | null;
-  rows: [string, string][];        // label/value detail rows
+// ---- deterministic dotted QR PREVIEW (for not-yet-minted assets) ------------
+function hash32(s: string): number { let h = 0x811c9dc5; for (let i = 0; i < s.length; i += 1) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
+function mulberry32(seed: number): () => number { let a = seed >>> 0; return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const FINDER = (r: number, c: number, N: number) => (r < 7 && c < 7) || (r < 7 && c >= N - 7) || (r >= N - 7 && c < 7);
+function QrPreview({ seed, size = 132 }: { seed: string; size?: number }) {
+  const N = 21, Q = 2, total = N + Q * 2, FG = '#1A1A2E', EYE = '#0F3460';
+  const grid = useMemo(() => { const rand = mulberry32(hash32(seed)); const g: boolean[][] = Array.from({ length: N }, () => Array<boolean>(N).fill(false)); for (let r = 0; r < N; r += 1) for (let c = 0; c < N; c += 1) if (!FINDER(r, c, N)) g[r][c] = rand() > 0.5; return g; }, [seed]);
+  const u = size / total, p = Q * u;
+  const eye = (cr: number, cc: number) => { const x = p + cc * u, y = p + cr * u; return (<g key={`f${cr}-${cc}`}><rect x={x} y={y} width={7 * u} height={7 * u} rx={1.6 * u} fill={EYE} /><rect x={x + u} y={y + u} width={5 * u} height={5 * u} rx={1.1 * u} fill="#fff" /><rect x={x + 2 * u} y={y + 2 * u} width={3 * u} height={3 * u} rx={0.8 * u} fill={EYE} /></g>); };
+  return (<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ background: '#fff', borderRadius: 8 }} role="img" aria-label="QR preview">{grid.map((row, r) => row.map((on, c) => (on && !FINDER(r, c, N) ? <circle key={`${r}-${c}`} cx={p + (c + 0.5) * u} cy={p + (r + 0.5) * u} r={u * 0.5} fill={FG} /> : null)))}{eye(0, 0)}{eye(0, N - 7)}{eye(N - 7, 0)}</svg>);
 }
 
-// ---- deterministic QR-style PREVIEW (dependency-free, not yet scannable) ----
-function hash32(s: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < s.length; i += 1) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); }
-  return h >>> 0;
-}
-function mulberry32(seed: number): () => number {
-  let a = seed >>> 0;
-  return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-}
-const FINDER = (r: number, c: number, N: number) =>
-  (r < 7 && c < 7) || (r < 7 && c >= N - 7) || (r >= N - 7 && c < 7);
-
-// Dotted preview matching the real minted style: circular data modules, solid
-// rounded finder "eyes", and a THIN white quiet-zone border (Q modules). Purely
-// cosmetic (not scanned), so the thin border is fine here.
-function QrPreview({ seed, size = 148 }: { seed: string; size?: number }) {
-  const N = 21;            // QR-v1-style module grid
-  const Q = 2;             // thin quiet zone (white border), in modules
-  const total = N + Q * 2;
-  const FG = '#1A1A2E', EYE = '#0F3460';
-  const grid = useMemo(() => {
-    const rand = mulberry32(hash32(seed));
-    const g: boolean[][] = Array.from({ length: N }, () => Array<boolean>(N).fill(false));
-    for (let r = 0; r < N; r += 1) for (let c = 0; c < N; c += 1) if (!FINDER(r, c, N)) g[r][c] = rand() > 0.5;
-    return g;
-  }, [seed]);
-  const u = size / total;  // px per module
-  const p = Q * u;         // quiet-zone offset in px
-  const eye = (cr: number, cc: number) => {
-    const x = p + cc * u, y = p + cr * u;
-    return (
-      <g key={`f${cr}-${cc}`}>
-        <rect x={x} y={y} width={7 * u} height={7 * u} rx={1.6 * u} fill={EYE} />
-        <rect x={x + u} y={y + u} width={5 * u} height={5 * u} rx={1.1 * u} fill="#fff" />
-        <rect x={x + 2 * u} y={y + 2 * u} width={3 * u} height={3 * u} rx={0.8 * u} fill={EYE} />
-      </g>
-    );
-  };
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ background: '#fff', borderRadius: 6 }}
-      role="img" aria-label={`QR preview for ${seed}`}>
-      {grid.map((row, r) => row.map((on, c) => (on && !FINDER(r, c, N)
-        ? <circle key={`${r}-${c}`} cx={p + (c + 0.5) * u} cy={p + (r + 0.5) * u} r={u * 0.5} fill={FG} />
-        : null)))}
-      {eye(0, 0)}{eye(0, N - 7)}{eye(N - 7, 0)}
-    </svg>
-  );
+function initials(s: string) { const w = (s || '?').replace(/[^a-zA-Z ]/g, ' ').trim().split(/\s+/); return ((w[0]?.[0] || '?') + (w[1]?.[0] || '')).toUpperCase(); }
+function FallbackImg({ src, seed, circle, size }: { src: string | null; seed: string; circle?: boolean; size?: number }) {
+  const [broken, setBroken] = useState(false);
+  const radius = circle ? '50%' : 10;
+  const dim = size ? { width: size, height: size } : { width: '100%', aspectRatio: '1' as const };
+  if (!src || broken) {
+    let h = 0; for (let i = 0; i < seed.length; i += 1) h = (h * 31 + seed.charCodeAt(i)) % 360;
+    return <div style={{ ...dim, borderRadius: radius, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 20, background: `linear-gradient(135deg, hsl(${h} 45% 34%), hsl(${(h + 40) % 360} 55% 46%))` }}>{initials(seed)}</div>;
+  }
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt="" loading="lazy" onError={() => setBroken(true)} style={{ ...dim, borderRadius: radius, objectFit: 'cover', display: 'block' }} />;
 }
 
-// A little QR glyph shown on QR-bearing tree rows so the "every album/song has a
-// code" arrangement reads at a glance.
-function QrChip() {
-  return (
-    <span title="Has an individual QR code" aria-hidden="true" style={{
-      display: 'inline-grid', gridTemplateColumns: 'repeat(3,3px)', gridAutoRows: 3, gap: 1, opacity: 0.7,
-    }}>
-      {[1, 0, 1, 0, 1, 0, 1, 0, 1].map((v, i) => (
-        <span key={i} style={{ width: 3, height: 3, background: v ? 'var(--accent-gold)' : 'transparent' }} />
-      ))}
-    </span>
-  );
-}
-
-const caret = (open: boolean) => (
-  <span style={{ display: 'inline-block', width: 12, transition: 'transform .12s', transform: open ? 'rotate(90deg)' : 'none', color: 'var(--ink-muted)' }}>▸</span>
-);
+const panel: React.CSSProperties = { border: '1px solid var(--line)', borderRadius: 14, padding: 16, background: 'var(--surface)', minWidth: 0 };
+const searchInput: React.CSSProperties = { background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '8px 12px', color: 'var(--ink)', fontSize: 13, outline: 'none', minWidth: 200, fontFamily: 'inherit' };
 
 export default function RedirectorCatalog() {
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [tokens, setTokens] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [expanded, setExpanded] = useState<Set<string>>(new Set(['music']));
-  const [sel, setSel] = useState<Selection | null>(null);
-  const [selId, setSelId] = useState<string | null>(null);
-  const [tokensBySlug, setTokensBySlug] = useState<Map<string, string>>(new Map());
+  const [section, setSection] = useState<'music' | 'articles' | 'books'>('music');
+  const [personaSlug, setPersonaSlug] = useState<string | null>(null);
+  const [albumCode, setAlbumCode] = useState<string | null>(null);
+  const [albumQuery, setAlbumQuery] = useState('');
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
   useEffect(() => {
@@ -125,239 +67,223 @@ export default function RedirectorCatalog() {
       try {
         const m = await fetch('/music/catalog-manifest.json').then((r) => { if (!r.ok) throw new Error(`manifest ${r.status}`); return r.json(); });
         let arts: Article[] = [];
-        try {
-          const a = await fetch('/articles/articles.json').then((r) => (r.ok ? r.json() : null));
-          if (a) arts = Array.isArray(a) ? a : (a.articles || Object.values(a).find(Array.isArray) || []);
-        } catch { /* articles are optional for the scaffold */ }
+        try { const a = await fetch('/articles/articles.json').then((r) => (r.ok ? r.json() : null)); if (a) arts = Array.isArray(a) ? a : (a.articles || Object.values(a).find(Array.isArray) || []); } catch { /* optional */ }
         if (!alive) return;
         setManifest(m); setArticles(arts);
-        // Real minted album tokens (admin-authed). Non-fatal: if unauthorized or
-        // the endpoint is unavailable, albums fall back to the preview placeholder.
-        try {
-          const at = await redirector.assetTokens(); // album + song tokens, keyed by slug
-          if (alive) setTokensBySlug(new Map(at.tokens.map((t) => [t.slug, t.token])));
-        } catch { /* not authed / no tokens — preview fallback */ }
+        try { const at = await redirector.assetTokens(); if (alive) setTokens(new Map(at.tokens.map((t) => [t.slug, t.token]))); } catch { /* preview fallback */ }
       } catch (e) { if (alive) setError(e instanceof Error ? e.message : String(e)); }
       finally { if (alive) setLoading(false); }
     })();
     return () => { alive = false; };
   }, []);
 
-  const toggle = (id: string) => setExpanded((prev) => {
-    const next = new Set(prev);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    return next;
-  });
-  const choose = (id: string, s: Selection) => { setSelId(id); setSel(s); };
-
-  // ---- derived models ------------------------------------------------------
   const personas = useMemo(() => {
     if (!manifest) return [] as MfArtist[];
     const bySlug = new Map<string, MfArtist>();
     for (const c of manifest.categories || []) for (const a of c.artists || []) bySlug.set(a.slug, a);
     return INSPIRE_ORDER.map((slug) => bySlug.get(slug)).filter((a): a is MfArtist => !!a);
   }, [manifest]);
+  const articleCount = useMemo(() => { const m = new Map<string, number>(); for (const a of articles) { const k = a.personaSlug || 'other'; m.set(k, (m.get(k) || 0) + 1); } return m; }, [articles]);
 
-  const articleGroups = useMemo(() => {
-    const byPersona = new Map<string, Article[]>();
-    for (const a of articles) {
-      const k = a.personaSlug || 'other';
-      if (!byPersona.has(k)) byPersona.set(k, []);
-      byPersona.get(k)!.push(a);
-    }
-    // Order the groups by the canonical persona order, then any leftovers.
-    const order = INSPIRE_ORDER.map(avatarKey);
-    const keys = [...byPersona.keys()].sort((x, y) => {
-      const ix = order.indexOf(x); const iy = order.indexOf(y);
-      return (ix === -1 ? 99 : ix) - (iy === -1 ? 99 : iy);
-    });
-    return keys.map((k) => ({ key: k, articles: byPersona.get(k)! }));
-  }, [articles]);
+  const persona = personaSlug ? personas.find((p) => p.slug === personaSlug) || null : null;
+  const album = persona && albumCode ? (persona.albums || []).find((a) => a.code === albumCode) || null : null;
 
-  const totalAlbums = useMemo(() => personas.reduce((n, p) => n + (p.albums?.length || 0), 0), [personas]);
+  const goSection = (s: 'music' | 'articles' | 'books') => { setSection(s); setPersonaSlug(null); setAlbumCode(null); setAlbumQuery(''); };
+  const albumToken = (code: string) => tokens.get(code);
+  const songToken = (code: string, n: number) => tokens.get(`${code}#${n}`);
 
-  // ---- row primitives ------------------------------------------------------
-  const rowBase = (depth: number, active: boolean): React.CSSProperties => ({
-    display: 'flex', alignItems: 'center', gap: 6, width: '100%', textAlign: 'left',
-    padding: '5px 8px', paddingLeft: 8 + depth * 14, borderRadius: 6, cursor: 'pointer',
-    border: 'none', background: active ? 'var(--bg)' : 'transparent',
-    color: active ? 'var(--accent-gold)' : 'var(--ink-soft)', fontSize: 13, fontWeight: active ? 700 : 500,
-  });
+  // ---- reusable bits -------------------------------------------------------
+  const crumb = (label: string, onClick?: () => void, last = false) => (
+    <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+      {onClick ? <button className="rc-link" onClick={onClick}>{label}</button> : <span style={{ color: last ? 'var(--ink)' : 'var(--ink-soft)', fontWeight: last ? 700 : 500 }}>{label}</span>}
+    </span>
+  );
+  const Crumbs = () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontSize: 13, marginBottom: 16 }}>
+      {crumb(section === 'music' ? 'Music' : section === 'articles' ? 'Articles' : 'Books', persona ? () => { setPersonaSlug(null); setAlbumCode(null); } : undefined, !persona)}
+      {persona && <span style={{ color: 'var(--ink-muted)' }}>›</span>}
+      {persona && crumb(persona.name, album ? () => setAlbumCode(null) : undefined, !album)}
+      {album && <span style={{ color: 'var(--ink-muted)' }}>›</span>}
+      {album && crumb(album.title, undefined, true)}
+    </div>
+  );
 
-  function Branch({ id, depth, label, count, open }: { id: string; depth: number; label: React.ReactNode; count?: React.ReactNode; open: boolean }) {
-    return (
-      <button onClick={() => toggle(id)} style={rowBase(depth, false)}>
-        {caret(open)}
-        <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
-        {count !== undefined && <span style={{ fontSize: 11, color: 'var(--ink-muted)' }}>{count}</span>}
-      </button>
-    );
-  }
-  function Leaf({ id, depth, label, sel: s, qr }: { id: string; depth: number; label: React.ReactNode; sel: Selection; qr?: boolean }) {
-    return (
-      <button onClick={() => choose(id, s)} style={{ ...rowBase(depth, selId === id), paddingLeft: 8 + depth * 14 + 12 }}>
-        <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
-        {qr && <QrChip />}
-      </button>
-    );
-  }
-
-  const pane: React.CSSProperties = { border: '1px solid var(--line)', borderRadius: 10, padding: 12, background: 'var(--surface)', minWidth: 0 };
-
-  if (loading) return <p className="notice">Loading catalog…</p>;
-  if (error) return <p className="notice" style={{ color: '#c0392b' }}>Could not load catalog: {error}</p>;
-
-  const musicOpen = expanded.has('music');
-  const articlesOpen = expanded.has('articles');
-  const booksOpen = expanded.has('books');
+  const nav: [typeof section, string, string, string][] = [
+    ['music', '🎵', 'Music', `${personas.length} personas`],
+    ['articles', '📄', 'Articles', `${articles.length} articles`],
+    ['books', '📚', 'Books', 'coming soon'],
+  ];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px,380px) minmax(0,1fr)', gap: 14, alignItems: 'start' }}>
-      {/* ---- left navigation ---- */}
-      <div style={{ ...pane, maxHeight: '72vh', overflowY: 'auto' }}>
-        {/* MUSIC */}
-        <Branch id="music" depth={0} label={<strong>🎵 Music</strong>} count={`${personas.length} personas · ${totalAlbums} albums`} open={musicOpen} />
-        {musicOpen && personas.map((p) => {
-          const pid = `music:${p.slug}`;
-          const pOpen = expanded.has(pid);
-          const albums = p.albums || [];
-          return (
-            <div key={p.slug}>
-              <Branch id={pid} depth={1} label={p.name} count={`${albums.length} album${albums.length === 1 ? '' : 's'}`} open={pOpen} />
-              {pOpen && albums.map((al) => {
-                const aid = `${pid}:${al.code}`;
-                const aOpen = expanded.has(aid);
-                const songs = al.tracks || [];
-                return (
-                  <div key={al.code}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <Branch id={aid} depth={2} label={<span>{al.title} <QrChip /></span>} count={`${songs.length || al.trackCount || 0} songs`} open={aOpen} />
-                      </div>
-                      <button title="Select album" onClick={() => choose(aid, {
-                        kind: 'album', title: al.title, token: tokensBySlug.get(al.code), qrSeed: `album:${al.code}`, cover: `/cover/${encodeURIComponent(al.code)}.png`,
-                        rows: [['Persona', p.name], ['Album code', al.code], ['Songs', String(songs.length || al.trackCount || 0)], ['Asset kind', 'album']],
-                      })} style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: selId === aid ? 'var(--accent-gold)' : (tokensBySlug.has(al.code) ? 'var(--success)' : 'var(--ink-muted)'), fontSize: 12, padding: '0 8px' }}>QR ▸</button>
-                    </div>
-                    {aOpen && songs.map((t) => {
-                      const sid = `${aid}#${t.n}`;
-                      return (
-                        <Leaf key={sid} id={sid} depth={3} qr
-                          label={<span><span style={{ color: 'var(--ink-muted)' }}>{t.n}.</span> {t.title}</span>}
-                          sel={{
-                            kind: 'song', title: t.title, token: tokensBySlug.get(`${al.code}#${t.n}`), qrSeed: `song:${al.code}#${t.n}`,
-                            rows: [['Persona', p.name], ['Album', al.title], ['Album code', al.code], ['Track #', String(t.n)], ['Song ID', `${al.code}#${t.n}`], ['Asset kind', 'song']],
-                          }} />
-                      );
-                    })}
-                    {aOpen && songs.length === 0 && <p className="notice" style={{ paddingLeft: 8 + 3 * 14 }}>No song list in the manifest for this album.</p>}
-                  </div>
-                );
-              })}
-              {pOpen && albums.length === 0 && <p className="notice" style={{ paddingLeft: 8 + 2 * 14 }}>No albums.</p>}
-            </div>
-          );
-        })}
+    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(170px,210px) minmax(0,1fr)', gap: 16, alignItems: 'start' }}>
+      <style>{`
+        .rc-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s;text-align:center}
+        .rc-card:hover{border-color:var(--accent-gold);transform:translateY(-2px)}
+        .rc-nav{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;border:none;background:transparent;border-radius:10px;padding:12px 12px;cursor:pointer;color:var(--ink-soft);transition:background .15s,color .15s}
+        .rc-nav:hover{background:var(--bg)}
+        .rc-nav.on{background:var(--bg);color:var(--ink);box-shadow:inset 3px 0 0 var(--accent-gold)}
+        .rc-link{border:none;background:transparent;color:var(--accent-gold);cursor:pointer;font-size:13px;font-weight:600;padding:0}
+        .rc-link:hover{text-decoration:underline}
+        .rc-dl{color:var(--accent-gold);text-decoration:none;font-size:12px}.rc-dl:hover{text-decoration:underline}
+      `}</style>
 
-        {/* ARTICLES */}
-        <div style={{ marginTop: 4 }}>
-          <Branch id="articles" depth={0} label={<strong>📄 Articles</strong>} count={`${articles.length}`} open={articlesOpen} />
-          {articlesOpen && articleGroups.map((g) => {
-            const gid = `articles:${g.key}`;
-            const gOpen = expanded.has(gid);
-            const label = g.articles[0]?.author || g.key;
-            return (
-              <div key={g.key}>
-                <Branch id={gid} depth={1} label={label} count={`${g.articles.length}`} open={gOpen} />
-                {gOpen && g.articles.map((ar) => {
-                  const arid = `${gid}:${ar.slug}`;
-                  return (
-                    <Leaf key={arid} id={arid} depth={2} qr label={ar.title}
-                      sel={{
-                        kind: 'article', title: ar.title, qrSeed: `article:${ar.slug}`,
-                        rows: [['Author', ar.author || '—'], ['Persona', ar.personaSlug || '—'], ['Related album', ar.album || '—'], ['Related song', ar.song || '—'], ['Slug', ar.slug], ['Asset kind', 'article']],
-                      }} />
-                  );
-                })}
-              </div>
-            );
-          })}
-          {articlesOpen && articles.length === 0 && <p className="notice" style={{ paddingLeft: 8 + 14 }}>No articles loaded.</p>}
-        </div>
-
-        {/* BOOKS */}
-        <div style={{ marginTop: 4 }}>
-          <Branch id="books" depth={0} label={<strong>📚 Books</strong>} count="0" open={booksOpen} />
-          {booksOpen && <p className="notice" style={{ paddingLeft: 8 + 14 }}>No books yet — this section is scaffolded and ready for a books data source.</p>}
-        </div>
+      {/* Left rail */}
+      <div style={{ ...panel, padding: 8 }}>
+        {nav.map(([key, icon, label, sub]) => (
+          <button key={key} className={`rc-nav${section === key ? ' on' : ''}`} onClick={() => goSection(key)}>
+            <span style={{ fontWeight: 700, fontSize: 14 }}>{icon} {label}</span>
+            <span style={{ fontSize: 11, color: 'var(--ink-muted)' }}>{sub}</span>
+          </button>
+        ))}
       </div>
 
-      {/* ---- detail / QR ---- */}
-      <div style={pane}>
-        <div className="eyebrow" style={{ marginBottom: 8 }}>Asset & QR code</div>
-        {!sel && <p className="notice">Select an album, song, or article on the left to see its individual QR code.</p>}
-        {sel && (
-          <div>
-            <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              {sel.cover && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={sel.cover} alt="" width={88} height={88} style={{ borderRadius: 8, objectFit: 'cover', background: 'var(--bg)' }} />
-              )}
-              <div style={{ minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: 17 }}>{sel.title}</div>
-                <div style={{ marginTop: 6, display: 'grid', gap: 2 }}>
-                  {sel.rows.map(([k, v]) => (
-                    <div key={k} style={{ display: 'flex', gap: 8, fontSize: 13 }}>
-                      <span style={{ flex: '0 0 108px', color: 'var(--ink-muted)' }}>{k}</span>
-                      <span style={{ minWidth: 0, wordBreak: 'break-word' }}>{v}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      {/* Right column */}
+      <div style={panel}>
+        {loading ? <p className="notice">Loading catalog…</p>
+          : error ? <p className="notice" style={{ color: '#c0392b' }}>Could not load: {error}</p>
+            : (
+              <>
+                <Crumbs />
 
-            {sel.token ? (
-              <div style={{ marginTop: 16, display: 'flex', gap: 16, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/qr/${sel.token}.svg`} alt={`QR for ${sel.title}`} width={148} height={148} style={{ background: '#fff', borderRadius: 6, padding: 6 }} />
-                <div style={{ minWidth: 0 }}>
-                  <span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: 999, fontSize: 11, fontWeight: 700, color: 'var(--success)', border: '1px solid var(--success)' }}>
-                    MINTED · live token
-                  </span>
-                  <div style={{ marginTop: 8, display: 'flex', gap: 8, fontSize: 13 }}>
-                    <span style={{ flex: '0 0 84px', color: 'var(--ink-muted)' }}>Token</span><code style={{ wordBreak: 'break-all' }}>{sel.token}</code>
+                {/* BOOKS */}
+                {section === 'books' && <p className="notice">No books yet — this section is scaffolded and ready for a books source.</p>}
+
+                {/* PERSONA GRID (music or articles) */}
+                {section !== 'books' && !persona && (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(140px,1fr))', gap: 14 }}>
+                    {personas.map((p) => {
+                      const count = section === 'music' ? (p.albums?.length || 0) : (articleCount.get(avatarKey(p.slug)) || 0);
+                      return (
+                        <div key={p.slug} className="rc-card" style={{ padding: 14 }} onClick={() => { setPersonaSlug(p.slug); setAlbumCode(null); setAlbumQuery(''); }}>
+                          <div style={{ width: 76, height: 76, margin: '0 auto 10px' }}><FallbackImg src={personaCardImage(p.slug)} seed={p.name} circle size={76} /></div>
+                          <div style={{ fontWeight: 700, fontSize: 13.5, color: 'var(--ink)' }}>{p.name}</div>
+                          <div style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 2 }}>{count} {section === 'music' ? 'albums' : 'articles'}</div>
+                        </div>
+                      );
+                    })}
                   </div>
-                  <div style={{ marginTop: 4, display: 'flex', gap: 8, fontSize: 13 }}>
-                    <span style={{ flex: '0 0 84px', color: 'var(--ink-muted)' }}>Short URL</span>
-                    <a href={`/r/${sel.token}`} target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', wordBreak: 'break-all' }}>{`${origin}/r/${sel.token}`}</a>
-                  </div>
-                  <div style={{ marginTop: 10, display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: 12, alignItems: 'center' }}>
-                    <a href={`/qr/${sel.token}.svg`} download>SVG</a>
-                    <a href={`/qr/${sel.token}.png?size=1024`} download>PNG</a>
-                    <a href={`/qr/${sel.token}.png?variant=print&size=2048`} download>Print</a>
-                    <button type="button" onClick={() => { if (typeof navigator !== 'undefined' && navigator.clipboard) navigator.clipboard.writeText(`${origin}/r/${sel.token}`); }}
-                      style={{ cursor: 'pointer', background: 'transparent', border: '1px solid var(--line)', borderRadius: 6, color: 'var(--ink-soft)', padding: '3px 10px' }}>Copy link</button>
-                  </div>
-                </div>
-              </div>
-            ) : sel.qrSeed ? (
-              <div style={{ marginTop: 16, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-                <QrPreview seed={sel.qrSeed} />
-                <div style={{ minWidth: 0 }}>
-                  <span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: 999, fontSize: 11, fontWeight: 700, color: 'var(--copper)', border: '1px solid var(--copper)' }}>
-                    PREVIEW · not minted yet
-                  </span>
-                  <p className="notice" style={{ maxWidth: 320, marginTop: 8 }}>
-                    A deterministic preview for this {sel.kind}. Album tokens are live; songs are
-                    minted in a later pass.
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <p className="notice" style={{ marginTop: 12 }}>This node is a grouping level — expand it to reach QR-bearing assets.</p>
+                )}
+
+                {/* ALBUM GRID (with search) */}
+                {section === 'music' && persona && !album && (() => {
+                  const all = persona.albums || [];
+                  const q = albumQuery.trim().toLowerCase();
+                  const filtered = q ? all.filter((a) => a.title.toLowerCase().includes(q) || a.code.toLowerCase().includes(q)) : all;
+                  return (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 14 }}>
+                        <div style={{ fontSize: 12, color: 'var(--ink-muted)' }}>
+                          {q ? `${filtered.length} of ${all.length}` : `${all.length}`} album{all.length === 1 ? '' : 's'}
+                        </div>
+                        <div style={{ position: 'relative' }}>
+                          <input value={albumQuery} onChange={(e) => setAlbumQuery(e.target.value)} placeholder="Search albums…"
+                            aria-label="Search albums" style={{ ...searchInput, paddingRight: albumQuery ? 30 : 12 }} />
+                          {albumQuery && (
+                            <button onClick={() => setAlbumQuery('')} aria-label="Clear search"
+                              style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'transparent', color: 'var(--ink-muted)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>×</button>
+                          )}
+                        </div>
+                      </div>
+                      {all.length === 0 ? <p className="notice">No albums.</p>
+                        : filtered.length === 0 ? <p className="notice">No albums match “{albumQuery}”.</p>
+                          : (
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: 14 }}>
+                              {filtered.map((al) => {
+                                const songs = al.tracks?.length || al.trackCount || 0;
+                                const minted = !!albumToken(al.code);
+                                return (
+                                  <div key={al.code} className="rc-card" style={{ padding: 10, textAlign: 'left' }} onClick={() => setAlbumCode(al.code)}>
+                                    <div style={{ position: 'relative', marginBottom: 8 }}>
+                                      <FallbackImg src={`/cover/${encodeURIComponent(al.code)}.png`} seed={al.title} />
+                                      <span style={{ position: 'absolute', top: 6, right: 6, width: 10, height: 10, borderRadius: '50%', background: minted ? 'var(--success)' : 'var(--ink-muted)', boxShadow: '0 0 0 2px rgba(0,0,0,.35)' }} title={minted ? 'QR minted' : 'not minted'} />
+                                    </div>
+                                    <div style={{ fontWeight: 700, fontSize: 13, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{al.title}</div>
+                                    <div style={{ fontSize: 11, color: 'var(--ink-muted)' }}>{songs} songs</div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                    </div>
+                  );
+                })()}
+
+                {/* ALBUM DETAIL — album QR + songs grid */}
+                {section === 'music' && persona && album && (() => {
+                  const aTok = albumToken(album.code);
+                  const songs = album.tracks || [];
+                  return (
+                    <div>
+                      {/* Album header */}
+                      <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', alignItems: 'flex-start', paddingBottom: 18, borderBottom: '1px solid var(--line)' }}>
+                        <div style={{ width: 120, flex: '0 0 auto' }}><FallbackImg src={`/cover/${encodeURIComponent(album.code)}.png`} seed={album.title} /></div>
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-muted)' }}>{persona.name} · album</div>
+                          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--ink)', margin: '2px 0 6px' }}>{album.title}</div>
+                          <div style={{ fontSize: 13, color: 'var(--ink-soft)' }}>Code <code>{album.code}</code> · {songs.length || album.trackCount || 0} songs</div>
+                        </div>
+                        <div style={{ flex: '0 0 auto', textAlign: 'center' }}>
+                          {aTok ? <img src={`/qr/${aTok}.svg?qz=2`} alt="Album QR" width={132} height={132} style={{ background: '#fff', borderRadius: 10, padding: 0 }} /> : <QrPreview seed={`album:${album.code}`} />}
+                          <div style={{ marginTop: 8 }}>
+                            {aTok ? (
+                              <>
+                                <span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: 999, fontSize: 11, fontWeight: 700, color: 'var(--success)', border: '1px solid var(--success)' }}>MINTED</span>
+                                <div style={{ marginTop: 6, display: 'flex', gap: 10, justifyContent: 'center', fontSize: 12 }}>
+                                  <a className="rc-dl" href={`/qr/${aTok}.svg`} download>SVG</a>
+                                  <a className="rc-dl" href={`/qr/${aTok}.png?size=1024`} download>PNG</a>
+                                  <a className="rc-dl" href={`/r/${aTok}`} target="_blank" rel="noreferrer">Open</a>
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--ink-muted)', marginTop: 6, wordBreak: 'break-all', maxWidth: 150 }}>{origin}/r/{aTok}</div>
+                              </>
+                            ) : <span style={{ fontSize: 11, color: 'var(--copper)' }}>preview · not minted</span>}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Songs */}
+                      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--ink-muted)', margin: '18px 0 12px' }}>Songs · scan to play</div>
+                      {songs.length === 0 ? <p className="notice">No song list for this album.</p> : (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: 14 }}>
+                          {songs.map((t) => {
+                            const sTok = songToken(album.code, t.n);
+                            return (
+                              <div key={t.n} style={{ background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 12, padding: 12, textAlign: 'center' }}>
+                                {sTok ? <img src={`/qr/${sTok}.svg?qz=2`} alt="" width={104} height={104} style={{ background: '#fff', borderRadius: 8, padding: 0, width: '100%', height: 'auto', maxWidth: 120 }} /> : <QrPreview seed={`song:${album.code}#${t.n}`} size={104} />}
+                                <div style={{ fontWeight: 700, fontSize: 12.5, color: 'var(--ink)', marginTop: 8, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}><span style={{ color: 'var(--ink-muted)' }}>{t.n}.</span> {t.title}</div>
+                                {sTok
+                                  ? <div style={{ marginTop: 4, display: 'flex', gap: 10, justifyContent: 'center', fontSize: 11 }}><a className="rc-dl" href={`/qr/${sTok}.svg`} download>SVG</a><a className="rc-dl" href={`/r/${sTok}`} target="_blank" rel="noreferrer">Open</a></div>
+                                  : <div style={{ fontSize: 10, color: 'var(--copper)', marginTop: 4 }}>not minted</div>}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+
+                {/* ARTICLES — persona's articles as preview cards */}
+                {section === 'articles' && persona && (() => {
+                  const list = articles.filter((a) => (a.personaSlug || 'other') === avatarKey(persona.slug));
+                  return list.length === 0 ? <p className="notice">No articles for {persona.name}.</p> : (
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(150px,1fr))', gap: 14 }}>
+                      {list.map((a) => {
+                        const tok = tokens.get(a.slug);
+                        return (
+                        <div key={a.slug} style={{ background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 12, padding: 12, textAlign: 'center' }}>
+                          {tok ? <img src={`/qr/${tok}.svg?qz=2`} alt="Article QR" width={104} height={104} style={{ background: '#fff', borderRadius: 8, padding: 0, width: '100%', height: 'auto', maxWidth: 120 }} /> : <QrPreview seed={`article:${a.slug}`} size={104} />}
+                          <div style={{ fontWeight: 700, fontSize: 12.5, color: 'var(--ink)', marginTop: 8, lineHeight: 1.3 }}>{a.title}</div>
+                          {tok
+                            ? <div style={{ marginTop: 4, display: 'flex', gap: 10, justifyContent: 'center', fontSize: 11 }}><a className="rc-dl" href={`/qr/${tok}.svg`} download>SVG</a><a className="rc-dl" href={`/qr/${tok}.png?size=1024`} download>PNG</a><a className="rc-dl" href={`/r/${tok}`} target="_blank" rel="noreferrer">Open</a></div>
+                            : <div style={{ fontSize: 10, color: 'var(--copper)', marginTop: 4 }}>preview · not minted</div>}
+                        </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+              </>
             )}
-          </div>
-        )}
       </div>
     </div>
   );

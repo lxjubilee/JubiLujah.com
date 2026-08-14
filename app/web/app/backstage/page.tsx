@@ -27,10 +27,6 @@ export default function BackstagePage() {
 
   return (
     <div className="bs-page">
-      <header className="bs-hero">
-        <h1 className="bs-hero-title">The stories behind the songs</h1>
-      </header>
-
       {sections.length === 0 ? (
         <div className="bs-empty">No Backstage pieces are published yet. Please check back soon.</div>
       ) : (

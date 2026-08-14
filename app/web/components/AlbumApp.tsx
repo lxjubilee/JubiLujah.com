@@ -319,7 +319,7 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
             {codes && codes.album && (
               <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/qr/${codes.album.token}.svg`} alt="Album QR code" width={150} height={150} style={{ background: '#fff', borderRadius: 8, padding: 6 }} />
+                <img src={`/qr/${codes.album.token}.svg?qz=2`} alt="Album QR code" width={150} height={150} style={{ background: '#fff', borderRadius: 8, padding: 0 }} />
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <p style={{ fontSize: 13, color: '#b7b7b7', margin: '2px 0 8px' }}>Scan to open this album — it won’t auto-play.</p>
                   <div style={{ display: 'flex', gap: 12, fontSize: 12, flexWrap: 'wrap' }}>
@@ -338,7 +338,7 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
                     return (
                       <div key={s.token} style={{ textAlign: 'center', minWidth: 0 }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={`/qr/${s.token}.svg`} alt="" width={72} height={72} style={{ background: '#fff', borderRadius: 6, padding: 3, width: '100%', height: 'auto' }} />
+                        <img src={`/qr/${s.token}.svg?qz=2`} alt="" width={72} height={72} style={{ background: '#fff', borderRadius: 6, padding: 0, width: '100%', height: 'auto' }} />
                         <div style={{ fontSize: 11, color: '#b7b7b7', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.n}. {tr?.title || ''}</div>
                       </div>
                     );
