@@ -45,14 +45,40 @@ The site itself must:
 
 ## 2. Three-drive architecture
 
+> **⚠ CORRECTED 2026-08-14 by Founder decision.** Every row below had drifted from the disk. The
+> table now records what is actually true; the superseded conventions are kept at the bottom so the
+> history is not lost.
+
 | Drive | Role | Path conventions |
 |---|---|---|
-| **C:** | Workshop / authoring environment | `c:\Websites\jubilujah.com\` — where lyrics are edited, manifests are rebuilt, audio files are imported. Source of truth for in-progress edits. |
-| **J:** | Production CDN backing store | `J:\music\` — what `cdn.jubileeverse.com` serves. Authoritative for what's live to consumers. **NEVER** use `J:\jubilujah.com\` — that path is forbidden (caused multi-phase sync confusion previously). |
-| **W:** | Web serving (workshop server) | `W:\jubilujah.com\public\` — the local web server (port 3119) serves HTML + a copy of the manifest from here. Audio comes from the CDN, not from W:. |
-| **G:** | Legacy Google Drive — being retired | `G:\My Drive\02 Melody Inspire\Websites\cdn.JubileeVerse.com` was the prior store; content was moved to J: on 2026-05-20. Re-uploads to G: are not part of the workflow. |
+| **C:** | **Retired — nothing for this workspace lives on C:** | The old `c:\Websites\jubilujah.com\` authoring root **does not exist and is not to be recreated**. Working files, scratch and session artifacts belong on **W:**. The only C: presence is the Claude Code CLI's own runtime temp dir, whose location is set by the CLI, not by this project. |
+| **J:** | Production CDN backing store | **`J:\jubilujah.com\music\`** — 14,241 files / ~41 GB, and the content the live CDN serves. This is the source tree for `deploy/rebuild-manifest.mjs`, `deploy/check-manifest.mjs`, `_r2-sync-music-inspire.js` and the `ARTWORK_BASE` scripts. Master manifest: `J:\jubilujah.com\music\catalog-manifest.json`. |
+| **W:** | Repo + web serving | **`W:\JubiLujah.com\`** is the repo (authoring, `app/web`, `deploy/`). `W:\jubilujah.com\public\` serves the local web server on port 3119. Audio always comes from the CDN, never from W:. Session scratch lives at `W:\.claude-scratch\`. |
+| **G:** | Legacy Google Drive — retired | `G:\My Drive\02 Melody Inspire\Websites\cdn.JubileeVerse.com` was the prior store; content moved to J: on 2026-05-20. Re-uploads to G: are not part of the workflow. |
 
-**Sync rule (memory-locked):** `C:\Websites\jubilujah.com\music\` → `J:\music\` is **additive only** (`robocopy /E`). **Never `/MIR`** — that previously deleted ~100+ MP3 audio assets.
+**The live CDN host is `cd.jubilujah.com`.** Verified by probe 2026-08-14: a known track returns
+**200** there and **404** on `cdn.jubileeverse.com`. `app/web/lib/cdn.ts` defaults to
+`cd.jubilujah.com`. Media is stored **without** the `albums/` path segment the bundled web manifest
+carries; `musicUrl()` strips it. See PUBLISH.md Step 1.
+
+**Sync rule (memory-locked, still binding):** any copy into the J: store is **additive only**
+(`robocopy /E`). **Never `/MIR`** — that previously deleted 100+ MP3 audio assets. The rule survives
+the path change; only the source side of it is retired along with C:.
+
+<details>
+<summary>Superseded conventions (kept for history — do not follow)</summary>
+
+- **`C:` = `c:\Websites\jubilujah.com\` authoring root.** Retired. PUBLISH.md already recorded on
+  2026-07-23 that this path does not exist on the machine.
+- **`J:` = `J:\music\`, and "NEVER use `J:\jubilujah.com\` — that path is forbidden (caused
+  multi-phase sync confusion previously)."** Inverted by the Founder on 2026-08-14: **`J:\music\`
+  does not exist**, the entire 41 GB store has always been at **`J:\jubilujah.com\music\`**, and the
+  live CDN serves exactly that content. The forbidden-path warning is void. The *concern* behind it
+  — two stores drifting out of sync — remains valid, which is why a mirrored second store was
+  rejected when this was settled.
+- **"`J:\music\` is what `cdn.jubileeverse.com` serves."** Wrong on both halves; see above.
+
+</details>
 
 ---
 
@@ -195,7 +221,7 @@ Counts auto-update whenever `node music/_quick-manifest.js` rebuilds the manifes
 |---|---|
 | HTML pages | W: drive, served by `node server.js` on port 3119 |
 | Catalog manifest | W: locally (`/music/catalog-manifest.json`) for fresh, plus J: → CDN for reference |
-| Audio assets (`.mp3`) | CDN: `https://cdn.jubileeverse.com/music/albums/…/tracks/*.mp3` (backed by J:\music\) |
+| Audio assets (`.mp3`) | CDN: `https://cd.jubilujah.com/music/<category>/<artist>/<CODE-slug>/tracks/*.mp3` (backed by `J:\jubilujah.com\music\`). **No `albums/` segment on the CDN** — the bundled web manifest carries it and `lib/cdn.ts` strips it. |
 | Album-page artwork & metadata | W: locally |
 
 **Why the split:** Pushing the manifest to R2/Cloudflare requires a cache purge or new R2 upload to take effect. Serving the manifest locally from W: keeps `playable` flags fresh the moment the manifest is rebuilt. The mp3 binaries rarely change once uploaded, so they cache happily at the CDN edge.
@@ -250,8 +276,8 @@ This is achieved by **two cooperating scripts**:
 
 ## 10. CDN architecture & cache strategy
 
-- `cdn.jubileeverse.com` is a Cloudflare-fronted endpoint backed by R2 / J:\music\
-- Audio paths: `https://cdn.jubileeverse.com/music/albums/<category>/<artist>/<ABCD1234EN-slug>/tracks/<file>.mp3`
+- **`cd.jubilujah.com`** is the live Cloudflare-fronted endpoint, backed by R2 and staged from `J:\jubilujah.com\music\`. *(Corrected 2026-08-14: this section previously named `cdn.jubileeverse.com`, which returns 404 for music. That host is the **avatars** bucket `jubileeverse-cdn`; the only R2 credentials on the machine are scoped to it, which is why the CDN sync in PUBLISH.md Step 1 is currently blocked.)*
+- Audio paths: `https://cd.jubilujah.com/music/<category>/<artist>/<ABCD1234EN-slug>/tracks/<file>.mp3` — **no `albums/` segment**
 - The CDN serves mp3s with `Content-Type: audio/mpeg`, supports range requests, caches at edge with a long TTL
 - The manifest at the CDN may lag behind J:\ — **prefer the local W: copy for freshness**
 - If a versioned manifest fetch is ever needed, append `?v=YYYYMMDD-HHMM` to bypass edge cache
@@ -293,9 +319,19 @@ Every visitor-facing HTML page must include the **standard site header**:
 
 ## 12. Catalog manifest — schema & rebuild process
 
-**File:** `c:\Websites\jubilujah.com\music\catalog-manifest.json` (authoritative) → copied to `W:\jubilujah.com\public\music\catalog-manifest.json` (served) → optionally pushed to `J:\music\catalog-manifest.json` for CDN.
+**Files (corrected 2026-08-14 — the C: authoring root is retired):**
+`J:\jubilujah.com\music\catalog-manifest.json` is the **master** (paths stored as `inspire/…`) and
+`W:\JubiLujah.com\app\web\public\music\catalog-manifest.json` is the **bundled web copy** (same data,
+paths stored as `albums/inspire/…`). They are **not** byte-identical and are not meant to be — see §2.
 
-**Generator:** `c:\Websites\jubilujah.com\music\_quick-manifest.js` — scans every album folder, reads `album.meta.json`, walks the `tracks/` subfolder, and emits per-track `{ n, title, file, url, audio }` plus per-album `{ playable, trackCount }`.
+**Generator:** `deploy/rebuild-manifest.mjs` *(written 2026-08-14; the previously documented
+`c:\Websites\jubilujah.com\music\_quick-manifest.js` does not exist on this machine)*. It scans every
+album folder, reads `album.meta.json` when present, walks `tracks/` (falling back to `lyrics/`, where
+some albums' mp3s are misfiled), and emits per-track `{ n, title, file, url, audio }` plus per-album
+`{ playable, trackCount }`. **It is add-only** — album titles, track titles, category assignment,
+`christmas` and `genres` are curated and cannot be regenerated from disk. Run it twice, once per
+manifest, with `--prefix=albums/` on the web copy. Gate: `deploy/check-manifest.mjs` (exit 3 = stale);
+deliberate exclusions live in `deploy/manifest-hold.json`.
 
 **Schema (relevant fields):**
 
@@ -351,7 +387,7 @@ node music/_quick-manifest.js
 cp music/catalog-manifest.json W:/jubilujah.com/public/music/
 
 # 3. (Optional) Push to J: for CDN backing if R2 sync is hooked up
-cp music/catalog-manifest.json J:/music/
+cp music/catalog-manifest.json J:/jubilujah.com/music/
 ```
 
 After the rebuild, all Ready/Studio badges and aggregate counts site-wide refresh on the next page load (with the 5-minute `sessionStorage` TTL on stale sessions).
@@ -405,8 +441,9 @@ These are non-negotiable when generating any analysis or ratings:
 
 ### Weekly — sync to J: / CDN
 
-1. Robocopy `C:\Websites\jubilujah.com\music\*` → `J:\music\` with `/E` (additive only — **never /MIR**)
-2. The fresh manifest and any new mp3s propagate to the CDN backing store
+1. *(Retired — the C: authoring root no longer exists. New albums are authored directly into `J:\jubilujah.com\music\`.)* Any copy **into** the J: store stays additive (`robocopy /E`) — **never /MIR**.
+2. Reconcile the manifest (`node deploy/rebuild-manifest.mjs --apply`, then again for the web copy with `--prefix=albums/`) and confirm `deploy/check-manifest.mjs` exits 0
+3. New mp3s reach the CDN via PUBLISH.md Step 1 — **currently blocked**: no credentials exist for the live `cd.jubilujah.com` bucket
 3. If a manifest cache-bust is required, bump `MANIFEST_CACHE_KEY` in `/web/_assets/player.js`
 
 ### When generating new HTML

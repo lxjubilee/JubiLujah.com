@@ -26,15 +26,26 @@ PROD_PATH="/var/www/Jubilujah.com"
 BACKUP_DIR="/var/www/.backup"
 
 # --- CDN sync target -------------------------------------------------------
-# The live site references cdn.jubileeverse.com (131 occurrences in app/web) and never
-# cdn.jubilujah.com, so the canonical bucket is jubileeverse-cdn. Source tree is J:/music.
+# CORRECTED 2026-08-14. The previous values here were wrong on all three counts and would have
+# pushed ~6.7 GB into a bucket the site does not read:
+#
+#   * "cdn.jubileeverse.com, 131 occurrences" -> actually 7 refs total across app/web, and
+#     app/web/lib/cdn.ts defaults to cd.jubilujah.com. Live probe 2026-08-14:
+#     https://cd.jubilujah.com/music/... -> 200 ;  https://cdn.jubileeverse.com/music/... -> 404
+#   * bucket jubileeverse-cdn      -> that is the AVATARS bucket, not the music CDN
+#   * source tree J:/music         -> does not exist; the store is J:/jubilujah.com/music
+#
+# BLOCKER: no credentials for the live music bucket exist on this machine. The only R2 token
+# present (R2_AVATARS_* in W:/JubileeInspire.com/api/.env) is scoped to jubileeverse-cdn. Set
+# R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_BUCKET_CDN for cd.jubilujah.com
+# before enabling the sync. Until then --site-only is the correct publish, and is usually all
+# that is needed: albums hidden by a stale manifest already have their media live on the CDN.
 SYNC_SCRIPT="$REPO_DIR/_r2-sync-music-inspire.js"
-SYNC_SRC="J:/music"
+SYNC_SRC="J:/jubilujah.com/music"
 SYNC_PREFIX="music/"
-SYNC_BUCKET="jubileeverse-cdn"
+SYNC_BUCKET="${R2_BUCKET_CDN:-}"          # intentionally empty until the live bucket is configured
 
-# Credentials: the sync script auto-loads W:/JubileeInspire.com/api/.env, whose R2_AVATARS_*
-# token is scoped to jubileeverse-cdn. No secrets are stored in this repo.
+# Credentials: the sync script auto-loads W:/JubileeInspire.com/api/.env. No secrets in this repo.
 
 SITE_ONLY=0
 AUTO_YES=0
@@ -90,6 +101,18 @@ fi
 if [[ $SITE_ONLY -eq 0 ]]; then
   hdr "Step 1/3 — CDN sync ($SYNC_SRC -> R2 $SYNC_BUCKET/$SYNC_PREFIX)"
   [[ -f "$SYNC_SCRIPT" ]] || { echo "Sync script missing at $SYNC_SCRIPT"; exit 1; }
+
+  # Guard added 2026-08-14: refuse to sync without an explicitly configured live bucket.
+  # Falling back to the avatars bucket would upload gigabytes to a store the site never reads.
+  if [[ -z "$SYNC_BUCKET" ]]; then
+    echo "REFUSING to sync: no live music bucket configured."
+    echo "  The live CDN host is cd.jubilujah.com; the only credentials on this machine"
+    echo "  (R2_AVATARS_* in W:/JubileeInspire.com/api/.env) are scoped to jubileeverse-cdn,"
+    echo "  which the site does NOT read (verified 404 on 2026-08-14)."
+    echo "  Set R2_BUCKET_CDN (plus R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY),"
+    echo "  or run with --site-only. See PUBLISH.md Step 1."
+    exit 1
+  fi
 
   NP="$(detect_node_path)" || {
     echo "@aws-sdk/client-s3 not found. Install it, e.g.:"

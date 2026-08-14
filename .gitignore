@@ -18,3 +18,12 @@ artwork/
 
 # Next.js dev build output (JubiLujah web)
 app/web/.next-dev/
+
+# Local review dumps (per-persona artwork/review exports + zips) — 1.4 GB.
+# Same class as artwork/ above: they live on J:/CDN and exceed GitHub's 100MB
+# per-file limit (review.zip is ~490MB, which git push would reject outright).
+review/
+review.zip
+
+# Local model scratch
+.models/

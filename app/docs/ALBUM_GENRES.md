@@ -28,7 +28,7 @@ existing or future album.
 
 ## 2. Where the genre truth lives (source content)
 
-Each album folder under `<ARTWORK_BASE>/<album.path>/` (default `J:/music/...`)
+Each album folder under `<ARTWORK_BASE>/<album.path>/` (default `J:/jubilujah.com/music/...`)
 carries the authoritative style description:
 
 1. **`blueprint.md`** (in the album folder or its `lyrics/` subfolder) — the
@@ -98,7 +98,7 @@ catalog JSON so the data is self-contained:
 - every artist → `"genres": [...]` = the artist's **two most-common album genres**
 
 …in **both** `app/web/public/music/catalog-manifest.json` **and** the J: master
-`J:/music/catalog-manifest.json`.
+`J:/jubilujah.com/music/catalog-manifest.json`.
 
 > Note: the manifest is otherwise folder-scan generated; if it is rebuilt from
 > scratch, re-run the merge step to re-bake genres.
@@ -108,23 +108,23 @@ catalog JSON so the data is self-contained:
 ## 6. How to run it (for new or changed albums)
 
 From `app/web` (with `ARTWORK_BASE` pointing at the music store, default
-`J:/music`):
+`J:/jubilujah.com/music`):
 
 ```bash
 # 1. Derive Primary/Secondary genres for every album from its content files.
-ARTWORK_BASE=J:/music node scripts/gen-album-genres.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/gen-album-genres.mjs
 #    (optional: a limit, or specific codes to spot-check)
-ARTWORK_BASE=J:/music node scripts/gen-album-genres.mjs JEIM1069EN,SAIM1001EN
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/gen-album-genres.mjs JEIM1069EN,SAIM1001EN
 
 # 2. Bake the genres into both catalog manifests.
-ARTWORK_BASE=J:/music node scripts/merge-genres-into-manifest.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/merge-genres-into-manifest.mjs
 
 # 3. (verify) compare derived genres to each blueprint's stated style.
-ARTWORK_BASE=J:/music node scripts/verify-genres.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/verify-genres.mjs
 ```
 
 **Adding a new album:** drop its folder (with `blueprint.md` + lyrics) under
-`J:/music/...`, ensure it's in the manifest, then run steps 1–2. Its genres are
+`J:/jubilujah.com/music/...`, ensure it's in the manifest, then run steps 1–2. Its genres are
 derived automatically — no per-album hand-tagging.
 
 **Adding/renaming a genre:** edit `GENRE_RULES` (and `FAMILY` if it has

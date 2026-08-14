@@ -14,7 +14,7 @@ for (const r of rows.filter(x => x.pass === false)) {
 
 // Find unprocessed second lyrics files
 const processed = new Set(JSON.parse(fs.readFileSync('w:/JubiLujah.com/app/_ratings-work/santiago-lyrics-files.json','utf8')).map(x => x.lyricsPath.toLowerCase()));
-const root = 'J:/music/albums/inspire/santiago-inspire';
+const root = 'J:/jubilujah.com/music/inspire/santiago-inspire';
 const dirs = fs.readdirSync(root).filter(d => /^SAIM\d+EN-/.test(d));
 const unprocessed = [];
 for (const d of dirs) {

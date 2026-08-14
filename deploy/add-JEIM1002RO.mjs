@@ -22,11 +22,11 @@ const FOLDER = "JEIM1002RO-piatra-rasturnata";
 const REL = `albums/inspire/jubilee-inspire/${FOLDER}`;
 const TITLE = "Piatra Răsturnată";
 const GENRES = ["Gospel", "Praise & Worship"]; // from EN sibling JEIM1002EN
-const TRACKS_DIR = `J:/music/${REL}/tracks`;
+const TRACKS_DIR = `J:/jubilujah.com/music/${REL}/tracks`;
 
 const WEB = "app/web/public/music";
 const MANIFEST_WEB = `${WEB}/catalog-manifest.json`;
-const MANIFEST_MASTER = "J:/music/catalog-manifest.json";
+const MANIFEST_MASTER = "J:/jubilujah.com/music/catalog-manifest.json";
 const COVERS = `${WEB}/album-covers.json`;
 const GENRESF = `${WEB}/album-genres.json`;
 

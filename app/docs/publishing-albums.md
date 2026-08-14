@@ -5,13 +5,13 @@ playing from the CDN. This is exactly the process used to publish **JEIM1069EN
 "Jubilujah"** (Jubilee Inspire, 12 tracks).
 
 Inputs live on the **J:** artwork/audio store, e.g.
-`J:/music/albums/inspire/jubilee-inspire/JEIM1069EN-jubilujah/` with `tracks/*.mp3`
+`J:/jubilujah.com/music/inspire/jubilee-inspire/JEIM1069EN-jubilujah/` with `tracks/*.mp3`
 (and ideally `artwork/<CODE>.png`).
 
 ## 1. Add the album to the manifest
 
 The manifest (`app/web/public/music/catalog-manifest.json`, mirrored on
-`J:/music/catalog-manifest.json`) is the source of truth for what the site shows.
+`J:/jubilujah.com/music/catalog-manifest.json`) is the source of truth for what the site shows.
 Add an entry under the right `category → artist`:
 
 ```json

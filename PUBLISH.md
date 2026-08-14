@@ -8,7 +8,7 @@ This document is the source of truth. When the procedure changes, update this fi
 
 ## What this does
 
-1. **CDN sync** — incremental upload of `J:/music/` → Cloudflare R2 bucket `jubileeverse-cdn` (public host `cdn.jubileeverse.com`). Only missing or size-mismatched files are uploaded; nothing on R2 is ever deleted by this flow.
+1. **CDN sync** — incremental upload of `J:/jubilujah.com/music/` → the Cloudflare R2 bucket behind **`cd.jubilujah.com`**. Only missing or size-mismatched files are uploaded; nothing on R2 is ever deleted by this flow. **Currently blocked — no credentials for that bucket exist on this machine; see Step 1.** Usually skippable (`--site-only`).
 2. **Site deploy** — tar+ship `W:/Jubilujah.com/` → `root@94.72.120.231:/var/www/Jubilujah.com/` and restart the `jubilujah` PM2 process on port 3119.
 3. **Verify** — sample a CDN MP3, hit the live site, confirm 200s.
 
@@ -40,7 +40,7 @@ Run from any working directory. Steps must execute in order; failure at any step
 
 ### Step 0 — Pre-publish QA: the catalog manifest MUST be current (MANDATORY GATE)
 
-New albums get added to `J:/music/albums` but the manifest is **not** auto-generated, so it goes stale and silently drops new albums from every page (home + category) and from covers/genres/analytics. **Never publish on a stale manifest.**
+New albums get added under `J:/jubilujah.com/music/` but the manifest is **not** auto-generated, so it goes stale and silently drops new albums from every page (home + category) and from covers/genres/analytics. **Never publish on a stale manifest.**
 
 ```bash
 # 1. Is the manifest stale? (read-only — reports "would add: N")
@@ -51,50 +51,109 @@ node deploy/check-manifest.mjs --list   # every missing album path
 If it reports **`would add: 0`**, the manifest is current — proceed to Step 1.
 `deploy/publish.sh` runs this gate automatically and **refuses to publish** on exit 3.
 
-> **⚠ OPEN ISSUE (2026-07-23): the reconciler is missing.**
-> `C:/jubilujah-local/rebuild-manifest.js` does not exist on this machine and no copy exists
-> anywhere on `W:`. `check-manifest.mjs` restores the *detection* half of this gate, but there
-> is currently **no tool that writes the manifest**. As of 2026-07-23 the gate reports
-> **949 albums on disk missing from the manifest** (982 recorded vs 1,889 on disk, generated
-> 2026-07-07), plus 42 manifest entries whose folders are gone.
-> **Until a reconciler exists, publishing renders roughly half the catalog invisible.**
-> Known edge cases any reconciler must handle: duplicate track numbers within one album
-> (e.g. `TTX301` has two `01_*.mp3`), and albums whose `.mp3`s are misfiled under `lyrics/`
-> (documented in `_r2-sync-music-inspire.js`).
+> **✅ RESOLVED 2026-08-14 — the reconciler now exists: `deploy/rebuild-manifest.mjs`.**
+>
+> ```bash
+> node deploy/rebuild-manifest.mjs                 # dry run (J: master)
+> node deploy/rebuild-manifest.mjs --apply
+> node deploy/rebuild-manifest.mjs --apply \
+>      --manifest=app/web/public/music/catalog-manifest.json \
+>      --out=app/web/public/music/catalog-manifest.json --prefix=albums/
+> ```
+>
+> **It is ADD-ONLY, deliberately.** Large parts of the manifest are curated and cannot be
+> regenerated from disk — album titles (`AMIM1002EN-bridge-forever` → "Cedars of Praise"),
+> track titles (`01_love-was-looking-at-me.mp3` → "Open the Window"), category assignment
+> (`radiant-stones` sits under `faith-based/` on disk but belongs to category `inspire`),
+> `christmas: true`, and per-album `genres`. A regenerate-from-scratch tool would destroy all
+> of it. New albums are placed by looking up their parent directory in the mapping the
+> existing manifest already demonstrates; anything without precedent is reported, never guessed.
+>
+> **⚠ The old "949 albums missing / half the catalog invisible" alarm was a counting artifact.**
+> It walked a fixed `albums/<category>/<artist>/<album>` shape that does not exist on disk and
+> compared by path. Measured correctly on 2026-08-14: **1,373 album folders on disk, 982 in the
+> manifest — but only 89 were genuinely addable.** Of the rest, **163 are the same album at a
+> second disk path** (e.g. `children/party-giggles/IX401EN-…` *and* `party-giggles/IX401EN-…`);
+> album *code* is the site's identity (`albumUuid`, `getAlbumByCode`), so adding the twin would
+> create a phantom duplicate. **142 are held pending a curation decision** — see
+> `deploy/manifest-hold.json`.
+>
+> Edge cases the reconciler handles: duplicate track numbers within one album (`TTX301` has two
+> `01_*.mp3` — preserved and reported, because the live manifest already contains them), `.mp3`s
+> misfiled under `lyrics/`, album folders at depth 1–3, and the nested `nations/romanian` category.
 
-Once a reconciler exists, re-derive the dependent data (these scripts **moved into this repo**):
+**Holds.** `deploy/manifest-hold.json` records folders knowingly kept out, with reasons, and
+`check-manifest.mjs` subtracts them so the gate keeps its meaning — anything missing that is
+*not* held is an accident and blocks the publish. Currently held: **`prayers/` (140)** and
+**`hebrew/` (1)**, both of which would create a brand-new public category and need a Founder
+decision on key + label; and **`faith-based/ron-tank` (1)**, a disk anomaly (a `tracks/` folder
+sitting at artist level) rather than an album.
+
+After reconciling, re-derive the dependent data (these scripts **moved into this repo**):
 
 ```bash
 cd /w/JubiLujah.com/app/web
-ARTWORK_BASE=J:/music node scripts/gen-album-covers.mjs
-ARTWORK_BASE=J:/music node scripts/gen-album-genres.mjs
-ARTWORK_BASE=J:/music node scripts/merge-genres-into-manifest.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/gen-album-covers.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/gen-album-genres.mjs
+ARTWORK_BASE=J:/jubilujah.com/music node scripts/merge-genres-into-manifest.mjs
 ```
 
-The canonical web copy is already `app/web/public/music/` (no cross-drive copy step needed —
-`catalog-manifest.json` there is byte-identical to the `J:/music` master). Re-run the check and
-confirm `would add: 0`. (Locally, restart the web dev server — `lib/manifest.ts` caches the
-manifest in memory.)
+**The two manifests are NOT byte-identical, and that is intentional** (the earlier note here was
+wrong). `J:/jubilujah.com/music/catalog-manifest.json` stores paths as `inspire/…`; the bundled
+web copy at `app/web/public/music/catalog-manifest.json` stores them as `albums/inspire/…`.
+`lib/cdn.ts` strips the `albums/` prefix when building CDN urls and keeps it for the local-disk
+fallback. **Run the reconciler twice — once per file, with `--prefix=albums/` on the web copy.**
+Re-run the check against both and confirm `would add: 0`. (Locally, restart the web dev server —
+`lib/manifest.ts` caches the manifest in memory.)
 
 ### Step 1 — CDN sync (diff first, then apply)
 
-**Canonical target** (settled 2026-07-23 by evidence): the site references `cdn.jubileeverse.com`
-131 times across `app/web` and `cdn.jubilujah.com` zero times, so the live bucket is
-**`jubileeverse-cdn`**, prefix `music/`, source tree `J:/music`. (`_r2-sync-music-inspire.js`'s
-own defaults target `J:/jubilujah.com/music/inspire` → `cdn.jubilujah.com`, a *different* bucket
-the site does not currently use — hence the explicit flags below.)
+> **🔴 CORRECTED 2026-08-14 — the target below was wrong and would have uploaded ~6.7 GB to a
+> bucket the site does not read.**
+>
+> The "settled 2026-07-23" claim (`cdn.jubileeverse.com`, 131 references, bucket
+> `jubileeverse-cdn`, source `J:/music`) is wrong on every count today:
+>
+> | Claim | Reality (verified by live probe, 2026-08-14) |
+> |---|---|
+> | site references `cdn.jubileeverse.com` 131× | **7 references total**, and `lib/cdn.ts` defaults to **`cd.jubilujah.com`** |
+> | live bucket is `jubileeverse-cdn` | `https://cd.jubilujah.com/music/…` → **200**. `https://cdn.jubileeverse.com/music/…` → **404** |
+> | source tree `J:/music` | **does not exist.** Real root is `J:/jubilujah.com/music` |
+>
+> **The live CDN host is `cd.jubilujah.com`.** `_r2-sync-music-inspire.js`'s own defaults were
+> right all along (`--src=J:/jubilujah.com/music/inspire`, `--prefix=music/inspire/`, bucket from
+> `R2_BUCKET_CDN`).
+>
+> **⚠ BLOCKER: there are no credentials for the live bucket on this machine.** The only R2 creds
+> present are `R2_AVATARS_*` in `W:/JubileeInspire.com/api/.env`, and that token is scoped to
+> `jubileeverse-cdn` only. `R2_BUCKET_CDN` / `R2_S3_ENDPOINT` for `cd.jubilujah.com` are not set
+> anywhere. **Until those exist, Step 1 cannot run correctly — and must not be run with the
+> avatars token, which would push gigabytes into the wrong bucket at real cost and zero effect.**
+>
+> **Step 1 is usually unnecessary anyway.** Spot-checked 2026-08-14: albums that were missing from
+> the manifest already have their audio and artwork live on `cd.jubilujah.com`. The manifest, not
+> the CDN, is what hides a catalog. Run Step 0 + Step 2 (`--site-only`) and Step 1 only when a
+> genuinely new render has to reach the CDN.
+
+Once `R2_BUCKET_CDN` and `R2_S3_ENDPOINT` for `cd.jubilujah.com` are configured:
 
 ```bash
 cd /w/JubiLujah.com
 export NODE_PATH=/w/JubileeInspire.com/api/node_modules   # @aws-sdk/client-s3 lives here
 
 # diff-only — surfaces what would upload
-node _r2-sync-music-inspire.js --src=J:/music --prefix=music/ --bucket=jubileeverse-cdn
+node _r2-sync-music-inspire.js --src=J:/jubilujah.com/music --prefix=music/ --bucket=<live-bucket>
 
 # actually uploads
-node _r2-sync-music-inspire.js --src=J:/music --prefix=music/ --bucket=jubileeverse-cdn \
+node _r2-sync-music-inspire.js --src=J:/jubilujah.com/music --prefix=music/ --bucket=<live-bucket> \
      --apply --concurrency=8
 ```
+
+**Verify an album is actually published before marking it playable.** `rebuild-manifest.mjs` sets
+`playable` from files on disk, which is not the same as files on the CDN. On 2026-08-14 exactly one
+newly surfaced album (`AMIM1040HI`) had audio on disk but nothing on the CDN; it was demoted to
+`playable: 0` with `cdnPending: true` so it shows as a studio draft instead of a player that 404s.
+Clear that flag when its audio is uploaded.
 
 The script:
 - Lists all keys under `music/` in the R2 bucket
@@ -116,11 +175,22 @@ remote keys: 18920 · PLAN: upload 1679 files (6.74 GB)`.
 
 ### Step 2 — Deploy Jubilujah.com to prod
 
+> **⚠ EXCLUSION LIST WIDENED 2026-08-14.** The original list excluded only `.claude`, `wpf`,
+> `node_modules` and `*.log`. On 2026-08-14 the working tree also held `review/` (950 MB),
+> `review.zip` (489 MB) and `.models/` — **1.44 GB of local artifacts that would have shipped
+> straight to production.** Anything not deliberately part of the site must be excluded here or
+> kept out of the repo root. `.git` is excluded too: prod runs the working tree, not a checkout.
+
 ```bash
 cd /w/Jubilujah.com && tar \
   --exclude='./.claude' \
+  --exclude='./.git' \
   --exclude='./wpf' \
   --exclude='./node_modules' \
+  --exclude='./review' \
+  --exclude='./review.zip' \
+  --exclude='./.models' \
+  --exclude='*.bak' \
   --exclude='*.log' \
   -czf - . | ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" -o IdentitiesOnly=yes root@94.72.120.231 \
   "tar -xzf - -C /var/www/Jubilujah.com && pm2 restart jubilujah --update-env && pm2 save"

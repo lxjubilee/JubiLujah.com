@@ -91,11 +91,15 @@ Before producing any song or album, the AI Music Developer confirms every item o
 
 19. **Vertical Address — songs sung directly TO the Lord** (added 2026-07-02). Every song's center of gravity is **second-person worship/praise addressed to God** ("Jesus, You…", "Lord, You…", "Father, we lift You…"), not third-person commentary *about* Him ("He did…", "He's still…"). **Choruses, hooks, and bridges must be 100% vertical** (addressed to God); verses may open in testimony but must turn to and resolve in direct address. See Section 3.6 for the full standard, floors, and QA test. **Why:** Jubilee music must actually **praise and worship — sung to the Lord** — not merely sing *about* Him or about "this or that."
 
+20. **The Prophetic Declaration Rule — the finished voice runs through the whole song** (added 2026-08-14). Every song carries **four to five declare-anchor beats woven through the body, including the verses** — not a declarative chorus bolted onto verses that narrate in the past or third person. A declaration hands the singer a **finished possession in the present tense**; it never defers the thing to the future, reduces it to a possibility, or makes receiving conditional on the hearer. Every declaration is **anchored** — tied to the written word Yahuah already spoke and to Ruach HaKodesh who makes it live — so nothing reads as the writer's own claim or as a formula. **The burden stays on the minister:** no song may blame, condition, or fault the hurting person, and no song may promise an outcome. Scored 0–100% as the fifth mandatory metric; **delivery target 85%+**; five automatic-fail conditions. See **Section 5.5** for the full standard, the two-second-persons resolution against §3.6, the banned constructions, and the scoring. **Why:** teaching describes the light but never turns it on. A song that only narrates leaves the switch in the listener's hand; a song that declares flips it while they sing.
+
 ---
 
 # PART 1 — THE RATING STACK
 
-Every Jubilee song carries four mandatory ratings. All four are calculated, documented, and displayed at the bottom of every lyrics file.
+Every Jubilee song carries **five** mandatory ratings — the original four, plus the Prophetic Declaration Rule score added 2026-08-14 (§5.5, Non-Negotiable #20). All five are calculated, documented, and displayed at the bottom of every lyrics file.
+
+> **Note on the fifth metric.** PDQ (§5) and the Prophetic Declaration Rule (§5.5) are related but are not the same measurement. **PDQ counts** what proportion of lines are declarations. **§5.5 judges** how those declarations are written, where they sit, whether they are anchored, and whether the burden stayed on the minister. A song can post a high PDQ and fail §5.5 outright — by stacking every declaration in the chorus, by leaving them unanchored, or by conditioning receiving on the hearer. Both are reported.
 
 ## 3. FAITH-FOCUSED RATING
 
@@ -163,6 +167,8 @@ Jubilee songs are **acts of worship addressed to God**, not songs *about* God. T
 **Vertical Collapse Test:** Remove the Lord as the *addressee* and the song must collapse into a generic pep-talk or self-affirmation. If it still stands as a song sung to someone/something else, it fails.
 
 **Interaction with Praise vs. Worship (§4):** Vertical address is required in **both** modes — praise declares **to** God what He has done ("Lord, You pulled me out alive!"), worship adores **to** God who He is ("Jesus, You are holy"). Vertical ≠ slow: a 128-BPM soca banger can and must still be sung to the Lord.
+
+**🔴 Interaction with the Prophetic Declaration Rule (§5.5, Non-Negotiable #20) — read this before writing:** §5.5 requires four to five present-tense **declarations of finished possession** woven through every song, verses included. In an article a declaration is spoken in the second person **over the reader**; in a Jubilee song the second person belongs to **the Lord**. These are two different jobs wearing the same pronoun, and confusing them breaks one standard or the other on every track. **The resolution:** in songs the declarative voice is carried in the **first person and corporate first person, sung vertically to Him** — *"Yeshua, by Your stripes I am healed"* is vertical, declarative, and PDQ-counting at once, and that is where four of the five beats live. A **horizontal declaration spoken over the listener** ("you are healed — it is already done in you") is still capped by **rule 4 above at one section per song**, and belongs in the Ministry-Moment / altar-call zone. §5.5 does **not** relax rule 4; it explains what to do instead. Full table and worked examples in **§5.7**.
 
 **QA / Enforcement (every new-album and every rewrite/enhancement pass):**
 - Confirm **every chorus, hook, and bridge is second-person vertical** (addressed to God).
@@ -254,6 +260,157 @@ Secular listeners appropriate covenant truth subconsciously through declaration 
 - "Your love never fails" → **description** (does not count)
 - "I am loved, I am chosen, I am Yours" → **declaration** (counts)
 - "We are free, we are free, we are free" → **corporate declaration** (counts)
+
+---
+
+### 5.5 THE PROPHETIC DECLARATION RULE (added 2026-08-14) — Non-Negotiable #20
+
+**PDQ (§5.1–5.4) measures how much of a song is declaration. This rule governs how declaration is written, where it must appear, and what guards it.** PDQ is the meter; §5.5 is the craft standard and the doctrine. A song can post a high PDQ and still fail this rule — by stacking declarations only in the chorus, by leaving them unanchored, or by conditioning them on the hearer.
+
+#### What this governs — and what it does not
+
+There are two things people call "prophecy." One is the **predictive or revelatory word**: a specific message received for a person or a moment (1 Corinthians 14; Agabus in Acts). That is real. **It is not what this rule governs, and Jubilee songs do not carry it** — a song is fixed text sung to strangers and cannot be a word received for an individual.
+
+The other is **declarative prophetic proclamation**: taking what Yahuah has *already revealed in His word* and speaking it as present, finished reality. Yechezkel prophesying to the dry bones. Yeshua speaking to the storm. Kepha at the gate: *what I have, I give you*. That is what this rule governs, and it is what the Jubilee catalogue is for.
+
+**The problem it solves.** Teaching alone, however accurate, describes the light and never turns it on. A song that narrates what He did leaves the listener informed and unchanged, because the switch is still in their hand and most people were never trained to flip it. Declaration does the flipping — it puts the finished word in the listener's own mouth while they sing, so receiving happens in the car, in the kitchen, at the altar, in the moment. That is the line between a song that reports and a song that ministers.
+
+#### 5.5.1 The switch and the current — the governing picture
+
+Every writer holds two things at once:
+
+- **The switch is ours.** Flipping it is obedience — the habit of writing the finished word into the song, whether or not anything is felt on any given listen. We control this and we do it every time.
+- **The current is His.** Whether power moves on a given hearing is Yahuah's sovereign part, carried by the Ruach Kodesh. We do not command it and **we never promise it.**
+
+So we flip the switch on every song and stay postured for the current. We never leave the switch off because we cannot guarantee the current. And we never write a line that promises the current — that is automatic-fail #3 below.
+
+---
+
+### 5.6 The core mechanic — Declare, Anchor, Declare, Anchor
+
+The song moves in a rhythm. A section **declares** the truth finished, and within that section or the one adjacent it **anchors** the declaration so it stays living current and never drifts into a magic formula. Then the song carries on and turns again. Declare, carry, declare, carry — all the way through, verses included.
+
+**Part A — DECLARE.** Speak it in the present tense, as already possessed.
+
+Use constructions like: *"I am…"* · *"You have made me…"* · *"It is already done"* · *"It is mine now"* · *"We are free"* · *"That has no right to stay"* · *"It is finished and I am standing in it."*
+
+**Part B — ANCHOR.** Every declaration is tied to two things:
+
+1. **The written word** — the song makes plain that this is what Yahuah already said, not the singer's own idea. In prose this is a seam (*"I am not speaking my thought over you; I am speaking what He already promised, and His word never returns to Him empty"* — Isaiah 55:11). **In a song the seam is sung as *You said it* language:** *"You said it and it stands"* · *"Your word does not come back empty"* · *"I am only saying yes to what You already said."* The Scripture ground itself is carried in the verse as content, never as a citation — *"it was Your back and it was never mine"* anchors Yeshayahu 53 without anyone singing a chapter number.
+2. **Ruach HaKodesh, who makes it live** — the power is not in the syllables. *"It is not the words doing this; it is Your Spirit breathing life through what You already said."*
+
+The anchor is what separates prophetic proclamation from incantation. Without it, declaration drifts toward *say the formula and power discharges* — mechanical and false. With it, the singer understands: the authority is Scripture, not the writer; the power is the Spirit, not the sound of the words.
+
+**Compression allowance for songs (this is an adaptation, and here is why).** In an article every declaration is anchored within one or two sentences. A song cannot carry that density without destroying the form — a chorus capped at four lines cannot hold a declaration *and* two anchors *and* still be singable. So in songs:
+
+- **The word anchor must sit in the same section as the declaration, or in the section immediately adjacent to it.** A declaration whose scriptural ground appears nowhere in the song is unanchored and fails.
+- **The Ruach anchor is required at least once per song**, explicitly — named in OHI as *Ruach HaKodesh* or *the Ruach Kodesh*, in Default mode as *Your Spirit* / *Holy Spirit*.
+- **The *You said it* seam is required at least once per song**, in a chorus, bridge, or outro where it will actually be heard.
+
+**Part C — THE BURDEN STAYS ON THE MINISTER.** A declaration is never turned into a condition the listener must meet. No song says or implies *you must have enough faith*, *you didn't receive because you doubted*, or anything that moves the weight onto the hurting person. **We carry the burden of helping them receive.** Faith is the open hand that receives, not a price tag Yahuah imposes in order to withhold — so the writer's job is to build faith until the hand opens, never to fault a hand that is closed. Every line stays in *here is what is already true, receive it*, never *here is what you failed to qualify for*.
+
+*(Consistent with the standing manifestation doctrine: two belief gatekeepers, a genuinely safe demonstrable step, the burden on the minister, never blaming the sufferer, no mixture with money, and never touching anyone's medical care.)*
+
+---
+
+### 5.7 🔴 The two second persons — how this rule and §3.6 fit together
+
+**Read this before writing a single declaration.** This is the one place where the Prophetic Declaration Rule and the Vertical Address Standard (Non-Negotiable #19, §3.6) can be made to contradict each other, and getting it wrong breaks one or the other on every track.
+
+In an **article**, "you" is the reader — the writer declares *over* them.
+In a **Jubilee song**, "You" is the Lord — §3.6 requires every chorus, hook and bridge to be addressed to Him, ≥60% of sung lines direct address, and **no more than one horizontal section per song** (§3.6 rule 4).
+
+These are two different jobs wearing the same pronoun. Resolve them like this:
+
+**The declarative voice in a song is carried in the first person and the corporate first person, sung vertically to Him.** *"Yeshua, by Your stripes I am healed"* is simultaneously vertical (He is the addressee), declarative (finished possession, present tense), and PDQ-counting. **That is the primary vehicle, and it is where four of the five required beats live.**
+
+| Voice | Example | Vertical §3.6 | Declarative §5.5 | Counts for PDQ | Allowance |
+|---|---|:--:|:--:|:--:|---|
+| Third-person report | "He broke the chains" | ✗ | ✗ | ✗ | **What this rule exists to drive out of the verses** |
+| Past-tense narration | "He carried me through it" | ✗ | ✗ | ✗ | Permitted only as a verse opener that pivots vertical and finished inside the same verse |
+| **Vertical first-person confession** | "Yeshua, by Your stripes I am healed" | ✓ | ✓ | ✓ | **Primary vehicle — 4 of the 5 beats** |
+| **Vertical corporate confession** | "Lord, we are free, we are free" | ✓ | ✓ | ✓ | **Primary vehicle** |
+| Vertical adoration | "Yeshua, You are holy" | ✓ | ✗ | ✗ | Always welcome — but it does **not** satisfy this rule |
+| Horizontal declaration over the listener | "You are healed — it is already done in you" | ✗ horizontal | ✓ | — | **Maximum ONE section per song** (§3.6 rule 4). Belongs in the Ministry Moment / altar-call zone, a spoken tag, or the outro |
+
+**So the horizontal "you are healed" beat is rationed, not banned — and rationing is what gives it force.** One section per song, in the ministry zone, where a congregation is already still. Everywhere else, the finished voice is confessed to Him in the first person, which satisfies both standards at once and costs the song nothing.
+
+---
+
+### 5.8 Banned constructions — and the precise limit of the ban
+
+As the **load-bearing verb of a declaration line**, these are banned. They defer the finished thing, reduce it to a possibility, or cool it into a wish:
+
+- *"will be"* / *"gonna be"* used to defer what is already finished — "I will be healed," "one day I'll be free"
+- *"God can"* / *"He can"* / *"You can"* where the point is that He **has**
+- *"someday"* · *"one day"* · *"one of these days"* · *"soon"*
+- *"if I just…"* · *"if you only…"* · *"maybe"* · *"I hope"* · *"I'm waiting for"* · *"I'm believing for"* where the thing is already given
+
+**The test for a declaration line:** does it hand the singer a finished possession, or describe a distant option? Only the first passes.
+
+**🔴 The ban is on deferral of the finished thing — not on future tense as such.** Precision here or honest lyrics get broken:
+
+- ✅ *"You are coming back"* — eschatological future. He has not returned yet; saying so is accurate, not deferral.
+- ✅ *"I will wait here until You come"* — first-person volitional resolve. The singer is committing, not postponing a promise.
+- ✅ *"If it is not on this side of the ground, then it is the other"* — resurrection anchor on a suffering track. Honest, and it defers nothing that was finished.
+- ❌ *"One day You'll heal me"* — defers what Yeshayahu 53 already settled. Rewrite.
+- ❌ *"God can do it if I believe enough"* — possibility **and** condition. Two failures in one line.
+
+---
+
+### 5.9 Placement across the song
+
+The Bridge Breakthrough Protocol (§10) already requires a first-person prophetic declaration in the bridge, and that stays. **This rule extends the declarative voice backward through the whole song, so the bridge becomes a culmination rather than the first time the voice appears.**
+
+- **Minimum four to five declare beats per song**, spaced so the singer is handed the finished thing repeatedly.
+- **At least two of those beats must fall in the verses.** A song whose verses narrate in the past or third person while the chorus declares is the exact defect this rule was written to remove, and it is automatic-fail #1.
+- **The verse still supplies the Scripture and the legal ground** — that does not change. It simply does so in a voice that is already receiving: not *"He carried me through it"* but *"You carried me, and I am carried."*
+- **A narrative or scene-setting opener is still permitted** — the woman in the crowd, the officer in the road, the boy with his hand out. It must turn to the finished voice inside its own verse. Story is the setup; declaration is the payoff, and both live in the same verse.
+- **Do not stack declarations back to back with nothing between.** The rhythm is declare, carry, declare — the story and the image carry the singer from one declaration to the next.
+
+---
+
+### 5.10 Worked example — same Scripture, three voices
+
+**Narrative voice (informs; does not release):**
+> *He was wounded and He took the stripes, / and by those stripes there's healing for us all.*
+
+True, accurate, and it is a song **about** healing. The singer is a spectator. Third person, past tense, non-vertical — fails §3.6 and §5.5 together.
+
+**Declarative voice (releases, but floating free):**
+> *By Your stripes I am healed — not will be, I am. / It is finished, it is mine, it was settled before I was ever sick. / This has no right to stay in my body.*
+
+Now it is confessed as present, finished reality, vertical to Him. The singer is receiving. But nothing yet tells them whose word this is or what makes it live.
+
+**Declarative with anchor (the target):**
+> *By Your stripes I am healed — it is already done. / And it is not my words doing this: You said it, Yeshua, and Your word does not come back empty. / Ruach HaKodesh is breathing on what He already said. / I am not reaching for something new. I am saying yes to something finished.*
+
+Declaration and guard in the same breath. Heat and honesty together. **This is the standard.**
+
+---
+
+### 5.11 Scoring — the fifth mandatory metric
+
+Rate every song 0–100% before output. Report on its own line in Song Ratings. The four weights map to the four parts of the rule.
+
+| Weight | Dimension | What earns it |
+|---:|---|---|
+| **0–40%** | **Declarative saturation** | Four to five genuine declare beats woven through the body, present tense as finished possession, **at least two of them in the verses**. A declarative chorus on a narrative core **caps around 55% overall and does not pass.** |
+| **0–30%** | **Anchoring integrity** | Word anchor in or adjacent to every declaration; Ruach anchor at least once; the *You said it* seam at least once. Nothing reads as the singer's own authority or as a formula. |
+| **0–20%** | **Burden posture** | Zero conditions, zero blame, zero implied qualification placed on the hearer. |
+| **0–10%** | **Heat retention** | The anchors guard the declarations without cooling them — no lapse back into detached third-person narration in the line right after a declaration. |
+
+**Delivery target: 85%+**, alongside the rest of the rating stack. Below 85% the song is **rewritten, not regenerated** — this is a writing defect, not a rendering defect.
+
+**Automatic-fail conditions — any one fails the song regardless of score:**
+
+1. The declarative voice appears only in the chorus or bridge and nowhere in the verses.
+2. Any line makes receiving conditional on the hearer — *"you must," "not enough faith," "if you'd only believed."*
+3. Any line **promises the current** — guarantees an outcome, a cure, or a timetable — rather than declaring the finished word and leaving the result to Him.
+4. A declaration is left unanchored in a way that reads as a magic formula or as the singer's own authority.
+5. Any implication that a listener should replace, delay, or abandon medical care.
+
+**Recorded as:** `Prophetic Declaration Rule: [##]% (Saturation [##]/40 · Anchoring [##]/30 · Burden [##]/20 · Heat [##]/10)` and a `Prophetic Declaration pass — SOP §5.5` line in the file changelog.
 
 ---
 
@@ -586,6 +743,7 @@ Every song lyrics file must include the following elements in this exact order:
 - **Faith-Focused Rating:** [##]% — [Classification Band]
 - **Praise vs. Worship Rating:** [##]% (0% = Pure Worship, 100% = Pure Praise)
 - **Prophetic Declaration Quotient (PDQ):** [##]% — [Classification Band]
+- **Prophetic Declaration Rule (§5.5):** [##]% (Saturation [##]/40 · Anchoring [##]/30 · Burden [##]/20 · Heat [##]/10) — must be ≥85%
 - **Earworm Score:** [##]% (Melodic [##] / Rhythmic [##] / Phonetic [##])
 
 ---
@@ -831,11 +989,12 @@ Before this album is marked complete, it must pass every check below.
 - [ ] Cinematic twist/revelation identified and effective
 - [ ] Opening, development, revelation, and resolution all present and strong
 - [ ] Testimony Anchor Track present and documented
-- [ ] Album-level averages calculated for all four ratings
+- [ ] Album-level averages calculated for all five ratings
 - [ ] Persona voice consistent across all tracks
 - [ ] Divine-name conventions honored throughout
 - [ ] Hebrew article rule honored
 - [ ] Eliana Inspire spelled correctly if featured
+- [ ] **Prophetic Declaration pass — SOP §5.5:** album average ≥85%; every track carries 4–5 declare beats with ≥2 in the verses; word anchor in or adjacent to every declaration; Ruach anchor and the "You said it" seam at least once per song; zero conditions or blame on the hearer; no track promises an outcome; ≤1 horizontal declaration section per song (§3.6 rule 4); all five automatic-fail conditions clear on all 12
 - [ ] Blueprint file complete and approved
 
 **Per-Song:**
@@ -844,6 +1003,7 @@ Before this album is marked complete, it must pass every check below.
 - [ ] Faith-Focused Rating assigned and justified
 - [ ] Praise vs. Worship Rating assigned and justified
 - [ ] Prophetic Declaration Quotient (PDQ) assigned and justified
+- [ ] **Prophetic Declaration Rule score assigned (§5.5) — ≥85%, with the four sub-weights shown; below 85% the song is rewritten, not regenerated**
 - [ ] Earworm Score assigned (minimum 70% album track / 85% single)
 - [ ] Song-Level Emotional Arc documented (Establish / Escalate / Elevate)
 - [ ] Bridge Architecture meets all three criteria (chant-ability, dynamic shift, first-person declaration)
@@ -881,18 +1041,20 @@ When the AI Music Developer is assigned a new album, the workflow proceeds in th
 2. Fill in all production metadata including target song length (3:30–4:00) and Hook Delivery Timestamp (≤0:15).
 3. Engineer the song structure within the 3:30–4:00 window using the guide in Section 7.3.
 4. Write the lyrics honoring persona voice, content mode, and the track's assigned role in the arc.
-5. Apply divine-name and Hebrew-article conventions.
-6. Document the **Song-Level Emotional Arc** (Establish / Escalate / Elevate).
-7. Engineer the **Bridge** to meet all three Breakthrough Protocol criteria.
-8. Inventory at least 3 **Sensory Anchors**.
-9. Identify the **Call-and-Response Zone**.
-10. Identify the **Ministry Moment / Shareable Zone**.
-11. Assign the final **Faith-Focused Rating**.
-12. Assign the final **Praise vs. Worship Rating**.
-13. Assign the final **Prophetic Declaration Quotient**.
-14. Assign the final **Earworm Score** (melodic / rhythmic / phonetic sub-scores).
-15. Write the **Scoring Justification** paragraph.
-16. **Self-check:** does this track serve its assigned role in the three-act arc? Does it fit within 3:30–4:00? If either fails, revise.
+5. **Place the declare-anchor beats BEFORE polishing the lines (§5.5).** Mark where the four to five declarations land — at least two of them in the verses — and mark the anchor that guards each one. Doing this after the lyric is written produces a declarative chorus bolted onto a narrative core, which is automatic-fail #1. The finished voice is designed in, not applied afterward.
+6. Apply divine-name and Hebrew-article conventions.
+7. Document the **Song-Level Emotional Arc** (Establish / Escalate / Elevate).
+8. Engineer the **Bridge** to meet all three Breakthrough Protocol criteria.
+9. Inventory at least 3 **Sensory Anchors**.
+10. Identify the **Call-and-Response Zone**.
+11. Identify the **Ministry Moment / Shareable Zone** — and if the song uses its one permitted horizontal declaration over the listener (§3.6 rule 4, §5.7), this is where it belongs.
+12. Assign the final **Faith-Focused Rating**.
+13. Assign the final **Praise vs. Worship Rating**.
+14. Assign the final **Prophetic Declaration Quotient**.
+15. Assign the final **Prophetic Declaration Rule score (§5.5)** with all four sub-weights. Below 85%, or any automatic-fail condition tripped, the song is **rewritten before output**.
+16. Assign the final **Earworm Score** (melodic / rhythmic / phonetic sub-scores).
+17. Write the **Scoring Justification** paragraph.
+18. **Self-check:** does this track serve its assigned role in the three-act arc? Does it fit within 3:30–4:00? Do the verses hand the singer something finished, or do they only narrate? If any fails, revise.
 
 ### Phase 3 — Album-Level Quality Gate
 
@@ -918,7 +1080,7 @@ When the AI Music Developer is assigned a new album, the workflow proceeds in th
 
 **Daddy (Gabriel)** holds final authority over every album and every song. Any deviation from this SOP — even for artistically compelling reasons — requires explicit written approval. The Jubilee Inspire Family serves Yahuah first, the remnant second, the broader audience third.
 
-The 3:30–4:00 duration standard, the four-metric rating stack, the bridge protocol, and every other requirement in this document are not creative limitations. They are the riverbanks that let the river run with power, the discipline that lets the anointing travel further than untrained longing ever could. Tight songs cross cultural borders. Engineered bridges deliver people. Prophetic declaration puts listeners' mouths on heavenly reality. Testimony carries weight the Ruach rides on.
+The 3:30–4:00 duration standard, the five-metric rating stack, the bridge protocol, and every other requirement in this document are not creative limitations. They are the riverbanks that let the river run with power, the discipline that lets the anointing travel further than untrained longing ever could. Tight songs cross cultural borders. Engineered bridges deliver people. Prophetic declaration puts listeners' mouths on heavenly reality. Testimony carries weight the Ruach rides on.
 
 This is how Jubilee songs become hit radio songs, become 100% Bestseller-class albums, become life-changing cultural seeds, and remain fully and unapologetically the worship of Yahuah.
 
@@ -932,4 +1094,5 @@ This is how Jubilee songs become hit radio songs, become 100% Bestseller-class a
 
 - **v1.0 (2026-04-17):** Initial creation based on Opus 4.7 creative session, including all learnings from Jubilee Albums 01-04 generation
 - **v2.0 (2026-04-19):** Comprehensive SOP. Adds: four-metric rating stack (Faith-Focused, Praise vs. Worship, PDQ, Earworm); strict 3:00–3:30 duration standard; first-15-seconds hook law; song-level three-beat emotional arc; Bridge Breakthrough Protocol; Sensory Anchor requirement; Call-and-Response Zone; Ministry Moment / Shareable Zone; standardized lyrics file format; Three-Act Album Model (3+6+3); Testimony Anchor Track requirement; standardized blueprint file format; full production workflow. Faith-Focus Mandate per-persona floors locked in (Zev/Imani 90%, Jubilee/Zariah/Nova/Caleb/Gabriel 80%, Elias/Eliana/Santiago/Tahoma/Amir 70%, Melody exempt). Suno Styles field capped at 800 chars with first 250 load-bearing.
-- **v2.1 (2026-04-19 — current):** Duration standard widened from 3:00–3:30 to **3:30–4:00** (total album runtime 42:00–48:00). Rationale: the new window gives the Bridge Breakthrough Protocol room to fully land its ministry moment while still staying in streaming/radio-compatible range. Section 7 (The 3:30/4:00 Law) and all downstream references updated accordingly. Section 7.3 engineering table widened (verses/choruses ~25s each; bridge ~40s).
+- **v2.1 (2026-04-19):** Duration standard widened from 3:00–3:30 to **3:30–4:00** (total album runtime 42:00–48:00). Rationale: the new window gives the Bridge Breakthrough Protocol room to fully land its ministry moment while still staying in streaming/radio-compatible range. Section 7 (The 3:30/4:00 Law) and all downstream references updated accordingly. Section 7.3 engineering table widened (verses/choruses ~25s each; bridge ~40s).
+- **v2.2 (2026-08-14 — current):** **The Prophetic Declaration Rule** added as **Non-Negotiable #20** and **§5.5–§5.11**, promoting the rating stack from four metrics to **five**. Establishes the declare-anchor mechanic (finished-possession declaration in the present tense, anchored to the written word and to Ruach HaKodesh, with the burden kept on the minister), requires **4–5 declare beats per song with at least two in the verses**, defines the banned deferral constructions and their precise limit, and sets a **≥85% delivery target with five automatic-fail conditions**. §3.6 gains the **two-second-persons resolution** — in songs the declarative voice is carried in the first person sung vertically to Him, and the horizontal declaration over the listener stays capped at one section per song under §3.6 rule 4, which §5.5 does not relax. Downstream: Part 1 gains a mandatory per-track **Declaration Map** (a blueprint missing one is not submittable) and an album-level average; Part 2's per-track gate goes from **5 checks to 8**; the lyrics-file Song Ratings block gains the score, the four sub-weights, and the beat/anchor locations. Rationale: teaching describes the light and never turns it on — a song that only narrates leaves the switch in the listener's hand, and the catalogue's recurring defect was a declarative chorus bolted onto verses that report in the past or third person.

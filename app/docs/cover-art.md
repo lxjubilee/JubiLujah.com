@@ -9,7 +9,7 @@ typically a **~97% size reduction** (e.g. 1.8 MB → ~80 KB).
 
 - The web `/cover/<CODE>.png` route ([app/web/app/cover/[code]/route.ts](../web/app/cover/[code]/route.ts))
   tries the **CDN first** (`cdn.jubileeverse.com/music/<album.path>/artwork/<CODE>.png`)
-  and falls back to the local `J:/music` master only in dev.
+  and falls back to the local `J:/jubilujah.com/music` master only in dev.
 - Production (the Seattle VPS) has **no J: drive**, so covers MUST be on the CDN or
   they won't display. See [[jubilujah-prod-deploy]].
 - We keep the `<CODE>.png` **URL** but store **WebP bytes** with
@@ -20,7 +20,7 @@ typically a **~97% size reduction** (e.g. 1.8 MB → ~80 KB).
 
 Whenever cover art is added or changed (e.g. after the
 [album cover workflow](album-cover-workflow) places new `<CODE>.png` masters under
-`J:/music/albums/**/artwork/`):
+`J:/jubilujah.com/music/**/artwork/`):
 
 1. **Keep the full-res PNG master on J:** (lossless source — never deleted).
 2. **Optimize + publish to the CDN** with the script below. Never upload raw PNGs.
@@ -37,7 +37,7 @@ node .claude/optimize-covers.js --apply          # optimize all covers and uploa
 node .claude/optimize-covers.js --apply --only=TTX3   # only matching paths (e.g. a label)
 ```
 
-It walks `J:/music/albums/**/artwork/*.png`, resizes to ≤ 800 px, encodes WebP q80,
+It walks `J:/jubilujah.com/music/**/artwork/*.png`, resizes to ≤ 800 px, encodes WebP q80,
 and uploads to R2 key `music/<relpath>` with `Content-Type: image/webp` and
 `Cache-Control: public, max-age=31536000, immutable`.
 

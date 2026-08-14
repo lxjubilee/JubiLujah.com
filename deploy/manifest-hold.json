@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "Album folders deliberately HELD OUT of catalog-manifest.json, with the reason.",
+    "",
+    "deploy/check-manifest.mjs subtracts these before deciding staleness, so the Step 0",
+    "gate stays meaningful: anything NOT on this list that is missing from the manifest is",
+    "an accident and blocks the publish (exit 3). Anything on this list is a known, reviewed",
+    "deferral and is reported separately as HELD.",
+    "",
+    "A hold is not a way to silence the gate. Each entry needs a reason and an owner decision.",
+    "Clear an entry by making the decision, then re-running deploy/rebuild-manifest.mjs."
+  ],
+  "holds": [
+    {
+      "match": "prayers/",
+      "count": 140,
+      "reason": "The `prayers` category has never existed in catalog-manifest.json. Surfacing 140 prayer albums means creating a NEW public category on the site, which needs a curated category key + human-facing label and a decision about whether prayers belong in the main browse surface at all. rebuild-manifest.mjs correctly refuses to guess a category.",
+      "decision_needed_from": "Founder",
+      "unblocks": "add a { key, label, artists: [...] } category to the manifest (or map prayers/<artist> onto an existing category), then re-run deploy/rebuild-manifest.mjs --apply",
+      "added": "2026-08-14"
+    },
+    {
+      "match": "hebrew/",
+      "count": 1,
+      "reason": "The `hebrew` category has never existed in the manifest. Single album (LHTW1001EN-the-first-visit). Same decision shape as `prayers` — a new public category.",
+      "decision_needed_from": "Founder",
+      "unblocks": "same as prayers/, or file the album under an existing category",
+      "added": "2026-08-14"
+    },
+    {
+      "match": "faith-based/ron-tank",
+      "count": 1,
+      "reason": "Not a new album — a disk anomaly. `faith-based/ron-tank/` holds a `tracks/` folder directly at the ARTIST level (alongside desktop.ini), so structural album-detection sees the artist folder as an album. Ron Tank's actual album is already in the manifest. Nothing to add; the loose tracks/ folder should be filed into an album folder or removed.",
+      "decision_needed_from": "catalog maintenance",
+      "unblocks": "move or remove J:/jubilujah.com/music/faith-based/ron-tank/tracks",
+      "added": "2026-08-14"
+    }
+  ]
+}
