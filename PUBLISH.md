@@ -175,31 +175,45 @@ remote keys: 18920 · PLAN: upload 1679 files (6.74 GB)`.
 
 ### Step 2 — Deploy Jubilujah.com to prod
 
-> **⚠ EXCLUSION LIST WIDENED 2026-08-14.** The original list excluded only `.claude`, `wpf`,
-> `node_modules` and `*.log`. On 2026-08-14 the working tree also held `review/` (950 MB),
-> `review.zip` (489 MB) and `.models/` — **1.44 GB of local artifacts that would have shipped
-> straight to production.** Anything not deliberately part of the site must be excluded here or
-> kept out of the repo root. `.git` is excluded too: prod runs the working tree, not a checkout.
+> **🔴 REWRITTEN 2026-08-14 — every fact in the previous Step 2 was wrong, and running it would
+> have failed or corrupted production.** Verified against the live host:
+>
+> | Previously documented | Reality on `root@94.72.120.231` |
+> |---|---|
+> | deploy target `/var/www/Jubilujah.com/` | **does not exist.** It is `/var/www/jubilujah.com` (lowercase) |
+> | PM2 process `jubilujah`, script `server.js` | **no such process.** Two processes: **`jubilujah-web`** (Next.js, cwd `/var/www/jubilujah.com/web`) and **`jubilujah-api`** (`api/src/index.js`) |
+> | port 3119 | 3119 is **JubileeVibes**, a different site. nginx proxies jubilujah to **:3030** (web) and **:4030** (api) |
+> | "tar the working tree, restart, done" | prod runs a **built** Next.js app, and the local layout (`app/web`, `app/api`) does not match prod (`web`, `api`). Dumping raw source over it breaks the build. |
+>
+> **Do not tar-and-ship the working tree.** Prod is not a checkout (`no .git`) and is not a static
+> `server.js` site. A full source deploy needs a real build/release procedure that does not exist
+> in this repo yet — writing one is open work, not something to improvise during a publish.
+
+**What a catalog publish actually needs is one file.** The manifest is read at runtime by
+`lib/manifest.ts` (`fs.readFileSync` + in-memory cache), so surfacing new albums is a file copy plus
+a restart — no rebuild:
 
 ```bash
-cd /w/Jubilujah.com && tar \
-  --exclude='./.claude' \
-  --exclude='./.git' \
-  --exclude='./wpf' \
-  --exclude='./node_modules' \
-  --exclude='./review' \
-  --exclude='./review.zip' \
-  --exclude='./.models' \
-  --exclude='*.bak' \
-  --exclude='*.log' \
-  -czf - . | ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" -o IdentitiesOnly=yes root@94.72.120.231 \
-  "tar -xzf - -C /var/www/Jubilujah.com && pm2 restart jubilujah --update-env && pm2 save"
+KEY="$USERPROFILE/.ssh/id_ed25519_jubilee_prod"
+SSH="ssh -i $KEY -o IdentitiesOnly=yes"
+REMOTE=/var/www/jubilujah.com/web/public/music/catalog-manifest.json
+
+# 1. back up what is live
+$SSH root@94.72.120.231 "cp -p $REMOTE ${REMOTE}.bak-\$(date +%Y%m%d-%H%M%S)"
+
+# 2. ship the reconciled web copy (the albums/-prefixed one)
+scp -i "$KEY" -o IdentitiesOnly=yes \
+    app/web/public/music/catalog-manifest.json root@94.72.120.231:$REMOTE
+
+# 3. restart the web process so the in-memory manifest cache is dropped
+$SSH root@94.72.120.231 "pm2 restart jubilujah-web --update-env && pm2 save"
 ```
 
-This:
-- Tars the local project (excluding session-local `.claude/`, Windows-only `wpf/`, any `node_modules`, logs)
-- Streams it over SSH; remote `tar -xzf -` extracts into `/var/www/Jubilujah.com/`
-- Restarts the `jubilujah` PM2 process (it'll pick up any changed `server.js` or static files)
+**Rollback** is the reverse copy from the newest `.bak-*` beside it, then the same restart.
+
+Applied this way on 2026-08-14: prod went from **983 albums (generated 2026-07-07)** to **1,071**,
+surfacing 88 albums that had been invisible — including the three new Jubilee crusade albums, each
+verified live at `https://www.jubilujah.com/album?c=…`.
 
 ### Step 3 — Verify
 
