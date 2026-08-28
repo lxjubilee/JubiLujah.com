@@ -6,7 +6,7 @@
  */
 import fs from 'fs';
 
-const ROOT = 'w:/jubilujah.com';
+const ROOT = 'w:/jubileepraise.com';
 const PAGE = ROOT + '/public/music/albums/inspire/jubilee-inspire/executive-summary.html';
 const COVER = '/personas/Jubilee.png';
 

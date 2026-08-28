@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace JubiLujahStudio;
+namespace JubileePraiseStudio;
 
 public partial class App : Application
 {

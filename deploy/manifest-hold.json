@@ -32,7 +32,7 @@
       "count": 1,
       "reason": "Not a new album — a disk anomaly. `faith-based/ron-tank/` holds a `tracks/` folder directly at the ARTIST level (alongside desktop.ini), so structural album-detection sees the artist folder as an album. Ron Tank's actual album is already in the manifest. Nothing to add; the loose tracks/ folder should be filed into an album folder or removed.",
       "decision_needed_from": "catalog maintenance",
-      "unblocks": "move or remove J:/jubilujah.com/music/faith-based/ron-tank/tracks",
+      "unblocks": "move or remove J:/jubileepraise.com/music/faith-based/ron-tank/tracks",
       "added": "2026-08-14"
     }
   ]

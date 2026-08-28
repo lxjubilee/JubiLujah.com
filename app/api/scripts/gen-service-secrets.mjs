@@ -14,18 +14,18 @@ const jwtSecret = crypto.randomBytes(32).toString('hex');     // 256-bit HS256 s
 const clientSecret = crypto.randomBytes(32).toString('hex');  // this client's credential
 const scopes = 'admin.set_password|admin.provision';
 
-process.stdout.write(`# ===== Jubilujah service auth — generated ${new Date().toISOString()} =====
-# Paste into the PROD .env (/var/www/jubilujah.com/.env), then: pm2 restart jubilujah-api
+process.stdout.write(`# ===== JubileePraise service auth — generated ${new Date().toISOString()} =====
+# Paste into the PROD .env (/var/www/jubileepraise.com/.env), then: pm2 restart jubileepraise-api
 SERVICE_JWT_SECRET=${jwtSecret}
-SERVICE_JWT_ISSUER=https://api.jubilujah.com
-SERVICE_JWT_AUDIENCE=jubilujah-admin
+SERVICE_JWT_ISSUER=https://api.jubileepraise.com
+SERVICE_JWT_AUDIENCE=jubileepraise-admin
 SERVICE_TOKEN_TTL_SEC=600
 SERVICE_CLIENTS=${clientId}:${clientSecret}:${scopes}
 
 # ----- Give JubileeInspire ONLY these (in JI's env). Never share SERVICE_JWT_SECRET. -----
-# JUBILUJAH_API_BASE=https://api.jubilujah.com
-# JUBILUJAH_CLIENT_ID=${clientId}
-# JUBILUJAH_CLIENT_SECRET=${clientSecret}
+# JUBILEEPRAISE_API_BASE=https://api.jubileepraise.com
+# JUBILEEPRAISE_CLIENT_ID=${clientId}
+# JUBILEEPRAISE_CLIENT_SECRET=${clientSecret}
 #
 # Rotate a client secret: re-run this, update SERVICE_CLIENTS + JI's env, restart.
 # Rotate the signing key: replace SERVICE_JWT_SECRET + restart (in-flight tokens

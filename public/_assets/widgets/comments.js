@@ -1,4 +1,4 @@
-/* Jubilujah Comments Widget — Build Spec §10
+/* JubileePraise Comments Widget — Build Spec §10
  * Auto-initializes on every <div data-comments-target="TYPE:ID"></div>.
  * Vanilla JS, no framework. One level of threaded replies, @mentions,
  * own-only edit/delete (soft), optional lyric_line anchor, optimistic UI

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ManageMusic from '@/components/ManageMusic';
 
 export const metadata: Metadata = {
-  title: 'Manage Music — JubiLujah Admin',
+  title: 'Manage Music — JubileePraise Admin',
   robots: { index: false, follow: false },
 };
 

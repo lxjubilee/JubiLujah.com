@@ -1,0 +1,224 @@
+#!/usr/bin/env node
+// UserPromptSubmit + Stop hook: keeps a DURABLE journal of every conversation
+// held in this workspace, so that a reboot never loses the thread.
+//
+// Claude Code already stores the full transcript of every session as JSONL under
+// the CLI's own state folder — that is the harness, and it is what `/resume`
+// replays. What it does NOT give you is a readable, workspace-local answer to
+// "what was I working on last night, and which session was it?"  That is what
+// this hook writes, on the W: drive, next to the work itself.
+//
+// Two events feed it:
+//   UserPromptSubmit → records the prompt (this is what makes a session findable)
+//   Stop            → stamps last-activity and counts the turn
+// Stop fires after every assistant turn, so even a hard reboot or a crash leaves
+// an accurate journal — nothing depends on a clean shutdown.
+//
+// Writes to .claude/sessions/ :
+//   <session_id>.json   one record per conversation
+//   INDEX.md            newest-first table of the last MAX_INDEX conversations
+//
+// WHICH MACHINE HELD IT.  This workspace lives on a network share, so the same
+// folder is opened from more than one machine and more than one Windows profile.
+// The journal is on W: and therefore sees every conversation; the transcripts
+// that `/resume` replays are stored per-user under C:\Users\<user>\.claude and
+// do NOT travel. A pointer to a thread held on another machine is a dead link
+// unless the reader is told so. So every record carries `held_on` — the host and
+// user that were live at its last turn — and INDEX.md prints it in its own
+// column. `.claude/tools/transcripts.mjs` is what actually moves a transcript
+// between machines; this hook only records the truth about where one lives.
+//
+// This hook is silent and defensive by design: it emits nothing on stdout and
+// always exits 0. A journal must never be able to break a session.
+
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
+const MAX_PROMPTS = 40; // prompts kept per session record
+const MAX_PROMPT_CHARS = 2000; // per prompt, in the record
+const MAX_INDEX = 60; // sessions listed in INDEX.md
+
+function readInput() {
+  try {
+    // Strip a UTF-8 BOM: harmless from Claude Code, but present when a shell
+    // (PowerShell) pipes the test fixture in, and it breaks JSON.parse.
+    return JSON.parse(fs.readFileSync(0, 'utf8').replace(/^﻿/, ''));
+  } catch {
+    return null;
+  }
+}
+
+function projectDir(input) {
+  const dir = process.env.CLAUDE_PROJECT_DIR || input.cwd || process.cwd();
+  return dir.replace(/\\/g, '/').replace(/\/+$/, '');
+}
+
+function oneLine(s, max) {
+  const flat = String(s).replace(/\s+/g, ' ').trim();
+  return flat.length > max ? flat.slice(0, max - 1) + '…' : flat;
+}
+
+function stamp(ms) {
+  const d = new Date(ms);
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+// The machine and profile this turn is running on. Never throws: an unnamed
+// host is recorded as unknown rather than left to break the journal.
+function machine() {
+  const out = { host: '', user: '' };
+  try {
+    out.host = os.hostname() || '';
+  } catch {
+    /* unknown host */
+  }
+  try {
+    out.user = os.userInfo().username || '';
+  } catch {
+    /* unknown user */
+  }
+  return out;
+}
+
+// `user@host` for the index. A trailing `?` means the value was inferred after
+// the fact rather than recorded live — see transcripts.mjs --stamp.
+function heldOnLabel(rec) {
+  const h = rec.held_on;
+  if (!h || (!h.host && !h.user)) return '—';
+  const label = [h.user, h.host].filter(Boolean).join('@');
+  return rec.held_on_source && rec.held_on_source !== 'recorded' ? `${label}?` : label;
+}
+
+function writeIndex(dir) {
+  const records = [];
+  for (const name of fs.readdirSync(dir)) {
+    if (!name.endsWith('.json')) continue;
+    try {
+      records.push(JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')));
+    } catch {
+      /* a half-written record is skipped, never fatal */
+    }
+  }
+  records.sort((a, b) => (b.last_active || 0) - (a.last_active || 0));
+
+  const rows = records.slice(0, MAX_INDEX).map((r) => {
+    const topic = oneLine(r.first_prompt || '(no prompt recorded)', 76).replace(/\|/g, '\\|');
+    return (
+      `| ${stamp(r.last_active || r.started_at)} | ${r.turns || 0} | ${heldOnLabel(r)} | ` +
+      `${topic} | \`${r.session_id}\` |`
+    );
+  });
+
+  // Distinct machines, by the same user@host label the table prints — a record
+  // may know the profile without knowing the host, and that still counts.
+  const hosts = new Set(
+    records
+      .map((r) => (r.held_on ? [r.held_on.user, r.held_on.host].filter(Boolean).join('@') : ''))
+      .filter(Boolean),
+  );
+
+  const body = [
+    '# Conversation index — JubileePraise.com',
+    '',
+    '<!-- GENERATED by .claude/hooks/session-journal.mjs — do not hand-edit; edits are overwritten. -->',
+    '',
+    'Newest first. To reopen one of these conversations with its full history, run `/resume`',
+    'inside Claude Code and pick it by date, or from a terminal in this folder:',
+    '',
+    '```',
+    'claude --resume <session id>     # a specific conversation',
+    'claude --continue                # simply the most recent one',
+    '```',
+    '',
+    '**"Held on" is the machine and Windows profile that ran the last turn.** This workspace is a',
+    'network share, so the journal below sees every conversation — but the transcript `/resume`',
+    'replays is stored per-user on that machine and does not travel with the share. A row whose',
+    '"Held on" is not the machine you are sitting at will **not** reopen here until its transcript',
+    'is carried across:',
+    '',
+    '```',
+    'node .claude/tools/transcripts.mjs list                  # what is where',
+    'node .claude/tools/transcripts.mjs push --all --confirm  # this machine → the vault on W:',
+    'node .claude/tools/transcripts.mjs pull <id>             # the vault → here, then /resume',
+    '```',
+    '',
+    'A `?` after the machine means it was inferred later, not recorded at the time. `—` means',
+    'the conversation predates this column and nothing about its machine is known.',
+    '',
+    `Last written ${stamp(Date.now())} · ${records.length} conversation(s) journaled` +
+      (hosts.size ? ` across ${hosts.size} machine(s): ${[...hosts].sort().join(', ')}.` : '.'),
+    '',
+    '| Last active | Turns | Held on | Opened with | Session id |',
+    '|---|---|---|---|---|',
+    ...rows,
+    '',
+  ].join('\n');
+
+  fs.writeFileSync(path.join(dir, 'INDEX.md'), body, 'utf8');
+}
+
+try {
+  const input = readInput();
+  if (!input) process.exit(0);
+
+  const dir = path.join(projectDir(input), '.claude', 'sessions');
+  fs.mkdirSync(dir, { recursive: true });
+
+  // No session to record — regenerate the index only. This is how
+  // .claude/tools/backfill-session-journal.mjs rebuilds INDEX.md without
+  // duplicating the writer.
+  if (!input.session_id) {
+    writeIndex(dir);
+    process.exit(0);
+  }
+
+  const file = path.join(dir, `${input.session_id}.json`);
+  const now = Date.now();
+
+  let rec;
+  try {
+    rec = JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    rec = {
+      session_id: input.session_id,
+      cwd: input.cwd || projectDir(input),
+      started_at: now,
+      last_active: now,
+      turns: 0,
+      first_prompt: '',
+      prompts: [],
+    };
+  }
+
+  rec.last_active = now;
+
+  // Where this turn actually ran. Recorded every turn, so `held_on` tracks
+  // `last_active`: a thread resumed on a second machine reports the machine it
+  // was last touched from, which is the one whose transcript is current.
+  rec.held_on = machine();
+  rec.held_on_source = 'recorded';
+
+  // Claude Code passes the live transcript path on every hook event. Keeping it
+  // lets transcripts.mjs find the file without re-deriving the store slug.
+  if (input.transcript_path) rec.transcript_path = String(input.transcript_path);
+
+  if (input.hook_event_name === 'UserPromptSubmit') {
+    const text = oneLine(input.prompt || '', MAX_PROMPT_CHARS);
+    if (text) {
+      if (!rec.first_prompt) rec.first_prompt = text;
+      rec.prompts.push({ at: now, text });
+      if (rec.prompts.length > MAX_PROMPTS) rec.prompts = rec.prompts.slice(-MAX_PROMPTS);
+    }
+  } else if (input.hook_event_name === 'Stop') {
+    rec.turns = (rec.turns || 0) + 1;
+  }
+
+  fs.writeFileSync(file, JSON.stringify(rec, null, 2), 'utf8');
+  writeIndex(dir);
+} catch {
+  /* never break a session over a journal entry */
+}
+
+process.exit(0);

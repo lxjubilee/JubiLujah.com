@@ -2,10 +2,10 @@
 // Jubilee Identity Authority (SSO) client — used when config.loginMode === 'sso'.
 //
 // The SSO (sso.jubileeinspire.com) is the SINGLE credential store for the family.
-// It hashes with the SAME scrypt KDF Jubilujah uses, so a Jubilujah password (or a
-// Jubilujah-computed scrypt hash) verifies there directly — no reset on migration.
+// It hashes with the SAME scrypt KDF JubileePraise uses, so a JubileePraise password (or a
+// JubileePraise-computed scrypt hash) verifies there directly — no reset on migration.
 //
-// Jubilujah authenticates to the SSO as a trusted service CLIENT: it POSTs its
+// JubileePraise authenticates to the SSO as a trusted service CLIENT: it POSTs its
 // client_id + client_secret to /api/auth/service/token, gets a short-lived bearer,
 // and presents it on the service-gated endpoints below. The bearer is cached
 // in-process until shortly before it expires; a 401 forces exactly one re-fetch.

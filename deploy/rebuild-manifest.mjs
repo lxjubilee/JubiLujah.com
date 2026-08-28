@@ -50,7 +50,7 @@
  *   node deploy/rebuild-manifest.mjs --list                   # every addition
  *
  * Flags:
- *   --music=<dir>     source tree            (default J:/jubilujah.com/music)
+ *   --music=<dir>     source tree            (default J:/jubileepraise.com/music)
  *   --manifest=<file> manifest to read       (default <music>/catalog-manifest.json)
  *   --out=<file>      manifest to write      (default = --manifest)
  *   --prefix=<str>    prepend to album.path  (e.g. albums/)
@@ -70,7 +70,7 @@ const arg = (k, d) => {
 };
 const has = (k) => args.includes(`--${k}`);
 
-const MUSIC = arg("music", "J:/jubilujah.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
+const MUSIC = arg("music", "J:/jubileepraise.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
 const MANIFEST = arg("manifest", `${MUSIC}/catalog-manifest.json`);
 const OUT = arg("out", MANIFEST);
 const PREFIX = arg("prefix", "").replace(/^\/+/, "");
@@ -86,6 +86,28 @@ if (!fs.existsSync(MUSIC)) {
   console.error(`music root not found: ${MUSIC}`);
   process.exit(2);
 }
+
+// ── Music roots ─────────────────────────────────────────────────────────────
+// Each property now keeps its own masters under its own domain folder on J:
+// (2026-08-16). The album folders moved; the RELATIVE paths this scan produces
+// did not — "party-giggles/IX401EN-…" is identical whether it is walked from
+// jubileepraise.com/music or from gopartygiggles.com/music — so nothing downstream
+// had to change, and the published manifest paths stay exactly as they were.
+//
+// J: is a network share, so a junction at the old location was not possible
+// ("Local NTFS volumes are required"). Scanning several roots is the honest fix:
+// without it these 75 albums simply stop existing as far as this script knows.
+//
+// Repeat --music= to add more.
+const EXTRA_ROOTS = [
+  "J:/gopartygiggles.com/music",
+  "J:/mytinytiggles.com/music",
+];
+const CLI_ROOTS = args.filter((x) => x.startsWith("--music=")).map((x) => x.split("=").slice(1).join("="));
+const ROOTS = [...new Set([MUSIC, ...(CLI_ROOTS.length ? [] : EXTRA_ROOTS)])]
+  .map((r) => r.replace(/[/]+$/, ""))
+  .filter((r) => fs.existsSync(r));
+
 
 const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
 
@@ -133,20 +155,23 @@ for (const c of manifest.categories ?? []) {
 // ── 2. find album folders on disk ───────────────────────────────────────────
 // An album folder is one containing tracks/ | lyrics/ | artwork/, or loose mp3s.
 const albumDirs = [];
-const walk = (parts, depth) => {
-  for (const d of dirs(path.join(MUSIC, ...parts))) {
+const walk = (root, parts, depth) => {
+  for (const d of dirs(path.join(root, ...parts))) {
     if (RESERVED.has(d)) continue;
     const next = [...parts, d];
-    const abs = path.join(MUSIC, ...next);
+    const abs = path.join(root, ...next);
     const kids = dirs(abs);
     if (kids.some((k) => RESERVED.has(k)) || hasMp3(abs)) albumDirs.push(next.join("/"));
-    else if (depth < 3) walk(next, depth + 1);
+    else if (depth < 3) walk(root, next, depth + 1);
   }
 };
 function hasMp3(abs) {
   try { return fs.readdirSync(abs).some((f) => /\.mp3$/i.test(f)); } catch { return false; }
 }
-walk([], 0);
+for (const r of ROOTS) walk(r, [], 0);
+// De-duplicate: a path reachable from two roots must not count twice.
+albumDirs.splice(0, albumDirs.length, ...new Set(albumDirs));
+console.error(`scanned ${ROOTS.length} music root(s): ${ROOTS.join(", ")}`);
 
 // ── 3. derivation helpers ───────────────────────────────────────────────────
 const SMALL = new Set(["a","an","and","as","at","but","by","for","from","in","of","on","or","the","to","with"]);

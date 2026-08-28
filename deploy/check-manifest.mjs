@@ -2,7 +2,7 @@
 /*
  * check-manifest.mjs — read-only staleness gate for the catalog manifest.
  *
- * WHY THIS EXISTS: PUBLISH.md Step 0 calls `node C:/jubilujah-local/rebuild-manifest.js`
+ * WHY THIS EXISTS: PUBLISH.md Step 0 calls `node C:/jubileepraise-local/rebuild-manifest.js`
  * (dry run) as a MANDATORY gate. That tool was never present on this machine. This
  * script reproduces the gate's *signal* — "would add: N" — by diffing album folders on
  * disk against the album paths recorded in the manifest.
@@ -13,7 +13,7 @@
  * This gate could not run at all as originally written. Two defects, both fixed here:
  *
  *   1. Default `--music=J:/music` does not exist. The real source tree is
- *      `J:/jubilujah.com/music` (PUBLISH.md carried the stale path too).
+ *      `J:/jubileepraise.com/music` (PUBLISH.md carried the stale path too).
  *   2. It assumed an `albums/` directory under the music root and walked exactly
  *      `albums/<category>/<artist>/<album>`. On disk there is no `albums/` level, and
  *      album folders sit at depth 1–3 (`tiny-tiggles/<album>`,
@@ -40,7 +40,7 @@ const arg = (k, d) => {
   const a = args.find((x) => x.startsWith(`--${k}=`));
   return a ? a.split("=").slice(1).join("=") : d;
 };
-const MUSIC = arg("music", "J:/jubilujah.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
+const MUSIC = arg("music", "J:/jubileepraise.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
 const MANIFEST = arg("manifest", `${MUSIC}/catalog-manifest.json`);
 const LIST = args.includes("--list");
 
@@ -52,6 +52,28 @@ if (!fs.existsSync(MUSIC)) {
   console.error(`music root not found: ${MUSIC}`);
   process.exit(2);
 }
+
+// ── Music roots ─────────────────────────────────────────────────────────────
+// Each property now keeps its own masters under its own domain folder on J:
+// (2026-08-16). The album folders moved; the RELATIVE paths this scan produces
+// did not — "party-giggles/IX401EN-…" is identical whether it is walked from
+// jubileepraise.com/music or from gopartygiggles.com/music — so nothing downstream
+// had to change, and the published manifest paths stay exactly as they were.
+//
+// J: is a network share, so a junction at the old location was not possible
+// ("Local NTFS volumes are required"). Scanning several roots is the honest fix:
+// without it these 75 albums simply stop existing as far as this script knows.
+//
+// Repeat --music= to add more.
+const EXTRA_ROOTS = [
+  "J:/gopartygiggles.com/music",
+  "J:/mytinytiggles.com/music",
+];
+const CLI_ROOTS = args.filter((x) => x.startsWith("--music=")).map((x) => x.split("=").slice(1).join("="));
+const ROOTS = [...new Set([MUSIC, ...(CLI_ROOTS.length ? [] : EXTRA_ROOTS)])]
+  .map((r) => r.replace(/[/]+$/, ""))
+  .filter((r) => fs.existsSync(r));
+
 
 // ---- 1. albums recorded in the manifest (by code AND by path) --------------
 const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
@@ -86,16 +108,19 @@ const hasMp3 = (abs) => {
   try { return fs.readdirSync(abs).some((f) => /\.mp3$/i.test(f)); } catch { return false; }
 };
 const onDisk = [];
-const walk = (parts, depth) => {
-  for (const d of dirs(path.join(MUSIC, ...parts))) {
+const walk = (root, parts, depth) => {
+  for (const d of dirs(path.join(root, ...parts))) {
     if (RESERVED.has(d)) continue;
     const next = [...parts, d];
-    const abs = path.join(MUSIC, ...next);
+    const abs = path.join(root, ...next);
     if (dirs(abs).some((k) => RESERVED.has(k)) || hasMp3(abs)) onDisk.push(next.join("/"));
-    else if (depth < 3) walk(next, depth + 1);
+    else if (depth < 3) walk(root, next, depth + 1);
   }
 };
-walk([], 0);
+for (const r of ROOTS) walk(r, [], 0);
+// De-duplicate: a path reachable from two roots must not count twice.
+onDisk.splice(0, onDisk.length, ...new Set(onDisk));
+console.error(`scanned ${ROOTS.length} music root(s): ${ROOTS.join(", ")}`);
 
 // ---- 3. diff ---------------------------------------------------------------
 // Compare by CODE: 163 albums exist at two disk paths (e.g. children/party-giggles/X

@@ -1,4 +1,4 @@
-/* Jubilujah.com — Polymorphic Ratings Widget
+/* JubileePraise.com — Polymorphic Ratings Widget
  * Build Spec §9. Vanilla JS, no dependencies.
  *
  * Usage: drop <div data-ratings-target="TYPE:ID"></div> into the page,

@@ -1,0 +1,10 @@
+{
+  "workers": [
+    {
+      "id": "w-unassigned",
+      "name": "Unassigned",
+      "role": "inbox",
+      "assigned": []
+    }
+  ]
+}

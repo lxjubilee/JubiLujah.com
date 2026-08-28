@@ -1,0 +1,12 @@
+/* Backstage-style Learn Hebrew listing on a flat black canvas (blacked out via
+   body:has(.bsHebraic)); always five equal columns spanning the full width. */
+.page {
+  padding: clamp(28px, 4vw, 52px) 10px 64px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  width: 100%;
+}

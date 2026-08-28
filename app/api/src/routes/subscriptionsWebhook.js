@@ -118,13 +118,13 @@ async function handleEvent(event) {
       const renewAmount = obj.amount_paid ?? 0;
       await notify({
         userId: sub.user_id, type: 'renewed', title: 'Your subscription renewed',
-        body: 'Thanks for staying with Jubilujah. Your subscription has renewed.',
+        body: 'Thanks for staying with JubileePraise. Your subscription has renewed.',
         metadata: { subscription_id: sub.id },
         email: renewUser?.email ? {
           to: renewUser.email,
-          subject: 'Your Jubilujah subscription renewed',
+          subject: 'Your JubileePraise subscription renewed',
           heading: renewFirst ? `Thanks, ${renewFirst} — your subscription renewed` : 'Your subscription renewed',
-          intro: `${renewName ? `Hi ${renewName}, thank you` : 'Thank you'} for staying with Jubilujah.com. Your subscription has renewed and your access continues uninterrupted.`,
+          intro: `${renewName ? `Hi ${renewName}, thank you` : 'Thank you'} for staying with JubileePraise.com. Your subscription has renewed and your access continues uninterrupted.`,
           rows: [
             { label: 'Amount', value: renewAmount === 0 ? '—' : `$${(renewAmount / 100).toFixed(2)}` },
             { label: 'Renewed on', value: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) },
@@ -153,7 +153,7 @@ async function handleEvent(event) {
         body: 'We could not process your subscription renewal. Please update your payment method.',
         metadata: { subscription_id: sub.id },
         email: user?.email ? {
-          to: user.email, subject: 'Action needed: your Jubilujah payment failed',
+          to: user.email, subject: 'Action needed: your JubileePraise payment failed',
           heading: 'Your subscription payment failed',
           intro: `${failName ? `Hi ${failName}, we` : 'We'} were unable to process your latest subscription renewal. Please update your payment method to keep your access uninterrupted.`,
           ctaLabel: 'Update payment', ctaUrl: `${config.webBaseUrl}/account/subscription`,

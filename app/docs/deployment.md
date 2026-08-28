@@ -68,7 +68,7 @@ npm --workspace api run start  # serve api (NODE_ENV=production)
   `db:import` if you want the catalog mirror updated). The API hot-reloads the manifest on mtime change,
   **but the catalog pages (`/`, `/inspire`, category pages) are ISR/prerendered at build time** — a manifest
   change does NOT appear on them until you **rebuild** (`rm -rf web/.next && npm run build && pm2 restart
-  jubilujah-web`) and purge the Cloudflare cache. Full runbook: [publishing-albums.md](publishing-albums.md).
+  jubileepraise-web`) and purge the Cloudflare cache. Full runbook: [publishing-albums.md](publishing-albums.md).
 - **Security checklist**: HTTPS+HSTS, HttpOnly/Secure/SameSite cookies, CSRF on mutations, parameterized
   SQL, Zod validation, helmet headers, locked CORS, secrets only via env. Rotate `SESSION_SECRET` and
   OIDC client secret per environment.

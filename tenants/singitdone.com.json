@@ -1,0 +1,273 @@
+{
+  "schema": "jl.tenant/2",
+  "tenant": "singitdone.com",
+  "key": "singitdone",
+  "site": "SingItDone.com",
+  "status": "staged",
+  "statusNote": "⚠ NOT LIVE, and it has no catalogue yet. The running process serves this tenant the moment a Host header for it arrives, but singitdone.com DNS and the nginx vhost do not exist, and no album carries the `declarations` category in catalog-manifest.json. Until both are done this file describes intent, not what a visitor gets. Step 4 of tenants/README.md.",
+  "role": "declaration-label",
+  "isDefault": false,
+  "hosts": [
+    "singitdone.com",
+    "www.singitdone.com"
+  ],
+  "brand": {
+    "lead": "SingIt",
+    "tail": "Done",
+    "accent": "#8E6FE0",
+    "logo": "/images/brand-logo.png",
+    "logoNote": "Shares the JubileePraise wordmark asset for now. A property whose whole subject is consecration should eventually carry its own.",
+    "wordmarkFont": "Orbitron",
+    "bodyFont": "Open Sans"
+  },
+  "tagline": "Sing what He has already said",
+  "description": "SingItDone.com — declaration albums from the Inspire Family. Scripture sung in the first person, as what Yahuah has already spoken and already finished. One declaration per album, one artist on each.",
+  "audience": "Believers who know the doctrine and have not yet received it. The property is sung in the first person on purpose: the listener is not the audience of the declaration, the listener is the one making it.",
+  "doctrineGuard": {
+    "risk": "The name reads as word-faith. 'Sing it done' can be heard as singing a thing into existence.",
+    "answer": "The tagline is the guard and it is load-bearing: 'Sing what He has already said'. Kernel section 8 holds it — a declaration does not create the thing, it announces what He has already spoken, and what He has spoken is finished before it is seen. Every lyric on this property anchors to the written word inside the line itself, never to the singer's own confidence.",
+    "bindsAt": "J:/singitdone.com/music/README.md, and the Guards section of every album BLUEPRINT.md",
+    "rule": "No lyric on this property may make receiving conditional on the listener's faith, guarantee an outcome, or imply anyone failed to qualify."
+  },
+  "mode": {
+    "citation": "OHI",
+    "citationNote": "Original Hebrew Intent, Founder decision for this property, 2026-08-19. Yahuah, Yeshua, Elohim, Ruach HaKodesh throughout the loose text and every lyric. 🔴 The label OHI is internal and never appears anywhere a listener can see it. A displayed verse is rendered exactly as its version reads and is never Hebraized; that is the Display Rule and violating it fails the whole deliverable.",
+    "scriptureVersion": "JSV where the Depth Test passes; otherwise the version is named as it reads.",
+    "ruachPronoun": "feminine, scaffolded on first appearance per the citation standard",
+    "focus": "Who I am before Yahuah. Identity first; everything else on this property is spoken from there."
+  },
+  "seo": {
+    "titleDefault": "SingItDone.com — Sing what He has already said",
+    "titleTemplate": "%s — SingItDone.com",
+    "canonical": "https://singitdone.com",
+    "canonicalNote": "Derived from hosts[0], because NEXT_PUBLIC_SITE_URL is a single process-wide value and belongs to JubileePraise.",
+    "openGraph": {
+      "type": "website",
+      "siteName": "SingItDone.com",
+      "description": "Sing what He has already said"
+    },
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "translate": "notranslate",
+    "builtBy": "app/web/app/layout.tsx generateMetadata()"
+  },
+  "catalogue": {
+    "source": "manifest",
+    "sourceNote": "A SCOPE of the shared catalogue, not a second source. Unlike Torah Sings, these albums are artist-keyed like everything else and belong in catalog-manifest.json.",
+    "categories": [
+      "declarations"
+    ],
+    "categoryLabel": "Declarations",
+    "categoriesNote": "🔴 The category key does not exist in catalog-manifest.json yet, so this tenant currently renders an empty catalogue. That is correct and temporary. deploy/rebuild-manifest.mjs must learn J:/singitdone.com/music as an EXTRA_ROOT before the first album appears.",
+    "artists": [
+      {
+        "slug": "elias-inspire",
+        "name": "Elias Inspire",
+        "album": "ELIM2001EN",
+        "declaration": "Chosen and appointed"
+      },
+      {
+        "slug": "nova-inspire",
+        "name": "Nova Inspire",
+        "album": "NVIM2001EN",
+        "declaration": "Abiding in His presence"
+      },
+      {
+        "slug": "imani-inspire",
+        "name": "Imani Inspire",
+        "album": "IMIM2001EN",
+        "declaration": "The fear of Yahuah"
+      },
+      {
+        "slug": "eliana-inspire",
+        "name": "Eliana Inspire",
+        "album": "EAIM2001EN",
+        "declaration": "Set apart, a vessel of honor"
+      },
+      {
+        "slug": "caleb-inspire",
+        "name": "Caleb Inspire",
+        "album": "CAIM2001EN",
+        "declaration": "Clothed in humility"
+      },
+      {
+        "slug": "tahoma-inspire",
+        "name": "Tahoma Inspire",
+        "album": "THIM2001EN",
+        "declaration": "Hearing His voice"
+      },
+      {
+        "slug": "zev-inspire",
+        "name": "Zev Inspire",
+        "album": "ZEIM2001EN",
+        "declaration": "His Word living in me"
+      },
+      {
+        "slug": "melody-inspire",
+        "name": "Melody Inspire",
+        "album": "MDIM2001EN",
+        "declaration": "Discerning and undeceived"
+      },
+      {
+        "slug": "zariah-inspire",
+        "name": "Zariah Inspire",
+        "album": "ZHIM2001EN",
+        "declaration": "Free from offense"
+      },
+      {
+        "slug": "jubilee-inspire",
+        "name": "Jubilee Inspire",
+        "album": "JEIM2001EN",
+        "declaration": "An overcomer"
+      }
+    ],
+    "albumCodeShapes": [
+      "ELIM2001EN",
+      "NVIM2001EN",
+      "IMIM2001EN",
+      "EAIM2001EN",
+      "CAIM2001EN",
+      "THIM2001EN",
+      "ZEIM2001EN",
+      "MDIM2001EN",
+      "ZHIM2001EN",
+      "JEIM2001EN"
+    ],
+    "albumCodeRange": "One album per artist, all in the 2001 series",
+    "albumCodeNote": "The album code is the ARTIST's own four letter code, not a property code, because one family member carries an entire album. The 2001 series separates this property from the 1000 series each persona already carries on JubileePraise, so ZHIM2001EN sits beside ZHIM1001EN without collision. <CODE>200100 is reserved for the free teaching track, which is not on the album.",
+    "trackConvention": "Twelve tracks, locked, all by one artist, all on one declaration. Each blueprint divides its declaration into FOUR MOVEMENTS drawn from the Founder's own text and gives each movement three songs. A track that cannot be placed in a movement is a wrong track.",
+    "musicDrive": "J:/singitdone.com/music",
+    "studioMusicRoot": "J:/singitdone.com",
+    "studioRootNote": "The persona folders now sit one level under musicDrive, which is exactly the studio's voice model. studioMusicRoot is still recorded as the parent of musicDrive for schema agreement because the studio does not carry this tenant. If it ever adopts it, set studioMusicRoot to J:/singitdone.com/music and musicDrive to a single artist folder.",
+    "cdnPrefix": "music/declarations",
+    "cdnPrefixNote": "Not synced. Nothing has been uploaded, because no audio exists.",
+    "manifest": "app/web/public/music/catalog-manifest.json",
+    "manifestPathPrefix": "albums/declarations",
+    "scopeEnforcedAt": "app/web/lib/manifest.ts load() — a filtered copy, so another tenant's album is unreachable by direct URL, not merely hidden",
+    "staleCopy": null,
+    "artistsNote": "ONE ARTIST PER ALBUM. Founder decision, 2026-08-19. Amir and Santiago hold no album on this property: ten interior declarations do not divide into twelve artists. Their folders exist and are empty on purpose, and J:/singitdone.com/music/VOICES.md names the two outward facing declarations they should carry instead.",
+    "driveLayout": "J:/singitdone.com/music/<persona-name>/<CODE>2001EN-<album-slug>/{BLUEPRINT.md,lyrics/,artwork/}. Persona folder names match JubileePraise's existing convention (zariah-inspire, elias-inspire)."
+  },
+  "home": {
+    "component": "app/web/components/TenantHome.tsx",
+    "featuredAlbum": null,
+    "featuredNote": "TenantHome pins nothing and shows one row per artist. With a single artist slug this renders as one long row until a per-declaration grouping is built.",
+    "childrenOnHome": false
+  },
+  "nav": [
+    {
+      "href": "/",
+      "key": "nav.home"
+    },
+    {
+      "href": "/playlists",
+      "key": "nav.playlists"
+    },
+    {
+      "href": "/subscription",
+      "key": "nav.upgrade"
+    }
+  ],
+  "navNote": "Deliberately minimal, and every entry is a route that already exists. No /inspire, /children, /general, /christmas or /music-type: those browse surfaces are empty under this scope. nav.upgrade is filtered out for a paid signed-in visitor, in components/Header.tsx.",
+  "routes": {
+    "own": [],
+    "ownNote": "None yet. This tenant serves JubileePraise's shared implementations under its own chrome. A /declarations browse surface is the obvious first tenant-specific route and does not exist.",
+    "shared": [
+      "/",
+      "/album",
+      "/signin",
+      "/signup",
+      "/account",
+      "/playlists",
+      "/liked",
+      "/search",
+      "/subscription",
+      "/privacy",
+      "/terms"
+    ]
+  },
+  "chrome": {
+    "shell": "app/web/components/Header.tsx and FooterPlayer",
+    "shellNote": "JubileePraise's chrome, tinted by brand.accent. This tenant brings no shell of its own, unlike Torah Sings.",
+    "styles": "app/web/app/globals.css",
+    "session": "Shared. One auth system across all five hosts."
+  },
+  "i18n": {
+    "defaultLanguage": "en",
+    "cookie": "jv_lang",
+    "supportedLanguages": 49,
+    "chromeTranslated": true,
+    "catalogueLanguage": "en",
+    "catalogueLanguageNote": "EN first, always. Translations run through skill_translate.music.<Language>.md against the APPROVED lyrics file, never a draft.",
+    "shared": true
+  },
+  "production": {
+    "server": "root@94.72.120.231",
+    "path": "/var/www/jubileepraise.com",
+    "webCwd": "/var/www/jubileepraise.com/web",
+    "pm2": "jubileepraise-web",
+    "pm2Script": "next start -p 3030",
+    "port": 3030,
+    "nginxVhost": null,
+    "nginxVhostNote": "⚠ DOES NOT EXIST YET. Create /etc/nginx/sites-available/singitdone.com proxying to 127.0.0.1:3030, matching the goPartyGiggles block.",
+    "apexBehaviour": "not configured",
+    "originTls": null,
+    "originTlsNote": "Not configured. Follow the goPartyGiggles pattern (port 80 only, Cloudflare terminating at the edge) unless an origin certificate is wanted.",
+    "edge": "Cloudflare",
+    "dns": null,
+    "dnsNote": "⚠ Domain ownership was not verified from inside this session. Nothing in this file asserts that singitdone.com is registered.",
+    "api": {
+      "host": "api.jubileepraise.com",
+      "shared": true
+    },
+    "verified": null
+  },
+  "runtime": {
+    "shared": true,
+    "routedBy": "Host header, in lib/tenants.ts tenantForHost()",
+    "devPort": 3000,
+    "devNote": "localhost resolves to JubileePraise, not here. To see this tenant locally, send the Host header or add a hosts-file entry.",
+    "env": {
+      "shared": "all NEXT_PUBLIC_* vars are process-wide; there is no per-tenant env"
+    }
+  },
+  "deploy": {
+    "scoped": false,
+    "note": "One pm2 process serves all five hosts, so a deploy ships them together. This site cannot be shipped on its own.",
+    "runbook": "PUBLISH.md",
+    "gate": "deploy/check-manifest.mjs",
+    "gateNote": "That gate scans EXTRA_ROOTS. J:/singitdone.com/music is not in that list yet, so nothing here is validated or blocked."
+  },
+  "studio": {
+    "picker": null,
+    "pickerNote": "Not in the WPF studio's Website picker. Nothing to enumerate until the first album is manifest-backed.",
+    "voice": null
+  },
+  "pipeline": {
+    "chain": "concept (Founder) → blueprint and lyrics (Melody) → four-axis QA (Tahoma) → engineering approval → generation → CDN → radio → distribution",
+    "gates": [
+      "BLUEPRINT.md approved before any lyric is written",
+      "lyrics approved before any recording money is spent",
+      "registration into each persona's music/by_register/<register>.md before any song can ever be offered"
+    ],
+    "gatesNote": "The third one is the quiet killer. Under skill_singsong.md section 7 a song absent from its register file does not exist and can never be handed to anybody. An album recorded but unregistered is an album nobody will ever hear offered.",
+    "authoring": "J:/singitdone.com/music",
+    "skill": "w:/InspirePersonas.com/personas/skills/skill_write.declaration-songs.md",
+    "skillNote": "The SingItDone declaration register, written as a mountable skill v1.0 on 2026-08-19. Mount it before writing lyrics for this property, alongside skill_write.prophetic-declaration.md and the Jubilee Music SOP v2. It carries every standing ruling in the rulings block above, plus the craft: three voices, soul-address budget of two, finished-possession grammar with retrieved verb parsings, anchor-inside-the-line, Suno tag discipline, lean file format, scoring traps, and the recorded failure list."
+  },
+  "notes": [
+    "This tenant was created before its catalogue existed, which is the reverse of how the other four came about. Nothing breaks — an empty scope renders an empty catalogue — but do not read a green check-tenants run as evidence that a visitor would see anything.",
+    "The manifest category key is `declarations`. On the music drive the albums sit directly under J:/singitdone.com/music with no category folder between. The two are not the same string and nothing should assume they are.",
+    "A code prefix is not a tenant boundary. The catalogue scope is the category key, enforced in lib/manifest.ts at load.",
+    "Design changed twice on 2026-08-19 before any lyric was approved: twelve voice compilation, then one artist per album. The blueprint gate is what made that cheap. Ten lyric drafts written under the first design were discarded rather than retrofitted."
+  ],
+  "rulings": {
+    "testimonyAnchor": "REMOVED. Founder ruling 2026-08-19. SOP section 18 requires a Testimony Anchor Track on every Jubilee album; that requirement is set aside for this property. No album here designates one and QA must not flag the absence.",
+    "propheticDeclarationFloor": "95% on the SOP section 5.5 Prophetic Declaration Rule, ten points above the standard 85% delivery target. Founder ruling 2026-08-19.",
+    "register": "Declarations sung BEFORE Yahuah with thanksgiving toward Him, spoken over the singer own soul in the pattern of David (1 Samuel 30:6; Psalm 42:5, 103:1, 62:5, 116:7). SOP section 3.6 Vertical Address describes songs sung TO Yahuah and is not applied here as a pass or fail.",
+    "soulAddressBudget": "Twice per song. Once at the top to set the posture, once at the close to return to it. Never used as a chorus refrain.",
+    "finishedPossession": "Founder ruling 2026-08-19. THE ACT IS STATED IN THE PERFECT; THE STANDING RESULT STAYS PRESENT. He has said it / He has released me / I have hidden it, alongside I walk free / peace is mine. Banned: the future for a finished thing, and the habitual-practice frame for a finished act (I hide it, I keep releasing, I try to) which describes effort in progress and hands the weight back to the singer. Where Scripture uses the perfect, the lyric uses the perfect. Worked example: Psalm 119:11, the verb tsaphanti is Qal perfect 1cs, so it is I have hidden it in my heart, never I hide it."
+  }
+}

@@ -1,0 +1,14 @@
+/* Backstage-style listing: minimal hero over a fixed-300px flex-wrap card grid
+   on a flat black canvas (the body is blacked out via body:has(.bsHebraic)). */
+.page {
+  padding: clamp(28px, 4vw, 52px) 10px 64px;
+}
+
+/* Always exactly five equal columns spanning the full width, edge to edge, at
+   every screen size — the cards stretch to fill each row (fully justified). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  width: 100%;
+}

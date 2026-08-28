@@ -1,0 +1,80 @@
+.cover {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 2 / 3;
+  border-radius: 4px 10px 10px 4px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #0d1226, #070a17 62%);
+  border: 1px solid var(--hairline-strong);
+  box-shadow: var(--shadow-lift);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 34px 28px;
+  isolation: isolate;
+}
+
+/* The spine. */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 12px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), transparent);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(100% 62% at 50% 0%, rgba(201, 168, 74, 0.2), transparent 64%),
+    radial-gradient(1.4px 1.4px at 24% 30%, rgba(232, 217, 168, 0.5), transparent 60%),
+    radial-gradient(1.1px 1.1px at 68% 21%, rgba(232, 217, 168, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 80% 44%, rgba(232, 217, 168, 0.3), transparent 60%);
+}
+
+.mark {
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.75;
+}
+
+.title {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.5rem, 3.4vw, 1.95rem);
+  line-height: 1.12;
+  color: var(--ink);
+  margin: 0;
+}
+
+.sub {
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.glyph {
+  position: absolute;
+  right: -6px;
+  bottom: -14px;
+  font-size: 8rem;
+  color: rgba(232, 217, 168, 0.05);
+  z-index: -1;
+  user-select: none;
+}
+
+.foot {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}

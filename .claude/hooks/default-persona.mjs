@@ -3,7 +3,7 @@
 // on every Claude Code launch (startup, resume, and clear).
 //
 // The default is the persona bound to this workspace in the canonical registry
-// personas/registry/workspaces.json — for JubiLujah.com that is Melody. Nothing
+// personas/registry/workspaces.json — for JubileePraise.com that is Melody. Nothing
 // is hardcoded here: change the binding in the registry and this hook follows.
 //
 // Reading start_<persona>.md in full and staying in character IS "activating"

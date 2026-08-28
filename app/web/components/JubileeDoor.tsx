@@ -16,7 +16,7 @@ const Eye = ({ on, toggle }: { on: boolean; toggle: () => void }) => (
 );
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
-const SITE_NAME = 'JubiLujah';
+const SITE_NAME = 'JubileePraise';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 declare global {
@@ -26,7 +26,7 @@ declare global {
 
 // The "one door" (Jubilee ID Sign-in guidelines): Screen 1 collects the EMAIL only,
 // looks it up at the Jubilee ID authority, then routes —
-//   welcome (2A)      : has a Jubilee ID + already uses JubiLujah → password → sign in
+//   welcome (2A)      : has a Jubilee ID + already uses JubileePraise → password → sign in
 //   confirm (2B-1)    : has a Jubilee ID, new here → confirm password …
 //   createlinked (2B-2): … then a Create-account screen (First/Last/DOB, no password)
 //   form (2C)         : no Jubilee ID → create one (name/DOB/password) → 6-digit email OTP
@@ -321,7 +321,7 @@ function JubileeDoor() {
           <div className="auth-panel-inner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="auth-avatar" src="/images/brand-logo.png" alt="" />
-            <div className="auth-brand"><span className="b1">JubiLujah</span><span className="b2">.com</span></div>
+            <div className="auth-brand"><span className="b1">JubileePraise</span><span className="b2">.com</span></div>
 
             {info && <div className="auth-err" style={{ borderColor: '#1f9d57', color: '#bfe6cf', marginTop: 18 }}>{info}</div>}
             {err && <div className="auth-err" style={{ marginTop: 18 }}>{err}</div>}
@@ -380,7 +380,7 @@ function JubileeDoor() {
               </form>
             )}
 
-            {/* ── Screen 2B-2: Create your JubiLujah account (no password) ── */}
+            {/* ── Screen 2B-2: Create your JubileePraise account (no password) ── */}
             {step === 'createlinked' && (
               <form onSubmit={submitCreateLinked} style={{ marginTop: 22 }}>
                 <div className="door-h">Create your {SITE_NAME} account</div>
@@ -487,7 +487,7 @@ function JubileeDoor() {
               </form>
             )}
           </div>
-          <div className="auth-foot">© 2026 JubiLujah.com &nbsp;|&nbsp; <Link href="/terms">Terms of Use</Link> &nbsp;|&nbsp; <Link href="/privacy">Privacy Policy</Link></div>
+          <div className="auth-foot">© 2026 JubileePraise.com &nbsp;|&nbsp; <Link href="/terms">Terms of Use</Link> &nbsp;|&nbsp; <Link href="/privacy">Privacy Policy</Link></div>
         </div>
 
         <AuthHero>

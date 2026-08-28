@@ -1,0 +1,127 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(4, 5, 11, 0.78);
+  backdrop-filter: blur(10px);
+  animation: fade 0.35s var(--ease);
+  overflow-y: auto;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline-strong);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-lift);
+  padding: 30px;
+  animation: lift 0.4s var(--ease);
+}
+
+@keyframes lift {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: rgba(4, 5, 11, 0.6);
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.close:hover {
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.video {
+  display: grid;
+  place-items: center;
+  margin-bottom: 26px;
+}
+
+.videoEl {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+  background: #05070f;
+}
+
+.videoNote {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  translate: -50% 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232, 217, 168, 0.42);
+  white-space: nowrap;
+}
+
+.headline {
+  font-size: clamp(1.6rem, 3.4vw, 2.05rem);
+  margin: 14px 0 16px;
+}
+
+.copy {
+  color: var(--ink-body);
+  font-size: 1.04rem;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.hush {
+  color: var(--accent-soft);
+  font-style: italic;
+  margin: 0 0 28px;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 24px 20px;
+  }
+
+  .actions .pill {
+    width: 100%;
+  }
+}

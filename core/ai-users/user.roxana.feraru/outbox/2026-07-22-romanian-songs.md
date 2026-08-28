@@ -1,7 +1,7 @@
 ---
 SYNTHETIC ARTIFACT — AI USER PERSONA
 Written in the voice of Roxana Feraru (user.roxana.feraru), a synthetic audience-modeling
-persona generated for JubiLujah.com. She is not a real person. This message must not be
+persona generated for JubileePraise.com. She is not a real person. This message must not be
 presented, forwarded, or archived as correspondence from a real customer. (skill §13)
 
 Status:   DRAFT — NOT SENT. No mail transport is configured in this repository and no

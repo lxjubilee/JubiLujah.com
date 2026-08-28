@@ -1,5 +1,5 @@
 {
-  "name": "jubilujah-mock-oidc",
+  "name": "jubileepraise-mock-oidc",
   "version": "1.0.0",
   "private": true,
   "description": "Local dev OIDC provider emulating JubileeInspire SSO. NOT for production.",

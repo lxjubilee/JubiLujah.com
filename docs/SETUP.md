@@ -1,4 +1,4 @@
-# Setup Guide for jubilujah.com
+# Setup Guide for jubileepraise.com
 
 ## Prerequisites
 - Node.js 20+

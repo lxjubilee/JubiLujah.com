@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
-import type { CSSProperties } from 'react';
 import { notFound } from 'next/navigation';
 import { getAlbumByCode, getArtist } from '@/lib/manifest';
 import { coverFor } from '@/lib/covers';
+import { supportMapFor } from '@/lib/support';
 import { avatarKey } from '@/lib/personas';
 import { similarAlbums } from '@/lib/musicTypes';
 import AlbumApp, { AlbumLink, CurrentAlbum, SimilarAlbum } from '@/components/AlbumApp';
@@ -83,19 +83,28 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
     tracks: album.tracks.map((t) => ({ id: t.id, n: t.n, title: t.title, url: t.url })),
   };
 
-  const heroStyle = { ['--persona-img' as string]: `url('${heroImage(album.artistSlug)}')` } as CSSProperties;
+  // The wide 16:9 band above the song list, when the album has one on the CDN.
+  // Resolved for every album the rail can switch to, not just this one: the
+  // component swaps albums in place without navigating, so a map built for the
+  // requested album alone would show the band on arrival and never again.
+  const support = supportMapFor([album.code, ...artistAlbums.map((a) => a.code)]);
 
+  // THE HERO IS RENDERED BY AlbumApp, not here, and that is a deliberate move.
+  // Its backdrop is now the album's own supporting image when one exists, and
+  // AlbumApp switches albums IN PLACE without navigating — so a hero rendered at
+  // this level would keep showing the first album's picture for the rest of the
+  // visit. The persona banner below is the fallback it falls back TO.
   return (
     <div className="album-exec">
-      <header className="x-hero" style={heroStyle}>
-        <div className="x-container">
-          <div className="x-inner">
-            <h1>{album.artistName}<em>{artist?.role || 'Inspire Family'}</em></h1>
-          </div>
-        </div>
-      </header>
-
-      <AlbumApp artist={album.artistName} albums={albums} initial={initial} similar={similar} />
+      <AlbumApp
+        artist={album.artistName}
+        artistRole={artist?.role || 'Inspire Family'}
+        heroFallback={heroImage(album.artistSlug)}
+        albums={albums}
+        initial={initial}
+        similar={similar}
+        support={support}
+      />
     </div>
   );
 }

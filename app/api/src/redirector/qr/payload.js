@@ -3,7 +3,7 @@
 // QR encoded payload — software/redirector.md §10.4.
 //
 // Encode the full canonical URL, no query string, no trailing slash:
-//     HTTPS://JUBILUJAH.COM/R/aB3kM9pQ7xT2
+//     HTTPS://JUBILEEPRAISE.COM/R/aB3kM9pQ7xT2
 // The scheme + host are uppercased (hosts are case-insensitive) so THAT segment
 // stays in QR alphanumeric mode; the token, however, is CASE-SENSITIVE (Base58,
 // mixed case) and is emitted verbatim — so the token segment encodes in byte mode.
@@ -17,7 +17,7 @@ import { config } from '../../config.js';
 // always forced to HTTPS in the payload (§10.4); in dev the host may be a
 // localhost:port, which is still alphanumeric-mode-safe (':' is a legal char).
 export function canonicalHost() {
-  const base = config.redirector.baseUrl || 'https://jubilujah.com';
+  const base = config.redirector.baseUrl || 'https://jubileepraise.com';
   return base.replace(/^https?:\/\//i, '').replace(/\/+$/, '').toUpperCase();
 }
 

@@ -1,0 +1,51 @@
+/* The "browse" zone — a darker cinema band that carries the catalog rails,
+   echoing JubileePraise's black rows section against the navy body around it. */
+.browse {
+  /* JubileePraise's catalog ROWS run full-bleed: edge-to-edge with only a 36px side
+     gutter (16px on small screens), no centred max-width. Re-scoping --gutter AND
+     releasing --wrap here reshapes every .wrap inside the band (catnav, rail
+     heads, grids) so the grid fills the screen when zoomed out — instead of the
+     framed 1548px column. The header sits outside .browse, so it keeps its own
+     10px gutter and 1548px cap, just like JubileePraise's inset header. */
+  --gutter: 36px;
+  --wrap: none;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(27, 35, 64, 0.55), transparent 62%),
+    #080b18;
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (max-width: 640px) {
+  .browse {
+    --gutter: 16px;
+  }
+}
+
+/* Jump-nav across the six divisions. */
+.catnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.catlink {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-body);
+  transition: color 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.catlink:hover,
+.catlink:focus-visible {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}

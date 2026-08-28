@@ -39,7 +39,7 @@ function page(title: string, message: string, statusNote?: string): string {
   // Mobile-first branded shell. No JS, no external assets, no leaked internals.
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
-<title>${title} — JubiLujah.com</title><style>
+<title>${title} — JubileePraise.com</title><style>
 :root{color-scheme:dark}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
 font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;
@@ -53,7 +53,7 @@ p{font-size:15px;line-height:1.6;color:#b7b7b7;margin-bottom:24px}
 a.btn{display:inline-block;padding:12px 22px;border-radius:8px;background:#E6AC00;color:#1b1b1b;
 font-weight:700;text-decoration:none}
 </style></head><body><div class="card">
-<div class="mark">JubiLujah<b>.com</b></div>
+<div class="mark">JubileePraise<b>.com</b></div>
 <h1>${title}</h1><p>${message}</p>
 <a class="btn" href="/">Explore the music</a>
 </div></body></html>`;

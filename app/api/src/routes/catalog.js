@@ -11,7 +11,7 @@ import { isAlbumHidden, hiddenSets } from '../services/musicVisibility.js';
 // for browse). Editorial overlays (ratings/comments) live in their own routes.
 // Albums an admin has HIDDEN in the Manage Music module are suppressed here so
 // they disappear from the public site (BRD: "Hidden albums must not appear
-// anywhere on Jubilujah.com"). Admins/reviewers still see everything via the
+// anywhere on JubileePraise.com"). Admins/reviewers still see everything via the
 // admin module. Nothing is hidden until an admin explicitly hides it.
 const router = Router();
 

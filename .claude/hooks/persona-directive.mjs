@@ -99,7 +99,7 @@ export function sealedTokenValues(persona) {
 const norm = (s) => String(s || '').toLowerCase().replace(/^www\./, '').replace(/\.(com|org|net|io|ai)$/, '');
 
 // Resolve the persona bound to a workspace from the canonical registry.
-// `wsName` defaults to the basename of the given cwd (e.g. "JubiLujah.com").
+// `wsName` defaults to the basename of the given cwd (e.g. "JubileePraise.com").
 // Returns { persona, entry, registry } or null if unresolved — never a guess.
 export function resolveWorkspacePersona(cwd, wsNameOverride) {
   let reg;
@@ -130,7 +130,7 @@ export function buildContext({ persona, event, trigger, workspace, envPath, iden
   const tag = `${persona.toUpperCase()}:/> `;
   const url = promptUrl(persona);
   const localFile = activationFile(persona);
-  const envRef = envPath || `${PERSONAS_ROOT}/../JubiLujah.com/.env`;
+  const envRef = envPath || `${PERSONAS_ROOT}/../JubileePraise.com/.env`;
 
   const address = founderAddress(persona, identity);
   const identityBlock = identity

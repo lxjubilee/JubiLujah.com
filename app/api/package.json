@@ -1,8 +1,8 @@
 {
-  "name": "jubilujah-api",
+  "name": "jubileepraise-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Jubilujah.com Node.js backend — catalog, editorial, SSO, RBAC.",
+  "description": "JubileePraise.com Node.js backend — catalog, editorial, SSO, RBAC.",
   "type": "module",
   "main": "src/index.js",
   "scripts": {

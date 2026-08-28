@@ -1,6 +1,6 @@
 # CATALOG TRANSLATION ORCHESTRATION — Standard Operating Procedure (SOP)
 
-**Audience:** the AI developer/agent running the JubiLujah.com catalog-translation pipeline.
+**Audience:** the AI developer/agent running the JubileePraise.com catalog-translation pipeline.
 **Scope:** review the entire **English (EN)** music catalog on the **J: drive**, pick the
 most suitable album/artist for each target language, skip anything already translated,
 translate it using the correct `translate_<LANGUAGE>.md` engine, then quality-check and
@@ -16,7 +16,7 @@ code), plus a verification report and an updated translation ledger.
 ## 0. INPUTS & PREREQUISITES (confirm before starting)
 
 1. **The EN catalog root** on the J: drive (confirm the actual path), e.g.
-   `J:\JubiLujah\Catalog\` containing per-artist/per-album folders.
+   `J:\JubileePraise\Catalog\` containing per-artist/per-album folders.
 2. **The translation engines:** the `/.prompts/translate_<LANGUAGE>.md` files (one per
    language). If any are missing, generate them first via `BUILD_TRANSLATION_PROMPTS.md`.
    Do NOT translate without the matching engine file.
@@ -141,6 +141,12 @@ For the selected album and target language:
 1. **Load the correct engine:** `/.prompts/translate_<LANGUAGE>.md`. Use it verbatim as the
    controlling instruction set. If it is missing or a placeholder, STOP and generate/fix it
    first (`BUILD_TRANSLATION_PROMPTS.md`).
+   **And load its Learned-Lessons Ledger** — `/.prompts/translate_<LANGUAGE>.LESSONS.md` — if one
+   exists. It holds every correction a native speaker has made to an AI-produced line, with the
+   before, the after, and the reasoning. **A language with a ledger is not translated without it,
+   and where a lesson conflicts with a general engine rule, the lesson governs.** Romanian
+   (`translate_Romanian.LESSONS.md`) is the reference implementation; other languages open a
+   ledger the first time a native review comes back.
 2. **Translate track by track, sung text only.** Follow the engine's workflow and laws:
    meaning-first; contextualize-never-syncretize; the worldview frame (§1A); the locked
    divine-names glossary (§2); the banned-error patterns and drop-the-rhyme test (§0A);

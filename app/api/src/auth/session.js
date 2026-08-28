@@ -53,13 +53,13 @@ export async function purgeUserAccount(client, userId, email) {
 // Upsert a user that JubileeInspire just authenticated (loginMode === 'ji').
 // Keys on EMAIL (the shared cross-platform
 // identifier) instead of external_subject: identity.users.email is UNIQUE, so a
-// JI login for an address that already has a local Jubilujah-native row (e.g. an
-// old `jubilujah|<email>` signup) must update that row, not insert a colliding
+// JI login for an address that already has a local JubileePraise-native row (e.g. an
+// old `jubileepraise|<email>` signup) must update that row, not insert a colliding
 // one. external_subject is set only on first insert and left intact thereafter.
 // ----------------------------------------------------------------------------
 const JI_ROLE_MAP = { user: 'content_editor', admin: 'admin', guest: 'viewer' };
 // Roles JubileeInspire is authoritative over (the values JI_ROLE_MAP can mint).
-// JI re-sync only grants/revokes within this set, so Jubilujah-native grants
+// JI re-sync only grants/revokes within this set, so JubileePraise-native grants
 // (e.g. `reviewer`, pipeline roles) survive an SSO login instead of being wiped.
 const JI_MANAGED_ROLES = new Set(Object.values(JI_ROLE_MAP));
 
@@ -109,7 +109,7 @@ export async function upsertUserFromJI(jiUser) {
       }
     }
     for (const r of have) {
-      // Only revoke roles JI manages — leave Jubilujah-native grants intact.
+      // Only revoke roles JI manages — leave JubileePraise-native grants intact.
       if (!want.has(r) && JI_MANAGED_ROLES.has(r)) {
         await client.query('DELETE FROM identity.user_roles WHERE user_id = $1 AND role = $2', [user.id, r]);
         await client.query(
@@ -128,7 +128,7 @@ export async function upsertUserFromJI(jiUser) {
 // Upsert a user the SSO (Jubilee Identity Authority) just authenticated
 // (loginMode === 'sso'). Keys on EMAIL like upsertUserFromJI. The SSO is the
 // CREDENTIAL authority only — NOT the role authority — so we seed a baseline role
-// on the FIRST sign-in but never grant/revoke on return logins (Jubilujah-native
+// on the FIRST sign-in but never grant/revoke on return logins (JubileePraise-native
 // roles survive). SSO user shape is snake_case: { id, email, first_name, last_name }.
 // ----------------------------------------------------------------------------
 const SSO_DEFAULT_ROLE = 'content_editor';
@@ -206,7 +206,7 @@ export async function issueAccessToken({ userId }) {
     email: u.email,
     displayName: u.display_name,
     role: highestRole(u.roles),   // single-string role, JI-compatible
-    roles: u.roles,               // full RBAC set, for Jubilujah's requireRole
+    roles: u.roles,               // full RBAC set, for JubileePraise's requireRole
   });
   return { token, expiresAt };
 }

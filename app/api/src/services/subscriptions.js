@@ -266,14 +266,14 @@ export async function activateSubscription({
   await notify({
     userId,
     type: result.fromPlanCode && result.fromPlanCode !== plan.code ? 'plan_changed' : 'subscription_activated',
-    title: result.fromPlanCode && result.fromPlanCode !== plan.code ? `You're now on the ${plan.name} plan` : `Welcome to Jubilujah ${plan.name}`,
+    title: result.fromPlanCode && result.fromPlanCode !== plan.code ? `You're now on the ${plan.name} plan` : `Welcome to JubileePraise ${plan.name}`,
     body: 'Your subscription is active. Enjoy unlimited Christian music.',
     metadata: { plan: plan.code, subscription_id: result.sub.id },
     email: user?.email ? {
       to: user.email,
-      subject: `Your Jubilujah ${plan.name} subscription is active`,
+      subject: `Your JubileePraise ${plan.name} subscription is active`,
       heading: firstName ? `You're all set, ${firstName} — ${plan.name} plan active` : `You're all set — ${plan.name} plan active`,
-      intro: `${fullName ? `Hi ${fullName}, thank you` : 'Thank you'} for subscribing to Jubilujah.com. Your subscription is active and you now have unlimited access to inspiring Christian music.`,
+      intro: `${fullName ? `Hi ${fullName}, thank you` : 'Thank you'} for subscribing to JubileePraise.com. Your subscription is active and you now have unlimited access to inspiring Christian music.`,
       rows: [
         { label: 'Plan', value: plan.name },
         { label: 'Price', value: plan.price_cents === 0 ? 'Free' : `$${(plan.price_cents / 100).toFixed(2)} / ${plan.billing_interval}` },

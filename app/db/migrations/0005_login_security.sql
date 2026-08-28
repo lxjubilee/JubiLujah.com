@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 0005_login_security.sql
--- Sign-in hardening for jubilujah.com: a one-time first-sign-in email OTP gate,
+-- Sign-in hardening for jubileepraise.com: a one-time first-sign-in email OTP gate,
 -- login lockout, the OTP challenge store, and a per-user 2FA toggle. Adapts the
 -- JubileeInspire reference to this identity schema. Idempotent; the migration
 -- runner wraps this file in a single transaction.

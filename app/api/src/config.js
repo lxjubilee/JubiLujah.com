@@ -45,7 +45,7 @@ export const config = {
     ? (process.env.AUTH_LOGIN_MODE || '').toLowerCase()
     : 'local'),
 
-  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah'),
+  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise'),
 
   corsOrigins: (process.env.CORS_ORIGIN || 'http://localhost:3000')
     .split(',').map((s) => s.trim()).filter(Boolean),
@@ -79,7 +79,7 @@ export const config = {
   // SENDGRID_API_KEY is set, else a dev/log transport that just logs the
   // link/code instead of sending — so the flows are testable with no provider.
   // EMAIL_PROVIDER ('mailgun' | 'sendgrid' | 'log') forces one explicitly.
-  // NOTE: `from` must be on the Mailgun sending domain (jubilujah.com) or Mailgun
+  // NOTE: `from` must be on the Mailgun sending domain (jubileepraise.com) or Mailgun
   // rejects the message / it fails SPF+DKIM alignment.
   email: {
     provider: (process.env.EMAIL_PROVIDER || '').trim().toLowerCase(),
@@ -90,7 +90,7 @@ export const config = {
       // US region = https://api.mailgun.net (default); EU = https://api.eu.mailgun.net
       apiBase: (process.env.MAILGUN_API_BASE || 'https://api.mailgun.net').replace(/\/$/, ''),
     },
-    from: process.env.EMAIL_FROM || 'Jubilujah <noreply@jubilujah.com>',
+    from: process.env.EMAIL_FROM || 'JubileePraise <noreply@jubileepraise.com>',
     resetTtlMinutes: Number(process.env.PASSWORD_RESET_TTL_MIN || 60),
   },
 
@@ -104,8 +104,8 @@ export const config = {
   // token-only). See middleware/serviceAuth.js + auth/serviceToken.js.
   service: {
     jwtSecret: process.env.SERVICE_JWT_SECRET || '',
-    issuer: process.env.SERVICE_JWT_ISSUER || 'https://api.jubilujah.com',
-    audience: process.env.SERVICE_JWT_AUDIENCE || 'jubilujah-admin',
+    issuer: process.env.SERVICE_JWT_ISSUER || 'https://api.jubileepraise.com',
+    audience: process.env.SERVICE_JWT_AUDIENCE || 'jubileepraise-admin',
     tokenTtlSec: Number(process.env.SERVICE_TOKEN_TTL_SEC || 600),
     // Registered client credentials. Format (env SERVICE_CLIENTS):
     //   id:secret:scopeA|scopeB , id2:secret2 , ...
@@ -117,9 +117,9 @@ export const config = {
     rateLimitMax: Number(process.env.ADMIN_SERVICE_RATE_MAX || 600),
   },
 
-  // OUTBOUND cross-platform password sync. When a Jubilujah user changes or resets
+  // OUTBOUND cross-platform password sync. When a JubileePraise user changes or resets
   // their password, we push the new password to JubileeInspire so the shared SSO
-  // credential stays in lockstep. Jubilujah is the CLIENT here (the mirror image of
+  // credential stays in lockstep. JubileePraise is the CLIENT here (the mirror image of
   // the inbound `service` block above): it POSTs client_id+client_secret to JI's
   // /api/auth/service/token, then presents the returned Bearer JWT to JI's
   // /api/auth/admin/set-password. Sync is skipped (no-op) when clientSecret is empty.
@@ -138,20 +138,20 @@ export const config = {
   // which platform the login came from. See services/jiLogin.js.
   jiLogin: {
     baseUrl: (process.env.JI_LOGIN_BASE || process.env.JI_API_BASE || 'https://api.jubileeinspire.com').replace(/\/$/, ''),
-    source: process.env.JI_LOGIN_SOURCE || 'jubilujah',
+    source: process.env.JI_LOGIN_SOURCE || 'jubileepraise',
   },
 
   // SSO delegation -> the Jubilee Identity Authority (sso.jubileeinspire.com), used
   // when loginMode === 'sso'. The SSO is the SINGLE credential store (scrypt, the same
-  // KDF Jubilujah uses), reached with a client-credentials service token (client_id +
-  // client_secret -> short-lived bearer). Jubilujah stays the SESSION authority: it
+  // KDF JubileePraise uses), reached with a client-credentials service token (client_id +
+  // client_secret -> short-lived bearer). JubileePraise stays the SESSION authority: it
   // verifies at the SSO, upserts the returned user, and mints its own tokens. `site`
   // tags which family site the identity is signing in on. See services/ssoClient.js.
   sso: {
     baseUrl: (process.env.SSO_API_BASE || 'https://sso.jubileeinspire.com').replace(/\/$/, ''),
-    clientId: process.env.SSO_CLIENT_ID || 'jubilujah',
+    clientId: process.env.SSO_CLIENT_ID || 'jubileepraise',
     clientSecret: process.env.SSO_CLIENT_SECRET || '',
-    site: process.env.SSO_SITE || 'jubilujah',
+    site: process.env.SSO_SITE || 'jubileepraise',
   },
 
   // ---- Subscriptions & billing ---------------------------------------------
@@ -233,7 +233,7 @@ export const config = {
 // Valid RBAC roles, ordered weakest -> strongest (index = privilege level).
 // Every account carries the baseline `viewer` (view + play) which is never
 // removable. The four grantable roles are reviewer, content_editor, executive,
-// admin. `reviewer` is an orthogonal, Jubilujah-native capability (preview
+// admin. `reviewer` is an orthogonal, JubileePraise-native capability (preview
 // in-production "studio" albums); it sits low on the ladder so it grants no
 // pipeline/admin powers via requireRole — studio visibility is an explicit
 // membership check. `executive` is the consolidated mid-tier manager role

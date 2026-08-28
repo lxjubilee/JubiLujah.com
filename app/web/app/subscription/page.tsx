@@ -5,7 +5,7 @@ import SubscriptionPlans from '@/components/SubscriptionPlans';
 export const metadata: Metadata = {
   title: 'Plans & Pricing',
   description:
-    'Choose the perfect plan for unlimited Christian music on JubiLujah.com — worship, gospel, praise, instrumental and devotional music anytime, anywhere.',
+    'Choose the perfect plan for unlimited Christian music on JubileePraise.com — worship, gospel, praise, instrumental and devotional music anytime, anywhere.',
 };
 
 export default function SubscriptionPage() {

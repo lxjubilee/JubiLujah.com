@@ -3,7 +3,7 @@
 --
 -- Only the SHA-256 hash (hex) of the raw token is stored; the raw token travels
 -- ONLY in the emailed reset link. `used_at` enforces single-use. Powers the
--- forgot-password / reset-password flow on jubilujah.com (and any sibling site
+-- forgot-password / reset-password flow on jubileepraise.com (and any sibling site
 -- sharing this identity store). Change-password needs no table.
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS identity.password_resets (

@@ -1,6 +1,6 @@
-# jubilujah.com
+# jubileepraise.com
 
-Web and API applications for jubilujah.com.
+Web and API applications for jubileepraise.com.
 
 ## Structure
 - `web/` - Web Application
@@ -11,8 +11,8 @@ Web and API applications for jubilujah.com.
 ## Environments
 | Env | Web | API | Branch |
 |-----|-----|-----|--------|
-| Dev | dev.jubilujah.com | dpi.jubilujah.com | develop |
-| Prod | jubilujah.com | api.jubilujah.com | main |
+| Dev | dev.jubileepraise.com | dpi.jubileepraise.com | develop |
+| Prod | jubileepraise.com | api.jubileepraise.com | main |
 
 ## Quick Start
 ```bash

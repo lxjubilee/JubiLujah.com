@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$log = 'w:\jubilujah.com\driver-install.log'
+$log = 'w:\jubileepraise.com\driver-install.log'
 function W($m){ $m | Tee-Object -FilePath $log -Append }
 "=== Driver install started ===" | Set-Content -Path $log
 try {

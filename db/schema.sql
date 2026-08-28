@@ -1,5 +1,5 @@
 -- ============================================================================
--- Jubilujah.com — PostgreSQL Schema (Initial DDL)
+-- JubileePraise.com — PostgreSQL Schema (Initial DDL)
 -- Implements Build Spec §18 four-schema model
 -- Target: PostgreSQL 16+
 --

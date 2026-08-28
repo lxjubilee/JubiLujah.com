@@ -1,8 +1,8 @@
 {
-  "name": "jubilujah-app",
+  "name": "jubileepraise-app",
   "version": "1.0.0",
   "private": true,
-  "description": "Jubilujah.com — Next.js + Node.js + PostgreSQL migration",
+  "description": "JubileePraise.com — Next.js + Node.js + PostgreSQL migration",
   "workspaces": [
     "web",
     "api",

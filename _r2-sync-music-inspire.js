@@ -1,8 +1,28 @@
 #!/usr/bin/env node
 /*
- * _r2-sync-music-inspire.js — incremental sync of J:/jubilujah.com/music/inspire -> Cloudflare R2
- * under the `music/inspire/` prefix, so tracks serve at
- * https://cdn.jubilujah.com/music/inspire/<artist>/<album>/tracks/<file>.
+ * ⛔ SUPERSEDED 2026-08-14 — USE tools/cdn-sync-music.mjs INSTEAD.
+ *
+ * This file is kept for its S3-SDK reference only. Three things about it were
+ * wrong and every one of them was silent:
+ *
+ *   1. It cannot run. @aws-sdk/client-s3 is not installed at the repo root, so
+ *      `node _r2-sync-music-inspire.js` dies with MODULE_NOT_FOUND.
+ *   2. THE PREFIX BELOW WAS `music/inspire/` AND THAT IS THE WRONG TREE. The live
+ *      one, which catalog-manifest.json builds every track URL from, is
+ *      `music/albums/inspire/`. `music/inspire/` is EMPTY on the bucket — a single
+ *      --apply would have pushed 23 GB somewhere nothing serves and reported
+ *      success. Corrected below so a stray run cannot repeat it.
+ *   3. The header named the wrong host and bucket: the audio serves from the
+ *      jubileeverse-cdn bucket, not a separate jubileepraise one.
+ *
+ *   And it has NO PUBLISH GATE. It would happily publish pre-rewrite audio over
+ *   albums whose lyrics were rewritten for compliance. The replacement holds
+ *   those; on the first real run that was 331 of 826 files.
+ *
+ * ----------------------------------------------------------------------------
+ * _r2-sync-music-inspire.js — incremental sync of J:/jubileepraise.com/music/inspire -> Cloudflare R2
+ * under the `music/albums/inspire/` prefix, so tracks serve at
+ * https://cdn.jubileeverse.com/music/albums/inspire/<artist>/<album>/tracks/<file>.
  *
  * Modeled directly on _r2-sync-avatars.js (W:/JubileeVerse.com): diff by size, nothing is ever
  * deleted, `--apply` to upload, immutable cache headers for media. Credentials are read from a
@@ -11,7 +31,7 @@
  *
  * NOTE ON THE BUCKET: the avatars sync targets `jubileeverse-cdn` (cdn.jubileeverse.com). This
  * job targets cdn.jubilujah.com, which is a DIFFERENT bucket. Either set R2_BUCKET_CDN to the
- * jubilujah bucket in the .env you point at, or override per-run with --bucket=<name>.
+ * jubileepraise bucket in the .env you point at, or override per-run with --bucket=<name>.
  *
  * PUBLISH SCOPE (decided 2026-07-21): audio + album art ONLY — 4,795 files / 23.58 GB.
  * Everything else in that tree is internal (blueprints, todo notes, red-flags.md, lyric .docx,
@@ -19,14 +39,14 @@
  *
  * DEPENDENCY: @aws-sdk/client-s3 is declared in app/api/package.json but is NOT installed at the
  * repo root, so a bare `node _r2-sync-music-inspire.js` fails with MODULE_NOT_FOUND. Either:
- *   cd app/api && npm install          # then run with NODE_PATH=w:/JubiLujah.com/app/api/node_modules
+ *   cd app/api && npm install          # then run with NODE_PATH=w:/JubileePraise.com/app/api/node_modules
  *   NODE_PATH=w:/JubileeInspire.com/api/node_modules node _r2-sync-music-inspire.js   # works today
  *
  * Usage:
  *   node _r2-sync-music-inspire.js                     # diff only — shows what would upload
  *   node _r2-sync-music-inspire.js --apply             # upload missing/size-mismatched files
  *   node _r2-sync-music-inspire.js --apply --concurrency=8
- *   node _r2-sync-music-inspire.js --bucket=jubilujah-cdn --env=W:/JubiLujah.com/.env
+ *   node _r2-sync-music-inspire.js --bucket=jubileepraise-cdn --env=W:/JubileePraise.com/.env
  */
 const fs = require("fs");
 const path = require("path");
@@ -36,8 +56,10 @@ const args = process.argv.slice(2);
 const arg = (k, d) => { const a = args.find((x) => x.startsWith(`--${k}=`)); return a ? a.split("=").slice(1).join("=") : d; };
 const APPLY = args.includes("--apply");
 const CONC = Math.max(1, Math.min(parseInt(arg("concurrency", "6"), 10) || 6, 12));
-const SRC = arg("src", "J:/jubilujah.com/music/inspire");
-const PREFIX = arg("prefix", "music/inspire/").replace(/^\/+/, "");
+const SRC = arg("src", "J:/jubileepraise.com/music/inspire");
+// Corrected 2026-08-14: was "music/inspire/", which is an empty prefix on the
+// bucket. See the banner at the top of this file.
+const PREFIX = arg("prefix", "music/albums/inspire/").replace(/^\/+/, "");
 const ENVF = arg("env", process.env.R2_ENV_FILE || "");
 
 // load a .env into process.env (only vars not already set); silent if file missing
@@ -50,13 +72,13 @@ function loadEnv(file) {
     }
   } catch {}
 }
-[ENVF, "W:/JubiLujah.com/.env", "W:/JubileeInspire.com/api/.env", "W:/JubileeVerse.com/.env"].forEach(loadEnv);
+[ENVF, "W:/JubileePraise.com/.env", "W:/JubileeInspire.com/api/.env", "W:/JubileeVerse.com/.env"].forEach(loadEnv);
 
 // Credentials live under two different naming schemes in this estate:
 //   R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_BUCKET_CDN  (_r2-sync-avatars.js)
 //   R2_AVATARS_ENDPOINT / R2_AVATARS_ACCESS_KEY_ID / ...                      (JubileeInspire api/.env)
 // Accept either. NOTE: the R2_AVATARS_* token is scoped to the `jubileeverse-cdn` bucket only
-// (verified: ListBuckets returns AccessDenied), so it CANNOT write a jubilujah bucket. Publishing
+// (verified: ListBuckets returns AccessDenied), so it CANNOT write a jubileepraise bucket. Publishing
 // to cdn.jubilujah.com needs a token scoped to that bucket, or an account-wide one.
 const BUCKET = arg("bucket", process.env.R2_BUCKET_CDN || process.env.R2_AVATARS_BUCKET);
 const R2_S3_ENDPOINT      = process.env.R2_S3_ENDPOINT      || process.env.R2_AVATARS_ENDPOINT;
@@ -68,7 +90,7 @@ if (!R2_S3_ENDPOINT || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY || !BUCKET) {
   process.exit(2);
 }
 if (/^https?:\/\//i.test(BUCKET) || BUCKET.includes(".")) {
-  console.error(`Bucket looks like a hostname ('${BUCKET}'). It must be the bucket NAME (e.g. jubilujah-cdn);`);
+  console.error(`Bucket looks like a hostname ('${BUCKET}'). It must be the bucket NAME (e.g. jubileepraise-cdn);`);
   console.error("the public domain is bound to the bucket separately in the Cloudflare dashboard.");
   process.exit(2);
 }

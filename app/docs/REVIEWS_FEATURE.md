@@ -1,6 +1,6 @@
 # Rating & Review System — Technical & Testing Documentation
 
-Implements the public **Rating and Review System** for Jubilujah.com: users rate
+Implements the public **Rating and Review System** for JubileePraise.com: users rate
 albums and songs, write reviews, vote reviews helpful, report abuse; moderators
 manage everything from a dashboard. Built on the existing stack (Next.js 14
 App Router + TypeScript web, Express + PostgreSQL 16 API) and designed to sit

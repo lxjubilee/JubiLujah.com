@@ -1,7 +1,7 @@
 {
-  "name": "@jubilee/jubilujah",
+  "name": "@jubilee/jubileepraise",
   "version": "1.0.0",
-  "description": "Jubilujah.com - Music & Worship",
+  "description": "JubileePraise.com - Music & Worship",
   "private": true,
   "main": "server.js",
   "scripts": {

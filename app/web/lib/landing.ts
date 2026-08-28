@@ -1,5 +1,5 @@
 // ============================================================================
-// Landing page template — software/redirector.md §11. JubiLujah-themed.
+// Landing page template — software/redirector.md §11. JubileePraise-themed.
 //
 // Server-rendered HTML string (no client framework, inline critical CSS) so the
 // arrival page renders in well under a second on 4G (§11.2 / §20.2). The PRIMARY
@@ -49,14 +49,14 @@ export function renderLanding(d: LandingData, appLinks?: AppLinks): string {
     android: { store: appLinks.android.playStoreUrl, pkg: appLinks.android.packageName },
   } : null;
   const appGate = appCfg ? `<div class="appgate" id="appgate" hidden>
-  <div class="ag-t">Get the JubiLujah app</div>
+  <div class="ag-t">Get the JubileePraise app</div>
   <div class="ag-row">
     <a class="ag-btn ag-open" id="agDownload" href="#">Download the App</a>
     <a class="ag-btn ag-web" href="${goUrl}">Continue on web</a>
   </div>
 </div>` : '';
   // Mobile: AUTO-OPEN the installed app on load (no tap), deep-linking straight to
-  // the album (jubilujah://album?c=<code>[&t=<n>]). Android uses intent:// whose
+  // the album (jubileepraise://album?c=<code>[&t=<n>]). Android uses intent:// whose
   // browser_fallback_url returns here with ?noapp=1 when the app ISN'T installed —
   // then we just show the "Download the App / Continue on web" choice (no re-fire,
   // no loop). iOS fires the custom scheme. The web "primary" + "related" are hidden
@@ -89,7 +89,7 @@ export function renderLanding(d: LandingData, appLinks?: AppLinks): string {
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
-<title>${esc(hero.title)} — JubiLujah.com</title><style>
+<title>${esc(hero.title)} — JubileePraise.com</title><style>
 :root{color-scheme:dark}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;
 background:radial-gradient(ellipse at top,rgba(15,52,96,.4),transparent 60%),linear-gradient(135deg,#0f0f1e,#141422,#0d0d16);
@@ -128,7 +128,7 @@ background:#161622;border:1px solid rgba(255,255,255,.08);border-radius:10px;pad
 .ag-web{background:transparent;border-color:rgba(255,255,255,.18);color:#e8e8e8}
 .ag-get{display:block;margin-top:10px;font-size:12px;color:#cbb98a;text-decoration:none;text-align:center}
 </style></head><body><div class="wrap">
-<div class="brand">JubiLujah<b>.com</b></div>
+<div class="brand">JubileePraise<b>.com</b></div>
 ${appGate}
 ${d.context_path ? `<div class="crumb">${esc(d.context_path)}</div>` : ''}
 ${persona}

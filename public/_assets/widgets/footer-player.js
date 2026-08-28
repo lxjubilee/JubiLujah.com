@@ -1,5 +1,5 @@
 /* ============================================================
-   Jubilujah Persistent Footer Player (Build Spec §13)
+   JubileePraise Persistent Footer Player (Build Spec §13)
    Vanilla JS - no framework. Zustand-equivalent global store.
    ============================================================ */
 (function () {

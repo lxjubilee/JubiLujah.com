@@ -1,0 +1,141 @@
+.panel {
+  position: sticky;
+  top: 100px;
+  padding: 26px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  background: var(--bg-panel);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.headTitle {
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.85;
+}
+
+.headMeta {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 10px;
+  margin-inline: -10px;
+  border-radius: 10px;
+  transition: background 0.2s var(--ease);
+}
+
+.row:hover {
+  background: rgba(232, 217, 168, 0.035);
+}
+
+.n {
+  flex: none;
+  width: 20px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-body);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.duration {
+  flex: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The song currently sounding. */
+.current .title {
+  color: var(--accent-soft);
+}
+
+.current .n {
+  color: var(--accent);
+}
+
+.current .duration {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.locked .title {
+  color: var(--ink-faint);
+}
+
+.lockNote {
+  flex: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.taste {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.tasteLabel {
+  margin-bottom: 10px;
+}
+
+.tasteBody {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.93rem;
+  line-height: 1.62;
+}
+
+.tasteLink {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .panel {
+    position: static;
+  }
+}

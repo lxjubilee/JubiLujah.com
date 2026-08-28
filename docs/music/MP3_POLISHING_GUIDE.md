@@ -2,7 +2,7 @@
 
 **Purpose:** Standardize the ID3 metadata of every `.mp3` file in the music catalog so each track is correctly attributed to its assigned Persona and carries no leftover generation metadata before distribution.
 
-**Applies to:** All `.mp3` files on both the **C: drive** working copy (`c:\Websites\jubilujah.com\music\albums\`) and the **J: drive** sync location (`j:\music\`).
+**Applies to:** All `.mp3` files on both the **C: drive** working copy (`c:\Websites\jubileepraise.com\music\albums\`) and the **J: drive** sync location (`j:\music\`).
 
 ---
 

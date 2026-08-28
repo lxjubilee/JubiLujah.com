@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SixLabors.ImageSharp.Processing;
 
-namespace JubiLujahStudio;
+namespace JubileePraiseStudio;
 
 // ============================================================================
 //  COVER IMAGES
@@ -121,12 +121,13 @@ public partial class MainWindow
         if (CmbCoverPersona == null) return;
         CmbCoverPersona.Items.Clear();
         CmbCoverPersona.Items.Add(new ComboBoxItem { Content = "All personas", Tag = "" });
-        if (Directory.Exists(_musicRoot))
+        if (Directory.Exists(EffectiveMusicRoot))
         {
-            foreach (var dir in Directory.EnumerateDirectories(_musicRoot).OrderBy(d => d, StringComparer.OrdinalIgnoreCase))
+            foreach (var dir in Directory.EnumerateDirectories(EffectiveMusicRoot).OrderBy(d => d, StringComparer.OrdinalIgnoreCase))
             {
                 var name = Path.GetFileName(dir);
                 if (name.StartsWith('_') || name.StartsWith('.')) continue;
+                if (!VoiceAllowed(name)) continue;   // the header's tenant picker
                 CmbCoverPersona.Items.Add(new ComboBoxItem { Content = VoiceDisplay(name), Tag = name });
             }
         }
@@ -187,17 +188,28 @@ public partial class MainWindow
     }
 
     /// <summary>
-    /// True when an album code carries the English language suffix.
+    /// True when an album is English — which is either an explicit EN suffix or
+    /// NO LANGUAGE SUFFIX AT ALL.
     ///
     /// The code is &lt;PREFIX&gt;&lt;NNNN&gt;&lt;LANG&gt; — MDIM1042EN, AMIM1034RO,
-    /// IMIM1034KO — so the last two characters are the language. Measured against
-    /// the drive: 769 of 940 album folders are EN, 171 are one of forty other
-    /// languages, and four match no pattern at all (two Cantonese YUE codes and two
-    /// stray folders that are not albums). All four fall outside EN, which is the
-    /// right answer for every one of them.
+    /// IMIM1034KO — so the last two characters are the language WHEN THERE ARE
+    /// TWO. Some codes carry none and end on their number instead.
+    ///
+    /// THE SECOND CLAUSE IS NOT DEFENSIVE, IT IS LOAD-BEARING. Requiring the EN
+    /// suffix hid every suffix-less album, and the whole of MyTinyTiggles is
+    /// suffix-less: the Covers view for that tenant reported "0 English album(s)
+    /// … 32 localised edition(s) hidden" and showed an empty list. The albums
+    /// were never localised; they simply never carried a tag.
+    ///
+    /// Re-measured across the whole music drive, 2026-08-17 — 1052 album codes:
+    /// 839 end in EN, 179 end in one of 39 other language tags, and 34 end on a
+    /// digit (TTX### for Tiny Tiggles, IMX### under faith-based and general).
+    /// No real language tag ends in a digit, so the test is exact rather than a
+    /// heuristic: a trailing digit means the code has no language field.
     /// </summary>
     private static bool IsEnglishAlbum(string code) =>
-        code.Length >= 2 && code.EndsWith("EN", StringComparison.OrdinalIgnoreCase);
+        code.Length >= 2
+        && (char.IsDigit(code[^1]) || code.EndsWith("EN", StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
     /// Opens whichever folder is the one you actually want: the review folder when
@@ -243,17 +255,18 @@ public partial class MainWindow
     private void ScanCovers()
     {
         _covers.Clear();
-        if (_root.Length == 0 || !Directory.Exists(_musicRoot))
+        if (_root.Length == 0 || !Directory.Exists(EffectiveMusicRoot))
         {
-            Log($"Music root not found: {_musicRoot}");
+            Log($"Music root not found: {EffectiveMusicRoot}");
             RenderCovers();
             return;
         }
 
         var only = SelectedCoverVoice();
-        var voices = Directory.EnumerateDirectories(_musicRoot)
+        var voices = Directory.EnumerateDirectories(EffectiveMusicRoot)
             .Select(Path.GetFileName)
             .Where(n => n is { Length: > 0 } && !n.StartsWith('_') && !n.StartsWith('.'))
+            .Where(VoiceAllowed)
             .Where(n => only.Length == 0 || string.Equals(n, only, StringComparison.OrdinalIgnoreCase))
             .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
             .ToList();
@@ -263,7 +276,7 @@ public partial class MainWindow
         int missing = 0, have = 0, skippedLang = 0, waiting = 0;
         foreach (var voice in voices)
         {
-            var voiceDir = Path.Combine(_musicRoot, voice!);
+            var voiceDir = Path.Combine(EffectiveMusicRoot, voice!);
             foreach (var dir in Directory.EnumerateDirectories(voiceDir).OrderBy(d => d, StringComparer.OrdinalIgnoreCase))
             {
                 var folder = Path.GetFileName(dir);
@@ -947,7 +960,7 @@ public partial class MainWindow
         "If the concept you have chosen cannot be staged somewhere beautiful and full of life, choose a " +
         "different concept.";
 
-    // ---- how old the family looks --------------------------------------------
+    // ---- how old the family looks, and what build it has ---------------------
 
     /// <summary>
     /// The family's canonical apparent age. **Thirty for all twelve, except Elias,
@@ -981,6 +994,46 @@ public partial class MainWindow
         "This OVERRIDES the attached reference images: take the facial identity, features and colouring " +
         "from them, but if a reference shows an older or a younger person, the age in THIS image is the " +
         "one stated here. No ageing beyond it — no deep lines, no jowls, no stoop, no frailty.";
+
+    /// <summary>
+    /// The family's build. Slender, lean and fit, for every one of the twelve.
+    ///
+    /// Stated HERE for the same reason the age is: the .models briefs describe
+    /// wardrobe, colour and light and say NOTHING about the body, so until this
+    /// existed the generator was free to invent one — and did. A brief that later
+    /// grows a physique line cannot outvote this, because this is what the prompt
+    /// actually carries.
+    ///
+    /// 🔴 POSITIVE ONLY, AND THAT IS A MEASURED RESULT, NOT A STYLE PREFERENCE.
+    /// InspireManna's runner/persona-image.js hit this first and wrote down what
+    /// happened: a line ending "never heavy set, stocky or overweight" produced
+    /// heavy renders anyway, because an image model does not subtract a concept it
+    /// has been shown — naming the wrong reading in order to forbid it PLANTS it.
+    /// "Slender" on its own read as a soft preference and was overridden by the
+    /// reference. So the build is described concretely, at length, and every word
+    /// of it is a word we want in the picture. Do not add a "never …" to this
+    /// clause. That has been tried and it makes the problem worse.
+    ///
+    /// The wording is deliberately near-identical to persona-image.js's BUILD:
+    /// the same person has to have the same body on an article, on a cover and on
+    /// a supporting image, in this repo and in that one. Two wordings drift.
+    ///
+    /// HEALTHY, not thin. "Fit" and "healthy" are load-bearing words — the target
+    /// is an athletic thirty-year-old in good condition, not a gaunt one.
+    ///
+    /// ONE LINE. See AspectSuffix.
+    /// </summary>
+    private static string BuildClause(string firstName) =>
+        " BUILD — " + firstName + " is SLENDER AND LEAN, and so is every member of the Inspire Family who " +
+        "appears in this image: light framed, trim and long limbed, with narrow shoulders, a slim waist and " +
+        "a clean defined jawline — the fit, healthy, athletic figure of " +
+        (string.Equals(firstName, "Elias", StringComparison.OrdinalIgnoreCase)
+            ? "an active adult in strong condition, still lean and upright at forty"
+            : "an active young adult in the prime of life") + ". " +
+        "Carry it through the whole figure: the face is slim and clearly boned, the neck and shoulders are " +
+        "fine, the posture is tall, open and easy, and the wardrobe hangs cleanly on a lean frame. " +
+        "This OVERRIDES the attached reference images: take the facial identity, features and colouring " +
+        "from them, and render the build stated here.";
 
     // ---- what to do with the attached portrait -------------------------------
 
@@ -1096,7 +1149,7 @@ public partial class MainWindow
         Log($"  Each cover learns from {StyleRefCount} of its persona's own released covers, attached to the turn.");
         Log($"  Output: {ReviewRoot}\\<Persona>\\<Album Title> (CODE).png — for approval, not the music drive.");
 
-        await RunBatch(queue, covers: true);
+        await RunBatch(queue, RunView.Covers);
     }
 
     private int SelectedDraftCount() =>

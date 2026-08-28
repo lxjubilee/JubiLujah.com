@@ -1,0 +1,110 @@
+/*
+  Celestial art placeholder.
+
+  (a) a hue-tinted top radial glow
+  (b) 3–5 tiny star dots, layered radial-gradients, seeded from the slug
+  (c) one soft blurred orb
+  (d) a faint mono caption
+
+  Hue varies per album so the motif stays iconic, not repetitive.
+  Swap this for real angel/star artwork at build.
+*/
+
+.art {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-color: #05070f;
+  isolation: isolate;
+}
+
+/* (a) hue-tinted glow from the top, and (b) the star dots, layered. */
+.glow {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(120% 78% at 50% 0%, hsl(var(--hue) 68% 62% / 0.24), transparent 62%),
+    radial-gradient(90% 60% at 50% 100%, hsl(var(--hue) 60% 30% / 0.16), transparent 70%);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+}
+
+/* (c) one soft blurred orb */
+.orb {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  translate: -50% 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 34%,
+    hsl(var(--hue) 88% 92% / 0.95),
+    hsl(var(--hue) 74% 62% / 0.55) 38%,
+    hsl(var(--hue) 62% 28% / 0.18) 68%,
+    transparent 74%
+  );
+  filter: blur(0.5px);
+}
+
+.orb::after {
+  content: '';
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--hue) 80% 70% / 0.22), transparent 62%);
+  filter: blur(14px);
+}
+
+/* An optional thin ring — used on the featured hero orb. */
+.ring {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  translate: -50% 0;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--hue) 60% 78% / 0.22);
+  rotate: -14deg;
+  scale: 1 0.34;
+}
+
+/* Hebrew watermark — standard letter, small-caps display face. */
+.watermark {
+  position: absolute;
+  right: 6%;
+  bottom: 4%;
+  font-size: clamp(3.5rem, 22cqw, 9rem);
+  color: hsl(var(--hue) 40% 88% / 0.07);
+  user-select: none;
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: rgba(232, 217, 168, 0.3);
+  pointer-events: none;
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* Container query unit for the watermark. */
+.art {
+  container-type: inline-size;
+}

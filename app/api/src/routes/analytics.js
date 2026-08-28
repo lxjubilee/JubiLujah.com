@@ -570,7 +570,7 @@ router.get('/export', ah(async (req, res) => {
   }
   const csv = toCsv(headers, rows);
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', `attachment; filename="jubilujah-analytics-${kind}.csv"`);
+  res.setHeader('Content-Disposition', `attachment; filename="jubileepraise-analytics-${kind}.csv"`);
   res.send(csv);
 }));
 

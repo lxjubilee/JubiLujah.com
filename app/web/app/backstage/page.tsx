@@ -17,7 +17,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Backstage Access',
   description:
-    'Interviews, testimonies and stories — every piece built on one specific song from the JubiLujah.com catalog.',
+    'Interviews, testimonies and stories — every piece built on one specific song from the JubileePraise.com catalog.',
 };
 
 export default function BackstagePage() {

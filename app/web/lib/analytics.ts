@@ -104,7 +104,7 @@ export async function exportReport(kind: 'albums' | 'songs' | 'users', params?: 
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `jubilujah-analytics-${kind}.${ext}`;
+  a.download = `jubileepraise-analytics-${kind}.${ext}`;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
 }

@@ -24,7 +24,7 @@ console.log('Reports helpers (offline)\n');
 {
   assert.equal(referrerBucket(null), 'direct / QR scan');
   assert.equal(referrerBucket(''), 'direct / QR scan');
-  assert.equal(referrerBucket('https://jubilujah.com/album/x'), 'jubilujah.com');
+  assert.equal(referrerBucket('https://jubileepraise.com/album/x'), 'jubileepraise.com');
   assert.equal(referrerBucket('http://t.co/abc'), 't.co');
   ok('referrerBucket: empty -> direct/QR, else host (§17.1)');
 }

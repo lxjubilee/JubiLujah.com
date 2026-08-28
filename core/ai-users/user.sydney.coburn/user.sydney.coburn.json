@@ -76,10 +76,10 @@
   "history_root": "core/ai-users/user.sydney.coburn/",
   "provenance": {
     "generated_at": "2026-07-22T00:00:00Z",
-    "seed": "jubilujah-2026-07-22-b",
+    "seed": "jubileepraise-2026-07-22-b",
     "confidence_pct": 86,
     "synthetic": true,
     "cohort": "cast-two (US depth cut)",
-    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
+    "source": "JubileePraise.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy)"
   }
 }

@@ -1,10 +1,10 @@
 // ============================================================================
 // Inbound credential delegation -> JubileeInspire.
 //
-// When config.loginMode === 'ji' (production), Jubilujah does NOT verify the
+// When config.loginMode === 'ji' (production), JubileePraise does NOT verify the
 // password locally. Instead /api/auth/signin forwards the credentials to JI's
 // POST /api/auth/login and trusts JI's verdict; on success we upsert the
-// returned user into our own identity.users and mint OUR OWN session (Jubilujah
+// returned user into our own identity.users and mint OUR OWN session (JubileePraise
 // stays the session authority — JI is only the credential authority).
 //
 // JI verifies the Cloudflare Turnstile token itself, so we MUST forward the raw

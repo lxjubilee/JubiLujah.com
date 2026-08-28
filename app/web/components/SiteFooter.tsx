@@ -8,7 +8,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="container">
         <div>
-          Copyright &copy; 2026 <strong>JubiLujah.com</strong> &middot; {t('footer.tagline')} &middot;{' '}
+          Copyright &copy; 2026 <strong>JubileePraise.com</strong> &middot; {t('footer.tagline')} &middot;{' '}
           <Link href="/terms">{t('footer.terms')}</Link> &middot; <Link href="/privacy">{t('footer.privacy')}</Link>
         </div>
       </div>

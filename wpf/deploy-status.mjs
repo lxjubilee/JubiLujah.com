@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /*
  * deploy-status.mjs — read-only measurement of the three places that hold
- * JubiLujah.com: this checkout, the production VPS, and the CDN bucket.
+ * JubileePraise.com: this checkout, the production VPS, and the CDN bucket.
  *
  * It is what the Studio's Deploy view reads. It changes nothing, anywhere.
  *
  *   node wpf/deploy-status.mjs            # human readable
  *   node wpf/deploy-status.mjs --json     # the shape the Studio parses
  *   node wpf/deploy-status.mjs --no-ssh   # skip the production round trip
- *   node wpf/deploy-status.mjs --music=J:/jubilujah.com/music
+ *   node wpf/deploy-status.mjs --music=J:/jubileepraise.com/music
  *
  * EVERY NUMBER IS MEASURED, NONE ASSUMED. When a probe cannot run it says so
  * and reports null rather than 0, because "I could not reach the server" and
@@ -36,13 +36,13 @@ const NO_SSH = flag("no-ssh");
 // The music drive. Not derived from the Studio's music root, which points one
 // level deeper at the persona folders: the manifest and the category folders
 // live together at this level.
-const MUSIC = arg("music", "J:/jubilujah.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
+const MUSIC = arg("music", "J:/jubileepraise.com/music").replace(/\\/g, "/").replace(/\/+$/, "");
 const MANIFEST = arg("manifest", `${MUSIC}/catalog-manifest.json`);
 
 // Production. The host and key are deploy/publish.sh's, verbatim.
 //
-// THE PATH IS NOT. publish.sh names /var/www/Jubilujah.com and the directory on
-// the box is /var/www/jubilujah.com, lowercase, with the web app under web/
+// THE PATH IS NOT. publish.sh names /var/www/JubileePraise.com and the directory on
+// the box is /var/www/jubileepraise.com, lowercase, with the web app under web/
 // rather than app/web/ — so the shape publish.sh ships is not the shape that is
 // running. This probe therefore SEARCHES rather than asserting, and reports
 // which root it found along with whether publish.sh's own path was among them.
@@ -50,12 +50,12 @@ const MANIFEST = arg("manifest", `${MUSIC}/catalog-manifest.json`);
 // at a different path would not be, so this file does not touch publish.sh.
 const SSH_KEY = path.join(process.env.USERPROFILE || "", ".ssh", "id_ed25519_jubilee_prod");
 const PROD = "root@94.72.120.231";
-const PUBLISH_SH_PATH = "/var/www/Jubilujah.com";
-const PROD_ROOTS = ["/var/www/Jubilujah.com", "/var/www/jubilujah.com"];
+const PUBLISH_SH_PATH = "/var/www/JubileePraise.com";
+const PROD_ROOTS = ["/var/www/JubileePraise.com", "/var/www/jubileepraise.com"];
 const PROD_WEB_DIRS = ["web", "app/web"];
 const ORIGIN = "http://127.0.0.1:3119/";
-const PUBLIC_URL = "https://www.jubilujah.com/";
-const PM2_APPS = ["jubilujah-web", "jubilujah"];
+const PUBLIC_URL = "https://www.jubileepraise.com/";
+const PM2_APPS = ["jubileepraise-web", "jubileepraise"];
 
 // ---------------------------------------------------------------- helpers ---
 const countFiles = (dir, ext) => {

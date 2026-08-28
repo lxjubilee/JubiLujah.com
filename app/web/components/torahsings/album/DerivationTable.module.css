@@ -1,0 +1,234 @@
+.scroller {
+  overflow-x: auto;
+  margin: 26px 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: rgba(11, 15, 32, 0.5);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.table caption {
+  caption-side: top;
+  padding: 16px 18px 0;
+  text-align: left;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.table th {
+  padding: 14px 18px;
+  text-align: left;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.8;
+  border-bottom: 1px solid var(--hairline);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(232, 217, 168, 0.06);
+  color: var(--ink-body);
+  font-size: 0.97rem;
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.glyphCell {
+  width: 1%;
+  font-size: 1.9rem;
+  color: var(--ink);
+  line-height: 1;
+  text-align: center;
+}
+
+.name {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+
+.sense {
+  color: var(--ink-muted);
+  font-size: 0.94rem;
+}
+
+.value,
+.note {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.value {
+  color: var(--ink-body);
+  font-size: 0.9rem;
+}
+
+.fold {
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+}
+
+.note {
+  color: var(--accent-soft);
+  font-size: 1rem;
+}
+
+/* The tonic — the resting place. */
+.tonic .note {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.tonic .note::after {
+  content: ' ·';
+  color: var(--accent);
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 18px;
+  border-top: 1px solid var(--hairline);
+  background: rgba(201, 168, 74, 0.035);
+}
+
+.lineLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.lineValue {
+  font-family: var(--font-display), serif;
+  font-size: 1.3rem;
+  color: var(--accent-soft);
+  letter-spacing: 0.02em;
+}
+
+.lineSum {
+  margin-left: auto;
+}
+
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 26px 0;
+}
+
+.step {
+  counter-increment: step;
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 18px;
+  color: var(--ink-body);
+  line-height: 1.7;
+}
+
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  color: var(--accent-soft);
+}
+
+.withheld {
+  margin-top: 34px;
+  padding: 24px 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline);
+  border-left: 2px solid var(--accent);
+  background: rgba(11, 15, 32, 0.6);
+}
+
+.withheldLabel {
+  margin-bottom: 12px;
+}
+
+.withheldBody {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.99rem;
+  line-height: 1.7;
+}
+
+.kit {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.source {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 26px 0 6px;
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline);
+}
+
+.hebrew {
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1.2;
+  direction: rtl;
+}
+
+.translit {
+  font-style: italic;
+  color: var(--ink-body);
+}
+
+.english {
+  color: var(--ink-muted);
+}
+
+.ref {
+  margin-left: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.85;
+}

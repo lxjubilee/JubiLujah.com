@@ -1,4 +1,4 @@
-# JubiLujah — STUDIO (in-development) Albums & Songs
+# JubileePraise — STUDIO (in-development) Albums & Songs
 
 Generated for development purposes.
 

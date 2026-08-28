@@ -24,14 +24,14 @@ const related = [
   { asset_id: 'a2', title: 'Sibling One', content_kind: 'track', cover_image_url: null, token: 'K7M9P2XR4TWB' },
   { asset_id: 'a3', title: 'Sibling Two', content_kind: 'track', cover_image_url: 'https://cdn/2.jpg', token: 'H3NQ8FVJ5CDY' },
 ];
-const p = shapeLanding(asset, 'Melody > Album > Song', related, 'https://jubilujah.com');
+const p = shapeLanding(asset, 'Melody > Album > Song', related, 'https://jubileepraise.com');
 assert.equal(p.hero.title, 'Song of Restoration');
 assert.equal(p.hero.content_kind, 'track');
 assert.equal(p.hero.summary, 'A test track.');
 assert.equal(p.primary.verb, 'Play');
 assert.equal(p.context_path, 'Melody > Album > Song');
 assert.equal(p.related.length, 2);
-assert.equal(p.related[0].short_url, 'https://jubilujah.com/r/K7M9P2XR4TWB');
+assert.equal(p.related[0].short_url, 'https://jubileepraise.com/r/K7M9P2XR4TWB');
 assert.equal(p.persona, null);
 assert.equal(p.resume, null);
 ok('shapeLanding builds hero / primary / context / related blocks (§11.1)');

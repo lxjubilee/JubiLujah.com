@@ -1,0 +1,76 @@
+/* Backstage card — charcoal panel, 16:9 art, gold tag. Fixed 300px footprint
+   so the flex-wrap grid snaps its column count with the viewport. */
+.card {
+  width: 100%;
+  background: #2d2d2d;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.card:hover {
+  background: #3a3a3a;
+}
+
+.image {
+  aspect-ratio: 16 / 9;
+  background: #242424;
+  overflow: hidden;
+  position: relative;
+}
+
+.img {
+  width: 100% !important;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.03);
+}
+
+.body {
+  padding: 10px 13px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 106px;
+}
+
+.category {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #e6ac00;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.22;
+  color: #fff;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 11px;
+  color: #8a8a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

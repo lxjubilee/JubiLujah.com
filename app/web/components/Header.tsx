@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTenant } from '@/components/TenantProvider';
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from './AuthProvider';
 import { usePlayer } from '@/stores/player';
@@ -11,18 +12,10 @@ import { langName, langFlagUrl, LANGUAGES } from '@/lib/languages';
 import type { TKey } from '@/lib/i18n';
 import LanguagePanel from './LanguagePanel';
 
-// Primary category nav (second row). Matches JubileeVerse's nav-bar treatment.
-// `key` is the i18n string key (labels are translated to the chosen language).
-const NAV: { href: string; key: TKey }[] = [
-  { href: '/', key: 'nav.home' },
-  { href: '/inspire', key: 'nav.inspire' },
-  { href: '/children', key: 'nav.children' },
-  { href: '/general', key: 'nav.family' },
-  { href: '/music-type', key: 'nav.musicType' },
-  { href: '/christmas', key: 'nav.christmas' },
-  { href: '/playlists', key: 'nav.playlists' },
-  { href: '/subscription', key: 'nav.upgrade' },
-];
+// Primary category nav (second row) now comes from the TENANT, not a constant
+// here — goPartyGiggles has no Inspire section to link to and no Christmas one.
+// See lib/tenants.ts. `key` is the i18n string key where one exists; a tenant
+// link with no translation yet carries a literal `label` instead.
 
 // Cross-property quick links in the top row.
 const MEDIA: { href: string; key: TKey; ext: boolean }[] = [
@@ -53,7 +46,8 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
   // Subscription page).
   const lang = useLang();
   const t = useT();
-  const nav = isPaid ? NAV.filter((n) => n.key !== 'nav.upgrade') : NAV;
+  const tenant = useTenant();
+  const nav = isPaid ? tenant.nav.filter((n) => n.key !== 'nav.upgrade') : tenant.nav;
 
   // Language picker (right slide-out, JubileeVerse/JubileeInspire-style). The flag
   // trigger + full language list are shown to EVERYONE, signed in or not.
@@ -101,9 +95,10 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
         <div className="jvh-inner">
           <Link href="/" className="jvh-logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/brand-logo.png" alt="JubiLujah" className="jvh-logo-icon" />
+            <img src={tenant.logo} alt={tenant.name} className="jvh-logo-icon" />
             <span className="jvh-logo-text">
-              Jubi<span className="jvh-logo-lujah">Lujah</span>.com
+              {tenant.brandLead}
+              <span className="jvh-logo-praise" style={{ color: tenant.accent }}>{tenant.brandTail}</span>.com
             </span>
           </Link>
 
@@ -173,8 +168,8 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
         <div className="jvh-nav-inner">
           <nav className="jvh-nav-menu">
             {nav.map((n) => (
-              <Link key={n.href + n.key} href={n.href} className={`jvh-nav-link${isActive(n.href) ? ' active' : ''}`}>
-                {t(n.key)}
+              <Link key={n.href + (n.key || n.label)} href={n.href} className={`jvh-nav-link${isActive(n.href) ? ' active' : ''}`}>
+                {n.key ? t(n.key as TKey) : n.label}
               </Link>
             ))}
           </nav>

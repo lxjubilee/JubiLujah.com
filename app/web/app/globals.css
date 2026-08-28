@@ -63,7 +63,7 @@ body.jv-has-player { padding-bottom: 84px; }
 .jvh-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0; }
 .jvh-logo-icon { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
 .jvh-logo-text { font-family: var(--font-orbitron), 'Orbitron', sans-serif; font-size: 24px; font-weight: 600; color: #fff; white-space: nowrap; }
-.jvh-logo-lujah { color: #E6AC00; }
+.jvh-logo-praise { color: #E6AC00; }
 
 .jvh-actions { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .jvh-media-links { display: flex; align-items: center; gap: 4px; font-size: 12px; }
@@ -624,6 +624,17 @@ a { color: inherit; }
 }
 .album-exec .x-inner { max-width: 58%; position: relative; z-index: 1; padding-left: 30px; }
 .album-exec .x-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xaccent); font-weight: 700; margin-bottom: 10px; }
+/* An album's supporting image is anchored to the TOP of the frame, not its
+   centre. The hero is ~3:1 while the photograph is 16:9, so `cover` fits the
+   width and overflows the height by roughly 400px at desktop widths; centred,
+   half of that is taken off the top and the subject is decapitated. Anchoring
+   top keeps every head in frame and spends the whole crop on the foreground,
+   which is the half of a wide photograph that carries least.
+
+   Deliberately a modifier rather than a change to .x-hero: the persona banners
+   were composed for this box and still want centre. Two background layers, so
+   two positions — the gradient stays centred, only the image moves. */
+.album-exec .x-hero--support { background-position: center, center top; }
 .album-exec .x-hero h1 { font-family: Georgia, 'Iowan Old Style', serif; font-size: 42px; font-weight: 700; line-height: 1.05; margin-bottom: 10px; color: var(--xink); }
 .album-exec .x-hero h1 em { display: block; font-size: 0.5em; font-weight: 500; color: var(--xink-soft); line-height: 1.4; margin-top: 6px; }
 .album-exec .x-sub { font-size: 15px; color: var(--xink-soft); max-width: 760px; margin-bottom: 18px; }

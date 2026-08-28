@@ -1,17 +1,17 @@
 # Publishing an album to the CDN + live site
 
-Runbook for making a new (or changed) album appear on **jubilujah.com** with audio
+Runbook for making a new (or changed) album appear on **jubileepraise.com** with audio
 playing from the CDN. This is exactly the process used to publish **JEIM1069EN
 "Jubilujah"** (Jubilee Inspire, 12 tracks).
 
 Inputs live on the **J:** artwork/audio store, e.g.
-`J:/jubilujah.com/music/inspire/jubilee-inspire/JEIM1069EN-jubilujah/` with `tracks/*.mp3`
+`J:/jubileepraise.com/music/inspire/jubilee-inspire/JEIM1069EN-jubilujah/` with `tracks/*.mp3`
 (and ideally `artwork/<CODE>.png`).
 
 ## 1. Add the album to the manifest
 
 The manifest (`app/web/public/music/catalog-manifest.json`, mirrored on
-`J:/jubilujah.com/music/catalog-manifest.json`) is the source of truth for what the site shows.
+`J:/jubileepraise.com/music/catalog-manifest.json`) is the source of truth for what the site shows.
 Add an entry under the right `category → artist`:
 
 ```json
@@ -54,24 +54,24 @@ rebuild** for a new album to appear in the catalog rows:
 ```bash
 # copy the updated manifest up
 cat app/web/public/music/catalog-manifest.json | \
-  ssh ...jubilee_prod root@94.72.120.231 'cat > /var/www/jubilujah.com/web/public/music/catalog-manifest.json'
+  ssh ...jubilee_prod root@94.72.120.231 'cat > /var/www/jubileepraise.com/web/public/music/catalog-manifest.json'
 # rebuild + restart on the VPS
 ssh ...jubilee_prod root@94.72.120.231 \
-  'cd /var/www/jubilujah.com && rm -rf web/.next && npm run build && pm2 restart jubilujah-web jubilujah-api'
+  'cd /var/www/jubileepraise.com && rm -rf web/.next && npm run build && pm2 restart jubileepraise-web jubileepraise-api'
 ```
 
 Also publish the manifest to the CDN (`music/catalog-manifest.json`) for other
-consumers, then **purge the jubilujah.com Cloudflare cache** (`purge_everything`,
+consumers, then **purge the jubileepraise.com Cloudflare cache** (`purge_everything`,
 zone `0845c114e738e3dc4e5ff6a26483adf9`) so the new pages aren't masked by edge cache.
 
 ## 5. Verify
 
 ```bash
-curl -s https://jubilujah.com/api/albums/JEIM1069EN            # title + tracks (CDN urls)
+curl -s https://jubileepraise.com/api/albums/JEIM1069EN            # title + tracks (CDN urls)
 curl -sI "https://cdn.jubileeverse.com/music/.../tracks/01%20Jubilujah.mp3"  # 200 audio/mpeg
-curl -s https://jubilujah.com/inspire | grep -c "album?code=JEIM1069EN"      # 1 = on Inspire Family
-curl -s https://jubilujah.com/        | grep -c "album?code=JEIM1069EN"      # 1 = on Home
+curl -s https://jubileepraise.com/inspire | grep -c "album?code=JEIM1069EN"      # 1 = on Inspire Family
+curl -s https://jubileepraise.com/        | grep -c "album?code=JEIM1069EN"      # 1 = on Home
 ```
 
-See [jubilujah-prod-deploy](../../README.md) context in `seattle-vps-db.md` for the
+See [jubileepraise-prod-deploy](../../README.md) context in `seattle-vps-db.md` for the
 PM2/nginx/Cloudflare layout.

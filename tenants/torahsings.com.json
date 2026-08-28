@@ -1,0 +1,209 @@
+{
+  "schema": "jl.tenant/2",
+  "tenant": "torahsings.com",
+  "key": "torahsings",
+  "site": "Torah Sings",
+  "status": "staged",
+  "statusNote": "⚠ NOT LIVE. The code is merged and builds, but torahsings.com DNS and the nginx vhost still point at the standalone app in W:/TorahSings.com. Until step 4 of tenants/README.md is done, this file describes what the process WOULD serve, not what a visitor gets.",
+  "role": "scripture-catalogue",
+  "isDefault": false,
+  "hosts": [
+    "torahsings.com",
+    "www.torahsings.com"
+  ],
+  "brand": {
+    "lead": "Torah",
+    "tail": "Sings",
+    "accent": "#feca57",
+    "logo": "/images/brand-logo.png",
+    "logoNote": "Registry value, kept for schema agreement. The Torah Sings header does NOT render it — components/torahsings/layout/SiteHeader.tsx uses /zev-circle.png, because this tenant brings its own chrome rather than components/Header.tsx.",
+    "wordmarkFont": "Orbitron",
+    "bodyFont": "Segoe UI (system stack)",
+    "extraFonts": [
+      "Spline Sans Mono — eyebrows, labels, note lines",
+      "Playfair Display — the Hebraic Christianity reading room"
+    ],
+    "themeVariant": "data-accent='silver' is supported by the scoped sheet"
+  },
+  "tagline": "The stars sang. The angels sang. Now you can hear it.",
+  "description": "Torah Sings — there are songs hidden inside the Scriptures. Taken symbol by symbol, the Paleo-Hebrew text surfaces melodies that read as sung from the angelic perspective. Not canon — something to consider.",
+  "audience": "Seekers and students of the Hebraic roots of the faith. Three pathways — the sung Scriptures, the Hebraic Christianity reading room, and Learn Hebrew — on one membership.",
+  "seo": {
+    "titleDefault": "Torah Sings — The stars sang. The angels sang. Now you can hear it.",
+    "titleTemplate": "%s — Torah Sings",
+    "canonical": "https://torahsings.com",
+    "canonicalNote": "Derived from hosts[0], because NEXT_PUBLIC_SITE_URL is a single process-wide value and belongs to JubileePraise.",
+    "openGraph": {
+      "type": "website",
+      "siteName": "Torah Sings",
+      "description": "The stars sang. The angels sang. Now you can hear it."
+    },
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "translate": "notranslate",
+    "builtBy": "app/web/app/layout.tsx generateMetadata()"
+  },
+  "catalogue": {
+    "source": "angels",
+    "sourceNote": "🔴 THE ONE TENANT THAT DOES NOT READ catalog-manifest.json. lib/tenants.ts carries a `catalog` field for exactly this: its albums come from app/web/content/torahsings/angels-catalog.ts, generated from the drive and grouped by canonical division rather than by artist.",
+    "categories": [],
+    "categoriesNote": "🔴 EMPTY, NOT NULL, and the difference is load-bearing. null means the whole shared catalogue; [] means none of it. A JubileePraise album is 404 here — verified 2026-08-17 against a production build, with no title or metadata in the response body.",
+    "divisions": [
+      "Torah",
+      "Prophets",
+      "Writings",
+      "Gospels",
+      "Letters",
+      "Revelation"
+    ],
+    "albumCodeShapes": [
+      "ANSMX#####EN"
+    ],
+    "countsNote": "No album or track totals here — README's rule, and it applies double to this tenant: the numbers live in the generated header of content/torahsings/angels-catalog.ts and change whenever that file is rebuilt.",
+    "musicDrive": "J:/torahsings.com/music",
+    "studioMusicRoot": "J:/torahsings.com",
+    "studioRootNote": "The studio does not carry this tenant in its picker yet; studioMusicRoot is recorded as the parent of musicDrive so the shape matches the other tenants. There are no per-voice folders here — the tree is 66 book folders (01_Genesis … 66_Revelation), verified on the drive 2026-08-17.",
+    "cdnPrefix": "torahsings",
+    "cdnPrefixNote": "From the standalone repo's `images:deploy` script — rclone target jubilee-r2:jubileeverse-cdn/torahsings/. Set NEXT_PUBLIC_MEDIA_BASE to the CDN prefix or audio falls back to /audio/placeholder-ambient.wav, a synthesized drone that is not music.",
+    "manifest": null,
+    "manifestNote": "Not in app/web/public/music/catalog-manifest.json at all, and deliberately so — reconciling 285 book-keyed albums into an artist-keyed manifest would mean inventing an artist for each. J:/torahsings.com/catalog-manifest.json is the standalone app's own separate file.",
+    "generatedBy": "scripts/build-angels-catalog.mjs, still only in W:/TorahSings.com — it has no counterpart in this repo yet, so regenerating means running it there and re-copying.",
+    "scopeEnforcedAt": "app/web/lib/manifest.ts load() for the shared catalogue (which yields nothing here), and app/page.tsx routing to TorahSingsHome via usesAngelsCatalog() before the truthiness check on categories"
+  },
+  "home": {
+    "component": "app/web/components/torahsings/TorahSingsHome.tsx",
+    "featuredAlbum": null,
+    "featuredNote": "No pinned album. One rail per canonical division, in canon order.",
+    "childrenOnHome": false
+  },
+  "nav": [
+    {
+      "href": "/",
+      "label": "Torah Sings"
+    },
+    {
+      "href": "/hebraic-christianity",
+      "label": "Hebraic Christianity"
+    },
+    {
+      "href": "/learn-hebrew",
+      "label": "Learn Hebrew"
+    },
+    {
+      "href": "/playlists",
+      "key": "nav.playlists"
+    },
+    {
+      "href": "/membership",
+      "label": "Membership"
+    }
+  ],
+  "navNote": "Rendered by components/torahsings/layout/SiteHeader.tsx, which reads THIS list out of lib/tenants.ts rather than declaring its own. Literal labels where no translation exists yet; nav.playlists is translated like JubileePraise's.",
+  "routes": {
+    "own": [
+      "/hebraic-christianity",
+      "/hebraic-christianity/[slug]",
+      "/learn-hebrew",
+      "/learn-hebrew/[slug]",
+      "/membership",
+      "/book",
+      "/media/[...path]",
+      "/album/[id]"
+    ],
+    "ownNote": "/album/[id] is a path segment and does not collide with JubileePraise's query-based /album?c=CODE — both exist in the same build.",
+    "shared": [
+      "/signin",
+      "/signup",
+      "/account",
+      "/admin",
+      "/playlists",
+      "/liked",
+      "/search",
+      "/privacy",
+      "/terms",
+      "/forgot-password",
+      "/reset-password"
+    ],
+    "sharedNote": "JubileePraise's single implementation, served under this tenant's chrome. Torah Sings shipped its own forked copies of all eleven; they were deliberately NOT ported. Its 'Jubilee ID one door' sign-in is the one worth revisiting — as a change to JubileePraise's own /signin for every tenant, not as a duplicate."
+  },
+  "chrome": {
+    "shell": "app/web/components/torahsings/TorahSingsShell.tsx",
+    "shellNote": "This tenant mounts its own header, footer, transport and intro modal instead of JubileePraise's. Exactly one shell mounts per request, branched in app/layout.tsx on usesAngelsCatalog(). Its catalogue rails and album detail drive AudioProvider directly, so mounting JubileePraise's FooterPlayer as well would give a visitor two transports fighting over one <audio>.",
+    "styles": "app/web/app/torahsings.css",
+    "stylesNote": "GENERATED from the standalone globals.css by W:/.claude-scratch/scope-css.mjs; every selector is scoped under [data-tenant='torahsings'], which layout.tsx stamps on <html>. Torah Sings names its primitives generically (.wrap .card .panel .pill .prose, bare h1/p/a, a :root token block) and would otherwise restyle the other three tenants.",
+    "session": "Shared. lib/torahsings/jubilee-account.tsx reads JubileePraise's lib/auth tokens, so signing in on the shared /signin is visible here immediately. Torah Sings' own token keys were dropped for this reason."
+  },
+  "membership": {
+    "page": "/membership",
+    "yearly": "$87.95/yr",
+    "reconciled": false,
+    "reconciledNote": "⚠ NOT reconciled with JubileePraise's own subscription system. /membership and /subscription are two separate pages and two separate price stories in one process. Open decision.",
+    "freeTier": "Tracks 1–2 of a gated album stream free; the album article and derivation tabs are always open.",
+    "bookPrice": "PLACEHOLDER — BOOK_PRICE_LABEL in lib/torahsings/format.ts was never set."
+  },
+  "i18n": {
+    "defaultLanguage": "en",
+    "cookie": "jv_lang",
+    "supportedLanguages": 49,
+    "chromeTranslated": false,
+    "chromeTranslatedNote": "Torah Sings' own chrome is English-only apart from the one nav item carrying an i18n key. The language picker lives in JubileePraise's Header, which this tenant does not mount.",
+    "catalogueLanguage": "en",
+    "shared": true
+  },
+  "production": {
+    "server": "root@94.72.120.231",
+    "path": "/var/www/jubileepraise.com",
+    "webCwd": "/var/www/jubileepraise.com/web",
+    "pm2": "jubileepraise-web",
+    "pm2Script": "next start -p 3030",
+    "port": 3030,
+    "nginxVhost": null,
+    "nginxVhostNote": "⚠ DOES NOT EXIST YET. Nothing on the box answers for torahsings.com through this process. Create /etc/nginx/sites-available/torahsings.com proxying to 127.0.0.1:3030, matching the goPartyGiggles block.",
+    "apexBehaviour": "not configured",
+    "originTls": null,
+    "originTlsNote": "Not configured. Follow the goPartyGiggles pattern (port 80 only, Cloudflare terminating at the edge) unless an origin certificate is wanted.",
+    "edge": "Cloudflare",
+    "api": {
+      "host": "api.jubileepraise.com",
+      "shared": true,
+      "note": "The standalone app pointed at api.torahsings.com via its own next.config rewrite. Inside this process there is one API base and it is JubileePraise's."
+    },
+    "verified": null
+  },
+  "runtime": {
+    "shared": true,
+    "routedBy": "Host header, in lib/tenants.ts tenantForHost()",
+    "devPort": 3000,
+    "devNote": "localhost resolves to JubileePraise, not here. To see this tenant locally, send the Host header or add a hosts-file entry.",
+    "env": {
+      "shared": "all NEXT_PUBLIC_* vars are process-wide; there is no per-tenant env",
+      "needed": "NEXT_PUBLIC_MEDIA_BASE for real audio; INTRO_VIDEO_URL for the intro film (the modal says 'film pending' without it)"
+    }
+  },
+  "deploy": {
+    "scoped": false,
+    "note": "One pm2 process serves all four hosts, so a deploy ships them together. This site cannot be shipped on its own.",
+    "runbook": "PUBLISH.md",
+    "gate": "deploy/check-manifest.mjs",
+    "gateNote": "That gate reads catalog-manifest.json, which this tenant is not in. It neither validates nor blocks Torah Sings content."
+  },
+  "studio": {
+    "picker": null,
+    "pickerNote": "Not in the WPF studio's Website picker. Its catalogue is not manifest-backed, so the picker has nothing to enumerate.",
+    "voice": null
+  },
+  "origin": {
+    "standaloneRepo": "W:/TorahSings.com",
+    "standaloneNote": "Still present, still deployable, NOT deleted. It remains the live site until DNS moves.",
+    "backup": "W:/Backups/TorahSings.com-2026-08-17 — 1,280 files / 214.1 MB, verified against source",
+    "framework": "Standalone was Next 16 / React 19; ported down to this app's Next 14 / React 18. Only the async params/searchParams pattern needed changing (8 files, 4 of them in the ported set) — no React 19 APIs, no server actions, no use() hook.",
+    "mergedOn": "2026-08-17"
+  },
+  "notes": [
+    "The three open decisions from the standalone README came across unresolved: the Prong II name ('Hebraic Christianity' is a working title), the standalone book price, and whether the free tier is songs 1–2 or first-song-only.",
+    "content/torahsings/angels-catalog.ts, hebraic-articles.ts and learn-hebrew-articles.ts are GENERATED (about 62,000 lines between them). Hand edits will be overwritten by the next regeneration.",
+    "The derivation engine (lib/torahsings/derivation.ts) has a verification script in the standalone repo that recomputes every album's note line from scratch and fails the build on drift. That script was NOT ported; nothing in this repo currently guards it."
+  ]
+}

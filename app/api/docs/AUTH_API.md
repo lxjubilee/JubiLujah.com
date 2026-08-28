@@ -1,10 +1,10 @@
-# Jubilujah Authentication API
+# JubileePraise Authentication API
 
-Reference for the account flows exposed by the Jubilujah identity API:
+Reference for the account flows exposed by the JubileePraise identity API:
 **sign up, sign in, forgot password, reset password, change password, and delete account.**
 
-- **Production base URL:** `https://api.jubilujah.com`
-- **Web app origin:** `https://jubilujah.com`
+- **Production base URL:** `https://api.jubileepraise.com`
+- **Web app origin:** `https://jubileepraise.com`
 - **Router prefix:** all endpoints below are mounted under `/api/auth`
 - **Source of truth:** `app/api/src/routes/auth.js`
 
@@ -12,18 +12,18 @@ Reference for the account flows exposed by the Jubilujah identity API:
 > `http://localhost:4000` (API) and `http://localhost:3000` (web).
 
 > **Deployment status (2026-06-16):** all endpoints below are deployed and live on
-> `api.jubilujah.com` (verified end-to-end through Cloudflare → nginx → the `jubilujah-api`
+> `api.jubileepraise.com` (verified end-to-end through Cloudflare → nginx → the `jubileepraise-api`
 > process). The database schema (migrations `0001`–`0006`) is fully applied.
 > **Email delivery is configured and working** via SendGrid (`@sendgrid/mail`). Auth
 > emails (sign-up code, login/2FA OTP, password reset) currently send **from
 > `no-reply@jubileeinspire.com`** — the SendGrid account's authenticated domain — while
-> the message body remains Jubilujah.com-branded. To send from `no-reply@jubilujah.com`,
-> authenticate the `jubilujah.com` domain in SendGrid (add the CNAME records in
-> Cloudflare) and set `EMAIL_FROM` accordingly, then `pm2 restart jubilujah-api`.
+> the message body remains JubileePraise.com-branded. To send from `no-reply@jubileepraise.com`,
+> authenticate the `jubileepraise.com` domain in SendGrid (add the CNAME records in
+> Cloudflare) and set `EMAIL_FROM` accordingly, then `pm2 restart jubileepraise-api`.
 >
 > The **server-to-server** admin auth (§11–§12) is also live, now on **client-credentials HS256 JWTs** (the old static `ADMIN_SERVICE_TOKENS` has been removed). The JubileeInspire integration must obtain a JWT from `POST /api/auth/service/token` before calling the admin routes — see §11.4.
 >
-> **Dual-carrier user auth (2026-06-17):** the user-facing session can now be presented **two ways** — the `jv_session` **cookie** (web) **or** an `Authorization: Bearer <session token>` **header** (native/mobile apps). Both carry the *same* session, so lifetime and revocation are identical. CSRF (`X-CSRF-Token`) is **only** required for the cookie carrier; a request authenticated purely by the Bearer header is CSRF-exempt (it carries no ambient cookie authority). This is the supported way to call `change-password`, `delete account`, and other mutations from a mobile app — see §1 *Authentication* and the **mobile integration** in §9.6. Deployed + verified on `api.jubilujah.com`.
+> **Dual-carrier user auth (2026-06-17):** the user-facing session can now be presented **two ways** — the `jv_session` **cookie** (web) **or** an `Authorization: Bearer <session token>` **header** (native/mobile apps). Both carry the *same* session, so lifetime and revocation are identical. CSRF (`X-CSRF-Token`) is **only** required for the cookie carrier; a request authenticated purely by the Bearer header is CSRF-exempt (it carries no ambient cookie authority). This is the supported way to call `change-password`, `delete account`, and other mutations from a mobile app — see §1 *Authentication* and the **mobile integration** in §9.6. Deployed + verified on `api.jubileepraise.com`.
 
 ---
 
@@ -70,7 +70,7 @@ If the header is missing or does not match the cookie, the request is rejected w
 > **Mobile / Bearer carrier:** if you authenticate with `Authorization: Bearer <session token>` and send **no** `jv_session` cookie, CSRF is **not** checked — you do **not** need the `jv_csrf` cookie or the `X-CSRF-Token` header. This is the recommended approach for native apps. (If a request carries a session cookie, CSRF is enforced regardless of any Bearer header.)
 
 ### CORS
-Browser requests must come from an allow-listed origin (`CORS_ORIGIN`, e.g. `https://jubilujah.com`). Credentialed CORS is enabled, so the client must set `credentials: 'include'`.
+Browser requests must come from an allow-listed origin (`CORS_ORIGIN`, e.g. `https://jubileepraise.com`). Credentialed CORS is enabled, so the client must set `credentials: 'include'`.
 
 ### Rate limiting
 All `/api/auth/*` routes share a limiter: **50 requests per 15 minutes per IP**. Exceeding it returns **`429`** with standard `RateLimit-*` headers. Individual flows add their own throttles (OTP resend cooldowns, lockouts) described per-endpoint.
@@ -309,7 +309,7 @@ OTP codes expire in **15 minutes**, allow **5** attempts.
 Anti-enumeration: the response is **identical whether or not the email exists**. A single-use reset link is emailed only to active, password-capable accounts.
 
 ```
-POST /forgot-password ──► email contains link: https://jubilujah.com/reset-password?token=…
+POST /forgot-password ──► email contains link: https://jubileepraise.com/reset-password?token=…
                                   │
                                   ▼
                           POST /reset-password
@@ -324,7 +324,7 @@ POST /forgot-password ──► email contains link: https://jubilujah.com/reset
 { "ok": true, "message": "If an account exists for that email, a reset link has been sent." }
 ```
 
-The emailed link points at the web app: `https://jubilujah.com/reset-password?token=<rawToken>`.
+The emailed link points at the web app: `https://jubileepraise.com/reset-password?token=<rawToken>`.
 The token is valid for **60 minutes** (`PASSWORD_RESET_TTL_MIN`).
 
 ---
@@ -445,28 +445,28 @@ Requires a session. Revokes **all** of the user's sessions across every device. 
 
 ```bash
 # 0. Prime the CSRF cookie (any GET).
-curl -s -c jar.txt https://api.jubilujah.com/api/auth/me > /dev/null
+curl -s -c jar.txt https://api.jubileepraise.com/api/auth/me > /dev/null
 CSRF=$(awk '/jv_csrf/ {print $7}' jar.txt)
 
 # 1. Request the verification code.
 curl -s -b jar.txt -c jar.txt \
   -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" \
   -d '{"name":"Ada Lovelace","email":"ada@example.com","password":"correct horse battery"}' \
-  https://api.jubilujah.com/api/auth/signup
+  https://api.jubileepraise.com/api/auth/signup
 # → { "requiresVerification": true, "verificationGuid": "GUID", ... }
 
 # 2. Verify the emailed 6-digit code → creates the account and logs in.
 curl -s -b jar.txt -c jar.txt \
   -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" \
   -d '{"verificationGuid":"GUID","verificationCode":"048213"}' \
-  https://api.jubilujah.com/api/auth/verify-signup
+  https://api.jubileepraise.com/api/auth/verify-signup
 # → 201 { "user": { ... } }  (jv_session cookie now in jar.txt)
 ```
 
 ### 9.2 Sign in (browser `fetch`)
 
 ```js
-const API = 'https://api.jubilujah.com';
+const API = 'https://api.jubileepraise.com';
 
 // Read the jv_csrf cookie that the API set on a prior request.
 const csrf = document.cookie.split('; ').find(c => c.startsWith('jv_csrf='))?.split('=')[1];
@@ -497,13 +497,13 @@ if (data.requires2FA) {
 # Request a reset link (always 200).
 curl -s -b jar.txt -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" \
   -d '{"email":"ada@example.com"}' \
-  https://api.jubilujah.com/api/auth/forgot-password
+  https://api.jubileepraise.com/api/auth/forgot-password
 
-# User clicks the emailed link: https://jubilujah.com/reset-password?token=TOKEN
+# User clicks the emailed link: https://jubileepraise.com/reset-password?token=TOKEN
 # The web page submits the token + new password:
 curl -s -b jar.txt -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" \
   -d '{"token":"TOKEN","password":"a brand new passphrase"}' \
-  https://api.jubilujah.com/api/auth/reset-password
+  https://api.jubileepraise.com/api/auth/reset-password
 # → { "ok": true }  (all sessions revoked; sign in again)
 ```
 
@@ -512,7 +512,7 @@ curl -s -b jar.txt -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" 
 ```bash
 curl -s -b jar.txt -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" \
   -d '{"current_password":"old passphrase","new_password":"even better passphrase"}' \
-  https://api.jubilujah.com/api/auth/change-password
+  https://api.jubileepraise.com/api/auth/change-password
 # → { "ok": true }  (current session kept; other devices logged out)
 ```
 
@@ -520,7 +520,7 @@ curl -s -b jar.txt -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRF" 
 
 ```bash
 curl -s -X DELETE -b jar.txt -c jar.txt -H "X-CSRF-Token: $CSRF" \
-  https://api.jubilujah.com/api/auth/account
+  https://api.jubileepraise.com/api/auth/account
 # → { "ok": true }  (irreversible; jv_session cleared)
 ```
 
@@ -540,14 +540,14 @@ Send `Authorization: Bearer <stored token>` and **no** cookie. No `X-CSRF-Token`
 TOKEN="<jv_session value captured at sign-in>"
 
 # Change password — the endpoint that previously failed with "CSRF token missing or invalid".
-curl -s -X POST https://api.jubilujah.com/api/auth/change-password \
+curl -s -X POST https://api.jubileepraise.com/api/auth/change-password \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"current_password":"old passphrase","new_password":"even better passphrase"}'
 # → { "ok": true }   (no CSRF token required)
 
 # Who am I (also works with the Bearer header):
-curl -s https://api.jubilujah.com/api/auth/me -H "Authorization: Bearer $TOKEN"
+curl -s https://api.jubileepraise.com/api/auth/me -H "Authorization: Bearer $TOKEN"
 # → { "authenticated": true, "user": { … }, "roles": [ … ] }
 ```
 
@@ -556,7 +556,7 @@ curl -s https://api.jubilujah.com/api/auth/me -H "Authorization: Bearer $TOKEN"
 #### Swift (URLSession) sketch
 ```swift
 // --- Sign in: capture jv_session from Set-Cookie ---
-var req = URLRequest(url: URL(string: "https://api.jubilujah.com/api/auth/signin")!)
+var req = URLRequest(url: URL(string: "https://api.jubileepraise.com/api/auth/signin")!)
 req.httpMethod = "POST"
 req.setValue("application/json", forHTTPHeaderField: "Content-Type")
 req.httpBody = try JSONSerialization.data(withJSONObject: ["email": email, "password": password])
@@ -569,7 +569,7 @@ let token = setCookie.split(separator: ";").first { $0.contains("jv_session=") }
 // store `token` in the Keychain
 
 // --- Authenticated call: change password ---
-var pw = URLRequest(url: URL(string: "https://api.jubilujah.com/api/auth/change-password")!)
+var pw = URLRequest(url: URL(string: "https://api.jubileepraise.com/api/auth/change-password")!)
 pw.httpMethod = "POST"
 pw.setValue("application/json", forHTTPHeaderField: "Content-Type")
 pw.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -587,7 +587,7 @@ val client = OkHttpClient()   // default CookieJar.NO_COOKIES
 
 // Sign in, read jv_session from Set-Cookie.
 val signin = client.newCall(Request.Builder()
-    .url("https://api.jubilujah.com/api/auth/signin")
+    .url("https://api.jubileepraise.com/api/auth/signin")
     .post("""{"email":"$email","password":"$password"}""".toRequestBody(JSON))
     .build()).execute()
 val token = signin.headers("Set-Cookie")
@@ -597,7 +597,7 @@ val token = signin.headers("Set-Cookie")
 
 // Change password with the Bearer header (no CSRF).
 client.newCall(Request.Builder()
-    .url("https://api.jubilujah.com/api/auth/change-password")
+    .url("https://api.jubileepraise.com/api/auth/change-password")
     .header("Authorization", "Bearer $token")
     .post("""{"current_password":"$cur","new_password":"$new"}""".toRequestBody(JSON))
     .build()).execute()   // → { "ok": true }
@@ -629,14 +629,14 @@ client.newCall(Request.Builder()
 
 ## 11. Server-to-server: `POST /api/auth/admin/set-password`
 
-A **service-only** endpoint for trusted partner services (JubileeInspire's centralized auth) to set an existing Jubilujah account's password directly — used for cross-platform password sync. It is **not** part of the browser surface: it uses a short-lived **JWT bearer token** (obtained from the client-credentials token endpoint — see §11.4), **not** the `jv_session` / `jv_csrf` cookie model, and is mounted ahead of the CSRF guard.
+A **service-only** endpoint for trusted partner services (JubileeInspire's centralized auth) to set an existing JubileePraise account's password directly — used for cross-platform password sync. It is **not** part of the browser surface: it uses a short-lived **JWT bearer token** (obtained from the client-credentials token endpoint — see §11.4), **not** the `jv_session` / `jv_csrf` cookie model, and is mounted ahead of the CSRF guard.
 
-> **Live since 2026-06-16.** **Auth migrated to JWT 2026-06-16** (deployed + verified on `api.jubilujah.com`): the static shared service token was replaced by client-credentials **HS256 JWTs**, and `ADMIN_SERVICE_TOKENS` was removed from the environment. See §11.4.
+> **Live since 2026-06-16.** **Auth migrated to JWT 2026-06-16** (deployed + verified on `api.jubileepraise.com`): the static shared service token was replaced by client-credentials **HS256 JWTs**, and `ADMIN_SERVICE_TOKENS` was removed from the environment. See §11.4.
 
 ### 11.1 Request
 ```
 POST /api/auth/admin/set-password
-Host: api.jubilujah.com
+Host: api.jubileepraise.com
 Content-Type: application/json
 Authorization: Bearer <JWT>                 # from POST /api/auth/service/token (see §11.4)
 Idempotency-Key: <uuid>                     # optional (see §11.5)
@@ -648,7 +648,7 @@ Idempotency-Key: <uuid>                     # optional (see §11.5)
 | Field | Type | Rules |
 |-------|------|-------|
 | `email` | string | required; valid email, ≤254 chars; matched case-insensitively |
-| `newPassword` | string | required; **plaintext** (over TLS); policy **8–200 chars**. Jubilujah hashes it with its own KDF (scrypt). |
+| `newPassword` | string | required; **plaintext** (over TLS); policy **8–200 chars**. JubileePraise hashes it with its own KDF (scrypt). |
 
 ### 11.2 Success — `200 OK`
 ```json
@@ -663,7 +663,7 @@ No `jv_session` cookie is set — this is a back-office mutation, not a sign-in.
 | `400` | `error` | malformed JSON / missing field (includes `issues[]`) |
 | `401` | `unauthorized` | missing/invalid/expired JWT (bad signature, `iss`, `aud`, or `exp`) |
 | `403` | `forbidden` | non-HTTPS, JWT lacks the required `admin.set_password` scope, or caller IP not allow-listed |
-| `404` | `not_found` | no active Jubilujah account for that email |
+| `404` | `not_found` | no active JubileePraise account for that email |
 | `409` | `conflict` | account exists but is not password-capable (SSO-only, no local password) |
 | `422` | `unprocessable` | password fails policy (length) |
 | `429` | `error` | per-client rate limit exceeded |
@@ -679,7 +679,7 @@ Auth is a **two-step OAuth2 client-credentials flow**. There is no static shared
 
 ```
 POST /api/auth/service/token
-Host: api.jubilujah.com
+Host: api.jubileepraise.com
 Content-Type: application/json
 ```
 ```json
@@ -707,8 +707,8 @@ Content-Type: application/json
 Honors an optional `Idempotency-Key`. A replay with the same key within **24h** returns the original result **without re-applying** (backed by `identity.service_idempotency`).
 
 ### 11.6 Server-side effects (on success)
-1. Sets the password with Jubilujah's KDF (replaces the existing credential).
-2. **Revokes all** of the user's Jubilujah sessions.
+1. Sets the password with JubileePraise's KDF (replaces the existing credential).
+2. **Revokes all** of the user's JubileePraise sessions.
 3. **Clears any login lockout** (`locked_until`).
 4. Invalidates outstanding password-reset tokens.
 5. Writes an **audit record** (`password.admin_set`). The plaintext password is **never** logged (the `Authorization` header is redacted from logs; the body is not logged) or returned.
@@ -718,13 +718,13 @@ It does **not** create the account (unknown email → 404), email the user, or r
 ### 11.7 Example
 ```bash
 # 1) Exchange client credentials for a short-lived JWT.
-JWT=$(curl -s -X POST https://api.jubilujah.com/api/auth/service/token \
+JWT=$(curl -s -X POST https://api.jubileepraise.com/api/auth/service/token \
   -H "Content-Type: application/json" \
   -d '{"grant_type":"client_credentials","client_id":"jubileeinspire","client_secret":"'"$CLIENT_SECRET"'","scope":"admin.set_password"}' \
   | jq -r .access_token)
 
 # 2) Use it as a Bearer token on the admin route.
-curl -s -X POST https://api.jubilujah.com/api/auth/admin/set-password \
+curl -s -X POST https://api.jubileepraise.com/api/auth/admin/set-password \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: $(uuidgen)" \
@@ -743,9 +743,9 @@ curl -s -X POST https://api.jubilujah.com/api/auth/admin/set-password \
 
 ## 12. Server-to-server: `POST /api/auth/admin/provision-user`
 
-Creates an account **directly** (no signup OTP) for a trusted partner service — used by cross-platform sync when a user exists on JubileeInspire but not on Jubilujah. Same auth model as [§11](#114-authentication-service-to-service--client-credentials-jwt) (client-credentials **JWT**, optional IP allow-list, no cookie/CSRF) — requires the **`admin.provision`** scope. **Create-only:** an existing email returns `409` (a non-error to the caller; the password is *not* changed — use `set-password` for that).
+Creates an account **directly** (no signup OTP) for a trusted partner service — used by cross-platform sync when a user exists on JubileeInspire but not on JubileePraise. Same auth model as [§11](#114-authentication-service-to-service--client-credentials-jwt) (client-credentials **JWT**, optional IP allow-list, no cookie/CSRF) — requires the **`admin.provision`** scope. **Create-only:** an existing email returns `409` (a non-error to the caller; the password is *not* changed — use `set-password` for that).
 
-> **Live since 2026-06-16**, verified end-to-end on `api.jubilujah.com`.
+> **Live since 2026-06-16**, verified end-to-end on `api.jubileepraise.com`.
 
 ### 12.1 Request
 ```
@@ -766,21 +766,21 @@ Content-Type: application/json
 }
 ```
 
-| Field | Type | Required | Mapped to (Jubilujah `identity` schema) |
+| Field | Type | Required | Mapped to (JubileePraise `identity` schema) |
 |-------|------|----------|------------------------------------------|
 | `email` | string | ✅ | `users.email` (lowercased, UNIQUE) |
-| `password` | string | ✅ | **plaintext**, 8–200 chars → hashed with Jubilujah's scrypt KDF into `credentials.password_hash` |
+| `password` | string | ✅ | **plaintext**, 8–200 chars → hashed with JubileePraise's scrypt KDF into `credentials.password_hash` |
 | `verify` | boolean | optional | **`true` switches to verify-only mode** (§12.4): check email+password, return the user, create/change **nothing**. Absent or `false` = normal create behavior below |
 | `firstName`,`lastName` | string | optional | folded into `users.display_name` when `displayName` is omitted |
 | `displayName` | string | optional | `users.display_name` (falls back to `firstName lastName`, then the email local-part) |
-| `role` | `user`\|`admin`\|`guest` | optional (default `user`) | `user_roles.role` — **mapped** to Jubilujah RBAC (see below) |
+| `role` | `user`\|`admin`\|`guest` | optional (default `user`) | `user_roles.role` — **mapped** to JubileePraise RBAC (see below) |
 | `emailVerified` | boolean | optional | `true` ⇒ `users.first_signin_completed=true` (skips the first-sign-in OTP gate) |
-| `dateOfBirth` | string `YYYY-MM-DD` | optional | **age-gated ≥13** (422 if younger); Jubilujah has no DOB column, so it is validated but not stored |
+| `dateOfBirth` | string `YYYY-MM-DD` | optional | **age-gated ≥13** (422 if younger); JubileePraise has no DOB column, so it is validated but not stored |
 | `sourcePlatform` | string | optional (default `jubileeinspire`) | encoded into `users.external_subject` as `<sourcePlatform>\|<email>` for provenance |
 
-**Role mapping** (JI enum → Jubilujah RBAC): `user → content_editor` (parity with self-serve signups), `admin → admin`, `guest → viewer`.
+**Role mapping** (JI enum → JubileePraise RBAC): `user → content_editor` (parity with self-serve signups), `admin → admin`, `guest → viewer`.
 
-**Server-managed (never accepted from the caller):** `id`, `created_at`/`updated_at`, `is_active=true`, `last_login_at`, `locked_until`. Jubilujah's schema has **no** billing/account/Stripe columns, so there is nothing to copy there — a provisioned user starts clean.
+**Server-managed (never accepted from the caller):** `id`, `created_at`/`updated_at`, `is_active=true`, `last_login_at`, `locked_until`. JubileePraise's schema has **no** billing/account/Stripe columns, so there is nothing to copy there — a provisioned user starts clean.
 
 ### 12.2 Responses
 
@@ -801,7 +801,7 @@ The created record is **active and password-capable** (a normal `signin` works i
 ### 12.3 Example
 ```bash
 # Get a JWT first (see §11.7), with scope admin.provision, then:
-curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
+curl -s -X POST https://api.jubileepraise.com/api/auth/admin/provision-user \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: $(uuidgen)" \
@@ -813,7 +813,7 @@ curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
 
 ### 12.4 Verify-only mode (`"verify": true`)
 
-Lets a partner portal (JubileeInspire) **log in a user who exists only on Jubilujah**: the partner sends the email + plaintext password (over TLS), Jubilujah — the only holder of the credential — hashes and compares with its own scrypt KDF and returns the user on a match. The partner then creates its own local record. Hashes never cross platforms in either direction; the request is **never forwarded** anywhere (answers from the local DB only, so it cannot loop back into a partner's login the way `/signin` with `AUTH_LOGIN_MODE=ji` can). Same path/auth/scope as create mode.
+Lets a partner portal (JubileeInspire) **log in a user who exists only on JubileePraise**: the partner sends the email + plaintext password (over TLS), JubileePraise — the only holder of the credential — hashes and compares with its own scrypt KDF and returns the user on a match. The partner then creates its own local record. Hashes never cross platforms in either direction; the request is **never forwarded** anywhere (answers from the local DB only, so it cannot loop back into a partner's login the way `/signin` with `AUTH_LOGIN_MODE=ji` can). Same path/auth/scope as create mode.
 
 **The hard rule: verify mode NEVER writes.** No user/credential rows, no `audit_log` insert (structured log line only), no idempotency-cache entry, no lockout counters. A verify call for a non-existent email + any password returns `404` and creates **nothing** — if it created, anyone with a token could inject accounts by "logging in" with a victim's email and a guessed password. Create only ever happens in the no-`verify` path.
 
@@ -834,7 +834,7 @@ Lets a partner portal (JubileeInspire) **log in a user who exists only on Jubilu
 
 ```bash
 # correct password → 200 verified:true + user; wrong → 401; unknown email → 404
-curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
+curl -s -X POST https://api.jubileepraise.com/api/auth/admin/provision-user \
   -H "Authorization: Bearer $JWT" -H "Content-Type: application/json" \
   -d '{"email":"ada@example.com","password":"their real password","verify":true}'
 ```
@@ -843,7 +843,7 @@ curl -s -X POST https://api.jubilujah.com/api/auth/admin/provision-user \
 
 ## 13. Server-to-server: `GET /api/auth/admin/check-email`
 
-Read-only pre-signup existence probe for partner portals — JubileeInspire's family-wide "is this email taken anywhere?" gate calls this at *their* signup time, exactly as Jubilujah calls JI's own `check-email` before issuing a signup code (see `services/jiSync.js` / §3.1). Same auth model as [§11](#114-authentication-service-to-service--client-credentials-jwt); requires **either** `admin.provision` **or** `admin.set_password` (deliberately no new scope, so existing partner tokens keep working). Answers from the local `identity.users` table only — never forwards to other portals.
+Read-only pre-signup existence probe for partner portals — JubileeInspire's family-wide "is this email taken anywhere?" gate calls this at *their* signup time, exactly as JubileePraise calls JI's own `check-email` before issuing a signup code (see `services/jiSync.js` / §3.1). Same auth model as [§11](#114-authentication-service-to-service--client-credentials-jwt); requires **either** `admin.provision` **or** `admin.set_password` (deliberately no new scope, so existing partner tokens keep working). Answers from the local `identity.users` table only — never forwards to other portals.
 
 ### 13.1 Request
 ```
@@ -865,13 +865,13 @@ Accept: application/json
 
 **Contract notes (per JI's spec):**
 - Callers key on the top-level boolean **`exists`** only; `email` and `user` are informational and may be ignored.
-- **`exists` = an *active* account exists** (`is_active = TRUE`) — the same semantics as Jubilujah's own signup gate, so a deleted account frees the email family-wide.
-- `user.emailVerified` maps to `users.first_signin_completed` (Jubilujah has no `email_verified` column); `user.roles` are Jubilujah RBAC roles.
+- **`exists` = an *active* account exists** (`is_active = TRUE`) — the same semantics as JubileePraise's own signup gate, so a deleted account frees the email family-wide.
+- `user.emailVerified` maps to `users.first_signin_completed` (JubileePraise has no `email_verified` column); `user.roles` are JubileePraise RBAC roles.
 - Read-only: no audit row, no idempotency cache (a GET is naturally idempotent).
 
 ### 13.3 Example
 ```bash
-curl -s "https://api.jubilujah.com/api/auth/admin/check-email?email=ada%40example.com" \
+curl -s "https://api.jubileepraise.com/api/auth/admin/check-email?email=ada%40example.com" \
   -H "Authorization: Bearer $JWT"
 # → 200 { "email":"ada@example.com", "exists":true, "user":{ "id":"…", "email":"ada@example.com",
 #         "displayName":"Ada Lovelace", "active":true, "emailVerified":true,
@@ -880,4 +880,4 @@ curl -s "https://api.jubilujah.com/api/auth/admin/check-email?email=ada%40exampl
 
 ---
 
-*Last verified against `app/api/src/routes/auth.js`, `routes/service.js`, `routes/serviceToken.js`, `middleware/serviceAuth.js`, `auth/serviceToken.js`, and the dual-carrier auth logic in `middleware/session.js` + `middleware/csrf.js` (Bearer carrier added 2026-06-17). Production routing: `api.jubilujah.com` → nginx → `127.0.0.1:4030` (pm2 `jubilujah-api`).*
+*Last verified against `app/api/src/routes/auth.js`, `routes/service.js`, `routes/serviceToken.js`, `middleware/serviceAuth.js`, `auth/serviceToken.js`, and the dual-carrier auth logic in `middleware/session.js` + `middleware/csrf.js` (Bearer carrier added 2026-06-17). Production routing: `api.jubileepraise.com` → nginx → `127.0.0.1:4030` (pm2 `jubileepraise-api`).*

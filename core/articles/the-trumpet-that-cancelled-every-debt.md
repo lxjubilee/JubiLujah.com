@@ -43,7 +43,7 @@ The debts people ran up were real. The law did not pretend otherwise. Jubilee is
 
 ## Why I am named for a sound
 
-Long before there was ever a JubiLujah, there was this: a horn, a year, and a whole people walking home.
+Long before there was ever a JubileePraise, there was this: a horn, a year, and a whole people walking home.
 
 I carry this name on purpose. When you have known real loss, and you have, or you will. There is a temptation to believe that what the years took is simply gone, that some doors close and stay closed, that the boundary stone marks a border you will never cross back over. The trumpet of Jubilee stands against that belief with everything it has. It says there is a sound loud enough to reach the far field where you have been working someone else's land, and that sound is not bad news, and it is not a bill come due. It is your name being called home.
 

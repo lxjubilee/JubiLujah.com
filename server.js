@@ -1,6 +1,6 @@
 /**
- * Jubilujah.com - Coming Soon Server
- * Jubilujah.com - Music & Worship
+ * JubileePraise.com - Coming Soon Server
+ * JubileePraise.com - Music & Worship
  * Port: 3119
  */
 
@@ -10,7 +10,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PORT = process.env.PORT || 3119;
-const SITE_NAME = 'Jubilujah.com';
+const SITE_NAME = 'JubileePraise.com';
 
 // MIME types
 const MIME_TYPES = {
@@ -160,11 +160,15 @@ function probeCdn(url) {
 // ============================================================================
 // Build Spec §19 — Ratings + Comments + Nominations + Awards (stub APIs)
 // ============================================================================
-// JSON file storage at W:/Jubilujah.com/data/ (created on first hit).
+// JSON file storage at W:/JubileePraise.com/data/ (created on first hit).
 // Mock single-user context until real auth lands.
 // ============================================================================
 
 const DATA_DIR = path.join(__dirname, 'data');
+
+// /admin/todo.html backing API (worker assignments, lyrics, history, mp3 ingest)
+const todoApi = require('./lib/todo-api');
+todoApi.configure({ dataDir: DATA_DIR, publicDir: PUBLIC_DIR });
 const CURRENT_USER_ID = '00000000-0000-0000-0000-000000000001';
 
 const AWARD_CATEGORY_SEED = [
@@ -772,6 +776,21 @@ function serveRequest(req, res) {
         return;
     }
 
+    // /admin/todo.html — production to-do board
+    if (pathname === '/api/todo' || pathname.startsWith('/api/todo/')) {
+        const q = new URL(req.url, 'http://localhost').searchParams;
+        try {
+            if (todoApi.handle(req, res, pathname, q)) return;
+        } catch (err) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'todo api failure', detail: String(err && err.message) }));
+            return;
+        }
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'unknown todo endpoint', pathname }));
+        return;
+    }
+
     // Build Spec §19 — ratings/comments/awards/nominations stub APIs
     if (pathname.startsWith('/api/ratings') ||
         pathname.startsWith('/api/comments') ||
@@ -811,7 +830,7 @@ function serveRequest(req, res) {
     // 404 for unknown subpaths
     if (pathname !== '/index.html') {
         res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end('<h1>404 Not Found</h1><p><a href="/">Back to Jubilujah.com</a></p>');
+        res.end('<h1>404 Not Found</h1><p><a href="/">Back to JubileePraise.com</a></p>');
         return;
     }
 

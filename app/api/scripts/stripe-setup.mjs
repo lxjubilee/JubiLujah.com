@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================================
-// One-time (idempotent) Stripe setup for the Jubilujah subscription plans.
+// One-time (idempotent) Stripe setup for the JubileePraise subscription plans.
 //
 // Creates a Stripe Product + recurring monthly Price for each paid plan and
 // writes the resulting price id back onto production.subscription_plans, so the
@@ -35,7 +35,7 @@ try {
     if (plan.provider_price_id) { console.log(`= ${code}: already linked to price ${plan.provider_price_id}`); continue; }
 
     const product = await stripe.products.create({
-      name: `Jubilujah ${plan.name}`,
+      name: `JubileePraise ${plan.name}`,
       description: plan.description || undefined,
       metadata: { plan_code: code },
     });

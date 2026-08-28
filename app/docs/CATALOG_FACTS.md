@@ -1,4 +1,4 @@
-# Catalog Facts — what is actually in JubiLujah.com
+# Catalog Facts — what is actually in JubileePraise.com
 
 Verified counts and the rules that govern them. Written because the catalog is easy to
 misread: three separate filters sit between "an album exists in the manifest" and "a visitor
@@ -89,7 +89,7 @@ Santiago's own two Brazilian albums (`SAIM1005BR`, `SAIM1036BR`) and two Romania
 (`SAIM1022RO`, `SAIM1025RO`) *are* suffixed correctly, which is what makes the `…EN` block look
 like an oversight rather than a convention.
 
-**Spanish is plausibly the largest untapped audience for this catalog** — `JUBILUJAH-REQUIREMENTS.md`
+**Spanish is plausibly the largest untapped audience for this catalog** — `JUBILEEPRAISE-REQUIREMENTS.md`
 §3 describes Santiago's lane as *Latin Worship (20 distinct traditions)*. The content exists and
 is finished. Only the suffix is wrong.
 
@@ -166,7 +166,7 @@ deciding which it is.**
 `gen-album-genres`, `merge-genres-into-manifest`, `gen-album-covers`, `gen-completion-dates`,
 `build-album-themes`, `verify-genres`. Nothing writes `catalog-manifest.json` from scratch.
 
-Per `JUBILUJAH-REQUIREMENTS.md` §2, the catalog is authored on the **C: workshop** drive and the
+Per `JUBILEEPRAISE-REQUIREMENTS.md` §2, the catalog is authored on the **C: workshop** drive and the
 audio lives on **J: / `cdn.jubileeverse.com`**. Neither is reachable from this checkout, so the
 manifest **cannot be regenerated or freshness-checked against real audio from here**. The counts
 above are accurate *as of the 2026-07-07 manifest*, and any album that gained audio after that

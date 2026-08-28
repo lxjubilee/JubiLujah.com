@@ -3,6 +3,7 @@ import path from 'node:path';
 import { albumUuid, songUuid } from './ids';
 import { coverFor } from './covers';
 import { musicUrl } from './cdn';
+import { currentTenant } from './tenant';
 import type { Album, Artist, CategorySummary, StatusCounts, Track } from './types';
 
 // ============================================================================
@@ -18,7 +19,7 @@ interface RawCategory { key: string; label: string; artists?: RawArtist[] }
 interface RawManifest { generated?: string; totalAlbums?: number; categories?: RawCategory[] }
 
 let cached: RawManifest | null = null;
-function load(): RawManifest {
+function loadRaw(): RawManifest {
   if (cached) return cached;
   try {
     cached = JSON.parse(fs.readFileSync(MANIFEST_FILE, 'utf8'));
@@ -26,6 +27,38 @@ function load(): RawManifest {
     cached = { categories: [] };
   }
   return cached!;
+}
+
+// Per-tenant view of the manifest, built once and kept.
+const scopedCache = new Map<string, RawManifest>();
+
+/**
+ * The catalogue THIS REQUEST is allowed to see.
+ *
+ * 🔴 EVERY catalogue read in this module goes through here, and that is the
+ * whole design. Scoping the listing functions one by one would have left
+ * getAlbumByCode() and searchCatalog() open — a goPartyGiggles visitor could
+ * have reached an Inspire album by typing its code into /album?c=. Filtering at
+ * the single loader means an out-of-scope album is not merely hidden from a
+ * grid, it does not exist as far as this request is concerned.
+ *
+ * JubileePraise has `categories: null` and gets the untouched object back, so the
+ * main site's behaviour and its cache are exactly what they were.
+ */
+function load(): RawManifest {
+  const t = currentTenant();
+  if (!t.categories) return loadRaw();
+
+  const hit = scopedCache.get(t.key);
+  if (hit) return hit;
+
+  const raw = loadRaw();
+  const categories = (raw.categories || []).filter((c) => t.categories!.includes(c.key));
+  const totalAlbums = categories.reduce(
+    (n, c) => n + (c.artists || []).reduce((m, a) => m + (a.albums || []).length, 0), 0);
+  const scoped: RawManifest = { ...raw, categories, totalAlbums };
+  scopedCache.set(t.key, scoped);
+  return scoped;
 }
 
 export function manifestMeta() {

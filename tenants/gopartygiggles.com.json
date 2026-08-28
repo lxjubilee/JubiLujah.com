@@ -1,0 +1,144 @@
+{
+  "schema": "jl.tenant/2",
+  "tenant": "gopartygiggles.com",
+  "key": "partygiggles",
+  "site": "goPartyGiggles.com",
+  "status": "live",
+  "role": "children-label",
+  "isDefault": false,
+  "hosts": [
+    "gopartygiggles.com",
+    "www.gopartygiggles.com",
+    "partygiggles.com",
+    "www.partygiggles.com"
+  ],
+  "brand": {
+    "lead": "goParty",
+    "tail": "Giggles",
+    "accent": "#FF3DA5",
+    "logo": "/images/brand-logo.png",
+    "wordmarkFont": "Orbitron",
+    "bodyFont": "Open Sans"
+  },
+  "tagline": "Big Songs for Big Kids",
+  "description": "goPartyGiggles.com — dance-along, sing-along music for ages 6 and up. Party Giggles from the JubileePraise collection.",
+  "audience": "Ages 6 and up. The older half of the children's catalogue.",
+  "seo": {
+    "titleDefault": "goPartyGiggles.com — Big Songs for Big Kids",
+    "titleTemplate": "%s — goPartyGiggles.com",
+    "canonical": "https://gopartygiggles.com",
+    "canonicalNote": "Derived from hosts[0], because NEXT_PUBLIC_SITE_URL is a single process-wide value and belongs to JubileePraise.",
+    "openGraph": {
+      "type": "website",
+      "siteName": "goPartyGiggles.com",
+      "description": "Big Songs for Big Kids"
+    },
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "translate": "notranslate",
+    "builtBy": "app/web/app/layout.tsx generateMetadata()"
+  },
+  "catalogue": {
+    "categories": [
+      "party-giggles"
+    ],
+    "categoryLabel": "Party Giggles",
+    "artists": [
+      {
+        "slug": "party-giggles",
+        "name": "Party Giggles",
+        "role": "Children's Universe"
+      }
+    ],
+    "albumCodeShapes": [
+      "IX###EN"
+    ],
+    "albumCodeRange": "IX401EN – IX443EN",
+    "musicDrive": "J:/gopartygiggles.com/music/party-giggles",
+    "studioMusicRoot": "J:/gopartygiggles.com/music",
+    "cdnPrefix": "music/children/party-giggles",
+    "manifest": "app/web/public/music/catalog-manifest.json",
+    "manifestPathPrefix": "albums/children/party-giggles",
+    "scopeEnforcedAt": "app/web/lib/manifest.ts load() — a filtered copy, so another tenant's album is unreachable by direct URL, not merely hidden",
+    "musicDriveNote": "The PER-DOMAIN root, which is what deploy/rebuild-manifest.mjs and deploy/check-manifest.mjs scan (EXTRA_ROOTS). Masters were re-filed here on 2026-08-16.",
+    "staleCopy": "J:/jubileepraise.com/music/children/party-giggles",
+    "staleCopyNote": "⚠ A FULL SECOND COPY, identical album list and identical file timestamps, still sitting at the pre-2026-08-16 location. It is not a junction — J: is a network share, so a link was impossible — and nothing scans it. Measured 2026-08-17. Editing the wrong one is silent: the manifest will not see the change and the site will not move."
+  },
+  "home": {
+    "component": "app/web/components/TenantHome.tsx",
+    "featuredAlbum": null,
+    "featuredNote": "TenantHome pins nothing. It shows one row per artist, everything the tenant has.",
+    "childrenOnHome": true
+  },
+  "nav": [
+    {
+      "href": "/",
+      "key": "nav.home"
+    },
+    {
+      "href": "/music-type",
+      "key": "nav.musicType"
+    },
+    {
+      "href": "/playlists",
+      "key": "nav.playlists"
+    },
+    {
+      "href": "/subscription",
+      "key": "nav.upgrade"
+    }
+  ],
+  "navNote": "No /inspire, /children, /general or /christmas: those browse surfaces are empty under this scope. nav.upgrade is filtered out for a paid signed-in visitor, in components/Header.tsx.",
+  "i18n": {
+    "defaultLanguage": "en",
+    "cookie": "jv_lang",
+    "supportedLanguages": 49,
+    "chromeTranslated": true,
+    "catalogueLanguage": "en",
+    "shared": true
+  },
+  "production": {
+    "server": "root@94.72.120.231",
+    "path": "/var/www/jubileepraise.com",
+    "webCwd": "/var/www/jubileepraise.com/web",
+    "pm2": "jubileepraise-web",
+    "pm2Script": "next start -p 3030",
+    "port": 3030,
+    "nginxVhost": "/etc/nginx/sites-available/gopartygiggles.com",
+    "apexBehaviour": "served directly; apex and www share one server block",
+    "originTls": null,
+    "originTlsNote": "⚠ PORT 80 ONLY. This vhost has no listen 443 and no ssl_certificate, so HTTPS works purely because Cloudflare terminates it at the edge and reaches the origin over plain HTTP. jubileepraise.com has a Cloudflare origin certificate; these two do not.",
+    "edge": "Cloudflare",
+    "api": {
+      "host": "api.jubileepraise.com",
+      "shared": true
+    },
+    "verified": "2026-08-17"
+  },
+  "runtime": {
+    "shared": true,
+    "routedBy": "Host header, in lib/tenants.ts tenantForHost()",
+    "devPort": 3000,
+    "devNote": "localhost resolves to JubileePraise, not here. To see this tenant locally, send the Host header or add a hosts-file entry.",
+    "env": {
+      "shared": "all four NEXT_PUBLIC_* vars are process-wide; there is no per-tenant env"
+    }
+  },
+  "deploy": {
+    "scoped": false,
+    "note": "One pm2 process serves all three hosts, so a deploy ships them together. This site cannot be shipped on its own.",
+    "runbook": "PUBLISH.md",
+    "gate": "deploy/check-manifest.mjs"
+  },
+  "studio": {
+    "picker": "goPartyGiggles.com — party-giggles",
+    "voice": "party-giggles",
+    "voiceNote": "The label folder IS the voice in the studio, which is why studioMusicRoot is the parent of musicDrive."
+  },
+  "notes": [
+    "The manifest category key is `party-giggles`; on the music drive it lives one level deeper, under children/. The two are not the same string and nothing should assume they are.",
+    "A code prefix is not a tenant boundary. The catalogue scope is the category key, enforced in lib/manifest.ts at load."
+  ]
+}

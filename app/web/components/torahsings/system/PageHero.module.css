@@ -1,0 +1,25 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hairline);
+  background:
+    radial-gradient(80% 130% at 50% -20%, rgba(254, 202, 87, 0.09), transparent 58%),
+    radial-gradient(90% 120% at 50% 0%, rgba(27, 35, 64, 0.55), transparent 64%);
+}
+
+.inner {
+  padding-block: clamp(30px, 8.5vw, 30px) clamp(30px, 4.5vw, 25px);
+}
+
+.title {
+  margin: 20px 0 0;
+  font-size: clamp(2.1rem, 4.6vw, 3.1rem);
+}
+
+.lede {
+  /* max-width: 64ch; */
+  color: var(--ink-body);
+  margin: 18px 0 0;
+  font-size: 1rem;
+  line-height: 1.72;
+}

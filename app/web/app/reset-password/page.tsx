@@ -45,7 +45,7 @@ function ResetInner() {
           <div className="auth-panel-inner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="auth-avatar" src="/images/brand-logo.png" alt="" />
-            <div className="auth-brand"><span className="b1">JubiLujah</span><span className="b2">.com</span></div>
+            <div className="auth-brand"><span className="b1">JubileePraise</span><span className="b2">.com</span></div>
             <div className="auth-switch">Set a new password</div>
 
             {err && <div className="auth-err">{err}</div>}
@@ -73,7 +73,7 @@ function ResetInner() {
               <Link className="auth-foot" style={{ color: '#f0ad4e' }} href="/signin">&larr; Back to sign in</Link>
             </div>
           </div>
-          <div className="auth-foot">© 2026 JubiLujah.com</div>
+          <div className="auth-foot">© 2026 JubileePraise.com</div>
         </div>
 
         <AuthHero>

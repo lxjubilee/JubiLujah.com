@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const OUT = 'C:/Users/MELODY~1.INS/AppData/Local/Temp/claude/w--JubiLujah-com/ec7103b0-63ad-4a95-aa19-bd776d58fc35/tasks/wlvoxu977.output';
+const OUT = 'C:/Users/MELODY~1.INS/AppData/Local/Temp/claude/w--JubileePraise-com/ec7103b0-63ad-4a95-aa19-bd776d58fc35/tasks/wlvoxu977.output';
 let raw = fs.readFileSync(OUT, 'utf8');
 
 // The file holds the workflow result JSON (possibly with surrounding text). Extract the outermost object.
@@ -35,7 +35,7 @@ ts += `export function albumRating(code: string): number {\n`;
 ts += `  return ALBUM_RATINGS[code] ?? 0;\n`;
 ts += `}\n`;
 
-fs.writeFileSync('w:/JubiLujah.com/app/web/lib/album-ratings.ts', ts);
+fs.writeFileSync('w:/JubileePraise.com/app/web/lib/album-ratings.ts', ts);
 
 console.log('albums:', codes.length, 'dupes:', dupes);
 console.log('min:', Math.min(...vals), 'max:', Math.max(...vals));

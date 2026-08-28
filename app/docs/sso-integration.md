@@ -1,8 +1,8 @@
 # SSO Integration — JubileeInspire
 
-Jubilujah delegates authentication to **JubileeInspire** via **OAuth 2.0 / OpenID Connect
-(Authorization Code flow with PKCE)**. Jubilujah never stores passwords or handles MFA — the
-JubileeInspire account *is* the Jubilujah account.
+JubileePraise delegates authentication to **JubileeInspire** via **OAuth 2.0 / OpenID Connect
+(Authorization Code flow with PKCE)**. JubileePraise never stores passwords or handles MFA — the
+JubileeInspire account *is* the JubileePraise account.
 
 ## Flow
 
@@ -25,9 +25,9 @@ Same-origin in dev: the Next app proxies `/api/*` to the API, so the whole round
 ## Shared user management
 
 - The OIDC `sub` claim is the **stable cross-platform identity** (`identity.users.external_subject`,
-  `UNIQUE`). A user who exists on jubileeinspire.com logs in to jubilujah.com with no new account.
+  `UNIQUE`). A user who exists on jubileeinspire.com logs in to jubileepraise.com with no new account.
 - On **every login**, roles from the IdP token are synchronized to `identity.user_roles` (grants and
-  revocations are written to `identity.audit_log`). Admin role edits in the Jubilujah console write
+  revocations are written to `identity.audit_log`). Admin role edits in the JubileePraise console write
   to the same shared store, so privileges stay in sync across both platforms.
 - A brand-new user registering through the shared IdP appears in `identity.users` on first login and is
   therefore visible from both sites.
@@ -61,22 +61,22 @@ No code changes — only environment values:
 OIDC_ISSUER=https://api.JubileeInspire.com         # real issuer (must serve /.well-known/openid-configuration)
 OIDC_CLIENT_ID=<registered client id>
 OIDC_CLIENT_SECRET=<registered client secret>
-OIDC_REDIRECT_URI=https://jubilujah.com/api/auth/callback
+OIDC_REDIRECT_URI=https://jubileepraise.com/api/auth/callback
 OIDC_SCOPES=openid profile email roles
 ```
 
 Requirements on the JubileeInspire side:
-1. Register Jubilujah as a confidential client with the redirect URI above.
+1. Register JubileePraise as a confidential client with the redirect URI above.
 2. Include a `roles` claim (array of the role strings above) in the ID token (or expose it at
    `/userinfo` — the client reads roles from the verified ID token claims).
 3. Serve a standard OIDC discovery document and JWKS.
 
-For a shared session across `jubilujah.com` and `jubileeinspire.com`, set `COOKIE_DOMAIN` to the
+For a shared session across `jubileepraise.com` and `jubileeinspire.com`, set `COOKIE_DOMAIN` to the
 shared parent domain (e.g. `.jubilee.example`) and `secureCookies` (production `NODE_ENV`).
 
 ## ⚠️ GO-LIVE BLOCKER — JubileeInspire must implement the OIDC login endpoints
 
-The Jubilujah side is already SSO-ready: the OIDC client is discovery-driven and config-only
+The JubileePraise side is already SSO-ready: the OIDC client is discovery-driven and config-only
 (`src/auth/oidc.js`), so cutover is just the `OIDC_*` env values above — **no code change**.
 
 The blocker is on **JubileeInspire**. As verified against `https://api.jubileeinspire.com`
@@ -93,13 +93,13 @@ The blocker is on **JubileeInspire**. As verified against `https://api.jubileein
 **Before SSO can go live, JubileeInspire MUST implement the OpenID Connect provider endpoints:**
 
 1. **`/api/auth/login` → authorization endpoint** — the user-facing login/consent page that the
-   Jubilujah API redirects to (`GET /api/auth/login` on our side builds the authorize URL and 302s
+   JubileePraise API redirects to (`GET /api/auth/login` on our side builds the authorize URL and 302s
    the browser there). This is the endpoint specifically called out as the go-live requirement.
 2. **OIDC discovery document** at `/.well-known/openid-configuration` + a **JWKS** endpoint.
 3. **Token endpoint** (`/token`) supporting Authorization Code + PKCE (S256).
 4. **`/userinfo`** and a **`roles`** claim (array) in the ID token.
-5. **Register Jubilujah as a confidential client** with redirect URI
-   `https://jubilujah.com/api/auth/callback` (and the localhost dev URI for testing).
+5. **Register JubileePraise as a confidential client** with redirect URI
+   `https://jubileepraise.com/api/auth/callback` (and the localhost dev URI for testing).
 
 Until these exist, the "Continue to JubileeInspire" button (and the `/signin` SSO link) will fail at
 the discovery step. The password-sync integration (`services/jiSync.js`) is unaffected — it uses the

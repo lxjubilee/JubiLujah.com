@@ -1,6 +1,6 @@
 const fs = require('fs');
-const run1 = JSON.parse(fs.readFileSync('w:/JubiLujah.com/app/_ratings-work/report-rows.json', 'utf8'));
-const out2 = fs.readFileSync('C:/Users/MELODY~1.INS/AppData/Local/Temp/claude/w--JubiLujah-com/ec7103b0-63ad-4a95-aa19-bd776d58fc35/tasks/w75li2gq6.output', 'utf8');
+const run1 = JSON.parse(fs.readFileSync('w:/JubileePraise.com/app/_ratings-work/report-rows.json', 'utf8'));
+const out2 = fs.readFileSync('C:/Users/MELODY~1.INS/AppData/Local/Temp/claude/w--JubileePraise-com/ec7103b0-63ad-4a95-aa19-bd776d58fc35/tasks/w75li2gq6.output', 'utf8');
 let o2; try { o2 = JSON.parse(out2); } catch { o2 = JSON.parse(out2.slice(out2.indexOf('{'), out2.lastIndexOf('}') + 1)); }
 const run2 = (o2.result || o2).rows || [];
 

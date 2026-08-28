@@ -10,6 +10,10 @@ import { LangProvider } from '@/lib/useLang';
 import MediaRow, { TileData } from '@/components/MediaRow';
 import LanguageHome from '@/components/LanguageHome';
 import FeaturedArtists from '@/components/FeaturedArtists';
+import TenantHome from '@/components/TenantHome';
+import TorahSingsHome from '@/components/torahsings/TorahSingsHome';
+import { currentTenant } from '@/lib/tenant';
+import { usesAngelsCatalog } from '@/lib/tenants';
 
 // Dynamic (not ISR): we read the jv_lang cookie ON THE SERVER so the first render
 // is already in the selected language — no flash of the English Home before the
@@ -32,10 +36,22 @@ const THEMED_EXCLUDE = new Set(['gabriel-inspire', 'melody-inspire']);
 const CHILDREN_CATEGORIES = new Set(['party-giggles', 'tiny-tiggles']);
 
 // Flagship album pinned as the very first tile on the Home page — matches the
-// JubiLujah.com brand.
+// JubileePraise.com brand.
 const FEATURED_ALBUM_CODE = 'JEIM1069EN';
 
 export default function HomePage() {
+  // A single-catalogue tenant gets its own Home. This page is JubileePraise's: it
+  // sorts the collection into worship themes and deliberately drops the
+  // children's categories (see CHILDREN_CATEGORIES below), so rendering it for
+  // goPartyGiggles would produce an empty page rather than a wrong one.
+  const tenant = currentTenant();
+  // Order matters. Torah Sings carries `categories: []` — empty, because it may
+  // see nothing of the shared manifest — and an empty array is TRUTHY, so this
+  // check has to come first or it would fall into TenantHome and render a page
+  // with nothing on it.
+  if (usesAngelsCatalog(tenant)) return <TorahSingsHome />;
+  if (tenant.categories) return <TenantHome />;
+
   const buckets: Record<string, TileData[]> = {};
   for (const t of THEMES) buckets[t.key] = [];
   buckets[FAMILY_POPULAR.key] = [];
@@ -90,7 +106,7 @@ export default function HomePage() {
     buckets[key] = dailyShuffle(buckets[key], key);
   }
 
-  // Pin the flagship "JubiLujah" album as the very first tile of the first row
+  // Pin the flagship "JubileePraise" album as the very first tile of the first row
   // (applied AFTER the shuffle, so the brand flagship stays first while every
   // other tile reshuffles daily).
   for (const key of Object.keys(buckets)) {

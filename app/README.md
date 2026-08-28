@@ -1,6 +1,6 @@
-# Jubilujah.com — Next.js + Node.js + PostgreSQL
+# JubileePraise.com — Next.js + Node.js + PostgreSQL
 
-Modern migration of the legacy static Jubilujah site to a Next.js frontend, a Node.js (Express)
+Modern migration of the legacy static JubileePraise site to a Next.js frontend, a Node.js (Express)
 backend, and PostgreSQL — with Single Sign-On to JubileeInspire, shared user management, RBAC,
 security hardening, and SEO.
 

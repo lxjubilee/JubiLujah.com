@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'How JubiLujah.com collects, uses, protects, and shares your personal information — accounts, cookies, email, and your privacy choices.',
+    'How JubileePraise.com collects, uses, protects, and shares your personal information — accounts, cookies, email, and your privacy choices.',
   robots: { index: true, follow: true },
 };
 
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           <div className="eyebrow">Legal</div>
           <h1>Privacy <em>Policy</em></h1>
           <p className="lead">
-            Your trust matters to us. This policy explains what information JubiLujah.com collects,
+            Your trust matters to us. This policy explains what information JubileePraise.com collects,
             how we use and protect it, and the choices you have over your own data.
           </p>
         </div>
@@ -31,9 +31,9 @@ export default function PrivacyPage() {
             <div className="updated">Effective {EFFECTIVE_DATE}</div>
 
             <p className="intro">
-              JubiLujah.com (&ldquo;JubiLujah,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;),
+              JubileePraise.com (&ldquo;JubileePraise,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;),
               operated by Jubilee Software, Inc., provides a faith-centered music streaming and discovery
-              experience. This Privacy Policy applies to the JubiLujah.com website and the services offered
+              experience. This Privacy Policy applies to the JubileePraise.com website and the services offered
               through it (the &ldquo;Service&rdquo;). By creating an account or using the Service, you agree to
               the practices described below.
             </p>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
             <p>
               If you choose to continue with <strong>JubileeInspire Single Sign-On (SSO)</strong>, we receive
               basic profile information (such as your name and email address) from your JubileeInspire account so
-              we can create or link your JubiLujah profile. Your JubiLujah and JubileeInspire accounts may be
+              we can create or link your JubileePraise profile. Your JubileePraise and JubileeInspire accounts may be
               kept in sync as part of the Jubilee family of services.
             </p>
 
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Legal and safety.</strong> When we reasonably believe disclosure is required by law, legal
-                process, or to protect the rights, property, or safety of our users, the public, or JubiLujah.
+                process, or to protect the rights, property, or safety of our users, the public, or JubileePraise.
               </li>
               <li>
                 <strong>Business transfers.</strong> In connection with a merger, acquisition, or sale of assets,
@@ -184,7 +184,7 @@ export default function PrivacyPage() {
 
             <h2>10. International Users</h2>
             <p>
-              JubiLujah.com is operated from the United States. If you access the Service from outside the United
+              JubileePraise.com is operated from the United States. If you access the Service from outside the United
               States, you understand that your information may be transferred to, stored, and processed in the
               United States and other countries where our service providers operate, which may have data
               protection laws different from those in your country.
@@ -201,7 +201,7 @@ export default function PrivacyPage() {
             <p>If you have questions or requests regarding this Privacy Policy or your personal information, contact us:</p>
             <div className="legal-contact">
               <p><strong>Jubilee Software, Inc.</strong></p>
-              <p>Privacy inquiries: <a href="mailto:privacy@jubilujah.com">privacy@jubilujah.com</a></p>
+              <p>Privacy inquiries: <a href="mailto:privacy@jubileepraise.com">privacy@jubileepraise.com</a></p>
             </div>
           </article>
         </div>

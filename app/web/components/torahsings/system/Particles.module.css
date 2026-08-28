@@ -1,0 +1,55 @@
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  bottom: -14px;
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.gold {
+  background: rgba(254, 202, 87, 0.32);
+  box-shadow: 0 0 7px 1px rgba(254, 202, 87, 0.4);
+}
+
+.peach {
+  background: rgba(255, 138, 107, 0.3);
+  box-shadow: 0 0 7px 1px rgba(255, 138, 107, 0.35);
+}
+
+.rose {
+  background: rgba(233, 69, 96, 0.3);
+  box-shadow: 0 0 7px 1px rgba(233, 69, 96, 0.35);
+}
+
+@keyframes rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(26px, -108vh, 0);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .particles {
+    display: none;
+  }
+}

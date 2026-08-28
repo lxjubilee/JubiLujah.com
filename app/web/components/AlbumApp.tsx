@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import AlbumCover from './AlbumCover';
 import AddToPlaylist from './AddToPlaylist';
@@ -51,7 +52,7 @@ function fmt(s: number) {
   return `${m}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-export default function AlbumApp({ artist, albums, initial, similar = [] }: { artist: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[] }) {
+export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFallback = '', albums, initial, similar = [], support = {} }: { artist: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string> }) {
   const playQueue = usePlayer((s) => s.playQueue);
   const togglePlay = usePlayer((s) => s.togglePlay);
   const nowPlaying = usePlayer((s) => s.nowPlaying);
@@ -65,6 +66,38 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
   const current = cache[code] || initial;
   const editId = albumUuid(code);
   const gp = genrePair(current.code, artist, current.title);
+
+  // The album's supporting image: a wide companion photograph built from this
+  // album's own cover art (see lib/support.ts). Keyed by code so it follows an
+  // in-place album switch.
+  //
+  // It is the HERO's backdrop, and the persona banner is what it falls back to.
+  // Both go through the same `--persona-img` custom property the stylesheet
+  // already reads, so the gradient, the sizing and the right-edge anchoring are
+  // whatever .x-hero has always done — this changes the picture, not the design.
+  const supportImage = support[current.code] || '';
+  const heroImage = supportImage || heroFallback;
+  const heroStyle = { ['--persona-img' as string]: heroImage ? `url('${heroImage}')` : 'none' } as CSSProperties;
+
+  // Rendered by both return paths below, so a studio album a guest cannot see
+  // still gets the same header it gets today.
+  //
+  // THE MODIFIER CLASS IS ONLY FOR THE SUPPORTING IMAGE, and it exists because
+  // the two pictures crop differently. The hero is far wider than it is tall, so
+  // `cover` scales any backdrop to the width and lets the height overflow — with
+  // the default `center` anchoring, that overflow is taken evenly off the top and
+  // the bottom, which on a 16:9 photograph is where the faces are. The persona
+  // banners were composed for this box and still want centre; an album photograph
+  // was not, so it is anchored to the top instead. See .x-hero--support.
+  const hero = (
+    <header className={`x-hero${supportImage ? ' x-hero--support' : ''}`} style={heroStyle}>
+      <div className="x-container">
+        <div className="x-inner">
+          <h1>{artist}<em>{artistRole}</em></h1>
+        </div>
+      </div>
+    </header>
+  );
 
   // ---- Public ratings (§2/§3/§6): album + per-song summaries -------------
   const [summaries, setSummaries] = useState<Record<string, ReviewSummary>>({});
@@ -199,23 +232,27 @@ export default function AlbumApp({ artist, albums, initial, similar = [] }: { ar
   // guest; resolves to the full player once an admin/reviewer session loads.
   if (current.status === 'studio' && !canSeeStudio) {
     return (
-      <section className="standard">
-        <div className="container">
-          {authLoading ? (
-            <p className="notice">Loading…</p>
-          ) : (
-            <>
-              <h1 className="section-title">Album not available</h1>
-              <p className="notice">This album is still in the studio and isn’t published yet.</p>
-            </>
-          )}
-        </div>
-      </section>
+      <>
+        {hero}
+        <section className="standard">
+          <div className="container">
+            {authLoading ? (
+              <p className="notice">Loading…</p>
+            ) : (
+              <>
+                <h1 className="section-title">Album not available</h1>
+                <p className="notice">This album is still in the studio and isn’t published yet.</p>
+              </>
+            )}
+          </div>
+        </section>
+      </>
     );
   }
 
   return (
     <>
+      {hero}
       <section className="jv-app">
         <div className="jv-app-grid">
           {/* Left — Similar Music (other albums sharing this album's primary genre) */}

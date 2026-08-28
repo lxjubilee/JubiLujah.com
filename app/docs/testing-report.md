@@ -73,7 +73,7 @@ ISR on album pages, dynamic album-by-code, generated `sitemap.xml` + `robots.txt
 
 | Route | Legacy equivalent | Status | `<title>` |
 |---|---|---|---|
-| `/` | `index.html` | 200 | Jubilujah.com — Feel the Spirit Move |
+| `/` | `index.html` | 200 | JubileePraise.com — Feel the Spirit Move |
 | `/inspire` | `inspire.html` | 200 | Inspire Family — … |
 | `/children` `/faith-based` `/general` | category pages | 200 | per-page SEO titles |
 | `/prayers` | `prayers.html` | 200 | Jubilee Prayers — … |

@@ -128,7 +128,7 @@ async function finalizeLogin(user, { extended = false } = {}) {
 }
 
 // ---- JI delegation (config.loginMode === 'ji') -----------------------------
-// JubileeInspire is the credential authority in production; Jubilujah stays the
+// JubileeInspire is the credential authority in production; JubileePraise stays the
 // SESSION authority. After JI validates, we upsert the returned user locally and
 // mint our OWN tokens (same JI token format, our local userId) — JI's own tokens
 // are discarded since they carry JI's userId, which our DB lookup wouldn't resolve.
@@ -170,7 +170,7 @@ async function establishSessionFromSSO(req, ssoUser) {
   return { user, tokens };
 }
 
-// JI-delegation self-heal: a user who signed up ON Jubilujah exists locally but
+// JI-delegation self-heal: a user who signed up ON JubileePraise exists locally but
 // was never provisioned into JubileeInspire, so JI rejects their sign-in with a
 // 401 even though their password is correct. When that happens, verify the
 // password against our LOCAL credential; if it matches, provision them into JI
@@ -217,7 +217,7 @@ async function selfHealJiLogin(req) {
   };
 }
 
-// Translate a JI /login or /verify-login reply into a Jubilujah auth response,
+// Translate a JI /login or /verify-login reply into a JubileePraise auth response,
 // preserving the existing client contract ({requires2FA,verificationGuid} for the
 // OTP step; {user,tokens} on success; JI's status+message on failure).
 async function relayJI(req, res, status, body, fallbackMsg) {
@@ -228,8 +228,8 @@ async function relayJI(req, res, status, body, fallbackMsg) {
     if (!body.user) throw new HttpError(502, 'Auth service returned an unexpected response.');
     const { tokens } = await establishSessionFromJI(req, res, body.user);
     // Forward JI's full user profile (role, accountType, subscription, preferences,
-    // …) and trustToken to the client; the tokens are Jubilujah's own minted JWTs
-    // (Jubilujah stays the session authority — JI's tokens are discarded).
+    // …) and trustToken to the client; the tokens are JubileePraise's own minted JWTs
+    // (JubileePraise stays the session authority — JI's tokens are discarded).
     return res.json({
       success: true,
       user: body.user,
@@ -381,7 +381,7 @@ router.post('/verify-signup', validate(verifySignupSchema), ah(async (req, res) 
       await client.query('UPDATE identity.signup_verifications SET verified_at = NOW(), used_at = NOW() WHERE id = $1', [row.id]);
       throw new HttpError(409, 'An account with this email already exists. Please sign in.');
     }
-    const sub = `jubilujah|${row.email}`;
+    const sub = `jubileepraise|${row.email}`;
     const u = await client.query(
       `INSERT INTO identity.users (external_subject, email, display_name, last_login_at, first_signin_completed)
          VALUES ($1, $2, $3, NOW(), TRUE) RETURNING id, email, display_name`,
@@ -491,15 +491,15 @@ router.post('/signin', validate(signinSchema), ah(async (req, res) => {
     const { email, password } = req.body;
     const emailNorm = String(email).trim().toLowerCase();
     // `provision:true` is sent ONLY by the sign-up flow (existing Jubilee ID). Plain
-    // sign-in never provisions, so a deleted Jubilujah account is NOT resurrected
+    // sign-in never provisions, so a deleted JubileePraise account is NOT resurrected
     // just because the SSO still holds the credential.
     const allowProvision = req.body.provision === true;
     const preview = req.body.preview === true;
 
     // Sign-up ENTRY preview (email + password): route WITHOUT committing —
     //   no Jubilee ID for this email        → { redirect:'signup' } (full registration)
-    //   valid + already a Jubilujah member  → sign in
-    //   valid + new to Jubilujah            → { needsProfile, profile } (pre-filled form)
+    //   valid + already a JubileePraise member  → sign in
+    //   valid + new to JubileePraise            → { needsProfile, profile } (pre-filled form)
     //   wrong password                      → 401
     if (preview) {
       const lk = await ssoLookup(email);
@@ -535,7 +535,7 @@ router.post('/signin', validate(signinSchema), ah(async (req, res) => {
       if (status === 401) throw new HttpError(401, 'Invalid email or password');
       throw new HttpError(status >= 400 && status < 600 ? status : 502, 'Sign in failed');
     }
-    // A valid Jubilee ID with no local Jubilujah account → route to the PRE-FILLED
+    // A valid Jubilee ID with no local JubileePraise account → route to the PRE-FILLED
     // signup (a deliberate re-join) instead of a dead-end "please sign up" error.
     const local = await query('SELECT 1 FROM identity.users WHERE email = $1 AND is_active = TRUE', [emailNorm]);
     if (local.rowCount === 0 && !allowProvision) {

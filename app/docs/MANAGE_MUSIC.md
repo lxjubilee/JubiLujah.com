@@ -1,6 +1,6 @@
 # Manage Music — Admin Module
 
-A Jubilujah.com Admin Panel module for managing every album and song on the
+A JubileePraise.com Admin Panel module for managing every album and song on the
 site. It **synchronizes with the CDN** (`cdn.jubileeverse.com`), tracks asset
 availability and health, and gives admins full control over what is visible on
 the public site.
@@ -177,7 +177,7 @@ blob download.
 ## 7. Deployment
 
 1. **DB:** `node app/db/run-migrations.js` on the target (applies `0015`).
-2. **API:** ship `app/api`, restart the `jubilujah-api` PM2 process. New env (all
+2. **API:** ship `app/api`, restart the `jubileepraise-api` PM2 process. New env (all
    optional): `MUSIC_SYNC_SCHEDULER=on` (one instance only). `CDN_BASE` already
    configured (`https://cdn.jubileeverse.com`).
 3. **Web:** rebuild & restart `app/web` (new route `/admin/music`, nav tab, CSS).

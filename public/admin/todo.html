@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production To&#8209;Do &middot; JubileePraise Admin</title>
+<link rel="stylesheet" href="/_assets/site.css">
+<style>
+  /* ==================== ADMIN-SHARED (verbatim, matches every admin page) ==================== */
+  .admin-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .admin-notice {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.12) 0%, rgba(254, 202, 87, 0.06) 100%), var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-notice strong { color: var(--accent-peach); letter-spacing: 0.04em; }
+
+  .admin-subnav {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-subnav a {
+    flex: 1;
+    min-width: 160px;
+    padding: 14px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--line);
+    transition: background 0.15s, color 0.15s;
+  }
+  .admin-subnav a:last-child { border-right: none; }
+  .admin-subnav a:hover { background: var(--surface-2); color: var(--ink); }
+  .admin-subnav a.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+
+  /* ==================== SCROLLBARS ==================== */
+  /* Extends the house pattern from index.html .feed-list / pipeline .kanban-scroll */
+  .scroll-area { scrollbar-width: thin; scrollbar-color: var(--surface-3) var(--bg-1); }
+  .scroll-area::-webkit-scrollbar { width: 10px; height: 10px; }
+  .scroll-area::-webkit-scrollbar-track {
+    background: var(--bg-1);
+    border-radius: 6px;
+    border: 1px solid var(--line-soft);
+  }
+  .scroll-area::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--surface-3) 0%, var(--surface-2) 100%);
+    border-radius: 6px;
+    border: 2px solid var(--bg-1);
+    transition: background 0.15s;
+  }
+  .scroll-area::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+  }
+  .scroll-area::-webkit-scrollbar-corner { background: var(--bg-1); }
+
+  /* ==================== WORKBENCH LAYOUT ==================== */
+  .todo-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(300px, 1fr) minmax(460px, 1.55fr);
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 1320px) {
+    .todo-layout { grid-template-columns: 240px 1fr; }
+    .todo-layout .pane-edit { grid-column: 1 / -1; }
+  }
+  @media (max-width: 860px) { .todo-layout { grid-template-columns: 1fr; } }
+
+  .pane {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .pane > h3 {
+    padding: 18px 22px;
+    margin: 0;
+    color: var(--ink);
+    font-size: 17px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .pane > h3 .count {
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .pane-body { padding: 14px 16px; }
+  .pane-body.scroll { max-height: 66vh; overflow: auto; }
+
+  /* ==================== BUTTONS (matches users.html .edit-btn) ==================== */
+  .btn {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.sm { padding: 4px 9px; font-size: 10px; }
+  .btn.primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .btn.primary:hover { filter: brightness(1.1); }
+  .btn.ghost { background: transparent; }
+  .btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+  .btn[disabled]:hover { background: var(--surface-2); border-color: var(--line); color: var(--ink-soft); }
+  .btn.ok { background: var(--success); border-color: var(--success); color: #0c1226; }
+
+  /* ==================== COUNT PILL (matches awards .cat-head .count) ========== */
+  .pill {
+    background: var(--bg-1);
+    color: var(--accent-gold);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .pill.hot {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+  }
+  .chip {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ==================== WORKER ROWS ==================== */
+  .worker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 6px;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .worker:hover { background: var(--surface-2); }
+  .worker.sel {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.18) 0%, rgba(254, 202, 87, 0.06) 100%);
+    border-color: var(--accent);
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  }
+  .worker .nm { flex: 1; min-width: 0; }
+  .worker .nm b {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .worker .nm span {
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  /* ==================== ALBUM CARDS (matches pipeline .kb-card) ============== */
+  .card {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 13px 14px 11px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .card.sel {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.14) 0%, var(--surface-2) 100%);
+  }
+  .card .code {
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .card .ttl {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 4px 0 5px;
+    line-height: 1.3;
+  }
+  .card .meta {
+    font-size: 11px;
+    color: var(--ink-muted);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .bar {
+    height: 5px;
+    border-radius: 3px;
+    background: var(--bg-1);
+    overflow: hidden;
+    margin-top: 9px;
+    border: 1px solid var(--line-soft);
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--success) 0%, var(--accent-gold) 100%);
+  }
+
+  /* ==================== EDIT PANEL ==================== */
+  .edit-grid { display: grid; grid-template-columns: 1fr 70px; }
+  .edit-main { padding: 16px 20px; min-width: 0; }
+  .rail {
+    border-left: 1px solid var(--line);
+    background: var(--bg-1);
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .rail .rl {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tbtn {
+    width: 48px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    position: relative;
+    transition: all 0.15s;
+  }
+  .tbtn:hover { background: var(--surface-3); color: var(--ink); }
+  .tbtn.sel {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .tbtn.has-mp3::after {
+    content: '';
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+  .tbtn.edited::before {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 4px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+  }
+
+  .fld { margin-bottom: 14px; }
+  .fld label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .fld .val {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 11px 13px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  .fld .val.tall { max-height: 130px; overflow: auto; }
+  textarea.lyr {
+    width: 100%;
+    min-height: 360px;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    padding: 14px 15px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.15s;
+  }
+  textarea.lyr:focus { outline: none; border-color: var(--accent); }
+  textarea.lyr.dirty { border-color: var(--accent-gold); }
+  .metagrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+
+  /* ==================== DROP ZONE ==================== */
+  .drop {
+    margin-top: 16px;
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    padding: 24px 18px;
+    text-align: center;
+    background: var(--bg-1);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .drop.over { border-color: var(--accent-gold); background: rgba(254, 202, 87, 0.07); }
+  .drop.done { border-color: var(--success); }
+  .drop h4 { margin: 0 0 6px; font-size: 14px; color: var(--ink); font-weight: 700; }
+  .drop p { margin: 0; font-size: 11.5px; color: var(--ink-muted); line-height: 1.5; }
+  .drop .prog {
+    height: 6px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    margin-top: 12px;
+    overflow: hidden;
+    display: none;
+  }
+  .drop .prog i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-gold) 100%);
+    transition: width 0.2s;
+  }
+
+  /* ==================== MISC ==================== */
+  .empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 99;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    color: var(--ink);
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.2s;
+    pointer-events: none;
+    max-width: 400px;
+  }
+  .toast.show { opacity: 1; transform: none; }
+  .toast.bad { border-color: var(--accent-peach); border-left-color: var(--accent-peach); }
+  .toast.good { border-color: var(--success); border-left-color: var(--success); }
+  .srch {
+    width: 100%;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    padding: 10px 13px;
+    font-size: 13px;
+    font-family: inherit;
+    margin-bottom: 12px;
+    transition: border-color 0.15s;
+  }
+  .srch:focus { outline: none; border-color: var(--accent); }
+  .hist {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--line);
+    margin-top: 14px;
+    padding-top: 12px;
+    max-height: 160px;
+    overflow: auto;
+    line-height: 1.6;
+  }
+  .hist div { padding: 4px 0; border-bottom: 1px solid var(--line-soft); }
+  .hist div:last-child { border-bottom: none; }
+  .hist b { color: var(--ink-soft); }
+  code.path { font-size: 10.5px; color: var(--ink-muted); word-break: break-all; }
+  .read-only-note {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="topbar">
+      <a href="/index.html" class="site-logo">JubileePraise.com</a>
+      <div class="site-tools">
+        <span class="admin-badge">Admin Mode</span>
+        <a href="/playlists.html">Playlists</a>
+        <span class="sep">|</span>
+        <a href="#login" class="login">Login</a>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/inspire.html">Inspire Family</a>
+      <a href="/children.html">Children Music</a>
+      <a href="/faith-based.html">Faith-Based Believers</a>
+      <a href="/general.html">General Audiences</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Admin Dashboard</div>
+    <h1>Production <em>To&#8209;Do</em></h1>
+    <p class="lead">
+      Pick a worker, open one of their assigned albums, and work it track by track. Lyrics load
+      live from the <strong>J: drive</strong> master, every edit is journalled before&#8209;and&#8209;after, and the
+      finished MP3 drops straight back down to the album&rsquo;s <code>tracks/</code> folder.
+    </p>
+  </div>
+</section>
+
+<section class="standard">
+  <div class="container">
+
+    <nav class="admin-subnav">
+      <a href="/admin/index.html">Overview</a>
+      <a href="/admin/pipeline.html">Pipeline Kanban</a>
+      <a href="/admin/todo.html" class="active">Production To&#8209;Do</a>
+      <a href="/admin/awards.html">Awards Review</a>
+      <a href="/admin/users.html">Users &amp; Roles</a>
+    </nav>
+
+    <div class="admin-notice">
+      <strong>ADMIN MODE</strong>
+      <span>Lyrics are read and written against the <strong>J: drive master</strong>. Every edit is journalled
+      before-and-after to <code>lyrics-changes.json</code> in the album&rsquo;s own <code>lyrics/</code> folder.
+      Files whose layout cannot be round-tripped safely are opened read-only.</span>
+    </div>
+
+    <div class="todo-layout">
+
+      <!-- ============ LEFT: WORKERS ============ -->
+      <div class="pane">
+        <h3>Workers <button class="btn sm" id="addWorker" title="Add a worker">+ Add</button></h3>
+        <div class="pane-body scroll scroll-area" id="workers">
+          <div class="empty">Loading&hellip;</div>
+        </div>
+      </div>
+
+      <!-- ============ MIDDLE: INBOX ============ -->
+      <div class="pane">
+        <h3><span id="inboxTitle">Inbox</span> <button class="btn sm" id="assignBtn" title="Assign an album to this worker">Assign&hellip;</button></h3>
+        <div class="pane-body scroll scroll-area" id="inbox">
+          <div class="empty">Select a worker on the left.</div>
+        </div>
+      </div>
+
+      <!-- ============ RIGHT: EDIT PANEL ============ -->
+      <div class="pane pane-edit">
+        <h3><span id="editTitle">Edit Panel</span> <span id="editSub" class="count"></span></h3>
+        <div class="edit-grid">
+          <div class="edit-main" id="editMain">
+            <div class="empty">
+              Choose an album from the inbox.<br>
+              Its tracks appear on the rail to the right.
+            </div>
+          </div>
+          <div class="rail" id="rail"><div class="rl">Trk</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="read-only-note">
+      Master source <code class="path" id="drivePath">J:\</code> &middot;
+      index <span id="idxInfo">&mdash;</span>
+      <button class="btn sm ghost" id="rescan" style="margin-left:8px">Rescan drive</button>
+    </p>
+
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const api = (p, o) => fetch(p, o).then(async r => {
+  const j = await r.json().catch(() => ({ error: 'bad response ' + r.status }));
+  if (!r.ok && !j.error) j.error = 'HTTP ' + r.status;
+  return j;
+});
+function toast(msg, kind) {
+  const t = $('#toast'); t.textContent = msg;
+  t.className = 'toast show ' + (kind || '');
+  clearTimeout(t._h); t._h = setTimeout(() => t.className = 'toast', 3200);
+}
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+
+let STATE = { workers: [], index: [], worker: null, album: null, track: null, dirty: false };
+
+/* ------------------------------------------------ workers ------------- */
+function editorName() { return STATE.worker ? STATE.worker.name : 'unknown'; }
+
+async function loadWorkers() {
+  const r = await api('/api/todo/workers');
+  STATE.workers = (r && r.workers) || [];
+  if (!STATE.workers.length) {
+    STATE.workers = [{ id: 'w-unassigned', name: 'Unassigned', role: 'inbox', assigned: [] }];
+    await saveWorkers();
+  }
+  renderWorkers();
+}
+async function saveWorkers() {
+  const r = await api('/api/todo/workers', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ workers: STATE.workers })
+  });
+  if (r.error) toast('Could not save workers: ' + r.error, 'bad');
+  return r;
+}
+function initials(n) {
+  return String(n).trim().split(/\s+/).slice(0, 2).map(x => x[0] || '').join('').toUpperCase() || '?';
+}
+function renderWorkers() {
+  const box = $('#workers');
+  if (!STATE.workers.length) { box.innerHTML = '<div class="empty">No workers yet.</div>'; return; }
+  box.innerHTML = STATE.workers.map(w => {
+    const n = (w.assigned || []).length;
+    return '<div class="worker' + (STATE.worker && STATE.worker.id === w.id ? ' sel' : '') + '" data-id="' + esc(w.id) + '">' +
+      '<div class="avatar">' + esc(initials(w.name)) + '</div>' +
+      '<div class="nm"><b>' + esc(w.name) + '</b><span>' + esc(w.role || 'worker') + '</span></div>' +
+      '<span class="pill' + (n ? ' hot' : '') + '">' + n + '</span></div>';
+  }).join('');
+  box.querySelectorAll('.worker').forEach(el => el.onclick = () => selectWorker(el.dataset.id));
+}
+function selectWorker(id) {
+  if (!leaveGuard()) return;
+  STATE.worker = STATE.workers.find(w => w.id === id) || null;
+  STATE.album = null; STATE.track = null;
+  renderWorkers(); renderInbox(); renderEdit();
+}
+$('#addWorker').onclick = async () => {
+  const name = prompt('Worker name');
+  if (!name) return;
+  const role = prompt('Role (e.g. producer, vocalist, editor)', 'producer') || 'worker';
+  STATE.workers.push({ id: 'w-' + Date.now().toString(36), name: name.trim(), role: role.trim(), assigned: [] });
+  await saveWorkers(); renderWorkers();
+};
+
+/* ------------------------------------------------ index + inbox ------- */
+async function loadIndex(refresh) {
+  $('#idxInfo').textContent = refresh ? 'scanning\u2026' : 'loading\u2026';
+  const r = await api('/api/todo/index' + (refresh ? '?refresh=1' : ''));
+  if (r.error) { $('#idxInfo').textContent = 'error'; toast(r.error, 'bad'); return; }
+  STATE.index = r.albums || [];
+  $('#drivePath').textContent = r.drive || 'J:\\';
+  const dup = (r.duplicate_codes || []).length;
+  $('#idxInfo').textContent = r.count + ' albums \u00b7 ' + new Date(r.built_at).toLocaleString() +
+    (dup ? '  \u00b7 \u26a0 ' + dup + ' album codes are not unique on the drive \u2014 albums are keyed by path, not code' : '');
+}
+$('#rescan').onclick = async () => { await loadIndex(true); renderInbox(); toast('Drive rescanned', 'good'); };
+
+function albumInfo(id) { return STATE.index.find(a => a.id === id) || { id, code: id, title: id, artist: '', property: '' }; }
+
+function renderInbox() {
+  const box = $('#inbox');
+  $('#inboxTitle').textContent = STATE.worker ? 'Inbox \u2014 ' + STATE.worker.name : 'Inbox';
+  if (!STATE.worker) { box.innerHTML = '<div class="empty">Select a worker on the left.</div>'; return; }
+  const list = STATE.worker.assigned || [];
+  if (!list.length) {
+    box.innerHTML = '<div class="empty">Nothing assigned yet.<br>Use <b>Assign\u2026</b> above.</div>'; return;
+  }
+  box.innerHTML = list.map(id => {
+    const a = albumInfo(id);
+    const done = (STATE.progress && STATE.progress[id]) || null;
+    return '<div class="card' + (STATE.album && STATE.album.id === id ? ' sel' : '') + '" data-id="' + esc(id) + '">' +
+      '<div class="code">' + esc(a.code) + ' \u00b7 ' + esc(a.property || '') + '</div>' +
+      '<div class="ttl">' + esc(a.title || id) + '</div>' +
+      '<div class="meta"><span>' + esc(a.artist || '\u2014') + '</span>' +
+      (done ? '<span class="pill">' + done.mp3 + '/' + done.total + ' mp3</span>' : '') + '</div>' +
+      (done ? '<div class="bar"><i style="width:' + Math.round(100 * done.mp3 / Math.max(1, done.total)) + '%"></i></div>' : '') +
+      '<button class="btn sm ghost unassign" style="margin-top:7px">Unassign</button></div>';
+  }).join('');
+  box.querySelectorAll('.card').forEach(el => {
+    el.onclick = e => { if (e.target.classList.contains('unassign')) return; openAlbum(el.dataset.id); };
+    const u = el.querySelector('.unassign');
+    if (u) u.onclick = async e => {
+      e.stopPropagation();
+      STATE.worker.assigned = STATE.worker.assigned.filter(c => c !== el.dataset.id);
+      await saveWorkers();
+      if (STATE.album && STATE.album.id === el.dataset.id) { STATE.album = null; STATE.track = null; renderEdit(); }
+      renderWorkers(); renderInbox();
+    };
+  });
+}
+
+$('#assignBtn').onclick = () => {
+  if (!STATE.worker) return toast('Pick a worker first', 'bad');
+  const box = $('#inbox');
+  box.innerHTML = '<input class="srch" id="pick" placeholder="Search ' + STATE.index.length + ' albums by code, title or artist\u2026" autofocus>' +
+    '<div id="pickList"></div>' +
+    '<button class="btn sm ghost" id="pickCancel" style="margin-top:8px;width:100%">Cancel</button>';
+  const draw = q => {
+    q = q.trim().toLowerCase();
+    const hits = (q ? STATE.index.filter(a =>
+      (a.code + ' ' + a.title + ' ' + a.artist + ' ' + a.property).toLowerCase().includes(q)) : STATE.index).slice(0, 60);
+    $('#pickList').innerHTML = hits.length ? hits.map(a =>
+      '<div class="card" data-id="' + esc(a.id) + '"><div class="code">' + esc(a.code) + ' \u00b7 ' + esc(a.property) + '</div>' +
+      '<div class="ttl">' + esc(a.title) + '</div><div class="meta">' + esc(a.artist || '\u2014') + '</div></div>'
+    ).join('') : '<div class="empty">No match.</div>';
+    $('#pickList').querySelectorAll('.card').forEach(el => el.onclick = async () => {
+      const c = el.dataset.id;
+      if (!STATE.worker.assigned.includes(c)) STATE.worker.assigned.push(c);
+      await saveWorkers(); renderWorkers(); renderInbox();
+      toast('Assigned ' + albumInfo(c).code + ' to ' + STATE.worker.name, 'good');
+    });
+  };
+  draw('');
+  $('#pick').oninput = e => draw(e.target.value);
+  $('#pickCancel').onclick = () => renderInbox();
+};
+
+/* ------------------------------------------------ album + tracks ------ */
+async function openAlbum(id) {
+  if (!leaveGuard()) return;
+  $('#editMain').innerHTML = '<div class="empty">Loading ' + esc(albumInfo(id).code) + ' from the drive\u2026</div>';
+  const r = await api('/api/todo/album?id=' + encodeURIComponent(id));
+  if (r.error) { $('#editMain').innerHTML = '<div class="empty">' + esc(r.error) + '</div>'; toast(r.error, 'bad'); return; }
+  STATE.album = r;
+  STATE.track = r.tracks.length ? r.tracks[0].index : null;
+  STATE.progress = STATE.progress || {};
+  STATE.progress[r.id] = { total: r.tracks.length, mp3: r.tracks.filter(t => t.mp3).length };
+  renderInbox(); renderEdit();
+}
+
+function renderRail() {
+  const rail = $('#rail');
+  if (!STATE.album) { rail.innerHTML = '<div class="rl">Trk</div>'; return; }
+  rail.innerHTML = '<div class="rl">Trk</div>' + STATE.album.tracks.map(t =>
+    '<button class="tbtn' + (STATE.track === t.index ? ' sel' : '') +
+    (t.mp3 ? ' has-mp3' : '') + (t.edits ? ' edited' : '') + '" data-i="' + t.index + '" title="' +
+    esc(String(t.number).padStart(2, '0') + ' ' + t.title + (t.duplicate ? '  (duplicate block)' : '')) + '">' +
+    String(t.number).padStart(2, '0') + '</button>').join('');
+  rail.querySelectorAll('.tbtn').forEach(b => b.onclick = () => {
+    if (!leaveGuard()) return;
+    STATE.track = parseInt(b.dataset.i, 10); renderEdit();
+  });
+}
+
+const COPY_FIELDS = [
+  ['Styles', 'Styles'],
+  ['VOCAL GENDER', 'Vocal Gender'],
+  ['Weirdness', 'Weirdness'],
+  ['Style Influence', 'Style Influence'],
+  ['Estimated Length', 'Estimated Length'],
+  ['ARCHETYPE', 'Archetype'],
+  ['Faith-Focus Rating', 'Faith-Focus'],
+  ['Praise vs. Worship Rating', 'Praise vs. Worship'],
+  ['Prophetic Declaration Rule', 'Prophetic Declaration Rule'],
+  ['Earworm Rating', 'Earworm'],
+  ['Save To', 'Save To']
+];
+
+function renderEdit() {
+  renderRail();
+  const main = $('#editMain');
+  if (!STATE.album) {
+    $('#editTitle').textContent = 'Edit Panel'; $('#editSub').textContent = '';
+    main.innerHTML = '<div class="empty">Choose an album from the inbox.<br>Its tracks appear on the rail to the right.</div>';
+    return;
+  }
+  const t = STATE.album.tracks.find(x => x.index === STATE.track);
+  $('#editTitle').textContent = STATE.album.header.album || STATE.album.code;
+  $('#editSub').textContent = STATE.album.code + (t ? ' \u00b7 track ' + String(t.number).padStart(2, '0') : '');
+  const dupNote = (STATE.album.duplicate_track_numbers || []).length
+    ? '<div class="admin-notice" style="margin:0 0 12px;padding:9px 13px;font-size:11.5px">' +
+      '<strong>HEADS UP</strong><span>This file contains more than one block per track number. ' +
+      'Each rail button targets one exact block, so edits stay unambiguous.</span></div>' : '';
+  if (!t) { main.innerHTML = '<div class="empty">No tracks parsed from this album.</div>'; return; }
+
+  main.innerHTML = dupNote +
+    '<div class="fld"><label>Song title <button class="btn sm ghost cp" data-v="' + esc(t.title) + '">Copy</button></label>' +
+    '<div class="val">' + esc(t.title) + '</div></div>' +
+
+    '<div class="fld"><label>Lyrics \u2014 live from J: master' +
+    '<span><button class="btn sm ghost cp" data-v="lyr">Copy lyrics</button> ' +
+    '<button class="btn sm primary" id="saveLyr" disabled>Save</button></span></label>' +
+    '<textarea class="lyr scroll-area" id="lyr" spellcheck="false">' + esc(t.lyrics) + '</textarea></div>' +
+
+    '<div class="metagrid">' + COPY_FIELDS.filter(f => t.meta[f[0]]).map(f =>
+      '<div class="fld"><label>' + esc(f[1]) + ' <button class="btn sm ghost cp" data-v="' + esc(t.meta[f[0]]) + '">Copy</button></label>' +
+      '<div class="val tall scroll-area">' + esc(t.meta[f[0]]) + '</div></div>').join('') + '</div>' +
+
+    '<div class="fld"><label>Identity DNA (album) <button class="btn sm ghost cp" data-v="' + esc(STATE.album.header.dna) + '">Copy</button></label>' +
+    '<div class="val tall">' + esc(STATE.album.header.dna || '\u2014') + '</div></div>' +
+
+    '<div class="drop" id="drop">' +
+    '<h4>' + (t.mp3 ? '\u2713 ' + esc(t.mp3.file) : 'Drop the finished MP3 here') + '</h4>' +
+    '<p>' + (t.mp3
+      ? Math.round(t.mp3.size / 1024) + ' KB \u00b7 uploaded ' + new Date(t.mp3.mtime).toLocaleString() + ' \u00b7 drop again to replace'
+      : 'Uploads to the website, then mirrors down to <code>' + esc(STATE.album.tracksDir) + '</code>') + '</p>' +
+    '<div class="prog"><i></i></div>' +
+    '<input type="file" id="fileIn" accept="audio/mpeg,.mp3" hidden>' +
+    '<button class="btn sm ghost" id="browse" style="margin-top:9px">or choose a file</button></div>' +
+
+    '<div class="hist scroll-area" id="hist">Loading history\u2026</div>' +
+    '<p style="margin-top:8px"><code class="path">' + esc(STATE.album.mdPath) + '</code></p>';
+
+  // copy buttons
+  main.querySelectorAll('.cp').forEach(b => b.onclick = async () => {
+    const v = b.dataset.v === 'lyr' ? $('#lyr').value : b.dataset.v;
+    try { await navigator.clipboard.writeText(v); }
+    catch { const ta = document.createElement('textarea'); ta.value = v; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+    const o = b.textContent; b.textContent = 'Copied'; b.classList.add('ok');
+    setTimeout(() => { b.textContent = o; b.classList.remove('ok'); }, 1100);
+  });
+
+  // dirty tracking + save
+  const ta = $('#lyr'), save = $('#saveLyr');
+  ta.oninput = () => {
+    STATE.dirty = ta.value !== t.lyrics;
+    ta.classList.toggle('dirty', STATE.dirty);
+    save.disabled = !STATE.dirty;
+  };
+  save.onclick = async () => {
+    save.disabled = true; save.textContent = 'Saving\u2026';
+    const r = await api('/api/todo/track', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: STATE.album.id, track: t.number, index: t.index, lyrics: ta.value, editor: editorName() })
+    });
+    save.textContent = 'Save';
+    if (r.error) { toast(r.error, 'bad'); save.disabled = false; return; }
+    t.lyrics = ta.value; STATE.dirty = false; ta.classList.remove('dirty');
+    t.edits = (t.edits || 0) + (r.unchanged ? 0 : 1);
+    toast(r.unchanged ? 'No change to save' : 'Saved to J: and journalled', 'good');
+    renderRail(); loadHistory();
+  };
+
+  wireDrop(t);
+  loadHistory();
+}
+
+async function loadHistory() {
+  const box = $('#hist'); if (!box || !STATE.album) return;
+  const cur = STATE.album.tracks.find(x => x.index === STATE.track);
+  const r = await api('/api/todo/history?id=' + encodeURIComponent(STATE.album.id) + '&track=' + (cur ? cur.number : ''));
+  if (r.error) { box.textContent = r.error; return; }
+  if (!r.count) { box.innerHTML = '<b>No changes recorded for this track.</b>'; return; }
+  box.innerHTML = '<b>' + r.count + ' change' + (r.count === 1 ? '' : 's') + ' on this track</b>' +
+    r.changes.slice(0, 12).map(c =>
+      '<div>' + new Date(c.at).toLocaleString() + ' \u00b7 <b>' + esc(c.editor) + '</b> \u00b7 ' + esc(c.field) +
+      (c.field === 'mp3' ? ' \u2192 ' + esc(c.after) : ' (' + (c.before || '').split('\n').length + ' \u2192 ' + (c.after || '').split('\n').length + ' lines)') +
+      '</div>').join('');
+}
+
+/* ------------------------------------------------ mp3 drop zone ------- */
+function wireDrop(t) {
+  const dz = $('#drop'), input = $('#fileIn'), prog = dz.querySelector('.prog'), bar = prog.querySelector('i');
+  $('#browse').onclick = () => input.click();
+  input.onchange = () => input.files[0] && upload(input.files[0]);
+  ['dragenter', 'dragover'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove('over'); }));
+  dz.addEventListener('drop', e => {
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) upload(f);
+  });
+
+  function upload(file) {
+    if (!/\.mp3$/i.test(file.name) && file.type !== 'audio/mpeg') return toast('That is not an MP3', 'bad');
+    prog.style.display = 'block'; bar.style.width = '10%';
+    const url = '/api/todo/upload?id=' + encodeURIComponent(STATE.album.id) +
+      '&track=' + t.number + '&title=' + encodeURIComponent(t.title) +
+      '&editor=' + encodeURIComponent(editorName());
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+    xhr.upload.onprogress = e => { if (e.lengthComputable) bar.style.width = Math.max(10, Math.round(90 * e.loaded / e.total)) + '%'; };
+    xhr.onload = () => {
+      bar.style.width = '100%';
+      let r = {}; try { r = JSON.parse(xhr.responseText); } catch {}
+      if (xhr.status >= 400) { toast(r.error || ('Upload failed (' + xhr.status + ')'), 'bad'); prog.style.display = 'none'; return; }
+      dz.classList.add('done');
+      t.mp3 = { file: r.file, size: r.bytes, mtime: new Date().toISOString() };
+      if (STATE.progress && STATE.progress[STATE.album.id])
+        STATE.progress[STATE.album.id].mp3 = STATE.album.tracks.filter(x => x.mp3).length;
+      toast(r.drive_error ? 'Uploaded to website, but J: mirror failed: ' + r.drive_error
+                          : 'Uploaded \u2192 website + J: drive', r.drive_error ? 'bad' : 'good');
+      renderInbox(); renderEdit();
+    };
+    xhr.onerror = () => { toast('Upload failed', 'bad'); prog.style.display = 'none'; };
+    xhr.send(file);
+  }
+}
+
+/* ------------------------------------------------ guards + boot ------- */
+function leaveGuard() {
+  if (!STATE.dirty) return true;
+  const go = confirm('You have unsaved lyric changes. Discard them?');
+  if (go) STATE.dirty = false;
+  return go;
+}
+window.addEventListener('beforeunload', e => { if (STATE.dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+(async function boot() {
+  await loadIndex(false);
+  await loadWorkers();
+  if (STATE.workers.length) selectWorker(STATE.workers[0].id);
+})();
+</script>
+
+</body>
+</html>

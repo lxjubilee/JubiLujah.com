@@ -1,4 +1,4 @@
-# Jubilujah.com — local development stack
+# JubileePraise.com — local development stack
 # Usage:
 #   cp .env.example .env
 #   docker compose up -d        # starts Postgres (schema+seed auto-loaded) + mock-oidc
@@ -11,12 +11,12 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: jubilujah-postgres
+    container_name: jubileepraise-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: jubilee
       POSTGRES_PASSWORD: jubilee_dev_pw
-      POSTGRES_DB: jubilujah
+      POSTGRES_DB: jubileepraise
     ports:
       - "5432:5432"
     volumes:
@@ -35,7 +35,7 @@ services:
       - ./db/seed/02_stations.sql:/docker-entrypoint-initdb.d/02_stations.sql:ro
       - ./db/seed/03_demo_editorial.sql:/docker-entrypoint-initdb.d/03_demo_editorial.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U jubilee -d jubilujah"]
+      test: ["CMD-SHELL", "pg_isready -U jubilee -d jubileepraise"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -43,13 +43,13 @@ services:
   mock-oidc:
     build:
       context: ./mock-oidc
-    container_name: jubilujah-mock-oidc
+    container_name: jubileepraise-mock-oidc
     restart: unless-stopped
     environment:
       MOCK_OIDC_PORT: "4010"
       MOCK_OIDC_ISSUER: "http://localhost:4010"
-      OIDC_CLIENT_ID: "jubilujah-web"
-      OIDC_CLIENT_SECRET: "jubilujah-dev-secret"
+      OIDC_CLIENT_ID: "jubileepraise-web"
+      OIDC_CLIENT_SECRET: "jubileepraise-dev-secret"
       OIDC_REDIRECT_URI: "http://localhost:4000/api/auth/callback"
     ports:
       - "4010:4010"

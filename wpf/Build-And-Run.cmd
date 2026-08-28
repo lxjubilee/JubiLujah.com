@@ -1,5 +1,5 @@
 @echo off
-REM Build and launch JubiLujah Studio (WPF + WebView2).
+REM Build and launch JubileePraise Studio (WPF + WebView2).
 setlocal
 cd /d "%~dp0"
 
@@ -11,5 +11,5 @@ dotnet build -c Release
 if errorlevel 1 ( echo [!] Build failed. & pause & exit /b 1 )
 
 echo [*] Launching...
-start "" "bin\Release\net8.0-windows\JubiLujahStudio.exe"
+start "" "bin\Release\net8.0-windows\JubileePraiseStudio.exe"
 endlocal

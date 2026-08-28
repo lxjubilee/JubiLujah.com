@@ -71,7 +71,7 @@ async function putIdempotent(key, endpoint, status, body) {
   }
 }
 
-// JubileeInspire role enum (user/admin/guest) -> Jubilujah RBAC role. 'user' maps
+// JubileeInspire role enum (user/admin/guest) -> JubileePraise RBAC role. 'user' maps
 // to content_editor for parity with self-serve signups (DEFAULT_SIGNUP_ROLE).
 const ROLE_MAP = { user: 'content_editor', admin: 'admin', guest: 'viewer' };
 
@@ -156,7 +156,7 @@ router.post('/set-password', requireServiceAuth, requireServiceScope('admin.set_
 
 // ---- POST /api/auth/admin/provision-user -----------------------------------
 // Create an account directly (no signup OTP) for a trusted partner service
-// (cross-platform sync). Maps the JubileeInspire user shape onto Jubilujah's
+// (cross-platform sync). Maps the JubileeInspire user shape onto JubileePraise's
 // identity schema (users + credentials + user_roles). Create-only: an existing
 // email returns 409 (a non-error to the caller; password is NOT changed — use
 // set-password for that). See AUTH_API.md §12.
@@ -233,7 +233,7 @@ router.post('/provision-user', requireServiceAuth, requireServiceScope('admin.pr
   if (b.password.length < 8 || b.password.length > 200) {
     throw new HttpError(422, 'Password must be 8–200 characters.');
   }
-  // Age gate (>=13). Jubilujah has no DOB column, so the date is validated/gated
+  // Age gate (>=13). JubileePraise has no DOB column, so the date is validated/gated
   // but not persisted.
   if (b.dateOfBirth) {
     const age = ageInYears(b.dateOfBirth);
@@ -307,7 +307,7 @@ router.post('/provision-user', requireServiceAuth, requireServiceScope('admin.pr
       id: created.id,
       email: created.email,
       displayName: created.display_name,
-      role: jubiRole,                 // Jubilujah RBAC role (mapped from the JI role)
+      role: jubiRole,                 // JubileePraise RBAC role (mapped from the JI role)
       emailVerified: firstSigninCompleted,
     },
   };

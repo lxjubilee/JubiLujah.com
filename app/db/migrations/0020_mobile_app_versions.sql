@@ -24,6 +24,6 @@ COMMENT ON TABLE production.mobile_app_versions IS 'Latest mobile-app version pe
 -- values an operator has since changed untouched.
 INSERT INTO production.mobile_app_versions (platform, latest_version, min_supported_version, store_url)
 VALUES
-  ('android', '2.0.0', '1.0.0', 'https://play.google.com/store/apps/details?id=com.jubilujah.app'),
+  ('android', '2.0.0', '1.0.0', 'https://play.google.com/store/apps/details?id=com.jubileepraise.app'),
   ('ios',     '2.0.0', '1.0.0', 'https://apps.apple.com/app/id6781227388')
 ON CONFLICT (platform) DO NOTHING;

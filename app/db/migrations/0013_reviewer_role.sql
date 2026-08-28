@@ -1,5 +1,5 @@
 -- ============================================================================
--- 0013_reviewer_role.sql — Add the Jubilujah-native "reviewer" role
+-- 0013_reviewer_role.sql — Add the JubileePraise-native "reviewer" role
 --
 -- A `reviewer` previews in-production ("studio") albums that are hidden from
 -- ordinary viewers and signed-out visitors. It is NOT minted from JubileeInspire

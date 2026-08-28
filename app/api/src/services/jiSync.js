@@ -2,9 +2,9 @@
 // Outbound service calls -> JubileeInspire (shared SSO credential): password sync,
 // user provisioning, and pre-signup email-existence checks.
 //
-// When a Jubilujah user changes or resets their password, we mirror it to
+// When a JubileePraise user changes or resets their password, we mirror it to
 // JubileeInspire so a single credential works on both platforms. Two-step,
-// client-credentials flow (Jubilujah is the trusted service CLIENT):
+// client-credentials flow (JubileePraise is the trusted service CLIENT):
 //
 //   1. POST {base}/api/auth/service/token  { client_id, client_secret }
 //        -> { access_token, token_type:"Bearer", expires_in, scope }
@@ -117,10 +117,10 @@ async function postProvision(token, payload) {
 }
 
 /**
- * Provision a Jubilujah-native account INTO JubileeInspire so JI (the prod
+ * Provision a JubileePraise-native account INTO JubileeInspire so JI (the prod
  * credential authority) can authenticate it. Same client-credentials token flow
  * as syncPasswordToJI; needs the `admin.provision` scope (already granted to the
- * `jubilujah` service client). Create-only on JI: an existing email is a 409.
+ * `jubileepraise` service client). Create-only on JI: an existing email is a 409.
  * Resolves to a result object; never rejects.
  *   { ok:true, created:true }    — newly created on JI (201)
  *   { ok:false, conflict:true }  — already exists on JI (409); NOT created
@@ -140,7 +140,7 @@ export async function provisionUserToJI({ email, password, displayName, role, em
     password,
     role: role || 'user',                 // JI role enum (user|admin|guest)
     emailVerified: emailVerified === true,
-    sourcePlatform: 'jubilujah',
+    sourcePlatform: 'jubileepraise',
   };
   if (displayName) payload.displayName = displayName;
 
@@ -181,7 +181,7 @@ function getCheckEmail(token, email, signal) {
 
 /**
  * Ask JubileeInspire whether an email is already registered anywhere on the shared
- * SSO. Called before a Jubilujah signup issues an OTP: JI is the credential
+ * SSO. Called before a JubileePraise signup issues an OTP: JI is the credential
  * authority, so an email it already knows will collide at sign-in even when it is
  * absent from our local identity.users.
  *

@@ -1,0 +1,124 @@
+{
+  "schema": "jl.tenant/2",
+  "tenant": "jubileepraise.com",
+  "key": "jubileepraise",
+  "site": "JubileePraise.com",
+  "status": "live",
+  "role": "flagship",
+  "isDefault": true,
+  "hosts": ["jubileepraise.com", "www.jubileepraise.com", "jubilujah.com", "www.jubilujah.com", "localhost", "127.0.0.1"],
+  "hostsNote": "The jubilujah hosts are deliberate: the rebrand deploys onto the existing jubilujah.com server, path and domain, so the old names must keep resolving here until DNS for jubileepraise.com exists. Drop them once the new domain is live and redirecting.",
+
+  "brand": {
+    "lead": "Jubilee",
+    "tail": "Praise",
+    "accent": "#E6AC00",
+    "logo": "/images/brand-logo.png",
+    "wordmarkFont": "Orbitron",
+    "bodyFont": "Open Sans"
+  },
+  "tagline": "Feel the Spirit Move",
+  "description": "JubileePraise.com — music that celebrates, restores, and resounds. The Inspire Family, Children Music, Faith-Based Believers, General Audiences, and Jubilee Prayers.",
+  "audience": "All ages. The whole house, and the front door to the other two sites.",
+
+  "seo": {
+    "titleDefault": "JubileePraise.com — Feel the Spirit Move",
+    "titleTemplate": "%s — JubileePraise.com",
+    "canonical": "$NEXT_PUBLIC_SITE_URL",
+    "canonicalNote": "The only tenant whose canonical comes from an env var. The other two derive theirs from hosts[0], because there is one env var and three sites.",
+    "openGraph": { "type": "website", "siteName": "JubileePraise.com", "description": "Feel the Spirit Move" },
+    "robots": { "index": true, "follow": true },
+    "translate": "notranslate",
+    "builtBy": "app/web/app/layout.tsx generateMetadata()"
+  },
+
+  "catalogue": {
+    "categories": null,
+    "categoriesNote": "null is the WHOLE catalogue, and it is not the same as []. An empty array would be a tenant that can see nothing. lib/tenant.ts depends on the difference.",
+    "categoryKeys": ["inspire", "faith-based", "party-giggles", "tiny-tiggles", "general", "nations/romanian", "christmas"],
+    "artists": null,
+    "albumCodeShapes": null,
+    "musicDrive": "J:/jubileepraise.com/music",
+    "studioMusicRoot": "J:/jubileepraise.com/music/inspire",
+    "cdnPrefix": "music",
+    "manifest": "app/web/public/music/catalog-manifest.json",
+    "manifestMaster": "J:/jubileepraise.com/music/catalog-manifest.json",
+    "scopeEnforcedAt": "app/web/lib/manifest.ts load() — a filtered copy, so another tenant's album is unreachable by direct URL, not merely hidden"
+  },
+
+  "home": {
+    "component": "app/web/app/page.tsx",
+    "featuredAlbum": "JEIM1069EN",
+    "featuredNote": "Floated to the front of its row on Home and on /inspire. Pinned in page.tsx as FEATURED_ALBUM_CODE, not in this file — recorded here so it is findable.",
+    "childrenOnHome": false,
+    "childrenOnHomeNote": "Home sorts the collection into worship themes and deliberately DROPS the children's categories; they have their own pages. That is why the other two tenants cannot reuse this component."
+  },
+
+  "nav": [
+    { "href": "/", "key": "nav.home" },
+    { "href": "/inspire", "key": "nav.inspire" },
+    { "href": "/children", "key": "nav.children" },
+    { "href": "/general", "key": "nav.family" },
+    { "href": "/music-type", "key": "nav.musicType" },
+    { "href": "/christmas", "key": "nav.christmas" },
+    { "href": "/playlists", "key": "nav.playlists" },
+    { "href": "/subscription", "key": "nav.upgrade" }
+  ],
+  "navNote": "nav.upgrade is filtered out for a paid signed-in visitor, in components/Header.tsx.",
+
+  "i18n": {
+    "defaultLanguage": "en",
+    "cookie": "jv_lang",
+    "supportedLanguages": 49,
+    "chromeTranslated": true,
+    "catalogueLanguage": "en",
+    "shared": true,
+    "sharedNote": "Language is a visitor setting, not a tenant setting — the same 49 languages and the same cookie on all three sites."
+  },
+
+  "production": {
+    "server": "root@94.72.120.231",
+    "path": "/var/www/jubileepraise.com",
+    "webCwd": "/var/www/jubileepraise.com/web",
+    "pm2": "jubileepraise-web",
+    "pm2Script": "next start -p 3030",
+    "port": 3030,
+    "nginxVhost": "/etc/nginx/sites-available/jubileepraise.com",
+    "apexBehaviour": "301 → https://www.jubileepraise.com$request_uri",
+    "originTls": "/etc/ssl/cloudflare/jubileepraise.com.crt",
+    "edge": "Cloudflare",
+    "api": { "host": "api.jubileepraise.com", "pm2": "jubileepraise-api", "port": 4030, "path": "/var/www/jubileepraise.com" },
+    "verified": "2026-08-17"
+  },
+
+  "runtime": {
+    "shared": true,
+    "routedBy": "Host header, in lib/tenants.ts tenantForHost()",
+    "devPort": 3000,
+    "env": {
+      "NEXT_PUBLIC_SITE_URL": "canonical base — JubileePraise only",
+      "NEXT_PUBLIC_CDN_BASE": "defaults to https://cd.jubilujah.com",
+      "NEXT_PUBLIC_API_BASE": "the auth/catalogue API",
+      "NEXT_PUBLIC_TURNSTILE_SITE_KEY": "sign-in CAPTCHA; must be in web/.env.production or sign-in fails"
+    },
+    "envNote": "All four are process-wide, NOT per-tenant. One build serves three sites, so there is no per-tenant env and never can be without splitting the deployment."
+  },
+
+  "deploy": {
+    "scoped": false,
+    "note": "One pm2 process serves all three hosts, so a deploy ships them together. No tenant can be shipped on its own.",
+    "runbook": "PUBLISH.md",
+    "gate": "deploy/check-manifest.mjs"
+  },
+
+  "studio": {
+    "picker": "the WPF studio's Website dropdown reads this folder",
+    "scopes": ["album worklist", "cover worklist", "live-site pane"],
+    "doesNotScope": ["article images (core/articles is JubileePraise's alone)", "the deploy"]
+  },
+
+  "notes": [
+    "The fallback tenant. An unrecognised Host resolves here rather than erroring, so a misconfigured DNS entry shows the main site instead of a stack trace.",
+    "studioMusicRoot is one level in, at the Inspire Family, because that is where the authoring work happens. musicDrive is the catalogue root above it, where catalog-manifest.json lives."
+  ]
+}

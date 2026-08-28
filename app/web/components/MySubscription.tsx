@@ -58,11 +58,11 @@ export default function MySubscription() {
       if (sessionId) {
         try {
           const r = await confirmCheckout(sessionId);
-          if (r.activated) setOk('Your subscription is active. Welcome to JubiLujah Premium!');
+          if (r.activated) setOk('Your subscription is active. Welcome to JubileePraise Premium!');
           else if (r.pending) setOk('Payment received — finalizing your subscription. This can take a moment.');
         } catch { /* fall through to load; webhook may still activate */ }
       } else if (justSubscribed) {
-        setOk('Your subscription is active. Welcome to JubiLujah Premium!');
+        setOk('Your subscription is active. Welcome to JubileePraise Premium!');
       }
       await load();
     })();

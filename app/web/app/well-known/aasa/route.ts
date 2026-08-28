@@ -1,7 +1,7 @@
 import { getAppLinks } from '@/lib/appLinks';
 
 // Apple App Site Association — served at /.well-known/apple-app-site-association
-// (via the rewrite in next.config.mjs). Declares that the JubiLujah iOS app
+// (via the rewrite in next.config.mjs). Declares that the JubileePraise iOS app
 // handles /r/* and /rp/* on this domain, so scanning a code opens the app
 // directly (Universal Links) when it's installed.
 //

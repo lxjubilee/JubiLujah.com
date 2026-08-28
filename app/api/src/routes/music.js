@@ -1,5 +1,5 @@
 // ============================================================================
-// Manage Music — admin module API (BRD: Manage Music for Jubilujah.com Admin).
+// Manage Music — admin module API (BRD: Manage Music for JubileePraise.com Admin).
 //
 // Mounted at /api/admin/music. EVERY route requires the `admin` role. The data
 // model is the production.music_* tables (see migration 0015) layered over the
@@ -532,7 +532,7 @@ router.get('/export', ah(async (req, res) => {
 
   const csv = toCsv(headers, rows);
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', `attachment; filename="jubilujah-music-${kind}.csv"`);
+  res.setHeader('Content-Disposition', `attachment; filename="jubileepraise-music-${kind}.csv"`);
   res.send(csv);
 }));
 

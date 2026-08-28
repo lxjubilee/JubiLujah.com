@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cdn.jubileeverse.com/schemas/v1/artist.schema.json",
   "title": "Artist Manifest",
-  "description": "Canonical published JSON manifest for an artist / brand persona in the Jubilujah catalog (Build Spec sections 6, 7, 16). One record per persona or branded act regardless of grouping.",
+  "description": "Canonical published JSON manifest for an artist / brand persona in the JubileePraise catalog (Build Spec sections 6, 7, 16). One record per persona or branded act regardless of grouping.",
   "type": "object",
   "additionalProperties": false,
   "required": [

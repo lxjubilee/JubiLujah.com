@@ -1,4 +1,4 @@
-# JubiLujah Studio (WPF + WebView2)
+# JubileePraise Studio (WPF + WebView2)
 
 A Windows desktop app for the three jobs this repo does by hand: putting hero
 images on the article library, moving album lyrics out to Suno and the rendered
@@ -10,13 +10,13 @@ browser, not an automation-flagged one — and then drives *your own logged-in
 session* to generate each piece's image.
 
 Ported from `InspireManna.com/tools/ArticleImageStudio`, which came from an
-earlier JubiLujah build by way of JubileeVerse. The browser half is unchanged.
-The data half is entirely JubiLujah's — see [What changed coming
-back](#what-changed-coming-back-to-jubilujah).
+earlier JubileePraise build by way of JubileeVerse. The browser half is unchanged.
+The data half is entirely JubileePraise's — see [What changed coming
+back](#what-changed-coming-back-to-jubileepraise).
 
 ```
 dotnet build -c Release          # or double-click Build-And-Run.cmd
-bin\Release\net8.0-windows\JubiLujahStudio.exe
+bin\Release\net8.0-windows\JubileePraiseStudio.exe
 ```
 
 Requires the **.NET 8 SDK** and the **WebView2 Runtime** (already present with
@@ -27,26 +27,31 @@ Edge on Windows 11).
 ## The window
 
 ```
-+--------------------------------------+---+----------------+----+
++--------------------------------------------------------------------+
+| JubileePraise Studio   inspire…            Website [ JubileePraise.com  v ] |
++--------------------------------------+---+----------------+----+----+
 |                                      | | |                | 🖼 |  Images
 |   the real browser (ChatGPT)         |<->|  the panel:    |    |
-|                                      | | |  one of five   | ♪  |  Music
+|                                      | | |  one of six    | 🖽 |  Support
 +--------------------------------------+ | |  views         |    |
-|=============== splitter =============| | |                | 🎨 |  Covers
+|=============== splitter =============| | |                | ♪  |  Music
 |  log: full window width, no heading  | | |                |    |
-+--------------------------------------+---+----------------+ ☁  |  Deploy
++--------------------------------------+---+----------------+ 🎨 |  Covers
+                                                             |    |
+                                                             | ☁  |  Deploy
                                                              |    |
                                                              | ⚙  |  Settings
 ```
 
-The strip on the far right switches what the panel shows. Four views at the
+The strip on the far right switches what the panel shows. Five views at the
 top, settings pinned at the bottom.
 
 | | View | Left pane | Right panel |
 |---|---|---|---|
 | 🖼 | **Article Images** | the browser | All + four section tabs, and one **Generate Images** button |
+| 🖽 | **Support Images** | the browser | persona → albums **with** artwork, and one **Generate Support Images** button |
 | ♪ | **Album Music** | the **lyrics reader** | voice → albums → tracks, and one drop zone |
-| 🎨 | **Cover Images** | the browser | persona → albums with no artwork, and one **Generate Covers** button |
+| 🎨 | **Cover Images** | the browser | persona → albums with **no** artwork, and one **Generate Covers** button |
 | ☁ | **Deploy** | the **live site** | what is live, what is waiting, and the Deploy button |
 | ⚙ | **Settings** | the browser | repo root, portraits, music root, generation location |
 
@@ -64,6 +69,88 @@ Both splitters are draggable and both remembered, written to
 A close while minimised measures every element at zero. Those values are refused
 rather than saved, so a minimised exit cannot reopen with the panel and the log
 collapsed to nothing. Minimums (260px panel, 52px log) stop a drag doing the same.
+
+---
+
+## The website picker
+
+One Next.js app serves three sites off the `Host` header — JubileePraise carries the
+whole catalogue, goPartyGiggles and MyTinyTiggles carry one children's label
+each. The picker in the upper right says which of them the studio is working on.
+It is the same control, and the same retemplate, as the one in
+`InspireManna.com/tools/ArticleImageStudio`.
+
+**The list is read from the repo, not maintained here.** Three sources, tried in
+order, and the launch log names the one it used:
+
+| | |
+|---|---|
+| 1. `tenants/*.json` | **the primary.** Written for tooling, so it states the music-drive folder and the studio root outright — the studio does not have to work backwards from a manifest category key to a folder. |
+| 2. `app/web/lib/tenants.ts` | the fallback for a checkout with no `tenants/` folder. It is what the site serves, but it cannot carry a disk path. |
+| 3. `BuiltInTenants()` | last resort, for a copy of the exe with no repo at all. |
+
+A tenant added to `tenants/` appears in the picker on the next launch with no
+code change. `node tools/check-tenants.mjs` is what stops the first two
+disagreeing — see [tenants/README.md](../tenants/README.md).
+
+> **The fallback used to be silent, and that is worth knowing about.** The
+> TypeScript reader scanned for the first `[` after the word `TENANTS`, which is
+> the one in `Tenant[]`, so it matched an empty array and found nothing — every
+> time. The picker looked perfectly correct because `BuiltInTenants()` names the
+> same three sites. Fixed, and the launch log now states its source out loud
+> precisely so a silent fallback cannot happen twice.
+
+| Selected | Album + cover worklists read |
+|---|---|
+| **JubileePraise.com** | the configured music root, whole (`J:\jubileepraise.com\music\inspire`) |
+| **goPartyGiggles.com** | `J:\jubileepraise.com\music\children\party-giggles` |
+| **MyTinyTiggles.com** | `J:\jubileepraise.com\music\children\tiny-tiggles` |
+
+### 🔴 What it scopes, and what it does not
+
+**It scopes the album and cover worklists**, and it points the live-site pane at
+that tenant's domain. It does **not** scope article images — `core/articles` is
+JubileePraise's alone — and it does **not** scope the deploy: one pm2 process serves
+all three hosts, so shipping ships them together whichever row is selected.
+
+Saying that out loud matters more than it looks. A picker that appears to scope
+everything and silently does not is worse than no picker at all, so the preflight
+log says it too, every time.
+
+### The category key is not the folder
+
+The manifest calls the label `party-giggles`; on disk it is
+`children\party-giggles`. **Declared beats derived:** each `tenants/*.json`
+states `catalogue.musicDrive` and `catalogue.studioMusicRoot` outright, and when
+both exist on the drive they are used as written — no manifest parse, no probing,
+and no chance of the studio and the tenant file disagreeing about where a label
+lives.
+
+The derivation stays for the TypeScript fallback, which cannot carry a disk path:
+the album paths already in `catalog-manifest.json` are read
+(`albums/children/party-giggles/…`) and the folder taken from there. Probing the
+drive — `<base>\<key>`, then `<base>\children\<key>`, then one level down — is the
+last resort for a machine with no manifest. That probe is not academic: the
+manifest publishes Tiny Tiggles at `albums/tiny-tiggles/…` while the drive keeps
+it under `children/`, so the derived answer misses and only the probe finds it.
+
+That manifest is 1.4 MB and lives on J:, so the **whole** key→folder map is built
+in one pass the first time any key is asked for, rather than parsed once per
+tenant on every launch. Changing the music root in Settings drops the cache.
+
+The selection is remembered in `studio.config.json`:
+
+```json
+"tenant": "partygiggles"
+```
+
+An unknown key falls back to **JubileePraise**, not to nothing — the same rule
+`tenantForHost` follows in the app itself. Opening the studio silently scoped to
+one children's label would be the wrong failure.
+
+The music root in Settings is **not** rewritten by a switch. That field is the
+configured root and what gets saved; the tenant scope is layered over it at read
+time, so switching to goPartyGiggles and back leaves the setting untouched.
 
 ---
 
@@ -199,7 +286,7 @@ one source of truth.
 The workflow the album lyrics were always heading toward: read them here, render
 the audio in Suno, drop the results back. **The songs themselves are not written
 here** — that is the blueprint and lyrics pipeline in
-`setup/generatelyrics-jubilujah.md`. This view reads them out and files the audio
+`setup/generatelyrics-jubileepraise.md`. This view reads them out and files the audio
 back.
 
 1. **Pick a voice first.** The dropdown carries the folders under the music root,
@@ -370,6 +457,35 @@ References are centre-cropped to 80% before they go, which removes most of the
 wordmark and the title — handing the model lettering and then asking for none is a
 fight worth avoiding.
 
+### Build — slender, lean and fit
+
+**Every persona is slender and lean, on every path.** Stated once, in
+`BuildClause`, and appended to cover, article and supporting-image prompts alike —
+a fact about the person that explicitly overrides the attached references.
+
+It had to be added because **nothing was saying it.** The twelve `.models` briefs
+describe wardrobe, palette, light and framing and say nothing at all about the
+body, so the generator invented one per render. Worse, the article path's
+take-list ended *"and general build"* — instructing the model to import the body
+from the reference portrait — so on that path the only build instruction in the
+prompt was the wrong one. Both are fixed.
+
+> 🔴 **Do not add a "never …" to this clause.** It has been tried and it makes the
+> problem worse. Measured in InspireManna's `runner/persona-image.js`: a line
+> ending *"never heavy set, stocky or overweight"* produced heavy renders anyway,
+> because an image model does not subtract a concept it has been shown — naming
+> the heavy reading in order to forbid it plants it. `"Slender"` alone read as a
+> soft preference and lost to the reference. So the build is described concretely
+> and at length, and **every word of it is a word we want in the picture.**
+
+The wording is deliberately near-identical to `persona-image.js`'s `BUILD`: the
+same person has to have the same body on an article, on a cover and on a
+supporting image, in this repo and in that one. Two wordings drift.
+
+`HeightClause` used to carry its own build sentence — including that negation. It
+now points at `BuildClause` instead, so the build is stated once, in one wording,
+everywhere. Height itself is still supporting-images-only, by Founder scope.
+
 ### Apparent age
 
 **Thirty for all twelve, except Elias — forty, with white hair and a white beard.**
@@ -531,6 +647,265 @@ way; this view would have paid that across all twelve voices every time it opene
 
 ---
 
+## Support Images
+
+**The wide band above an album's song list.** Not the cover — a second
+photograph *derived from* the cover, at 16:9, for the page where a listener is
+deciding whether to press play.
+
+```
+<album>/artwork/JEIM1051EN.png              the cover master      (Covers view)
+<album>/artwork/JEIM1051EN-support-1.webp   its supporting image  (this view)
+<album>/artwork/JEIM1051EN-support-2.webp   a second draft
+```
+
+### It is the Covers view inverted
+
+Every line of it. Read this table before changing either one.
+
+| | Cover Images | Support Images |
+|---|---|---|
+| Queues albums with | **no** artwork | artwork **already there** |
+| Picture is | **invented** from a persona brief | **derived** from a picture that exists |
+| Attached to the turn | **three** of the persona's released covers | **one** — this album's own cover |
+| The setting must be | **new** — never repeat an old cover's | **the same** — it is the cover's own scene |
+| Shape | 1:1 square | **16:9 landscape** |
+| Saved as | `.png`, matching the masters | **`.webp`**, matching the site |
+| Where | `review/<Persona>/` — approval first | **the album's `artwork/` folder** |
+| House chrome | drawn on afterwards | **none** — the page renders the title in real text |
+| Drafts default | 4 | **2** |
+
+**An album with no cover is not listed at all.** There is nothing to derive from,
+and it is not "pending" here — it belongs to the Covers view until it has one.
+Measured on the whole catalogue, 2026-08-17: **538 English albums have artwork
+and no supporting image**, 234 more were skipped for having no cover, and 171
+localised editions were hidden by the language filter.
+
+### What keeps it tied to the cover
+
+The album's own cover master is attached to the turn, cropped to its centre 80%
+by the same `CoverRefBase64` the Covers view uses — and that crop earns its place
+twice over here, because it removes the border, most of the wordmark up the left
+edge and most of the title along the bottom. The model sees the photograph, not
+the lettering it must not reproduce.
+
+`SupportAuthorClause` then inverts both of the other author clauses. An article
+clause throws the reference's costume away; a cover clause keeps the costume and
+throws the **setting** away. This one keeps **everything** — person, wardrobe,
+place, palette, hour of the day — and changes only the camera position and the
+moment. A supporting image that invents a new setting has stopped supporting its
+album and become a second, contradictory cover.
+
+It is **not gated on "put the piece's author in the image"**. That switch belongs
+to Article Images; the person here is already in the attached cover and cannot be
+left out of a picture whose whole job is to match it.
+
+### The four angles
+
+One album, N drafts, and all four keep the same person, place, wardrobe and
+light. They differ only in where the camera stands:
+
+| | |
+|---|---|
+| **Widen out** | further back than the cover, the whole location visible |
+| **The moment after** | the same place a beat later, released into movement |
+| **The gathering** | that location filled with people enjoying it together |
+| **Come in closer** | one specific joyful detail, the location still legible behind |
+
+**Two by default, not four.** A cover leaves the whole picture open and needs
+four readings of the title. A supporting image is pinned to a photograph that
+already exists, so the genuine spread is narrow.
+
+### The look is InspireManna's, carried across verbatim
+
+`GoldenLook` and `JoyLook` are lifted from `InspireManna.com/runner/persona-image.js`
+(its `GOLDEN` and `JOY` constants) rather than paraphrased. The house look is
+**warm golden light**: low raking first-light or late afternoon, warm amber and
+honey tones, deep gentle shadows, nothing cold or clinical, rich cinematic film
+still.
+
+It is a **named grade, not the word "warm"**, and that was measured over there
+rather than guessed: the corpus once ended `Photographic, warm, unposed, 16:9`
+and produced 0% golden or amber wording across 138 prompts — a look that varied
+image to image instead of being recognisable. A paraphrase here is how two
+properties end up "both warm" and visibly different.
+
+### Six feet tall
+
+**Every member of the Inspire Family, in every supporting image.** Stated on the
+same terms `AgeClause` states the age — as a fact about the person that
+**overrides the attached cover**, not as something to read off it.
+
+It is deliberately not the words "six feet tall" and nothing else. **A camera
+cannot photograph a measurement.** Height exists in a picture only as *scale*:
+against the people nearby, against a doorway, a railing, a table, an instrument.
+A prompt that gives the number and stops has said something unphotographable, and
+what comes back is an average person of unspecified height. So the number is
+given once and then translated into the comparisons that carry it — eyeline high
+in the group, correct against objects of known size, a long figure against the
+room.
+
+**It has to work with nobody else in the frame.** Four in five supporting images
+are solitary once the crowd gate has run, so a clause that only compared the
+persona to other people would do nothing across most of the catalogue. The
+architecture and the furnishings are the anchor there.
+
+**The build rides along on purpose.** "Six feet tall" drifts toward heavy set and
+broad shouldered without a counterweight, and the ecosystem's standing rule is
+that every persona is slender — stated once in InspireManna's `persona-image.js`
+so the same person has the same body everywhere. *Tall and slender* is one
+instruction; splitting it invites two different answers. Two further guards ride
+with it: **statuesque, never towering or looming**, and **never a giant among
+small people** — everyone else is an ordinary adult height, which is what makes
+six feet read as tall rather than making the world read as small.
+
+Support images only, by Founder scope (2026-08-18). Covers and article images are
+untouched. It sits immediately after the age clause in the tail, because the two
+are the same kind of instruction and read as one physical description:
+
+```
+prompt + SupportAuthorClause + AgeClause + HeightClause + SupportSuffix
+```
+
+### 🔴 Is anyone else in the frame at all?
+
+**Asked and answered before anything else, and the default is no.** A supporting
+image does not get a crowd because crowds photograph well. It gets one only when
+the album's own cover already had one.
+
+The answer is read off **§8 of the persona's model file**, the per-album register,
+which carries one row per released cover and a short description of what that
+picture shows:
+
+```
+| 5  | JEIM1004EN | Every Tribe Sings | Guitar in a crowd of many nations | Nations |
+| 13 | JEIM1012EN | Kingdom Roars     | Cheek against a white lion        | ...     |
+```
+
+That column is a written description of the exact picture this tool is about to
+derive from, which makes it the cheapest honest answer available — no extra turn,
+no vision call, no guess. `CompanyFor` looks this album up and returns one of
+three states:
+
+| | When | What changes |
+|---|---|---|
+| **Warranted** | the description names a crowd, congregation, gathering, procession, banquet… | the gathering angle is offered; the wardrobe rule applies |
+| **Solitary** | there is a row and it names none of those | **the gathering angle is removed entirely**, `NoCompanyClause` forbids inventing one, and the wardrobe rule is not issued at all |
+| **Unknown** | no row for this album | the turn decides *from the attached cover*, told plainly to choose the smaller number of people |
+
+Measured over Jubilee's 78 registered covers: **15 warranted, 63 solitary.** Four
+albums in five now get no invented crowd.
+
+**Three things had to change together**, and any one left alone would have
+defeated the other two:
+
+1. **The angle is removed, not caveated.** A solitary album never receives *"fill
+   the location with people"* followed by *"but do not add people"*. Contradicting
+   an instruction is weaker than never issuing it.
+2. **"The moment after" was reworded.** It used to end *"others arriving into the
+   frame"*, which quietly made two of the four angles crowd angles.
+3. **`JoyLookSolo` exists.** The house joy register asks for *"people plainly
+   enjoying themselves and enjoying each other"* — a requirement for people
+   hiding inside a mood instruction, and on a solitary cover it reintroduces the
+   crowd the prompt just refused. A positive description always beats a
+   prohibition, so the description had to go rather than the prohibition get
+   louder.
+
+The run log states the finding and its evidence, so a wrong-looking draft is
+diagnosable without re-deriving anything:
+
+```
+People: NO — the cover is recorded as "Cheek against a white lion", so none are added.
+People: YES — the cover is recorded as "Guitar in a crowd of many nations in colour".
+People: not recorded in .models — the turn decides from the cover, defaulting to none.
+```
+
+**Refresh re-reads the register**, so correcting a row in `.models` and pressing
+Refresh changes the next image. No restart.
+
+### Who else is in the frame, and what they wear
+
+**Only reached when the answer above was not Solitary.** Per persona, in
+`CompanyWardrobe` — a table keyed by persona slug. A voice with
+no entry gets no clause and the scene dresses itself from the attached cover,
+which is the right default: the cover already shows the world the album lives in.
+**Adding a persona is one entry.**
+
+**Jubilee** has one, by Founder direction (2026-08-17). When the album warrants
+company at all, the people around her wear bright, glamorous colour — **purple, red and maroon, blue, green, and
+yellow and gold** — mixed freely both across the crowd and *within* single
+garments, in fabrics with real sheen and drape. Every person a different
+combination, so the crowd reads as a mass of colour rather than a uniform.
+
+> 🔴 **She stays in white. Every garment, shoes included, turquoise at the
+> throat as her only colour.** The clause says so explicitly and absolutely,
+> after the colour instruction, because "everyone in the frame is in bright
+> colour" is read by a generator as including the woman it is looking at — which
+> is precisely how a signature look gets quietly dismantled. InspireManna's
+> `WHITE_ONLY` carries the same warning for the same reason: stated once as an
+> adjective it does not hold, so it is stated again as a rule about the person.
+>
+> **Any future entry in this table must do the same for its persona.**
+
+**Scope: supporting images only.** Her model file's §3.4 says the opposite for
+**covers** — *"radiant white as the whole world … the crowd's clothing"* — and
+that is untouched, because `BuildCoverPrompt` reads `.models` and never comes
+through here. The two surfaces now differ on purpose: a white-on-white cover,
+and beneath it a band where she is the still white centre of a room full of
+jewel colour.
+
+The clause also carries the house modesty line — high closed necklines, sleeves
+to the elbow, hems below the knee, nothing tight, sheer, cropped or low cut —
+because *glamorous* is the word most likely to drift, and the glamour is meant to
+be in the colour and the craftsmanship. **Note this rides on the wardrobe entry,
+so the eleven personas without one carry no modesty clause on this surface yet.**
+
+When a rule fires, the log says so, so a wrong-looking draft is diagnosable:
+
+```
+Wardrobe rule applied for Jubilee Inspire: the people around her in colour, she stays in white.
+```
+
+### 🔴 Output goes straight to the music drive
+
+Founder decision, 2026-08-17, and it differs from Covers deliberately. There is
+no review folder. **Drafts land numbered side by side and the lowest-numbered
+survivor is the one the website shows**, so deleting the drafts you do not want
+*is* the approval step.
+
+Nothing here can overwrite an approved master: the name carries `-support-` and
+no other part of the system reads that suffix. The sibling sweep that removes a
+superseded render is **skipped for these**, and that is not tidiness — it looks
+for `<slug>.<ext>` in the folder it just wrote to, which is exactly the name of
+the cover master.
+
+### Getting them onto the site
+
+Three steps, and the picture is invisible until all three are done:
+
+1. Keep one draft per album, delete the rest.
+2. Push the album artwork to the CDN.
+3. `node app/web/scripts/gen-album-support.mjs` — probes the CDN for each
+   album's surviving draft and writes `public/music/album-support.json`.
+
+The page reads that file through `lib/support.ts`. It becomes **the backdrop of
+the album page's hero**, through the same `--persona-img` custom property the
+stylesheet already reads — so the gradient, the sizing and the right-edge
+anchoring are unchanged and only the picture differs. **No entry means the hero
+falls back to the persona banner** it has always used, which is why an un-probed
+catalogue looks exactly as it does today rather than broken.
+
+The hero is rendered by `AlbumApp`, not by the page. It has to be: its backdrop
+is now per-ALBUM, and the component switches albums in place without navigating,
+so a hero owned by the page would keep showing the first album's picture for the
+rest of the visit.
+
+> **You are the review gate.** Look hardest at whether it is still the same
+> person, in the same place, in the same clothes. A supporting image that drifts
+> off its cover is worse than none.
+
+---
+
 ## Deploy
 
 Three places hold the site and they drift independently: this checkout, the VPS,
@@ -564,9 +939,9 @@ does not touch `publish.sh`, because retargeting a deploy script is not a
 measurement.
 
 **1. `publish.sh` ships to a path the box does not have.** It names
-`/var/www/Jubilujah.com`; the live tree is `/var/www/jubilujah.com`, lowercase,
+`/var/www/JubileePraise.com`; the live tree is `/var/www/jubileepraise.com`, lowercase,
 with the web app under `web/` rather than `app/web/` and PM2 running it as
-`jubilujah-web`. The probe therefore *searches* both and reports which it found.
+`jubileepraise-web`. The probe therefore *searches* both and reports which it found.
 
 **The Deploy button REFUSES while that is true — it does not warn and proceed.**
 publish.sh syncs the R2 music bucket in Step 1 and ships the site in Step 2, so a
@@ -578,7 +953,7 @@ has measured something, because an unmeasured session cannot know either way.
 **2. The Step 0 manifest gate cannot run.** `deploy/check-manifest.mjs` looks for
 `<music>/albums/<category>/<artist>/<album>`, and neither `J:/music` nor an
 `albums/` level exists — the manifest's own paths are `<category>/<artist>/<album>`
-under `J:/jubilujah.com/music`. So the gate exits 2 before comparing anything, and
+under `J:/jubileepraise.com/music`. So the gate exits 2 before comparing anything, and
 `publish.sh` Step 0 fails with it.
 
 When the gate cannot run, the probe measures the same diff itself, against the
@@ -604,7 +979,7 @@ is left untouched until the scope is settled.
 
 ---
 
-## What changed coming back to JubiLujah
+## What changed coming back to JubileePraise
 
 | | InspireManna | Now |
 |---|---|---|
@@ -617,14 +992,14 @@ is left untouched until the scope is settled.
 | Music view | an article's two songs | **the album corpus**: lyrics out, `tracks/*.mp3` back, publish gate |
 | Deploy probe | `runner/deploy-status.js` | **`wpf/deploy-status.mjs`**, in this folder |
 | Repo marker | `runner/article-stats.js` | `core/articles/gen-articles.mjs` |
-| WebView2 profile | `%LOCALAPPDATA%\InspireManna\…` | `%LOCALAPPDATA%\JubiLujah\Studio\webview2` |
+| WebView2 profile | `%LOCALAPPDATA%\InspireManna\…` | `%LOCALAPPDATA%\JubileePraise\Studio\webview2` |
 | Tool location | `tools/ArticleImageStudio` | `wpf/` |
 
 The ChatGPT login from the older in-repo tool is migrated once on first launch
 from `tools/ArticleImageStudio/.webview2`, so you do not log in again.
 
 **No fallback repo path.** The older build defaulted its root to a hard-coded
-`W:\JubiLujah.com` when it could not find its marker, which means a stray copy of
+`W:\JubileePraise.com` when it could not find its marker, which means a stray copy of
 the exe anywhere on the machine would have written into that repo. An unresolved
 root now says which folder it started from and refuses to scan.
 
@@ -640,6 +1015,97 @@ generated image) may conflict with **OpenAI's Terms of Use**. This app does
 **not** defeat the bot / human check — *you* pass that yourself in a real browser
 — but the attachment and prompt submission afterward are automated, against your
 own session, at your direction.
+
+## 🔴 The hang, and the watchdog
+
+**Symptom:** the log sits on `…still waiting (6 image(s) on page, ~287s left)`
+counting down for six minutes, the prompt is visible in the composer, and the
+send button is showing as a **stop** button. Then it does it again on the next
+image, and the one after, and the run stops after three.
+
+**Cause — the submit was reporting success it could not know about.**
+`SubmitScript` scheduled its click inside `setTimeout(…, 450)` and returned
+`'submitted'` immediately: before the click had happened, and without ever
+checking there was a send button to click. That guess is wrong in exactly one
+case, and it is the case that bites — **while ChatGPT is streaming, the send
+button IS the stop button.** The selector finds nothing, the synthetic Enter
+fallback is ignored (ProseMirror does not act on untrusted key events), and the
+prompt sits in the box unsent while the run waits out a six-minute deadline for
+an image nobody asked for. On failure the run kept the same thread, so the next
+two pieces went into the same wedged conversation: ~18 minutes, three pieces
+burned, nothing generated.
+
+**Four fixes, and they are a chain:**
+
+| | |
+|---|---|
+| **Don't type into a streaming composer** | `WaitUntilComposerIdle` waits up to 90s for the stop button to go away first. |
+| **Report what actually happened** | The submit is synchronous now and returns `clicked` · `enter` · `busy` · `disabled` · `mismatch` · `no-composer`. No more `submitted` as a guess. |
+| **Verify the send landed** | The only proof a turn left the machine is the composer **emptying**. Checked for ~5s before anything waits on an image. |
+| **Never reuse a failed thread** | `inThread = 0` on failure, so the next piece opens a fresh conversation instead of walking back into the wedged one. |
+
+### 🔴 The 700ms between typing and sending is load-bearing
+
+**Do not collapse the type and the click into one script call.** It was tried and
+it broke generation outright.
+
+The original code clicked inside a `setTimeout(…, 450)`. That reads like
+defensive padding and it is not. `execCommand` puts the text in the DOM the
+instant it runs, but the composer is a **React-controlled ProseMirror** and React
+does not hold that content until it has processed the `input` event on a later
+tick. Click send in the same tick and the turn submits what React still believes
+the box holds — nothing — **with the attachment still on it.** ChatGPT then
+answers:
+
+> *"I can see the cover clearly. Tell me what you want me to do with it — create a
+> wide 16:9 companion banner, edit the existing artwork…"*
+
+Measured: three consecutive albums failed exactly that way, `0 generated, 3 failed`.
+
+**The read-back check cannot catch this.** It reads `innerText`, which is the DOM,
+and the DOM is correct — it is React that is behind. So the only defence is the
+wait, and it now lives in the caller (`SubmitScript` types, `ClickSendScript`
+sends) where its result can actually be inspected. That keeps both things: the
+original timing, and a return value that reports what really happened.
+
+### Every prompt ends by forbidding a conversation
+
+All three closing suffixes — `AspectSuffix` (16:9), `SquareSuffix` (covers) and
+`SupportSuffix` — end with **GENERATE THE IMAGE NOW**: no text reply, no asking
+what to do with the attachment, no offering options. It goes last because the
+last instruction is the one the composer honours most reliably.
+
+This is belt and braces with the fix above, and it earns its place: the signed-in
+account carries custom instructions that make ChatGPT answer conversationally
+(replies come back with a persona speaker tag), so a prompt that leaves any room
+to talk will get talked to.
+
+### The stall watchdog
+
+**Two minutes with the page completely static and the conversation is abandoned**
+— the run opens a fresh thread and retries that image, rather than sitting out
+the rest of the six-minute deadline.
+
+> **"Static" is measured, and deliberately not "the stop button is missing".** A
+> wedged conversation can sit there with its stop button showing and nothing
+> behind it — that is the exact state this was reported in, so trusting the
+> stream flag would have called a dead thread alive. `ProgressProbeScript`
+> fingerprints the three things that move when work is really happening: the
+> count of large loaded images, the length of the last assistant message, and the
+> stream flag. **Any change resets the clock.** A genuinely slow render is
+> growing one of those and keeps its full six minutes; only a frozen page is cut
+> short.
+
+The deliberate "Something went wrong" backoffs (20s / 45s / 90s) reset the
+watchdog clock too — that is time spent *told* not to poll, not evidence of a
+stall, and without the reset a 90s backoff would leave its retry only thirty
+seconds before being declared dead.
+
+Recovery routes through the `PageFailed` path that already existed: pause 30–60s,
+open a brand-new conversation, retry the piece once. The waiting line now also
+says how long the page has been idle, so a stall is visible before it fires.
+
+---
 
 ## If ChatGPT changes its layout
 

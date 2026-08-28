@@ -1,6 +1,6 @@
-# Jubilujah API Reference
+# JubileePraise API Reference
 
-The Jubilujah API is an Express.js service (`jubilujah-api`) that backs the Next.js
+The JubileePraise API is an Express.js service (`jubileepraise-api`) that backs the Next.js
 web app. It exposes the music catalog, social features (ratings, comments, awards),
 the production pipeline, radio programming, personal playlists, account/auth flows,
 and server-to-server admin endpoints.
@@ -32,7 +32,7 @@ auth middleware), giving `req.auth = { user, roles }`; an absent/invalid token y
 **Login modes** (env `AUTH_LOGIN_MODE`, see [src/config.js](../app/api/src/config.js)):
 - `local` (default/dev) — credentials verified against the local DB.
 - `ji` (prod) — `/api/auth/signin` delegates to JubileeInspire's `POST /api/auth/login`;
-  JI is the credential authority, Jubilujah upserts the user and mints its own JWT. If JI
+  JI is the credential authority, JubileePraise upserts the user and mints its own JWT. If JI
   rejects a user who signed up locally (not yet provisioned into JI), the API verifies the
   password locally, provisions the account into JI (`admin.provision`), then signs in.
 
@@ -72,7 +72,7 @@ e.g. `{ "error": "message" }`, with appropriate HTTP status codes (400, 401, 403
 
 | Method | Path | Auth | Description |
 |---|---|---|---|
-| GET | `/health` | — | DB + service health. `{ status: "healthy"\|"degraded", db: boolean, service: "jubilujah-api" }` (503 when DB down). |
+| GET | `/health` | — | DB + service health. `{ status: "healthy"\|"degraded", db: boolean, service: "jubileepraise-api" }` (503 when DB down). |
 | GET | `/api/openapi.json` | — | OpenAPI 3.1 spec. |
 
 ---

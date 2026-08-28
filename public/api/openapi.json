@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Jubilujah Internal API",
+    "title": "JubileePraise Internal API",
     "version": "1.0.0",
-    "summary": "Editorial, pipeline, ratings, awards, radio, and admin surface for Jubilujah.",
-    "description": "OpenAPI 3.1 contract implementing every endpoint enumerated in Jubilujah Build Spec v1.0 §19 (API Surface — Initial). Authentication is delegated to JubileeInspire SSO (Build Spec §5); the resulting session cookie (`session_id`, HttpOnly/Secure/SameSite=Strict) authorizes all calls. All mutating requests require a CSRF token header (`X-CSRF-Token`). Role-based gates per §5: minimum `content_editor` for read; `production_manager` for pipeline transitions; `radio_producer` for playlist mutations; `admin` for `/admin/*`. Domain schemas live at `/schemas/v1/*.schema.json` and are referenced via `$ref` from this document.",
+    "summary": "Editorial, pipeline, ratings, awards, radio, and admin surface for JubileePraise.",
+    "description": "OpenAPI 3.1 contract implementing every endpoint enumerated in JubileePraise Build Spec v1.0 §19 (API Surface — Initial). Authentication is delegated to JubileeInspire SSO (Build Spec §5); the resulting session cookie (`session_id`, HttpOnly/Secure/SameSite=Strict) authorizes all calls. All mutating requests require a CSRF token header (`X-CSRF-Token`). Role-based gates per §5: minimum `content_editor` for read; `production_manager` for pipeline transitions; `radio_producer` for playlist mutations; `admin` for `/admin/*`. Domain schemas live at `/schemas/v1/*.schema.json` and are referenced via `$ref` from this document.",
     "contact": {
       "name": "Gabriel Ungureanu — Stewardship",
-      "url": "https://jubilujah.com"
+      "url": "https://jubileepraise.com"
     },
     "license": {
       "name": "Proprietary — Jubilee Music Internal Use Only",
@@ -20,7 +20,7 @@
       "description": "Local development (server.js)"
     },
     {
-      "url": "https://jubilujah.com/api",
+      "url": "https://jubileepraise.com/api",
       "description": "Production stub (gated by JubileeInspire SSO)"
     }
   ],

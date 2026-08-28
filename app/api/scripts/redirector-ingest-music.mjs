@@ -28,7 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '../../.env') }); // load prod env for DATABASE_URL
 
 const MANIFEST = path.resolve(__dirname, '../../web/public/music/catalog-manifest.json');
-const BASE = (process.env.REDIRECTOR_BASE_URL || 'https://www.jubilujah.com').replace(/\/+$/, '');
+const BASE = (process.env.REDIRECTOR_BASE_URL || 'https://www.jubileepraise.com').replace(/\/+$/, '');
 const argv = process.argv.slice(2);
 const APPLY = argv.includes('--apply');
 const LIMIT = (() => { const i = argv.indexOf('--limit'); return i >= 0 ? parseInt(argv[i + 1], 10) : Infinity; })();

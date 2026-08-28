@@ -4,7 +4,7 @@ import MySubscription from '@/components/MySubscription';
 
 export const metadata: Metadata = {
   title: 'My Subscription',
-  description: 'Manage your JubiLujah subscription, billing, and plan.',
+  description: 'Manage your JubileePraise subscription, billing, and plan.',
 };
 
 export default function MySubscriptionPage() {

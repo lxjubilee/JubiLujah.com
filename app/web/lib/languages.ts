@@ -1,4 +1,4 @@
-// Supported UI/catalog languages for JubiLujah.com. An album's language is
+// Supported UI/catalog languages for JubileePraise.com. An album's language is
 // encoded in the last 2 letters of its code (…EN = English, …ES = Spanish, …),
 // so albumLanguage() derives it from the code. The whole catalog is currently
 // English; other languages populate as …<XX>-suffixed albums are added.

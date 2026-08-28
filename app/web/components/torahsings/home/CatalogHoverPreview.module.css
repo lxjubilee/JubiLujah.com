@@ -1,0 +1,177 @@
+/* JubileePraise "nf-preview" — the hover popup that opens over a grid tile:
+   an enlarged cover, then a dark info panel with an action row + metadata.
+   Rendered in a portal at document.body, positioned fixed over the tile. */
+.preview {
+  position: fixed;
+  z-index: 1500;
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.8);
+  transform-origin: center;
+  animation: pop 0.16s ease-out;
+  color: #fff;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #222;
+  overflow: hidden;
+}
+
+.cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverGrad {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 66%, rgba(24, 24, 24, 0.94));
+}
+
+.body {
+  padding: 12px 15px 16px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+}
+
+/* jubileepraise ".nf-act" — all four buttons share one 38px round shape. */
+.act {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 2px solid #6d6d6e;
+  border-radius: 50%;
+  background: rgba(42, 42, 42, 0.6);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.act:hover {
+  border-color: #fff;
+}
+
+/* Liked — solid white fill, black thumb: exactly JubileePraise's .nf-act.on. */
+.actOn {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.actOn:hover {
+  border-color: #fff;
+}
+
+.act:active {
+  transform: scale(0.92);
+}
+
+.act svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* White filled play (.nf-act.play). */
+.play {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.play:hover:not(:disabled) {
+  background: #d2d2d2;
+  border-color: #fff;
+}
+
+.play:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* The chevron sits at the far right (.nf-act.details). */
+.details {
+  margin-left: auto;
+}
+
+.title {
+  font-family: var(--font-display), 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #d2d2d2;
+  margin-bottom: 6px;
+}
+
+.genre {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+}
+
+.hd {
+  border: 1px solid #5a5a5a;
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #aaa;
+}
+
+.artist {
+  margin-left: auto;
+  font-size: 12px;
+  color: #ddd;
+  white-space: nowrap;
+}
+
+.tags {
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    animation: none;
+  }
+  .act {
+    transition: none;
+  }
+}

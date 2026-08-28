@@ -91,7 +91,7 @@ await check('GET /api/admin/users without session -> 401', async () => {
   return res.status === 401;
 });
 
-console.log('\nJubilujah API smoke test');
+console.log('\nJubileePraise API smoke test');
 console.log('='.repeat(48));
 for (const [status, name] of rows) console.log(`  ${status}  ${name}`);
 console.log('='.repeat(48));

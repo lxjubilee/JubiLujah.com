@@ -103,7 +103,7 @@ const redirectorLimiter = rateLimit({
 // ---- Health + OpenAPI -------------------------------------------------------
 app.get('/health', async (req, res) => {
   const db = await healthCheck();
-  res.status(db ? 200 : 503).json({ status: db ? 'healthy' : 'degraded', db, service: 'jubilujah-api' });
+  res.status(db ? 200 : 503).json({ status: db ? 'healthy' : 'degraded', db, service: 'jubileepraise-api' });
 });
 
 app.get('/api/openapi.json', (req, res) => {
@@ -156,7 +156,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
-  logger.info({ port: config.port, env: config.env, loginMode: config.loginMode }, 'Jubilujah API listening');
+  logger.info({ port: config.port, env: config.env, loginMode: config.loginMode }, 'JubileePraise API listening');
   // Warm the catalog manifest cache.
   import('./manifest.js').then((m) => m.getManifest()).catch(() => {});
   // Manage Music scheduled CDN sync (opt-in via MUSIC_SYNC_SCHEDULER=on).

@@ -1,7 +1,7 @@
 -- ============================================================================
 -- 0014_subscriptions.sql — Subscription Management System
 --
--- A complete, normalized model for premium music subscriptions on Jubilujah.com:
+-- A complete, normalized model for premium music subscriptions on JubileePraise.com:
 --   * subscription_plans          — the catalog of plans (Free / Individual / Family)
 --   * subscriptions               — one owner's subscription record + provider link
 --   * family_groups / _members /  — Family-plan account linking (1 owner + 5 members)

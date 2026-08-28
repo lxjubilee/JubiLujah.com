@@ -12,7 +12,7 @@ const data: LandingData = {
   hero: { title: 'Song <b>of</b> Restoration', content_kind: 'track', summary: 'A test track.', cover_image_url: 'https://cdn/x.jpg' },
   primary: { verb: 'Play' },
   context_path: 'Melody > Album > Song',
-  related: [{ title: 'Sibling', kind: 'track', cover_image_url: null, short_url: 'https://jubilujah.com/r/H3NQ8FVJ5CDY' }],
+  related: [{ title: 'Sibling', kind: 'track', cover_image_url: null, short_url: 'https://jubileepraise.com/r/H3NQ8FVJ5CDY' }],
   persona: null,
   resume: null,
 };
@@ -35,7 +35,7 @@ assert.ok(html.includes('Song &lt;b&gt;of&lt;/b&gt; Restoration'), 'hero title p
 assert.ok(!html.includes('<b>of</b>'), 'title HTML is escaped, not injected');
 assert.ok(html.includes('Melody &gt; Album &gt; Song'), 'context strip present + escaped');
 assert.ok(html.includes('A test track.'), 'summary present');
-assert.ok(html.includes('href="https://jubilujah.com/r/H3NQ8FVJ5CDY"'), 'related card links to sibling short_url');
+assert.ok(html.includes('href="https://jubileepraise.com/r/H3NQ8FVJ5CDY"'), 'related card links to sibling short_url');
 ok('hero / context strip / summary / related blocks present (§11.1)');
 
 // The real destination must never appear (it is not even passed to the renderer).

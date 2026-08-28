@@ -1,0 +1,127 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 38px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.back:hover {
+  color: var(--accent-soft);
+}
+
+/* ---- hero ---- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 52px;
+  align-items: center;
+  padding-block: 40px 68px;
+}
+
+.art {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+}
+
+.title {
+  margin: 20px 0 22px;
+}
+
+.description {
+  color: var(--ink-body);
+  font-size: 1.09rem;
+  line-height: 1.72;
+  max-width: 58ch;
+  margin-bottom: 32px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.presenter {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.presenterName {
+  color: var(--ink-muted);
+}
+
+/* ---- body ---- */
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 64px;
+  align-items: start;
+  padding-bottom: 40px;
+}
+
+.articleHeadline {
+  margin: 0 0 26px;
+  font-size: clamp(1.6rem, 2.8vw, 2rem);
+}
+
+/* ---- lyrics ---- */
+
+.lyrics {
+  max-width: 60ch;
+}
+
+.stanza {
+  margin: 0 0 34px;
+  color: var(--ink);
+  font-size: 1.16rem;
+  line-height: 1.85;
+}
+
+.stanza span {
+  display: block;
+}
+
+/* The opening line of each stanza leans on the gold. */
+.stanza span:first-child {
+  color: var(--accent-soft);
+}
+
+.lyricsNote {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-faint);
+  font-size: 0.93rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+@media (max-width: 1080px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-block: 28px 48px;
+  }
+
+  .art {
+    max-width: 320px;
+  }
+}

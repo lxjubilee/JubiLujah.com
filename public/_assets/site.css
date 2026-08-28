@@ -1,6 +1,6 @@
-/* Jubilujah.com — shared site styles (W: build)
+/* JubileePraise.com — shared site styles (W: build)
    Navy base + red/peach/gold accent palette + animated particles flourish.
-   Adapted from the C: warm-copper variant; same structure, Jubilujah brand. */
+   Adapted from the C: warm-copper variant; same structure, JubileePraise brand. */
 
 :root {
   /* Navy base */
@@ -18,7 +18,7 @@
   --line: #2a3454;
   --line-soft: #1f2740;
 
-  /* Jubilujah signature accent palette */
+  /* JubileePraise signature accent palette */
   --accent: #e94560;          /* JV red */
   --accent-peach: #ff6b6b;    /* peach */
   --accent-gold: #feca57;     /* gold */

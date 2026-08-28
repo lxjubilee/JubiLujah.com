@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cdn.jubileeverse.com/schemas/v1/song.schema.json",
   "title": "Song Manifest",
-  "description": "Canonical published JSON manifest for a single song in the Jubilujah catalog. Written by the Jubilujah publish flow (see Build Spec sections 16 and 17) and read by Jubilee Radio, the persistent footer player, DSP distribution, and any downstream consumer surface on cdn.jubileeverse.com. Editorial-only state (comments, ratings, internal notes, OHI/CCI mode labels) is intentionally excluded.",
+  "description": "Canonical published JSON manifest for a single song in the JubileePraise catalog. Written by the JubileePraise publish flow (see Build Spec sections 16 and 17) and read by Jubilee Radio, the persistent footer player, DSP distribution, and any downstream consumer surface on cdn.jubileeverse.com. Editorial-only state (comments, ratings, internal notes, OHI/CCI mode labels) is intentionally excluded.",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# publish.sh — runs the "Publish Jubilujah.com" procedure end-to-end.
+# publish.sh — runs the "Publish JubileePraise.com" procedure end-to-end.
 # See ../PUBLISH.md for the runbook this script automates.
 #
 # Usage:
@@ -11,7 +11,7 @@
 #
 # 2026-07-23 repair — the previous version could not run on this machine:
 #   * SYNC_SCRIPT pointed at C:/Websites/jubileeverse.com/.claude/r2-sync-music.js  (does not exist)
-#   * Step 0's manifest gate pointed at C:/jubilujah-local/rebuild-manifest.js      (does not exist)
+#   * Step 0's manifest gate pointed at C:/jubileepraise-local/rebuild-manifest.js      (does not exist)
 #   * @aws-sdk/client-s3 is not installed at this repo root, so a bare `node` run fails
 #   * the runbook's SSH key path named a different Windows user
 # Now: uses the in-repo sync script, auto-detects the SDK, gates on deploy/check-manifest.mjs,
@@ -19,11 +19,38 @@
 
 set -euo pipefail
 
-REPO_DIR="/w/JubiLujah.com"
+REPO_DIR="/w/JubileePraise.com"
 SSH_KEY="$USERPROFILE/.ssh/id_ed25519_jubilee_prod"
 PROD="root@94.72.120.231"
-PROD_PATH="/var/www/Jubilujah.com"
+
+# CORRECTED 2026-08-27. Steps 2 and 3 below had never been updated to match the Step 2 that
+# PUBLISH.md rewrote on 2026-08-14 after verifying it against the live host. Until today this
+# script still did all four things that rewrite calls wrong:
+#
+#   * PROD_PATH=/var/www/JubileePraise.com   -> capitalised; the prod dir is lowercase
+#   * tar the working tree over PROD_PATH    -> prod runs a BUILT Next.js app whose layout
+#                                               (web/, api/) does not match this repo
+#                                               (app/web, app/api). Raw source breaks the build.
+#   * pm2 restart <bare name>                -> no such process; it is <name>-web / <name>-api
+#   * verify 127.0.0.1:3119 + cdn.jubileeverse.com -> 3119 is JubileeVibes, and that CDN host
+#                                               404s for music
+#
+# A catalog publish is ONE file (PUBLISH.md Step 2): lib/manifest.ts reads the manifest at
+# runtime and caches it in memory, so it is a copy plus a restart, with no rebuild. A full
+# source deploy still has no procedure in this repo — see PUBLISH.md "Standing up the parallel
+# site". This script deliberately refuses to attempt one.
+# TARGET: the EXISTING jubilujah deployment (Founder decision 2026-08-27 — deploy the rebrand to
+# the same location and credentials rather than standing up a parallel site). These are the
+# live-verified values from PUBLISH.md "Production facts"; they are NOT renamed to jubileepraise,
+# because the server, the path, the processes and the domain are unchanged. The rebrand is what
+# gets deployed INTO them.
+PROD_PATH="/var/www/jubilujah.com"
+PM2_WEB="jubilujah-web"
+PUBLIC_HOST="https://www.jubilujah.com"
 BACKUP_DIR="/var/www/.backup"
+
+# nginx proxies the web app on :3030 and the API on :4030 (:3119 is JubileeVibes, a different site).
+WEB_PORT="${WEB_PORT:-3030}"
 
 # --- CDN sync target -------------------------------------------------------
 # CORRECTED 2026-08-14. The previous values here were wrong on all three counts and would have
@@ -33,7 +60,7 @@ BACKUP_DIR="/var/www/.backup"
 #     app/web/lib/cdn.ts defaults to cd.jubilujah.com. Live probe 2026-08-14:
 #     https://cd.jubilujah.com/music/... -> 200 ;  https://cdn.jubileeverse.com/music/... -> 404
 #   * bucket jubileeverse-cdn      -> that is the AVATARS bucket, not the music CDN
-#   * source tree J:/music         -> does not exist; the store is J:/jubilujah.com/music
+#   * source tree J:/music         -> does not exist; the store is J:/jubileepraise.com/music
 #
 # BLOCKER: no credentials for the live music bucket exist on this machine. The only R2 token
 # present (R2_AVATARS_* in W:/JubileeInspire.com/api/.env) is scoped to jubileeverse-cdn. Set
@@ -41,7 +68,7 @@ BACKUP_DIR="/var/www/.backup"
 # before enabling the sync. Until then --site-only is the correct publish, and is usually all
 # that is needed: albums hidden by a stale manifest already have their media live on the CDN.
 SYNC_SCRIPT="$REPO_DIR/_r2-sync-music-inspire.js"
-SYNC_SRC="J:/jubilujah.com/music"
+SYNC_SRC="J:/jubileepraise.com/music"
 SYNC_PREFIX="music/"
 SYNC_BUCKET="${R2_BUCKET_CDN:-}"          # intentionally empty until the live bucket is configured
 
@@ -139,35 +166,64 @@ else
 fi
 
 # ---------------------------------------------------------------- Step 2 ----
+REMOTE_MANIFEST="$PROD_PATH/web/public/music/catalog-manifest.json"
+LOCAL_MANIFEST="$REPO_DIR/app/web/public/music/catalog-manifest.json"
+
+hdr "Step 2a/3 — Preflight: does the target actually exist?"
+# Everything below is fatal rather than best-effort. The whole reason this script was wrong for
+# two weeks is that it assumed a prod layout nobody had checked.
+ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" "
+  fail=0
+  [ -d '$PROD_PATH' ]        || { echo '  MISSING dir      : $PROD_PATH'; fail=1; }
+  [ -f '$REMOTE_MANIFEST' ]  || { echo '  MISSING manifest : $REMOTE_MANIFEST'; fail=1; }
+  pm2 describe '$PM2_WEB' >/dev/null 2>&1 || { echo '  MISSING process  : $PM2_WEB'; fail=1; }
+  [ \$fail -eq 0 ] && echo '  ok — target exists'
+  exit \$fail
+" || {
+  echo ""
+  echo "REFUSING TO PUBLISH: the target above is not what this script expects."
+  echo "It targets the EXISTING jubilujah deployment ($PROD_PATH, $PM2_WEB)."
+  echo "If that is wrong, fix the values at the top of this script — do not"
+  echo "bypass this check. Nothing was changed on the server."
+  exit 4
+}
+
 if [[ $DO_BACKUP -eq 1 ]]; then
-  hdr "Step 2a/3 — Snapshot prod for rollback"
+  hdr "Step 2b/3 — Back up the live manifest"
+  # Rollback is the reverse copy from the newest .bak-* beside it, then the same restart.
   ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" \
-    "mkdir -p $BACKUP_DIR && tar -czf $BACKUP_DIR/Jubilujah.com.\$(date +%Y%m%d-%H%M%S).tgz -C $PROD_PATH . \
-     && ls -1t $BACKUP_DIR | head -3"
+    "cp -p '$REMOTE_MANIFEST' '$REMOTE_MANIFEST'.bak-\$(date +%Y%m%d-%H%M%S) \
+     && ls -1t '$(dirname "$REMOTE_MANIFEST")' | grep catalog-manifest | head -3"
 fi
 
-hdr "Step 2/3 — Deploy site to $PROD:$PROD_PATH"
-cd "$REPO_DIR" && tar \
-  --exclude='./.claude' \
-  --exclude='./.git' \
-  --exclude='./wpf' \
-  --exclude='./node_modules' \
-  --exclude='*.log' \
-  -czf - . | ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" \
-  "tar -xzf - -C $PROD_PATH && pm2 restart jubilujah --update-env && pm2 save | tail -2"
+hdr "Step 2/3 — Publish the catalog manifest to $PROD:$REMOTE_MANIFEST"
+scp -i "$SSH_KEY" -o IdentitiesOnly=yes "$LOCAL_MANIFEST" "$PROD:$REMOTE_MANIFEST"
+ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" \
+  "pm2 restart '$PM2_WEB' --update-env && pm2 save | tail -2"
 
 # ---------------------------------------------------------------- Step 3 ----
 hdr "Step 3/3 — Verify"
-ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" '
-  origin=$(curl -sS -o /dev/null -w "%{http_code}" http://127.0.0.1:3119/);
-  public=$(curl -sS -o /dev/null -w "%{http_code}" https://www.jubilujah.com/);
-  cdn=$(curl -sS -o /dev/null -w "%{http_code}" https://cdn.jubileeverse.com/music/catalog-manifest.json);
-  echo "  origin (127.0.0.1:3119):  $origin";
-  echo "  public (www):             $public";
-  echo "  cdn  (catalog-manifest):  $cdn";
-  test "$origin" = "200" -a "$public" = "200" -a "$cdn" = "200"
-' || { echo "Verification failed."; exit 1; }
+# A 200 proves the app is up, not that the manifest landed, so the album count is checked too.
+ssh -i "$SSH_KEY" -o IdentitiesOnly=yes "$PROD" "
+  origin=\$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:$WEB_PORT/);
+  echo \"  origin (127.0.0.1:$WEB_PORT):  \$origin\";
+  node -e \"const m=require('$REMOTE_MANIFEST');
+            let n=0; for(const c of m.categories||[]) for(const a of c.artists||[]) n+=(a.albums||[]).length;
+            console.log('  manifest live       : '+m.generated+' — '+n+' albums');\";
+  test \"\$origin\" = '200'
+" || { echo "Verification failed."; exit 1; }
+
+# The site is served at its existing domain until DNS for jubileepraise.com exists.
+public=$(curl -sS -o /dev/null -w "%{http_code}" "$PUBLIC_HOST/" 2>/dev/null || echo "unreachable")
+echo "  public (www)        : $public"
+# cd.jubilujah.com is deliberately NOT renamed — there is no DNS for a jubileepraise CDN.
+cdn=$(curl -sS -o /dev/null -w "%{http_code}" \
+  "https://cd.jubilujah.com/music/inspire/jubilee-inspire/JEIM1001EN-sky-splits-open/artwork/JEIM1001EN.png" 2>/dev/null || echo "fail")
+echo "  cdn  (artwork probe): $cdn"
 
 line
-echo "  PUBLISHED https://www.jubilujah.com"
+echo "  CATALOG PUBLISHED to $PROD:$REMOTE_MANIFEST"
+if [[ "$public" != "200" ]]; then
+  echo "  (the public host is not serving yet — this publish changed the origin only)"
+fi
 line

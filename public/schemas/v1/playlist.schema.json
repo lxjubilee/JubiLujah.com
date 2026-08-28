@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cdn.jubileeverse.com/schemas/v1/playlist.schema.json",
   "title": "Playlist Manifest",
-  "description": "Canonical published JSON manifest for a playlist (Build Spec sections 12, 16). Drives both the persistent footer player on Jubilujah and the Jubilee Radio Engine v3.0 (Liquidsoap) station rotations. Playlists are an ordered collection of song references; each item carries an explicit transition directive consumed by the radio engine.",
+  "description": "Canonical published JSON manifest for a playlist (Build Spec sections 12, 16). Drives both the persistent footer player on JubileePraise and the Jubilee Radio Engine v3.0 (Liquidsoap) station rotations. Playlists are an ordered collection of song references; each item carries an explicit transition directive consumed by the radio engine.",
   "type": "object",
   "additionalProperties": false,
   "required": [

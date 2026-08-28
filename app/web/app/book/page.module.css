@@ -1,0 +1,141 @@
+.page {
+  padding-block: clamp(52px, 7vw, 88px) 40px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.title {
+  margin: 22px 0 24px;
+}
+
+.lede {
+  color: var(--ink-body);
+  font-size: 1.12rem;
+  line-height: 1.74;
+  max-width: 56ch;
+  margin-bottom: 34px;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.price {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.priceNote {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.85;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pending {
+  margin: 20px 0 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.8;
+}
+
+.coverWrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- contents ---- */
+
+.contents {
+  margin-top: clamp(72px, 9vw, 112px);
+}
+
+.chapters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--hairline);
+}
+
+.chapter {
+  padding: 30px 32px;
+  background: var(--bg-panel);
+}
+
+.chapterN {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.75;
+}
+
+.chapterTitle {
+  font-family: var(--font-display), serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin: 12px 0 10px;
+  line-height: 1.2;
+}
+
+.chapterBody {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.96rem;
+  line-height: 1.62;
+}
+
+.closing {
+  margin-top: 64px;
+  text-align: center;
+}
+
+.closingLine {
+  margin: 0 auto;
+  max-width: 62ch;
+  color: var(--ink);
+  font-style: italic;
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+  line-height: 1.6;
+}
+
+@media (max-width: 940px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .coverWrap {
+    order: -1;
+  }
+
+  .chapters {
+    grid-template-columns: 1fr;
+  }
+}

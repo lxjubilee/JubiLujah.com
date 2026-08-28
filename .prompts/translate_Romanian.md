@@ -7,6 +7,28 @@
 
 ---
 
+## ⚑ BINDING ADDENDUM — READ BEFORE YOU TRANSLATE A SINGLE LINE
+
+**`translate_Romanian.LESSONS.md` — the Learned-Lessons Ledger — is part of this engine and is
+mandatory.** It holds every correction a **native Romanian** has made to an AI-produced line,
+with the before, the after, and the *why*. It is the house's own accumulated Romanian, and it
+grows with every review.
+
+- **Scan its INDEX before drafting.** Open the full entry before you render any contested word,
+  idiom, loanword, rhyme, or cultural image.
+- **A lesson governs where it conflicts with a general rule in this file** — it came from a real
+  native correction; the general rule did not. Only LAW #1 and LAW #2 (§0) outrank it.
+- **Check every line against it in QA (§8).**
+- **Never promote a rule on your own confidence in your Romanian.** Fluency is not accuracy —
+  the model produces lines that parse, scan, rhyme, and are quietly wrong, with no internal
+  signal that anything is off. The native reviewer is the ground truth. §0A below is simply the
+  first harvest of that ledger.
+
+New corrections are logged through the ledger's **Intake Protocol**, never pasted straight into
+this file.
+
+---
+
 ## 0. THE GOLDEN RULE — Singing Translation, Not Word-for-Word
 
 You are writing a **singing translation** (the translator's *skopos* is performance, not literal accuracy). In priority order:
@@ -28,6 +50,8 @@ When 2–5 conflict, **meaning (1) wins, then singability (2)**. Break a rhyme b
 ## 0A. BANNED ERROR PATTERNS (LOCKED — every one of these was caught in a real review; do NOT repeat them)
 
 Before finalizing any line, check it against this list. These are the exact failure modes that produce lyrics a faith-based Romanian instantly hears as wrong.
+
+> **These nine are the first harvest of `translate_Romanian.LESSONS.md` (entries RO-L001 – RO-L010), which carries each one's full before/after pair and the reasoning behind it.** This list is the quick screen; the ledger is the authority and the growing record. When they diverge, the ledger governs.
 
 **1. No nonsense / forced rhyme-filler words.** Never end a line with a word that is there *only* to rhyme and does not belong in the sentence. Real offenders that shipped and had to be removed: **livadă** ("orchard" — meaningless), **tumul** (a burial mound), **sub ceață** ("under fog"), **n-are saț** ("has no satiety"), **fără bani** ("without money," in a heaven climax), **văpaie/o văpaie** ("a blaze" next to a *cold* floor), **feerie** (secular fairy-tale word in a Gospel line), **fărâmie** (not a real word), **comori** (dangling "treasures"), **bătătură** ("farmyard"), **semnături-mplinite** ("fulfilled signatures"). **Test:** cover the rhyme; if the last word adds no real meaning, cut it and recast the line.
 
@@ -183,6 +207,7 @@ Romania is **~85% Romanian Orthodox**, with a meaningful **neo-Protestant minori
 
 ## 8. QA CHECKLIST (run before delivering any RO album)
 
+- [ ] **LEARNED-LESSONS PASS (run first).** Every line checked against `translate_Romanian.LESSONS.md`, category by category. Any line matching a logged failure pattern is rejected and recast. **A correction a native already made is never made twice.**
 - [ ] **Sing-through:** every line read aloud in rhythm fits the melody/meter; no rushed or padded bars.
 - [ ] **Syllable check** on hook + chorus lines vs. the EN original (within ±1, hook exact).
 - [ ] **Diacritics complete** (ă â î ș ț) in all sung text AND titles. Grep for bare *a/i/s/t* mis-spellings of common words (*sfânt, mântuit, Împărat, bucurie, înviat*).

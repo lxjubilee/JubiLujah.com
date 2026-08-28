@@ -1,6 +1,6 @@
 'use client';
 // ============================================================================
-// Manage Music — Admin Panel module (BRD: Manage Music for Jubilujah.com).
+// Manage Music — Admin Panel module (BRD: Manage Music for JubileePraise.com).
 // Dashboard + Albums + Songs + Missing Assets + Activity + Sync, all backed by
 // /api/admin/music. Access is gated by the admin/layout.tsx role guard.
 // ============================================================================
@@ -590,7 +590,7 @@ function CsvButton({ kind }: { kind: string }) {
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = `jubilujah-music-${kind}.csv`; a.click();
+      a.href = url; a.download = `jubileepraise-music-${kind}.csv`; a.click();
       URL.revokeObjectURL(url);
     } catch { /* surfaced via button state only */ }
     finally { setBusy(false); }

@@ -1,4 +1,4 @@
-# Jubilujah Build Spec v1.0 — Implementation Roadmap
+# JubileePraise Build Spec v1.0 — Implementation Roadmap
 *Generated: 2026-06-03*
 
 ## Status legend
@@ -12,7 +12,7 @@
 ## Section-by-section status
 
 ### §1 Purpose & Vision — Implemented
-The "workshop, not storefront" framing is reflected in the homepage copy, the README, and the admin landing page. Editors understand Jubilujah is the internal console and that public listening happens via Jubilee Radio, DSPs, and `cdn.jubileeverse.com`. No engineering work outstanding.
+The "workshop, not storefront" framing is reflected in the homepage copy, the README, and the admin landing page. Editors understand JubileePraise is the internal console and that public listening happens via Jubilee Radio, DSPs, and `cdn.jubileeverse.com`. No engineering work outstanding.
 
 ### §2 System Goals — Scaffolded (partial)
 Catalog, ratings, comments, nominations, and playlists are working end-to-end against JSON storage. The pipeline kanban, radio program publishing, and CDN publish flow are scaffolded only — screens exist with mock data, no state transitions persist. The 12-song album lock, OHI default, and Hebrew article rule (goal 7) are documented but not enforced because there is no data layer yet.
@@ -100,7 +100,7 @@ That is enough surface for an editor to walk through the intended workflow and j
 3. **Build the FastAPI backend implementing `/api/openapi.json`.** Replace the minimal `server.js` endpoints. Ratings, comments, and nominations are the easy first cut because the contracts are already nailed down by the working MVP.
 4. **Wire the Pipeline kanban to live data with drag-to-advance state transitions.** Audit log writes on every transition. This is the single most valuable editor feature still missing.
 5. **Provision Cloudflare R2 and write the Cloudflare Worker per spec §15.** Audio gating, catalog index serving, cache TTL strategy. This is the storefront half of the workshop/storefront split.
-6. **Implement the Publish-to-CDN action with the 10-step transactional flow from spec §17.** This is the moment Jubilujah becomes a source of truth instead of a sketchpad.
+6. **Implement the Publish-to-CDN action with the 10-step transactional flow from spec §17.** This is the moment JubileePraise becomes a source of truth instead of a sketchpad.
 7. **Wire the admin Award Winner selection UI to live nominations.** Small task, high editorial value, and a good first integration test of the new backend reading from existing JSON-storage nominations during the migration window.
 8. **Stand up the Radio Engine v3.0 manifest publish flow (spec §12).** Once §6 (R2) and §17 (publish flow) exist, this is mostly schema-driven plumbing into Icecast-KH / Liquidsoap.
 

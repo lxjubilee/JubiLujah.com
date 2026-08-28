@@ -1,0 +1,74 @@
+.btn {
+  --ring: rgba(232, 217, 168, 0.28);
+
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: var(--play-size);
+  height: var(--play-size);
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--ring);
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px -4px rgba(201, 168, 74, 0.7);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+  filter: grayscale(0.4);
+}
+
+/* Ghost variant — a hairline ring rather than a gold disc. */
+.ghost {
+  background: transparent;
+  border-color: var(--hairline-strong);
+}
+
+.ghost .tri {
+  border-left-color: var(--accent-soft);
+}
+
+.ghost .bar {
+  background: var(--accent-soft);
+}
+
+/* The triangle: pure CSS borders. No icon font. */
+.tri {
+  width: 0;
+  height: 0;
+  border-top: calc(var(--play-size) * 0.19) solid transparent;
+  border-bottom: calc(var(--play-size) * 0.19) solid transparent;
+  border-left: calc(var(--play-size) * 0.3) solid var(--on-accent);
+  /* nudge toward the optical centre of the circle */
+  margin-left: calc(var(--play-size) * 0.07);
+}
+
+.pause {
+  display: flex;
+  gap: calc(var(--play-size) * 0.08);
+}
+
+.bar {
+  width: calc(var(--play-size) * 0.08);
+  height: calc(var(--play-size) * 0.34);
+  border-radius: 1px;
+  background: var(--on-accent);
+}
+
+.lock {
+  font-family: var(--font-mono), monospace;
+  font-size: calc(var(--play-size) * 0.34);
+  color: var(--ink-faint);
+  line-height: 1;
+}

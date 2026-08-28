@@ -66,6 +66,14 @@ export const getSummary = (type: TargetType, id: string) =>
 export const batchSummaries = (targets: Target[]) =>
   api.post<{ summaries: Record<string, ReviewSummary> }>(`/api/reviews/summaries`, { targets });
 
+/**
+ * The key a summary is returned under by batchSummaries, e.g. "album:<uuid>".
+ *
+ * Callers were building this string inline, which meant the shape of the
+ * response key was written down in several places and enforced in none.
+ */
+export const summaryKey = (type: TargetType, id: string) => `${type}:${id}`;
+
 export const listReviews = (
   targets: Target[],
   opts: { sort?: ReviewSort; page?: number; limit?: number } = {},

@@ -1,6 +1,6 @@
 # Backstage Access — content library
 
-The VIP wing of JubiLujah.com. Every piece here is built on **one specific song**, in one of
+The VIP wing of JubileePraise.com. Every piece here is built on **one specific song**, in one of
 exactly three formats, per `skill_write.content.backstage.md` (InspirePersonas → personas/skills).
 
 ```

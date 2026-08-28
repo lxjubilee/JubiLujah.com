@@ -16,7 +16,7 @@
 -- Target: PostgreSQL 16+. Conventions match 0001_init.sql / 0012_analytics.sql.
 -- ============================================================================
 
--- Publish state of an album/song on Jubilujah.com.
+-- Publish state of an album/song on JubileePraise.com.
 --   published — visible on the public site (and admin)
 --   hidden    — admin-suppressed: must NOT appear anywhere on the public site,
 --               but stays in the admin panel

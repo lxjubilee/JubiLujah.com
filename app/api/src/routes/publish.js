@@ -19,7 +19,7 @@ const router = Router();
 router.use(requireRole('admin'));
 
 const J_ROOT = process.env.ARTWORK_BASE || 'J:/music';
-const ORCHESTRATOR = process.env.PUBLISH_SCRIPT || 'C:/jubilujah-local/publish-to-production.js';
+const ORCHESTRATOR = process.env.PUBLISH_SCRIPT || 'C:/jubileepraise-local/publish-to-production.js';
 const jAvailable = () => { try { return fs.existsSync(`${J_ROOT}/albums`); } catch { return false; } };
 
 const isDup = (f) => / \(\d+\)\.mp3$/i.test(f);

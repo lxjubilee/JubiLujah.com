@@ -1,8 +1,8 @@
-# Living Waters: The Over-the-Counter Soul Medicine Experience on JubiLujah
+# Living Waters: The Over-the-Counter Soul Medicine Experience on JubileePraise
 
 ## What This Is
 
-Living Waters is a section on JubiLujah.com where a person walks in, finds a medicine for their soul, and begins taking it, with no intake and no consultation. It is the over-the-counter counterpart to the prescribed Divine Medicine track (Nova's "doctor's visit"). The heart behind it: as a ministry, we take on the burden of helping people receive rather than blaming them for not receiving. Living Waters removes every possible point of friction between a person and the living Word.
+Living Waters is a section on JubileePraise.com where a person walks in, finds a medicine for their soul, and begins taking it, with no intake and no consultation. It is the over-the-counter counterpart to the prescribed Divine Medicine track (Nova's "doctor's visit"). The heart behind it: as a ministry, we take on the burden of helping people receive rather than blaming them for not receiving. Living Waters removes every possible point of friction between a person and the living Word.
 
 This document is a companion to the Divine Medicine Formulary Standard. All three core tenets (tangible outcome, scriptural warrant, present-tense possession) and the category and tag systems defined there still govern every medicine that appears here. What changes is only the delivery posture: open shelf instead of prescription counter.
 
@@ -187,4 +187,4 @@ Each medicine can show, truthfully and opt-in only, how many people have taken i
 - Final coined names for the launch catalog of medicines.
 - Public heading wording for the five category cards (coordinate with the cross-site playlist public-heading decision).
 - Exact snooze cap (number of snoozes before roll-over).
-- Whether Living Waters medicines appear anywhere alongside the standard JubiLujah playlist rows, or live entirely in their own section (leaning: their own section).
+- Whether Living Waters medicines appear anywhere alongside the standard JubileePraise playlist rows, or live entirely in their own section (leaning: their own section).

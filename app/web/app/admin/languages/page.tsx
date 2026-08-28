@@ -3,7 +3,7 @@ import { languageStats } from '@/lib/languageStats';
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
-  title: 'Languages — JubiLujah',
+  title: 'Languages — JubileePraise',
   robots: { index: false, follow: false },
 };
 
@@ -15,7 +15,7 @@ export default function LanguagesPage() {
     <>
       <h2 className="section-title">Languages</h2>
       <p className="section-sub">
-        Languages JubiLujah supports and how much live catalog each one has. An album&apos;s language comes from its code suffix (…EN = English, …ES = Spanish, …). The catalog is currently English; other languages fill in as localized albums are published.
+        Languages JubileePraise supports and how much live catalog each one has. An album&apos;s language comes from its code suffix (…EN = English, …ES = Spanish, …). The catalog is currently English; other languages fill in as localized albums are published.
       </p>
 
       <div className="kpi-row">

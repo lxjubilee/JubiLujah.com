@@ -3,7 +3,7 @@ import { productionHistory, ALBUM_QUOTA, SONG_QUOTA } from '@/lib/productionHist
 
 export const revalidate = 600;
 export const metadata: Metadata = {
-  title: 'Production History — JubiLujah',
+  title: 'Production History — JubileePraise',
   robots: { index: false, follow: false },
 };
 

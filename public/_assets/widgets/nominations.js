@@ -1,4 +1,4 @@
-/* Jubilujah — Trophy Nominations widget
+/* JubileePraise — Trophy Nominations widget
  * Build Spec §11 — Awards & Nominations
  *
  * Auto-init: scans the DOM for <div data-nominations-target="TYPE:ID"></div>

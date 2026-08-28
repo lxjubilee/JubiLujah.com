@@ -69,11 +69,11 @@
   "history_root": "core/ai-users/user.ellis.vandenberg/",
   "provenance": {
     "generated_at": "2026-07-22T00:00:00Z",
-    "seed": "jubilujah-2026-07-22-d",
+    "seed": "jubileepraise-2026-07-22-d",
     "synthetic": true,
     "cohort": "cast-four (Chicago & Atlanta · Middle states · Europe)",
     "confidence_pct": 74,
     "depth_tier": "engine-assembled (constrained individuation, §2) — authored core per persona; a tier below the hand-authored ranks 1-20. Deepen on request.",
-    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
+    "source": "JubileePraise.com site analysis (web routes, catalog taxonomy, subscription tiers, genre taxonomy, 40 translation targets)"
   }
 }

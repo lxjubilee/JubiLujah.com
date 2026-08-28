@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cdn.jubileeverse.com/schemas/v1/album.schema.json",
   "title": "Album Manifest",
-  "description": "Canonical published JSON manifest for an album in the Jubilujah catalog (Build Spec section 16). Enforces the 12-song lock for Inspire Family albums via JSON Schema if/then/else: when artist.grouping = 'inspire_family', the songs array must contain exactly 12 entries with track_numbers 1 through 12.",
+  "description": "Canonical published JSON manifest for an album in the JubileePraise catalog (Build Spec section 16). Enforces the 12-song lock for Inspire Family albums via JSON Schema if/then/else: when artist.grouping = 'inspire_family', the songs array must contain exactly 12 entries with track_numbers 1 through 12.",
   "type": "object",
   "additionalProperties": false,
   "required": [

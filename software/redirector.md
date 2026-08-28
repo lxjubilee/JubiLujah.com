@@ -1,7 +1,7 @@
 # Redirector Engine and QR Code System
 ## Build Instructions for AI Developer
 **Version:** 2.0 — **Part A** is the specification (the *why* and *what*); **Part B** (appended 2026-08-06) is the **as-built Implementation & Installation Guide** — what actually exists in this repo and how to stand it up on any other website.
-**Status:** Built and verified on the pilot domain (JubiLujah.com). MVP phases (1,2,4,5,7) plus phases 3,6,8,9,11 are implemented and offline-verified; Phase 10 (IPX handler) and a handful of items remain deferred — see **Part B §B0** for the exact done/deferred ledger.
+**Status:** Built and verified on the pilot domain (JubileePraise.com). MVP phases (1,2,4,5,7) plus phases 3,6,8,9,11 are implemented and offline-verified; Phase 10 (IPX handler) and a handful of items remain deferred — see **Part B §B0** for the exact done/deferred ledger.
 **Architecture:** Distributed, per domain, no shared runtime.
 **Reference stack (as built):** Node.js / Express (ESM) API · PostgreSQL (schema `redirector.*`, via `pg`) · Next.js (App Router) web. No shared runtime service; no central token DB.
 
@@ -30,7 +30,7 @@ Read this section twice. It overrides any instinct toward centralization.
 
 ### 2.1 Fully distributed
 
-Each website in the ecosystem (JubileeVerse.com, JubiLujah.com, TorahSings.com, KJubilee.com, InspirePrayers.com, JubileeInspire.com, and any future domain) runs its **own complete, self contained instance** of the redirector engine.
+Each website in the ecosystem (JubileeVerse.com, JubileePraise.com, TorahSings.com, KJubilee.com, InspirePrayers.com, JubileeInspire.com, and any future domain) runs its **own complete, self contained instance** of the redirector engine.
 
 That means each domain owns:
 
@@ -42,7 +42,7 @@ That means each domain owns:
 - Its own admin console
 - Its own failover snapshot and health watcher service
 
-There is **no shared runtime service**. There is **no central token database**. There is **no cross domain API dependency in the request path**. If JubiLujah goes down, TorahSings redirects keep working, and vice versa.
+There is **no shared runtime service**. There is **no central token database**. There is **no cross domain API dependency in the request path**. If JubileePraise goes down, TorahSings redirects keep working, and vice versa.
 
 ### 2.2 What IS shared
 
@@ -71,7 +71,7 @@ https://<domain>/r/<TOKEN>
 Examples:
 
 ```
-https://jubilujah.com/r/K7M9P2XR4TWB
+https://jubileepraise.com/r/K7M9P2XR4TWB
 https://torahsings.com/r/H3NQ8FVJ5CDY
 https://jubileeverse.com/r/9RTBM4KXWP7H
 ```
@@ -584,7 +584,7 @@ Error correction level H is mandatory whenever a logo overlays the center. The o
 Encode the full canonical URL, uppercase, no query string, no trailing slash:
 
 ```
-HTTPS://JUBILUJAH.COM/R/K7M9P2XR4TWB
+HTTPS://JUBILEEPRAISE.COM/R/K7M9P2XR4TWB
 ```
 
 Uppercase the entire payload including scheme and host. This keeps the code inside QR alphanumeric encoding mode. Hosts are case insensitive, so this resolves correctly everywhere.
@@ -597,7 +597,7 @@ Each domain ships a `qr.style.json` alongside its taxonomy profile.
 
 ```json
 {
-  "domain": "jubilujah.com",
+  "domain": "jubileepraise.com",
   "styles": [
     {
       "key": "default",
@@ -706,8 +706,8 @@ Each domain ships a `taxonomy.profile.json` and a `qr.style.json`. The admin con
 
 ```json
 {
-  "domain": "jubilujah.com",
-  "display_name": "JubiLujah Music",
+  "domain": "jubileepraise.com",
+  "display_name": "JubileePraise Music",
   "levels": [
     {
       "key": "persona",
@@ -754,7 +754,7 @@ Each domain ships a `taxonomy.profile.json` and a `qr.style.json`. The admin con
 
 | Domain | Hierarchy | Notable |
 |---|---|---|
-| JubiLujah.com | Persona, Album, Song, plus Articles | Resume tokens on albums, device routing to app stores |
+| JubileePraise.com | Persona, Album, Song, plus Articles | Resume tokens on albums, device routing to app stores |
 | TorahSings.com | Series, Book, Chapter, plus Articles and Song references | Resume tokens on books, the strongest use case |
 | JubileeVerse.com | Category, Article, plus Related media | `latest_in_collection` DQR per category |
 | KJubilee.com | Station, Show, Episode | Vanity aliases are essential, spoken on air |
@@ -830,9 +830,9 @@ GET /api/redirector/v1/lookup?kind=track&q=restoration&limit=3
       "kind": "track",
       "summary": "One line summary for context.",
       "keywords": ["restoration", "healing", "psalms"],
-      "short_url": "https://jubilujah.com/r/K7M9P2XR4TWB",
-      "qr_svg_url": "https://jubilujah.com/qr/K7M9P2XR4TWB.svg",
-      "qr_png_url": "https://jubilujah.com/qr/K7M9P2XR4TWB.png",
+      "short_url": "https://jubileepraise.com/r/K7M9P2XR4TWB",
+      "qr_svg_url": "https://jubileepraise.com/qr/K7M9P2XR4TWB.svg",
+      "qr_png_url": "https://jubileepraise.com/qr/K7M9P2XR4TWB.png",
       "path": "Persona Name > Album Name > Song Title"
     }
   ]
@@ -954,7 +954,7 @@ Phases 1, 2, 4, 5, and 7 are the minimum viable deployment. Everything else can 
 
 ### 19.2 Pilot domain
 
-Build and prove the full stack on **one domain first**. JubiLujah.com is the recommended pilot because the music hierarchy (persona, album, song) exercises three levels of depth, both token types, resume tokens, device routing to app stores, landing pages, and the persona recommendation path in a single deployment.
+Build and prove the full stack on **one domain first**. JubileePraise.com is the recommended pilot because the music hierarchy (persona, album, song) exercises three levels of depth, both token types, resume tokens, device routing to app stores, landing pages, and the persona recommendation path in a single deployment.
 
 Do not roll out to a second domain until the pilot has run in production for at least two weeks with real scan traffic.
 
@@ -1021,7 +1021,7 @@ Flag these for review before Phase 6.
 
 # PART B — Reference Implementation & Installation Guide (as-built)
 
-*Appended 2026-08-06. Part A above is the design contract. This part documents the code that actually exists in this repository (`w:/JubiLujah.com`), verified against source, and turns it into a runbook for installing the same engine on another website. Where the code diverges from Part A, §B9 lists every divergence; the code is authoritative for what runs today.*
+*Appended 2026-08-06. Part A above is the design contract. This part documents the code that actually exists in this repository (`w:/JubileePraise.com`), verified against source, and turns it into a runbook for installing the same engine on another website. Where the code diverges from Part A, §B9 lists every divergence; the code is authoritative for what runs today.*
 
 ## B0. Build status ledger (done / deferred)
 
@@ -1220,22 +1220,22 @@ Assumes the target site runs the same reference stack (Express ESM API + Postgre
 6. **Rebrand the themed files (§B11).** Landing template, the two `/r` & `/rp` route branded pages, `appLinks.ts`, and the well-known routes.
 7. **Adjust locale + RBAC.** Token blocklist locale terms in `tokens.js`; `roleFor()` mapping in `redirectorAuth.js` to the site's role names; default timezone if not `America/Los_Angeles`.
 8. **Verify.** Run the offline suite (§B7) — all should pass. With Postgres up, run `redirector:smoke`, `redirector:snapshot`, `redirector:health`.
-9. **Seed content.** Either call the Automation API (`/assets` → `/tokens/bulk` → …) from the site's own publish pipeline, or write a site-specific ingest (the JubiLujah `redirector-ingest-music.mjs` is a model, not reusable as-is).
+9. **Seed content.** Either call the Automation API (`/assets` → `/tokens/bulk` → …) from the site's own publish pipeline, or write a site-specific ingest (the JubileePraise `redirector-ingest-music.mjs` is a model, not reusable as-is).
 10. **Ops.** `robots.txt` disallow `/r/` `/rp/`; enable `REDIRECTOR_SCHEDULER=on`; mint API keys (`redirector-mint-key.mjs`); assign SSO roles; and close the §B9 gaps that matter for your launch (signed URLs first if print/scrape risk is high).
 
 ## B11. Portability checklist — exact files/keys to change per site
 
 **Swap, don't recode (design intent):**
-- `app/api/src/redirector/profiles/taxonomy.profile.json` — `domain`, `display_name`, and the `levels` tree (JubiLujah ships persona → album → track("Song") → article).
-- `app/api/src/redirector/profiles/qr.style.json` — `domain`, brand colors (JubiLujah: `#1A1A2E`, `#0F3460`, gold `#E6AC00`), `center_mark_monogram` ("J"), `min_print_cm`.
+- `app/api/src/redirector/profiles/taxonomy.profile.json` — `domain`, `display_name`, and the `levels` tree (JubileePraise ships persona → album → track("Song") → article).
+- `app/api/src/redirector/profiles/qr.style.json` — `domain`, brand colors (JubileePraise: `#1A1A2E`, `#0F3460`, gold `#E6AC00`), `center_mark_monogram` ("J"), `min_print_cm`.
 
 **Domain / base URL:**
-- `REDIRECTOR_BASE_URL` / `WEB_BASE_URL` env. Hardcoded fallbacks to change if env is unset: `qr/payload.js` (`https://jubilujah.com`) and `redirector-ingest-music.mjs` (`https://www.jubilujah.com`).
+- `REDIRECTOR_BASE_URL` / `WEB_BASE_URL` env. Hardcoded fallbacks to change if env is unset: `qr/payload.js` (`https://jubileepraise.com`) and `redirector-ingest-music.mjs` (`https://www.jubileepraise.com`).
 
-**Rebrand (contain hardcoded JubiLujah strings):**
-- `app/web/lib/landing.ts` — brand mark, gold theme, "Get the JubiLujah app" copy, `♪` placeholder.
-- `app/web/app/r/[token]/route.ts` & `app/web/app/rp/[token]/route.ts` — inline branded page HTML ("JubiLujah.com", gold, "Explore the music").
-- `app/web/lib/appLinks.ts` — `com.jubilujah.app`, store URLs, Apple Team ID, Android SHA-256 fingerprint, scheme `jubilujah`.
+**Rebrand (contain hardcoded JubileePraise strings):**
+- `app/web/lib/landing.ts` — brand mark, gold theme, "Get the JubileePraise app" copy, `♪` placeholder.
+- `app/web/app/r/[token]/route.ts` & `app/web/app/rp/[token]/route.ts` — inline branded page HTML ("JubileePraise.com", gold, "Explore the music").
+- `app/web/lib/appLinks.ts` — `com.jubileepraise.app`, store URLs, Apple Team ID, Android SHA-256 fingerprint, scheme `jubileepraise`.
 - `app/web/app/well-known/aasa/route.ts` + `assetlinks/route.ts` — derive from `appLinks.ts`.
 
 **Locale / RBAC / defaults:**
@@ -1243,7 +1243,7 @@ Assumes the target site runs the same reference stack (Express ESM API + Postgre
 - `app/api/src/middleware/redirectorAuth.js` `roleFor()` — maps to this app's RBAC (`content_editor`/`executive`/`admin`); remap to the new app's roles.
 - Default timezone `America/Los_Angeles` in `0021_redirector.sql` and `rules/engine.js`.
 
-**Replace or omit (JubiLujah-only, not generic):**
+**Replace or omit (JubileePraise-only, not generic):**
 - `app/api/scripts/redirector-ingest-music.mjs` — reads `web/public/music/catalog-manifest.json`, the 12 Inspire persona slugs, album/song URL shapes. A per-site ingest must be written fresh.
 - `app/web/components/RedirectorCatalog.tsx` — Music/Articles/Books tree tied to `@/lib/personas` and the music/articles JSON. Rebuild for the new site's catalog.
 

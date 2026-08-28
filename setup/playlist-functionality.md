@@ -1,8 +1,8 @@
 # Jubilee Music Playlist Standard and Editing Specification
 
-**Scope:** Cross-site standard for how playlists are organized, presented, edited, and stored across the Jubilee music sites (currently JubiLujah.com and TorahSings.com). This is the shared default. Individual sites may layer their own exceptions on top of it.
+**Scope:** Cross-site standard for how playlists are organized, presented, edited, and stored across the Jubilee music sites (currently JubileePraise.com and TorahSings.com). This is the shared default. Individual sites may layer their own exceptions on top of it.
 
-**Relationship to other specs:** This document governs playlist presentation, editing, and storage. It complements the deeper JubiLujah playlist system specification, which covers the internal mechanics of a playlist (song capacity, artist selection across the Inspire Family, and the enhancement layers). Where a figure here differs from that one, see Section 10 (Open Decisions).
+**Relationship to other specs:** This document governs playlist presentation, editing, and storage. It complements the deeper JubileePraise playlist system specification, which covers the internal mechanics of a playlist (song capacity, artist selection across the Inspire Family, and the enhancement layers). Where a figure here differs from that one, see Section 10 (Open Decisions).
 
 ---
 
@@ -283,7 +283,7 @@ The following ten enhancements are part of this specification.
 
 The following are agreed to be unresolved and are called out so they can be settled before or during build.
 
-1. **Default playlist length.** The stated default here is 36 songs. The JubiLujah theme-playlist system was previously specified at 120 songs per playlist. To confirm: is 36 the default everywhere, or 36 for a user's editable playlist while 120 remains for the large curated theme playlists?
+1. **Default playlist length.** The stated default here is 36 songs. The JubileePraise theme-playlist system was previously specified at 120 songs per playlist. To confirm: is 36 the default everywhere, or 36 for a user's editable playlist while 120 remains for the large curated theme playlists?
 2. **Section headings.** Final public wording for the Thematic and Emotional State headings (working choices: "Songs by Theme" and "For Your Season").
 3. **Section order.** Whether "My Playlists" leads for signed-in users, or the defaults always lead.
 4. **Description-line style.** Confirm the mood or subject line as the standard over a factual data tag.

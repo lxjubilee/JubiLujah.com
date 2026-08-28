@@ -1,0 +1,42 @@
+/* JubileePraise "nf-tile" — a square cover with the title on a gradient. The rich
+   hover interaction now lives in the portal preview (HoverPreview.tsx), so the
+   tile itself stays calm: no scale/pop of its own. */
+.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #14181f;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  /* Keep a 285-tile page cheap: skip painting/layout for off-screen tiles,
+     remembering their real size once measured. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 210px;
+}
+
+/* Cover image (real /artwork) — square, cropped to fill. */
+.cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Celestial-art fallback brings its own 1 / 1 ratio. */
+.art {
+  border-radius: 0;
+}
+
+.tile[data-audio='no'] .cover,
+.tile[data-audio='no'] .art {
+  opacity: 0.62;
+}

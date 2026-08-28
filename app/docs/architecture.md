@@ -2,7 +2,7 @@
 
 ## Overview
 
-Jubilujah.com is migrated from a static HTML site into three cooperating services plus a database.
+JubileePraise.com is migrated from a static HTML site into three cooperating services plus a database.
 
 ```
 Browser ──> Next.js (web :3000) ──/api/* proxy──> Express (api :4000) ──SQL──> PostgreSQL

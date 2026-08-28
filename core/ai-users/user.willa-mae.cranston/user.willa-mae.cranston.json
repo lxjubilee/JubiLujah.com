@@ -76,9 +76,9 @@
   "history_root": "core/ai-users/user.willa-mae.cranston/",
   "provenance": {
     "generated_at": "2026-07-22T00:00:00Z",
-    "seed": "jubilujah-2026-07-22-a",
+    "seed": "jubileepraise-2026-07-22-a",
     "confidence_pct": 86,
     "synthetic": true,
-    "source": "JubiLujah.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
+    "source": "JubileePraise.com site analysis (web routes, catalog taxonomy, subscription tiers, 40 translation targets, genre taxonomy)"
   }
 }

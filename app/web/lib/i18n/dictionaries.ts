@@ -1,5 +1,5 @@
 // Per-language UI string overrides. Keys mirror EN in lib/i18n.ts; any missing
-// key falls back to English. Brand names (JubiLujah) and {placeholders} preserved.
+// key falls back to English. Brand names (JubileePraise) and {placeholders} preserved.
 // Auto-assembled from 40 per-language translations (40 languages).
 export const DICTIONARIES: Record<string, Record<string, string>> = {
   "es": {

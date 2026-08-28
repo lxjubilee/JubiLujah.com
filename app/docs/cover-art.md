@@ -9,9 +9,9 @@ typically a **~97% size reduction** (e.g. 1.8 MB → ~80 KB).
 
 - The web `/cover/<CODE>.png` route ([app/web/app/cover/[code]/route.ts](../web/app/cover/[code]/route.ts))
   tries the **CDN first** (`cdn.jubileeverse.com/music/<album.path>/artwork/<CODE>.png`)
-  and falls back to the local `J:/jubilujah.com/music` master only in dev.
+  and falls back to the local `J:/jubileepraise.com/music` master only in dev.
 - Production (the Seattle VPS) has **no J: drive**, so covers MUST be on the CDN or
-  they won't display. See [[jubilujah-prod-deploy]].
+  they won't display. See [[jubileepraise-prod-deploy]].
 - We keep the `<CODE>.png` **URL** but store **WebP bytes** with
   `Content-Type: image/webp`. Browsers render by content-type, so no route/manifest/
   component changes are needed.
@@ -20,7 +20,7 @@ typically a **~97% size reduction** (e.g. 1.8 MB → ~80 KB).
 
 Whenever cover art is added or changed (e.g. after the
 [album cover workflow](album-cover-workflow) places new `<CODE>.png` masters under
-`J:/jubilujah.com/music/**/artwork/`):
+`J:/jubileepraise.com/music/**/artwork/`):
 
 1. **Keep the full-res PNG master on J:** (lossless source — never deleted).
 2. **Optimize + publish to the CDN** with the script below. Never upload raw PNGs.
@@ -37,7 +37,7 @@ node .claude/optimize-covers.js --apply          # optimize all covers and uploa
 node .claude/optimize-covers.js --apply --only=TTX3   # only matching paths (e.g. a label)
 ```
 
-It walks `J:/jubilujah.com/music/**/artwork/*.png`, resizes to ≤ 800 px, encodes WebP q80,
+It walks `J:/jubileepraise.com/music/**/artwork/*.png`, resizes to ≤ 800 px, encodes WebP q80,
 and uploads to R2 key `music/<relpath>` with `Content-Type: image/webp` and
 `Cache-Control: public, max-age=31536000, immutable`.
 
@@ -47,11 +47,11 @@ If a cover URL was ever requested while missing, Cloudflare may have edge-cached
 404. After uploading new covers, purge the relevant zone so the new images appear:
 
 ```bash
-# jubilujah.com zone (id 0845c114e738e3dc4e5ff6a26483adf9) — clears cached /cover 404s
+# jubileepraise.com zone (id 0845c114e738e3dc4e5ff6a26483adf9) — clears cached /cover 404s
 curl -X POST "https://api.cloudflare.com/client/v4/zones/<zone>/purge_cache" \
   -H "X-Auth-Email: <email>" -H "X-Auth-Key: <global-key>" \
   -H "Content-Type: application/json" --data '{"purge_everything":true}'
 ```
 
 The `/cover` route also keeps a 10-minute in-memory negative cache; `pm2 restart
-jubilujah-web` clears it immediately if needed.
+jubileepraise-web` clears it immediately if needed.

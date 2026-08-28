@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description:
-    'The terms and conditions that govern your use of JubiLujah.com — accounts, acceptable use, content, intellectual property, and your rights and responsibilities.',
+    'The terms and conditions that govern your use of JubileePraise.com — accounts, acceptable use, content, intellectual property, and your rights and responsibilities.',
   robots: { index: true, follow: true },
 };
 
@@ -19,7 +19,7 @@ export default function TermsPage() {
           <div className="eyebrow">Legal</div>
           <h1>Terms of <em>Use</em></h1>
           <p className="lead">
-            These terms are the agreement between you and JubiLujah.com. Please read them carefully &mdash;
+            These terms are the agreement between you and JubileePraise.com. Please read them carefully &mdash;
             by creating an account or using the Service, you agree to be bound by them.
           </p>
         </div>
@@ -31,9 +31,9 @@ export default function TermsPage() {
             <div className="updated">Effective {EFFECTIVE_DATE}</div>
 
             <p className="intro">
-              Welcome to JubiLujah.com. These Terms of Use (&ldquo;Terms&rdquo;) are a legal agreement between you
-              and Jubilee Software, Inc. (&ldquo;JubiLujah,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
-              &ldquo;our&rdquo;) governing your access to and use of the JubiLujah.com website and the
+              Welcome to JubileePraise.com. These Terms of Use (&ldquo;Terms&rdquo;) are a legal agreement between you
+              and Jubilee Software, Inc. (&ldquo;JubileePraise,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
+              &ldquo;our&rdquo;) governing your access to and use of the JubileePraise.com website and the
               faith-centered music streaming and discovery services offered through it (the
               &ldquo;Service&rdquo;). Please also review our <Link href="/privacy">Privacy Policy</Link>, which
               explains how we handle your information and is incorporated into these Terms by reference.
@@ -86,7 +86,7 @@ export default function TermsPage() {
             <p>
               The Service lets you contribute content such as comments, star ratings, award nominations, and
               playlists (&ldquo;User Content&rdquo;). You retain ownership of your User Content, but by submitting
-              it you grant JubiLujah a worldwide, royalty-free, non-exclusive license to host, store, display,
+              it you grant JubileePraise a worldwide, royalty-free, non-exclusive license to host, store, display,
               reproduce, and use that content as needed to operate and improve the Service.
             </p>
             <p>You are solely responsible for your User Content, and you represent that:</p>
@@ -138,7 +138,7 @@ export default function TermsPage() {
 
             <h2>11. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by law, JubiLujah and its affiliates, officers, employees, artists,
+              To the fullest extent permitted by law, JubileePraise and its affiliates, officers, employees, artists,
               and licensors will not be liable for any indirect, incidental, special, consequential, or punitive
               damages, or any loss of data, use, goodwill, or profits, arising out of or relating to your use of
               (or inability to use) the Service. Our total liability for any claim relating to the Service will
@@ -148,7 +148,7 @@ export default function TermsPage() {
 
             <h2>12. Indemnification</h2>
             <p>
-              You agree to indemnify and hold harmless JubiLujah and its affiliates from any claims, damages,
+              You agree to indemnify and hold harmless JubileePraise and its affiliates from any claims, damages,
               losses, and expenses (including reasonable legal fees) arising out of your use of the Service, your
               User Content, or your violation of these Terms or applicable law.
             </p>
@@ -173,7 +173,7 @@ export default function TermsPage() {
             <p>If you have any questions about these Terms, please contact us:</p>
             <div className="legal-contact">
               <p><strong>Jubilee Software, Inc.</strong></p>
-              <p>Legal inquiries: <a href="mailto:legal@jubilujah.com">legal@jubilujah.com</a></p>
+              <p>Legal inquiries: <a href="mailto:legal@jubileepraise.com">legal@jubileepraise.com</a></p>
             </div>
           </article>
         </div>

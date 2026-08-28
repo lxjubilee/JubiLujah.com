@@ -1,12 +1,12 @@
 // ============================================================================
 // Mock OIDC provider — emulates the JubileeInspire identity provider for local
-// development ONLY. Implements the slice of OpenID Connect that Jubilujah
+// development ONLY. Implements the slice of OpenID Connect that JubileePraise
 // uses: discovery, JWKS, Authorization Code + PKCE, token, and userinfo.
 //
 // The seed users below model the *shared* JubileeInspire account store: the same
 // subjects/emails exist in identity.users (DB seed), so "same credentials across
 // both platforms" is demonstrable. In production this whole service is replaced
-// by api.JubileeInspire.com — Jubilujah only changes OIDC_* env values.
+// by api.JubileeInspire.com — JubileePraise only changes OIDC_* env values.
 // ============================================================================
 import express from 'express';
 import crypto from 'node:crypto';
@@ -16,11 +16,11 @@ import {
 
 const PORT = process.env.MOCK_OIDC_PORT || 4010;
 const ISSUER = process.env.MOCK_OIDC_ISSUER || `http://localhost:${PORT}`;
-const CLIENT_ID = process.env.OIDC_CLIENT_ID || 'jubilujah-web';
-const CLIENT_SECRET = process.env.OIDC_CLIENT_SECRET || 'jubilujah-dev-secret';
+const CLIENT_ID = process.env.OIDC_CLIENT_ID || 'jubileepraise-web';
+const CLIENT_SECRET = process.env.OIDC_CLIENT_SECRET || 'jubileepraise-dev-secret';
 
 // ---- Seed accounts (mirror identity.users) ---------------------------------
-// roles drive RBAC sync on the Jubilujah side.
+// roles drive RBAC sync on the JubileePraise side.
 const USERS = {
   gabriel: {
     sub: 'jubileeinspire|gabriel.ungureanu',
@@ -118,7 +118,7 @@ app.get('/authorize', (req, res) => {
     </style></head><body>
     <div class="card">
       <h1>JubileeInspire SSO</h1>
-      <p>Development identity provider — choose an account to sign in to Jubilujah.</p>
+      <p>Development identity provider — choose an account to sign in to JubileePraise.</p>
       ${buttons}
       <div class="note">Mock provider. In production this is api.JubileeInspire.com.</div>
     </div></body></html>`);

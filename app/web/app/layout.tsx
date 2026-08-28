@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
-import { Open_Sans, Orbitron } from 'next/font/google';
+import { Open_Sans, Orbitron, Playfair_Display, Spline_Sans_Mono } from 'next/font/google';
 import './globals.css';
+// Torah Sings' base sheet. Every rule is scoped under [data-tenant='torahsings']
+// (stamped on <html> below), so importing it globally costs the other tenants
+// nothing but keeps it in the one stylesheet Next emits.
+import './torahsings.css';
 
 // Open Sans — the JubileeInspire typeface, used on the auth pages for a matching
 // look. Exposed as a CSS variable so only the auth screens opt into it.
@@ -8,10 +12,19 @@ const openSans = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '600', '
 
 // Orbitron — the JubileeVerse logo wordmark typeface, used by the site header.
 const orbitron = Orbitron({ subsets: ['latin'], weight: ['600', '700'], variable: '--font-orbitron', display: 'swap' });
+
+// Torah Sings' two additional faces: Spline Sans Mono for eyebrows and labels,
+// Playfair Display for the Hebraic Christianity reading room. Both are declared
+// unconditionally — next/font must be called at module scope, not inside a
+// branch — but they cost nothing on the other tenants: the variables are only
+// attached to <html> for Torah Sings, and an unreferenced CSS variable does not
+// download a font.
+const splineSansMono = Spline_Sans_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' });
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['500', '700'], style: ['normal', 'italic'], variable: '--font-serif', display: 'swap' });
 import { cookies } from 'next/headers';
 import { AuthProvider } from '@/components/AuthProvider';
 import Header from '@/components/Header';
-import { getArtist } from '@/lib/manifest';
+import { getArtist, listArtists } from '@/lib/manifest';
 import { languagesWithContent } from '@/lib/languageStats';
 import { LangProvider } from '@/lib/useLang';
 import { LANG_COOKIE, DEFAULT_LANG, isSupportedLang } from '@/lib/languages';
@@ -25,39 +38,53 @@ import CoverUploadModal from '@/components/CoverUploadModal';
 import TrackManagerModal from '@/components/TrackManagerModal';
 import ScrollRestoreGuard from '@/components/ScrollRestoreGuard';
 import NavTracker from '@/components/NavTracker';
+import { TenantProvider } from '@/components/TenantProvider';
+import TorahSingsShell from '@/components/torahsings/TorahSingsShell';
+import { currentTenant } from '@/lib/tenant';
+import { usesAngelsCatalog } from '@/lib/tenants';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: 'JubiLujah.com — Feel the Spirit Move',
-    template: '%s — JubiLujah.com',
-  },
-  description:
-    'JubiLujah.com — music that celebrates, restores, and resounds. The Inspire Family, Children Music, Faith-Based Believers, General Audiences, and Jubilee Prayers.',
-  openGraph: {
-    title: 'JubiLujah.com — Feel the Spirit Move',
-    description: 'Music that celebrates, restores, and resounds.',
-    url: SITE_URL,
-    siteName: 'JubiLujah.com',
-    type: 'website',
-  },
-  robots: { index: true, follow: true },
-  // Suppress the browser's built-in "Translate this page?" prompt. Because the
-  // site sets <html lang="ro/ja/…"> for the chosen UI language, Chrome/Edge would
-  // otherwise offer to machine-translate the (already-localized) page back to the
-  // user's browser language. `google: notranslate` renders
-  // <meta name="google" content="notranslate"> which disables that offer; paired
-  // with translate="no" on <html> below for Firefox/Safari coverage.
-  other: { google: 'notranslate' },
-};
+// Metadata is per-request now, because the title, the description and the
+// canonical URL all belong to whichever property the Host header names. A static
+// `metadata` export cannot see the request, so it would have titled every
+// goPartyGiggles page "JubileePraise.com".
+export async function generateMetadata(): Promise<Metadata> {
+  const t = currentTenant();
+  const url = t.key === 'jubileepraise' ? SITE_URL : `https://${t.hosts[0]}`;
+  return {
+    metadataBase: new URL(url),
+    title: {
+      default: `${t.name} — ${t.tagline}`,
+      template: `%s — ${t.name}`,
+    },
+    description: t.description,
+    openGraph: {
+      title: `${t.name} — ${t.tagline}`,
+      description: t.tagline,
+      url,
+      siteName: t.name,
+      type: 'website',
+    },
+    robots: { index: true, follow: true },
+    other: { google: 'notranslate' },
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Fallback target for the "Music" nav link when nothing is playing yet:
-  // the first album of Jubilee Inspire (the flagship Inspire Family persona).
+  const tenant = currentTenant();
+
+  // Fallback target for the "Music" nav link when nothing is playing yet.
+  //
+  // Jubilee Inspire is JubileePraise's flagship and is NOT in a children's tenant's
+  // catalogue, so getArtist() correctly returns null there — the scoped manifest
+  // does not contain her. Fall back to the tenant's own first album instead of
+  // sending a goPartyGiggles visitor to /inspire, which is empty for them.
   const firstInspire = getArtist('jubilee-inspire')?.albums?.[0]?.code;
-  const defaultMusicHref = firstInspire ? `/album?c=${firstInspire}` : '/inspire';
+  const firstOwn = firstInspire ? null : listArtists()[0]?.slug;
+  const defaultMusicHref = firstInspire
+    ? `/album?c=${firstInspire}`
+    : firstOwn ? `/artist/${firstOwn}` : '/';
 
   // Resolve the chosen UI language from the jv_lang cookie ON THE SERVER so the
   // whole site (chrome + content) renders in that language on the first paint —
@@ -66,11 +93,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const lang = cookieLang && isSupportedLang(cookieLang) ? cookieLang : DEFAULT_LANG;
   const dir = isRtlLang(lang) ? 'rtl' : 'ltr';
 
+  // Torah Sings brings its own chrome and its own transport (see
+  // components/torahsings/TorahSingsShell). Everything OUTSIDE the branch stays
+  // shared — TenantProvider, the language provider and AuthProvider in
+  // particular, because a Torah Sings visitor still lands on JubileePraise's
+  // /signin, /account and /admin, and those routes need the session context.
+  const torahSings = usesAngelsCatalog(tenant);
+  const fontVars = torahSings
+    ? `${orbitron.variable} ${splineSansMono.variable} ${playfair.variable}`
+    : `${openSans.variable} ${orbitron.variable}`;
+
   return (
-    <html lang={lang} dir={dir} translate="no" className={`notranslate ${openSans.variable} ${orbitron.variable}`}>
+    <html
+      lang={lang}
+      dir={dir}
+      translate="no"
+      data-tenant={tenant.key}
+      className={`notranslate ${fontVars}`}
+    >
       <body>
+        <TenantProvider tenant={tenant}>
         <LangProvider value={lang}>
           <AuthProvider>
+            {torahSings ? (
+              <TorahSingsShell>{children}</TorahSingsShell>
+            ) : (
+            <>
             <ScrollRestoreGuard />
             <NavTracker />
             <Particles />
@@ -87,8 +135,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <CoverUploadModal />
             {/* Admin-only: manage an album's .mp3 files on the J: drive. */}
             <TrackManagerModal />
+            </>
+            )}
           </AuthProvider>
         </LangProvider>
+        </TenantProvider>
       </body>
     </html>
   );

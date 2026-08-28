@@ -77,7 +77,7 @@ public partial class MainWindow : Window
                 break;
             dir = dir.Parent;
         }
-        _root = dir?.FullName ?? @"W:\JubiLujah.com";
+        _root = dir?.FullName ?? @"W:\JubileePraise.com";
         _articlesJson = Path.Combine(_root, "app", "web", "public", "articles", "articles.json");
         _imagesDir = Path.Combine(_root, "app", "web", "public", "images", "articles");
         _mdDir = Path.Combine(_root, "core", "articles");

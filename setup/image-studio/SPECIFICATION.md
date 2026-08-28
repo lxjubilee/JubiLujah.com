@@ -3,7 +3,7 @@
 **What it is:** a Windows desktop app (WPF + WebView2) that hosts a real
 browser, lets you log in to ChatGPT by hand, and then drives *your own
 authenticated session* to generate a hero image for each article on
-JubiLujah.com — saving each image into the site and wiring it into the article
+JubileePraise.com — saving each image into the site and wiring it into the article
 automatically.
 
 **Status:** working. Built and run locally against the `.NET 8` SDK.
@@ -12,7 +12,7 @@ automatically.
 
 ## 1. Why it exists
 
-Every article in the JubiLujah.com article system (`core/articles/*.md` →
+Every article in the JubileePraise.com article system (`core/articles/*.md` →
 `app/web/public/articles/articles.json` → the `/articles` route) carries an
 `imagePrompt`. Image Studio turns those prompts into real `.webp` hero images.
 
@@ -113,6 +113,15 @@ For each article that still needs an image:
 
 ### Tunable constants (in `MainWindow.xaml.cs`)
 - `AspectSuffix` — the 16:9 landscape instruction appended to every prompt.
+- **The persona clauses**, appended to every prompt that renders a family member —
+  `AuthorClause` / `CoverAuthorClause` / `SupportAuthorClause` (likeness and
+  framing), `AgeClause` (thirty; Elias forty), `BuildClause` (slender, lean and
+  fit — **every** path), `HeightClause` (six feet — supporting images only).
+  `AgeClause` and `BuildClause` live in `CoverImages.cs`, `HeightClause` in
+  `SupportImages.cs`. **A persona's age and body are set here, in code, not in the
+  `.models` briefs** — the briefs describe wardrobe, palette, light and framing and
+  deliberately say nothing about either, because twelve copies of a fact drift.
+  See `wpf/README.md` for why `BuildClause` is worded positive-only.
 - Per-thread image count — `if (++inThread >= 10)` in `RunBatch`.
 - Random pause — `_rng.Next(1000, 10001)` (1–10 s) in `RunBatch`.
 - Timeouts — login wait, image wait (6 min), navigation (25 s).

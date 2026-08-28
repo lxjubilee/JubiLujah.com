@@ -486,4 +486,4 @@ The sung lyric body of every prayer song — text between section tags like `[In
 **Supersedes: v1.0**
 **Author/Steward: Gabriel Ungureanu, Jubilee Software, Inc.**
 **Mode: OHI (Master)**
-**Reference framework for: Jubilee Music · Jubilujah.com · JubileeVerse.com · BornAgainDNA.com (assessment integration)**
+**Reference framework for: Jubilee Music · JubileePraise.com · JubileeVerse.com · BornAgainDNA.com (assessment integration)**

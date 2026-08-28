@@ -1,0 +1,346 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+/* ── Row 1 — top bar: logo left, account actions right ──────────────────── */
+/* JubileePraise's exact header colors: a lighter top bar (#242424) over a darker
+   nav bar (#1b1b1b), with white hairline borders. */
+.topbar {
+  background: #242424;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.topInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 48px;
+}
+
+/* Persona badge + wordmark — JubileePraise logo (icon 32px, text 24px / 600). */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  text-decoration: none;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+
+.text {
+  font-family: var(--font-cosmic), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.accent {
+  color: #e6ac00;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  min-width: 0;
+}
+
+/* AI Bible Chat — JubileePraise media link. */
+.medialink {
+  color: #c4c4c4;
+  text-decoration: none;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.medialink:hover {
+  color: #fff;
+}
+
+/* Admin — same size and weight as its neighbour, but gold and boxed, so a
+   privileged link never reads as just another nav item. */
+.adminlink {
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: var(--accent);
+  border: 1px solid rgba(254, 202, 87, 0.35);
+  background: rgba(254, 202, 87, 0.08);
+}
+
+.adminlink:hover {
+  color: #1a1424;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Search bar — JubileePraise jvh-search. */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: hsla(0, 0%, 100%, 0.06);
+  border: 1px solid hsla(0, 0%, 100%, 0.12);
+  color: #8a8a8a;
+}
+
+.searchIcon {
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 130px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+}
+
+.searchInput::placeholder {
+  color: #8a8a8a;
+}
+
+.searchBtn {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 3px;
+  background: #e6ac00;
+  color: #1b1b1b;
+  font-family: var(--font-body), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.searchBtn:hover {
+  background: #f5c518;
+}
+
+/* Sign in — JubileePraise bordered button. */
+.signin {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  background: transparent;
+  color: #c4c4c4;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.signin:hover {
+  background: #2d2d2d;
+  color: #fff;
+}
+
+/* ── Signed-in account: gold initial disc + dropdown card ──────────────── */
+.account {
+  position: relative;
+  flex: none;
+}
+
+/* The initial in a gold disc, sized to match the brand badge. */
+.avatarBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #e6ac00;
+  color: #1b1b1b;
+  font-family: var(--font-body), sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.avatarBtn:hover {
+  background: #f5c518;
+}
+
+.avatarBtn[aria-expanded='true'] {
+  box-shadow: 0 0 0 3px hsla(45, 100%, 45%, 0.3);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: 244px;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  border-radius: 8px;
+  background: #2b2b2b;
+  box-shadow: 0 12px 32px hsla(0, 0%, 0%, 0.5);
+  overflow: hidden;
+}
+
+.menuHead {
+  padding: 13px 16px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.08);
+}
+
+/* Name and email can be arbitrarily long — clip rather than widen the card. */
+.menuName,
+.menuEmail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-body), sans-serif;
+}
+
+.menuName {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menuEmail {
+  margin-top: 2px;
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
+.menuList {
+  padding: 6px 0;
+}
+
+.menuItem {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: #d6d6d6;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.menuItem:hover {
+  background: #383838;
+  color: #fff;
+}
+
+.menuSignout {
+  margin-top: 6px;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.08);
+  color: #e59a9a;
+}
+
+.menuSignout:hover {
+  background: #3a2b2b;
+  color: #ff9b9b;
+}
+
+/* ── Row 2 — nav bar: one line that scrolls sideways, never wraps ───────── */
+.navbar {
+  background: #1b1b1b;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 50px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none; /* Firefox */
+}
+
+.navInner::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+.link {
+  flex: none;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.link:hover {
+  color: #fff;
+  background: #2d2d2d;
+}
+
+.active,
+.active:hover {
+  color: #e6ac00;
+  border-color: #e6ac00;
+  background: transparent;
+}
+
+/* Progressively shed the top-bar extras as room runs out (Sign in +
+   Subscribe always stay; the nav row keeps scrolling). */
+@media (max-width: 1024px) {
+  .medialink {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .searchInput {
+    width: 96px;
+  }
+}
+
+@media (max-width: 720px) {
+  .search {
+    display: none;
+  }
+}
+
+/* Tighten on small screens — the nav still scrolls, it never breaks. */
+@media (max-width: 600px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .text {
+    font-size: 20px;
+  }
+}

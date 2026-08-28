@@ -1,6 +1,6 @@
 -- ============================================================================
 -- identity.credentials — email/password credentials for the SHARED identity
--- store, enabling form-based sign up / sign in on jubilujah.com (and any sibling
+-- store, enabling form-based sign up / sign in on jubileepraise.com (and any sibling
 -- site, e.g. jubileeinspire.com) against the same identity.users rows.
 --
 -- Passwords are stored as scrypt hashes (salt embedded), never plaintext. SSO

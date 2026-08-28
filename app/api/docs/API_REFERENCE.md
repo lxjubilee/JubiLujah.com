@@ -1,6 +1,6 @@
-# Jubilujah API — Complete Technical Reference
+# JubileePraise API — Complete Technical Reference
 
-> Generated 2026-07-20 by reading the source at `W:\JubiLujah.com\app\api\src` end to end.
+> Generated 2026-07-20 by reading the source at `W:\JubileePraise.com\app\api\src` end to end.
 > Every claim below is drawn from the code, not from prior documentation. Where the existing
 > docs in `app/api/docs/` disagree with the code, the code wins and the drift is called out.
 
@@ -59,7 +59,7 @@ The manifest is authoritative for **catalog identity**; the database is authorit
 ## 2. Directory structure
 
 ```
-W:\JubiLujah.com\
+W:\JubileePraise.com\
 ├── server.js               ⚠ LEGACY — standalone http "Coming Soon" server, port 3119.
 │                             Hand-rolled routing, superseded by app/api. Not part of this doc.
 ├── api/server.js           ⚠ 2-line stub (/health, /api/v1/status). Not the real API.
@@ -393,7 +393,7 @@ Schemas are plain `z.object()` — **not `.strict()`** — so unknown keys are s
 
 ## 5. Auth & Identity
 
-Source root: `W:\JubiLujah.com\app\api\src` (bash: `/w/JubiLujah.com/app/api/src`). Express 4.19 (`package.json`), ESM, `zod@3`, `jose@5`, `pg@8`. Postgres schemas: `identity`, `catalog`, `production`, `radio`.
+Source root: `W:\JubileePraise.com\app\api\src` (bash: `/w/JubileePraise.com/app/api/src`). Express 4.19 (`package.json`), ESM, `zod@3`, `jose@5`, `pg@8`. Postgres schemas: `identity`, `catalog`, `production`, `radio`.
 
 ---
 
@@ -481,7 +481,7 @@ return { token: `${b64}.${signature}`, hash: hashToken(token), expiresAt };
 
 - **Signature input** is the base64url payload string only (there is no header to bind), so this is *not* a compact JWS.
 - `jti` = 16 random bytes hex (32 chars). `type` is `'access'` or `'refresh'`.
-- Access payload (`auth/session.js:142-148`): `{ userId, email, displayName, role, roles, type:'access', exp, iat, jti }`. `role` is the single strongest role (`highestRole`, `auth/session.js:7-14`, max index in `ROLE_ORDER`) for JI compatibility; `roles` is the full array for Jubilujah's own RBAC.
+- Access payload (`auth/session.js:142-148`): `{ userId, email, displayName, role, roles, type:'access', exp, iat, jti }`. `role` is the single strongest role (`highestRole`, `auth/session.js:7-14`, max index in `ROLE_ORDER`) for JI compatibility; `roles` is the full array for JubileePraise's own RBAC.
 - Refresh payload (`auth/session.js:169`): `{ userId, type:'refresh', exp, iat, jti }` — nothing else.
 - Secret: `config.token.secret` = `JWT_SECRET || SESSION_SECRET || 'dev-only-change-me-please-32-bytes-min'` (`config.js:58`). This is deliberately **JubileeInspire's shared `JWT_SECRET`** so the format is byte-for-byte compatible with JI's `api/services/crypto.js` (`auth/token.js:4-14`).
 - TTLs (`config.js:59-61`): access `ACCESS_TOKEN_TTL_MS` default **3 600 000 ms (1 h)**; refresh `REFRESH_TOKEN_TTL_MS` default **30 d**; extended refresh `EXTENDED_REFRESH_TTL_MS` default **365 d**.
@@ -497,7 +497,7 @@ Used by: every user-facing route via `Authorization: Bearer <token>` → `attach
 A genuine 3-part compact JWS minted with `jose`'s `SignJWT` (`auth/serviceToken.js:50-58`):
 
 - Header: `{ alg: 'HS256', typ: 'JWT' }`
-- Claims: `sub` = client id, `iss` = `config.service.issuer` (`SERVICE_JWT_ISSUER`, default `https://api.jubilujah.com`), `aud` = `config.service.audience` (`SERVICE_JWT_AUDIENCE`, default `jubilujah-admin`), `iat`, `exp` (**seconds**, `SERVICE_TOKEN_TTL_SEC`, default **600**), `jti` = `crypto.randomUUID()`, `scope` = space-delimited string.
+- Claims: `sub` = client id, `iss` = `config.service.issuer` (`SERVICE_JWT_ISSUER`, default `https://api.jubileepraise.com`), `aud` = `config.service.audience` (`SERVICE_JWT_AUDIENCE`, default `jubileepraise-admin`), `iat`, `exp` (**seconds**, `SERVICE_TOKEN_TTL_SEC`, default **600**), `jti` = `crypto.randomUUID()`, `scope` = space-delimited string.
 - Secret: `config.service.jwtSecret` = `SERVICE_JWT_SECRET`, **empty by default**. Empty ⇒ issuance `503`, every admin call `401` (fails closed, `auth/serviceToken.js:44-47`, `66-70`).
 - Verification (`auth/serviceToken.js:71-75`): `jwtVerify` pinned to `algorithms: ['HS256']` plus `issuer` + `audience`; `exp`/`nbf` enforced by jose.
 
@@ -532,7 +532,7 @@ Table `identity.refresh_tokens` (migration `0008_refresh_tokens.sql`): `id, user
 export const ROLE_ORDER = ['viewer', 'reviewer', 'content_editor', 'executive', 'admin'];
 ```
 
-Index = privilege level. `viewer` (0) is the never-removable baseline; `reviewer` (1) is a Jubilujah-native, deliberately low-ranked orthogonal capability (studio-album preview) so it grants nothing via `requireRole`; `executive` (3) replaced the legacy `radio_producer` + `production_manager` in migration `0017`.
+Index = privilege level. `viewer` (0) is the never-removable baseline; `reviewer` (1) is a JubileePraise-native, deliberately low-ranked orthogonal capability (studio-album preview) so it grants nothing via `requireRole`; `executive` (3) replaced the legacy `radio_producer` + `production_manager` in migration `0017`.
 
 - `roleLevel(roles)` = max `ROLE_ORDER.indexOf(r)`, `-1` when empty.
 - `hasRole(roles, minRole)` = `roleLevel(roles) >= ROLE_ORDER.indexOf(minRole)`. ⚠️ An unknown/typo'd `minRole` yields `indexOf === -1`, so `hasRole` returns true for **any** user (even one with zero roles, since `-1 >= -1`). Callers must pass a literal from `ROLE_ORDER`.
@@ -565,13 +565,13 @@ This flag branches **exactly one place**: the top of `POST /api/auth/signin` (`r
 | `trustToken` | always `null` | JI's `body.trustToken ?? null` |
 | Session tokens | ours | **still ours** — JI's tokens are discarded because they carry JI's userId |
 
-JI is the *credential* authority; Jubilujah remains the *session* authority (`services/jiLogin.js:1-13`).
+JI is the *credential* authority; JubileePraise remains the *session* authority (`services/jiLogin.js:1-13`).
 
 Three helpers implement the `ji` path:
 
 **`establishSessionFromJI`** (`routes/auth.js:134-159`) — `upsertUserFromJI(jiUser)`, then **mirrors the plaintext password into local `identity.credentials`** (`INSERT … ON CONFLICT (user_id) DO UPDATE`) so JI-only users gain a local credential anchor that makes `/change-password` and `/forgot-password` work. Wrapped in try/catch; a failure only warns. Then mints our tokens with `extended = !!req.body.rememberMe` and audits `login_success { via: 'ji_delegate' }`.
 
-**`upsertUserFromJI`** (`auth/session.js:66-125`) — keys on **email** (unique) not `external_subject`, so an existing `jubilujah|<email>` row is updated rather than colliding. `external_subject` is written as `jubileeinspire|<jiUser.id>` **only on insert**; the `ON CONFLICT (email) DO UPDATE` touches only `last_login_at` and `is_active = TRUE` — display/first/last names are deliberately *not* overwritten on return logins so admin edits stick. Roles are then reconciled to exactly `JI_ROLE_MAP[jiUser.role]` (`user→content_editor`, `admin→admin`, `guest→viewer`, unknown→`viewer`), granting what's missing and revoking only roles in `JI_MANAGED_ROLES` — so Jubilujah-native grants like `reviewer` survive (`auth/session.js:60-64`, `111-121`). Each grant/revoke writes an `identity.audit_log` row (`role.grant` / `role.revoke`, `payload.source = 'ji_login'`).
+**`upsertUserFromJI`** (`auth/session.js:66-125`) — keys on **email** (unique) not `external_subject`, so an existing `jubileepraise|<email>` row is updated rather than colliding. `external_subject` is written as `jubileeinspire|<jiUser.id>` **only on insert**; the `ON CONFLICT (email) DO UPDATE` touches only `last_login_at` and `is_active = TRUE` — display/first/last names are deliberately *not* overwritten on return logins so admin edits stick. Roles are then reconciled to exactly `JI_ROLE_MAP[jiUser.role]` (`user→content_editor`, `admin→admin`, `guest→viewer`, unknown→`viewer`), granting what's missing and revoking only roles in `JI_MANAGED_ROLES` — so JubileePraise-native grants like `reviewer` survive (`auth/session.js:60-64`, `111-121`). Each grant/revoke writes an `identity.audit_log` row (`role.grant` / `role.revoke`, `payload.source = 'ji_login'`).
 
 **`relayJI`** (`routes/auth.js:211-230`) — translation layer:
 - 2xx + `body.success` + `body.requires2FA` → `200 {success:true, requires2FA:true, email, verificationGuid}`.
@@ -579,7 +579,7 @@ Three helpers implement the `ji` path:
 - 2xx + `body.success` but no `user` → `HttpError(502, 'Auth service returned an unexpected response.')`.
 - otherwise → `HttpError(status in [400,600) ? status : 502, body.error || 'Sign in failed')`, with `{locked:true, lockedUntil}` spread in when `body.locked`. A JI `200 {success:false}` therefore becomes a **502**.
 
-**`selfHealJiLogin`** (`routes/auth.js:169-206`) — the migration path for accounts created on Jubilujah before JI knew them. Only runs on `status === 401` **and** no `verificationCode` present (`routes/auth.js:421`). Steps: look up local user + credential (active only); return `null` if no local credential or `verifyPassword` fails or `locked_until` is in the future; else `provisionUserToJI({email, password, displayName, emailVerified:true})`. Only `{ok:true}` (JI 201 = fresh create) proceeds — a 409 means JI really did know the account so its 401 was a genuine bad password, and any other failure means JI is down; both return `null` and fall through to `relayJI`. On success: audit `account.ji_self_provisioned {via:'signin_migration'}`, `finalizeLogin`, and return the full auth envelope with `trustToken: null`.
+**`selfHealJiLogin`** (`routes/auth.js:169-206`) — the migration path for accounts created on JubileePraise before JI knew them. Only runs on `status === 401` **and** no `verificationCode` present (`routes/auth.js:421`). Steps: look up local user + credential (active only); return `null` if no local credential or `verifyPassword` fails or `locked_until` is in the future; else `provisionUserToJI({email, password, displayName, emailVerified:true})`. Only `{ok:true}` (JI 201 = fresh create) proceeds — a 409 means JI really did know the account so its 401 was a genuine bad password, and any other failure means JI is down; both return `null` and fall through to `relayJI`. On success: audit `account.ji_self_provisioned {via:'signin_migration'}`, `finalizeLogin`, and return the full auth envelope with `trustToken: null`.
 
 ---
 
@@ -594,7 +594,7 @@ Three helpers implement the `ji` path:
 | `config.jiSync.clientSecret` | `JI_SERVICE_CLIENT_SECRET` | `''` |
 | `config.jiSync.checkEmailTimeoutMs` | `JI_CHECK_EMAIL_TIMEOUT_MS` | `4000` |
 | `config.jiLogin.baseUrl` | `JI_LOGIN_BASE` ‖ `JI_API_BASE` | `https://api.jubileeinspire.com` |
-| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubilujah` |
+| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubileepraise` |
 
 `jiSyncEnabled()` = both `clientId` **and** `clientSecret` non-empty (`services/jiSync.js:34`).
 
@@ -620,7 +620,7 @@ The result object is returned to the client verbatim as the `jiSync` field of th
 
 #### `provisionUserToJI({email, password, displayName, role, emailVerified})`
 
-`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform:'jubilujah'}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubilujah` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
+`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform:'jubileepraise'}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubileepraise` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
 
 #### `checkEmailOnJI(email)` — pre-signup gate
 
@@ -724,7 +724,7 @@ Single transaction with `SELECT * … FOR UPDATE`:
 - `attempts >= max_attempts` → 429 `'Too many attempts. Please sign up again.'`
 - wrong code → `attempts+1`, 400 `'Incorrect code. N attempt(s) left.'` + `{attemptsRemaining}`
 - email claimed in the meantime → marks the row `verified_at`+`used_at`, then 409 (**note: the throw rolls that update back**)
-- otherwise: INSERT `identity.users (external_subject = 'jubilujah|<email>', email, display_name, last_login_at = NOW(), first_signin_completed = TRUE)`; INSERT `identity.credentials` reusing the **hash stored at phase 1** (the plaintext was never persisted); INSERT `identity.user_roles (user_id, DEFAULT_SIGNUP_ROLE, granted_by = self) ON CONFLICT DO NOTHING`; mark the verification row spent; audit `account.created {via:'signup_otp'}`.
+- otherwise: INSERT `identity.users (external_subject = 'jubileepraise|<email>', email, display_name, last_login_at = NOW(), first_signin_completed = TRUE)`; INSERT `identity.credentials` reusing the **hash stored at phase 1** (the plaintext was never persisted); INSERT `identity.user_roles (user_id, DEFAULT_SIGNUP_ROLE, granted_by = self) ON CONFLICT DO NOTHING`; mark the verification row spent; audit `account.created {via:'signup_otp'}`.
 
 Then, **outside** the transaction, `issueTokens({userId, extended: !!rememberMe})`.
 
@@ -902,7 +902,7 @@ DELETE identity.signup_verifications WHERE email
 - ⚠️ Because of the naive `entry.split(':')`, **secrets must not contain `,`, `:` or `|`** — a secret containing `:` silently truncates and the scope list gets garbage. Use hex/base64url secrets.
 - Default is `''` ⇒ **zero registered clients** ⇒ every token request 401s.
 
-Other service config: `SERVICE_JWT_SECRET` (`''`), `SERVICE_JWT_ISSUER` (`https://api.jubilujah.com`), `SERVICE_JWT_AUDIENCE` (`jubilujah-admin`), `SERVICE_TOKEN_TTL_SEC` (`600`), `ADMIN_SERVICE_ALLOW_IPS` (comma list, `''`), `ADMIN_SERVICE_RATE_MAX` (`600`).
+Other service config: `SERVICE_JWT_SECRET` (`''`), `SERVICE_JWT_ISSUER` (`https://api.jubileepraise.com`), `SERVICE_JWT_AUDIENCE` (`jubileepraise-admin`), `SERVICE_TOKEN_TTL_SEC` (`600`), `ADMIN_SERVICE_ALLOW_IPS` (comma list, `''`), `ADMIN_SERVICE_RATE_MAX` (`600`).
 
 #### 9.2 `requireServiceAuth` (`middleware/serviceAuth.js:21-56`)
 
@@ -1011,7 +1011,7 @@ Steps:
 
 **Errors:** 400, 401, 403, 409, 422, 429, 500. No signup OTP email is ever sent; the account is immediately usable via `/signin` when `emailVerified: true`.
 
-**Verify-only mode (`verify: true`)** — branch at the top of the handler, before the 422 policy check, idempotency, and create logic (AUTH_API.md §12.4). Lets JI log in a Jubilujah-only user: hash+compare happens here (only holder of the credential), user returned on match, JI provisions its own record. **Never writes**: no rows, no audit insert (logger only), no idempotency read/write (the cache keys on `Idempotency-Key` alone — sharing it could replay a cached CREATE response), no lockout counters. One SQL: `users LEFT JOIN credentials LEFT JOIN user_roles` with `array_agg(role)`, filtered `email = $1 AND is_active = TRUE`.
+**Verify-only mode (`verify: true`)** — branch at the top of the handler, before the 422 policy check, idempotency, and create logic (AUTH_API.md §12.4). Lets JI log in a JubileePraise-only user: hash+compare happens here (only holder of the credential), user returned on match, JI provisions its own record. **Never writes**: no rows, no audit insert (logger only), no idempotency read/write (the cache keys on `Idempotency-Key` alone — sharing it could replay a cached CREATE response), no lockout counters. One SQL: `users LEFT JOIN credentials LEFT JOIN user_roles` with `array_agg(role)`, filtered `email = $1 AND is_active = TRUE`.
 
 - no row (unknown or inactive) → **404** `{ok:false, existed:false, verified:false}` — creates nothing.
 - row but `locked_until` in the future → **401** `{ok:false, existed:true, verified:false}` (lockout *respected* without comparing, never set/extended here).
@@ -1032,7 +1032,7 @@ Read-only pre-signup existence probe for partner portals (JubileeInspire's famil
 
 Steps: lowercase the email; one SQL — `identity.users LEFT JOIN identity.user_roles` with `array_agg(role)`, filtered `email = $1 AND is_active = TRUE` (same **active-only** semantics as the signup gate `routes/auth.js:280`, so a deleted account frees the email family-wide); `logger.info 'service check-email'` with `{email, exists, caller}`. No audit row, no idempotency (read-only GET).
 
-**200 (exists):** `{ email, exists: true, user: { id, email, displayName, active, emailVerified, roles, createdAt } }` — `emailVerified` maps to `first_signin_completed` (there is no `email_verified` column); `roles` are Jubilujah RBAC roles.
+**200 (exists):** `{ email, exists: true, user: { id, email, displayName, active, emailVerified, roles, createdAt } }` — `emailVerified` maps to `first_signin_completed` (there is no `email_verified` column); `roles` are JubileePraise RBAC roles.
 **200 (free):** `{ email, exists: false }`.
 Partners key on the top-level boolean `exists` only; `email`/`user` are informational.
 
@@ -1052,11 +1052,11 @@ Three auth templates share one table-based, inline-styled shell (`emailShell`, g
 
 | Function | Subject | Content |
 |---|---|---|
-| `sendLoginVerificationEmail({to, code})` | `Your Jubilujah.com sign-in code` | 6-digit code, "expires in 15 minutes" |
-| `sendSignupVerificationEmail({to, code})` | `Verify your email for Jubilujah.com` | 6-digit code, "expires in 30 minutes" |
-| `sendPasswordResetEmail({to, resetUrl})` | `Reset your Jubilujah.com password` | CTA button + plaintext fallback link, "expires in `config.email.resetTtlMinutes` minutes" |
+| `sendLoginVerificationEmail({to, code})` | `Your JubileePraise.com sign-in code` | 6-digit code, "expires in 15 minutes" |
+| `sendSignupVerificationEmail({to, code})` | `Verify your email for JubileePraise.com` | 6-digit code, "expires in 30 minutes" |
+| `sendPasswordResetEmail({to, resetUrl})` | `Reset your JubileePraise.com password` | CTA button + plaintext fallback link, "expires in `config.email.resetTtlMinutes` minutes" |
 
-From address: `config.email.from` = `EMAIL_FROM`, default `Jubilujah <no-reply@jubilujah.com>`. (`sendSubscriptionEmail` also lives here but is billing, not auth.)
+From address: `config.email.from` = `EMAIL_FROM`, default `JubileePraise <no-reply@jubileepraise.com>`. (`sendSubscriptionEmail` also lives here but is billing, not auth.)
 
 ---
 
@@ -1082,7 +1082,7 @@ From address: `config.email.from` = `EMAIL_FROM`, default `Jubilujah <no-reply@j
 
 ### 12. `docs/AUTH_API.md` — accuracy assessment
 
-The file is at `W:\JubiLujah.com\app\api\docs\AUTH_API.md` (**not** `/w/JubiLujah.com/docs`, which has no auth doc). It is **substantially stale** — the server-to-server half (§11–§12) is still accurate, but the entire user-facing half describes an architecture that no longer exists.
+The file is at `W:\JubileePraise.com\app\api\docs\AUTH_API.md` (**not** `/w/JubileePraise.com/docs`, which has no auth doc). It is **substantially stale** — the server-to-server half (§11–§12) is still accurate, but the entire user-facing half describes an architecture that no longer exists.
 
 #### Wrong / obsolete
 
@@ -1103,7 +1103,7 @@ The file is at `W:\JubiLujah.com\app\api\docs\AUTH_API.md` (**not** `/w/JubiLuja
 
 #### Still accurate
 
-- §11 and §12 in full: the client-credentials HS256 JWT flow, `SERVICE_CLIENTS` format, per-route scopes (`admin.set_password` / `admin.provision`), fail-closed on an unset `SERVICE_JWT_SECRET`, the optional IP allow-list, TLS assertion via `x-forwarded-proto`, 24 h `Idempotency-Key` replay, the JI→Jubilujah role mapping table, the ≥13 age gate, DOB validated-but-not-stored, and every status code in §11.3 / §12.2.
+- §11 and §12 in full: the client-credentials HS256 JWT flow, `SERVICE_CLIENTS` format, per-route scopes (`admin.set_password` / `admin.provision`), fail-closed on an unset `SERVICE_JWT_SECRET`, the optional IP allow-list, TLS assertion via `x-forwarded-proto`, 24 h `Idempotency-Key` replay, the JI→JubileePraise role mapping table, the ≥13 age gate, DOB validated-but-not-stored, and every status code in §11.3 / §12.2.
 - All OTP/lockout numbers: 30 min signup code, 15 min login code, 5 attempts, 60 s resend cooldown, 2 resends → 3 codes, 1 h lockout, 60 min reset TTL.
 - Field-level validation rules for every public endpoint (name 1–120, email ≤254, password 8–200, 6-digit codes, UUID GUIDs, token 20–200).
 - The 256 KB body cap and the 50 req / 15 min `/api/auth/*` IP limiter.
@@ -1730,7 +1730,7 @@ Mounted `app.use('/api/admin/publish', writeLimiter, publishRouter)` (`index.js:
 **The "creative bridge"** (header comment, `publish.js:10-17`): the page lives on the public site, but J: is on the local network — so these endpoints only do real work when the API runs on the studio machine. On prod (no J:), `/candidates` reports `available:false` so the UI can guide the admin to open the page from localhost.
 
 - `J_ROOT = process.env.ARTWORK_BASE || 'J:/music'` (`publish.js:21`)
-- `ORCHESTRATOR = process.env.PUBLISH_SCRIPT || 'C:/jubilujah-local/publish-to-production.js'` (`publish.js:22`)
+- `ORCHESTRATOR = process.env.PUBLISH_SCRIPT || 'C:/jubileepraise-local/publish-to-production.js'` (`publish.js:22`)
 
 **`GET /api/admin/publish/candidates`** (`publish.js:38-53`).
 
@@ -1767,7 +1767,7 @@ Response: `{ ok: final.ok !== false, steps, codes }` where `final = steps[steps.
 
 ⚠️ **The request blocks for the orchestrator's entire runtime** with no timeout — and per `PUBLISH.md`, the orchestrator does rclone/R2 upload → manifest rebuild → site deploy, which for a large batch is minutes to hours. Any proxy or load-balancer idle timeout will sever the response while the child keeps running detached. There is also no concurrency guard: two admins can launch overlapping orchestrator processes against the same codes.
 
-Per `PUBLISH.md`, the surrounding manual runbook is: **Step 0** rebuild the manifest (`node C:/jubilujah-local/rebuild-manifest.js --apply` — a mandatory gate, since new J: albums do *not* auto-appear), re-derive `album-covers.json`/`album-genres.json`, `merge-genres-into-manifest.mjs`, and copy the results into `app/web/public/music/`; **Step 1** `r2-sync-music.js --apply` (diff-only upload, never deletes, `max-age=31536000, immutable` for media / `max-age=60` for catalog JSON); **Step 2** tar+ssh deploy + `pm2 restart jubilujah`; **Step 3** verify 200s.
+Per `PUBLISH.md`, the surrounding manual runbook is: **Step 0** rebuild the manifest (`node C:/jubileepraise-local/rebuild-manifest.js --apply` — a mandatory gate, since new J: albums do *not* auto-appear), re-derive `album-covers.json`/`album-genres.json`, `merge-genres-into-manifest.mjs`, and copy the results into `app/web/public/music/`; **Step 1** `r2-sync-music.js --apply` (diff-only upload, never deletes, `max-age=31536000, immutable` for media / `max-age=60` for catalog JSON); **Step 2** tar+ssh deploy + `pm2 restart jubileepraise`; **Step 3** verify 200s.
 
 ---
 
@@ -2695,7 +2695,7 @@ So `?days` governs only `daily` and `dau`. Note `dau` uses `($1 || ' days')::int
 
 **Admin.** Params: `?kind=albums|songs|users` (whitelist-validated, **silently defaults to `albums`** on anything else, `:549`), plus `?from=`/`?to=`.
 
-**Format:** CSV via a local `toCsv` (`:540-546`) that quotes any value containing `"`, `,`, or newline and doubles inner quotes. Joined with `\n` (LF, not CRLF). Headers: `Content-Type: text/csv; charset=utf-8`, `Content-Disposition: attachment; filename="jubilujah-analytics-<kind>.csv"`. Status `200`.
+**Format:** CSV via a local `toCsv` (`:540-546`) that quotes any value containing `"`, `,`, or newline and doubles inner quotes. Joined with `\n` (LF, not CRLF). Headers: `Content-Type: text/csv; charset=utf-8`, `Content-Disposition: attachment; filename="jubileepraise-analytics-<kind>.csv"`. Status `200`.
 
 | kind | Columns | Range filter? |
 |---|---|---|
@@ -3144,7 +3144,7 @@ Other gaps (omissions, not errors):
 
 ## 10. Admin, Manage Music & Mobile CMS
 
-Source root: `W:\JubiLujah.com\app\api\src` (Express 4.19, ESM, zod 3, `pg`).
+Source root: `W:\JubileePraise.com\app\api\src` (Express 4.19, ESM, zod 3, `pg`).
 
 ### Cross-cutting mechanics
 
@@ -3568,7 +3568,7 @@ Query: `kind ∈ {albums, songs, missing, activity}` (default `albums`), `format
 | `missing` | 3-leg `UNION ALL` (albums missing cover, albums missing metadata, songs missing audio), `ORDER BY artist_name, album_code` | Album Code, Title, Artist, Issue |
 | `activity` | `music_activity_log`, `ORDER BY created_at DESC LIMIT 5000` | Timestamp(ISO), Administrator, Action, Target Type, Target |
 
-Headers: `Content-Type: text/csv; charset=utf-8`, `Content-Disposition: attachment; filename="jubilujah-music-<kind>.csv"`.
+Headers: `Content-Type: text/csv; charset=utf-8`, `Content-Disposition: attachment; filename="jubileepraise-music-<kind>.csv"`.
 
 ---
 
@@ -3872,7 +3872,7 @@ Seeded (migration `0020:25-29`) with `2.0.0` / min `1.0.0` for both platforms �
 
 ## 11. Data Layer, Runtime & Ops
 
-Root: `W:\JubiLujah.com` · App workspace: `W:\JubiLujah.com\app`
+Root: `W:\JubileePraise.com` · App workspace: `W:\JubileePraise.com\app`
 
 ---
 
@@ -3914,7 +3914,7 @@ Note the domain drift: `production` was originally "the editorial pipeline schem
 | 0010 | `0010_reviews.sql` | **Public** rating & review module (distinct from the editorial `production.ratings`). 3 enums + 6 tables: `user_reviews`, `review_helpful_votes`, `review_reports`, `review_moderation_log`, `review_notifications`, `review_summaries` + the summary-recompute and helpful-count triggers. |
 | 0011 | `0011_likes.sql` | `production.user_likes` — account-backed favorites, polymorphic over album/song, composite PK `(user_id, target_type, target_id)`. Replaces per-browser localStorage. |
 | 0012 | `0012_analytics.sql` | Media analytics: `production.playback_events` (raw log, BIGSERIAL, 6 aggregation indexes, `UPDATE/DELETE/TRUNCATE` revoked) + `production.analytics_daily` rollup cache. New enum `playback_source`. |
-| 0013 | `0013_reviewer_role.sql` | Widens the `user_roles.role` CHECK to admit `reviewer` — a Jubilujah-native role (preview in-production "studio" albums) that JI SSO never mints. |
+| 0013 | `0013_reviewer_role.sql` | Widens the `user_roles.role` CHECK to admit `reviewer` — a JubileePraise-native role (preview in-production "studio" albums) that JI SSO never mints. |
 | 0014 | `0014_subscriptions.sql` | Full subscription system (21 KB): 5 enums + 10 tables (`subscription_plans`, `subscriptions`, `family_groups/_members/_invitations`, `subscription_transactions`, `payment_records`, `subscription_renewals`, `subscription_history`, `daily_listening_counters`, `subscription_notifications`), 4 touch triggers, and the Free/Individual/Family plan seed. |
 | 0015 | `0015_manage_music.sql` | Manage Music admin layer over the CDN manifest: `music_visibility` enum + `music_album_state`, `music_song_state`, `music_sync_runs`, `music_validation_results`, `music_sync_config` (singleton), `music_activity_log` (append-only). |
 | 0016 | `0016_invoice_pdf.sql` | Adds `payment_records.invoice_pdf_url` (Stripe's direct-PDF link, alongside the existing hosted `invoice_url`). |
@@ -4183,17 +4183,17 @@ new Pool({ connectionString: config.databaseUrl, max: 10, idleTimeoutMillis: 30_
 
 | Workspace | Runtime | Key deps |
 |---|---|---|
-| `api` (`jubilujah-api`, ESM, `node --watch src/index.js` in dev) | Express 4.19 | `helmet` 7, `cors`, `express-rate-limit` 7, `pino` 9 + `pino-http` 10, `pg` 8, `zod` 3, `jose` 5, `stripe` 16, `@sendgrid/mail` 8, `@aws-sdk/client-s3` (R2), `cookie-parser` (vestigial — the API is cookie-free), `uuid`, `dotenv` |
-| `web` (`jubilujah-web`) | **Next.js 14.2.33**, React 18.3.1, TypeScript 5.9.3, `zustand` 4.5 | dev/start on **:3000** |
+| `api` (`jubileepraise-api`, ESM, `node --watch src/index.js` in dev) | Express 4.19 | `helmet` 7, `cors`, `express-rate-limit` 7, `pino` 9 + `pino-http` 10, `pg` 8, `zod` 3, `jose` 5, `stripe` 16, `@sendgrid/mail` 8, `@aws-sdk/client-s3` (R2), `cookie-parser` (vestigial — the API is cookie-free), `uuid`, `dotenv` |
+| `web` (`jubileepraise-web`) | **Next.js 14.2.33**, React 18.3.1, TypeScript 5.9.3, `zustand` 4.5 | dev/start on **:3000** |
 | `mock-oidc` | Express + `jose` only | :4010 |
 
-There is a **second, unrelated** `package.json` at the repo root (`W:\JubiLujah.com\package.json`, `@jubilee/jubilujah`) whose `main` is `server.js` — a zero-dependency 36 KB Node server. **This is what actually runs in production** (PM2 `jubilujah`, port 3119); the `app/` Next.js+API stack is the migration target, not the deployed artifact. See §2.9.
+There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePraise.com\package.json`, `@jubilee/jubileepraise`) whose `main` is `server.js` — a zero-dependency 36 KB Node server. **This is what actually runs in production** (PM2 `jubileepraise`, port 3119); the `app/` Next.js+API stack is the migration target, not the deployed artifact. See §2.9.
 
 #### 2.2 `docker-compose.yml` — local stack
 
 | Service | Image / build | Ports | Notes |
 |---|---|---|---|
-| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubilujah`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
+| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubileepraise`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
 | `mock-oidc` | build `./mock-oidc` (node:20-alpine) | 4010:4010 | env: `MOCK_OIDC_PORT/ISSUER`, `OIDC_CLIENT_ID/SECRET`, `OIDC_REDIRECT_URI` |
 
 ⚠️ **Two ops traps in the compose init path:**
@@ -4207,7 +4207,7 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubiLujah.
 
 | Variable | Default in example | Purpose |
 |---|---|---|
-| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah` | Postgres DSN. Prod alternative (commented) points at `jubilujah_app@94.72.120.231/jubilujah`. |
+| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise` | Postgres DSN. Prod alternative (commented) points at `jubileepraise_app@94.72.120.231/jubileepraise`. |
 | `PGSSLMODE` | `disable` | Only the literal `require` turns on TLS, and then without cert validation (`db.js:11`). |
 | `API_PORT` | `4000` | Express listen port. |
 | `NODE_ENV` | `development` | Drives default log level and general env gating. |
@@ -4217,25 +4217,25 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubiLujah.
 | `SESSION_TTL_HOURS` | `12` | **DEAD** — not referenced anywhere. |
 | `AUTH_LOGIN_MODE` | `local` | `local` = verify against `identity.credentials`; `ji` = delegate to JubileeInspire's `/api/auth/login`. Anything other than `ji` normalizes to `local` (`config.js:40`). Rollback is env-only + restart, no redeploy. |
 | `JI_LOGIN_BASE` | `https://api.jubileeinspire.com` | JI login API base; falls back to `JI_API_BASE` then the prod default. |
-| `JI_LOGIN_SOURCE` | `jubilujah` | Platform tag sent as `source` so JI knows the origin app. |
+| `JI_LOGIN_SOURCE` | `jubileepraise` | Platform tag sent as `source` so JI knows the origin app. |
 | `JI_API_BASE` | `https://api.jubileeinspire.com` | JI service/admin API: password sync, provisioning, pre-signup `check-email`. |
 | `JI_SERVICE_CLIENT_ID` | *(blank)* | Client-credentials id for JI's `/api/auth/service/token`. Blank ⇒ sync/provisioning no-op. |
 | `JI_SERVICE_CLIENT_SECRET` | *(blank)* | Matching secret. Blank ⇒ `check-email` degrades to the unauthenticated call. |
 | `JI_CHECK_EMAIL_TIMEOUT_MS` | `4000` | Hard deadline for the synchronous pre-signup check; **fails open** (allows signup) on timeout. |
 | `OIDC_ISSUER` | `http://localhost:4010` | **DEAD in the API** — used only by `mock-oidc` + compose. |
-| `OIDC_CLIENT_ID` | `jubilujah-web` | Read by `mock-oidc/server.js` only. |
-| `OIDC_CLIENT_SECRET` | `jubilujah-dev-secret` | Read by `mock-oidc/server.js` only. |
+| `OIDC_CLIENT_ID` | `jubileepraise-web` | Read by `mock-oidc/server.js` only. |
+| `OIDC_CLIENT_SECRET` | `jubileepraise-dev-secret` | Read by `mock-oidc/server.js` only. |
 | `OIDC_REDIRECT_URI` | `http://localhost:3000/api/auth/callback` | **DEAD** — the callback route no longer exists (`routes/auth.js:232-235`). |
 | `OIDC_SCOPES` | `openid profile email roles` | **DEAD** in the API. |
 | `WEB_BASE_URL` | `http://localhost:3000` | Post-login redirect target / web app base. |
 | `SENDGRID_API_KEY` | *(blank)* | Blank ⇒ the email service logs reset links + OTP codes to the API console instead of sending. |
-| `EMAIL_FROM` | `Jubilujah <no-reply@jubilujah.com>` | From header. |
+| `EMAIL_FROM` | `JubileePraise <no-reply@jubileepraise.com>` | From header. |
 | `PASSWORD_RESET_TTL_MIN` | `60` | Reset-link lifetime in minutes. |
 | `TURNSTILE_SITE_KEY` | *(blank)* | Cloudflare Turnstile public key (server-side copy). |
 | `TURNSTILE_SECRET_KEY` | *(blank)* | Blank ⇒ server **skips CAPTCHA verification entirely**. Deploy the pair together. |
 | `SERVICE_JWT_SECRET` | *(blank)* | HS256 key that both signs and verifies service JWTs. **Blank ⇒ fail-closed**: issuance 503, admin routes 401. `openssl rand -hex 32`. |
-| `SERVICE_JWT_ISSUER` | `https://api.jubilujah.com` | `iss` claim, verified on every admin call. |
-| `SERVICE_JWT_AUDIENCE` | `jubilujah-admin` | `aud` claim, verified. |
+| `SERVICE_JWT_ISSUER` | `https://api.jubileepraise.com` | `iss` claim, verified on every admin call. |
+| `SERVICE_JWT_AUDIENCE` | `jubileepraise-admin` | `aud` claim, verified. |
 | `SERVICE_TOKEN_TTL_SEC` | `600` | Service access-token lifetime. |
 | `SERVICE_CLIENTS` | *(blank)* | Registry `id:secret:scopeA\|scopeB, …`. Entries split on `,`, fields on `:`, scopes on `\|`; omitted 3rd field = all scopes (`*`). Secrets must avoid `, : \|`. Known scopes: `admin.set_password`, `admin.provision`. Parser at `config.js:18-27` silently drops entries missing id or secret. |
 | `ADMIN_SERVICE_ALLOW_IPS` | *(blank)* | Optional IP allow-list; a valid token from an unlisted IP → 403. Requires real client IP to survive Cloudflare/nginx. |
@@ -4277,13 +4277,13 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubiLujah.
 | `REVALIDATE_SECRET` | `''` | Shared secret for on-demand Next ISR revalidation after a cover change. Also read by `web`. | `config.js:171` |
 | `WEB_INTERNAL_URL` | `http://127.0.0.1:3000` | Internal URL the API calls to trigger revalidation. | `config.js:172` |
 | `DEFAULT_SIGNUP_ROLE` | `content_editor` | Role auto-granted on self-serve signup; validated against `ROLE_ORDER`, invalid values silently fall back. | `routes/auth.js:21-22` |
-| `PUBLISH_SCRIPT` | `C:/jubilujah-local/publish-to-production.js` | Path to the publish orchestrator the admin publish route shells out to. | `routes/publish.js:22` |
+| `PUBLISH_SCRIPT` | `C:/jubileepraise-local/publish-to-production.js` | Path to the publish orchestrator the admin publish route shells out to. | `routes/publish.js:22` |
 | `MUSIC_SYNC_SCHEDULER` | *(off)* | Must equal `on` (case-insensitive) to start the scheduled CDN sync. | `services/musicScheduler.js:51` |
 | `API_BASE` / `WEB_BASE` / `OIDC_BASE` | `:4000` / `:3000` / `:4010` | Smoke-script target overrides only. | `scripts/*.mjs` |
 
 #### 2.4 Logging — `api/src/logger.js`
 
-Pino, transport-free (no `pino-pretty` dependency). `base: { service: 'jubilujah-api' }`. Level from `LOG_LEVEL`, else `info` in production / `debug` otherwise.
+Pino, transport-free (no `pino-pretty` dependency). `base: { service: 'jubileepraise-api' }`. Level from `LOG_LEVEL`, else `info` in production / `debug` otherwise.
 
 **Redaction** (`logger.js:11-18`) — censored to `[redacted]`:
 - `req.headers.authorization` (service + user Bearer tokens)
@@ -4363,7 +4363,7 @@ Three seed accounts mirroring `identity.users`: `gabriel` (admin + production_ma
 
 **What is actually deployed is not the `app/` workspace.** Production runs the repo-root `server.js` (36 KB, zero dependencies) under PM2.
 
-`W:\JubiLujah.com\deploy\` contains three files:
+`W:\JubileePraise.com\deploy\` contains three files:
 
 | File | Role |
 |---|---|
@@ -4373,26 +4373,26 @@ Three seed accounts mirroring `identity.users`: `gabriel` (admin + production_ma
 
 **`PUBLISH.md` runbook** — three mandatory-ordered steps plus a gate:
 
-- **Step 0 (MANDATORY GATE)** — the catalog manifest must be current. New albums land in `J:/music/albums` but the manifest is **not** auto-generated, so it silently drops new albums from every page, covers, genres, and analytics. Dry-run `node C:/jubilujah-local/rebuild-manifest.js` must report `would add: 0`. If stale: `--apply`, then regenerate covers/genres (`gen-album-covers.mjs`, `gen-album-genres.mjs`, `merge-genres-into-manifest.mjs` with `ARTWORK_BASE=J:/music`), then copy the three JSON files to `/w/JubiLujah.com/app/web/public/music/`. Locally, restart the web dev server — `lib/manifest.ts` caches in memory.
+- **Step 0 (MANDATORY GATE)** — the catalog manifest must be current. New albums land in `J:/music/albums` but the manifest is **not** auto-generated, so it silently drops new albums from every page, covers, genres, and analytics. Dry-run `node C:/jubileepraise-local/rebuild-manifest.js` must report `would add: 0`. If stale: `--apply`, then regenerate covers/genres (`gen-album-covers.mjs`, `gen-album-genres.mjs`, `merge-genres-into-manifest.mjs` with `ARTWORK_BASE=J:/music`), then copy the three JSON files to `/w/JubileePraise.com/app/web/public/music/`. Locally, restart the web dev server — `lib/manifest.ts` caches in memory.
 - **Step 1 — CDN sync**: `node .claude/r2-sync-music.js` (diff) then `--apply --concurrency=8` from `/c/Websites/jubileeverse.com`. Uploads only missing/size-mismatched files under `music/`, **never deletes**. Sets `Cache-Control: public, max-age=31536000, immutable` for media, `max-age=60` for catalog JSON/HTML. Failures land in `.claude/r2-sync-failures.txt`.
-- **Step 2 — Site deploy**: `tar -czf -` of `/w/Jubilujah.com` excluding `./.claude`, `./wpf`, `./node_modules`, `*.log`, streamed over SSH to `root@94.72.120.231`, extracted into `/var/www/Jubilujah.com`, then `pm2 restart jubilujah --update-env && pm2 save`.
-- **Step 3 — Verify**: origin `127.0.0.1:3119`, public `https://www.jubilujah.com`, and the CDN manifest must all return 200 (`publish.sh:63-71` asserts all three and exits non-zero otherwise).
+- **Step 2 — Site deploy**: `tar -czf -` of `/w/JubileePraise.com` excluding `./.claude`, `./wpf`, `./node_modules`, `*.log`, streamed over SSH to `root@94.72.120.231`, extracted into `/var/www/JubileePraise.com`, then `pm2 restart jubileepraise --update-env && pm2 save`.
+- **Step 3 — Verify**: origin `127.0.0.1:3119`, public `https://www.jubileepraise.com`, and the CDN manifest must all return 200 (`publish.sh:63-71` asserts all three and exits non-zero otherwise).
 
 **Production facts:**
 
 | | |
 |---|---|
 | Host | `root@94.72.120.231` — `SEAIIS01SERVER`, Ubuntu, nginx 1.24, Node 20.20.0, PM2 6.0.14 |
-| Code dir | `/var/www/Jubilujah.com/` |
-| PM2 process | name `jubilujah`, script `/var/www/Jubilujah.com/server.js`, **port 3119** |
-| Nginx | vhost `/etc/nginx/sites-available/jubilujah.com`, proxies `:80` → `127.0.0.1:3119`; logs `/var/log/nginx/Jubilujah.com_{access,error}.log` |
-| PM2 logs | `/root/.pm2/logs/jubilujah-{out,error}.log` |
-| DNS/TLS | `jubilujah.com` + `www` proxied through Cloudflare; TLS terminates at the CF edge (zone `5a4817eed553c36db47e8b7b3390120b`) |
+| Code dir | `/var/www/JubileePraise.com/` |
+| PM2 process | name `jubileepraise`, script `/var/www/JubileePraise.com/server.js`, **port 3119** |
+| Nginx | vhost `/etc/nginx/sites-available/jubileepraise.com`, proxies `:80` → `127.0.0.1:3119`; logs `/var/log/nginx/JubileePraise.com_{access,error}.log` |
+| PM2 logs | `/root/.pm2/logs/jubileepraise-{out,error}.log` |
+| DNS/TLS | `jubileepraise.com` + `www` proxied through Cloudflare; TLS terminates at the CF edge (zone `5a4817eed553c36db47e8b7b3390120b`) |
 | CDN | R2 bucket `jubileeverse-cdn`, prefix `music/`, public host `cdn.jubileeverse.com` |
 | SSH key | `C:\Users\zariah.inspire\.ssh\id_ed25519_jubilee_prod` |
-| DB (prod, per `.env.example` comment) | `postgres://jubilujah_app:<PW>@94.72.120.231:5432/jubilujah` with `PGSSLMODE=require` — same box as the web host |
+| DB (prod, per `.env.example` comment) | `postgres://jubileepraise_app:<PW>@94.72.120.231:5432/jubileepraise` with `PGSSLMODE=require` — same box as the web host |
 
-**No rollback exists.** PUBLISH.md:155 states the prior code is not snapshotted; if rollback matters you must manually tar `/var/www/Jubilujah.com` into `/var/www/.backup/Jubilujah.com.$(date +%Y%m%d-%H%M%S).tgz` *before* deploying. There is also no migration step anywhere in the publish flow — schema changes are applied out-of-band via `db/run-migrations.js`.
+**No rollback exists.** PUBLISH.md:155 states the prior code is not snapshotted; if rollback matters you must manually tar `/var/www/JubileePraise.com` into `/var/www/.backup/JubileePraise.com.$(date +%Y%m%d-%H%M%S).tgz` *before* deploying. There is also no migration step anywhere in the publish flow — schema changes are applied out-of-band via `db/run-migrations.js`.
 
 ---
 
@@ -4471,7 +4471,7 @@ The four docs in `app/api/docs/` are broadly accurate but have measurable drift:
 
 Two files will mislead anyone grepping this repo for endpoints:
 
-- **`W:\JubiLujah.com\server.js`** — a standalone `http`-module "Coming Soon" server on port 3119 with its own hand-rolled routing (`/api/album`, `/api/cdn-probe`, `/api/cdn-probe-batch`, `/api/awards/*`, `/music/albums/...`). Superseded by `app/api`; likely dead weight.
-- **`W:\JubiLujah.com\api\server.js`** — a 2-line Express stub exposing only `/health` and `/api/v1/status`.
+- **`W:\JubileePraise.com\server.js`** — a standalone `http`-module "Coming Soon" server on port 3119 with its own hand-rolled routing (`/api/album`, `/api/cdn-probe`, `/api/cdn-probe-batch`, `/api/awards/*`, `/music/albums/...`). Superseded by `app/api`; likely dead weight.
+- **`W:\JubileePraise.com\api\server.js`** — a 2-line Express stub exposing only `/health` and `/api/v1/status`.
 
 Neither is the service documented here.

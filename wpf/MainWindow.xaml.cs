@@ -14,7 +14,7 @@ using Microsoft.Web.WebView2.Core;
 // one here would be ambiguous rather than wrong-and-obvious.
 using SixLabors.ImageSharp.Processing;
 
-namespace JubiLujahStudio;
+namespace JubileePraiseStudio;
 
 // A WPF host around a real WebView2 (Edge/Chromium) browser. You log in to
 // ChatGPT by hand in the embedded browser — a genuine browser, so Cloudflare's
@@ -24,8 +24,8 @@ namespace JubiLujahStudio;
 // writes it back beside the piece.
 //
 // Ported from InspireManna.com/tools/ArticleImageStudio, which was itself ported
-// from an earlier JubiLujah build by way of JubileeVerse. The browser-automation
-// half is unchanged. The DATA half is entirely JubiLujah's:
+// from an earlier JubileePraise build by way of JubileeVerse. The browser-automation
+// half is unchanged. The DATA half is entirely JubileePraise's:
 //
 //   Images   — core/articles/*.md and core/backstage/{interviews,stories,
 //              testimonies}/*.md, imaged into app/web/public/images/
@@ -70,7 +70,22 @@ public partial class MainWindow : Window
         /// album folder, the prompt is BUILT from .models plus the album's own
         /// content, and the record is <CODE>.png landing in artwork/.
         Cover,
+        /// A supporting image for an album that ALREADY has a cover: the same
+        /// person, place and light, opened out to 16:9 for the band above the
+        /// song list. Derived from that cover rather than from a brief, and
+        /// saved as <CODE>-support-<N>.webp beside it. See SupportImages.cs.
+        Support,
     }
+
+    /// <summary>
+    /// Which view a batch belongs to, which decides only what is re-rendered as
+    /// each image lands.
+    ///
+    /// Deliberately NOT inferred from the jobs: an article run carries mixed
+    /// Kinds, so the view is a property of the button that was pressed rather
+    /// than of any one job in the queue.
+    /// </summary>
+    private enum RunView { Pieces, Covers, Support }
 
     // The four source folders, in tab order. Paths are relative to the repo root
     // and are the live directory names.
@@ -84,7 +99,7 @@ public partial class MainWindow : Window
 
     // The album corpus. A separate volume from the repo, which is why it is a
     // setting rather than derived from the repo root.
-    private const string DefaultMusicRoot = @"J:\jubilujah.com\music\inspire";
+    private const string DefaultMusicRoot = @"J:\jubileepraise.com\music\inspire";
 
     private string _root = "";          // the repo, resolved by its marker file
     private string _toolDir = "";
@@ -95,6 +110,17 @@ public partial class MainWindow : Window
 
     /// <summary>app/web/public — every image this tool writes lands under here.</summary>
     private string WebPublic => Path.Combine(_root, "app", "web", "public");
+
+    /// <summary>
+    /// The music root the worklists actually read, which is the tenant's scope
+    /// when one narrows it and the configured root otherwise.
+    ///
+    /// Deliberately separate from _musicRoot. That field is what the Settings box
+    /// shows and what studio.config.json stores; overwriting it on every tenant
+    /// switch would save a scoped path as the user's configured root and leave
+    /// the studio permanently pointed at one label's folder.
+    /// </summary>
+    private string EffectiveMusicRoot => _tenantMusicRoot.Length > 0 ? _tenantMusicRoot : _musicRoot;
 
     // Layout the user dragged to, in device-independent pixels. Restored on
     // launch and written back on close, so the window comes up the way it was
@@ -202,7 +228,10 @@ public partial class MainWindow : Window
     // and see SubmitScript for the guard that now catches it.
     private const string AspectSuffix =
         " IMPORTANT: produce this image in a 16:9 widescreen landscape aspect ratio, " +
-        "wide horizontal orientation, not square and not portrait.";
+        "wide horizontal orientation, not square and not portrait. " +
+        "GENERATE THE IMAGE NOW. Do not reply with text, do not ask what to do with the " +
+        "attachment, do not offer options or ask which one is wanted, and do not describe what you " +
+        "could make. The attachment is a reference, not a question. Return the finished picture.";
 
     /// <summary>
     /// The same job for an album cover, which is square rather than wide — and
@@ -225,7 +254,10 @@ public partial class MainWindow : Window
         "Leave the left third of the frame visually calm and uncluttered, and keep the bottom edge " +
         "free of important detail. " +
         "CRITICAL: the image must contain NO text of any kind — no title, no lettering, no words, " +
-        "no signature, no watermark, no logo, no caption and no border. It is a photograph only.";
+        "no signature, no watermark, no logo, no caption and no border. It is a photograph only. " +
+        "GENERATE THE IMAGE NOW. Do not reply with text, do not ask what to do with the " +
+        "attachment, do not offer options or ask which one is wanted, and do not describe what you " +
+        "could make. The attachment is a reference, not a question. Return the finished picture.";
 
     public MainWindow()
     {
@@ -236,9 +268,14 @@ public partial class MainWindow : Window
         PersonasRoot.Text = _personasRoot;
         MusicRoot.Text = _musicRoot;
         ApplyLayout();
+        // Before the two pickers below, because it decides what they are allowed
+        // to list. Its own rescan is suppressed here — see ApplyTenant.
+        FillTenantPicker();
         FillPersonaPicker();
         FillCoverPersonaPicker();
         _coverUiBuilt = true;   // the covers picker may now trigger a scan
+        FillSupportPersonaPicker();
+        _supportUiBuilt = true; // and the support picker
         Loaded += async (_, _) => await InitAsync();
         // Coming back to the window is the moment you would look at the lyrics
         // again, and the moment a batch running elsewhere is most likely to have
@@ -266,21 +303,23 @@ public partial class MainWindow : Window
     private void Rail_Checked(object sender, RoutedEventArgs e)
     {
         if (ViewImages == null || ViewMusic == null || ViewSettings == null
-            || ViewDeploy == null || ViewCovers == null || PanelTitle == null) return;
+            || ViewDeploy == null || ViewCovers == null || ViewSupport == null || PanelTitle == null) return;
 
         var which = (sender as FrameworkElement)?.Name ?? "";
         var images = which == "RailImages";
+        var support = which == "RailSupport";
         var music = which == "RailMusic";
         var deploy = which == "RailDeploy";
         var covers = which == "RailCovers";
 
         ViewImages.Visibility = images ? Visibility.Visible : Visibility.Collapsed;
+        ViewSupport.Visibility = support ? Visibility.Visible : Visibility.Collapsed;
         ViewMusic.Visibility = music ? Visibility.Visible : Visibility.Collapsed;
         ViewDeploy.Visibility = deploy ? Visibility.Visible : Visibility.Collapsed;
         ViewCovers.Visibility = covers ? Visibility.Visible : Visibility.Collapsed;
-        ViewSettings.Visibility = (!images && !music && !deploy && !covers) ? Visibility.Visible : Visibility.Collapsed;
+        ViewSettings.Visibility = (!images && !support && !music && !deploy && !covers) ? Visibility.Visible : Visibility.Collapsed;
 
-        PanelTitle.Text = images ? "Article Images" : music ? "Album Music"
+        PanelTitle.Text = images ? "Article Images" : support ? "Support Images" : music ? "Album Music"
                         : deploy ? "Deploy" : covers ? "Cover Images" : "Settings";
 
         // The left pane belongs to whichever view is driving: the ChatGPT browser
@@ -306,6 +345,490 @@ public partial class MainWindow : Window
         // and a session that never opens this view should not pay for it. Not
         // gated on _ready — the scan reads folders, not the browser.
         if (covers && _coverUiBuilt && _covers.Count == 0) ScanCovers();
+        if (support && _supportUiBuilt && _supports.Count == 0) ScanSupport();
+    }
+
+    // ========================================================================
+    //  TENANTS
+    // ========================================================================
+    //
+    // One Next.js app serves three sites off the Host header — JubileePraise carries
+    // the whole catalogue, goPartyGiggles and MyTinyTiggles carry one children's
+    // label each. The picker in the header says which of them this studio is
+    // working on.
+    //
+    // WHAT IT SCOPES, AND WHAT IT DOES NOT. It re-scopes the album and cover
+    // worklists to that tenant's catalogue and points the live-site pane at its
+    // domain. It does NOT scope the article library (core/articles is JubileePraise's
+    // alone) and it does NOT scope the deploy: one process serves all three, so
+    // shipping ships them together. Saying that out loud here matters more than
+    // it looks — a picker that appears to scope everything and silently does not
+    // is worse than no picker.
+    //
+    // THE LIST IS READ FROM THE REPO, not maintained here. app/web/lib/tenants.ts
+    // is the runtime's own source of truth; a tenant added there appears in this
+    // picker without a code change, and cannot disagree with what the site serves.
+    // The three built-ins below are the fallback for a checkout where that file is
+    // missing or unparseable, never the primary.
+
+    private sealed class TenantOption
+    {
+        public string Key = "";
+        public string Name = "";                     // "goPartyGiggles.com"
+        public string Host = "jubileepraise.com";        // first entry in hosts[]
+        public string Accent = "#E6AC00";
+        public List<string> Categories = new();      // empty = the whole catalogue
+        public string MusicDrive = "";               // catalogue.musicDrive, when declared
+        public string StudioMusicRoot = "";          // catalogue.studioMusicRoot, when declared
+        public string Source = "";                   // which file this row came from
+        // The row is the domain and nothing else. The scope it resolves to is
+        // already on screen beside the wordmark and in the launch log, and a
+        // second copy of it inside the picker only made the row harder to read.
+        public override string ToString() => Name;
+    }
+
+    private readonly List<TenantOption> _tenants = new();
+    private TenantOption? _tenant;
+
+    /// <summary>Tenant scope, resolved to disk. Empty means "the configured root".</summary>
+    private string _tenantMusicRoot = "";
+
+    /// <summary>
+    /// Folder names under <see cref="EffectiveMusicRoot"/> this tenant may show.
+    /// Empty means all of them, which is JubileePraise and should stay that way.
+    /// </summary>
+    private readonly List<string> _tenantVoices = new();
+
+    /// <summary>The tenant key read out of studio.config.json, before the list exists.</summary>
+    private string _wantedTenantKey = "";
+
+    /// <summary>
+    /// Set while the picker is being filled. Assigning SelectedItem raises
+    /// SelectionChanged, and letting that run during the constructor would walk
+    /// the music drive before the window has been shown.
+    /// </summary>
+    private bool _suppressTenantEvent;
+
+    private bool VoiceAllowed(string? folder) =>
+        _tenantVoices.Count == 0 ||
+        (folder != null && _tenantVoices.Contains(folder, StringComparer.OrdinalIgnoreCase));
+
+    /// <summary>The three sites, for a checkout that has no app/web/lib/tenants.ts.</summary>
+    private static List<TenantOption> BuiltInTenants() => new()
+    {
+        new TenantOption { Key = "jubileepraise",   Name = "JubileePraise.com",     Host = "jubileepraise.com",       Accent = "#E6AC00" },
+        new TenantOption { Key = "partygiggles",Name = "goPartyGiggles.com",Host = "gopartygiggles.com",  Accent = "#FF3DA5", Categories = { "party-giggles" } },
+        new TenantOption { Key = "tinytiggles", Name = "MyTinyTiggles.com", Host = "mytinytiggles.com",   Accent = "#59C7F5", Categories = { "tiny-tiggles" } },
+    };
+
+    /// <summary>
+    /// Parse app/web/lib/tenants.ts into the picker's list.
+    ///
+    /// A targeted read of one well-known literal, not a TypeScript parser: the
+    /// file is a plain array of object literals and has been since it was written.
+    /// The brace scan is quote-aware so a brace inside a description string cannot
+    /// end a block early, and anything it fails to make sense of falls back to the
+    /// built-ins rather than leaving the studio with an empty picker.
+    /// </summary>
+    /// <summary>
+    /// The tenant list, from the repo. tenants/*.json first, lib/tenants.ts
+    /// second, the built-ins last.
+    ///
+    /// The JSON files win because they are written FOR tooling: they carry the
+    /// music-drive folder and the studio root outright, so the studio does not
+    /// have to work backwards from a manifest category key to a folder. The
+    /// TypeScript is what the site serves and is the fallback for a checkout
+    /// where tenants/ has not been created yet. tools/check-tenants.mjs is what
+    /// stops the two disagreeing.
+    /// </summary>
+    private List<TenantOption> ReadTenantsFromRepo()
+    {
+        var json = ReadTenantsFromJson();
+        if (json.Count > 0) return json;
+        return ReadTenantsFromTypeScript();
+    }
+
+    private List<TenantOption> ReadTenantsFromJson()
+    {
+        var dir = _root.Length > 0 ? Path.Combine(_root, "tenants") : "";
+        if (dir.Length == 0 || !Directory.Exists(dir)) return new();
+
+        var found = new List<TenantOption>();
+        foreach (var file in Directory.EnumerateFiles(dir, "*.json").OrderBy(f => f, StringComparer.OrdinalIgnoreCase))
+        {
+            try
+            {
+                var n = JsonNode.Parse(File.ReadAllText(file));
+                var key = n?["key"]?.GetValue<string>() ?? "";
+                var site = n?["site"]?.GetValue<string>() ?? "";
+                if (key.Length == 0 || site.Length == 0) continue;
+
+                var t = new TenantOption
+                {
+                    Key = key,
+                    Name = site,
+                    Source = Path.GetFileName(file),
+                    Host = n?["hosts"]?.AsArray().FirstOrDefault()?.GetValue<string>() ?? "jubileepraise.com",
+                    Accent = n?["brand"]?["accent"]?.GetValue<string>() ?? "#E6AC00",
+                };
+
+                var cat = n?["catalogue"];
+                t.MusicDrive = cat?["musicDrive"]?.GetValue<string>() ?? "";
+                t.StudioMusicRoot = cat?["studioMusicRoot"]?.GetValue<string>() ?? "";
+                // null is the whole catalogue and stays an empty list here.
+                if (cat?["categories"] is JsonArray keys)
+                    foreach (var k in keys)
+                        if (k?.GetValue<string>() is { Length: > 0 } s) t.Categories.Add(s);
+
+                found.Add(t);
+            }
+            catch (Exception ex) { Log($"Could not read tenants/{Path.GetFileName(file)}: {ex.Message}"); }
+        }
+
+        // The default tenant leads the picker, as it does in lib/tenants.ts.
+        return found.OrderByDescending(x => x.Categories.Count == 0).ToList();
+    }
+
+    private List<TenantOption> ReadTenantsFromTypeScript()
+    {
+        var file = Path.Combine(_root, "app", "web", "lib", "tenants.ts");
+        if (_root.Length == 0 || !File.Exists(file)) return new();
+
+        try
+        {
+            var src = File.ReadAllText(file);
+            var start = src.IndexOf("TENANTS", StringComparison.Ordinal);
+            if (start < 0) return new();
+            // AFTER THE '=', NOT AFTER THE NAME. The declaration reads
+            //     export const TENANTS: Tenant[] = [
+            // so the first bracket following "TENANTS" belongs to `Tenant[]`.
+            // Scanning from there matches an empty pair immediately and finds no
+            // tenants at all — silently, because the caller then falls back to
+            // the built-ins and the picker looks perfectly correct.
+            var eq = src.IndexOf('=', start);
+            if (eq < 0) return new();
+            start = src.IndexOf('[', eq);
+            if (start < 0) return new();
+
+            var found = new List<TenantOption>();
+            int depth = 0, blockStart = -1;
+            char quote = '\0';
+
+            for (var i = start; i < src.Length; i++)
+            {
+                var c = src[i];
+
+                if (quote != '\0')
+                {
+                    if (c == '\\') { i++; continue; }
+                    if (c == quote) quote = '\0';
+                    continue;
+                }
+                if (c is '\'' or '"' or '`') { quote = c; continue; }
+
+                if (c == '{')
+                {
+                    if (depth == 0) blockStart = i;
+                    depth++;
+                }
+                else if (c == '}')
+                {
+                    depth--;
+                    if (depth == 0 && blockStart >= 0)
+                    {
+                        var t = ParseTenantBlock(src[blockStart..(i + 1)]);
+                        if (t != null) found.Add(t);
+                        blockStart = -1;
+                    }
+                }
+                else if (c == ']' && depth == 0) break;
+            }
+
+            return found;
+        }
+        catch (Exception ex)
+        {
+            Log("Could not read app/web/lib/tenants.ts: " + ex.Message);
+            return new();
+        }
+    }
+
+    private static TenantOption? ParseTenantBlock(string block)
+    {
+        string One(string field)
+        {
+            var m = Regex.Match(block, field + @"\s*:\s*(['""`])(.*?)\1", RegexOptions.Singleline);
+            return m.Success ? m.Groups[2].Value : "";
+        }
+
+        var key = One("key");
+        var name = One("name");
+        if (key.Length == 0 || name.Length == 0) return null;
+
+        var t = new TenantOption { Key = key, Name = name };
+
+        var hosts = Regex.Match(block, @"hosts\s*:\s*\[(.*?)\]", RegexOptions.Singleline);
+        if (hosts.Success)
+        {
+            var first = Regex.Match(hosts.Groups[1].Value, @"(['""`])(.*?)\1");
+            if (first.Success) t.Host = first.Groups[2].Value;
+        }
+
+        var accent = One("accent");
+        if (accent.Length > 0) t.Accent = accent;
+
+        // `categories: null` is the whole catalogue and stays an empty list here.
+        var cats = Regex.Match(block, @"categories\s*:\s*\[(.*?)\]", RegexOptions.Singleline);
+        if (cats.Success)
+            foreach (Match m in Regex.Matches(cats.Groups[1].Value, @"(['""`])(.*?)\1"))
+                t.Categories.Add(m.Groups[2].Value);
+
+        return t;
+    }
+
+    /// <summary>Where the picker's rows came from, for the launch log.</summary>
+    private string TenantSourceLabel()
+    {
+        var src = _tenants.FirstOrDefault()?.Source ?? "";
+        if (src.Length > 0) return $"tenants/ ({_tenants.Count(x => x.Source.Length > 0)} file(s))";
+        return _root.Length > 0 && File.Exists(Path.Combine(_root, "app", "web", "lib", "tenants.ts"))
+            ? "app/web/lib/tenants.ts"
+            : "the built-in fallback list — no tenants/ folder and no lib/tenants.ts found";
+    }
+
+    private void FillTenantPicker()
+    {
+        _tenants.Clear();
+        var fromRepo = ReadTenantsFromRepo();
+        _tenants.AddRange(fromRepo.Count > 0 ? fromRepo : BuiltInTenants());
+
+        _suppressTenantEvent = true;
+        TenantPicker.ItemsSource = null;
+        TenantPicker.ItemsSource = _tenants;
+
+        // Falls back to the first tenant, which is JubileePraise: an unrecognised key
+        // must not silently open the studio scoped to one children's label.
+        var pick = _tenants.FirstOrDefault(x => string.Equals(x.Key, _wantedTenantKey, StringComparison.OrdinalIgnoreCase))
+                   ?? _tenants[0];
+        TenantPicker.SelectedItem = pick;
+        _suppressTenantEvent = false;
+
+        ApplyTenant(pick, rescan: false);
+    }
+
+    private void TenantPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_suppressTenantEvent) return;
+        if (TenantPicker.SelectedItem is not TenantOption t) return;
+        ApplyTenant(t, rescan: true);
+    }
+
+    /// <summary>
+    /// Point the studio at a tenant.
+    ///
+    /// <paramref name="rescan"/> is false exactly once, from the constructor: the
+    /// worklists have not been built yet at that point, and walking the music
+    /// drive there would hold the window closed behind a disk read.
+    /// </summary>
+    private void ApplyTenant(TenantOption t, bool rescan)
+    {
+        _tenant = t;
+
+        var (root, voices) = ResolveTenantScope(t);
+        _tenantMusicRoot = root;
+        _tenantVoices.Clear();
+        _tenantVoices.AddRange(voices);
+
+        Title = $"Studio — {t.Name}";
+        HeaderScope.Text = t.Categories.Count == 0
+            ? "whole catalogue"
+            : (_tenantVoices.Count > 0 ? string.Join(", ", _tenantVoices) : "scope not found on this machine");
+
+        try
+        {
+            var brush = (System.Windows.Media.Brush)new System.Windows.Media.BrushConverter().ConvertFromString(t.Accent)!;
+            HeaderBrand.Foreground = brush;
+        }
+        catch { /* an unparseable accent just leaves the house yellow */ }
+
+        SiteUrl.Text = SiteUrlText;
+
+        if (!rescan) return;
+
+        Log($"\nWebsite → {t.Name}");
+        Log(t.Categories.Count == 0
+            ? $"  albums and covers  the whole catalogue, under {EffectiveMusicRoot}"
+            : (_tenantVoices.Count > 0
+                ? $"  albums and covers  {string.Join(", ", _tenantVoices)}, under {EffectiveMusicRoot}"
+                : $"  albums and covers  nothing found on this drive for {string.Join(", ", t.Categories)}"));
+        Log($"  live site pane     {SiteUrlText}");
+        Log("  article images and the deploy are shared — one app serves all three sites.");
+
+        // The pickers below carry the old tenant's folders, so they are rebuilt
+        // before anything is asked to scan.
+        FillPersonaPicker();
+        FillCoverPersonaPicker();
+        FillSupportPersonaPicker();
+        _covers.Clear();
+        _supports.Clear();
+
+        if (ViewMusic?.Visibility == Visibility.Visible) _ = RefreshAlbumsAsync();
+        if (ViewCovers?.Visibility == Visibility.Visible) ScanCovers();
+        if (ViewSupport?.Visibility == Visibility.Visible) ScanSupport();
+        if (ViewDeploy?.Visibility == Visibility.Visible)
+        {
+            try { WvSite?.CoreWebView2?.Navigate(SiteUrlText); }
+            catch (Exception ex) { Log("Could not switch the live-site pane: " + ex.Message); }
+        }
+    }
+
+    /// <summary>
+    /// Turn a tenant's manifest category keys into a folder on the music drive.
+    ///
+    /// The two are NOT the same string: the manifest calls the label
+    /// `party-giggles`, and on disk it is `children\party-giggles`. Rather than
+    /// keep a second mapping here that could drift, the album paths already in
+    /// catalog-manifest.json are read first — `albums/children/party-giggles/…`
+    /// is the answer, written by the tool that built the catalogue. Probing the
+    /// drive is the fallback for a machine with no manifest.
+    ///
+    /// Returns the folder the picker enumerates as "voices" and the names it is
+    /// allowed to show, which for these tenants is one label apiece. An empty
+    /// root means "use the configured music root unchanged".
+    /// </summary>
+    private (string Root, List<string> Voices) ResolveTenantScope(TenantOption t)
+    {
+        if (t.Categories.Count == 0) return ("", new List<string>());
+
+        // DECLARED BEATS DERIVED. When the tenant file names its folders, they
+        // are used as written — no manifest parse, no probing, and no chance of
+        // this and the file disagreeing about where a label lives. The derivation
+        // below stays for a checkout whose tenant files predate these fields, or
+        // for the TypeScript fallback, which cannot carry a disk path at all.
+        if (t.StudioMusicRoot.Length > 0 && t.MusicDrive.Length > 0
+            && Directory.Exists(t.StudioMusicRoot) && Directory.Exists(t.MusicDrive))
+        {
+            var leaf = new DirectoryInfo(t.MusicDrive).Name;
+            if (leaf.Length > 0) return (t.StudioMusicRoot, new List<string> { leaf });
+        }
+
+        var baseDir = MusicBase();
+        if (baseDir.Length == 0) return ("", new List<string>());
+
+        var hits = new List<string>();
+        foreach (var key in t.Categories)
+        {
+            var dir = CategoryFolder(baseDir, key);
+            if (dir.Length > 0) hits.Add(dir);
+        }
+        if (hits.Count == 0) return ("", new List<string>());
+
+        // Every category of a tenant has sat under one parent so far. If one ever
+        // does not, the odd one out is dropped rather than silently widening the
+        // scope to a parent that also holds other tenants' labels.
+        var parent = Path.GetDirectoryName(hits[0]) ?? "";
+        var voices = hits
+            .Where(h => string.Equals(Path.GetDirectoryName(h), parent, StringComparison.OrdinalIgnoreCase))
+            .Select(h => Path.GetFileName(h)!)
+            .ToList();
+
+        return (parent, voices);
+    }
+
+    /// <summary>
+    /// The catalogue root on the music drive — the folder holding the category
+    /// folders and catalog-manifest.json.
+    ///
+    /// Walked up from the configured music root rather than assumed, because that
+    /// setting points one level in (…\music\inspire) and a checkout could just as
+    /// easily point it at the root itself.
+    /// </summary>
+    private string MusicBase()
+    {
+        var dir = _musicRoot.TrimEnd('\\', '/');
+        for (var i = 0; i < 3 && dir.Length > 0; i++)
+        {
+            if (File.Exists(Path.Combine(dir, "catalog-manifest.json"))) return dir;
+            dir = Path.GetDirectoryName(dir) ?? "";
+        }
+        // No manifest anywhere above it: the parent is still the best guess, since
+        // the setting names a category folder.
+        return Path.GetDirectoryName(_musicRoot.TrimEnd('\\', '/')) ?? "";
+    }
+
+    /// <summary>
+    /// category key → folder on the music drive, read once.
+    ///
+    /// catalog-manifest.json is 1.4 MB and lives on J:. Resolving three tenants
+    /// on launch would otherwise parse it three times over a drive that is not
+    /// local, so the whole map is built in ONE pass the first time any key is
+    /// asked for. Cleared when the music root is changed in Settings.
+    /// </summary>
+    private Dictionary<string, string>? _categoryDirs;
+    private string _categoryDirsFor = "";
+
+    private Dictionary<string, string> CategoryDirs(string baseDir)
+    {
+        if (_categoryDirs != null && string.Equals(_categoryDirsFor, baseDir, StringComparison.OrdinalIgnoreCase))
+            return _categoryDirs;
+
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            var manifest = Path.Combine(baseDir, "catalog-manifest.json");
+            if (File.Exists(manifest))
+            {
+                var cats = JsonNode.Parse(File.ReadAllText(manifest))?["categories"]?.AsArray();
+                foreach (var cat in cats ?? new JsonArray())
+                {
+                    var key = cat?["key"]?.GetValue<string>();
+                    var path = cat?["artists"]?.AsArray().FirstOrDefault()
+                                ?["albums"]?.AsArray().FirstOrDefault()
+                                ?["path"]?.GetValue<string>();
+                    if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(path)) continue;
+
+                    // albums/children/party-giggles/IX401EN-… → children\party-giggles
+                    var parts = path.Replace('/', '\\').Split('\\', StringSplitOptions.RemoveEmptyEntries).ToList();
+                    if (parts.Count > 0 && parts[0].Equals("albums", StringComparison.OrdinalIgnoreCase)) parts.RemoveAt(0);
+                    if (parts.Count > 1) parts.RemoveAt(parts.Count - 1);   // drop the album folder
+                    if (parts.Count == 0) continue;
+
+                    var dir = Path.Combine(baseDir, Path.Combine(parts.ToArray()));
+                    if (Directory.Exists(dir)) map[key] = dir;
+                }
+            }
+        }
+        catch { /* a malformed manifest just means "probe the drive instead" */ }
+
+        _categoryDirs = map;
+        _categoryDirsFor = baseDir;
+        return map;
+    }
+
+    /// <summary>Where a manifest category key lives on disk, or "".</summary>
+    private string CategoryFolder(string baseDir, string key)
+    {
+        if (CategoryDirs(baseDir).TryGetValue(key, out var known)) return known;
+
+        foreach (var candidate in new[]
+        {
+            Path.Combine(baseDir, key.Replace('/', '\\')),
+            Path.Combine(baseDir, "children", key),
+        }) if (Directory.Exists(candidate)) return candidate;
+
+        // Last resort, one level down: a label moved under a category folder this
+        // code has never heard of is still findable by name.
+        try
+        {
+            foreach (var sub in Directory.EnumerateDirectories(baseDir))
+            {
+                var hit = Path.Combine(sub, key);
+                if (Directory.Exists(hit)) return hit;
+            }
+        }
+        catch { }
+
+        return "";
     }
 
     // ========================================================================
@@ -315,7 +838,7 @@ public partial class MainWindow : Window
     // The workflow the album lyrics were always heading toward: read them here,
     // render the audio in Suno, drop the results back into the album's tracks/
     // folder. The songs themselves are not written here — that is the blueprint
-    // and lyrics pipeline in setup/generatelyrics-jubilujah.md. This view reads
+    // and lyrics pipeline in setup/generatelyrics-jubileepraise.md. This view reads
     // them out and files the audio back.
 
     /// <summary>One album folder under a voice.</summary>
@@ -362,12 +885,18 @@ public partial class MainWindow : Window
     /// the corpus grows a voice — kingdom-pulse, radiant-stones — without anyone
     /// remembering to come back and edit a list in here.
     /// </summary>
+    /// <remarks>
+    /// Filtered by the selected tenant. For JubileePraise that filter is empty and
+    /// this is the whole corpus, exactly as before; for the two children's sites
+    /// the label folder IS the voice, so the picker holds one row.
+    /// </remarks>
     private List<string> VoiceFolders()
     {
-        if (!Directory.Exists(_musicRoot)) return new();
-        return Directory.EnumerateDirectories(_musicRoot)
+        if (!Directory.Exists(EffectiveMusicRoot)) return new();
+        return Directory.EnumerateDirectories(EffectiveMusicRoot)
             .Select(Path.GetFileName)
             .Where(n => !string.IsNullOrEmpty(n) && !n!.StartsWith('_') && !n.StartsWith('.'))
+            .Where(VoiceAllowed)
             .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
             .Select(n => n!)
             .ToList();
@@ -418,20 +947,20 @@ public partial class MainWindow : Window
     {
         var keepIndex = LstAlbums.SelectedIndex;
 
-        if (!Directory.Exists(_musicRoot))
+        if (!Directory.Exists(EffectiveMusicRoot))
         {
             _albums.Clear();
             LstAlbums.Items.Clear();
             LstTracks.Items.Clear();
-            MusicSummary.Text = "Music root not found: " + _musicRoot;
+            MusicSummary.Text = "Music root not found: " + EffectiveMusicRoot;
             MusicSummary.Foreground = WarnAmber;
             return;
         }
 
         var voice = SelectedVoice();
-        if (voice.Length == 0) { MusicSummary.Text = "No voice folders under " + _musicRoot; return; }
+        if (voice.Length == 0) { MusicSummary.Text = "No voice folders under " + EffectiveMusicRoot; return; }
 
-        var voiceDir = Path.Combine(_musicRoot, voice);
+        var voiceDir = Path.Combine(EffectiveMusicRoot, voice);
         if (!Directory.Exists(voiceDir)) { MusicSummary.Text = "Not found: " + voiceDir; return; }
 
         // OFF THE UI THREAD, and this is not a micro-optimisation.
@@ -672,7 +1201,7 @@ public partial class MainWindow : Window
                 ? File.ReadAllText(a.LyricsFile)
                 : $"No lyrics file under:\n{Path.Combine(a.Dir, "lyrics")}\n\n"
                   + "Lyrics are authored by the blueprint and lyrics engines, not here. "
-                  + "See setup/generatelyrics-jubilujah.md.";
+                  + "See setup/generatelyrics-jubileepraise.md.";
         }
         catch (Exception ex) { LyricsText.Text = "Could not read the lyrics file: " + ex.Message; }
 
@@ -1019,7 +1548,7 @@ public partial class MainWindow : Window
             {
                 var ask = MessageBox.Show(
                     $"{Path.GetFileName(track.File)} already exists.\n\nReplace it?",
-                    "JubiLujah Studio", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    "JubileePraise Studio", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (ask != MessageBoxResult.Yes) { Log("Kept the existing " + Path.GetFileName(track.File)); return false; }
             }
 
@@ -1176,7 +1705,16 @@ public partial class MainWindow : Window
     // carried its own copy of the procedure would be a second source of truth,
     // and the two would disagree the first time the runbook changed.
 
-    private const string SiteUrlText = "https://jubilujah.com/";
+    /// <summary>
+    /// The site the live pane shows — the selected tenant's own domain.
+    ///
+    /// The DEPLOY itself is not scoped: one pm2 process serves all three hosts,
+    /// so shipping ships them together whichever one is selected here. Only the
+    /// preview follows the picker.
+    /// </summary>
+    private string SiteUrlText =>
+        "https://" + (_tenant is { Host.Length: > 0 } t ? t.Host : "jubileepraise.com") + "/";
+
     private bool _deploying;
 
     /// <summary>
@@ -1349,7 +1887,8 @@ public partial class MainWindow : Window
         {
             Log("\n=== preflight ===");
             Log(Directory.Exists(_root) ? $"  repo        ok   {_root}" : $"  repo        MISSING  {_root}");
-            Log(Directory.Exists(_musicRoot) ? $"  music       ok   {_musicRoot}" : $"  music       MISSING  {_musicRoot}");
+            Log(Directory.Exists(EffectiveMusicRoot) ? $"  music       ok   {EffectiveMusicRoot}" : $"  music       MISSING  {EffectiveMusicRoot}");
+            Log($"  website     {_tenant?.Name ?? "JubileePraise.com"} — the deploy itself ships all three sites, it is not scoped by the picker");
 
             var key = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
@@ -1412,7 +1951,7 @@ public partial class MainWindow : Window
             "restarts PM2, then verifies.\n\n" +
             "deploy/publish.sh " + string.Join(' ', flags) + "\n\n" +
             "The live site will restart.",
-            "Deploy JubiLujah", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            "Deploy JubileePraise", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         if (ask != MessageBoxResult.Yes) { Log("Deploy cancelled."); return; }
 
         await RunPublishAsync(string.Join(' ', flags));
@@ -1551,7 +2090,7 @@ public partial class MainWindow : Window
     /// core/articles/gen-articles.mjs.
     ///
     /// NO FALLBACK PATH. An earlier build of this tool defaulted its root to a
-    /// hard-coded W:\JubiLujah.com when the marker was not found, which means a
+    /// hard-coded W:\JubileePraise.com when the marker was not found, which means a
     /// stray copy of the exe anywhere on the machine would have written into that
     /// repo. An unresolved root now says which folder it started from and refuses
     /// to scan, which is the recoverable failure.
@@ -1577,7 +2116,7 @@ public partial class MainWindow : Window
         // cookie store next to the user's other local app data instead.
         _userDataFolder = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "JubiLujah", "Studio", "webview2");
+            "JubileePraise", "Studio", "webview2");
         Directory.CreateDirectory(_userDataFolder);
 
         // One-time migration so the ChatGPT login from the older in-repo tool
@@ -1621,6 +2160,10 @@ public partial class MainWindow : Window
             if (!string.IsNullOrWhiteSpace(p)) _personasRoot = p.TrimEnd('\\', '/');
             var m = cfg?["musicRoot"]?.GetValue<string>();
             if (!string.IsNullOrWhiteSpace(m)) _musicRoot = m.TrimEnd('\\', '/');
+            // Held rather than applied: the tenant list does not exist yet, and an
+            // unknown key must fall back to JubileePraise rather than to nothing.
+            var tn = cfg?["tenant"]?.GetValue<string>();
+            if (!string.IsNullOrWhiteSpace(tn)) _wantedTenantKey = tn.Trim();
             var loc = cfg?["locationUrl"]?.GetValue<string>();
             if (!string.IsNullOrWhiteSpace(loc)) LocationUrl.Text = loc;
 
@@ -1656,6 +2199,7 @@ public partial class MainWindow : Window
                 ["repoRoot"] = _root,
                 ["personasRoot"] = _personasRoot,
                 ["musicRoot"] = _musicRoot,
+                ["tenant"] = _tenant?.Key ?? "",
                 ["locationUrl"] = LocationUrl.Text ?? CHATGPT,
                 ["includeAuthor"] = ChkIncludeAuthor.IsChecked == true,
                 ["layout"] = new JsonObject
@@ -1674,7 +2218,17 @@ public partial class MainWindow : Window
     {
         _root = (RepoRoot.Text ?? "").Trim().TrimEnd('\\', '/');
         _personasRoot = (PersonasRoot.Text ?? "").Trim().TrimEnd('\\', '/');
-        _musicRoot = (MusicRoot.Text ?? "").Trim().TrimEnd('\\', '/');
+
+        var music = (MusicRoot.Text ?? "").Trim().TrimEnd('\\', '/');
+        // Moving the music root moves every tenant's scope with it, so the cached
+        // category map and the resolved scope are both dropped rather than left
+        // pointing at folders on the old drive.
+        if (!string.Equals(music, _musicRoot, StringComparison.OrdinalIgnoreCase))
+        {
+            _musicRoot = music;
+            _categoryDirs = null;
+            if (_tenant != null) ApplyTenant(_tenant, rescan: false);
+        }
     }
 
     // ---- init WebView2 with a persistent profile (this is the cookie store) -
@@ -1702,6 +2256,12 @@ public partial class MainWindow : Window
             Wv.CoreWebView2.Navigate(CHATGPT);
             _ready = true;
 
+            Log($"Website: {_tenant?.Name ?? "JubileePraise.com"} — {(_tenantVoices.Count > 0 ? string.Join(", ", _tenantVoices) : "whole catalogue")}, under {EffectiveMusicRoot}.");
+            // Names the file the list actually came from. The old line hardcoded
+            // app/web/lib/tenants.ts, which stopped being true the moment tenants/
+            // existed — and a log that states the wrong source is how a silent
+            // fallback goes unnoticed for a month.
+            Log($"  {_tenants.Count} site(s) in the picker, from {TenantSourceLabel()}. Article images and the deploy are shared across all of them.");
             Log("Article images are written into app/web/public/images/articles and recorded in each article's image field.");
             Log("Backstage images are written into app/web/public/images/backstage, where gen-backstage.mjs finds them by slug.");
             Log("Log in to ChatGPT in the browser, then pick a section tab and generate.");
@@ -1714,7 +2274,7 @@ public partial class MainWindow : Window
             MessageBox.Show(
                 "WebView2 failed to start. Make sure the WebView2 Runtime is installed " +
                 "(it ships with Edge on Windows 11).\n\n" + ex.Message,
-                "JubiLujah Studio", MessageBoxButton.OK, MessageBoxImage.Error);
+                "JubileePraise Studio", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -2367,8 +2927,15 @@ public partial class MainWindow : Window
         // Age deliberately NOT on this take-list any more: it is stated explicitly
         // by AgeClause, and "take the approximate age from the portrait" would put
         // the two instructions in direct contradiction.
-        "Take from it ONLY the facial features, skin tone, hair colour and texture, facial hair, " +
-        "and general build. " +
+        //
+        // AND NEITHER IS BUILD, for exactly the same reason and it is the same bug.
+        // This line used to end "and general build", which told the model to import
+        // the body from the reference portrait — while BuildClause, appended a few
+        // hundred characters later, told it to override the reference. Two flatly
+        // contradictory instructions in one prompt, and the nearer one to the
+        // attachment tended to win. The build is a FACT ABOUT THE PERSON and is
+        // stated once, in BuildClause.
+        "Take from it ONLY the facial features, skin tone, hair colour and texture, and facial hair. " +
         "Ignore everything else about the reference photograph completely: its clothing, its glowing or " +
         "futuristic costume, its headwear, its jewellery, its neon and circuit-pattern background, its " +
         "studio lighting and its head-and-shoulders framing are all irrelevant and must not appear. " +
@@ -2534,7 +3101,7 @@ public partial class MainWindow : Window
     /// worklist gets re-rendered and what is worth saying at the end. A flag with a
     /// default keeps all three existing call sites untouched.
     /// </param>
-    private async Task RunBatch(List<Piece> jobs, bool covers = false)
+    private async Task RunBatch(List<Piece> jobs, RunView view = RunView.Pieces)
     {
         if (_running) { Log("Already running — press Stop first."); return; }
         _running = true;
@@ -2552,7 +3119,7 @@ public partial class MainWindow : Window
                 if (job.Section != lastSection)
                 {
                     lastSection = job.Section;
-                    Log($"\n--- {(covers ? job.Section : DisplayFor(job.Section))} ---");
+                    Log($"\n--- {(view == RunView.Pieces ? DisplayFor(job.Section) : job.Section)} ---");
                 }
 
                 // Never regenerate one already done (this session or a prior run).
@@ -2580,8 +3147,12 @@ public partial class MainWindow : Window
                     _sessionDone.Add(job.Path);
                     // Show the image that just landed. The user is watching a long
                     // run; the picture arriving is the thing worth seeing.
-                    if (covers) { RenderCovers(); ShowCoverPreview(job); }
-                    else { RenderAll(); ShowPreview(job); }
+                    switch (view)
+                    {
+                        case RunView.Covers: RenderCovers(); ShowCoverPreview(job); break;
+                        case RunView.Support: RenderSupport(); ShowSupportPreview(job); break;
+                        default: RenderAll(); ShowPreview(job); break;
+                    }
                     if (++inThread >= 10)
                     {
                         Log("  Reached 10 images in this conversation — the next one starts a new thread.");
@@ -2599,6 +3170,13 @@ public partial class MainWindow : Window
                 else
                 {
                     failed++;
+                    // THE NEXT PIECE STARTS A FRESH CONVERSATION. A failure is very
+                    // often the thread itself — wedged, streaming forever, or
+                    // holding an unsent prompt — and leaving inThread where it was
+                    // sent the next piece straight back into it. That is how ONE
+                    // stuck conversation used to consume three pieces and the best
+                    // part of twenty minutes before the run gave up.
+                    inThread = 0;
                     // Three failures in a row is not bad luck. It is almost always
                     // a quota or a capacity problem, and grinding through the
                     // remaining pieces would just burn them all against the same
@@ -2626,15 +3204,28 @@ public partial class MainWindow : Window
         {
             _running = false;
             SetBusy(false);
-            if (covers) ScanCovers(); else ScanAll();
+            switch (view)
+            {
+                case RunView.Covers: ScanCovers(); break;
+                case RunView.Support: ScanSupport(); break;
+                default: ScanAll(); break;
+            }
             Log($"\nFinished. {done} generated"
                 + (failed > 0 ? $", {failed} failed" : "")
                 + (skipped > 0 ? $", {skipped} skipped (already done)" : "") + ".");
-            if (done > 0 && covers)
+            if (done > 0 && view == RunView.Covers)
             {
                 Log("Nothing here is reviewed automatically — look at every cover before it ships.");
                 Log("These are MASTERS on the music drive. They are not on the site or the CDN until");
                 Log("the cover publish pipeline runs (WebP → R2 → bump cover-versions.json).");
+            }
+            else if (done > 0 && view == RunView.Support)
+            {
+                Log("Nothing here is reviewed automatically — look at every one before it ships.");
+                Log("These went STRAIGHT ONTO THE MUSIC DRIVE, beside each album's cover. Keep the");
+                Log("draft you want and delete the rest: the lowest-numbered survivor is the one the");
+                Log("website shows. They are not live until the artwork is pushed to the CDN and");
+                Log("app/web/scripts/gen-album-support.mjs is re-run.");
             }
             else if (done > 0)
             {
@@ -2691,6 +3282,13 @@ public partial class MainWindow : Window
             Log($"  ✗ Could not build a prompt: no generation brief for {job.Author} in .models.");
             return false;
         }
+        // A supporting image carries no prompt until now either, and for the same
+        // reason: building it reads the album's lyrics file for its song titles.
+        if (job.Kind == Kind.Support && !PrepareSupport(job))
+        {
+            Log("  ✗ Could not build a supporting-image prompt for this album.");
+            return false;
+        }
         if (job.Prompt.Length == 0) { Log("  ✗ No image prompt on this piece — skipping."); return false; }
 
         // Resolve the author BEFORE the browser is touched. A missing portrait is
@@ -2744,6 +3342,12 @@ public partial class MainWindow : Window
                         else
                             Log($"  ⚠ Image saved, but no imagePrompt field was found to update in {Path.GetFileName(job.Path)}");
                     }
+                    else if (job.Kind == Kind.Support)
+                    {
+                        // Rebuilt from the cover and the album on every run, so
+                        // there is nowhere to write the working wording back to.
+                        Log("  Support prompts are rebuilt from the album each run, so nothing is written back.");
+                    }
                     else if (job.Kind == Kind.Cover)
                     {
                         // A cover prompt is BUILT, not stored, so there is nothing
@@ -2790,9 +3394,10 @@ public partial class MainWindow : Window
 
     private async Task<Attempt> AttemptOne(Piece job, bool newThread, string promptText, AuthorRef author, CancellationToken ct)
     {
-        // Decided once, up front: it changes what gets attached, which clause is
-        // appended and which aspect ratio is demanded.
+        // Decided once, up front: they change what gets attached, which clause
+        // is appended and which aspect ratio is demanded.
         var cover = job.Kind == Kind.Cover;
+        var support = job.Kind == Kind.Support;
 
         if (newThread)
         {
@@ -2835,6 +3440,19 @@ public partial class MainWindow : Window
                 return new Attempt(null, false, false);
             }
         }
+        else if (support)
+        {
+            // ONE reference, and it is this album's own cover. Not the persona
+            // portrait: the cover already carries the right face AND the right
+            // wardrobe AND the right place AND the right light, which is the whole
+            // set of things this picture has to keep. Attaching the neon studio
+            // portrait as well would introduce a second, contradictory likeness.
+            if (!await AttachSupportReference(job, ct))
+            {
+                Log("  ✗ The cover could not be attached, so nothing was sent. This album stays queued.");
+                return new Attempt(null, false, false);
+            }
+        }
         else if (author.Required)
         {
             if (!await AttachReference(author.Base64, author.FileName, ct))
@@ -2842,6 +3460,19 @@ public partial class MainWindow : Window
                 Log($"  ✗ {author.FirstName} could not be attached, so nothing was sent. This piece stays queued.");
                 return new Attempt(null, false, false);
             }
+        }
+
+        // NOTHING IS TYPED INTO A STREAMING COMPOSER. While ChatGPT is mid-turn its
+        // send button IS the stop button, so a submit into that window cannot land:
+        // the click finds no send button and the synthetic Enter is ignored. The
+        // prompt then sits in the box, unsent, while the run waits out a six-minute
+        // deadline for an image that was never requested. That is the hang.
+        if (!await WaitUntilComposerIdle(TimeSpan.FromSeconds(90), ct))
+        {
+            Log("  ✗ This conversation has been streaming for 90s with nothing to show — it is wedged.");
+            // PageFailed, so the caller retries this piece in a BRAND NEW thread
+            // rather than typing into the same stuck one again.
+            return new Attempt(null, true, false);
         }
 
         // Remember which images are already on the page so we only accept a NEW one.
@@ -2869,17 +3500,42 @@ public partial class MainWindow : Window
         // it is a fact about the persona, not a note about the attachment, and the
         // article path can have its author clause switched off.
         var who = author.FirstName.Length > 0 ? author.FirstName : FamilyNameFor(job.AuthorSlug);
+        // A support clause is NOT gated on author.Required. That switch belongs to
+        // Article Images and means "put the writer in the picture"; here the person
+        // is already in the attached cover and cannot be left out of a picture whose
+        // entire job is to match it. Turning the switch off would strip the
+        // instruction that keeps the likeness and leave the reference unexplained.
         var full = oneLine
-                 + (author.Required ? (cover ? CoverAuthorClause(who) : AuthorClause(who)) : "")
+                 + (support ? SupportAuthorClause(who)
+                    : author.Required ? (cover ? CoverAuthorClause(who) : AuthorClause(who)) : "")
                  + (who.Length > 0 ? AgeClause(who) : "")
-                 + (cover ? SquareSuffix : AspectSuffix);
-        if (who.Length > 0) Log($"  Age: {who} is rendered at {(who.Equals("Elias", StringComparison.OrdinalIgnoreCase) ? "40, white-haired" : "30")}.");
-        if (author.Required)
+                 // Build sits with age because it is the same KIND of clause — a
+                 // fact about the person that overrides the reference — and the
+                 // two read as one physical description rather than as two
+                 // unrelated corrections.
+                 //
+                 // EVERY PATH, unlike height. Height is support-only by Founder
+                 // scope; the build is not scoped, because a cover and an article
+                 // image show the same person and there is no reading in which she
+                 // is slender in one and not the other. Until this line existed the
+                 // covers and article images carried NO build instruction at all —
+                 // the .models briefs describe wardrobe and light and never the
+                 // body — so the generator invented one per render.
+                 + (who.Length > 0 ? BuildClause(who) : "")
+                 + (support && who.Length > 0 ? HeightClause(who) : "")
+                 + (cover ? SquareSuffix : support ? SupportSuffix : AspectSuffix);
+        if (who.Length > 0) Log($"  Age: {who} is rendered at {(who.Equals("Elias", StringComparison.OrdinalIgnoreCase) ? "40, white-haired" : "30")}, slender and fit.");
+        if (support)
+        {
+            Log($"  Carried from the cover: {who}, same wardrobe, same place, same light.");
+            Log($"  Height: {who} rendered at six feet, tall and slender.");
+        }
+        else if (author.Required)
             Log(cover
                 ? $"  Cover subject: {author.FirstName}, in the wardrobe the model file specifies."
                 : $"  Author in this image: {author.FirstName}, dressed for the scene.");
         var submit = Json(await Wv.CoreWebView2.ExecuteScriptAsync(SubmitScript(full)));
-        Log($"  submit result: {submit}");
+        Log($"  typed: {submit}");
         if (submit == "no-composer") { Log("  ✗ Could not find the chat box to type into."); return new Attempt(null, false, false); }
         if (submit.StartsWith("mismatch", StringComparison.Ordinal))
         {
@@ -2887,6 +3543,40 @@ public partial class MainWindow : Window
             // it burns a turn and produces an image for the wrong description.
             Log("  ✗ The composer did not receive the full prompt, so nothing was sent.");
             return new Attempt(null, false, false);
+        }
+
+        // LET REACT CATCH UP BEFORE PRESSING SEND. See SubmitScript: the text is in
+        // the DOM the instant execCommand runs, but the composer is React-controlled
+        // and does not hold it until the input event has been processed on a later
+        // tick. Sending inside that gap submits an EMPTY message with the attachment
+        // still on it, and ChatGPT answers by asking what it is supposed to do with
+        // the picture instead of generating anything.
+        await Task.Delay(700, ct);
+
+        var click = Json(await Wv.CoreWebView2.ExecuteScriptAsync(ClickSendScript()));
+        Log($"  send: {click}");
+        if (click == "busy" || click == "disabled")
+        {
+            Log("  ✗ The send button was not available (the page was still busy). Nothing was sent.");
+            return new Attempt(null, true, false);
+        }
+        if (click == "no-composer") { Log("  ✗ The chat box went away before the prompt could be sent."); return new Attempt(null, true, false); }
+
+        // THE SEND IS VERIFIED, NOT ASSUMED. A click on a button that is present
+        // but inert leaves the prompt sitting in the composer; the only reliable
+        // proof the turn actually went is the box emptying. Without this the run
+        // proceeds to wait six minutes on a turn that never left the machine.
+        var landed = false;
+        for (int i = 0; i < 8; i++)
+        {
+            await Task.Delay(700, ct);
+            if (int.TryParse(Json(await Wv.CoreWebView2.ExecuteScriptAsync(ComposerLengthScript())), out var len) && len < 5)
+            { landed = true; break; }
+        }
+        if (!landed)
+        {
+            Log("  ✗ The prompt is still sitting in the composer — the send did not go through.");
+            return new Attempt(null, true, false);
         }
 
         Log("  Waiting for the image to finish generating…");
@@ -2926,6 +3616,27 @@ public partial class MainWindow : Window
         int[] backoff = { 20000, 45000, 90000 };
         string? last = null;
         int stable = 0, polls = 0, retries = 0;
+
+        // ---- the stall watchdog ------------------------------------------------
+        //
+        // TWO MINUTES WITH THE PAGE COMPLETELY STATIC MEANS THE THREAD IS DEAD, and
+        // the run should move to a fresh conversation rather than sit out the rest
+        // of the six-minute deadline. Founder instruction, and it is the difference
+        // between one wasted turn and eighteen minutes of apparent hang: on a
+        // failure the caller keeps the same thread, so a wedged conversation used
+        // to take the next two pieces down with it before the run gave up.
+        //
+        // "STATIC" IS MEASURED, NOT GUESSED, and it is deliberately NOT "the stop
+        // button is missing". A wedged conversation can sit there with its stop
+        // button showing and nothing behind it — that is exactly the state this was
+        // reported in. So the probe fingerprints the things that MOVE when work is
+        // really happening (large-image count, the length of the last assistant
+        // message, the stream flag) and the clock resets the moment any of them
+        // changes. A genuinely slow render is streaming text or growing an image
+        // and keeps its full six minutes; only a frozen page is cut short.
+        var stallLimit = TimeSpan.FromMinutes(2);
+        var lastProgress = DateTime.UtcNow;
+        var fingerprint = "";
         while (DateTime.UtcNow < deadline)
         {
             ct.ThrowIfCancellationRequested();
@@ -2970,14 +3681,33 @@ public partial class MainWindow : Window
                     }
                     deadline = deadline.AddMilliseconds(wait + 30000);
                     await Task.Delay(6000, ct);
+                    // The backoff was time spent deliberately NOT polling, so it is
+                    // not evidence of a stall. Without this reset a 90s backoff would
+                    // hand the retry only thirty seconds of watchdog before it was
+                    // declared wedged — punishing the recovery for the wait it was
+                    // told to take.
+                    lastProgress = DateTime.UtcNow;
                     continue;
                 }
                 Log($"    ✗ ChatGPT failed this turn {backoff.Length + 1} times, backing off each time.");
                 return (null, true, false);
             }
 
+            var probe = Json(await Wv.CoreWebView2.ExecuteScriptAsync(ProgressProbeScript()));
+            if (probe != fingerprint) { fingerprint = probe; lastProgress = DateTime.UtcNow; }
+            else if (DateTime.UtcNow - lastProgress > stallLimit)
+            {
+                Log($"    ✗ Nothing on the page has changed for {stallLimit.TotalMinutes:0} minutes — this conversation is wedged.");
+                Log("      Abandoning it and starting a fresh thread for this image.");
+                return (null, true, false);   // PageFailed → the caller opens a new conversation
+            }
+
             if (++polls % 5 == 0)
-                Log($"    …still waiting ({current.Count} image(s) on page, ~{(int)(deadline - DateTime.UtcNow).TotalSeconds}s left)");
+            {
+                var idle = (int)(DateTime.UtcNow - lastProgress).TotalSeconds;
+                Log($"    …still waiting ({current.Count} image(s) on page, ~{(int)(deadline - DateTime.UtcNow).TotalSeconds}s left" +
+                    (idle >= 20 ? $", no page activity for {idle}s" : "") + ")");
+            }
             await Task.Delay(3000, ct);
         }
         Log("    ✗ Timed out waiting for the image.");
@@ -3019,9 +3749,14 @@ public partial class MainWindow : Window
             var original = Convert.FromBase64String(b64);
             // A cover goes to the REVIEW folder, never to the music drive. The
             // drive holds approved masters; this tool produces candidates.
-            var imagesDir = job.Kind == Kind.Cover
-                ? Path.GetDirectoryName(job.ReviewFile) ?? job.TargetDir
-                : ImagesDirFor(job.Kind);
+            var imagesDir = job.Kind switch
+            {
+                Kind.Cover => Path.GetDirectoryName(job.ReviewFile) ?? job.TargetDir,
+                // A supporting image goes straight into the album's own artwork
+                // folder on the music drive, beside the cover it was derived from.
+                Kind.Support => Path.GetDirectoryName(job.SupportFile) ?? job.TargetDir,
+                _ => ImagesDirFor(job.Kind),
+            };
             Directory.CreateDirectory(imagesDir);
 
             byte[] bytes;
@@ -3047,8 +3782,15 @@ public partial class MainWindow : Window
             }
 
             // A cover is named for its album title, not its code, because the
-            // review folder is read by a person deciding whether to keep it.
-            var fileName = job.Kind == Kind.Cover ? Path.GetFileName(job.ReviewFile) : job.Slug + ext;
+            // review folder is read by a person deciding whether to keep it. A
+            // supporting image is named <CODE>-support-<N> because the website
+            // resolves it by code and picks the lowest-numbered survivor.
+            var fileName = job.Kind switch
+            {
+                Kind.Cover => Path.GetFileName(job.ReviewFile),
+                Kind.Support => Path.GetFileName(job.SupportFile),
+                _ => job.Slug + ext,
+            };
             var dest = Path.Combine(imagesDir, fileName);
             await File.WriteAllBytesAsync(dest, bytes, ct);
 
@@ -3061,7 +3803,14 @@ public partial class MainWindow : Window
             // Skipped for covers: they are named by title, so there is no
             // slug-keyed sibling to supersede, and a review folder is somewhere a
             // person may have deliberately kept an earlier take to compare.
-            if (job.Kind != Kind.Cover)
+            //
+            // 🔴 AND SKIPPED FOR SUPPORT IMAGES, WHICH IS NOT A TIDINESS
+            // CHOICE. A supporting image is written INTO the album's artwork
+            // folder, and StaleSiblings looks for <slug>.<ext> there — which is
+            // exactly the name of the cover master. Running it here would delete
+            // the album's approved artwork as a "superseded" sibling of the
+            // picture derived from it, every single time.
+            if (job.Kind != Kind.Cover && job.Kind != Kind.Support)
             {
                 foreach (var stale in StaleSiblings(imagesDir, job.Slug, fileName))
                 {
@@ -3083,6 +3832,11 @@ public partial class MainWindow : Window
             {
                 Log("  Cover: written to review/ for approval. NOT on the music drive.");
             }
+            else if (job.Kind == Kind.Support)
+            {
+                Log("  Support image: written to the album's artwork folder on the music drive.");
+                Log("  It is not published until the artwork is pushed to the CDN.");
+            }
             else
             {
                 Log("  Backstage: the file on disk is the record — gen-backstage.mjs finds it by slug.");
@@ -3100,6 +3854,7 @@ public partial class MainWindow : Window
             {
                 Kind.Article => "images/articles",
                 Kind.Cover => "review/" + Path.GetFileName(imagesDir),
+                Kind.Support => Path.GetFileName(job.AlbumDir) + "/artwork",
                 _ => "images/backstage",
             };
             Log($"  Saved {where}/{fileName}  ({bytes.Length:N0} bytes"
@@ -3309,9 +4064,113 @@ public partial class MainWindow : Window
         "box.dispatchEvent(new Event('input',{bubbles:true}));" +
         "var head=P.slice(0,40).replace(/\\s+/g,' ').trim();" +
         "if(got.indexOf(head)!==0)return 'mismatch|want:'+head+'|got:'+got.slice(0,90);" +
-        "setTimeout(function(){var btn=document.querySelector('button[data-testid=\"send-button\"]')||document.querySelector('button[aria-label=\"Send prompt\"]');" +
-        "if(btn){btn.click();}else{box.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));}},450);" +
-        "return 'submitted|'+got.length+' chars';})();";
+        // TYPING ONLY. THE CLICK IS A SEPARATE CALL, AND THE GAP BETWEEN THEM IS
+        // LOAD-BEARING.
+        //
+        // The original code clicked inside a setTimeout(…, 450). That delay looked
+        // like defensive padding and it is not: execCommand puts the text in the
+        // DOM immediately, but the composer is a React-controlled ProseMirror and
+        // React has not committed that content to its own state until it has
+        // processed the input event on a later tick. Clicking send in the SAME tick
+        // submits what React still believes the composer holds, which is nothing —
+        // so the turn goes with the ATTACHMENT ONLY and no instruction, and ChatGPT
+        // replies "I can see the cover clearly, tell me what you want me to do with
+        // it". Measured: three consecutive albums failed that way.
+        //
+        // The read-back check above cannot catch it. It reads innerText, which is
+        // the DOM, and the DOM is correct — it is React that is behind.
+        //
+        // So the wait is back, moved OUT of the page and into the caller where its
+        // result can actually be inspected. That keeps both things: the original
+        // timing, and a return value that reports what really happened instead of
+        // guessing.
+        "return 'typed|'+got.length;})();";
+
+    /// <summary>
+    /// Press send, once the composer has had time to settle. Split out of
+    /// SubmitScript so the delay between typing and clicking happens in C#,
+    /// where a real return value survives it.
+    ///
+    /// Reports what it actually did — never that it "submitted" when it only
+    /// scheduled something. Enter stays as the fallback for a layout with no
+    /// send button, as it always was.
+    /// </summary>
+    private static string ClickSendScript() =>
+        "(function(){" +
+        "if(document.querySelector('button[data-testid=stop-button]'))return 'busy';" +
+        "var box=document.querySelector('#prompt-textarea')||document.querySelector('div[contenteditable=true]');" +
+        "var btn=document.querySelector('button[data-testid=send-button]');" +
+        "if(btn&&!btn.disabled){btn.click();return 'clicked';}" +
+        "if(btn&&btn.disabled)return 'disabled';" +
+        "if(box){box.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));return 'enter';}" +
+        "return 'no-composer';})();";
+
+    // ---- is the page busy, did the send land, is anything moving? ----------
+    //
+    // Three cheap probes that between them tell a WEDGED conversation apart from
+    // a slow one. Every CSS attribute value below is left UNQUOTED, which is legal
+    // for identifier-shaped values and keeps these strings free of escapes.
+
+    /// <summary>'busy' while ChatGPT is streaming a turn, 'idle' otherwise.</summary>
+    private static string ComposerBusyScript() =>
+        "(function(){if(document.querySelector('button[data-testid=stop-button]'))return 'busy';" +
+        "var bs=document.querySelectorAll('button');" +
+        "for(var i=0;i<bs.length;i++){var a=(bs[i].getAttribute('aria-label')||'').toLowerCase();" +
+        "if(a.indexOf('stop')===0)return 'busy';}return 'idle';})();";
+
+    /// <summary>
+    /// How many characters are sitting in the composer.
+    ///
+    /// The send is confirmed by this going to zero. A click that did nothing
+    /// leaves the prompt in the box, which is the difference between "sent and
+    /// rendering" and "never sent" — and the old code could not see it.
+    /// </summary>
+    private static string ComposerLengthScript() =>
+        "(function(){var box=document.querySelector('#prompt-textarea')||" +
+        "document.querySelector('div[contenteditable=true]');" +
+        "if(!box)return '0';return String((box.innerText||box.textContent||'').trim().length);})();";
+
+    /// <summary>
+    /// A cheap fingerprint of everything that would change if the page were alive:
+    /// how many large images are loaded, how long the last assistant message is,
+    /// and whether it is streaming.
+    ///
+    /// THE STREAM FLAG IS NOT ENOUGH ON ITS OWN, which is the whole reason this
+    /// returns three values. A wedged conversation can sit with its stop button
+    /// showing and nothing behind it, so "is it streaming" reports alive while
+    /// nothing moves. An unchanged fingerprint is the honest signal.
+    /// </summary>
+    private static string ProgressProbeScript() =>
+        "(function(){var n=0;var imgs=document.querySelectorAll('img');" +
+        "for(var i=0;i<imgs.length;i++){var im=imgs[i];" +
+        "if(im.complete&&(im.naturalWidth||0)>=400&&(im.naturalHeight||0)>=400)n++;}" +
+        "var t=document.querySelectorAll('[data-message-author-role=assistant]');" +
+        "var L=t.length?(t[t.length-1].innerText||'').length:0;" +
+        "var s=document.querySelector('button[data-testid=stop-button]')?1:0;" +
+        "return n+'|'+L+'|'+s;})();";
+
+    /// <summary>
+    /// Wait until the page has stopped streaming, so the prompt is not typed into
+    /// a composer whose send button is currently a STOP button.
+    /// </summary>
+    /// <returns>false if it never went idle — the conversation is wedged.</returns>
+    private async Task<bool> WaitUntilComposerIdle(TimeSpan limit, CancellationToken ct)
+    {
+        var until = DateTime.UtcNow + limit;
+        var told = false;
+        while (DateTime.UtcNow < until)
+        {
+            ct.ThrowIfCancellationRequested();
+            if (Json(await Wv.CoreWebView2.ExecuteScriptAsync(ComposerBusyScript())) != "busy") return true;
+            if (!told)
+            {
+                Log("  The previous turn is still streaming — waiting for it to finish before typing…");
+                told = true;
+            }
+            await Task.Delay(2000, ct);
+        }
+        return false;
+    }
 
     // Returns every finished, LARGE image on the page, in DOM order (last = most
     // recent). We detect by size rather than URL: ChatGPT serves generated images
@@ -3498,5 +4357,20 @@ public partial class MainWindow : Window
         /// rather than the only one.
         /// </summary>
         public int Variant;
+
+        // ---- support images only -----------------------------------------
+        /// <summary>
+        /// This album's existing cover master, full path. It is the REFERENCE a
+        /// supporting image is derived from, so a job without one cannot run —
+        /// which is why the scan refuses to list an album that has no artwork.
+        /// </summary>
+        public string CoverFile = "";
+        /// <summary>
+        /// Where the supporting image is written:
+        /// &lt;album&gt;/artwork/&lt;CODE&gt;-support-&lt;N&gt;.webp. Full path,
+        /// because the draft number is part of the name and cannot be derived
+        /// from Slug alone.
+        /// </summary>
+        public string SupportFile = "";
     }
 }

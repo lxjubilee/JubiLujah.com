@@ -20,7 +20,7 @@ const rank = (slug: string) => {
 };
 
 // Flagship album pinned to the front of its persona row so it is the very first
-// album on the page — matches the Jubilujah.com brand.
+// album on the page — matches the JubileePraise.com brand.
 const FEATURED_ALBUM_CODE = 'JEIM1069EN';
 
 export default function InspirePage() {

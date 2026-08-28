@@ -1,6 +1,6 @@
 # Subscription Management — Feature & Operations Guide
 
-Premium music subscriptions for Jubilujah.com: a Free tier with a daily listening
+Premium music subscriptions for JubileePraise.com: a Free tier with a daily listening
 limit, paid **Individual** and **Family** plans, a provider-agnostic billing layer
 (Stripe in production), and the supporting account UI, enforcement, and audit.
 
@@ -140,7 +140,7 @@ CHECKOUT_CANCEL_PATH=/subscription?checkout=cancelled
 # Free-plan daily reset timezone (IANA name)
 LISTENING_TZ=America/Los_Angeles
 
-WEB_BASE_URL=https://jubilujah.com
+WEB_BASE_URL=https://jubileepraise.com
 ```
 
 With **no Stripe key**, the provider falls back to `mock`: the full subscribe →
@@ -164,7 +164,7 @@ before wiring a real gateway.
    STRIPE_SECRET_KEY=sk_test_... DATABASE_URL=postgres://... node scripts/stripe-setup.mjs
    ```
 4. **Register the webhook** in the Stripe dashboard pointing at
-   `https://api.jubilujah.com/api/subscriptions/webhook`, subscribed to:
+   `https://api.jubileepraise.com/api/subscriptions/webhook`, subscribed to:
    `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`,
    `customer.subscription.updated`, `customer.subscription.deleted`. Put the signing
    secret in `STRIPE_WEBHOOK_SECRET`.
@@ -176,7 +176,7 @@ before wiring a real gateway.
 > exact bytes. Don't move it below `express.json`.
 
 ### Local dev
-See memory `local-backend-stack-howto`: copy `api`/`db` to `C:\jubilujah-local`,
+See memory `local-backend-stack-howto`: copy `api`/`db` to `C:\jubileepraise-local`,
 `npm install`, run migrations, `npm start` (API :4000). Web rewrites `/api/*` →
 the API. With `PAYMENT_PROVIDER` unset and no Stripe key, checkout uses the mock
 gateway and activates instantly.

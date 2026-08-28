@@ -1,44 +1,44 @@
 {
   "registry": "ai-users",
   "synthetic": true,
-  "project": "JubiLujah.com",
+  "project": "JubileePraise.com",
   "terminology": {
     "AI User Persona": "A synthetic member of the AUDIENCE — one of the 100 modelled listeners in this directory. Never a real person. Registry key: user_personas.",
     "Inspire Persona": "One of the 12 AI ministry personas of Jubilee Ministries (jubilee, melody, amir, imani, santiago, tahoma, elias, eliana, caleb, nova, zariah, zev). Per-user key: inspire_personas.",
     "note": "These are NOT the same thing and the word \"persona\" alone is ambiguous. Always qualify it."
   },
-  "seed": "jubilujah-2026-07-22-a",
+  "seed": "jubileepraise-2026-07-22-a",
   "generated_at": "2026-07-22T00:00:00Z",
   "generated_by": "Melody Inspire · skill_create.ai-user.personas v1.4",
   "theological_mode": "Blend",
   "layout_note": "Record lives INSIDE its history folder (founder directive 2026-07-22) — diverges from skill_create.ai-user.personas v1.4 §10.1, which places it beside the folder.",
   "cohorts": {
     "cast-one": {
-      "seed": "jubilujah-2026-07-22-a",
+      "seed": "jubileepraise-2026-07-22-a",
       "ranks": "1-10",
       "note": "global audience cut"
     },
     "cast-two": {
-      "seed": "jubilujah-2026-07-22-b",
+      "seed": "jubileepraise-2026-07-22-b",
       "ranks": "11-20",
       "note": "US depth cut — founder directive: American names"
     },
     "cast-three (US regional: South · NY tri-state · TX/AZ)": {
-      "seed": "jubilujah-2026-07-22-c",
+      "seed": "jubileepraise-2026-07-22-c",
       "ranks": "21-50",
       "count": 30,
       "depth_tier": "engine-assembled",
       "confidence_pct": 74
     },
     "cast-four (Chicago & Atlanta · Middle states · Europe)": {
-      "seed": "jubilujah-2026-07-22-d",
+      "seed": "jubileepraise-2026-07-22-d",
       "ranks": "51-80",
       "count": 30,
       "depth_tier": "engine-assembled",
       "confidence_pct": 74
     },
     "cast-five (Romanian — mostly US-based, plus Romania and Europe)": {
-      "seed": "jubilujah-2026-07-22-e",
+      "seed": "jubileepraise-2026-07-22-e",
       "ranks": "81-100",
       "count": 20,
       "depth_tier": "engine-assembled",

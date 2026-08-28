@@ -1,0 +1,39 @@
+/* JubileePraise-style copyright bar: dark, centered, gold top border. */
+.footer {
+  background: var(--bg-deep);
+  color: var(--cream);
+  border-top: 2px solid var(--accent);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  /* JubileePraise's exact footer padding (61px tall). The fixed now-playing bar is
+     cleared by body padding the bar sets when it mounts, not by the footer. */
+  padding: 20px 0;
+}
+
+.inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  /* 1.6 keeps a single 12px line at ~19px so the footer lands at JubileePraise's
+     61px; still gives breathing room if the line wraps on narrow screens. */
+  line-height: 1.6;
+}
+
+/* "TorahSings.com" in a gold gradient. */
+.brand {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent) 0%, #ffd877 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #ffd877;
+}

@@ -16,7 +16,7 @@ import {
 // ============================================================================
 // Subscription API (user-facing). All money handling is delegated to the
 // configured payment provider (services/payments/*); this router owns the
-// Jubilujah-side subscription lifecycle, audit and notifications.
+// JubileePraise-side subscription lifecycle, audit and notifications.
 //
 //   GET  /api/subscriptions/plans          — plan catalog (public)
 //   GET  /api/subscriptions/me             — my entitlement + subscription
@@ -204,11 +204,11 @@ router.post('/cancel', requireAuth, validate(cancelSchema), ah(async (req, res) 
     metadata: { subscription_id: sub.id, immediate },
     email: req.auth.user.email ? {
       to: req.auth.user.email,
-      subject: 'Your Jubilujah subscription was cancelled',
+      subject: 'Your JubileePraise subscription was cancelled',
       heading: immediate ? 'Your subscription has ended' : 'Your subscription will not renew',
       intro: immediate
-        ? `${cancelName ? `Hi ${cancelName}, your` : 'Your'} Jubilujah subscription has been cancelled and access to premium features has ended. We hope to see you again soon.`
-        : `${cancelName ? `Hi ${cancelName}, your` : 'Your'} Jubilujah subscription has been set to not renew. You'll keep full access until ${fmtDate(updated.current_period_end)}.`,
+        ? `${cancelName ? `Hi ${cancelName}, your` : 'Your'} JubileePraise subscription has been cancelled and access to premium features has ended. We hope to see you again soon.`
+        : `${cancelName ? `Hi ${cancelName}, your` : 'Your'} JubileePraise subscription has been set to not renew. You'll keep full access until ${fmtDate(updated.current_period_end)}.`,
       ctaLabel: 'Resubscribe', ctaUrl: `${config.webBaseUrl}/subscription`,
     } : null,
   });
@@ -314,9 +314,9 @@ router.post('/change', requireAuth, validate(changeSchema), ah(async (req, res) 
     metadata: { subscription_id: sub.id, from: sub.plan_code, to: newPlan.code },
     email: user.email ? {
       to: user.email,
-      subject: `You're now on the Jubilujah ${newPlan.name} plan`,
+      subject: `You're now on the JubileePraise ${newPlan.name} plan`,
       heading: changeFirst ? `Plan updated, ${changeFirst}` : 'Your plan was updated',
-      intro: `${changeName ? `Hi ${changeName}, your` : 'Your'} Jubilujah plan has been changed to the ${newPlan.name} plan, effective immediately. Your billing adjusts at your next cycle.`,
+      intro: `${changeName ? `Hi ${changeName}, your` : 'Your'} JubileePraise plan has been changed to the ${newPlan.name} plan, effective immediately. Your billing adjusts at your next cycle.`,
       rows: [
         { label: 'New plan', value: newPlan.name },
         { label: 'Price', value: newPlan.price_cents === 0 ? 'Free' : `$${(newPlan.price_cents / 100).toFixed(2)} / ${newPlan.billing_interval}` },

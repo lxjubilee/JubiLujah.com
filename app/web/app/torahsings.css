@@ -1,0 +1,435 @@
+/* ============================================================================
+ * TORAH SINGS — tenant-scoped base styles
+ * ============================================================================
+ *
+ * GENERATED from W:/TorahSings.com/src/app/globals.css by
+ * W:/.claude-scratch/scope-css.mjs. Re-run that script rather than hand-editing,
+ * or the next regeneration will silently drop the edit.
+ *
+ * Every selector is scoped under [data-tenant='torahsings'], which app/layout.tsx
+ * stamps onto <html> for this tenant only. Torah Sings names its primitives
+ * generically — .wrap, .card, .panel, .pill, .prose, plus bare h1/p/a and the
+ * :root token block — and JubileePraise's own sheet is 1,586 lines deep in the same
+ * document. Unscoped, this file would restyle goPartyGiggles and MyTinyTiggles
+ * the moment it was imported.
+ *
+ * Torah Sings' palette was authored to match JubileePraise's (its own comments say
+ * so: same 1548px measure, same Segoe UI stack), so the two sheets agree far
+ * more than they collide. The scope is here for the cases where they do not.
+ * ========================================================================== */
+
+/* ============================================================================
+   Torah Sings — Global Design System
+   Tokens are normative. They are what make the pages feel like one platform.
+   ========================================================================= */
+
+[data-tenant='torahsings'] {
+  /* Color — JubileePraise palette: deep navy-indigo with warm gold / coral / rose. */
+  --bg-deep: #0c1226;
+  --bg-panel: #161d33;
+  --bg-card: #1b2340;
+
+  --ink: #f0ebe3;
+  --ink-body: #b8bcd4;
+  --ink-muted: #7f86a8;
+  --ink-faint: #565d80;
+
+  --accent: #feca57; /* gold */
+  --accent-soft: #ffd877; /* light gold */
+  --accent-peach: #ff8a6b; /* coral */
+  --accent-rose: #e94560; /* rose */
+  --cream: #f4d8a8;
+  --success: #5fb371; /* JubileePraise's affirmative green — compare-table checks */
+
+  --hairline: rgba(244, 216, 168, 0.12);
+  --hairline-strong: rgba(244, 216, 168, 0.3);
+
+  /* Ink that sits on top of gold. */
+  --on-accent: #0c1226;
+
+  /* Rhythm — JubileePraise's exact page measure: a 1548px max width that runs
+     nearly edge-to-edge on a 10px gutter. The header, content, and footer all
+     share it (via .wrap), so the top bar lines up with everything beneath it.
+     (Matches JubileePraise's header: --site-max 1548px, --site-pad 10px. Its catalog
+     ROWS widen the gutter to 36px — scoped to .browse, not here.) */
+  --wrap: 1548px;
+  --gutter: 10px;
+  --radius: 12px;
+  --radius-lg: 18px;
+
+  --shadow-lift: 0 18px 50px -18px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 24px -6px rgba(254, 202, 87, 0.45);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Type — body + headings run in the system UI stack (Segoe UI), matching
+     JubileePraise's site font exactly; Orbitron (--font-cosmic) is the brand
+     wordmark, Spline Sans Mono (--font-mono) the eyebrow/label accent. */
+  --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Segoe UI', Tahoma, Geneva, Verdana, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Optional silver theme. Apply `data-accent="silver"` to <html>. */
+[data-tenant='torahsings'][data-accent='silver'] {
+  --accent: #c3c7e0;
+  --accent-soft: #e8ebf7;
+  --hairline: rgba(232, 235, 247, 0.12);
+  --hairline-strong: rgba(232, 235, 247, 0.3);
+  --shadow-glow: 0 0 24px -6px rgba(195, 199, 224, 0.45);
+}
+
+[data-tenant='torahsings'] *,
+[data-tenant='torahsings'] *::before,
+[data-tenant='torahsings'] *::after {
+  box-sizing: border-box;
+}
+
+html[data-tenant='torahsings'] {
+  -webkit-text-size-adjust: 100%;
+}
+
+[data-tenant='torahsings'] body {
+  margin: 0;
+  min-height: 100dvh;
+  /* Column flex so the footer is pushed to the bottom on pages whose content is
+     shorter than the viewport — min-height alone stretches the body but leaves
+     the footer sitting at the end of the content, with background showing under
+     it. Only the header, main and footer are in flow; the particles, the star
+     field, the transport and the modals are all fixed or absolute. */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse at top, rgba(15, 52, 96, 0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #131a2c 0%, #0c1226 52%, #0a0f24 100%);
+  background-attachment: fixed;
+  color: var(--ink-body);
+  font-family: var(--font-body), 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Takes up the slack between the header and the footer, so short pages still
+   plant the footer on the bottom edge. */
+[data-tenant='torahsings'] main {
+  flex: 1 0 auto;
+}
+
+/* A faint scatter of stars behind everything. */
+[data-tenant='torahsings'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, rgba(232, 217, 168, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 34% 62%, rgba(232, 217, 168, 0.32), transparent 60%),
+    radial-gradient(1.4px 1.4px at 61% 24%, rgba(232, 217, 168, 0.42), transparent 60%),
+    radial-gradient(1px 1px at 78% 71%, rgba(232, 217, 168, 0.28), transparent 60%),
+    radial-gradient(1.1px 1.1px at 89% 33%, rgba(232, 217, 168, 0.36), transparent 60%),
+    radial-gradient(1px 1px at 47% 88%, rgba(232, 217, 168, 0.24), transparent 60%),
+    radial-gradient(1.3px 1.3px at 22% 79%, rgba(232, 217, 168, 0.3), transparent 60%);
+}
+
+/* -------------------------------------------------------------------------
+   Backstage-style Hebraic Christianity reading room — a flat black canvas
+   that overrides the navy theme + star field for those pages only. Scoped by
+   the .bsHebraic marker the listing and reader roots carry.
+   ---------------------------------------------------------------------- */
+[data-tenant='torahsings'] body:has(.bsHebraic) {
+  background: #000;
+}
+
+[data-tenant='torahsings'] body:has(.bsHebraic)::before {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------
+   Typography
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] h1,
+[data-tenant='torahsings'] h2,
+[data-tenant='torahsings'] h3,
+[data-tenant='torahsings'] h4 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0;
+  margin: 0;
+  text-wrap: balance;
+}
+
+[data-tenant='torahsings'] h1 {
+  font-size: clamp(2.05rem, 4.4vw, 3rem);
+}
+
+[data-tenant='torahsings'] h2 {
+  font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+}
+
+[data-tenant='torahsings'] h3 {
+  font-size: clamp(1.12rem, 1.8vw, 1.38rem);
+}
+
+[data-tenant='torahsings'] p {
+  margin: 0 0 1.15em;
+  text-wrap: pretty;
+}
+
+[data-tenant='torahsings'] a {
+  color: var(--accent-soft);
+  text-decoration: none;
+  transition: color 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+[data-tenant='torahsings'] a:hover {
+  color: var(--accent);
+}
+
+[data-tenant='torahsings'] :where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[data-tenant='torahsings'] ::selection {
+  background: rgba(201, 168, 74, 0.28);
+  color: var(--ink);
+}
+
+/* Hebrew glyphs — standard letters; Hebrew falls back to the system serif. */
+[data-tenant='torahsings'] .glyph {
+  font-family: var(--font-display), serif;
+  line-height: 1;
+  font-feature-settings: normal;
+}
+
+/* -------------------------------------------------------------------------
+   Layout
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: 1;
+}
+
+[data-tenant='torahsings'] .hairline {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Eyebrow label — mono, 11px, .3em tracking, uppercase, accent-soft @ 85%.
+   Often prefixed with a 6px glowing gold dot.
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.85;
+  margin: 0;
+}
+
+[data-tenant='torahsings'] .eyebrow--dot::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px 1px rgba(201, 168, 74, 0.75);
+}
+
+/* Mono meta text — labels, footnotes, prices-as-data. */
+[data-tenant='torahsings'] .mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* -------------------------------------------------------------------------
+   Pill buttons
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  color: var(--on-accent);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+[data-tenant='torahsings'] .pill:hover {
+  color: var(--on-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+[data-tenant='torahsings'] .pill:active {
+  transform: translateY(0);
+}
+
+[data-tenant='torahsings'] .pill--ghost {
+  background: transparent;
+  border-color: var(--hairline-strong);
+  color: var(--ink);
+}
+
+[data-tenant='torahsings'] .pill--ghost:hover {
+  color: var(--ink);
+  border-color: var(--accent-soft);
+  box-shadow: none;
+}
+
+[data-tenant='torahsings'] .pill--sm {
+  padding: 10px 18px;
+  font-size: 11px;
+}
+
+[data-tenant='torahsings'] .pill:disabled,
+[data-tenant='torahsings'] .pill[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------------------------
+   Chip — e.g. "Not canon · Something to consider"
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.014);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* -------------------------------------------------------------------------
+   Panels & cards
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+}
+
+[data-tenant='torahsings'] .card {
+  background: var(--bg-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+/* -------------------------------------------------------------------------
+   Prose — article bodies
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .prose {
+  color: var(--ink-body);
+  font-size: 1.055rem;
+  line-height: 1.78;
+  max-width: 68ch;
+}
+
+[data-tenant='torahsings'] .prose > h3 {
+  margin: 2rem 0 0.85rem;
+  color: var(--ink);
+}
+
+[data-tenant='torahsings'] .prose blockquote {
+  margin: 2rem 0;
+  padding: 0 0 0 1.4rem;
+  border-left: 2px solid var(--accent);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+[data-tenant='torahsings'] .prose blockquote cite {
+  display: block;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  font-style: normal;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0.8;
+}
+
+/* -------------------------------------------------------------------------
+   Utilities
+   ---------------------------------------------------------------------- */
+
+[data-tenant='torahsings'] .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+[data-tenant='torahsings'] .muted {
+  color: var(--ink-muted);
+}
+
+[data-tenant='torahsings'] .faint {
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {[data-tenant='torahsings'] *,
+[data-tenant='torahsings'] *::before,
+[data-tenant='torahsings'] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

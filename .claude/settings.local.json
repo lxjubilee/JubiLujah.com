@@ -401,9 +401,20 @@
             "type": "command",
             "command": "node",
             "args": [
-              "w:/JubiLujah.com/.claude/hooks/activate-persona.mjs"
+              "w:/JubileePraise.com/.claude/hooks/activate-persona.mjs"
             ],
             "statusMessage": "Checking for persona activation..."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "w:/JubileePraise.com/.claude/hooks/session-journal.mjs"
+            ]
           }
         ]
       }
@@ -415,9 +426,21 @@
             "type": "command",
             "command": "node",
             "args": [
-              "w:/JubiLujah.com/.claude/hooks/default-persona.mjs"
+              "w:/JubileePraise.com/.claude/hooks/default-persona.mjs"
             ],
             "statusMessage": "Activating workspace default persona (Melody)..."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "w:/JubileePraise.com/.claude/hooks/session-resume.mjs"
+            ],
+            "statusMessage": "Picking up where we left off..."
           }
         ]
       }
@@ -430,7 +453,19 @@
             "command": "node -e \"const fs=require('fs');const input=JSON.parse(require('fs').readFileSync(0,'utf8'));const msg={event:'Stop',session_id:input.session_id,timestamp:Date.now(),stop_hook_active:input.stop_hook_active};const dir=process.env.CLAUDE_PROJECT_DIR||'.';const file=dir+'/.claude/hook-messages.json';fs.writeFileSync(file,JSON.stringify(msg));\""
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "w:/JubileePraise.com/.claude/hooks/session-journal.mjs"
+            ]
+          }
+        ]
       }
     ]
-  }
+  },
+  "cleanupPeriodDays": 3650
 }
