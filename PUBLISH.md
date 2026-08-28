@@ -73,7 +73,7 @@ This document is the source of truth. When the procedure changes, update this fi
 | `@aws-sdk/client-s3` | Not installed at this repo root. `deploy/publish.sh` auto-detects it, currently resolving to `W:\JubileeInspire.com\api\node_modules`. To make this repo self-contained: `npm install @aws-sdk/client-s3 @aws-sdk/lib-storage` |
 | Sync script | `W:\JubileePraise.com\_r2-sync-music-inspire.js` (in-repo; supports `--src= --prefix= --bucket= --env=`) |
 | Manifest gate | `W:\JubileePraise.com\deploy\check-manifest.mjs` (read-only staleness check) |
-| Nginx vhost | `/etc/nginx/sites-available/jubileepraise.com` on prod (proxies to `127.0.0.1:3030` for web and `127.0.0.1:4030` for the API — **not** 3119, which is JubileeVibes) |
+| Nginx vhost | **Two** vhosts, both proxying to `127.0.0.1:3030` (web) and `127.0.0.1:4030` (api) — **not** 3119, which is JubileeVibes:<br>`/etc/nginx/sites-available/jubilujah.com` — `jubilujah.com` (301 → www) + `www.jubilujah.com`<br>`/etc/nginx/sites-available/jubileepraise.com` — `jubileepraise.com` (301 → www) + `www.jubileepraise.com` *(added 2026-08-28)* |
 | PM2 processes | **`jubilujah-web`** (Next.js, cwd `/var/www/jubilujah.com/web`, :3030) and **`jubilujah-api`** (`/var/www/jubilujah.com/api/src/index.js`, :4030). Persisted via `pm2 save`. There is no process named `jubileepraise`. |
 | Prod code dir | `/var/www/jubilujah.com` — **lowercase**, and **not a git checkout** (`no .git`) |
 | DNS | `www.jubileepraise.com` and `jubileepraise.com` proxied through Cloudflare (TLS terminates at CF edge) |
@@ -374,6 +374,110 @@ Should return `HTTP/2 200`.
 
 ---
 
+## Activating jubileepraise.com (started 2026-08-28)
+
+> **Founder decision, 2026-08-28: BOTH domains live; `jubilujah.com` stays canonical.**
+> `jubileepraise.com` serves the same app, on the same box, port and PM2 process. The HTML
+> `<link rel="canonical">`, `og:url` and `sitemap.xml` continue to point at `jubilujah.com`.
+> **No rebuild is required**, which is what makes this a small change — see the SEO note below
+> for what a *full* cutover would additionally need.
+
+### Done on the server (2026-08-28) — origin is ready, DNS is not
+
+**1. Origin TLS certificate.** The house pattern on this host is a **self-signed** origin cert
+per domain in `/etc/ssl/cloudflare/`, with SANs for apex + www (verified against
+`jubilujah.com`, `cornellkay.com`, `beforedenominations.com` — all `subject == issuer`). That
+implies the Cloudflare SSL mode is **Full**, not Full (strict). Created to match:
+
+```bash
+cd /etc/ssl/cloudflare
+openssl req -x509 -nodes -newkey rsa:2048 -days 3650   -keyout jubileepraise.com.key -out jubileepraise.com.crt   -subj "/CN=jubileepraise.com"   -addext "subjectAltName=DNS:jubileepraise.com,DNS:www.jubileepraise.com"
+chmod 600 jubileepraise.com.key; chmod 644 jubileepraise.com.crt
+```
+
+**2. Nginx vhost** `/etc/nginx/sites-available/jubileepraise.com`, symlinked into `sites-enabled`.
+It is a copy of the `jubilujah.com` vhost with the names and cert paths swapped: apex 301s to www,
+www proxies `/api/` → `:4030` and `/` → `:3030`. `nginx -t` passed, `systemctl reload nginx` applied.
+
+> ⚠ **This host serves ~100 sites off one nginx.** Always `nginx -t` before reloading, and remove
+> the symlink again if it fails — a bad vhost takes every site down, not just this one.
+
+**3. Verified without DNS.** Because `--resolve` bypasses name resolution, the origin can be proved
+correct *before* any record exists. This is the check to run after any vhost change here:
+
+```bash
+curl -sS -k -o /dev/null -w "%{http_code} %{redirect_url}
+"   --resolve jubileepraise.com:443:94.72.120.231 https://jubileepraise.com/       # 301 -> www
+curl -sS -k -o /dev/null -w "%{http_code}
+"   --resolve www.jubileepraise.com:443:94.72.120.231 https://www.jubileepraise.com/  # 200
+```
+
+Result on 2026-08-28: **301 → `https://www.jubileepraise.com/`** and **200**, serving
+`<title>JubileePraise.com — Feel the Spirit Move</title>`, `og:site_name` `JubileePraise.com`,
+and `/album?c=JEIM1069EN` → **200** (so tenant resolution and the manifest both work on the new
+host). `www.jubilujah.com` 200, apex 301 and `cd.jubilujah.com` 200 were all re-probed after the
+reload: **zero regressions**.
+
+### Outstanding — DNS (the only remaining step)
+
+`jubileepraise.com` **is registered and already on Cloudflare** (`denver.ns.cloudflare.com`,
+`teagan.ns.cloudflare.com`), but **the zone is empty** — `jubileepraise.com`, `www`, `api` and `cd`
+all return `NO RECORD`. Two records make the site public:
+
+| Type | Name | Content | Proxy | TTL |
+|---|---|---|---|---|
+| `A` | `@` (`jubileepraise.com`) | `94.72.120.231` | **Proxied** (orange) | Auto |
+| `A` | `www` | `94.72.120.231` | **Proxied** (orange) | Auto |
+
+Also confirm the zone's **SSL/TLS mode is `Full`** (not `Full (strict)`) — the origin cert is
+self-signed, exactly like every other site on this box, and `Full (strict)` would 526.
+
+**No Cloudflare API credentials exist on this workstation.** `.env` has `ZONEID_API` /
+`ACCOUNTID_API` but no token, and the `$CLOUDFLARE_GLOBAL_API_KEY` that the Troubleshooting
+section's purge example expects is unset. So this step is dashboard work, or needs a scoped
+token (`Zone → DNS → Edit` on the `jubileepraise.com` zone). Nothing else is blocking.
+
+Do **not** add a `cd.jubileepraise.com` record. Media deliberately stays on `cd.jubilujah.com`;
+see D-2026-08-27-3…-6.
+
+### 🔴 Pre-existing SEO bug found while checking this — `robots.txt` points at localhost
+
+Live right now on production:
+
+```
+$ curl -s https://www.jubilujah.com/robots.txt
+...
+Sitemap: http://localhost:3000/sitemap.xml
+```
+
+**Search engines cannot discover the sitemap at all.** Cause: `app/web/app/robots.ts` reads
+`process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'`, and that variable was **not set in
+the build environment** for the 2026-08-27 release. `robots.txt` is statically prerendered, so it
+baked in the localhost fallback. `sitemap.ts` uses the identical expression but is *dynamic*
+(it calls `listArtists()` / `backstageSlugs()`), so it reads prod's runtime `.env` and correctly
+emits `https://jubilujah.com`. `og:url` is likewise correct on every page probed.
+
+**The fix requires a rebuild** — a `pm2 restart` cannot change a prerendered file. Set
+`NEXT_PUBLIC_SITE_URL=https://www.jubilujah.com` in the build environment and re-run **Step 2b**.
+It was deliberately **not** done on 2026-08-28 because the Founder chose the no-rebuild path.
+
+### If the decision later changes to a full cutover
+
+Making `jubileepraise.com` the canonical brand is **not** a DNS change. `NEXT_PUBLIC_SITE_URL`
+drives canonical, `og:url`, `robots.txt` and `sitemap.xml`, so a full cutover needs:
+
+1. `NEXT_PUBLIC_SITE_URL=https://www.jubileepraise.com` in prod's `/var/www/jubilujah.com/.env`
+   **and in the build environment**, then a full **Step 2b** rebuild+release.
+2. Flip the `jubilujah.com` vhost from serving to `return 301 https://www.jubileepraise.com$request_uri`.
+3. Drop `jubilujah.com` / `www.jubilujah.com` from `hosts` in `tenants/jubileepraise.com.json` and
+   `app/web/lib/tenants.ts` — they are documented there as deliberate and removable at exactly this point.
+4. Leave `cd.jubilujah.com` alone regardless.
+
+Until then, two domains serve identical content and the old one is canonical — which is correct
+and intended, not an oversight.
+
+---
+
 ## Standing up the parallel site (JubileePraise cutover)
 
 > **⛔ SUPERSEDED the same day, 2026-08-27, by a Founder decision to deploy the rebrand to the
@@ -549,9 +653,9 @@ and `node deploy/check-manifest.mjs` before publishing and make it a deliberate 
 |---|---|
 | Host | `root@94.72.120.231` (hostname `SEAIIS01SERVER`, Ubuntu, nginx 1.24, Node 20.20.0, PM2 6.0.14) |
 | Code dir | **`/var/www/jubilujah.com/`** — lowercase; **not a git checkout**. Layout is `web/` + `api/`, which does **not** match the repo's `app/web` + `app/api`. |
-| Nginx vhost | `/etc/nginx/sites-available/jubileepraise.com` → proxies to `127.0.0.1:3030` (web) and `127.0.0.1:4030` (api) |
+| Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` **and** `/etc/nginx/sites-available/jubileepraise.com` → both proxy to `127.0.0.1:3030` (web) and `127.0.0.1:4030` (api). *Corrected 2026-08-28: only the jubilujah vhost existed; the runbook named a jubileepraise file that had never been created.* |
 | PM2 processes | **`jubilujah-web`** — Next.js, cwd `/var/www/jubilujah.com/web`, **:3030**<br>**`jubilujah-api`** — `/var/www/jubilujah.com/api/src/index.js`, **:4030**<br>*(there is no process named `jubileepraise`)* |
 | Live manifest | `/var/www/jubilujah.com/web/public/music/catalog-manifest.json` (read at runtime by `lib/manifest.ts`, cached in memory — restart `jubilujah-web` after replacing it) |
-| Public URL | https://www.jubileepraise.com (also responds at apex https://jubileepraise.com) |
+| Public URL | `https://www.jubilujah.com` (apex 301 → www) — **serving today**.<br>`https://www.jubileepraise.com` — origin is configured and verified, but **DNS does not exist yet**, so it is not reachable publicly. See "Activating jubileepraise.com". |
 | CDN | public host **`cd.jubilujah.com`**, prefix `music/`, no `albums/` segment. Backed by R2 and staged from `J:\jubileepraise.com\music\`. **No credentials for this bucket exist on this machine** — see Step 1. |
 | ⚠ Not this site | **port 3119 is `jubileevibes`** (`/var/www/JubileeVibes.com/server.js`). `cdn.jubileeverse.com` is the **avatars** bucket and 404s for music. Both appeared in this runbook as if they were JubileePraise's. |

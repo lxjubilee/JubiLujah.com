@@ -252,3 +252,51 @@ site", which is superseded and kept as history. **Also corrected there: the `J:`
 a blocker** — `check-manifest.mjs` accepts `--music=`, so
 `--music=J:/jubilujah.com/music` passes the gate (`would add: 0`) with no 41 GB move and no
 server-side `mklink`. `J:\jubileepraise.com\` remains empty and nothing depends on it.
+
+## D-2026-08-28-1 · The rebrand is committed — `3648a31`
+**Decided:** 2026-08-28 · **By:** Founder, "let's review it, and let's push this out".
+**Why:** the rebrand had been serving on production since 2026-08-27 but existed only as an
+uncommitted working tree, so there was no versioned record of what was live. Gates were re-run
+first and all three passed: `tools/check-tenants.mjs` (5 tenants), `tsc --noEmit` clean,
+`check-manifest.mjs --music=J:/jubilujah.com/music` → **would add: 0**.
+**Changed:** 666 files committed (408 modified · 252 added · 6 renamed). The untracked set was
+scanned for private keys / API tokens / `-pw` literals before staging — clean.
+**Deliberately excluded:** `.claude/sessions/*.json`, the per-session journals. Whether the
+conversation history belongs in the repo is still an open Founder question, and committing it
+would have answered it by accident. `CONTINUITY.md` and `DECISIONS.md` were force-added, since
+those are the durable records CLAUDE.md points at.
+**Not addressed:** `.claude/settings.local.json` still carries **9** plaintext `-pw` literals and
+is still tracked. They were already in `HEAD` before this commit — verified, so this commit did
+not introduce or worsen them. Rotating them and scrubbing history remains an open decision.
+
+## D-2026-08-28-2 · Both domains live; `jubilujah.com` stays canonical
+**Decided:** 2026-08-28 · **By:** Founder, choosing between full cutover / both-live / soft-launch.
+**Why:** the both-live shape needs **no rebuild**, which makes activation a small additive change
+— a cert, a vhost and two DNS records — instead of a release. The trade-off was stated and
+accepted: search engines keep indexing the `jubilujah.com` brand, because canonical, `og:url` and
+`sitemap.xml` all derive from `NEXT_PUBLIC_SITE_URL` on prod and are unchanged.
+**Changed on the server:** a self-signed origin cert `/etc/ssl/cloudflare/jubileepraise.com.{crt,key}`
+(matching the house pattern — every other domain on this box is self-signed, so the Cloudflare SSL
+mode is `Full`, not `Full (strict)`), and a new vhost
+`/etc/nginx/sites-available/jubileepraise.com` symlinked into `sites-enabled`, mirroring the
+`jubilujah.com` vhost. `nginx -t` passed before reload. Verified via `curl --resolve` **without
+DNS**: apex → 301 → www, www → 200, `/album?c=JEIM1069EN` → 200. `www.jubilujah.com`,
+the apex redirect and `cd.jubilujah.com` re-probed after the reload — zero regressions.
+**Rollback is one command:** `rm /etc/nginx/sites-enabled/jubileepraise.com && nginx -t && systemctl reload nginx`.
+Nothing pre-existing was modified; the change is purely additive.
+**Still outstanding:** the two Cloudflare A records. The zone exists and is on Cloudflare's
+nameservers but is **empty**; no Cloudflare API token exists on this workstation, so it is
+dashboard work or needs a scoped `Zone → DNS → Edit` token. Records are tabulated in PUBLISH.md
+→ "Activating jubileepraise.com".
+
+## D-2026-08-28-3 · Production `robots.txt` advertises `http://localhost:3000/sitemap.xml` — found, not fixed
+**Decided:** 2026-08-28 · **By:** found while verifying the domain activation; left for a separate
+change because the Founder had just chosen the no-rebuild path.
+**Why it happens:** `app/web/app/robots.ts` reads `process.env.NEXT_PUBLIC_SITE_URL ||
+'http://localhost:3000'`, and that variable was **not set in the build environment** for the
+2026-08-27 release. `robots.txt` is statically prerendered, so the localhost fallback was baked in.
+`sitemap.ts` uses the identical expression but is *dynamic* (it calls `listArtists()`), so it reads
+prod's runtime `.env` and correctly emits `https://jubilujah.com` — which is why the two disagree.
+**Impact:** search engines cannot discover the sitemap. Pre-existing, not caused by any deploy.
+**The fix needs a rebuild, not a restart** — set `NEXT_PUBLIC_SITE_URL` in the build environment
+and re-run PUBLISH.md Step 2b. Recorded in PUBLISH.md under "Activating jubileepraise.com".
