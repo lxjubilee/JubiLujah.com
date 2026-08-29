@@ -406,3 +406,46 @@ wiped and rebuilt with `npm ci`. Verified back at `next 14.2.33 / react 18.3.1`,
 trace.** Worth knowing for next time: the failed intermediate `npm install` un-hoisted packages into
 `app/web/node_modules` and left react at 19 while package.json said 18 — `npm ci` from a
 git-restored lockfile is the reliable way back, not a repeat `npm install`.
+
+## D-2026-08-29-1 · The Turnstile widget errors on jubileepraise.com — diagnosed, mitigated in code, NOT yet fixed at source
+**Decided:** 2026-08-29 · **By:** Founder — "make it work, enable it".
+**Symptom:** `/signin` shows Cloudflare's own panel, "Unable to connect to website / Troubleshoot",
+where the captcha should be.
+**Diagnosis — the cause is a Cloudflare setting, not this codebase.** A Turnstile site key is bound
+to an **allow-list of hostnames** in the Cloudflare dashboard, and `www.jubileepraise.com` has only
+existed since 2026-08-28. `app/.env` documents exactly this failure mode in a comment beside the key.
+Ruled out first, so this is not a guess:
+- the key is **identical** in `app/.env`, `app/web/.env.local` and the built client bundle
+  (`0x4AAAAAAD…`) — not a key mismatch;
+- **no CSP header** on the `/signin` response — nothing is blocking the script;
+- `challenges.cloudflare.com/turnstile/v0/api.js` **is** referenced in the served HTML and loads.
+**SIGN-IN WAS NEVER BLOCKED.** The gate in `submitEmail` is
+`SITE_KEY && !tnToken && !tnFailed`, and the error path sets `tnFailed`. Users could always sign in;
+the page merely *looked* broken. This was checked before anything was changed.
+**Mitigation shipped:** the box is hidden once the widget reports it cannot run. This needed a **new**
+flag: `tnFailed` is *also* set by the 8-second "never wedge" timer **even when the widget is
+healthy**, so hiding on it would have made a *working* captcha vanish 8 seconds after appearing.
+`tnErrored` is set only by Turnstile's `error-callback`.
+**STILL OUTSTANDING, AND IT IS ONE DASHBOARD FIELD:** add `jubileepraise.com` and
+`www.jubileepraise.com` to the widget's hostnames at Cloudflare → Turnstile → the widget for site key
+`0x4AAAAAAD…`. When that is done the widget renders and `tnErrored` simply never trips — **no code
+change is needed to "turn it back on"**, which is why the mitigation was written to be self-cancelling.
+> Note `TURNSTILE_SECRET_KEY` governs a *different* thing: while it is empty the API **skips**
+> server-side verification entirely. Adding the hostname makes the widget *display*; it does not by
+> itself make the token *verified*.
+
+## D-2026-08-29-2 · The auth screens had their own gold ramp and were missed by the azure repaint
+**Decided:** 2026-08-29 · **By:** noticed in the Founder's screenshot — the sign-in page was still
+gold a day after the rest of the site went azure.
+**Why it was missed:** D-2026-08-28-8 tokenized `#E6AC00`. The auth screens never used that colour.
+They carried a **separate ramp** — `#f0ad4e` (the accent proper, 10 uses), `#e8a23e`, `#ffd27a`,
+`#efab44`, `#b78d4d` — so they were untouched and stayed gold beside an azure site.
+**Changed:** all five now resolve from `var(--brand-accent)`, the lighter and darker members as
+`color-mix` against it so the ramp stays a ramp rather than five flat copies of one colour.
+`#2a1c00` — the **ink on** the button, not an accent — became the navy `#04233d` for the same
+contrast reason it was a brown-black on gold.
+**Lesson worth keeping: "replace the brand colour" is not one literal.** A second, independent ramp
+sat one screen away and looked fine in every check that grepped for the first one. When repainting,
+grep for *colour-shaped strings in the area being repainted*, not for the known value.
+**Deliberately still gold:** the analytics widget's scrollbar gradient (`an-scrollbar`, an admin
+surface) and the TorahSings modules (their own brand, scoped).
