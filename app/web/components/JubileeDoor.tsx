@@ -44,7 +44,7 @@ const doorStyles = `
   }
   .door-acct .em { word-break: break-all; }
   .door-acct .diff {
-    background: none; border: none; color: #f0ad4e; font-size: 12.5px; cursor: pointer;
+    background: none; border: none; color: var(--brand-accent); font-size: 12.5px; cursor: pointer;
     text-decoration: underline; white-space: nowrap; padding: 0;
   }
   .door-tn { width: 100%; margin: 6px 0 16px; overflow: hidden; }
@@ -94,6 +94,28 @@ function JubileeDoor() {
   // if the widget can't render (e.g. domain not allow-listed) it never blocks.
   const [tnToken, setTnToken] = useState('');
   const [tnFailed, setTnFailed] = useState(false);
+  /*
+   * tnErrored IS NOT tnFailed, AND THE DIFFERENCE MATTERS.
+   *
+   * tnFailed means "stop waiting for a token" and is set by the 8s timer BELOW
+   * EVEN WHEN THE WIDGET IS WORKING FINE — it exists only so the submit gate can
+   * never wedge. Hiding the widget on tnFailed would therefore make a perfectly
+   * good captcha vanish 8 seconds after it appeared.
+   *
+   * tnErrored is set ONLY by Turnstile's error-callback, i.e. the widget itself
+   * reporting it cannot run. That is the one case where the box should go away:
+   * Cloudflare paints its own "Unable to connect to website / Troubleshoot" panel
+   * in that box, which tells a visitor nothing they can act on and makes a
+   * working sign-in page look broken. Verification is already being skipped at
+   * that point (see the gate in submitEmail), so the honest thing is to show
+   * nothing rather than an error the visitor cannot fix.
+   *
+   * THE UNDERLYING CAUSE IS NOT IN THIS FILE. A Turnstile site key is bound to an
+   * allow-list of hostnames in the Cloudflare dashboard; a host that is not on it
+   * gets exactly this error. When jubileepraise.com was added to the widget's
+   * hostnames this stopped firing on its own — nothing here needed changing.
+   */
+  const [tnErrored, setTnErrored] = useState(false);
   const tnRef = useRef<HTMLDivElement>(null);       // inner 300px render target (scaled)
   const tnBoxRef = useRef<HTMLDivElement>(null);    // outer full-width wrapper (measured)
   const widgetId = useRef<string | null>(null);
@@ -104,7 +126,7 @@ function JubileeDoor() {
       theme: 'dark',
       size: 'normal',
       callback: (t: string) => { setTnToken(t); setTnFailed(false); },
-      'error-callback': () => { setTnToken(''); setTnFailed(true); },
+      'error-callback': () => { setTnToken(''); setTnFailed(true); setTnErrored(true); },
       'expired-callback': () => setTnToken(''),
     });
   }, []);
@@ -120,7 +142,7 @@ function JubileeDoor() {
       try { window.turnstile.remove(widgetId.current); } catch { /* widget gone */ }
     }
     widgetId.current = null;
-    setTnToken(''); setTnFailed(false);
+    setTnToken(''); setTnFailed(false); setTnErrored(false);
   }, [step, renderTurnstile]);
 
   // The 'normal' widget is a fixed 300px; CSS-scale it to the measured container
@@ -335,7 +357,8 @@ function JubileeDoor() {
                   <label htmlFor="email">Email Address</label>
                   <input id="email" type="email" autoComplete="email" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                {SITE_KEY && (
+                {/* Hidden once the widget reports it cannot run — see tnErrored above. */}
+                {SITE_KEY && !tnErrored && (
                   <div className="door-tn" ref={tnBoxRef}>
                     <div className="door-tn-inner" ref={tnRef} />
                   </div>
@@ -467,7 +490,7 @@ function JubileeDoor() {
             {step === 'code' && (
               <form onSubmit={submitCode} style={{ marginTop: 22 }}>
                 <div className="door-h">Check your email</div>
-                <p className="door-sub">Enter the 6-digit code we sent to <strong style={{ color: '#f0ad4e' }}>{email}</strong>.</p>
+                <p className="door-sub">Enter the 6-digit code we sent to <strong style={{ color: 'var(--brand-accent)' }}>{email}</strong>.</p>
                 <div className="auth-input">
                   <label htmlFor="otp">6-digit code</label>
                   <input id="otp" inputMode="numeric" autoComplete="one-time-code" pattern="\d{6}" maxLength={6} required autoFocus

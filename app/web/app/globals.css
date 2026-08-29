@@ -476,7 +476,7 @@ a { color: inherit; }
 /* Dark charcoal form panel (left) + tinted hero photo with scripture (right),
    gold accents, Open Sans. Rendered as a focused full-screen overlay. */
 .auth-topbar { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 1001;
-  background: linear-gradient(90deg, #e8a23e, #ffd27a 50%, #e8a23e); }
+  background: linear-gradient(90deg, var(--brand-accent), color-mix(in srgb, var(--brand-accent) 55%, white) 50%, var(--brand-accent)); }
 .auth-split {
   position: fixed; inset: 0; z-index: 1000; display: grid;
   grid-template-columns: clamp(360px, 33vw, 520px) 1fr; overflow: hidden;
@@ -486,20 +486,20 @@ a { color: inherit; }
 .auth-panel { background: #292622; color: #f5f3ee; height: 100%; overflow-y: auto;
   display: flex; flex-direction: column; padding: 40px 44px 22px;
   /* Themed scrollbar (shows on short viewports) — gold thumb on the panel base. */
-  scrollbar-width: thin; scrollbar-color: #b78d4d #221f1b; }
+  scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--brand-accent) 60%, black) #221f1b; }
 .auth-panel::-webkit-scrollbar { width: 10px; }
 .auth-panel::-webkit-scrollbar-track { background: #221f1b; border-radius: 8px; }
 .auth-panel::-webkit-scrollbar-thumb { border-radius: 8px; border: 2px solid #292622;
-  background: linear-gradient(180deg, #e8a23e, #b78d4d); }
-.auth-panel::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #ffd27a, #e8a23e); }
+  background: linear-gradient(180deg, var(--brand-accent), color-mix(in srgb, var(--brand-accent) 60%, black)); }
+.auth-panel::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--brand-accent) 55%, white), var(--brand-accent)); }
 .auth-panel-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; max-width: 380px; margin: 0 auto; padding: 18px 0; }
 .auth-avatar { width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto 14px; object-fit: cover;
   background: #1f1c19; }
 .auth-brand { text-align: center; font-weight: 800; font-size: 27px; letter-spacing: -0.01em; line-height: 1; }
 .auth-brand .b1 { color: #ffffff; }
-.auth-brand .b2 { color: #f0ad4e; }
+.auth-brand .b2 { color: var(--brand-accent); }
 .auth-switch { text-align: center; font-size: 14px; color: #d3cdc1; margin: 8px 0 26px; }
-.auth-switch a { color: #f0ad4e; font-weight: 700; text-decoration: none; }
+.auth-switch a { color: var(--brand-accent); font-weight: 700; text-decoration: none; }
 
 .auth-input { position: relative; margin-bottom: 18px; }
 .auth-input label { position: absolute; top: -8px; left: 12px; padding: 0 6px; background: #292622;
@@ -507,7 +507,7 @@ a { color: inherit; }
   /* Sit above the field — type="date" inputs are position:relative (for the
      calendar icon) and would otherwise paint their border over the label. */
   z-index: 1; }
-.auth-input input { width: 100%; padding: 15px 40px 14px 14px; background: transparent; border: 1.5px solid #b78d4d;
+.auth-input input { width: 100%; padding: 15px 40px 14px 14px; background: transparent; border: 1.5px solid color-mix(in srgb, var(--brand-accent) 60%, black);
   border-radius: 8px; color: #fff; font-size: 14px; font-family: inherit; transition: border-color 0.15s, box-shadow 0.15s; }
 .auth-input input::placeholder { color: #98917f; }
 /* Kill the browser autofill repaint (Chrome/Edge/Safari force a pale blue/yellow
@@ -553,10 +553,10 @@ a { color: inherit; }
   color: #e0b766; cursor: pointer; padding: 6px; display: grid; place-items: center; }
 
 .auth-check { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #d3cdc1; margin-bottom: 12px; }
-.auth-check input { accent-color: #f0ad4e; width: 16px; height: 16px; margin-top: 1px; flex: 0 0 auto; }
-.auth-check a { color: #f0ad4e; text-decoration: none; }
+.auth-check input { accent-color: var(--brand-accent); width: 16px; height: 16px; margin-top: 1px; flex: 0 0 auto; }
+.auth-check a { color: var(--brand-accent); text-decoration: none; }
 .auth-forgot { text-align: right; margin: -6px 0 14px; }
-.auth-forgot a { color: #f0ad4e; font-size: 13px; text-decoration: none; }
+.auth-forgot a { color: var(--brand-accent); font-size: 13px; text-decoration: none; }
 /* Same link row, but placed BELOW the submit button (resend code / use a
    different email / edit details). The base rule's -6px top margin exists to
    tuck "Forgot password?" up under the password input; under a button it pulls
@@ -572,7 +572,7 @@ a { color: inherit; }
 .auth-turnstile-inner { width: 300px; transform-origin: top left; }
 
 .auth-submit { width: 100%; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 15px;
-  font-family: inherit; color: #2a1c00; background: linear-gradient(180deg, #ffd27a 0%, #efab44 100%);
+  font-family: inherit; color: #04233d; background: linear-gradient(180deg, color-mix(in srgb, var(--brand-accent) 55%, white) 0%, color-mix(in srgb, var(--brand-accent) 85%, black) 100%);
   box-shadow: 0 8px 20px rgba(239, 171, 68, 0.26); margin-top: 6px; transition: filter 0.15s, transform 0.1s; }
 .auth-submit:hover { filter: brightness(1.03); }
 .auth-submit:active { transform: translateY(1px); }
@@ -580,7 +580,7 @@ a { color: inherit; }
 .auth-err { background: rgba(239, 68, 68, 0.12); border: 1px solid #ef4444; color: #fca5a5; padding: 10px 12px;
   border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
 .auth-foot { text-align: center; font-size: 12px; color: #8a857b; padding-top: 18px; }
-.auth-foot a { color: #f0ad4e; text-decoration: none; }
+.auth-foot a { color: var(--brand-accent); text-decoration: none; }
 
 /* ---- Hero (right) — auto-advancing image slideshow (see AuthHero.tsx) ---- */
 .auth-hero { position: relative; overflow: hidden; background-color: #1a1612; }
@@ -601,7 +601,7 @@ a { color: inherit; }
 .auth-hero-quote { position: absolute; left: 8%; right: 8%; bottom: 11%; z-index: 2; text-align: center; }
 .auth-hero-quote p { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 600; color: #fff;
   font-size: clamp(20px, 1.7vw, 30px); line-height: 1.42; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); margin-bottom: 14px; }
-.auth-hero-quote cite { font-style: normal; color: #f0ad4e; font-size: 15px; font-weight: 600; }
+.auth-hero-quote cite { font-style: normal; color: var(--brand-accent); font-size: 15px; font-weight: 600; }
 /* Slide indicators */
 .auth-hero-dots { position: absolute; left: 0; right: 0; bottom: 4%; z-index: 2;
   display: flex; gap: 9px; justify-content: center; }
@@ -609,7 +609,7 @@ a { color: inherit; }
   background: rgba(255, 255, 255, 0.42); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: background 0.25s ease, width 0.25s ease, border-radius 0.25s ease; }
 .auth-hero-dot:hover { background: rgba(255, 255, 255, 0.75); }
-.auth-hero-dot.is-active { width: 24px; border-radius: 5px; background: linear-gradient(90deg, #ffd27a, #e8a23e); }
+.auth-hero-dot.is-active { width: 24px; border-radius: 5px; background: linear-gradient(90deg, color-mix(in srgb, var(--brand-accent) 55%, white), var(--brand-accent)); }
 @media (prefers-reduced-motion: reduce) {
   .auth-hero-slide { transition: opacity 0.4s ease-in-out; transform: none; }
   .auth-hero-slide.is-active { transform: none; }
@@ -871,7 +871,7 @@ a { color: inherit; }
 .auth-input input::-ms-reveal, .auth-input input::-ms-clear { display: none; }
 
 /* Link-styled button used on the sign-in OTP step (resend / switch account) */
-.auth-linkbtn { background: none; border: none; color: #f0ad4e; cursor: pointer; font-size: 13px; padding: 0; }
+.auth-linkbtn { background: none; border: none; color: var(--brand-accent); cursor: pointer; font-size: 13px; padding: 0; }
 .auth-linkbtn:disabled { color: #8a8275; cursor: default; }
 .auth-linkbtn:hover:not(:disabled) { text-decoration: underline; }
 
