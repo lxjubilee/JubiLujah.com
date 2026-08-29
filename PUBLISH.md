@@ -274,6 +274,15 @@ Step 2 alone is enough *only* when `catalog-manifest.json` is the sole thing tha
 
 **Why it is small.** Prod already has `node_modules` and the identical Next version
 (`14.2.33` both sides — **check this first; a mismatch means you must ship `node_modules` too**).
+
+> ⚠ **Prod's `node_modules` is at `/var/www/jubilujah.com/node_modules`, NOT `web/node_modules`** —
+> it is hoisted one level above the Next project root. `web/node_modules` **does not exist**, so the
+> obvious version check fails with `MODULE_NOT_FOUND` and reads like a broken deploy. PM2 launches
+> `/var/www/jubilujah.com/node_modules/next/dist/bin/next start -p 3030` with cwd
+> `/var/www/jubilujah.com/web`. Correct check:
+> ```bash
+> node -e 'console.log(require("/var/www/jubilujah.com/node_modules/next/package.json").version)'
+> ```
 `next start` needs only `.next` + `public` + `package.json` + `next.config.mjs`. And `.next/cache`
 is build-only: excluding it takes the payload from **252 MB to 14 MB**.
 
@@ -418,29 +427,44 @@ and `/album?c=JEIM1069EN` → **200** (so tenant resolution and the manifest bot
 host). `www.jubilujah.com` 200, apex 301 and `cd.jubilujah.com` 200 were all re-probed after the
 reload: **zero regressions**.
 
-### Outstanding — DNS (the only remaining step)
+### ✅ DNS — DONE 2026-08-28, the site is LIVE
 
-`jubileepraise.com` **is registered and already on Cloudflare** (`denver.ns.cloudflare.com`,
-`teagan.ns.cloudflare.com`), but **the zone is empty** — `jubileepraise.com`, `www`, `api` and `cd`
-all return `NO RECORD`. Two records make the site public:
+**`https://www.jubileepraise.com` is live and serving.** The Founder added the two records in the
+Cloudflare dashboard on 2026-08-28; no API token was ever available on the workstation (see below).
+The records now in the `jubileepraise.com` zone:
 
 | Type | Name | Content | Proxy | TTL |
 |---|---|---|---|---|
 | `A` | `@` (`jubileepraise.com`) | `94.72.120.231` | **Proxied** (orange) | Auto |
 | `A` | `www` | `94.72.120.231` | **Proxied** (orange) | Auto |
 
-Also confirm the zone's **SSL/TLS mode is `Full`** (not `Full (strict)`) — the origin cert is
+The zone's **SSL/TLS mode must stay `Full`** (not `Full (strict)`) — the origin cert is
 self-signed, exactly like every other site on this box, and `Full (strict)` would 526.
 
-**No Cloudflare API credentials exist on this workstation.** `.env` has `ZONEID_API` /
-`ACCOUNTID_API` but no token, and the `$CLOUDFLARE_GLOBAL_API_KEY` that the Troubleshooting
-section's purge example expects is unset. So this step is dashboard work, or needs a scoped
-token (`Zone → DNS → Edit` on the `jubileepraise.com` zone). Nothing else is blocking.
+**Verified live 2026-08-28**, immediately after the records were added:
+`https://jubileepraise.com/` → **301** → `https://www.jubileepraise.com/` → **200**, serving
+`<title>JubileePraise.com — Feel the Spirit Move</title>`. Twelve routes probed on **both**
+domains — `/`, `/inspire`, `/children`, `/faith-based`, `/general`, `/playlists`, `/backstage`,
+`/privacy`, `/terms`, `/album?c=JEIM1069EN`, `/artist/jubilee-inspire`, `/sitemap.xml` — **all 200**.
+
+> ⚠ **Public resolvers lag by up to 30 minutes.** Right after adding the records, `1.1.1.1` still
+> returned `NO RECORD` — the zone's SOA sets a 1800 s negative-cache TTL, so the *absence* was
+> cached. Query the authoritative nameserver to confirm immediately, and don't mistake a cached
+> negative for a failed change:
+> ```bash
+> nslookup jubileepraise.com denver.ns.cloudflare.com
+> ```
+
+**No Cloudflare API credentials exist on this workstation** and none were found on the VPS. `.env`
+has `ZONEID_API` / `ACCOUNTID_API` but no token, and the `$CLOUDFLARE_GLOBAL_API_KEY` the
+Troubleshooting purge example expects is unset. **DNS work here is dashboard work**, unless someone
+provisions a scoped `Zone → DNS → Edit` token. Note also that a VPS password or SSH key does *not*
+help: Cloudflare is a separate control plane, and the records do not live on the server.
 
 Do **not** add a `cd.jubileepraise.com` record. Media deliberately stays on `cd.jubilujah.com`;
 see D-2026-08-27-3…-6.
 
-### 🔴 Pre-existing SEO bug found while checking this — `robots.txt` points at localhost
+### ✅ FIXED 2026-08-28 — `robots.txt` pointed at localhost
 
 Live right now on production:
 
@@ -457,9 +481,28 @@ baked in the localhost fallback. `sitemap.ts` uses the identical expression but 
 (it calls `listArtists()` / `backstageSlugs()`), so it reads prod's runtime `.env` and correctly
 emits `https://jubilujah.com`. `og:url` is likewise correct on every page probed.
 
-**The fix requires a rebuild** — a `pm2 restart` cannot change a prerendered file. Set
-`NEXT_PUBLIC_SITE_URL=https://www.jubilujah.com` in the build environment and re-run **Step 2b**.
-It was deliberately **not** done on 2026-08-28 because the Founder chose the no-rebuild path.
+**The fix required a rebuild** — a `pm2 restart` cannot change a prerendered file. Done
+2026-08-28 via Step 2b:
+
+```bash
+cd app/web && NODE_ENV=production NEXT_PUBLIC_SITE_URL=https://jubilujah.com   ../node_modules/.bin/next build
+```
+
+`BUILD_ID y03bofLgbOKhp2TkT7ozj → WGNANpoNycDYGJjhw519V`. Production robots.txt now reads
+`Sitemap: https://jubilujah.com/sitemap.xml`, matching what `sitemap.ts` emits at runtime.
+
+**The release shipped `.next` only — 3.6 MB.** Nothing under `public/` had changed since the
+2026-08-27 release, so the public-overlay half of Step 2b was correctly skipped. Verify with
+`git status --porcelain -- app/web/public` before packaging; if it is empty, ship `.next` alone.
+
+> ⚠ **`app/web/.env.local` is loaded by `next build` and its values are inlined.** It sets
+> `NEXT_PUBLIC_API_BASE=http://localhost:4000`, which therefore lands in every production build.
+> It is **harmless today** only because `lib/api.ts:25` gates it behind
+> `process.env.NODE_ENV === 'development' ? … : ''`, so production uses relative URLs. But the
+> server-side redirector routes (`app/r/[token]`, `app/rp/[token]`, `app/qr/[file]`) fall back to
+> that same inlined value, and they rely on `REDIRECTOR_API_BASE` being set in prod's `.env` to
+> override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
+> checking the redirector.** Flagged 2026-08-28, not changed.
 
 ### If the decision later changes to a full cutover
 
