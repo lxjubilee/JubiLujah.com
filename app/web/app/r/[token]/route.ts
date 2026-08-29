@@ -40,17 +40,17 @@ function page(title: string, message: string, statusNote?: string): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
 <title>${title} — JubileePraise.com</title><style>
-:root{color-scheme:dark}*{box-sizing:border-box;margin:0;padding:0}
+:root{color-scheme:dark;--brand-accent:#3DA5FF}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
 font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;
 background:radial-gradient(ellipse at top,rgba(15,52,96,.4),transparent 60%),linear-gradient(135deg,#0f0f1e,#141422,#0d0d16)}
 .card{max-width:440px;width:100%;text-align:center;background:#161622;border:1px solid rgba(255,255,255,.08);
 border-radius:16px;padding:40px 28px}
 .mark{font-size:22px;font-weight:800;letter-spacing:.5px;margin-bottom:20px}
-.mark b{color:#E6AC00}
+.mark b{color:var(--brand-accent)}
 h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:12px}
 p{font-size:15px;line-height:1.6;color:#b7b7b7;margin-bottom:24px}
-a.btn{display:inline-block;padding:12px 22px;border-radius:8px;background:#E6AC00;color:#1b1b1b;
+a.btn{display:inline-block;padding:12px 22px;border-radius:8px;background:var(--brand-accent);color:#1b1b1b;
 font-weight:700;text-decoration:none}
 </style></head><body><div class="card">
 <div class="mark">JubileePraise<b>.com</b></div>

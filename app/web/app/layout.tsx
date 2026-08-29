@@ -5,6 +5,11 @@ import './globals.css';
 // (stamped on <html> below), so importing it globally costs the other tenants
 // nothing but keeps it in the one stylesheet Next emits.
 import './torahsings.css';
+// The JubileeInspire rail's stylesheet. Global rather than a CSS module because
+// the rail's class names are global (it also styles <body>), and imported here
+// rather than mounted from the component because that needs React 19's
+// <link precedence> and this app is React 18. See components/InspireRail.tsx.
+import './inspire-rail.css';
 
 // Open Sans — the JubileeInspire typeface, used on the auth pages for a matching
 // look. Exposed as a CSS variable so only the auth screens opt into it.
@@ -39,6 +44,7 @@ import TrackManagerModal from '@/components/TrackManagerModal';
 import ScrollRestoreGuard from '@/components/ScrollRestoreGuard';
 import NavTracker from '@/components/NavTracker';
 import { TenantProvider } from '@/components/TenantProvider';
+import InspireRail from '@/components/InspireRail';
 import TorahSingsShell from '@/components/torahsings/TorahSingsShell';
 import { currentTenant } from '@/lib/tenant';
 import { usesAngelsCatalog } from '@/lib/tenants';
@@ -110,6 +116,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       translate="no"
       data-tenant={tenant.key}
       className={`notranslate ${fontVars}`}
+      /*
+       * THE TENANT'S BRAND ACCENT, AS A CSS VARIABLE.
+       *
+       * app/globals.css used to hard-code #E6AC00 (JubileePraise gold) in 53
+       * places, with no tenant scoping at all — so goPartyGiggles and
+       * MyTinyTiggles rendered gold too, even though tenants.ts has declared
+       * their own accents (#FF3DA5 and #59C7F5) all along. Those rules now read
+       * var(--brand-accent) and this is where it comes from.
+       *
+       * DELIBERATELY NOT CALLED --accent: that name is already taken twice in
+       * this app — app/styles/site.css binds it to the JV red #e94560, and
+       * footer-player.css rebinds it inside the player. Reusing it would have
+       * repainted both.
+       *
+       * Torah Sings is unaffected either way: its palette lives in
+       * torahsings.css, scoped under [data-tenant='torahsings'].
+       */
+      style={{ '--brand-accent': tenant.accent } as React.CSSProperties}
     >
       <body>
         <TenantProvider tenant={tenant}>
@@ -119,6 +143,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <TorahSingsShell>{children}</TorahSingsShell>
             ) : (
             <>
+            {/*
+              * The JubileeInspire rail — the same one kJubilee.com carries, and
+              * the way back to the other Inspire properties.
+              *
+              * JUBILEEPRAISE ONLY, DELIBERATELY. Its rows are Born Again DNA,
+              * the JSV Bible, Jubilee News and Bible References; goPartyGiggles
+              * and MyTinyTiggles are children's sites, and a rail pointing
+              * five-year-olds at a genetics site is not a design decision
+              * anybody made. Torah Sings never reaches here at all — it renders
+              * through TorahSingsShell in the branch above, with its own chrome.
+              */}
+            {tenant.key === 'jubileepraise' && <InspireRail />}
             <ScrollRestoreGuard />
             <NavTracker />
             <Particles />

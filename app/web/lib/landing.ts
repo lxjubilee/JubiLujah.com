@@ -90,41 +90,41 @@ export function renderLanding(d: LandingData, appLinks?: AppLinks): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
 <title>${esc(hero.title)} — JubileePraise.com</title><style>
-:root{color-scheme:dark}*{box-sizing:border-box;margin:0;padding:0}
+:root{color-scheme:dark;--brand-accent:#3DA5FF}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;
 background:radial-gradient(ellipse at top,rgba(15,52,96,.4),transparent 60%),linear-gradient(135deg,#0f0f1e,#141422,#0d0d16);
 padding:24px 16px}
 .wrap{max-width:520px;margin:0 auto}
 .brand{font-size:15px;font-weight:800;letter-spacing:.5px;color:#cfcfcf;margin-bottom:16px}
-.brand b{color:#E6AC00}
+.brand b{color:var(--brand-accent)}
 .crumb{font-size:12px;color:#8f8f9f;margin-bottom:10px}
 .hero{display:flex;gap:16px;align-items:center;margin-bottom:8px}
 .cover{border-radius:12px;object-fit:cover;background:#1c1c2b;flex:0 0 auto}
-.cover--placeholder{width:160px;height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;color:#E6AC00}
-.kind{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#E6AC00;margin-bottom:6px}
+.cover--placeholder{width:160px;height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--brand-accent)}
+.kind{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--brand-accent);margin-bottom:6px}
 h1{font-size:22px;font-weight:800;color:#fff;line-height:1.2}
 .summary{font-size:14px;line-height:1.6;color:#b7b7b7;margin:12px 0 20px}
-.primary{display:block;text-align:center;padding:16px;border-radius:12px;background:#E6AC00;color:#1b1b1b;
+.primary{display:block;text-align:center;padding:16px;border-radius:12px;background:var(--brand-accent);color:#1b1b1b;
 font-weight:800;font-size:17px;text-decoration:none;margin-bottom:12px}
 .secondary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
 .secondary button,.secondary a{flex:1;min-width:120px;text-align:center;padding:12px;border-radius:10px;
 background:transparent;border:1px solid rgba(255,255,255,.14);color:#e8e8e8;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer}
-.persona{font-size:13px;color:#d7c9a0;background:rgba(230,172,0,.08);border:1px solid rgba(230,172,0,.25);
-border-radius:10px;padding:10px 12px;margin-bottom:16px}.persona-name{font-weight:800;color:#E6AC00}
+.persona{font-size:13px;color:#d7c9a0;background:color-mix(in srgb, var(--brand-accent) 8%, transparent);border:1px solid color-mix(in srgb, var(--brand-accent) 25%, transparent);
+border-radius:10px;padding:10px 12px;margin-bottom:16px}.persona-name{font-weight:800;color:var(--brand-accent)}
 .resume{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#b7b7b7;
 background:#161622;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:16px}
-.link{color:#E6AC00;text-decoration:none;font-weight:700}
+.link{color:var(--brand-accent);text-decoration:none;font-weight:700}
 .related h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:#8f8f9f;margin-bottom:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
 .card{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:#e8e8e8}
 .card img,.thumb{width:100%;aspect-ratio:1;border-radius:10px;object-fit:cover;background:#1c1c2b}
-.thumb{display:flex;align-items:center;justify-content:center;font-size:28px;color:#E6AC00}
+.thumb{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--brand-accent)}
 .card-title{font-size:12px;font-weight:600;line-height:1.3}.card-kind{font-size:10px;color:#8f8f9f;text-transform:uppercase}
-.appgate{background:linear-gradient(135deg,rgba(230,172,0,.14),rgba(15,52,96,.16));border:1px solid rgba(230,172,0,.3);border-radius:12px;padding:14px;margin-bottom:16px}
-.ag-t{font-size:12px;font-weight:800;color:#E6AC00;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
+.appgate{background:linear-gradient(135deg,color-mix(in srgb, var(--brand-accent) 14%, transparent),rgba(15,52,96,.16));border:1px solid color-mix(in srgb, var(--brand-accent) 30%, transparent);border-radius:12px;padding:14px;margin-bottom:16px}
+.ag-t{font-size:12px;font-weight:800;color:var(--brand-accent);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
 .ag-row{display:flex;gap:10px}
 .ag-btn{flex:1;text-align:center;padding:12px;border-radius:10px;font-weight:800;font-size:14px;text-decoration:none;cursor:pointer;border:1px solid transparent}
-.ag-open{background:#E6AC00;color:#1b1b1b}
+.ag-open{background:var(--brand-accent);color:#1b1b1b}
 .ag-web{background:transparent;border-color:rgba(255,255,255,.18);color:#e8e8e8}
 .ag-get{display:block;margin-top:10px;font-size:12px;color:#cbb98a;text-decoration:none;text-align:center}
 </style></head><body><div class="wrap">

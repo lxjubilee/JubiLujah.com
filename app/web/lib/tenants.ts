@@ -113,7 +113,7 @@ export const TENANTS: Tenant[] = [
       { href: '/subscription', key: 'nav.upgrade' },
     ],
     logo: '/images/brand-logo.png',
-    accent: '#E6AC00',
+    accent: '#3DA5FF',
   },
   {
     key: 'partygiggles',
