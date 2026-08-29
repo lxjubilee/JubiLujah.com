@@ -340,3 +340,69 @@ the browser — `lib/api.ts:25` uses it only when `NODE_ENV === 'development'` �
 redirector routes (`/r/`, `/rp/`, `/qr/`) fall back to it and depend on prod's `REDIRECTOR_API_BASE`
 overriding it, since prod's API is on **:4030**. Untangling that needs the redirector tested, which
 was out of scope for a release.
+
+## D-2026-08-28-7 · The JubileeInspire rail is ported to JubileePraise, jubileepraise tenant only
+**Decided:** 2026-08-28 · **By:** Founder — "implement that exact same railing bar here".
+**What:** `components/InspireRail.tsx` + `app/inspire-rail.css`, ported from kJubilee.com's
+`app/_inspire-rail.js` and `public/css/inspire-rail.css`. All **8** Material Symbols icon paths are
+byte-for-byte identical (verified by `diff` on the extracted `icon:` literals); menu, collapse
+behaviour and bottom-corner branding unchanged.
+**Three adaptations, and only three:**
+1. **React 18, not 19.** kJubilee mounts the sheet with `<link rel="stylesheet" precedence>`, which
+   is React 19 stylesheet hoisting and does not exist here. `app/layout.tsx` imports it globally
+   instead. **When this app reaches React 19 the import should STAY** — re-adding the link would
+   load the sheet twice.
+2. TypeScript types for the nav rows and icon props. No behaviour change.
+3. **The accent token, and this one was not cosmetic.** kJubilee's rail reads `var(--accent)`.
+   On this site `--accent` is **already the JV red `#e94560`** (`app/styles/site.css`, rebound again
+   in `footer-player.css`) — binding to it would have drawn the whole rail red. It reads
+   `--brand-accent` instead.
+**Mounted for the `jubileepraise` tenant only.** Its rows are Born Again DNA, the JSV Bible and
+Jubilee News; goPartyGiggles and MyTinyTiggles are children's sites. Torah Sings never reaches the
+branch at all — it renders through `TorahSingsShell`.
+**No row is active on this site, and that is correct** — nothing in the menu points at
+JubileePraise. The `is-active` test is kept and pointed at this site's hosts so a future
+JubileePraise row lights up without anyone editing the file.
+**Only `.jv-player` needed a fixed-chrome offset.** The auth screen and the language drawer are
+`inset:0` overlays that *should* cover the rail, and `.nf-preview` is positioned by JavaScript from
+measured viewport coordinates — a CSS offset would double-shift it.
+
+## D-2026-08-28-8 · Gold → azure, and the theme is now tenant-driven rather than hard-coded
+**Decided:** 2026-08-28 · **By:** Founder, choosing "tokenize to var(--accent)" with the side
+effect stated and accepted.
+**The bug this exposed:** `app/globals.css` hard-coded `#E6AC00` in **71** places with **no tenant
+scoping at all**, so goPartyGiggles and MyTinyTiggles rendered JubileePraise gold even though
+`lib/tenants.ts` had declared their own accents (`#FF3DA5`, `#59C7F5`) all along. The accents were
+decorative; nothing read them.
+**Changed:** all 71 became `var(--brand-accent)`, stamped per request on `<html>` by
+`app/layout.tsx` from the serving tenant. JubileePraise's accent is now **`#3DA5FF`** — the same
+azure kJubilee sets as `--accent` and the rail already used. `rgba(230,172,0,α)` tints became
+`color-mix(in srgb, var(--brand-accent) N%, transparent)`.
+**Deliberately NOT named `--accent`** — that name is taken twice in this app already.
+**Verified serving:** `jubileepraise #3DA5FF` + rail · `gopartygiggles #FF3DA5` no rail ·
+`mytinytiggles #59C7F5` no rail. Torah Sings untouched (`torahsings.css`, scoped under
+`[data-tenant='torahsings']`).
+**A floor is declared** as `:root { --brand-accent: #3DA5FF }` so a render that never got the stamp
+still resolves; an inline style on `<html>` beats it, so the tenant always wins.
+> ⚠ **`@import` must stay first in `globals.css`.** The floor was first written *above* the
+> `@import` block, which silently invalidates every import in CSS. Caught before it shipped. It now
+> sits after the last `@import`.
+
+## D-2026-08-28-9 · Next 16 / React 19 upgrade: attempted, reverted, deferred — and it is NOT a version bump
+**Decided:** 2026-08-28 · **By:** Founder, choosing "rail + azure first, upgrade second" once the
+scope was measured.
+**Why deferred:** in Next 15+, `headers()` and `cookies()` are **Promise-only**, and
+`lib/tenant.ts`'s `currentTenant()` is synchronous and called by `lib/manifest.ts` on **every
+catalogue read**. Making it async forces **9 exported manifest functions** async, which ripples to
+**20 files / 42 call sites**, plus `params`/`searchParams` in **14** more. It is a real refactor,
+not a dependency change — and it was proposed for the same day the domain went live.
+**Also true:** upgrading changes the *deploy shape*. PM2 runs `next start` from
+`/var/www/jubilujah.com/node_modules`, and Step 2b is only small because prod's Next matches ours.
+A version change means **shipping `node_modules`**, not a 3.6 MB `.next`.
+**What was done and undone:** `next@16.3.2 / react@19.2.8` were installed before the decision, then
+fully reverted — `package.json` restored, `package-lock.json` restored from git, `node_modules`
+wiped and rebuilt with `npm ci`. Verified back at `next 14.2.33 / react 18.3.1`, hoisted at
+`app/node_modules` with `.bin/next` present. **The lockfile is clean in git; the excursion left no
+trace.** Worth knowing for next time: the failed intermediate `npm install` un-hoisted packages into
+`app/web/node_modules` and left react at 19 while package.json said 18 — `npm ci` from a
+git-restored lockfile is the reliable way back, not a repeat `npm install`.
