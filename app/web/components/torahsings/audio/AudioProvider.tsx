@@ -102,7 +102,30 @@ function writePosition(id: string, seconds: number) {
   }
 }
 
+/**
+ * RE-ENTRANT ON PURPOSE. TorahSingsShell's own comment states the invariant:
+ * mounting two providers "would give a visitor two transports fighting over one
+ * <audio>". Until now that invariant was only a note — nothing enforced it, and
+ * the opposite failure was the live one: the reading surfaces
+ * (/learn-hebrew/[slug], /hebraic-christianity/[slug]) are shared routes that
+ * render on the JubileePraise tenant, where no shell mounts a provider at all.
+ * `useAudio` threw, and ~390 long-form articles answered HTTP 500 to every
+ * reader and every crawler that followed a link from their index pages.
+ *
+ * A route can now wrap itself in <AudioProvider> unconditionally and be correct
+ * on BOTH tenants: where a provider already exists above it (the Torah Sings
+ * shell) this one steps aside and the shell's single transport stays the only
+ * one; where none does (JubileePraise) it supplies the missing one. The
+ * invariant is now enforced by the component instead of remembered by the
+ * caller — which is what makes wrapping safe to do at every such route.
+ */
 export function AudioProvider({ children }: { children: ReactNode }) {
+  const inherited = useContext(AudioCtx);
+  if (inherited) return <>{children}</>;
+  return <AudioTransport>{children}</AudioTransport>;
+}
+
+function AudioTransport({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const queueRef = useRef<PlayableTrack[]>([]);
   const lastSaveRef = useRef(0);

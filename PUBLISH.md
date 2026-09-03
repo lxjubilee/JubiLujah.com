@@ -351,6 +351,32 @@ previously-existing static routes re-probed: **zero regressions**. Two *new* rou
 and `/book` — return **500** (`useJubileeAccount must be used inside <JubileeAccountProvider>`);
 they are unlinked Torah Sings tenant pages that never worked, not a regression. See Troubleshooting.
 
+**Result of the 2026-09-02 run** (mobile responsiveness + navigation + SEO):
+`BUILD_ID d08rs1bto73kE-pUjjThl → Lg_Hi8skckqq4cGO_x10q`, payload **5.0 MB** (`.next` only —
+`git status -- app/web/public` was empty, so the public overlay was correctly skipped).
+Run from **HPC-CALEB** (`caleb.inspire`), which also holds `~/.ssh/id_ed25519_jubilee_prod` —
+CONTINUITY's note that the key exists only on HPC-GABRIEL is out of date.
+
+- **~390 pages went from 500 to 200.** `/learn-hebrew/[slug]` (190) and
+  `/hebraic-christianity/[slug]` (200) were throwing `useAudio must be used inside
+  <AudioProvider>` on this tenant, which mounts no Torah Sings shell. `AudioProvider` is now
+  re-entrant (it steps aside when one already exists above it), so those routes wrap themselves
+  and are correct on both tenants.
+- **Canonical host consolidated onto `https://www.jubileepraise.com`** (Founder's call). Both
+  `www.jubilujah.com` and `www.jubileepraise.com` now emit that same canonical, so the four
+  hostnames stop splitting ranking signals. Also added: og:image/twitter:image sitewide,
+  schema.org graphs (Organization, WebSite+SearchAction, MusicAlbum, MusicGroup, Article,
+  BreadcrumbList), and an `<h1>` on Home.
+- **Sitemap 1,592 → 1,982 URLs**, zero `localhost`, zero `jubilujah.com`.
+- **24 routes re-probed after the swap: zero regressions.** Still 500, unchanged and unlinked:
+  `/album/[id]`, `/membership`, `/book` (all `useJubileeAccount`, a different provider).
+- Rollback staged at `.next.bak-20260902-085156` (14 MB) and `/var/www/.backup/env.bak-20260902-084540`.
+
+> ⚠ `/var/www/jubilujah.com/.env` still reads `NEXT_PUBLIC_SITE_URL=https://jubilujah.com`. It was
+> left alone deliberately: per the correction below it is **inert**, and editing a production env
+> file was not needed to land the change. It is misleading to a reader, though — worth aligning
+> the next time that file is touched for a real reason.
+
 
 ### Step 3 — Verify
 
@@ -480,6 +506,24 @@ the build environment** for the 2026-08-27 release. `robots.txt` is statically p
 baked in the localhost fallback. `sitemap.ts` uses the identical expression but is *dynamic*
 (it calls `listArtists()` / `backstageSlugs()`), so it reads prod's runtime `.env` and correctly
 emits `https://jubilujah.com`. `og:url` is likewise correct on every page probed.
+
+> 🔴 **The sentence above is WRONG and was corrected 2026-09-02. `NEXT_PUBLIC_*` NEVER reads
+> prod's runtime `.env` — Next inlines it into the SERVER bundle at build time too, not only the
+> client one, and being a dynamic route makes no difference.** Tested directly: a build made with
+> `NEXT_PUBLIC_SITE_URL=https://www.jubileepraise.com`, then started with
+> `NEXT_PUBLIC_SITE_URL=https://jubilujah.com` in its environment, served
+> `https://www.jubileepraise.com` in the canonical tag, in `robots.txt` **and** in the dynamic
+> `sitemap.xml`. The runtime value was ignored in all three.
+>
+> **What this means in practice:** `NEXT_PUBLIC_SITE_URL` in `/var/www/jubilujah.com/.env` is
+> INERT for the web app. Setting it there does nothing; the only thing that decides the origin is
+> the value present when `next build` runs. Whatever produced the mixed observation on
+> 2026-08-28, it was not a runtime read.
+>
+> Since 2026-09-02 the fallback in `app/web/lib/seo.ts` is the real production origin rather than
+> `http://localhost:3000`, so a build that forgets the variable now emits the correct host instead
+> of an unreachable one. `robots.ts` and `sitemap.ts` both import `SITE_URL` from there, so they
+> can no longer disagree with each other.
 
 **The fix required a rebuild** — a `pm2 restart` cannot change a prerendered file. Done
 2026-08-28 via Step 2b:

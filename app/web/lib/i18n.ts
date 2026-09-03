@@ -37,6 +37,11 @@ export const EN = {
   'nav.upgrade': 'UPGRADE',
   // Backstage Access — right side of the nav row, beside the language flag
   'nav.backstage': 'BACKSTAGE',
+  // The hamburger that stands in for this whole row once the categories above
+  // stop fitting (Header.tsx → useNavCollapse). Caps to match its neighbours.
+  // Untranslated languages fall back to this English string, same as every
+  // other key — a readable "MENU" beats a literal "nav.menu" on the button.
+  'nav.menu': 'MENU',
   // Language picker panel
   'lang.title': 'Languages',
   'lang.search': 'Search languages...',

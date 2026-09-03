@@ -147,6 +147,12 @@ export default function HomePage() {
   return (
     <LangProvider value={lang}>
       <LanguageHome otherAlbums={otherLang}>
+        {/* The page's one <h1>. The design opens straight into cover rows with
+            no visible headline, so this is off-screen (.sr-only) rather than
+            absent — thirteen <h2> row titles under no <h1> is a broken outline
+            for a crawler and for a screen reader alike. It names the property,
+            which is what the page is. */}
+        <h1 className="sr-only">{tenant.name} — {tenant.tagline}</h1>
         <div className="nf-rows">
           {THEMES.filter((t) => buckets[t.key].length > 0).map((t) => (
             <MediaRow key={t.key} title={t.label} items={buckets[t.key]} />

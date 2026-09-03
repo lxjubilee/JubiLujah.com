@@ -49,7 +49,8 @@ import TorahSingsShell from '@/components/torahsings/TorahSingsShell';
 import { currentTenant } from '@/lib/tenant';
 import { usesAngelsCatalog } from '@/lib/tenants';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+import { SITE_URL, DEFAULT_OG_IMAGE, canonical, organizationLd, webSiteLd } from '@/lib/seo';
+import JsonLd from '@/components/JsonLd';
 
 // Metadata is per-request now, because the title, the description and the
 // canonical URL all belong to whichever property the Host header names. A static
@@ -65,13 +66,22 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s — ${t.name}`,
     },
     description: t.description,
+    /* The home page's own canonical. Every other route sets its own (via
+       lib/seo `canonical()`); Next does NOT derive one from the path, so a
+       route that omits it simply has none. */
+    alternates: canonical('/'),
     openGraph: {
       title: `${t.name} — ${t.tagline}`,
       description: t.tagline,
       url,
       siteName: t.name,
       type: 'website',
+      /* The site-wide share image, inherited by every page that does not name
+         its own (album and artist pages do). Without this the whole site
+         shared as a bare text card. */
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1091, height: 1086, alt: t.name }],
     },
+    twitter: { card: 'summary', images: [DEFAULT_OG_IMAGE] },
     robots: { index: true, follow: true },
     other: { google: 'notranslate' },
   };
@@ -136,6 +146,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       style={{ '--brand-accent': tenant.accent } as React.CSSProperties}
     >
       <body>
+        {/* The site-level graph — publisher identity plus the search box, on
+            every page so the two @id nodes the per-page blocks reference are
+            always resolvable. Emitted server-side; see components/JsonLd.tsx. */}
+        <JsonLd data={[organizationLd(tenant.name, tenant.description), webSiteLd(tenant.name)]} />
         <TenantProvider tenant={tenant}>
         <LangProvider value={lang}>
           <AuthProvider>

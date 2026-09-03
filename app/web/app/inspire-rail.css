@@ -272,12 +272,34 @@
 /* ---------- the mobile hamburger + backdrop ------------------------------ */
 
 /* Hidden on desktop, where the in-rail NAVIGATION button is the toggle. Below
-   1024px the rail is off-canvas and this fixed button is the only way to open it. */
+   1024px the rail is off-canvas and this fixed button is the only way to open it.
+
+   🔴 THE STACKING ORDER HERE IS LOAD-BEARING, AND IT WAS WRONG UNTIL 2026-09-02.
+   This button sits at top-left, which is exactly where .jvh-header (sticky,
+   z-index 1000) paints. At z-index 320 it was UNDERNEATH: rendered, laid out,
+   occupying its 36px — and unreachable. `document.elementFromPoint()` at the
+   button's own centre returned `div.jvh-inner` at 390px, 768px AND 1024px, so
+   for the whole range where the rail is a drawer there was NO WAY TO OPEN IT.
+   The 56px of padding .jvh-inner reserves below 1024px (further down this file)
+   was holding a gap for a control nobody could press.
+
+   320 is the value this rail carries on kJubilee, where it is correct because
+   that site's header is z-index 30. Ours is 1000, so the number had to move
+   with it. Anything fixed that must stay clickable over this header belongs
+   above 1000 — and the drawer's own layers have to come with it, or the open
+   rail hides behind the header it is supposed to cover. */
+/* LEFT EDGE 20px, AND THAT NUMBER IS NOT FREE. It is the horizontal padding of
+   .jvh-nav-inner (globals.css), which puts the MENU hamburger in row 2 at
+   exactly x=20 — so the two hamburgers on a phone, this one for the Inspire
+   rail and that one for the categories, share a left edge and read as a column
+   of controls rather than two buttons scattered near a corner. Move one and
+   move the other.
+   top: 6px centres the 36px button in the 48px row 1 ((48 − 36) / 2). */
 .jir-burger {
   display: none;
   position: fixed;
-  top: 12px;
-  left: 12px;
+  top: 6px;
+  left: 20px;
   width: 36px;
   height: 36px;
   align-items: center;
@@ -288,19 +310,22 @@
   color: #8e8e8e;
   cursor: pointer;
   padding: 0;
-  z-index: 320;
+  z-index: 1101;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 .jir-burger:hover { background: #3f3f3f; border-color: var(--jir-azure); color: var(--jir-azure); }
 .jir-burger svg { width: 22px; height: 22px; fill: currentColor; pointer-events: none; }
 .jir-burger.is-hidden { display: none !important; }
 
+/* Above .jvh-header (1000) for the same reason the burger is — a dimmer that
+   the site header punches through is not a dimmer, and the open drawer would
+   have read as sliding out from behind the bar. Below the rail itself (1100). */
 .jir-backdrop {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 290;
+  z-index: 1090;
 }
 
 /* ---------- moving the page out from under the rail ---------------------- */
@@ -341,7 +366,9 @@ body.jir-on .jv-player { left: var(--jir-w); }
     width: 260px;
     max-width: 80vw;
     background: var(--jir-bg);
-    z-index: 1000;
+    /* Over the backdrop (1090), which is itself over .jvh-header (1000). 1000
+       here used to TIE with the header and resolve on paint order alone. */
+    z-index: 1100;
   }
   .jir-rail.is-open { transform: translateX(0); width: 260px; }
   /* Inside a drawer the collapsed icon-only state is meaningless — every row
@@ -358,14 +385,21 @@ body.jir-on .jv-player { left: var(--jir-w); }
 
   /* KEEPING THE TWO CONTROLS APART. The site header's top row carries the
      wordmark at its far left — exactly where this rail's fixed button lands.
-     Pad it clear so the two read as two controls rather than one stack. */
-  body.jir-on .jvh-inner { padding-left: 56px; }
+     Pad it clear so the two read as two controls rather than one stack.
+     66px = the button's 20px left edge + its 36px width + a 10px gap. */
+  body.jir-on .jvh-inner { padding-left: 66px; }
 }
 
+/* Phones take a slightly smaller button, but NOT a different left edge: this
+   block used to pull it to left:10px with a 50px pad, which would have undone
+   the 20px alignment above on exactly the screens the alignment is for. Only
+   the size changes here; the column does not.
+     top: 8px  — centres the 32px button in the 48px row ((48 − 32) / 2)
+     62px pad  — 20px left edge + 32px width + the same 10px gap */
 @media (max-width: 768px) {
-  .jir-burger { top: 10px; left: 10px; width: 32px; height: 32px; }
+  .jir-burger { top: 8px; left: 20px; width: 32px; height: 32px; }
   .jir-burger svg { width: 19px; height: 19px; }
-  body.jir-on .jvh-inner { padding-left: 50px; }
+  body.jir-on .jvh-inner { padding-left: 62px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

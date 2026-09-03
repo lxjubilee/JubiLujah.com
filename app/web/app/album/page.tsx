@@ -7,6 +7,8 @@ import { coverFor } from '@/lib/covers';
 import { supportMapFor } from '@/lib/support';
 import { avatarKey } from '@/lib/personas';
 import { similarAlbums } from '@/lib/musicTypes';
+import { canonical, musicAlbumLd, breadcrumbLd } from '@/lib/seo';
+import JsonLd from '@/components/JsonLd';
 import AlbumApp, { AlbumLink, CurrentAlbum, SimilarAlbum } from '@/components/AlbumApp';
 
 export const revalidate = 3600; // ISR
@@ -20,10 +22,26 @@ function albumCode(sp: { c?: string; code?: string }): string | null {
 export function generateMetadata({ searchParams }: { searchParams: { c?: string; code?: string } }): Metadata {
   const code = albumCode(searchParams);
   const album = code ? getAlbumByCode(code) : null;
-  if (!album) return { title: 'Album not found' };
+  // An unknown code is not a page — say so, rather than leaving a thin
+  // "Album not found" body indexable under the site's title template.
+  if (!album) return { title: 'Album not found', robots: { index: false, follow: false } };
+  const cover = coverFor(album.code, album.path);
+  const description = `${album.title} by ${album.artistName}. ${album.trackCount} tracks · ${album.status === 'ready' ? 'Ready to play' : 'In the studio'}.`;
   return {
     title: `${album.title} — ${album.artistName}`,
-    description: `${album.title} by ${album.artistName}. ${album.trackCount} tracks · ${album.status === 'ready' ? 'Ready to play' : 'In the studio'}.`,
+    description,
+    /* Canonical on the ?c= form. The route also answers to the legacy ?code=
+       parameter (see albumCode above), so without this every album is reachable
+       at two URLs and reads as duplicated. Both now point at the ?c= one. */
+    alternates: canonical(`/album?c=${album.code}`),
+    openGraph: {
+      title: `${album.title} — ${album.artistName}`,
+      description,
+      type: 'music.album',
+      url: `/album?c=${album.code}`,
+      ...(cover ? { images: [{ url: cover, alt: `${album.title} cover art` }] } : {}),
+    },
+    ...(cover ? { twitter: { card: 'summary' as const, images: [cover] } } : {}),
   };
 }
 
@@ -96,6 +114,25 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
   // visit. The persona banner below is the fallback it falls back TO.
   return (
     <div className="album-exec">
+      {/* MusicAlbum + its trail. The track names are the ones already rendered
+          below; publishing them here is what lets a result show the album as a
+          record with contents rather than as an untyped page. */}
+      <JsonLd
+        data={[
+          musicAlbumLd({
+            code: album.code,
+            title: album.title,
+            artistName: album.artistName,
+            artistSlug: album.artistSlug,
+            image: coverFor(album.code, album.path) || null,
+            trackNames: album.tracks.map((t) => t.title),
+          }),
+          breadcrumbLd([
+            { name: album.artistName, path: `/artist/${album.artistSlug}` },
+            { name: album.title, path: `/album?c=${album.code}` },
+          ]),
+        ]}
+      />
       <AlbumApp
         artist={album.artistName}
         artistRole={artist?.role || 'Inspire Family'}

@@ -74,8 +74,17 @@ body.jv-has-player { padding-bottom: 84px; }
   position: sticky; top: 0; z-index: 1000;
   background: #242424; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+/* BOTH HEADER ROWS RUN THE FULL WIDTH OF THE VIEWPORT, at every resolution,
+   with a flat 20px gutter and nothing else. They deliberately do NOT use
+   --site-max / --site-pad any more: those still cap the CONTENT column at
+   1548px, so on a wide screen the header now reaches past the content edges
+   instead of lining up with them. That divergence is the point of this rule —
+   if the two are ever meant to line up again, the fix is to restore
+   `max-width: var(--site-max)` here, not to widen the content token. On a page
+   showing the Inspire rail the 20px is measured from the rail's inner edge,
+   because <body> carries the rail's padding-left (see inspire-rail.css). */
 .jvh-inner {
-  max-width: var(--site-max); margin: 0 auto; padding: 0 var(--site-pad); height: 48px;
+  max-width: none; margin: 0; padding: 0 20px; height: 48px;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
 .jvh-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0; }
@@ -135,8 +144,10 @@ body.jv-has-player { padding-bottom: 84px; }
   height: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); background: #1b1b1b;
   position: sticky; top: 48px; z-index: 999; margin-top: -1px;
 }
+/* Full-bleed with a 20px gutter, exactly as .jvh-inner above — the two rows are
+   one piece of chrome and must share an edge. Keep these two in step. */
 .jvh-nav-inner {
-  max-width: var(--site-max); margin: 0 auto; padding: 0 var(--site-pad); height: 100%;
+  max-width: none; margin: 0; padding: 0 20px; height: 100%;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
 .jvh-nav-menu { display: flex; align-items: center; gap: 4px; height: 100%; overflow-x: auto; scrollbar-width: none; }
@@ -170,6 +181,121 @@ body.jv-has-player { padding-bottom: 84px; }
 @media (max-width: 640px) {
   .jvh-search { display: none; }
   .jvh-inner { overflow: hidden; }
+
+  /* WHY THE WORDMARK HAS TO GIVE WAY, AND SIGN IN MUST NOT.
+     Dropping the search box was not enough. At 390px the top row has ~314px of
+     usable space (20px right gutter + the 56px the rail's drawer hamburger
+     claims on the left, below). The Orbitron wordmark at 24px measures ~292px
+     of that on its own, and because .jvh-logo is flex-shrink:0 it took the
+     space and .jvh-actions was squeezed to 22px — so "Sign In" rendered at
+     x=411 on a 390px screen and the `overflow: hidden` above quietly CLIPPED
+     IT AWAY. The only way into an account on a phone was invisible.
+     So: the actions cluster becomes the rigid one and the wordmark becomes the
+     flexible one. It shrinks by type size first, and ellipsizes only if some
+     future tenant's name is longer still — either is better than amputating
+     the control next to it. */
+  .jvh-logo { flex-shrink: 1; min-width: 0; }
+  .jvh-logo-text { font-size: 18px; overflow: hidden; text-overflow: ellipsis; }
+  .jvh-logo-icon { width: 26px; height: 26px; }
+  .jvh-actions { flex-shrink: 0; gap: 8px; }
+
+  /* Second row: the category menu is the primary navigation and it is a
+     horizontal scroller here, so every pixel taken by the cluster on its right
+     is a pixel of menu the thumb never reaches. Backstage keeps its label —
+     it is a real destination, not decoration — but drops to the smallest size
+     that stays a legal 32px-ish tap target. */
+  .jvh-nav-inner { gap: 6px; }
+  .jvh-nav-right { gap: 6px; }
+  .jvh-backstage { padding: 6px 8px; font-size: 11px; letter-spacing: 0; }
+  .jvh-nav-link { padding: 8px 10px; }
+}
+
+/* Small phones (iPhone SE/mini, 360-375px CSS px). One more step down for the
+   wordmark: at 360px the 18px above still leaves Sign In ~15px short. */
+@media (max-width: 400px) {
+  .jvh-logo-text { font-size: 15px; }
+  .jvh-logo-icon { width: 24px; height: 24px; }
+}
+
+/* ============ THE CATEGORY BAR, WHEN IT STOPS FITTING ====================
+   Row 2 does not scroll sideways any more — it FOLDS. Header.tsx measures a
+   hidden copy of these links against the room left beside the tail and sets
+   `.is-nav-collapsed` on the bar; see useNavCollapse there for why this is
+   measured rather than a breakpoint (forty languages, per-tenant link counts).
+
+   This replaces the right-edge fade that used to live here. That fade was an
+   affordance for a horizontal scroller, and there is no scroller left to
+   advertise: the bar is now either showing every category or showing none of
+   them. Leaving it in would have faded the last item of a menu that fits.
+
+   Ported from kJubilee's site-header.css so the two properties match. */
+
+/* THE RULER. Off-canvas rather than display:none — a box that is not laid out
+   has no width to measure. Same .jvh-nav-link class as the real links, so the
+   widths it reports are the real widths and not an approximation. */
+.jvh-nav-measure {
+  position: fixed; top: 0; left: -20000px;
+  display: flex; align-items: center; gap: 4px; white-space: nowrap;
+  visibility: hidden; pointer-events: none;
+}
+
+.jvh-nav-burger {
+  display: none; align-items: center; gap: 9px; flex: 0 0 auto;
+  height: 34px; padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 4px; background: transparent;
+  color: #fff; font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  white-space: nowrap; cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.jvh-nav-burger:hover,
+.jvh-nav-burger.is-open { background: #2d2d2d; border-color: rgba(255, 255, 255, 0.28); }
+.jvh-nav-burger-bars { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 16px; }
+.jvh-nav-burger-bars span { display: block; height: 2px; border-radius: 2px; background: currentColor; }
+/* The middle bar is what makes it read as a menu rather than an equals sign;
+   it shortens on open so the control shows its own state. */
+.jvh-nav-burger.is-open .jvh-nav-burger-bars span:nth-child(2) { width: 60%; }
+
+/* Collapsed: the categories fold away and the button takes their place. */
+.jvh-nav-bar.is-nav-collapsed .jvh-nav-menu { display: none; }
+.jvh-nav-bar.is-nav-collapsed .jvh-nav-burger { display: inline-flex; }
+
+/* Sits UNDER the header (z-index below .jvh-nav-bar's 999 and .jvh-header's
+   1000), not over it: the bar stays visible and the reader can still see the
+   control they just pressed. --jvh-hdr-h is published by Header.tsx from the
+   stack it measured; the fallback is today's 48px + 50px for the frame before
+   the script runs. */
+.jvh-nav-overlay {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  top: var(--jvh-hdr-h, 98px);
+  background: rgba(0, 0, 0, 0.5); z-index: 997;
+}
+.jvh-nav-panel {
+  position: fixed; left: 0; right: 0; z-index: 998;
+  top: var(--jvh-hdr-h, 98px);
+  display: flex; flex-direction: column;
+  max-height: calc(100dvh - var(--jvh-hdr-h, 98px)); overflow-y: auto;
+  background: #1b1b1b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+.jvh-nav-panel-link {
+  /* 48px: a thumb target, not a mouse target. */
+  min-height: 48px; display: flex; align-items: center; width: 100%;
+  padding: 0 18px; background: transparent; border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+  text-align: left; text-decoration: none; white-space: normal;
+  /* Deliberately NOT text-transform: uppercase. These labels arrive already
+     cased from the dictionaries ('nav.home' is 'HOME'), and forcing caps here
+     would impose an English convention on forty languages — several of which
+     do not have upper case at all. The string decides. */
+}
+.jvh-nav-panel-link:last-child { border-bottom: 0; }
+.jvh-nav-panel-link:hover { background: #2d2d2d; }
+/* Beats .jvh-nav-link.active, which paints a bordered chip meant for the bar. */
+.jvh-nav-panel-link.active {
+  color: var(--brand-accent); background: transparent;
+  box-shadow: inset 3px 0 0 var(--brand-accent);
 }
 
 /* Footer player's animated top border lives in styles/widgets/footer-player.css
@@ -423,15 +549,55 @@ body.jv-has-player { padding-bottom: 84px; }
 .album-exec .jv-secondary-genre { color: #ffffff; }
 .nf-preview-tags { font-size: 12px; color: #ddd; }
 
+/* ===================== COVER GRIDS: THE COLUMN LADDER =====================
+   .nf-tile--square (album covers) and .fa-card (the circular Featured Artists
+   avatars) are both percentage-flex grids with a HARD-CODED column count —
+   6 across, set once for desktop. Nothing recomputed that count on the way
+   down, so the tiles just got narrower and narrower: at 768px six covers came
+   out ~200px with their titles overrunning the art, and .fa-card (which had NO
+   breakpoint of any kind) rendered twelve 40px circles on a phone with every
+   artist's name ellipsized to nothing — "Melody Inspire" in 40px of box.
+
+   So both drop down a ladder together, and they must stay together: they sit
+   in the same column on the same page and a 4/6 split between them reads as a
+   misalignment. Each step keeps a tile in the 160-200px band, which is what
+   makes the burnt-in cover titles legible.
+
+     >1024px   6 across   (the base rule, further up)
+     <=1024px  4 across   tablet landscape / small laptop
+     <=760px   3 across   tablet portrait
+     <=560px   2 across   phones
+
+   The arithmetic in each flex-basis is (100% − (n−1) × the 16px column gap) / n,
+   so n tiles and n−1 gaps come to exactly 100% with no wrap-early rounding. */
+@media (max-width: 1024px) {
+  .nf-tile--square,
+  .fa-card { flex: 0 0 calc((100% - 48px) / 4); max-width: calc((100% - 48px) / 4); }
+}
+
 @media (max-width: 760px) {
   .nf-billboard { padding: 28px 16px 12px; }
   .nf-billboard h1 { font-size: 22px; }
   .nf-row-title { padding: 0 16px; font-size: 18px; }
   .nf-row-track { padding: 4px 16px 8px; }
   .nf-tile { width: 180px; }
-  /* 3 per row on mobile: (100% − 2 column-gaps of 16px) / 3 */
-  .nf-tile--square { flex: 0 0 calc((100% - 32px) / 3); max-width: calc((100% - 32px) / 3); }
+  /* 3 per row: (100% − 2 column-gaps of 16px) / 3 */
+  .nf-tile--square,
+  .fa-card { flex: 0 0 calc((100% - 32px) / 3); max-width: calc((100% - 32px) / 3); }
+  .fa-track { padding: 4px 16px 8px; }
   .nf-row-arrow { display: none; }
+}
+
+@media (max-width: 560px) {
+  /* 2 per row: (100% − 1 column-gap of 16px) / 2. Below this a third column
+     puts the tile under ~110px, where the title burnt into the cover art stops
+     being readable — which is the whole point of the tile. */
+  .nf-tile--square,
+  .fa-card { flex: 0 0 calc((100% - 16px) / 2); max-width: calc((100% - 16px) / 2); }
+  /* The label is absolutely positioned over the art, so it cannot reflow the
+     tile — it can only overflow it. Step it down with the tile. */
+  .nf-tile-label { font-size: 13px; padding: 8px 10px; }
+  .nf-tile-role { font-size: 10px; }
 }
 
 a { color: inherit; }

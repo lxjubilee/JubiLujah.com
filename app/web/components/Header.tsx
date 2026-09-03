@@ -22,6 +22,98 @@ const MEDIA: { href: string; key: TKey; ext: boolean }[] = [
   { href: 'https://www.jubileeinspire.com', key: 'media.bibleChat', ext: true },
 ];
 
+/*
+ * WHEN THE CATEGORIES STOP FITTING, THEY BECOME A HAMBURGER.
+ *
+ * MEASURED, NOT A BREAKPOINT — and here that is not a refinement, it is the
+ * only thing that can work. The labels in this bar are `t('nav.*')` in ONE OF
+ * FORTY LANGUAGES, and the tenant decides how many of them there are:
+ * JubileePraise carries seven, goPartyGiggles carries three. "CHILDREN MUSIC"
+ * is "MUSIQUE POUR ENFANTS" in French. Any width hard-coded today is wrong for
+ * some language on some tenant, and wrong SILENTLY — the bar would either fold
+ * away while there was room to spare, or run its last category off the edge
+ * and never fold at all.
+ *
+ * So a hidden one-line copy of the same links, in the same class, is measured
+ * against the room actually left in row 2 once the tail (Backstage + the flag,
+ * which never fold) has taken its share. The copy has to keep existing while
+ * collapsed: the real nav is display:none by then, and a bar with nothing to
+ * measure could never decide to open back up as the window widens.
+ *
+ * Ported from kJubilee's `useNavCollapse` (w:/kJubilee.com/app/_site-header.js)
+ * so the two properties behave identically. The one difference: kJubilee's nav
+ * is written into the DOM by a per-page script, so it needs a MutationObserver
+ * to notice; ours is React-rendered, so re-rendering the ghost IS the
+ * notification and the ResizeObserver on it catches the new width.
+ */
+function useNavCollapse() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const barRef = useRef<HTMLDivElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const ghostRef = useRef<HTMLDivElement | null>(null);
+  const tailRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const row = rowRef.current;
+    const ghost = ghostRef.current;
+    if (!row || !ghost) return undefined;
+
+    const measure = () => {
+      const cs = getComputedStyle(row);
+      const gap = parseFloat(cs.columnGap || cs.gap || '0') || 0;
+      const room =
+        row.clientWidth
+        - parseFloat(cs.paddingLeft || '0')
+        - parseFloat(cs.paddingRight || '0')
+        - (tailRef.current ? tailRef.current.offsetWidth : 0)
+        - gap;
+      // The hamburger costs room too, so a bar that only just fits is not left
+      // flipping back and forth across a single pixel as the window is dragged.
+      setCollapsed(ghost.scrollWidth > room - 8);
+
+      /* Publish where the sticky header stack ENDS, for the panel that hangs
+         below it. Computed from the bar's own sticky offset plus its height
+         rather than written down as 98px: row 1 is 48px today and the panel
+         must not need editing the day it is not. */
+      const bar = barRef.current;
+      if (bar) {
+        const h = Math.ceil(parseFloat(getComputedStyle(bar).top || '0') + bar.offsetHeight);
+        if (h) document.documentElement.style.setProperty('--jvh-hdr-h', `${h}px`);
+      }
+    };
+
+    measure();
+
+    let ro: ResizeObserver | undefined;
+    if (typeof ResizeObserver === 'function') {
+      ro = new ResizeObserver(measure);
+      ro.observe(row);
+      ro.observe(ghost);
+    }
+    window.addEventListener('resize', measure);
+    window.addEventListener('orientationchange', measure);
+    return () => {
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('orientationchange', measure);
+    };
+  }, []);
+
+  // Nothing may leave the menu open behind the reader — a window dragged wide
+  // again puts the links back in the bar, and the panel has to go with them.
+  useEffect(() => { if (!collapsed) setOpen(false); }, [collapsed]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  return { collapsed, open, setOpen, barRef, rowRef, ghostRef, tailRef };
+}
+
 export default function Header({ defaultMusicHref, langWithContent = [] }: { defaultMusicHref: string; langWithContent?: string[] }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -73,6 +165,9 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
   const [q, setQ] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const userRef = useRef<HTMLDivElement>(null);
+
+  // Row 2 folds into a hamburger the moment its categories stop fitting.
+  const { collapsed, open: navOpen, setOpen: setNavOpen, barRef, rowRef, ghostRef, tailRef } = useNavCollapse();
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -164,8 +259,28 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
       </header>
 
       {/* Row 2 — category nav (collapses to HOME (<LANGUAGE>) in other languages) */}
-      <div className="jvh-nav-bar">
-        <div className="jvh-nav-inner">
+      <div className={`jvh-nav-bar${collapsed ? ' is-nav-collapsed' : ''}`} ref={barRef}>
+        <div className="jvh-nav-inner" ref={rowRef}>
+          {/* FIRST IN THE ROW so it paints on the left — and first in the DOM
+              rather than moved there with `order`, because tab order and
+              screen-reader order follow the DOM, not the paint. On a phone this
+              is the only way into the categories; it must not be the last thing
+              a keyboard reaches. display:none until the bar collapses, so it
+              costs the wide layout nothing. */}
+          <button
+            type="button"
+            className={`jvh-nav-burger${navOpen ? ' is-open' : ''}`}
+            aria-expanded={navOpen ? 'true' : 'false'}
+            aria-controls="jvh-nav-panel"
+            aria-label={t('nav.menu')}
+            onClick={() => setNavOpen((v) => !v)}
+          >
+            <span className="jvh-nav-burger-bars" aria-hidden="true">
+              <span /><span /><span />
+            </span>
+            <span className="jvh-nav-burger-label">{t('nav.menu')}</span>
+          </button>
+
           <nav className="jvh-nav-menu">
             {nav.map((n) => (
               <Link key={n.href + (n.key || n.label)} href={n.href} className={`jvh-nav-link${isActive(n.href) ? ' active' : ''}`}>
@@ -174,8 +289,23 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
             ))}
           </nav>
 
-          {/* Right side of the nav row: Backstage, then the language flag. */}
-          <div className="jvh-nav-right">
+          {/* THE RULER. Off-canvas rather than display:none — a box that is not
+              laid out has no width to measure. Inert: aria-hidden, unfocusable
+              spans, pointer-events:none in the CSS. It carries .jvh-nav-link so
+              the widths it reports are the real widths, and it keeps rendering
+              while collapsed so the bar can decide to unfold again. */}
+          <div className="jvh-nav-measure" aria-hidden="true" ref={ghostRef}>
+            {nav.map((n) => (
+              <span key={n.href + (n.key || n.label)} className="jvh-nav-link">
+                {n.key ? t(n.key as TKey) : n.label}
+              </span>
+            ))}
+          </div>
+
+          {/* Right side of the nav row: Backstage, then the language flag.
+              This is the tail — it never folds, so the measurement above
+              subtracts it as room already spoken for. */}
+          <div className="jvh-nav-right" ref={tailRef}>
             <Link
               href="/backstage"
               className={`jvh-backstage${isActive('/backstage') ? ' active' : ''}`}
@@ -193,6 +323,30 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
           </div>
         </div>
       </div>
+
+      {/* The folded-away categories. Full width under the bar rather than a
+          narrow dropdown: these are the things the site is for, on the screen
+          where they had to be folded, and they should still be a list you can
+          hit with a thumb. It tucks UNDER the sticky header (z-index below both
+          rows) so the reader can still see the control they just pressed. */}
+      {collapsed && navOpen ? (
+        <>
+          <div className="jvh-nav-overlay" onClick={() => setNavOpen(false)} />
+          <nav className="jvh-nav-panel" id="jvh-nav-panel" aria-label={t('nav.menu')}>
+            {nav.map((n) => (
+              <Link
+                key={n.href + (n.key || n.label)}
+                href={n.href}
+                className={`jvh-nav-panel-link${isActive(n.href) ? ' active' : ''}`}
+                {...(isActive(n.href) ? { 'aria-current': 'page' as const } : {})}
+                onClick={() => setNavOpen(false)}
+              >
+                {n.key ? t(n.key as TKey) : n.label}
+              </Link>
+            ))}
+          </nav>
+        </>
+      ) : null}
 
       {/* Slide-out language picker (triggered by the header flag button) */}
       {showLangPicker && (

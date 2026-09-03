@@ -45,6 +45,14 @@ type NavItem = {
   /** Material Symbols glyphs carry their own 960-unit grid; stock ones are 24. */
   viewBox?: string;
   icon: string;
+  /**
+   * Keep the row's definition — its label, its artwork and the notes explaining
+   * both — but do not render it. This is for a property that is specified but
+   * not yet reachable: deleting the entry would throw away chosen artwork and
+   * the reason it is absent, and the next person would re-derive both from
+   * scratch. Clearing this flag is the whole of putting the row back.
+   */
+  hidden?: boolean;
 };
 
 const NAV_ITEMS: NavItem[] = [
@@ -132,6 +140,12 @@ const NAV_ITEMS: NavItem[] = [
     {
         key: 'references',
         label: 'Bible References',
+        // HIDDEN 2026-09-02 at the Founder's request — it was the last row in
+        // the rail and it is gone from the rendered menu. The row is kept here
+        // rather than deleted because the domain below never came up, so the
+        // note explaining that is still the live reason it is absent; drop
+        // `hidden` and it returns exactly as it was.
+        hidden: true,
         // NOT LIVE AT THE TIME OF WRITING. www.jubileereferences.com was
         // NXDOMAIN and the apex carried no A record, so this row is a dead
         // link until the domain is pointed at something. Left as specified
@@ -263,7 +277,7 @@ export default function InspireRail() {
           <span className="jir-label">NAVIGATION</span>
         </button>
 
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEMS.filter((item) => !item.hidden).map((item) => (
           <a
             key={item.key}
             className={'jir-item' + (isCurrentProperty(item) ? ' is-active' : '')}
