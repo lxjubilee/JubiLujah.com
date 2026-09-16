@@ -38,7 +38,9 @@
     ".next-album/types/**/*.ts",
     ".next-picks/types/**/*.ts",
     ".next-single/types/**/*.ts",
-    ".next-single2/types/**/*.ts"
+    ".next-single2/types/**/*.ts",
+    ".next-hero2/types/**/*.ts",
+    ".next-hero3/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

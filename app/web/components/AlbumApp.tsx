@@ -46,6 +46,41 @@ const TransportIcon = ({ paused }: { paused: boolean }) => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d={paused ? PLAY_D : PAUSE_D} /></svg>
 );
 
+/**
+ * Keep a heading on ONE line by shrinking its font until it fits its box.
+ *
+ * CSS alone cannot promise this: `nowrap` stops the wrap but cuts a long title
+ * off, and a viewport-based size is only right for an average title. So the
+ * stylesheet sets the full size, and this measures the rendered line and scales
+ * the font down by exactly the overflow — re-measured when the title changes
+ * (the page switches albums in place) and whenever the box is resized. Never
+ * below MIN_PX; the stylesheet's ellipsis is the backstop past that.
+ */
+const MIN_TITLE_PX = 20;
+function useFitOneLine<T extends HTMLElement>(text: string) {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fit = () => {
+      el.style.fontSize = '';                       // back to the stylesheet's size
+      const full = parseFloat(getComputedStyle(el).fontSize) || 42;
+      const box = el.clientWidth;
+      const need = el.scrollWidth;
+      if (box > 0 && need > box) {
+        el.style.fontSize = `${Math.max(MIN_TITLE_PX, Math.floor(full * (box / need) * 0.98))}px`;
+      }
+    };
+    fit();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(fit) : null;
+    ro?.observe(el.parentElement || el);
+    // Web fonts can land after the first measurement and change the width.
+    document.fonts?.ready?.then(fit).catch(() => {});
+    return () => ro?.disconnect();
+  }, [text]);
+  return ref;
+}
+
 function fmt(s: number) {
   if (!isFinite(s) || s <= 0) return '--:--';
   const m = Math.floor(s / 60);
@@ -186,14 +221,21 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
   // the bottom, which on a 16:9 photograph is where the faces are. The persona
   // banners were composed for this box and still want centre; an album photograph
   // was not, so it is anchored to the top instead. See .x-hero--support.
+  const titleRef = useFitOneLine<HTMLHeadingElement>(current.title);
   const canPlay = current.tracks.some((t) => t.url);
   const blurb = albumBlurb(current.code, current.title, artist, current.trackCount || current.tracks.length, current.tracks[0]?.title);
   const genres = [gp.primary, gp.secondary].filter(Boolean);
+  // LAYOUT (owner direction, second pass, 2026-09-16): everything sits LOW in the
+  // picture, top to bottom — the title on ONE line, the description, then one
+  // bottom line holding Play Album, the genres and the artist, in that order.
   const hero = (
     <header className={`x-hero${supportImage ? ' x-hero--support' : ''}`} style={heroStyle}>
       <div className="x-container">
         <div className="x-inner x-album-inner">
-          <h1 lang={albumBcp47(current.code)}>{current.title}</h1>
+          {/* 🔴 ONE LINE, ALWAYS (owner: "very, very important"). It may run the
+              full width of the picture, and it shrinks to fit rather than wrap
+              or be cut off: see useFitOneLine. */}
+          <h1 ref={titleRef} className="x-album-title" lang={albumBcp47(current.code)} title={current.title}>{current.title}</h1>
           <p className="x-sub x-album-desc">{blurb}</p>
           <div className="x-album-actions">
             {canPlay && (
@@ -202,19 +244,22 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
                 <span>{!bigPlayPaused ? 'Pause' : albumIsActive ? 'Resume' : 'Play Album'}</span>
               </button>
             )}
-            {artistSlug
-              ? <a className="x-album-artist" href={`/artist/${artistSlug}`}>by <strong>{artist}</strong></a>
-              : <span className="x-album-artist">by <strong>{artist}</strong></span>}
+            {(genres.length > 0 || staffPicks.includes(current.code)) && (
+              <ul className="x-album-genres" aria-label="Genres">
+                {/* Only for an album a team member chose (content/staff-picks.json). */}
+                {staffPicks.includes(current.code) && <li className="x-album-pill x-album-pill--staff">Staff Pick</li>}
+                {genres.map((g) => <li key={g} className="x-album-pill">{g}</li>)}
+              </ul>
+            )}
           </div>
-          {(genres.length > 0 || staffPicks.includes(current.code)) && (
-            <ul className="x-album-genres" aria-label="Genres">
-              {/* Only for an album a team member chose (content/staff-picks.json). */}
-              {staffPicks.includes(current.code) && <li className="x-album-pill x-album-pill--staff">Staff Pick</li>}
-              {genres.map((g) => <li key={g} className="x-album-pill">{g}</li>)}
-            </ul>
-          )}
         </div>
       </div>
+      {/* THE ARTIST, the home hero's way (owner, 2026-09-16): huge and faint,
+          right-justified in the corner, reaching as far left as the name needs.
+          It replaced "by <artist>" on the bottom line. */}
+      {artistSlug
+        ? <a className="x-album-ident" href={`/artist/${artistSlug}`} aria-label={`More from ${artist}`}>{artist}</a>
+        : <span className="x-album-ident" aria-hidden="true">{artist}</span>}
     </header>
   );
 

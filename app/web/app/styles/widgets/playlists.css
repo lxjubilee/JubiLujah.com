@@ -112,7 +112,8 @@
 .spl-back { color: rgba(255,255,255,.8); text-decoration: none; font-size: 13px; font-weight: 600; }
 .spl-back:hover { color: #fff; text-decoration: underline; }
 .spl-eyebrow { margin: 14px 0 4px; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 700; color: var(--brand-accent); }
-.spl-title { margin: 0 0 8px; color: #fff; font-size: clamp(28px, 4.2vw, 44px); font-weight: 800; line-height: 1.1; }
+/* Title close on the description, like every hero (about 80% less space). */
+.spl-title { margin: 0 0 1px; color: #fff; font-size: clamp(28px, 4.2vw, 44px); font-weight: 800; line-height: 1.05; }
 .spl-description { margin: 0 0 6px; max-width: 720px; color: rgba(255,255,255,.88); font-size: 16px; line-height: 1.5; }
 .spl-meta { margin: 0 0 16px; color: rgba(255,255,255,.66); font-size: 13px; }
 .spl-play {
