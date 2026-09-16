@@ -110,31 +110,45 @@ export default function ReviewsBrowser({ album, songs }: { album: AlbumRef; song
           <h1 className="rv-summary-title">{album.title}</h1>
           <a className="rv-summary-artist" href={`/artist/${album.artistSlug}`}>{album.artistName}</a>
 
-          <div className="rv-summary-score">
-            <div className="rv-summary-big">{summary?.average != null ? summary.average.toFixed(1) : '-'}</div>
-            <div className="rv-summary-stars">
-              <StarRating value={summary?.average ?? 0} size="md" />
-              <div className="rv-summary-counts">
-                {(summary?.rating_count || 0).toLocaleString()} rating{summary?.rating_count === 1 ? '' : 's'}
-                <span className="rv-dot">·</span>
-                {(summary?.review_count || 0).toLocaleString()} review{summary?.review_count === 1 ? '' : 's'}
+          {/* No empty counts (owner direction, 2026-09-16): the score, the stars
+              and "0 ratings · 0 reviews" appear with the first rating, not before.
+              An album nobody has rated yet shows an invitation instead. */}
+          {total5 > 0 && summary?.average != null ? (
+            <div className="rv-summary-score">
+              <div className="rv-summary-big">{summary.average.toFixed(1)}</div>
+              <div className="rv-summary-stars">
+                <StarRating value={summary.average} size="md" />
+                <div className="rv-summary-counts">
+                  {total5.toLocaleString()} rating{total5 === 1 ? '' : 's'}
+                  {summary.review_count > 0 && (
+                    <>
+                      <span className="rv-dot">·</span>
+                      {summary.review_count.toLocaleString()} review{summary.review_count === 1 ? '' : 's'}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <p className="rv-summary-invite">A new release. Be among the first to rate and review it.</p>
+          )}
 
-          {/* Distribution (§7) */}
-          <div className="rv-dist">
-            {([5, 4, 3, 2, 1] as const).map((star) => {
-              const pct = summary ? distPct(summary.distribution, star, total5) : 0;
-              return (
-                <div className="rv-dist-row" key={star}>
-                  <span className="rv-dist-label">{star} star</span>
-                  <span className="rv-dist-bar"><span className="rv-dist-fill" style={{ width: `${pct}%` }} /></span>
-                  <span className="rv-dist-pct">{pct}%</span>
-                </div>
-              );
-            })}
-          </div>
+          {/* Distribution (§7). Five rows of 0% say nothing but "empty", so it
+              waits for the first rating like the score above. */}
+          {total5 > 0 && (
+            <div className="rv-dist">
+              {([5, 4, 3, 2, 1] as const).map((star) => {
+                const pct = summary ? distPct(summary.distribution, star, total5) : 0;
+                return (
+                  <div className="rv-dist-row" key={star}>
+                    <span className="rv-dist-label">{star} star</span>
+                    <span className="rv-dist-bar"><span className="rv-dist-fill" style={{ width: `${pct}%` }} /></span>
+                    <span className="rv-dist-pct">{pct}%</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div className="rv-summary-actions">
             <button className="rv-btn rv-btn-primary" type="button" onClick={openComposer}>
@@ -171,7 +185,7 @@ export default function ReviewsBrowser({ album, songs }: { album: AlbumRef; song
       <section className="rv-list">
         {loading && items.length === 0 && <div className="rv-empty">Loading reviews…</div>}
         {!loading && items.length === 0 && (
-          <div className="rv-empty">No reviews yet for this selection. {authenticated ? 'Be the first to write one.' : <a href="/signin">Sign in</a>} </div>
+          <div className="rv-empty">{authenticated ? 'Be the first to share what this album means to you.' : <><a href="/signin">Sign in</a> to be the first to share what this album means to you.</>}</div>
         )}
         {items.map((r) => (
           <ReviewItem

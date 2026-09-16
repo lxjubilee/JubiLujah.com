@@ -13,6 +13,7 @@ import FeaturedArtists from '@/components/FeaturedArtists';
 import TenantHome from '@/components/TenantHome';
 import HomeHero from '@/components/HomeHero';
 import { heroSlides } from '@/lib/heroes';
+import { featuredToday, isStaffPick } from '@/lib/editorial';
 import TorahSingsHome from '@/components/torahsings/TorahSingsHome';
 import { currentTenant } from '@/lib/tenant';
 import { usesAngelsCatalog } from '@/lib/tenants';
@@ -66,6 +67,8 @@ export default function HomePage() {
     status: al.status,
     trackCount: al.trackCount,
     artistName,
+    // A team member's pick carries its label everywhere the album appears.
+    ...(isStaffPick(al.code) ? { badge: 'staff-pick' as const } : {}),
   });
 
   // personaRows() spans the ENTIRE collection (every category/persona) and
@@ -120,6 +123,14 @@ export default function HomePage() {
     }
   }
 
+  // FEATURED TODAY: twelve finished English albums from across the rows, a new set
+  // every day (lib/editorial.ts). Labelled "Featured", which is exactly what they
+  // are; a Staff Pick among them keeps its own label instead.
+  const featured = featuredToday(
+    Object.values(buckets).flat().filter((t) => albumLanguage(t.code) === 'en'),
+    12,
+  ).map((t) => (t.badge ? t : { ...t, badge: 'featured' as const }));
+
   // Non-English albums (by code suffix), for the per-language Home view. Empty
   // while the catalog is all-English; populates as …<XX> albums are published.
   // Scope (for now): INSPIRE FAMILY personas only — translated albums from other
@@ -162,6 +173,7 @@ export default function HomePage() {
             in another is worse than no banner. */}
         <HomeHero slides={heroSlides(3)} />
         <div className="nf-rows">
+          {featured.length > 0 && <MediaRow key="featured-today" title="Featured Today" items={featured} />}
           {THEMES.filter((t) => buckets[t.key].length > 0).map((t) => (
             <MediaRow key={t.key} title={t.label} items={buckets[t.key]} />
           ))}

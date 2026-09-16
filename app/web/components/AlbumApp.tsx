@@ -55,7 +55,9 @@ function fmt(s: number) {
 
 // artistRole is still accepted (and still passed by app/album/page.tsx) but no
 // longer shown: the banner names the album now, not the persona's role.
-export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {} }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string> }) {
+// staffPicks: every Staff Pick code, not a flag — the page switches albums in
+// place, so the banner has to know for whichever album is current.
+export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {}, staffPicks = [] }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string>; staffPicks?: string[] }) {
   const playQueue = usePlayer((s) => s.playQueue);
   const togglePlay = usePlayer((s) => s.togglePlay);
   const nowPlaying = usePlayer((s) => s.nowPlaying);
@@ -204,8 +206,10 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
               ? <a className="x-album-artist" href={`/artist/${artistSlug}`}>by <strong>{artist}</strong></a>
               : <span className="x-album-artist">by <strong>{artist}</strong></span>}
           </div>
-          {genres.length > 0 && (
+          {(genres.length > 0 || staffPicks.includes(current.code)) && (
             <ul className="x-album-genres" aria-label="Genres">
+              {/* Only for an album a team member chose (content/staff-picks.json). */}
+              {staffPicks.includes(current.code) && <li className="x-album-pill x-album-pill--staff">Staff Pick</li>}
               {genres.map((g) => <li key={g} className="x-album-pill">{g}</li>)}
             </ul>
           )}

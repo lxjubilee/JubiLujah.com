@@ -31,7 +31,12 @@ export interface TileData {
   // Whether the album has a published cover image on the CDN. Used with
   // MediaRow's `requireCover` to hide cover-less albums from non-admins.
   hasCover?: boolean;
+  // An editorial label on the tile (lib/editorial.ts): a team member's Staff
+  // Pick, or today's Featured selection. Staff Pick wins where both apply.
+  badge?: 'staff-pick' | 'featured';
 }
+
+const BADGE_LABEL = { 'staff-pick': 'Staff Pick', featured: 'Featured' } as const;
 
 const Icon = ({ d }: { d: string }) => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d={d} /></svg>
@@ -159,6 +164,9 @@ export default function HoverTile({ data }: { data: TileData }) {
         {/* Album-code ID pill (upper-left) — always shown on foreign-language
             covers for the privileged tier; also on studio drafts. */}
         {showCodePill && <span className="nf-code-pill nf-code-pill--tile">{data.code}</span>}
+        {data.badge && (
+          <span className={`nf-badge nf-badge--${data.badge}`}>{BADGE_LABEL[data.badge]}</span>
+        )}
       </Link>
 
       {mounted && open && createPortal(

@@ -93,6 +93,8 @@
 .rv-summary-artist { color: var(--accent-gold); text-decoration: none; font-size: 14px; }
 .rv-summary-artist:hover { text-decoration: underline; }
 .rv-summary-score { display: flex; align-items: center; gap: 16px; margin: 16px 0; }
+/* Shown instead of the score while an album has no ratings (no empty counts). */
+.rv-summary-invite { margin: 16px 0; color: var(--ink-soft); font-size: 15px; }
 .rv-summary-big { font-size: 48px; font-weight: 800; color: var(--ink); line-height: 1; }
 .rv-summary-counts { color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
 .rv-dist { display: flex; flex-direction: column; gap: 5px; max-width: 420px; }

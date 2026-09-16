@@ -1,0 +1,10 @@
+{
+  "note": "STAFF PICKS: albums the JubileePraise team has personally chosen. Each one shows a 'Staff Pick' label on its tile and its album page. Add an album by its code. This list is for genuine picks by a person; the daily 'Featured Today' row is the site's own rotating selection and needs no entry here. See lib/editorial.ts and DECISIONS D-2026-09-16-7.",
+  "picks": [
+    {
+      "code": "JEIM1069EN",
+      "note": "The JubileePraise flagship: the album the brand is named after, already pinned first on the home page by the owner.",
+      "added": "2026-09-16"
+    }
+  ]
+}

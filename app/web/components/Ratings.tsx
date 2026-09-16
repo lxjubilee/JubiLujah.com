@@ -52,9 +52,9 @@ export default function Ratings({ type, id }: { type: string; id: string }) {
         ))}
       </div>
       <div className="jv-ratings-summary">
-        {pct != null
-          ? <>★ {pct}% <span className="muted">({agg?.count} rating{agg?.count === 1 ? '' : 's'})</span></>
-          : <span className="muted">No ratings yet</span>}
+        {/* Nothing at all until the first rating: "No ratings yet" reads as
+            unpopular rather than new (owner direction, 2026-09-16). */}
+        {pct != null && <>★ {pct}% <span className="muted">({agg?.count} rating{agg?.count === 1 ? '' : 's'})</span></>}
       </div>
       {!canRate && <div className="jv-ratings-hint muted">Sign in as a content editor to rate.</div>}
       {err && <div className="jv-ratings-err" style={{ color: 'var(--accent-peach)' }}>{err}</div>}

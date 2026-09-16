@@ -19,19 +19,23 @@ export default function PublicAlbumRating({ summary, code, onRate }: Props) {
   const count = summary?.rating_count ?? 0;
   const mine = summary?.mine ?? null;
 
+  // 🔴 NO EMPTY COUNTS (owner direction, 2026-09-16). Five grey stars, a dash
+  // and "No ratings yet" make a new album look unpopular rather than new, and
+  // this is the first thing under the title. With no ratings the summary simply
+  // is not shown; the Rate button is. The numbers appear with the first rating.
+  const hasRatings = count > 0 && avg != null;
+
   return (
     <div className="rv-album-rating">
-      <div className="rv-album-rating-main">
-        <StarRating value={avg ?? 0} size="md" />
-        {avg != null
-          ? <span className="rv-avg">{avg.toFixed(1)}</span>
-          : <span className="rv-avg rv-avg-none">-</span>}
-        <span className="rv-count">
-          {count > 0
-            ? <>Based on {count.toLocaleString()} rating{count === 1 ? '' : 's'}</>
-            : 'No ratings yet. Be the first'}
-        </span>
-      </div>
+      {hasRatings && (
+        <div className="rv-album-rating-main">
+          <StarRating value={avg} size="md" />
+          <span className="rv-avg">{avg.toFixed(1)}</span>
+          <span className="rv-count">
+            Based on {count.toLocaleString()} rating{count === 1 ? '' : 's'}
+          </span>
+        </div>
+      )}
       <div className="rv-album-rating-actions">
         <button className="rv-btn rv-btn-primary rv-btn-sm" type="button" onClick={onRate}>
           {mine ? 'Edit your rating' : 'Rate this Album'}

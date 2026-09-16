@@ -18,12 +18,18 @@ export default function SongRatingControl({ summary, onRate }: Props) {
   const count = summary?.rating_count ?? 0;
   const rated = !!summary?.mine;
 
+  // No empty counts: a song nobody has rated shows only its Rate button — not
+  // five grey stars and "(0)", which reads as unpopular rather than new.
+  const hasRatings = count > 0 && avg != null;
+
   return (
     <span className="rv-song" onClick={(e) => e.stopPropagation()}>
-      <StarRating value={avg ?? 0} size="sm" />
-      <span className="rv-song-count">
-        {count > 0 ? `(${count.toLocaleString()})` : '(0)'}
-      </span>
+      {hasRatings && (
+        <>
+          <StarRating value={avg} size="sm" />
+          <span className="rv-song-count">({count.toLocaleString()})</span>
+        </>
+      )}
       <button
         type="button"
         className={`rv-song-rate${rated ? ' rated' : ''}`}

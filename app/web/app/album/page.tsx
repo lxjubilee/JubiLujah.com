@@ -10,6 +10,7 @@ import { similarAlbums } from '@/lib/musicTypes';
 import { canonical, musicAlbumLd, breadcrumbLd } from '@/lib/seo';
 import JsonLd from '@/components/JsonLd';
 import AlbumApp, { AlbumLink, CurrentAlbum, SimilarAlbum } from '@/components/AlbumApp';
+import { staffPickCodes } from '@/lib/editorial';
 
 export const revalidate = 3600; // ISR
 
@@ -136,6 +137,7 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
       <AlbumApp
         artist={album.artistName}
         artistSlug={album.artistSlug}
+        staffPicks={Array.from(staffPickCodes())}
         artistRole={artist?.role || 'Inspire Family'}
         heroFallback={heroImage(album.artistSlug)}
         albums={albums}

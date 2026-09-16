@@ -762,6 +762,20 @@ body.jv-has-player { padding-bottom: 84px; }
 /* Smaller variant for the always-visible grid tile (foreign-language albums). */
 .nf-code-pill--tile { top: 6px; left: 6px; font-size: 9px; padding: 2px 7px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
 
+/* EDITORIAL LABELS on album tiles (lib/editorial.ts). Bottom-right, clear of the
+   wordmark up the cover's left edge and of the studio code pill top-left. Staff
+   Pick is gold — a person chose it; Featured is the tenant accent — the site did. */
+.nf-badge {
+  position: absolute; right: 6px; bottom: 6px; z-index: 3;
+  font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 999px; line-height: 1.3; pointer-events: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+.nf-badge--staff-pick { background: #F5B82E; color: #2a1c00; }
+.nf-badge--featured { background: var(--brand-accent); color: #04233d; }
+/* The same Staff Pick label beside the genres in the album page banner. */
+.album-exec .x-album-pill--staff { background: #F5B82E; color: #2a1c00; border-color: #F5B82E; }
+
 /* Fallback when an album has no cover art: the album name in a styled font,
    centered over the tile's gradient. Shared look with .album-cover-fallback. */
 .nf-cover-fallback {
