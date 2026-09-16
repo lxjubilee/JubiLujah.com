@@ -43,7 +43,7 @@ compose up -d`.
 
 ### Option B — Managed Postgres (Neon / Supabase / RDS, or non-Docker local)
 ```bash
-export DATABASE_URL=postgres://user:pass@host:5432/jubileepraise
+export DATABASE_URL=postgres://user:pass@host:5432/jubilujah
 npm run db:migrate -- --seed     # tracks applied files in public._migrations (idempotent)
 ```
 

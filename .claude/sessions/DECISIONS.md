@@ -449,3 +449,321 @@ sat one screen away and looked fine in every check that grepped for the first on
 grep for *colour-shaped strings in the area being repainted*, not for the known value.
 **Deliberately still gold:** the analytics widget's scrollbar gradient (`an-scrollbar`, an admin
 surface) and the TorahSings modules (their own brand, scoped).
+
+## D-2026-09-03-1 · The database stays `jubilujah` — and so does every identifier registered on another system
+**Decided:** 2026-09-03 · **By:** Founder — "Lets use Jubilujah DB".
+**What broke.** Local auth was dead: `GET /api/auth/lookup` returned 500. Two causes in one request,
+both from the 2026-08-27 rename rewriting `app/.env`:
+`SSO token endpoint 401: {"error":"invalid_client"}` and `database "jubileepraise" does not exist`
+(SQLSTATE 3D000). Proven, not inferred — **same secret, only the id changed**:
+`client_id=jubilujah -> 200`, `client_id=jubileepraise -> 401 invalid_client`, at BOTH
+`sso.jubileeinspire.com` and `api.jubileeinspire.com`. `psql -l` on `:5433` lists `jubilujah`;
+a `jubileepraise` database has never existed.
+**Production was never affected.** Prod's `.env` is gitignored and lives on the server, so the rename
+never reached it. Verified live: lookup of a known account → `existsInSso:true`; signin of an unknown
+account → a clean `401`, which a broken service client would have made a 500.
+**Restored to the pre-rename values** (each checked against `3648a31^`, not guessed):
+- `app/.env` — `DATABASE_URL` db name, `SSO_CLIENT_ID`, `SSO_SITE`, `JI_SERVICE_CLIENT_ID`
+- `app/api/src/config.js:48,141,152,154` + `services/jiSync.js:143` — the code-level defaults, which
+  had been renamed too and were a latent repeat of the same failure
+- `app/docker-compose.yml:19` `POSTGRES_DB` — a fresh volume would have created the wrong database
+- docs: `app/.env.example`, `app/docs/database.md`, `app/docs/seattle-vps-db.md`,
+  `app/api/docs/API_REFERENCE.md`. **`seattle-vps-db.md` had been rewritten into a false claim** —
+  "the `jubileepraise_app` role and `jubileepraise` database exist on the VPS (provisioned & live)".
+  They do not; `jubilujah_app`/`jubilujah` do.
+**Deliberately NOT changed:** `EMAIL_FROM` / `MAILGUN_DOMAIN` (jubileepraise.com *is* a verified
+Mailgun sending domain), and `SERVICE_JWT_ISSUER`/`AUDIENCE` (JubileePraise's own namespace, not
+registered on anyone else's system).
+**Verified after the change:** lookup(known) `existsInSso:true, existsLocally:true, available:true`;
+signin(unknown) 401; refresh(bogus) 401; `/api/me` 401; CORS preflight 204; `/signin` 200 on
+`localhost:3000`; zero level-50 entries in the API log.
+**Still open, deliberately:** a `jubileepraise` SSO service client has been generated and staged
+commented-out in `app/.env` (secret fingerprint `sha256[0:16]=45d750e2b0495f4f`), awaiting
+registration at `sso.jubileeinspire.com` — which needs shell access to the box. Note `SSO_SITE` is not
+a registration: it is a value inside each SSO identity's `sites[]` array column, so switching it is a
+**data migration**, not a config flip.
+**Lesson worth keeping: a rename may only rewrite strings this repo owns.** A database name, a
+service `client_id` and a platform tag live in someone else's registry. Rewriting them here renames
+nothing — it just stops matching, silently, until something asks for a token.
+
+---
+
+## D-2026-09-10-1 · `J:\jubileepraise.com` is now a full copy of `J:\jubilujah.com` — and it is a COPY, not a move
+
+Founder instruction: sync the two J: trees ahead of retiring JubiLujah.
+
+**Done, and verified byte-for-byte.** `robocopy /E /COPY:DAT /DCOPY:DAT /MT:32`, 09:44 at
+91 MB/s. Both trees now measure **20,842 files · 8,057 dirs · 53,327,123,653 bytes**. Robocopy
+reported `0 FAILED · 0 Mismatch · 0 Extras`. Log: `W:\.claude-scratch\jdrive-sync-20260910-134416.log`.
+
+`J:\jubileepraise.com\` had been created empty by the 2026-08-27 rename and had sat empty since,
+which is what the 🔴 warnings in CLAUDE.md and PUBLISH.md were about. **Those warnings are now
+stale and should be edited when someone next touches those files.**
+
+**The repo's own gate passes against the new path**, identically to the old one:
+`node deploy/check-manifest.mjs --music=J:/jubileepraise.com/music` →
+`1071 in manifest · 1464 on disk · would add: 0 · Manifest is current`.
+
+**A COPY was chosen over a move or a junction, deliberately.** J: is a network share
+(`\HDC-INSPIRESERVER\JubileeVerse`) with 10.3 TB free, so 50 GB of duplication is cheap, and a copy
+is the only one of the three that is reversible and that leaves the old tree working while the new
+one is validated. The cost is **drift**: from today, anything written to `J:\jubilujah.com` is
+invisible to `J:\jubileepraise.com`. Re-running the same robocopy is additive and safe and is the
+resync. Retiring the old tree — move, junction, or delete — is a separate Founder decision and was
+NOT taken.
+
+Carried across as-is, worth knowing about: `music\_outdated-audio-2026-08-14` is **9.24 GB of
+explicitly retired audio** and is now duplicated. Dropping it from the new tree is safe and would
+recover that space; it was not dropped, because narrowing a sync nobody asked to narrow is how
+content goes missing quietly.
+
+## D-2026-09-10-2 · The R2 bucket is `jubilujah-cdn`, the rename broke it in four tools, and it is restored
+
+**The 2026-08-27 rename rewrote the R2 bucket name from `jubilujah-cdn` to `jubileepraise-cdn`** in
+every tool that pushes to the CDN. Verified against the untouched pre-rename originals in
+`W:\JubiLujah.com`, which all read `jubilee-r2:jubilujah-cdn`:
+
+| file | was | had become |
+|---|---|---|
+| `tools/cdn-sync-music.mjs` | `jubilujah-cdn` | `jubileepraise-cdn` |
+| `tools/cdn-sync-artwork.mjs` | `jubilujah-cdn` | `jubileepraise-cdn` |
+| `tools/cdn-sync-covers.mjs` | *(new file, inherited the wrong name)* | `jubileepraise-cdn` |
+| `deploy/refresh-tracks.mjs` | `jubilujah-cdn` | `jubileepraise-cdn` |
+
+**This is the CDN-host exclusion CLAUDE.md already documents, one level down at the bucket, and it
+was missed.** `cd.jubileepraise.com` has **no DNS record** (re-checked today; `cd.jubilujah.com`
+resolves to Cloudflare and serves 200). No JubileePraise CDN exists, so there is no JubileePraise
+bucket for one to hold. `www.jubileepraise.com` serves the **byte-identical** build as
+`www.jubilujah.com` — same 265,412 bytes, same `<title>` — and both build every media URL against
+`cd.jubilujah.com`.
+
+Left as it was, `--apply` would have done one of two things and **both are silent**: errored on a
+bucket that does not exist, or — if somebody created one to clear the error — uploaded 35 GB to a
+bucket nothing serves and reported complete success. That is *precisely* the failure
+`cdn-sync-music.mjs`'s own header was written about, at the prefix level, repeated one level up.
+
+**Worse, the rename edited a recorded measurement into a false one.** The comment at
+`cdn-sync-music.mjs:63` documented a 2026-08-19 probe — upload an object to each bucket, request it —
+and its result line had been rewritten to read `jubileepraise-cdn … -> 200`. That probe was against
+`jubilujah-cdn`. A measurement nobody took now read as fact. Restored.
+
+All four restored to `jubilujah-cdn` with a 🔴 note saying why, so the next rename — or the next
+reader who thinks it is a typo — leaves it alone. `node --check` clean on all four. **This changes
+when `cd.jubileepraise.com` has DNS and a bucket behind it, and not before.**
+
+## D-2026-09-10-3 · The CDN is not the reason anything is down: audio is 100% up, the real gap is 131 artwork masters
+
+Measured today against the live `cd.jubilujah.com`, read-only, before proposing any push.
+
+**Audio: complete.** 33 playable tracks sampled across all six populated categories — **33/33 → 200**.
+There is nothing to push. `www.jubileepraise.com` returns **200** with
+`<title>JubileePraise.com — Feel the Spirit Move</title>`. The site is operational.
+
+**Artwork, all 1,071 manifest albums audited** (`W:\.claude-scratch\artwork-audit.mjs`, which stats
+the drive first and only asks the CDN about albums that actually have a master):
+
+| | count | what it is |
+|---|---|---|
+| present on the CDN | 542 | nothing to do |
+| **on disk, NOT on the CDN** | **131** | **the push list — 516.2 MB** |
+| never generated | 398 | no master anywhere; Cover Art Studio's job, not a publish problem |
+
+The 131 are **entirely `inspire`**: caleb 54, melody 49, imani 13, jubilee 13, amir 1, tahoma 1.
+Full list: `W:\.claude-scratch\cdn-artwork-push-list.txt`.
+
+**Telling those three apart matters and a bare 404 cannot.** Spot-checked albums whose artwork 404s —
+`JMZM1011EN`, `IX500EN`, `IX401RO`, `IXMH001EN`, `CEF001EN` — and their `artwork\` folders hold
+**only `desktop.ini`**. The CDN is not missing those pictures; nobody has drawn them.
+
+**The push is BLOCKED on one thing: R2 credentials.** `rclone` is installed
+(v1.74.4) and has **no config at all** — no `jubilee-r2` remote, no `rclone.conf`, and no `R2_*` keys
+in any `.env` on this workstation or in `W:\JubiLujah.com`. Dry run confirms the tool is otherwise
+ready and now aimed correctly: `Listing published support images in jubilee-r2:jubilujah-cdn/music …
+✗ rclone could not list the bucket`.
+
+Per the 2026-08-27 finding, the live values exist in `/var/www/jubilujah.com/.env` on prod, and the
+prod SSH key **is** on this machine (`~/.ssh/id_ed25519_jubilee_prod`). **Copying production secrets
+onto a workstation remains a Founder decision and was again NOT taken.** Only the variable names have
+ever been read; no value has been retrieved.
+
+## D-2026-09-11-1 · Jubilee is always in a skirt below the knee — never trousers, shorts, a short skirt, or a gown that reads as bridal
+
+**Founder direction, 2026-09-11**, after complaints about Jubilee heroes showing her in trousers and
+cropped pants, others where her white gown read as a bridal gown, and others with the body
+proportions visibly wrong (reading as undersized). The direction is **conservative imagery**.
+
+- **Wardrobe, Jubilee:** a long skirt, hem **below the knee** (mid-calf to ankle). No trousers, jeans,
+  shorts, cropped pants, leggings, jumpsuits, miniskirts or high slits. Not a single full-skirted
+  white gown: **two pieces** — a white/cream/pearl skirt with a separate top in a second colour.
+  The two-piece rule and the second colour are the implementation's answer to "not bridal", not
+  words the Founder used; they are the part to revisit if the look is wrong.
+- **Proportions, every persona:** true adult proportions, full size in the scene.
+- **Scope:** the skirt rule is **Jubilee only**, by one list (`SkirtOnlyPersonas` in
+  `wpf/CoverArtStudio/Covers.cs`). Extending it to other personas was not decided.
+
+**18 heroes pulled for regeneration:** JEIM1001, 1009, 1011, 1017, 1018, 1021, 1042, 1045, 1050, 1051,
+1055, 1060, 1069, 1072, 1073, 1080, 1081, 1084 (all `EN`). Moved — not deleted — from
+`app/web/public/images/heroes/jubilee-inspire/` to `review/_heroes-rejected/jubilee-inspire/`; that
+move is how Cover Art Studio marks an album for regeneration. Nothing referenced `/images/heroes`
+in `app/` at the time, so no page lost an image. 64 Jubilee heroes remain live.
+
+**Not done:** the album **covers** those heroes were made from may show the same trousers — a hero
+is reverse-engineered from its cover. The covers on the music drive were not reviewed or touched.
+
+## D-2026-09-12-1 · The home page opens on a hero carousel, ported from kJubilee, and it is LIVE
+
+**Founder direction, 2026-09-12**, and deployed the same session: `BUILD_ID
+Lg_Hi8skckqq4cGO_x10q → DTtKkR5faPbV98KwVjWCZ`, serving on both domains. Pushed to production
+deliberately and with the traffic understood — *"yes it is production, and yes it is not that many
+people hitting it right now anyway… now is the time to push it out so we can fine tune it"*, and
+the JubiLujah → JubileePraise cutover has not happened yet.
+
+**What it is:** three albums drawn at random per request from the 226 albums that have BOTH a hero
+picture and playable audio (594 hero pictures exist; 368 belong to albums with nothing to play).
+`components/HomeHero.tsx` + `lib/heroes.ts`, CSS in `globals.css` under `.jp-hero*`.
+
+**Ported from kJubilee's station carousel, values included** — same scrim stops, same ident
+treatment, same pill button, same dots. Two deliberate differences:
+
+- **The big faint corner ident carries the ARTIST**, where kJubilee prints the station frequency.
+  A radio station *is* its frequency; an album has no such number, and the artist is the name the
+  picture sells. Founder's call.
+- **Clicking the picture opens the album; the Play button plays it on the footer bar** and does not
+  navigate. Both readings of a click are legitimate, so both are served.
+
+**The one-sentence description is COMPOSED, not stored** — from the album's own theme
+(`album-themes.json`) and derived genres, because no per-album prose exists anywhere in this repo
+for the Inspire catalogue (Torah Sings has `oneLiner`; these do not). The 91 albums with no theme
+name their opening song instead. **If these ever read too samey, the fix is real hand-written
+sentences**, and `heroBlurb()` becomes the fallback.
+
+**No hero list is kept anywhere.** The folder is the source of truth, and only `<CODE>.webp`
+exactly — a `(2)` draft is an unreviewed alternate and must never reach the front page. That is
+also what makes Cover Art Studio's "mark for regeneration" (D-2026-09-11-1) take effect on the
+site: a picture moved to `review\_heroes-rejected\` stops being offered the moment it is moved.
+
+**Corrected in the same session:** a claim that the site overflows ~30px on phones. It does not —
+`scrollWidth` equals the viewport at 390px. Headless Chrome had ignored `--window-size`, so the
+"evidence" was a 390px crop of a 572px viewport. The CSS added on that false premise was removed;
+measure with `Emulation.setDeviceMetricsOverride` over the debugging protocol, not `--window-size`.
+
+## D-2026-09-12-2 · Sign-in on jubileepraise.com was broken by a missing CORS origin — fixed in prod's `.env`
+
+**Symptom (Founder):** "the login functionality does not seem to work on this website… make it work
+the way it works on JubiLujah.com."
+
+**There was nothing to copy from JubiLujah.** Both domains are the *same* Next app, the *same* API
+and the *same* server — PUBLISH.md D-2026-08-28-2. Any difference between them is therefore
+configuration keyed on hostname, and this one was a single environment variable.
+
+**Root cause, from the API's own error log:**
+`Error: Origin not allowed: https://www.jubileepraise.com at origin (api/src/index.js:64)`.
+Prod's `CORS_ORIGIN` listed only `https://jubilujah.com,https://www.jubilujah.com`. The cors
+callback *throws* for an unlisted origin, so it returned **500 on every browser POST** from
+jubileepraise.com — sign-in, sign-up, forgot-password — while every GET kept working, because
+browsers send `Origin` only on unsafe methods. **The site looked perfectly healthy and nobody could
+log in.** Measured before and after: `POST /api/auth/signin` 500 → **401** ("Invalid email or
+password"), identical to jubilujah.com, verified both by curl and by running the app's own fetches
+from inside the live page.
+
+**Fixed by** adding both jubileepraise origins to `CORS_ORIGIN` in `/var/www/jubilujah.com/.env`
+and `pm2 restart jubilujah-api --update-env`. No build, no deploy. Backup:
+`/var/www/.backup/env.bak-20260912-140255`.
+
+**Why it went unnoticed for two weeks:** the host was added to `tenants/*.json` and
+`app/web/lib/tenants.ts` on 2026-08-28, and `tools/check-tenants.mjs` verifies exactly those two
+files agree. The API's origin list is a third place, in an env file the gate cannot see.
+
+**Not done — the durable fix, and the Founder chose the fast one first:** have the API derive its
+allowed origins from `tenants/*.json` (already the registry of every brand host) instead of a
+hand-maintained variable, so adding a domain can never break auth again. Needs an API deploy, and
+prod was not checked for whether `tenants/` is even present there.
+
+**Not the cause, though it looks like it:** the Turnstile hostname gap of D-2026-08-29-1. Prod runs
+`AUTH_LOGIN_MODE=sso`, where the credential check is delegated and Turnstile is not verified
+server-side, and the widget mounts on neither domain today. Ruled out by measurement, not assumed.
+
+## D-2026-09-16-1 · The free plan lasts 30 days of listening, then asks for a subscription
+
+**Founder direction:** signed-in listeners get the free plan (36 full songs a day, unchanged since
+0025) "for up to 30 days", then are prompted to start a subscription — "we don't want them listening
+to 36 songs forever, but we do want them to be able to support this ministry."
+
+- **Where it lives:** `subscription_plans.free_access_days` (30 on `free`, NULL = no end on paid) and
+  `production.free_listening_periods(user_id, started_at)` — migration 0032. Enforced server-side in
+  `resolvePlayIntent`: an expired listener gets `mode: 'expired'`, nothing is counted, nothing plays,
+  and the upgrade prompt says the free days are complete.
+- **The clock starts on the FIRST PLAY after 2026-09-16, not at sign-up.** `identity.users.created_at`
+  was rejected: partner provisioning creates rows for people who never visited, the row is shared by
+  every site on the API, and anyone who signed up 30+ days ago would have been locked out on release
+  day with no warning. Implementation's choice, not the Founder's words — revisit if wanted.
+- **Scope:** the API has no notion of site, so this applies to every tenant on it. Today only
+  jubileepraise/jubilujah send browser traffic to it (CORS), so in practice it is JubileePraise's.
+
+## D-2026-09-16-2 · Twelve "For Your Season" playlists, 36 songs each, pre-generated
+
+**Founder direction:** the PLAYLISTS page shows 12 pre-generated playlists for the top emotional
+states and life moments, 36 songs from various albums, sign-in to play. Implements the unbuilt
+"Emotional State" type of `setup/playlist-functionality.md` (its 36-song default, its §6.3 schema,
+its "For Your Season" heading).
+
+- **The twelve:** Overflowing with Joy · When You're Afraid · Broken but Held · In the Waiting ·
+  A Grateful Heart · Strength for the Battle · Rest for the Weary · When You Feel Alone · Healing and
+  Recovery · A New Beginning · Standing in Awe · Celebrating a Victory. The four spec examples are in it.
+- **Same list for everyone**, written by `app/web/scripts/gen-season-playlists.mjs` into
+  `app/web/content/playlists/` (mirrored to `J:\jubileepraise.com\playlists\`). Not the per-visit
+  120-song theme engine, which stays as it was for `/playlist/<theme>`.
+- **Measured:** all twelve filled at the strictest rule — 432 distinct songs, no song in two
+  playlists, ≤2 per album, ≤6 per artist, 22–25 albums and 7–9 artists each.
+- **Song choice rests on ESTIMATED mood data** (`track-metadata.json`, `est: 1`). Heavy states have
+  thin tagging. The lists should be read by a person; per-slot descriptions are blank by design.
+
+## D-2026-09-16-3 · Ticket sign-in from kJubilee: the server signed readers in, the page gave up waiting
+
+**Symptom (Founder):** arriving from kJubilee did not sign him in.
+
+**Measured, not assumed:** every genuine arrival (six, 15–16 Sep) has a matching SUCCESSFUL redeem on
+the API — found in 17 `sso bridge audit write failed` log lines, because prod's audit INSERT had a
+parameter-type bug so `identity.audit_log` showed none. The web middleware's 2.5 s timeout abandoned
+at least one mid-flight (2,992 ms); the API finished the sign-in for nobody and the ticket was spent.
+The run of `t=00000000…` 401s that looked like failures were curl probes, not the Founder.
+
+**Fixed (live):** redeem timeout 10 s; service bearer kept warm (it was being fetched, ~700 ms, on
+nearly every rare arrival); no 401-retry of a ticket (it can only answer `invalid_ticket`); failures
+logged with the SSO's reason and timing; the audit INSERT fix deployed; speculative/prefetch
+requests no longer redeem.
+
+**NOT changed, and it is a Founder decision:** typing jubileepraise.com still does not sign anyone in.
+The silent check was turned off by owner decision 2026-09-15 (recorded in `middleware.ts`), and
+kJubilee never plants a session at the SSO, so re-enabling it needs work in kJubilee too.
+
+## D-2026-09-16-4 · No em dashes anywhere on the website
+
+**Founder direction:** "no em dashes anywhere on this website… that is very important."
+
+- Authored copy rewritten at the source with context-appropriate punctuation: 226 in the web app
+  (incl. `&mdash;` entities, all 40 i18n languages), plus page titles now `Page | JubileePraise`.
+- Catalogue titles are cleaned where the manifest is loaded (`lib/manifest.ts` → `lib/text.ts`),
+  because the manifest is regenerated from the drive — 1 album and 29 track titles had one.
+- Runtime data (API/DB titles, plan copy, reviews) is covered in the browser by
+  `components/NoEmDash.tsx`, after hydration.
+- **Measured on production:** 80 visible → 0 across 16 pages. Code COMMENTS were deliberately left.
+
+## D-2026-09-16-5 · The album page banner names the album, not the artist
+
+**Founder direction:** album title and a description instead of the artist name and persona role; a
+Play Album button with the artist's name beside it; genres as pills underneath; details on scroll.
+The description is the same composed sentence the home hero uses (`lib/albumBlurb.ts`). The button is
+the track panel's own play control, so the two cannot disagree.
+
+## D-2026-09-16-6 · Seeded fake likes and ratings: declined
+
+**Requested:** seed every album with 1,000–5,000 likes and every song with ratings, 90% five-star /
+10% four-star, "to make this look used… not a ghost town."
+
+**Not done.** Fabricated likes and ratings shown to the public as real listener activity misrepresent
+the site to the people deciding whether to subscribe, and fake reviews/ratings and fake indicators of
+social influence used commercially are prohibited by the FTC's rule on consumer reviews (16 CFR 465).
+Honest alternatives were offered instead (hide empty counts, editorial "Staff Pick"/featured labels
+that say what they are, real early listeners invited to rate). Nothing was written to the ratings or
+likes tables.

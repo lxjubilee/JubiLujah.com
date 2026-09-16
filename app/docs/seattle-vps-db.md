@@ -1,9 +1,9 @@
-# Seattle VPS — `jubileepraise` PostgreSQL database
+# Seattle VPS — `jubilujah` PostgreSQL database
 
-Point the JubileePraise API (`app/api`) at a dedicated **`jubileepraise`** database on the
+Point the JubileePraise API (`app/api`) at a dedicated **`jubilujah`** database on the
 Seattle production VPS instead of the local Docker Postgres.
 
-> **Status: provisioned & live.** The `jubileepraise_app` role and `jubileepraise` database
+> **Status: provisioned & live.** The `jubilujah_app` role and `jubilujah` database
 > exist on the VPS (PostgreSQL 16.11). Schema (`0001_init`, `0002_credentials`),
 > seeds, and the catalog mirror (34 artists / 732 albums / 5,979 songs) are loaded.
 > The API connects over the SSH tunnel below; the role password lives in `app/.env`
@@ -13,8 +13,8 @@ Seattle production VPS instead of the local Docker Postgres.
 |---|---|
 | Host | `94.72.120.231` (hostname `SEAIIS01SERVER`, Ubuntu) |
 | SSH access | `ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" -o IdentitiesOnly=yes root@94.72.120.231` |
-| Database | `jubileepraise` (lowercase — no quoting needed) |
-| App role | `jubileepraise_app` |
+| Database | `jubilujah` (lowercase — no quoting needed) |
+| App role | `jubilujah_app` |
 | Consumed by | `app/api` via `DATABASE_URL` (see `app/api/src/config.js` / `db.js`) |
 
 > The web app (`:3000`) never talks to Postgres directly — it calls the API, and the
@@ -35,8 +35,8 @@ pg_isready                                  # expect: accepting connections
 
 # Create the app role + database (pick a strong password)
 sudo -u postgres psql <<'SQL'
-CREATE ROLE jubileepraise_app LOGIN PASSWORD 'CHANGE_ME_STRONG';
-CREATE DATABASE jubileepraise OWNER jubileepraise_app;
+CREATE ROLE jubilujah_app LOGIN PASSWORD 'CHANGE_ME_STRONG';
+CREATE DATABASE jubilujah OWNER jubilujah_app;
 SQL
 ```
 
@@ -74,7 +74,7 @@ npm run smoke                    # optional: API smoke test against the DB
 `app/.env` already has the active connection (tunnel form):
 
 ```ini
-DATABASE_URL=postgres://jubileepraise_app:<password>@localhost:5433/jubileepraise
+DATABASE_URL=postgres://jubilujah_app:<password>@localhost:5433/jubilujah
 PGSSLMODE=disable
 ```
 
@@ -88,5 +88,5 @@ curl -s localhost:4000/health    # {"status":"healthy","db":true,...}
 
 ### Notes
 - Keep the password out of git — `app/.env` is gitignored; only `.env.example` (placeholder) is tracked.
-- If the API is deployed onto the VPS, use `@localhost:5432/jubileepraise` and `PGSSLMODE=disable`
+- If the API is deployed onto the VPS, use `@localhost:5432/jubilujah` and `PGSSLMODE=disable`
   (no need to expose 5432 externally) — that's the more secure default.

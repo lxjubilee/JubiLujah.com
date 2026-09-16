@@ -60,13 +60,34 @@ const SRC = opt('src', 'J:/jubileepraise.com/music/inspire');
 // It is simply not what cd.jubilujah.com serves. Proven by uploading a fresh
 // object to each bucket and requesting it:
 //
-//   jubileepraise-cdn      music/_probe/r-<n>.txt  ->  200
+//   jubilujah-cdn      music/_probe/r-<n>.txt  ->  200
 //   jubileeverse-cdn   music/_probe/q-<n>.txt  ->  404   (and music/albums/… 404)
 //
 // So a push to jubileeverse-cdn lands, reports success, and the site never plays
 // it. Same class of bug this tool's header describes at the PREFIX level, one
 // level up at the bucket. The probe objects were deleted afterwards.
-const REMOTE = opt('remote', 'jubilee-r2:jubileepraise-cdn');
+//
+// 🔴 AND THE NAME IS `jubilujah-cdn`, WHICH IS NOT A TYPO AND MUST NOT BE
+// "CORRECTED" TO A JUBILEEPRAISE ONE.
+//
+// The JubileePraise rename rewrote this string to `jubileepraise-cdn` on
+// 2026-08-27 along with 543 other files, and restored on 2026-09-10. It is the
+// same exclusion CLAUDE.md already documents for the CDN HOST, one level down at
+// the bucket: `cd.jubileepraise.com` has no DNS record, so no JubileePraise CDN
+// exists to hold a JubileePraise bucket. `cd.jubilujah.com` is what every media
+// URL on the live site resolves to — including on www.jubileepraise.com, which
+// serves the identical build — and `jubilujah-cdn` is what fronts it.
+//
+// Pointed at `jubileepraise-cdn`, this tool does one of two things and both are
+// silent: rclone errors on a bucket that does not exist, or — if somebody creates
+// one to make the error go away — it uploads 35 GB to a bucket nothing serves and
+// reports complete success. That is the exact failure the paragraph above this
+// one was written about, repeated.
+//
+// This changes when `cd.jubileepraise.com` has DNS and a bucket behind it, and
+// not before. Until then the CDN is the one old-brand string left standing on
+// purpose.
+const REMOTE = opt('remote', 'jubilee-r2:jubilujah-cdn');
 // The live tree. catalog-manifest.json builds every track URL as
 // `albums/inspire/<artist>/<album>/tracks/<file>` under the CDN's music/ root, so
 // this is not a preference — it is the only prefix the site can play from.

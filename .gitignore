@@ -43,3 +43,8 @@ review.zip
 # machine can be reopened on another (.claude/tools/transcripts.mjs); it must
 # never reach the repo. Its README is tracked so the folder explains itself.
 .claude/sessions/transcripts/*.jsonl
+
+# Next.js production builds made into a fresh dist dir per release (NEXT_DIST_DIR=.next-<name>).
+# The default .next on this network share hangs `next build` — see PUBLISH.md, 2026-09-12 and
+# 2026-09-16 — so every release builds into its own folder, and none of them are source.
+app/web/.next-*/

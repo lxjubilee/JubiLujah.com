@@ -184,17 +184,40 @@ logs there; that is the harness, not the project, and it cannot be relocated fro
 | **J:** | The CDN backing store: **`J:\jubileepraise.com\music\`** (~41 GB). Master manifest lives here. All publish/manifest tooling reads from J:. |
 | **W:** | The repo (`W:\JubileePraise.com\`), the local web server (`W:\jubileepraise.com\public\`, port 3119), and scratch (`W:\.claude-scratch\`). |
 
-> 🔴 **`J:\jubileepraise.com\` exists but is EMPTY** (created 2026-08-27 by the rename). The
-> ~41 GB of music and the master manifest are still at **`J:\jubilujah.com\music\`**. Every path
-> in the table above and in the publish/manifest tooling now names the new, empty root, so those
-> tools will find nothing until the content is moved or the folder is junctioned. Moving 41 GB was
-> not part of the rename and was deliberately not done.
+> ✅ **`J:\jubileepraise.com\` is POPULATED** (2026-09-10). It was created empty by the rename and
+> stayed empty for two weeks; it is now a full copy of `J:\jubilujah.com\` — **20,842 files ·
+> 8,057 dirs · 53,327,123,653 bytes**, verified identical on both sides, `0 FAILED`. The gate
+> agrees: `node deploy/check-manifest.mjs --music=J:/jubileepraise.com/music` →
+> `1071 in manifest · 1464 on disk · would add: 0`. See DECISIONS.md D-2026-09-10-1.
+>
+> **It is a COPY, so the two trees drift from today.** Anything written to `J:\jubilujah.com` after
+> 2026-09-10 is invisible to `J:\jubileepraise.com`. Re-running the same additive robocopy is the
+> resync. Retiring the old tree — move, junction or delete — has NOT been done and is a Founder
+> decision. Until it is, **`J:\jubilujah.com\` remains the tree most tooling defaults to** (e.g.
+> `tools/cdn-sync-covers.mjs --music`), and both are correct.
+>
+> <details><summary>Superseded — what this warning said until 2026-09-10</summary>
+>
+> > 🔴 **`J:\jubileepraise.com\` exists but is EMPTY** (created 2026-08-27 by the rename). The
+> > ~41 GB of music and the master manifest are still at **`J:\jubilujah.com\music\`**. Every path
+> > in the table above and in the publish/manifest tooling now names the new, empty root, so those
+> > tools will find nothing until the content is moved or the folder is junctioned. Moving 41 GB was
+> > not part of the rename and was deliberately not done.
+>
+> </details>
 
 **The live CDN host is still `cd.jubilujah.com`** — not `cdn.jubileeverse.com`, which serves the
 avatars bucket and 404s for music. The CDN host was **deliberately excluded** from the
 JubileePraise rename: `cd.jubileepraise.com` has no DNS record, so renaming it would 404 every
 media URL on the site. It is the one old-brand string left standing on purpose, and it stays until
 the DNS name and bucket exist.
+
+> 🔴 **The exclusion extends to the R2 BUCKET, which is `jubilujah-cdn`, and the rename broke it.**
+> On 2026-08-27 four tools had their bucket rewritten to a `jubileepraise-cdn` that has never
+> existed — `tools/cdn-sync-{music,artwork,covers}.mjs` and `deploy/refresh-tracks.mjs`. Restored
+> 2026-09-10. Left alone it would have errored on a missing bucket or, worse, uploaded to one
+> nothing serves and reported success. Do not "correct" `jubilujah-cdn`; it is not a typo. The
+> rename also edited a *recorded measurement* into a false one — see DECISIONS.md D-2026-09-10-2.
 
 Two documents that used to state the opposite have been corrected and now agree:
 [JUBILEEPRAISE-REQUIREMENTS.md §2](JUBILEEPRAISE-REQUIREMENTS.md) and [PUBLISH.md](PUBLISH.md). Both keep

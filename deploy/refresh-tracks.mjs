@@ -39,7 +39,15 @@ const args = process.argv.slice(2);
 const APPLY = args.includes('--apply');
 const opt = (k, d) => { const a = args.find((x) => x.startsWith(`--${k}=`)); return a ? a.slice(k.length + 3) : d; };
 const ONLY = opt('persona', '');
-const REMOTE = opt('remote', 'jubilee-r2:jubileepraise-cdn');
+// 🔴 `jubilujah-cdn`, NOT a JubileePraise bucket, and that is deliberate.
+// The 2026-08-27 rename rewrote this to `jubileepraise-cdn`; restored 2026-09-10.
+// `cd.jubileepraise.com` has no DNS record, so no JubileePraise CDN exists —
+// every media URL on the live site (www.jubileepraise.com included) resolves to
+// `cd.jubilujah.com`, and `jubilujah-cdn` is the bucket behind it. Pointed at a
+// jubileepraise bucket this either errors on a bucket that is not there or,
+// worse, uploads to one nothing serves and reports success. Same exclusion
+// CLAUDE.md documents for the CDN host, one level down at the bucket.
+const REMOTE = opt('remote', 'jubilee-r2:jubilujah-cdn');
 
 const MANIFESTS = [
   'J:/jubileepraise.com/music/catalog-manifest.json',

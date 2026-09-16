@@ -29,16 +29,30 @@ This document is the source of truth. When the procedure changes, update this fi
 >
 > **Two further corrections, both found by running the procedure:**
 >
-> 1. **Step 0 does NOT require the `J:` junction.** `J:/jubileepraise.com/` is real but **empty**;
->    the ~41 GB master still lives at `J:/jubilujah.com/music/`. The junction was recorded as a
->    blocker, but `check-manifest.mjs` takes `--music=`, which resolves it with no file moves and
->    no server-side `mklink`:
+> 1. **Step 0 never required the `J:` junction, and as of 2026-09-10 there is nothing left to
+>    resolve: `J:/jubileepraise.com/` is POPULATED.** It is a full, verified copy of
+>    `J:/jubilujah.com/` — 20,842 files · 53,327,123,653 bytes, identical on both sides. Either
+>    root works, and `check-manifest.mjs` takes `--music=` either way:
 >    ```bash
->    node deploy/check-manifest.mjs --music=J:/jubilujah.com/music \
+>    node deploy/check-manifest.mjs --music=J:/jubileepraise.com/music \
 >         --manifest=app/web/public/music/catalog-manifest.json
 >    ```
->    Run this way on 2026-08-27: **1,464 albums on disk · 1,071 in manifest · would add: 0** —
->    the gate passes; the 142 held folders are subtracted as designed.
+>    Run against the NEW root on 2026-09-10, and against the old one on 2026-08-27 — **identical
+>    result both times: 1,464 albums on disk · 1,071 in manifest · would add: 0.** The gate passes;
+>    the 142 held folders are subtracted as designed.
+>
+>    ⚠ The two trees are a **copy**, not a move, so they drift from 2026-09-10 onward. Re-running
+>    the additive robocopy is the resync. See DECISIONS.md D-2026-09-10-1.
+>
+>    <details><summary>Superseded — what this said until 2026-09-10</summary>
+>
+>    > 1. **Step 0 does NOT require the `J:` junction.** `J:/jubileepraise.com/` is real but
+>    >    **empty**; the ~41 GB master still lives at `J:/jubilujah.com/music/`. The junction was
+>    >    recorded as a blocker, but `check-manifest.mjs` takes `--music=`, which resolves it with
+>    >    no file moves and no server-side `mklink`. Run this way on 2026-08-27: **1,464 albums on
+>    >    disk · 1,071 in manifest · would add: 0**.
+>
+>    </details>
 >
 > 2. **Step 1 says the live CDN credentials "are not set anywhere". They exist — on prod.**
 >    `/var/www/jubilujah.com/.env` defines `R2_ENDPOINT`, `R2_BUCKET`, `R2_ACCESS_KEY_ID` and
@@ -539,6 +553,38 @@ cd app/web && NODE_ENV=production NEXT_PUBLIC_SITE_URL=https://jubilujah.com   .
 2026-08-27 release, so the public-overlay half of Step 2b was correctly skipped. Verify with
 `git status --porcelain -- app/web/public` before packaging; if it is empty, ship `.next` alone.
 
+### 2026-09-12 · the home hero, and 594 hero images
+
+Released via Step 2b, `BUILD_ID Lg_Hi8skckqq4cGO_x10q → DTtKkR5faPbV98KwVjWCZ`, live on both
+`www.jubilujah.com` and `www.jubileepraise.com`. Shipped `.next` **plus** `public/images/heroes`
+(594 files, 129 MB — a 133 MB tarball, the first release where the public overlay mattered).
+Rollback: `/var/www/jubilujah.com/web/.next.bak-20260912-041312` (19 MB). Nothing under `public/`
+was overwritten — prod had no `images/heroes` directory at all — so no public backup was needed,
+and a rollback of the code leaves the pictures in place harmlessly.
+
+12 routes re-probed after the swap, all 200. **The site was down ~3 minutes** during it: see the
+`pm2 restart … Process 14 not found` entry under Troubleshooting, which is the thing to read before
+running Step 2b again.
+
+> 🔴 **`next build` HANGS FOREVER against the default `.next` on this share, and that is what it
+> looks like: the banner prints, then nothing, at 1% CPU, indefinitely.** Two runs were lost to it
+> before the cause was found — a stale `W:\JubileePraise.com\app\web\.next` that Windows will
+> neither delete (`rm -rf` and `Remove-Item -Recurse -Force` both report the directory as non-empty
+> with one undeletable `trace` file in it) nor let the build write into. **The fix is a fresh dist
+> dir per build**, which is what kJubilee's `.temp/.next-b0902`, `.next.locked-*` and `.next.stale-*`
+> folders have been for all along:
+>
+> ```bash
+> cd app/web && NODE_ENV=production NEXT_DIST_DIR=.next-<something> ../node_modules/.bin/next build
+> ```
+>
+> It builds in ~2.5 minutes that way. `NEXT_DIST_DIR` **must be relative** — Next joins it to the
+> project directory, so an absolute `C:/…` path becomes `W:\…\app\web\C:` and the build dies with
+> `ENOENT: mkdir`. Then pack it under the name prod expects:
+> `tar czf … --transform 's,^\.next-<something>,.next,' .next-<something>`.
+> `next dev` fails on the same stale directory with `EPERM: open '.next\trace'` and never serves a
+> request; it takes `NEXT_DIST_DIR` too.
+
 > ⚠ **`app/web/.env.local` is loaded by `next build` and its values are inlined.** It sets
 > `NEXT_PUBLIC_API_BASE=http://localhost:4000`, which therefore lands in every production build.
 > It is **harmless today** only because `lib/api.ts:25` gates it behind
@@ -547,6 +593,76 @@ cd app/web && NODE_ENV=production NEXT_PUBLIC_SITE_URL=https://jubilujah.com   .
 > that same inlined value, and they rely on `REDIRECTOR_API_BASE` being set in prod's `.env` to
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
+
+### 2026-09-16 · 30-day free plan, "For Your Season" playlists, ticket sign-in fix, no em dashes, album banner (web, api AND db)
+
+Run from HPC-GABRIEL (`gabriel.inspire`, `~/.ssh/id_ed25519_jubilee_prod`). Three web releases the same
+day, each backed up: `J3l6KXcll8FaAEyL4hosP → 2cLyBOkIhbYWHuR6ls7vU → -cytl7pcIZThyvR-kPrz9`
+(rollback `.next.bak-20260916-124419`, then `.next.bak-20260916-125231`). Decisions: DECISIONS.md
+D-2026-09-16-1 … -6.
+
+- **DB:** `app/db/migrations/0032_free_listening_period.sql` applied with psql and recorded in
+  `public._migrations` by hand — prod's migration history is incomplete, so it is idempotent and was
+  not run through `run-migrations.js`. Free plan now `36/day · 30 days`.
+- **API:** `services/subscriptions.js`, `services/ssoClient.js`, `routes/ssoBridge.js` — **patched onto
+  prod's own copies** (prod's subscriptions.js still says "Jubilujah" in three email strings, kept).
+  Backup `/var/www/.backup/jubilujah-api-src-20260916-123119-trial-sso.tgz`.
+- **🔴 The web release now ships `content/playlists/`.** The twelve playlists are read at runtime from
+  `web/content/playlists/*.json`; prod had no `content/` directory at all. Step 2b's tarball must
+  include it (`tar … .next-X content/playlists`) or the section silently renders nothing.
+- **Build dir:** `NEXT_DIST_DIR=.next-season` / `.next-album`, per the 2026-09-12 note — the default
+  `.next` on this share still hangs.
+- **Verified:** 16 public pages crawled in a real browser for visible em dashes: **80 before, 0 after**
+  (`W:\.claude-scratch\emdash-crawl.mjs`; run it with `MSYS_NO_PATHCONV=1` or Git Bash rewrites the
+  `/paths`). Playlists 200, `/playlists/<id>/songs` returns 36, unknown id 404; bogus ticket now fails
+  in 193 ms with its reason logged.
+
+### 2026-09-14 · Jubilee ID door + cross-site sign-in (web AND api)
+
+Released via Step 2b for the web, `BUILD_ID DTtKkR5faPbV98KwVjWCZ → 6LlvqYHEwovIAg0CzHQzA`
+(`.next` only, 5.3 MB), plus the **first API code release in this runbook**. What shipped:
+
+- **The sign-in page is JubileeInspire's door**, screen for screen (`components/JubileeDoor.tsx`,
+  `app/jubilee-door.css`, scoped under `.jid-door`), in the tenant's accent rather than JI gold.
+- **One signed-in browser across the family.** `web/middleware.ts` asks
+  `sso.jubileeinspire.com/api/auth/continue` for a signed-out reader on **jubileepraise.com only**
+  and redeems the `?t=` ticket server-side; `lib/familySso.ts` plants after a password sign-in.
+  API: new `routes/ssoBridge.js` (`/api/auth/sso/redeem-ticket`, `/plant-url`, own limiter), four
+  calls added to `services/ssoClient.js`, and `/logout` now revokes every family session.
+- **SSO side (Contabo, `ji-sso-prod`):** `SSO_AUTO_LOGIN_HOSTS` added to `/home/gabe/ji-sso-prod/.env`
+  with the twelve persona domains restated plus `jubileepraise.com` (setting it replaces the
+  built-in list). Backup `.env.bak-autologin-jubileepraise-20260914`. **This had to go live
+  before the web middleware** — otherwise every signed-out visitor meets an SSO `invalid_return`.
+
+> 🔴 **Prod's API is NOT the repo's.** 19 files under `api/src` differ from `HEAD` — the rebrand
+> was never released to the API (health still says `jubilujah-api`, and new signups are still
+> `jubilujah|<email>`). So the four API files were **patched onto prod's own copies**, not copied
+> from the repo. Do the same next time: pull `api/src`, diff, patch — never overwrite whole files.
+
+Verified: API `online`, `/health` 200, bogus ticket 401, plant-url without bearer 401; web
+`online`; public signed-out chain `/playlists → SSO → /playlists?sso=none` = 2 redirects then 200;
+`/album?c=…&t=3` keeps its track number (a ticket is exactly 64 hex chars); `www.jubilujah.com`
+untouched; 15 routes re-probed, all 200.
+
+**Rollback** (web, then api, then the SSO line):
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260914-sso .next && pm2 restart jubilujah-web --update-env"
+$SSH $PROD "tar xzf /var/www/.backup/jubilujah-api-src-20260914-sso.tgz -C /var/www/jubilujah.com/api && rm -f /var/www/jubilujah.com/api/src/routes/ssoBridge.js && pm2 restart jubilujah-api --update-env"
+ssh root@66.94.114.192 "cd /home/gabe/ji-sso-prod && cp -p .env.bak-autologin-jubileepraise-20260914 .env && systemctl restart ji-sso-prod"
+```
+Run from HPC-JUBILEE with `~/.ssh/id_ed25519` (authorised on both boxes 2026-09-14).
+
+**Follow-up the same day — the Turnstile widget had silently stopped rendering.** The site key is
+inlined at BUILD time from **`app/web/.env.local`**, which still held the OLD key; prod's
+`.env`/`web/.env.production` and `app/.env` had been moved to the new key (`0x4AAAAAAEu-ee…`) on
+2026-09-10. Every local build since (2026-09-12 included) shipped the old key, Cloudflare rejected it
+for jubileepraise.com, and the door's `tnErrored` path hid the box. Fixed by setting the new key in
+`app/web/.env.local` and re-releasing: `6LlvqYHEwovIAg0CzHQzA → JA222yv0WWcurJ6WyrapB`, rollback
+`.next.bak-20260914-turnstile`. **Check the inlined key before every web release:**
+`grep -rhoE '0x4AAAA[A-Za-z0-9_-]{8,}' app/web/.next-*/static | sort -u`.
+Note Turnstile is still a client-side gate only: the Android (`okhttp`) and iOS (`JubileeVerse/…`)
+apps call `/api/auth/lookup` and `/signin` directly, so enforcing the token server-side would lock
+them out until the apps can present one.
 
 ### If the decision later changes to a full cutover
 
@@ -693,6 +809,26 @@ regressions; all six behave identically in the previous build.
 
 **`Permission denied (publickey)` on SSH** — the private key at `%USERPROFILE%\.ssh\id_ed25519_jubilee_prod` (currently `C:\Users\gabriel.inspire\...`) is missing or its public counterpart is no longer in `root@prod:~/.ssh/authorized_keys`. Regenerate and reinstall per the original session.
 
+**🔴 `pm2 restart jubilujah-web` can fail with `[PM2][ERROR] Process 14 not found` — and it did,
+mid-release, on 2026-09-12.** The app was **id 14, status `errored`, pid 0** at that moment: the
+`rm -rf .next && mv .next.incoming .next` in Step 2b had pulled the build directory out from under
+the running process, which exited, and pm2 will not *restart* a process it is not running — it
+resolves the name, finds no live process, and reports the id as "not found". The site was down for
+about three minutes, until:
+
+```bash
+pm2 start 14            # or: pm2 start jubilujah-web
+```
+
+**So `restart` is not enough on its own.** Use `pm2 start <name>` when `restart` reports "not
+found", and **always** confirm the process is `online` and `curl -sI localhost:3030` returns 200
+before calling a release done — the `pm2 restart` line in Step 2b exits 0 even when this happens,
+so a release that ends at the restart looks successful while the site is serving 502s.
+
+Unrelated noise in that app's error log: repeated `ECONNREFUSED 127.0.0.1:4000` / `::1:4000`. That
+is the redirector's inlined `NEXT_PUBLIC_API_BASE` fallback (prod's API is on **:4030**) and it is
+pre-existing — see the `.env.local` warning in the 2026-08-28 notes. It is not a crash cause.
+
 **`502 Bad Gateway` after deploy** — the Node process didn't come back up. Check:
 ```bash
 ssh -i "$USERPROFILE/.ssh/id_ed25519_jubilee_prod" root@94.72.120.231 \
@@ -743,6 +879,7 @@ and `node deploy/check-manifest.mjs` before publishing and make it a deliberate 
 | Nginx vhost | `/etc/nginx/sites-available/jubilujah.com` **and** `/etc/nginx/sites-available/jubileepraise.com` → both proxy to `127.0.0.1:3030` (web) and `127.0.0.1:4030` (api). *Corrected 2026-08-28: only the jubilujah vhost existed; the runbook named a jubileepraise file that had never been created.* |
 | PM2 processes | **`jubilujah-web`** — Next.js, cwd `/var/www/jubilujah.com/web`, **:3030**<br>**`jubilujah-api`** — `/var/www/jubilujah.com/api/src/index.js`, **:4030**<br>*(there is no process named `jubileepraise`)* |
 | Live manifest | `/var/www/jubilujah.com/web/public/music/catalog-manifest.json` (read at runtime by `lib/manifest.ts`, cached in memory — restart `jubilujah-web` after replacing it) |
+| 🔴 `CORS_ORIGIN` | In `/var/www/jubilujah.com/.env`, read by the **api**. **Must list every brand hostname, apex and www.** A missing one makes `api/src/index.js` throw `Origin not allowed`, which is a **500 on every POST from that domain** — sign-in, sign-up, password reset — while GETs are untouched, so the site looks healthy and nobody can log in. It listed only the jubilujah hosts until 2026-09-12; see DECISIONS D-2026-09-12-2. After any change: `pm2 restart jubilujah-api --update-env`. |
 | Public URL | `https://www.jubilujah.com` (apex 301 → www) — **serving today**.<br>`https://www.jubileepraise.com` — origin is configured and verified, but **DNS does not exist yet**, so it is not reachable publicly. See "Activating jubileepraise.com". |
 | CDN | public host **`cd.jubilujah.com`**, prefix `music/`, no `albums/` segment. Backed by R2 and staged from `J:\jubileepraise.com\music\`. **No credentials for this bucket exist on this machine** — see Step 1. |
 | ⚠ Not this site | **port 3119 is `jubileevibes`** (`/var/www/JubileeVibes.com/server.js`). `cdn.jubileeverse.com` is the **avatars** bucket and 404s for music. Both appeared in this runbook as if they were JubileePraise's. |
