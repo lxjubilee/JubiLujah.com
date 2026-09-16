@@ -767,3 +767,52 @@ social influence used commercially are prohibited by the FTC's rule on consumer 
 Honest alternatives were offered instead (hide empty counts, editorial "Staff Pick"/featured labels
 that say what they are, real early listeners invited to rate). Nothing was written to the ratings or
 likes tables.
+
+## D-2026-09-16-7 · No empty counts; "Featured Today" and "Staff Pick" labels
+
+**Founder direction**, choosing from the honest alternatives offered in D-2026-09-16-6: hide empty
+counts, and add staff picks / featured.
+
+- **No empty counts:** an album or song with no ratings shows only its Rate action — no grey stars,
+  no dash, no "(0)", no "No ratings yet". The reviews page shows an invitation instead of "0
+  ratings" and five 0% bars. Numbers appear with the first genuine rating.
+- **Featured Today:** 12 finished English albums, rotated daily by the existing day-seeded shuffle,
+  labelled "Featured". True: the site is featuring them.
+- **Staff Pick:** ONLY albums a person lists in `app/web/content/staff-picks.json`. The label claims a
+  human choice, so it is never generated. Seeded with the flagship JEIM1069EN, which the owner had
+  already pinned first on the home page. The Founder's team adds the rest.
+- Released as web `I7vG76TAVDih_MUrdtXGr`. **The release must ship `content/staff-picks.json`.**
+
+## D-2026-09-16-8 · SUPERSEDES the 2026-09-15 "rail links only" decision: single sign-on is single
+
+**Founder direction:** "the whole point to a single sign-on is just that, single… if the user has to
+sign on 5, 10, 20 times to get around our ecosystem, that's going to frustrate them… this was a
+recent enhancement to the previously established business rules."
+
+**Superseded:** the owner decision of 2026-09-15, recorded only in code comments (middleware.ts,
+ssoBridge.js `PLANT_RETIRED`, AuthProvider.tsx), that another family site signs a reader in here only
+by a rail link carrying a ticket, and that a sign-in here must not teach the SSO this browser.
+
+**Why it had been retired, and what now prevents it:** planting let one sign-in speak for the whole
+browser, and signing out could sign a reader straight back in — possibly as a different account the
+SSO cookie still named (JubileeInspire, 2026-09-15; JubileePraise, 2026-09-14). The fix is
+JubileeInspire's own: a `ji_signed_out` marker set on a DELIBERATE sign-out or account deletion, which
+the silent check respects until the reader signs in here again.
+
+**JubileePraise, live 2026-09-16** (web `hg3nUYR96LxiUaIgy6WvU`; api patched; migration 0033):
+silent ASK restored with bot/auth-page/prefetch/`_rsc` exclusions and two loop guards (`?sso=none`,
+and a ticketless `?sso=asked`, which JI does not need); PLANT restored for link arrivals and after
+sign-in; a Jubilee ID with no account here gets one — **except** a silent check never recreates an
+account its owner deleted (`identity.account_tombstones`, SHA-256 of the email only). Verified: the
+signed-out chain is 307 → SSO `/continue` → 302 `?sso=none` → 200; bots, `Accept: */*`, and
+signed-out-on-purpose readers get the page directly.
+
+**NOT verified, and cannot be from HPC-GABRIEL:** that the SSO MINTS a ticket for jubileepraise.com
+when the browser is signed in (`SSO_AUTO_LOGIN_HOSTS` on 66.94.114.192; a 09-15 comment claimed it
+refused this host, but `/continue` accepts the return). A refusal degrades to `sso=none`, never a
+loop or an error page.
+
+**kJubilee** never plants or asks, so a kJubilee-only sign-in is invisible to the family. The plan
+(three releases: sign-out safety → plant → ask) was handed to the active kJubilee session
+(`kjubilee-com-02`) on 2026-09-16 rather than edited from here, because that session was deploying
+kJubilee the same hour and two sessions editing its auth files would collide.
