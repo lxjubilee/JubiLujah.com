@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>JubileeCoverArtStudio</AssemblyName>
+    <RootNamespace>JubileeCoverArtStudio</RootNamespace>
+    <AssemblyTitle>Jubilee Cover Art Studio</AssemblyTitle>
+    <Product>Jubilee Cover Art Studio</Product>
+    <!--
+      The Jubilee circle. Built from app/web/public/images/JubileeLogo.png by
+      tools/make-icon.ps1 — seven sizes, 16 through 256, PNG-compressed, so the
+      taskbar and the 256px shell views both get a real raster rather than an
+      upscaled 32px one.
+    -->
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.*" />
+    <!--
+      Pinned to 2.1.x deliberately, matching wpf/JubileePraiseStudio.csproj:
+      ImageSharp 3.0 moved to the Six Labors Split License, which requires a paid
+      licence above a revenue threshold. The 2.x line is Apache-2.0 and has both
+      the WebP encoder and — the part WIC cannot do at all on this machine — a
+      WebP DECODER, which is what lets a .webp preview render here.
+    -->
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Shipped beside the exe so the About box and the window chrome can show
+         the circle without reaching back into the repo. -->
+    <Content Include="app.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
