@@ -21,10 +21,10 @@
   /* JubileePraise signature accent palette */
   --accent: #e94560;          /* JV red */
   --accent-peach: #ff6b6b;    /* peach */
-  --accent-gold: #feca57;     /* gold */
+  --accent-gold: var(--brand-accent, #3DA5FF);     /* gold */
   --accent-deep: #c2304c;     /* deep red */
   --cream: #f4d8a8;           /* warm text accent */
-  --copper: #feca57;          /* alias for compatibility */
+  --copper: var(--brand-accent, #3DA5FF);          /* alias for compatibility */
   --warm: #ff6b6b;            /* alias for compatibility */
 
   /* Category color identities (JV-tuned) */
@@ -196,7 +196,7 @@ main { flex: 1 0 auto; }
   padding: 64px 0 48px;
   background:
     radial-gradient(1200px 600px at 80% -10%, rgba(233, 69, 96, 0.18) 0%, transparent 50%),
-    radial-gradient(800px 400px at 10% 110%, rgba(254, 202, 87, 0.10) 0%, transparent 50%);
+    radial-gradient(800px 400px at 10% 110%, color-mix(in srgb, var(--brand-accent, #3DA5FF) 10%, transparent) 0%, transparent 50%);
   border-bottom: 3px solid var(--accent);
   position: relative;
 }
@@ -887,8 +887,8 @@ h2.section-title {
 /* ============================= NOTICE BANNER ============================= */
 
 .notice {
-  background: linear-gradient(135deg, rgba(254, 202, 87, 0.10) 0%, rgba(140, 111, 207, 0.08) 100%), var(--surface);
-  border: 1px solid rgba(254, 202, 87, 0.28);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-accent, #3DA5FF) 10%, transparent) 0%, rgba(140, 111, 207, 0.08) 100%), var(--surface);
+  border: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 28%, transparent);
   border-left: 4px solid var(--accent-gold);
   border-radius: 10px;
   padding: 18px 22px;
@@ -934,7 +934,7 @@ h2.section-title {
   border-radius: 50%;
   animation: float 15s infinite;
 }
-.particle.gold { background: rgba(254, 202, 87, 0.28); }
+.particle.gold { background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 28%, transparent); }
 .particle.peach { background: rgba(255, 107, 107, 0.30); }
 @keyframes float {
   0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
@@ -961,16 +961,16 @@ h2.section-title {
   align-items: center;
 }
 .site-footer strong {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, #ffd877 100%);
+  background: linear-gradient(135deg, var(--accent-gold) 0%, color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .site-footer a { color: var(--accent-gold); text-decoration: none; }
-.site-footer a:hover { color: #ffd877; }
+.site-footer a:hover { color: color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white); }
 .site-footer .jubilee-badge { margin-top: 6px; }
 /* Footer badge in the theme gold (matches the footer's gold links/border). */
-.site-footer .jubilee-badge { background: rgba(254, 202, 87, 0.10); border-color: var(--accent-gold); color: var(--accent-gold); }
+.site-footer .jubilee-badge { background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 10%, transparent); border-color: var(--accent-gold); color: var(--accent-gold); }
 
 /* ============================= GLOBAL WIDGETS HOOKS ============================= */
 /* Footer-player bottom spacing is applied conditionally in globals.css
@@ -998,7 +998,7 @@ td.album-title a:hover,
 td.title a:hover,
 td.code-cell a:hover,
 td.code a:hover {
-  color: #e8b870;          /* warm gold accent */
+  color: color-mix(in srgb, var(--brand-accent, #3DA5FF) 65%, white);          /* warm gold accent */
   text-decoration: none;
 }
 
@@ -1017,7 +1017,7 @@ a.jv-card-link:hover .card-title,
 a.jv-card-link:hover .card-code,
 a.jv-card-link:hover .fusion-title,
 a.jv-card-link:hover .fusion-code {
-  color: #e8b870;
+  color: color-mix(in srgb, var(--brand-accent, #3DA5FF) 65%, white);
 }
 
 /* ============================= LEGAL / PROSE =============================
@@ -1053,7 +1053,7 @@ a.jv-card-link:hover .fusion-code {
 .legal li::marker { color: var(--accent-gold); }
 .legal strong { color: var(--ink); font-weight: 600; }
 .legal a { color: var(--accent-gold); text-decoration: none; }
-.legal a:hover { color: #ffd877; text-decoration: underline; }
+.legal a:hover { color: color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white); text-decoration: underline; }
 .legal .legal-contact {
   margin-top: 10px;
   padding: 18px 22px;

@@ -8,7 +8,7 @@
      scoped custom-property overrides cascade to every var(--accent*) used inside
      the bar — cover gradient, play button, progress fill, scrub thumb, etc. */
   --accent: var(--accent-gold);
-  --accent-peach: #ffd877;
+  --accent-peach: color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white);
   --accent-deep: #d49a1e;
   position: fixed;
   bottom: 0;
@@ -128,7 +128,7 @@
 
 .jv-player .now .cover:hover {
   transform: scale(1.04);
-  box-shadow: 0 4px 18px rgba(254, 202, 87, 0.4);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--brand-accent, #3DA5FF) 40%, transparent);
 }
 
 .jv-player .now .cover img {
@@ -217,13 +217,13 @@
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  color: #241a02; /* dark glyph for contrast on the gold button */
+  color: #04233d; /* dark glyph for contrast on the gold button */
   padding: 0;
 }
 
 .jv-player .ctrls button.play:hover {
   background: var(--accent-peach);
-  color: #241a02;
+  color: #04233d;
 }
 
 .jv-player .ctrls button.play svg {
@@ -412,7 +412,7 @@
 
 .jv-add-pl-menu .new-row button {
   background: var(--accent-gold);
-  color: #241a02;
+  color: #04233d;
   border: none;
   border-radius: 7px;
   font-weight: 700;

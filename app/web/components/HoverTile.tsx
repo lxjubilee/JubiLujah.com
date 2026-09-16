@@ -181,6 +181,8 @@ export default function HoverTile({ data }: { data: TileData }) {
             {/* Studio albums OR any foreign-language album (privileged tier): show
                 the album-code ID (upper-left, red pill). */}
             {showCodePill && <span className="nf-code-pill">{data.code}</span>}
+            {/* The tile's editorial label, kept on the hover card in the same corner. */}
+            {data.badge && <span className={`nf-badge nf-badge--${data.badge}`}>{BADGE_LABEL[data.badge]}</span>}
             {/* Admin-only (large preview): replace cover + manage J: tracks. */}
             <CoverEditBadge code={data.code} title={data.title} />
             <TrackEditBadge code={data.code} title={data.title} />

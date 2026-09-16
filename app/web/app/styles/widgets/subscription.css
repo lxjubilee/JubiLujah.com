@@ -28,19 +28,19 @@
   padding: 30px 26px 28px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
   transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
 }
-.sub-card:hover { transform: translateY(-4px); border-color: rgba(254, 202, 87, 0.4); }
+.sub-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--brand-accent, #3DA5FF) 40%, transparent); }
 .sub-card.featured {
   border-color: var(--accent-gold);
-  box-shadow: 0 18px 50px rgba(254, 202, 87, 0.16);
-  background: linear-gradient(180deg, rgba(254, 202, 87, 0.06), var(--surface) 40%);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--brand-accent, #3DA5FF) 16%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--brand-accent, #3DA5FF) 6%, transparent), var(--surface) 40%);
 }
 .sub-badge {
   position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--accent-gold), #ffd877); color: #241a02;
+  background: linear-gradient(135deg, var(--accent-gold), color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white)); color: #04233d;
   font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
   padding: 5px 14px; border-radius: 999px; white-space: nowrap;
 }
-.sub-badge.current { background: linear-gradient(135deg, var(--accent-gold), #ffd877); color: #000; border: none; }
+.sub-badge.current { background: linear-gradient(135deg, var(--accent-gold), color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white)); color: #000; border: none; }
 .sub-card-name { font-size: 22px; font-weight: 800; color: var(--ink); margin: 6px 0 2px; }
 .sub-card-tagline { font-size: 13px; color: var(--accent-gold); font-weight: 600; margin: 0 0 14px; }
 .sub-card-price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
@@ -62,12 +62,13 @@
 .sub-cmp-table th, .sub-cmp-table td { padding: 14px 18px; text-align: center; border-bottom: 1px solid var(--line-soft); }
 .sub-cmp-table thead th { background: var(--surface-2); color: var(--ink-soft); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
 .sub-cmp-table thead th.featured { color: var(--accent-gold); }
-.sub-cmp-table td.featured { background: rgba(254, 202, 87, 0.05); }
+.sub-cmp-table td.featured { background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 5%, transparent); }
 .sub-cmp-table th:first-child, .sub-cmp-table td.sub-cmp-feature { text-align: left; color: var(--ink); font-weight: 600; }
 .sub-cmp-table tbody tr:last-child td { border-bottom: none; }
 .sub-cmp-ok { fill: var(--success); }
 .sub-cmp-no { fill: var(--ink-muted); opacity: 0.6; }
-.sub-cmp-val { font-weight: 700; color: var(--accent-peach); }
+/* The theme accent, not coral (azure theme, 2026-09-16). */
+.sub-cmp-val { font-weight: 700; color: var(--brand-accent); }
 .sub-fineprint { font-size: 12.5px; color: var(--ink-muted); margin: 16px 2px 0; line-height: 1.5; }
 
 @media (max-width: 820px) {
@@ -104,9 +105,9 @@
 .sub-upgrade-close:hover { color: var(--ink); background: var(--surface-2); }
 .sub-upgrade-icon {
   width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px;
-  display: grid; place-items: center; color: #241a02;
-  background: linear-gradient(135deg, var(--accent-gold), #ffd877);
-  box-shadow: 0 8px 22px rgba(254, 202, 87, 0.3);
+  display: grid; place-items: center; color: #04233d;
+  background: linear-gradient(135deg, var(--accent-gold), color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white));
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--brand-accent, #3DA5FF) 30%, transparent);
 }
 .sub-upgrade-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 .sub-upgrade-actions .btn { width: 100%; padding: 12px; }

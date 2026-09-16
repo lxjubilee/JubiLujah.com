@@ -19,9 +19,15 @@ import LanguagePanel from './LanguagePanel';
 // link with no translation yet carries a literal `label` instead.
 
 // Cross-property quick links in the top row.
-const MEDIA: { href: string; key: TKey; ext: boolean }[] = [
-  { href: 'https://www.jubileeinspire.com', key: 'media.bibleChat', ext: true },
-];
+// "AI Bible Chat" (https://www.jubileeinspire.com) was removed at the owner's
+// request on 2026-09-16; the kJubilee Radio pill beside the search box replaced
+// it as the header's cross-site link. Restore by re-adding the entry here.
+const MEDIA: { href: string; key: TKey; ext: boolean }[] = [];
+
+// The radio sibling, as a pill immediately left of the search box (owner,
+// 2026-09-16). Lower-case k, capital J and R: "kJubilee Radio". A signed-in reader
+// arrives on kJubilee already signed in (goSignedIn, a one-time Jubilee ID ticket).
+const KJUBILEE_RADIO = 'https://www.kjubilee.com/';
 
 /*
  * WHEN THE CATEGORIES STOP FITTING, THEY BECOME A HAMBURGER.
@@ -230,6 +236,18 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
                 {t('media.admin')}
               </Link>
             )}
+
+            {/* kJubilee Radio: the family's radio site, a pill directly left of
+                the search box. Opens in a new tab so the music here keeps playing. */}
+            <a
+              href={KJUBILEE_RADIO}
+              className="jvh-radio-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => { void goSignedIn(e, KJUBILEE_RADIO, true); }}
+            >
+              kJubilee Radio
+            </a>
 
             {/* ONE MAGNIFYING GLASS, ON THE RIGHT, AND IT IS THE BUTTON —
                 kJubilee's arrangement (.searchbar / .search-go there).

@@ -81,12 +81,12 @@
   display: inline-block; margin-left: 8px; vertical-align: middle;
   font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
   padding: 2px 7px; border-radius: 999px;
-  background: rgba(254, 202, 87, 0.16); color: var(--accent-gold); border: 1px solid var(--accent-gold);
+  background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 16%, transparent); color: var(--accent-gold); border: 1px solid var(--accent-gold);
 }
 .jv-add-pl-menu .row .pl-default-tag {
   margin-left: 6px; font-size: 9px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
   padding: 1px 5px; border-radius: 999px; color: var(--accent-gold);
-  background: rgba(254, 202, 87, 0.14); border: 1px solid rgba(254, 202, 87, 0.5);
+  background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 14%, transparent); border: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 50%, transparent);
 }
 
 /* ======================= "FOR YOUR SEASON" (2026-09-16) =======================

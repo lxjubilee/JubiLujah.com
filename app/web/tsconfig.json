@@ -40,7 +40,9 @@
     ".next-single/types/**/*.ts",
     ".next-single2/types/**/*.ts",
     ".next-hero2/types/**/*.ts",
-    ".next-hero3/types/**/*.ts"
+    ".next-hero3/types/**/*.ts",
+    ".next-azure/types/**/*.ts",
+    ".next-azure2/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

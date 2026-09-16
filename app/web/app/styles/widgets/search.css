@@ -3,7 +3,7 @@
    card + Songs list, then card rows for albums / artists / music types /
    playlists. Uses the site design tokens.
    ========================================================================== */
-.sr-title { font-size: 26px; font-weight: 800; color: var(--ink); margin: 4px 0 0; padding-bottom: 10px; border-bottom: 1px solid rgba(254, 202, 87, 0.45); }
+.sr-title { font-size: 26px; font-weight: 800; color: var(--ink); margin: 4px 0 0; padding-bottom: 10px; border-bottom: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent); }
 .sr-notice { color: var(--ink-soft); font-size: 15px; padding: 24px 0; }
 
 /* Search-page-only override of the standard section padding (other pages keep
@@ -16,7 +16,7 @@ section.standard.sr-page { padding: 20px 0 50px; }
 .sr-nav {
   display: flex; flex-direction: column; gap: 4px;
   flex: 0 0 190px; max-width: 190px;
-  border-right: 1px solid rgba(254, 202, 87, 0.45); padding-right: 14px;
+  border-right: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent); padding-right: 14px;
   align-self: stretch; /* stretch to the content's full height so the divider runs all the way down */
 }
 .sr-nav-label { font-size: 16px; line-height: 1.2; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-gold); padding: 30px 14px 14px; }
@@ -34,7 +34,7 @@ section.standard.sr-page { padding: 20px 0 50px; }
   .sr-layout { flex-direction: column; gap: 16px; }
   .sr-nav {
     flex-direction: row; flex-wrap: wrap; gap: 8px; max-width: none; flex-basis: auto; width: 100%;
-    border-right: none; border-bottom: 1px solid rgba(254, 202, 87, 0.45);
+    border-right: none; border-bottom: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent);
     padding-right: 0; padding-bottom: 14px; position: static;
   }
   .sr-nav-label { display: none; }
@@ -50,7 +50,7 @@ section.standard.sr-page { padding: 20px 0 50px; }
 /* Top Result big card */
 .sr-top-card {
   position: relative; display: block; text-decoration: none; cursor: pointer;
-  background: var(--surface-2); border: 1px solid rgba(254, 202, 87, 0.45); border-radius: 12px;
+  background: var(--surface-2); border: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent); border-radius: 12px;
   padding: 22px; min-height: 200px; transition: background 0.18s, transform 0.12s;
 }
 .sr-top-card:hover { background: var(--surface-3); }
@@ -72,7 +72,7 @@ section.standard.sr-page { padding: 20px 0 50px; }
 .sr-song {
   display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px;
   cursor: pointer; transition: background 0.14s;
-  border-bottom: 1px solid rgba(254, 202, 87, 0.45);
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent);
 }
 .sr-song:hover { background: var(--surface-2); }
 .sr-song-art { position: relative; width: 42px; height: 42px; border-radius: 5px; overflow: hidden; flex: 0 0 auto; }
@@ -94,7 +94,7 @@ section.standard.sr-page { padding: 20px 0 50px; }
 .sr-card {
   position: relative; display: block; text-decoration: none; padding: 14px; border-radius: 10px;
   background: var(--surface-2); transition: background 0.18s; overflow: hidden;
-  border: 1px solid rgba(254, 202, 87, 0.45);
+  border: 1px solid color-mix(in srgb, var(--brand-accent, #3DA5FF) 45%, transparent);
 }
 .sr-card:hover { background: var(--surface-3); }
 .sr-card:hover .sr-card-play { opacity: 1; transform: translateY(0); }

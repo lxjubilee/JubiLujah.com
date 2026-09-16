@@ -22,7 +22,7 @@
 .jv-trophy-btn:hover {
   border-color: var(--accent-gold);
   color: var(--accent-gold);
-  box-shadow: 0 0 12px rgba(254, 202, 87, 0.3);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--brand-accent, #3DA5FF) 30%, transparent);
 }
 .jv-trophy-btn:focus-visible {
   outline: 2px solid var(--accent-gold);
@@ -144,7 +144,7 @@
 .jv-modal input[type="text"]:focus {
   outline: none;
   border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px rgba(254, 202, 87, 0.18);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-accent, #3DA5FF) 18%, transparent);
 }
 .jv-modal input[type="text"][readonly] {
   background: var(--surface-2);

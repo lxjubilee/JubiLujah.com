@@ -12,10 +12,10 @@ html.an-scrollbar::-webkit-scrollbar-track { background: var(--surface-2); borde
 html.an-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 10px; border: 3px solid var(--surface-2); background-clip: content-box;
   background-color: var(--accent-gold);
-  background-image: linear-gradient(180deg, var(--accent-gold), #e8a23e);
+  background-image: linear-gradient(180deg, var(--accent-gold), color-mix(in srgb, var(--brand-accent, #3DA5FF) 80%, black));
 }
 html.an-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-image: linear-gradient(180deg, #ffd27a, #e8a23e);
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--brand-accent, #3DA5FF) 55%, white), color-mix(in srgb, var(--brand-accent, #3DA5FF) 80%, black));
 }
 
 .an-wrap { max-width: 1180px; margin: 0 auto; padding: 0 18px 80px; }
@@ -160,7 +160,7 @@ html.an-scrollbar::-webkit-scrollbar-thumb:hover {
 .an-bar-lbl { font-size: 9px; color: var(--ink-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; }
 .an-toplist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .an-toplist li { position: relative; padding: 6px 8px; border-radius: 6px; font-size: 13px; color: var(--ink-soft); overflow: hidden; }
-.an-toplist-bar { position: absolute; inset: 0; background: rgba(254,202,87,.12); z-index: 0; }
+.an-toplist-bar { position: absolute; inset: 0; background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 12%, transparent); z-index: 0; }
 .an-toplist-tx { position: relative; z-index: 1; }
 
 /* Distribution */
