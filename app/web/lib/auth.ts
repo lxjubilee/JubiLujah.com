@@ -19,6 +19,9 @@
 const STORAGE_KEY = 'jubileeInspireAuth';
 const BOOTSTRAP_COOKIE = 'ji_bootstrap';
 const SIGNED_IN_COOKIE = 'ji_signed_in';
+// "Signed out HERE, on purpose" — the middleware stops asking the SSO. Ported from
+// JubileeInspire (src/lib/auth.ts setSignedOutMarker). See markSignedOut below.
+const SIGNED_OUT_COOKIE = 'ji_signed_out';
 
 export interface AuthTokens {
   accessToken: string;
@@ -80,6 +83,10 @@ export function staleMarkerCleared(): boolean {
 function setSignedInMarker(): void {
   if (typeof document === 'undefined') return;
   try {
+    // Any sign-in here — the form, a sibling's link, the silent check — lifts a
+    // deliberate sign-out. BEFORE the early return below: a stale "1" must not
+    // leave the signed-out marker standing under a live session.
+    if (readCookie(SIGNED_OUT_COOKIE)) dropCookie(SIGNED_OUT_COOKIE);
     if (readCookie(SIGNED_IN_COOKIE) === '1') return;
     const secure = location.protocol === 'https:' ? '; Secure' : '';
     document.cookie = `${SIGNED_IN_COOKIE}=1; Max-Age=${365 * 24 * 60 * 60}; Path=/; SameSite=Lax${secure}`;
@@ -146,6 +153,29 @@ export function setTokens(tokens: AuthTokens | null | undefined): void {
     JSON.stringify({ accessToken: tokens.accessToken, refreshToken, expiresAt: tokens.expiresAt }),
   );
   setSignedInMarker();
+}
+
+/**
+ * The reader SIGNED OUT here on purpose (Sign out, or deleting the account).
+ *
+ * 🔴 WITHOUT THIS, SINGLE SIGN-ON SIGNS YOU STRAIGHT BACK IN. Signing out revokes
+ * the family sessions for the account signing out, but no page can reach the
+ * SSO's own cookie, and that cookie may name a DIFFERENT account — planted by
+ * signing in as someone else on another family site. The next page load asks the
+ * SSO, gets that account, and signs the reader back in: JubileeInspire shipped
+ * exactly that on 2026-09-15 ("I logged out and it logged me in again").
+ *
+ * So a deliberate sign-out stays signed out on this origin until the reader signs
+ * in here again (setSignedInMarker clears it). A FORCED sign-out — a refresh the
+ * server refused — does not set it, so a session ended elsewhere can still be
+ * replaced by the family one. Call it just before clearTokens().
+ */
+export function markSignedOut(): void {
+  if (typeof document === 'undefined') return;
+  try {
+    const secure = location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = `${SIGNED_OUT_COOKIE}=1; Max-Age=${365 * 24 * 60 * 60}; Path=/; SameSite=Lax${secure}`;
+  } catch { /* ignore */ }
 }
 
 export function clearTokens(): void {

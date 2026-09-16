@@ -51,6 +51,7 @@ const API = (process.env.SSO_BRIDGE_API ||
 const TICKET_RE = /^[0-9a-f]{64}$/;
 
 const SIGNED_IN_COOKIE = 'ji_signed_in';   // "1" = a session exists on this origin (written by lib/auth.ts)
+const SIGNED_OUT_COOKIE = 'ji_signed_out'; // "1" = signed out HERE on purpose; never ask (lib/auth.ts markSignedOut)
 const BOOTSTRAP_COOKIE = 'ji_bootstrap';   // one-shot: the session, carried to the first paint
 const PLANTED_COOKIE = 'ji_planted';       // one-shot: the plant question is settled for this arrival
 const SIGNED_IN_TTL = 365 * 24 * 60 * 60;
@@ -148,14 +149,19 @@ export async function middleware(request: NextRequest) {
   const speculative =
     /prefetch|prerender/i.test(request.headers.get('sec-purpose') || request.headers.get('purpose') || '') ||
     request.headers.has('next-router-prefetch') ||
-    request.headers.get('rsc') === '1';
+    request.headers.get('rsc') === '1' ||
+    // Next strips the RSC header before middleware sees it (measured 2026-09-16),
+    // so the router's `_rsc` cache-busting parameter is the reliable sign.
+    url.searchParams.has('_rsc');
   if (TICKET_RE.test(rawTicket) && !speculative) {
     // WAS THIS TICKET MINTED BECAUSE WE ASKED, OR BECAUSE THEY CAME?
     //   stamped (sso=asked) — our own silent check; the SSO already knows this
-    //                         browser, and they did not ask to join anything.
-    //   unstamped           — a sibling site handed them over on a link;
-    //                         arriving IS the act of coming here.
-    // Only the second may create an account (see api routes/ssoBridge.js).
+    //                         browser, so no plant is needed.
+    //   unstamped           — a sibling site handed them over on a link; the
+    //                         SSO has never seen this browser, so plant.
+    // Both create an account for a Jubilee ID with none here (single sign-on,
+    // 2026-09-16) — except that a silent check never recreates an account its
+    // owner deleted (api routes/ssoBridge.js, migration 0033 tombstones).
     const fromOurOwnAsk = url.searchParams.get('sso') === 'asked';
     const pending: Pending[] = [];
 
@@ -163,7 +169,8 @@ export async function middleware(request: NextRequest) {
       const ip = visitorIp(request);
       const r = await postJson(
         '/api/auth/sso/redeem-ticket',
-        { ticket: rawTicket, provision: !fromOurOwnAsk },
+        // `provision` is kept for an API older than `via`; the current API reads `via`.
+        { ticket: rawTicket, via: fromOurOwnAsk ? 'ask' : 'link', provision: true },
         ip ? { 'x-forwarded-for': ip } : {},
         REDEEM_TIMEOUT_MS,
       );
@@ -182,8 +189,28 @@ export async function middleware(request: NextRequest) {
         const arrivedAs = String(r.data?.user?.id || '');
         if (arrivedAs) pending.push({ name: PLANTED_COOKIE, value: arrivedAs, maxAge: 120 });
 
-        // No plant since 2026-09-15: a JubileePraise sign-in must not teach the
-        // SSO cookie this browser, or the persona domains sign in silently.
+        // PLANT, on the way in, for a link arrival (restored 2026-09-16; retired
+        // 2026-09-15). The reader came from a sibling site whose session the SSO's
+        // own cookie may not name, so teach it this browser now — one hop through
+        // the SSO and back to this same page, before the app boots — and every
+        // other family site will recognise them. A silent-check arrival skips it:
+        // the SSO answered because it already knows the browser.
+        if (!fromOurOwnAsk) {
+          try {
+            const plant = await postJson(
+              '/api/auth/sso/plant-url',
+              { return: cleanReturn(request, host).toString() },
+              { authorization: `Bearer ${tokens.accessToken}` },
+              REDEEM_TIMEOUT_MS,
+            );
+            const to = plant.ok ? plant.data?.url : null;
+            if (typeof to === 'string' && to.startsWith(`${SSO_BASE}/`)) {
+              const res = NextResponse.redirect(to, 307);
+              res.headers.set('Cache-Control', 'no-store');
+              return withCookies(res, host, pending);
+            }
+          } catch { /* no plant: the reader is still signed in here, which is what matters */ }
+        }
       } else {
         // Expired, spent, refused, or no account here. The next navigation
         // asks again rather than assuming anything.
@@ -199,11 +226,50 @@ export async function middleware(request: NextRequest) {
     return withCookies(NextResponse.next(), host, pending);
   }
 
-  // NO SILENT ASK (owner decision 2026-09-15). Signing in here from another
-  // family site happens ONLY by following a rail link, which carries a ticket
-  // (REDEEM above). The persona domains’ silent sign-in is a separate feature,
-  // and the SSO refuses this host on /continue.
-  return NextResponse.next();
+  // ── ASK ───────────────────────────────────────────────────────────────────
+  // RESTORED 2026-09-16. The 2026-09-15 owner decision ("rail links only") is
+  // superseded by the Founder's rule that single sign-on must be single: a reader
+  // signed in on any family site arrives here signed in. Ported from
+  // JubileeInspire's src/proxy.ts, which runs this in production, with its
+  // sign-out guard.
+  //
+  // Only a real, top-level page load by a person is asked. Everything else is
+  // passed straight through:
+  if (request.method !== 'GET') return NextResponse.next();
+  if (speculative) return NextResponse.next();
+  if (!(request.headers.get('accept') || '').includes('text/html')) return NextResponse.next();
+  const ua = (request.headers.get('user-agent') || '').toLowerCase();
+  if (!ua || BOT_RE.test(ua)) return NextResponse.next();   // crawlers can never have a session
+  if (QUIET_PATHS.some((p) => url.pathname === p || url.pathname.startsWith(`${p}/`))) return NextResponse.next();
+
+  // JUST ASKED: THE LOOP GUARD. The SSO sends the reader back with ?sso=none, and
+  // nothing else stops the next check, so this answer is rendered, never
+  // redirected (lib/familySso.ts strips the marker).
+  // A SECOND LOOP GUARD, which JubileeInspire does not need: a return still
+  // stamped `sso=asked` but carrying no usable ticket means the SSO answered
+  // without one (it refused this host, or the ticket was malformed). Treat it as
+  // "none". Without this, an SSO that bounced the reader straight back unchanged
+  // would be asked again on every load, forever.
+  if (url.searchParams.get('sso') === 'none' || url.searchParams.get('sso') === 'asked') {
+    return withCookies(NextResponse.next(), host, [{ name: SIGNED_IN_COOKIE, value: '0', maxAge: SIGNED_IN_TTL }]);
+  }
+  // Signed in here, signed out here ON PURPOSE, or mid-handover: do not ask.
+  // The signed-out marker is the fix for "I logged out and it logged me in again":
+  // the SSO's cookie can outlive a sign-out and even name another account.
+  if (request.cookies.get(SIGNED_IN_COOKIE)?.value === '1') return NextResponse.next();
+  if (request.cookies.get(SIGNED_OUT_COOKIE)?.value === '1') return NextResponse.next();
+  if (request.cookies.get(BOOTSTRAP_COOKIE)) return NextResponse.next();
+
+  // Stamp the return, so the ticket that comes back says it answers OUR question
+  // (no plant needed), and send the browser to the SSO's own origin, where its
+  // first-party cookie can be read.
+  const back = cleanReturn(request, host);
+  back.searchParams.set('sso', 'asked');
+  const ask = new URL(`${SSO_BASE}/api/auth/continue`);
+  ask.searchParams.set('return', back.toString());
+  const res = NextResponse.redirect(ask, 307);
+  res.headers.set('Cache-Control', 'no-store');
+  return res;
 }
 
 // Static constants only — Next analyses this at build time. Page routes only:

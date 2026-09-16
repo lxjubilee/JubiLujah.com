@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import MyContributions from '@/components/MyContributions';
 import { api, ApiError } from '@/lib/api';
-import { getRefreshToken, clearTokens } from '@/lib/auth';
+import { getRefreshToken, clearTokens, markSignedOut } from '@/lib/auth';
 
 const EYE = 'M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5C21.3 7.6 17 4.5 12 4.5zm0 12.5a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z';
 const EYE_OFF = 'M12 7a5 5 0 015 5c0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.8 11.8 0 001 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65a3 3 0 003 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 01-5-5c0-.79.2-1.53.53-2.2z';
@@ -61,6 +61,9 @@ export default function AccountPage() {
     setDelErr(null); setDeleting(true);
     try {
       await api.del('/api/auth/account');
+      // Deliberate: the silent family check must not sign this browser back in
+      // (the API's tombstone stops it recreating the account; this stops the ask).
+      markSignedOut();
       clearTokens();
       setConfirmOpen(false);
       setDeleted(true);

@@ -47,6 +47,17 @@ export async function purgeUserAccount(client, userId, email) {
   await client.query('UPDATE catalog.assets SET uploaded_by = NULL WHERE uploaded_by = $1', [userId]);
   await client.query('DELETE FROM identity.users WHERE id = $1', [userId]);
   if (email) await client.query('DELETE FROM identity.signup_verifications WHERE email = $1', [email]);
+  // THE TOMBSTONE (migration 0033): the SSO silent check must never recreate an
+  // account its owner deleted. Only a hash of the address is kept. Hashed in SQL
+  // so the email never has to be handled here beyond the delete itself.
+  if (email) {
+    await client.query(
+      `INSERT INTO identity.account_tombstones (email_sha256)
+       VALUES (encode(sha256(lower($1)::bytea), 'hex'))
+       ON CONFLICT (email_sha256) DO UPDATE SET deleted_at = NOW()`,
+      [email],
+    );
+  }
 }
 
 // ----------------------------------------------------------------------------

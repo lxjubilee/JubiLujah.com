@@ -102,6 +102,8 @@ export async function plantFamily(userKey: string): Promise<boolean> {
 export function askFamilyAfterStaleMarker(): boolean {
   if (typeof window === 'undefined' || !familyHost()) return false;
   if (marked(STALE_RETRY_KEY) || marked(ASKED_KEY)) return false;
+  // Signed out HERE on purpose: never ask (lib/auth.ts markSignedOut).
+  if (/(?:^|;\s*)ji_signed_out=1(?:;|$)/.test(document.cookie)) return false;
   const params = new URLSearchParams(window.location.search);
   if (params.get('sso') === 'none' || TICKET_RE.test(params.get('t') || '')) return false;
   mark(STALE_RETRY_KEY);

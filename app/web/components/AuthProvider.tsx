@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { api } from '@/lib/api';
-import { clearTokens, getRefreshToken } from '@/lib/auth';
-import { stripSsoMarkers } from '@/lib/familySso';
+import { clearTokens, getRefreshToken, markSignedOut, staleMarkerCleared } from '@/lib/auth';
+import { stripSsoMarkers, plantFamily, askFamilyAfterStaleMarker } from '@/lib/familySso';
 
 // Mirrors the server RBAC ladder (api/src/config.js ROLE_ORDER), weakest→strongest.
 const ROLE_ORDER = ['viewer', 'reviewer', 'content_editor', 'executive', 'admin'];
@@ -62,9 +62,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Once the session is known: signed in → make sure the SSO knows this browser
   // (keyed to WHO, so a change of account re-plants); signed out with a stale
   // "signed in" marker just cleared → ask the SSO once, directly.
-  // No plant and no silent ask since 2026-09-15 (owner decision): another family
-  // site signs the reader in here only by a rail link with a ticket, and a
-  // sign-in here does not teach the SSO cookie this browser.
+  //
+  // Off from 2026-09-15 (owner decision: rail links only); RESTORED 2026-09-16
+  // under the Founder's rule that single sign-on must be single across the
+  // family. What made it unsafe — signing out and being signed straight back in —
+  // is now stopped by the deliberate sign-out marker (lib/auth.ts markSignedOut),
+  // which both this ask and the middleware's respect.
+  useEffect(() => {
+    if (loading) return;
+    if (state.authenticated && state.user?.id) void plantFamily(state.user.id);
+    else if (!state.authenticated && staleMarkerCleared()) askFamilyAfterStaleMarker();
+  }, [loading, state.authenticated, state.user?.id]);
 
   // Keep the session warm: periodically re-validate (which transparently mints a
   // fresh access token via the refresh token) so a long-running or idle tab never
@@ -77,6 +85,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = useCallback(async () => {
     try { await api.post('/api/auth/logout', { refreshToken: getRefreshToken() }); } catch { /* ignore */ }
+    // DELIBERATE: stay signed out here even though the SSO may still know this
+    // browser (as this account or another). See markSignedOut in lib/auth.ts.
+    markSignedOut();
     clearTokens();
     // Drop any persisted now-playing state so a signed-out guest doesn't resume audio.
     try { sessionStorage.removeItem('jvPlayerState'); } catch { /* ignore */ }

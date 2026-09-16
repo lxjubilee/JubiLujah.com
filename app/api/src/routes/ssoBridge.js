@@ -97,8 +97,29 @@ router.post('/redeem-ticket', ah(async (req, res) => {
   // admin has not blocked and wrong here, so refuse before it runs.
   if (row && !row.is_active) throw new HttpError(403, 'account_disabled');
 
-  if (!row && req.body?.provision !== true) {
-    return res.status(404).json({ error: 'no_local_user', message: 'No account on this site yet.' });
+  // WHO MAY GET AN ACCOUNT MADE FOR THEM (superseded 2026-09-16).
+  //
+  // Until 2026-09-16 only a deliberate arrival (a sibling site's link) created an
+  // account; a ticket answering our own silent check did not, so a family member
+  // who had never been here was not signed in by it. The Founder's rule now is
+  // single sign-on: anyone with a Jubilee ID is signed in here, account and all.
+  //
+  // The one exception is the reason the old rule existed: an account DELETED here
+  // must not be recreated by merely opening the site. Deletion is a hard delete,
+  // so migration 0033 keeps a hashed tombstone, and a silent check that finds no
+  // account consults it. A link arrival is deliberate and is never refused.
+  //
+  // `via` is the new field; `provision` is still read so web builds from before
+  // this keep their old meaning (provision:false = our own silent check).
+  const asked = req.body?.via === 'ask' || (req.body?.via == null && req.body?.provision !== true);
+  if (!row && asked) {
+    const tomb = await query(
+      `SELECT 1 FROM identity.account_tombstones WHERE email_sha256 = encode(sha256(lower($1)::bytea), 'hex')`,
+      [email],
+    );
+    if (tomb.rowCount) {
+      return res.status(404).json({ error: 'no_local_user', message: 'No account on this site.' });
+    }
   }
 
   // Creates the row on a deliberate arrival; on a returning reader it refreshes
@@ -135,12 +156,14 @@ router.post('/redeem-ticket', ah(async (req, res) => {
 // NULL IS THE ORDINARY ANSWER, never an error: the SSO may be unconfigured, down,
 // or unwilling. Every one of those means "carry on", which is what the reader
 // wanted anyway, so this route never fails a page.
-// RETIRED 2026-09-15 — always null. Planting is what let a JubileePraise sign-in
-// silently sign the persona domains in (as this account, even over another).
-// Owner decision: the family signs in by rail link only (/go-url, redeem), and
-// the persona domains' silent sign-in is theirs alone. Kept answering, not
-// removed, because web builds from before this still call it on every page.
-const PLANT_RETIRED = true;
+// RETIRED 2026-09-15, RESTORED 2026-09-16. The 2026-09-15 owner decision (rail
+// links only) is superseded by the Founder's rule that single sign-on must be
+// single across the family: signing in here teaches the SSO this browser, so
+// every sibling site recognises the reader. The failure that retirement was
+// guarding against — signing out and being signed straight back in, possibly as
+// another account — is now prevented where it happened, by the ji_signed_out
+// marker (web lib/auth.ts, middleware.ts), exactly as JubileeInspire does.
+const PLANT_RETIRED = false;
 
 router.post('/plant-url', requireAuth, ah(async (req, res) => {
   if (PLANT_RETIRED || !familySsoOn()) return res.json({ success: true, url: null });
