@@ -92,7 +92,7 @@ function fmt(s: number) {
 // longer shown: the banner names the album now, not the persona's role.
 // staffPicks: every Staff Pick code, not a flag — the page switches albums in
 // place, so the banner has to know for whichever album is current.
-export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {}, staffPicks = [] }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string>; staffPicks?: string[] }) {
+export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {}, heroImages = {}, staffPicks = [] }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string>; heroImages?: Record<string, string>; staffPicks?: string[] }) {
   const playQueue = usePlayer((s) => s.playQueue);
   const togglePlay = usePlayer((s) => s.togglePlay);
   const nowPlaying = usePlayer((s) => s.nowPlaying);
@@ -115,8 +115,11 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
   // Both go through the same `--persona-img` custom property the stylesheet
   // already reads, so the gradient, the sizing and the right-edge anchoring are
   // whatever .x-hero has always done — this changes the picture, not the design.
-  const supportImage = support[current.code] || '';
-  const heroImage = supportImage || heroFallback;
+  // Picture order: the album's 16:9 hero (as on the home page), then its support
+  // image, then the persona banner. Both album pictures are top-anchored.
+  const albumPicture = heroImages[current.code] || support[current.code] || '';
+  const supportImage = albumPicture;
+  const heroImage = albumPicture || heroFallback;
   const heroStyle = { ['--persona-img' as string]: heroImage ? `url('${heroImage}')` : 'none' } as CSSProperties;
 
 

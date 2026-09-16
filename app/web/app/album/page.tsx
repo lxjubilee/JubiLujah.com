@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getAlbumByCode, getArtist } from '@/lib/manifest';
 import { coverFor } from '@/lib/covers';
 import { supportMapFor } from '@/lib/support';
+import { heroPool } from '@/lib/heroes';
 import { avatarKey } from '@/lib/personas';
 import { similarAlbums } from '@/lib/musicTypes';
 import { canonical, musicAlbumLd, breadcrumbLd } from '@/lib/seo';
@@ -107,6 +108,12 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
   // component swaps albums in place without navigating, so a map built for the
   // requested album alone would show the band on arrival and never again.
   const support = supportMapFor([album.code, ...artistAlbums.map((a) => a.code)]);
+  // The album's own 16:9 hero picture (Cover Art Studio), the one the home page
+  // banner shows. Preferred over the support image on this page's banner too, so
+  // an album looks the same in both places (owner, 2026-09-16).
+  const wanted = new Set([album.code, ...artistAlbums.map((a) => a.code)]);
+  const heroImages: Record<string, string> = {};
+  for (const h of heroPool()) if (wanted.has(h.code)) heroImages[h.code] = h.image;
 
   // THE HERO IS RENDERED BY AlbumApp, not here, and that is a deliberate move.
   // Its backdrop is now the album's own supporting image when one exists, and
@@ -144,6 +151,7 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
         initial={initial}
         similar={similar}
         support={support}
+        heroImages={heroImages}
       />
     </div>
   );

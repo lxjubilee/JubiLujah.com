@@ -1,11 +1,18 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { api } from '@/lib/api';
+
+// What the always-visible bar plays when pressed before anything is loaded: the
+// JubileePraise flagship, the album the brand is named after (pinned first on the
+// home page, and the first Staff Pick).
+const IDLE_ALBUM = 'JEIM1069EN';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { usePlayer } from '@/stores/player';
 import { pingNowPlaying, stopNowPlaying } from '@/lib/analytics';
 import { useUpgradeModal } from '@/stores/upgradeModal';
 import AddToPlaylist from '@/components/AddToPlaylist';
+import PlayerWave from '@/components/PlayerWave';
 
 const I = {
   play: 'M7 5v14l12-7z',
@@ -126,17 +133,37 @@ export default function FooterPlayer() {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  // Reserve bottom space for the fixed player only while a track is loaded — the
-  // bar is display:none otherwise, so a permanent body padding would just leave
-  // an empty gap below the footer. The CSS rule is body.jv-has-player.
+  // THE BAR IS ALWAYS THERE (owner, 2026-09-16): "it should launch with the footer
+  // ... sticky and it should always display when on this website, without fail."
+  // Until 2026-09-16 it mounted only once a track was loaded, which made the home
+  // hero change height on the first press of Play. So the space is reserved
+  // permanently, and the heroes (.jp-hero, the album banner) fit exactly between
+  // the header and this bar from the first paint.
   useEffect(() => {
-    document.body.classList.toggle('jv-has-player', !!p.nowPlaying);
-    // New track → allow the upgrade prompt to show again if it gets capped.
-    promptedRef.current = false;
+    document.body.classList.add('jv-has-player');
     return () => document.body.classList.remove('jv-has-player');
-  }, [p.nowPlaying]);
+  }, []);
+  // New track → allow the upgrade prompt to show again if it gets capped.
+  useEffect(() => { promptedRef.current = false; }, [p.nowPlaying]);
 
   const song = p.nowPlaying;
+
+  // IDLE: nothing loaded yet. The bar still offers to play: today's flagship album.
+  const [idleBusy, setIdleBusy] = useState(false);
+  const startIdle = async () => {
+    if (idleBusy) return;
+    setIdleBusy(true);
+    try {
+      const album = await api.get<{ title: string; artistName?: string; tracks: { id: string; title: string; url: string | null }[] }>(`/api/albums/${IDLE_ALBUM}`);
+      const songs = album.tracks.filter((t) => t.url).map((t) => ({
+        id: t.id, songId: t.id, title: t.title, artist: album.artistName, album: album.title,
+        url: t.url, cover: `/cover/${IDLE_ALBUM}.png`, href: `/album?c=${IDLE_ALBUM}`,
+      }));
+      if (songs.length) p.playQueue(songs, 0);
+    } catch { /* nothing to start; the bar simply waits */ } finally {
+      setIdleBusy(false);
+    }
+  };
 
   // Real-time "now playing" heartbeat → admin Active Listeners. Pings on play and
   // every 25s; clears presence on pause/stop/track-change. Fire-and-forget.
@@ -164,22 +191,23 @@ export default function FooterPlayer() {
           Setting crossOrigin="anonymous" would make the browser block the load. */}
       <audio ref={audioRef} id="jv-audio" preload="metadata" />
 
-      <div className={`jv-player${song ? ' active' : ''}${p.isPlaying ? ' jv-playing' : ''}`} style={{ display: song ? '' : 'none' }}>
+      <div className={`jv-player${song ? ' active' : ' idle'}${p.isPlaying ? ' jv-playing' : ''}`}>
+        <PlayerWave />
         <div className="now">
           <div className="cover" onClick={() => p.setExpanded(true)} title="Open now-playing">
             {song?.cover ? <Image src={song.cover} alt="" width={60} height={60} /> : <Svg d={I.note} cls="placeholder-glyph" />}
           </div>
           <div className="meta">
-            <div className="title">{song?.title || ''}</div>
-            <div className="sub">{sub}</div>
+            <div className="title">{song?.title || 'Ready to listen'}</div>
+            <div className="sub">{song ? sub : 'Press play, or pick any album'}</div>
           </div>
         </div>
 
         <div className="ctrls">
           <div className="buttons">
-            <button className="prev" onClick={() => p.prev()} title="Previous (P)" aria-label="Previous"><Svg d={I.prev} /></button>
-            <button className="play" onClick={() => p.togglePlay()} title="Play/Pause (Space)" aria-label="Play"><Svg d={p.isPlaying ? I.pause : I.play} /></button>
-            <button className="next" onClick={() => p.next()} title="Next (N)" aria-label="Next"><Svg d={I.next} /></button>
+            <button className="prev" onClick={() => p.prev()} title="Previous (P)" aria-label="Previous" disabled={!song}><Svg d={I.prev} /></button>
+            <button className="play" onClick={() => (song ? p.togglePlay() : void startIdle())} title="Play/Pause (Space)" aria-label="Play"><Svg d={p.isPlaying ? I.pause : I.play} /></button>
+            <button className="next" onClick={() => p.next()} title="Next (N)" aria-label="Next" disabled={!song}><Svg d={I.next} /></button>
           </div>
           <div className="progress-row">
             <div className="times"><span className="cur">{fmt(p.position)}</span> / <span className="dur">{fmt(p.duration)}</span></div>

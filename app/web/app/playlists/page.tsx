@@ -26,19 +26,14 @@ export const metadata: Metadata = {
 
 export default function PlaylistsPage() {
   const seasons = listSeasonPlaylists();
+  // THE HOME PAGE'S LOOK (owner, 2026-09-16): the black page and its rows, no
+  // explanatory copy. The listener's own playlists come FIRST, as "My Playlists",
+  // then the twelve defaults. The <h1> stays for crawlers and screen readers.
   return (
-    <>
-      <section className="plx-hero">
-        <div className="container">
-          <h1 className="plx-hero-title">Playlists</h1>
-          <p className="plx-hero-lead">
-            Music for wherever you are today, or build your own mixes from any album and keep them
-            saved to your account.
-          </p>
-        </div>
-      </section>
-      <SeasonPlaylists items={seasons} />
+    <div className="nf-rows spl-page">
+      <h1 className="sr-only">Playlists</h1>
       <MyPlaylists />
-    </>
+      <SeasonPlaylists items={seasons} />
+    </div>
   );
 }

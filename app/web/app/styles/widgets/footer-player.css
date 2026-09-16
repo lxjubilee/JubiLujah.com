@@ -30,8 +30,18 @@
   font-family: inherit;
 }
 
-.jv-player.active {
+/* ALWAYS UP (2026-09-16): the bar is shown from the first paint, idle or playing. */
+.jv-player.active,
+.jv-player.idle {
   transform: translateY(0);
+}
+.jv-player.idle .ctrls .buttons button:disabled { opacity: 0.35; cursor: default; }
+
+/* THE MUSIC LINE (components/PlayerWave.tsx): one line across the whole bar, 50%
+   transparent, above the bar's contents but never in the way of a click. */
+.jv-player .jv-wave {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: 0.5; z-index: 3;
 }
 
 /* ---- Now-playing: animated multi-color moving top border ----

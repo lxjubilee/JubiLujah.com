@@ -87,11 +87,11 @@ export default function MyPlaylists() {
 
   return (
     <>
-      <section className="plx-section">
-        <div className="container">
+      {/* A home-page row: same title style and side gutter as "For Your Season" below. */}
+      <section className="nf-row plx-mine">
+        <div className="plx-mine-inner">
           <div className="plx-section-head">
-            <h2 className="plx-section-title">My Playlists</h2>
-            {authenticated && mine.length > 0 && <span className="plx-section-count">{mine.length}</span>}
+            <h2 className="nf-row-title plx-mine-title">My Playlists</h2>
           </div>
 
           {!loading && !authenticated && (

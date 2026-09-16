@@ -1183,8 +1183,14 @@ a { color: inherit; }
 
    Readability does not rest on the gradient alone: .x-hero h1/.x-sub carry a
    text-shadow below, so the band can stay light enough to see through. */
+/* FITS BETWEEN THE HEADER AND THE PLAYER BAR (2026-09-16), exactly as the home
+   hero does: the bar is now always shown, so the banner is the whole first screen
+   and nothing of it hides behind the player. 420px is the floor on a short window. */
 .album-exec .x-hero {
-  position: relative; min-height: calc(56vh + 100px); display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  position: relative; min-height: 420px;
+  min-height: max(420px, calc(100vh - var(--jvh-hdr-h, 98px) - var(--jv-player-h, 80px)));
+  min-height: max(420px, calc(100dvh - var(--jvh-hdr-h, 98px) - var(--jv-player-h, 80px)));
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
   padding: 52px 0; border-bottom: 1px solid var(--xline); overflow: hidden; background-color: #0a0e14;
   background-image:
     linear-gradient(to top,

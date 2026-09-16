@@ -139,3 +139,40 @@
 .spl-track-sub { color: var(--ink-muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .spl-track-sub a { color: inherit; text-decoration: none; }
 .spl-track-sub a:hover { text-decoration: underline; }
+
+/* ================= THE PLAYLISTS PAGE, HOME-PAGE STYLE (2026-09-16) =================
+   app/playlists/page.tsx is a .nf-rows page now: black, rows with .nf-row-title, and
+   the For Your Season tiles open the same .nf-preview hover card as the album tiles. */
+.spl-page { min-height: 60vh; }
+/* My Playlists sits in the rows' 36px gutter. */
+.plx-mine-inner { padding: 0 36px; }
+.plx-mine .plx-mine-title { padding: 0; margin: 0; }
+.plx-mine .plx-section-head { margin-bottom: 14px; }
+.plx-mine .plx-signin { background: #141414; border-color: #262626; }
+.plx-mine .plx-card { background: #141414; border-color: #262626; }
+
+/* For Your Season: four 16:9 tiles to a row, filling the width like the home rows. */
+.spl-track { gap: 24px 16px; }
+.nf-tile.spl-tile {
+  flex: 0 0 calc((100% - 48px) / 4); max-width: calc((100% - 48px) / 4); width: auto;
+  aspect-ratio: 16 / 9; display: block;
+}
+.spl-tile img { object-position: center top; }
+.spl-tile-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.78)); pointer-events: none; }
+/* 20% smaller than the 18px it was, and lower: the "36 songs" count below it is gone. */
+.spl-tile-title {
+  position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 2;
+  color: #fff; font-size: 14.4px; font-weight: 800; line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0,0,0,.6);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* The hover card's picture is the playlist's 16:9, not an album's square. */
+.spl-preview .spl-preview-cover { aspect-ratio: 16 / 9; }
+.spl-preview .spl-preview-cover img, .spl-preview .spl-preview-cover .nf-tile-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top;
+}
+@media (max-width: 1100px) { .nf-tile.spl-tile { flex-basis: calc((100% - 32px) / 3); max-width: calc((100% - 32px) / 3); } }
+@media (max-width: 760px) {
+  .plx-mine-inner { padding: 0 16px; }
+  .nf-tile.spl-tile { flex-basis: calc((100% - 16px) / 2); max-width: calc((100% - 16px) / 2); }
+}

@@ -97,14 +97,28 @@ function resolveSongs(p: RawPlaylist): SeasonSong[] {
  * people-centred 16:9 photography from the same catalogue the songs come from,
  * which is what the spec asks the generated image to be.
  */
+// ONE PICTURE PER PLAYLIST, NEVER SHARED (2026-09-16): two playlists that open on
+// the same album used to show the same photograph side by side on the page. The
+// pictures are assigned together, in display order, each taking the first hero
+// among its songs that no earlier playlist has already taken.
+let pictureCache: Map<string, string | null> | null = null;
 function pictureFor(p: RawPlaylist): string | null {
-  if (p.linkedImage) return `/images/playlists/${encodeURIComponent(p.linkedImage)}`;
-  const heroes = new Map(heroPool().map((h) => [h.code, h.image]));
-  for (const s of p.songs) {
-    const img = heroes.get(s.code);
-    if (img) return img;
+  if (!pictureCache) {
+    pictureCache = new Map();
+    const heroes = new Map(heroPool().map((h) => [h.code, h.image]));
+    const used = new Set<string>();
+    for (const pl of loadRaw()) {
+      if (pl.linkedImage) { pictureCache.set(pl.id, `/images/playlists/${encodeURIComponent(pl.linkedImage)}`); continue; }
+      let pick: string | null = null;
+      for (const s of pl.songs) {
+        const img = heroes.get(s.code);
+        if (img && !used.has(img)) { pick = img; break; }
+      }
+      if (pick) used.add(pick);
+      pictureCache.set(pl.id, pick);
+    }
   }
-  return null;
+  return pictureCache.get(p.id) ?? null;
 }
 
 function toCard(p: RawPlaylist, songs: SeasonSong[]): SeasonPlaylist {
