@@ -8,6 +8,7 @@
 @import './styles/widgets/theme-playlist.css';
 @import './styles/widgets/analytics.css';
 @import './styles/widgets/footer-player.css';
+@import './styles/widgets/now-playing.css';
 @import './styles/widgets/subscription.css';
 @import './styles/widgets/music-type.css';
 @import './styles/widgets/album-extras.css';
@@ -56,6 +57,54 @@ body.jv-has-player { padding-bottom: 84px; }
    height before and after, and the 80px below it shows the top edge of the
    first shelf, which is a better invitation to scroll than a dead viewport. */
 :root { --jv-player-h: 80px; }
+
+/* ══ THE PAGE SCROLLBAR, kJubilee's (owner, 2026-09-16: "take the genericness
+   out of it") ══
+   Ported from kjubilee.com public/css/scrollbars.css: a faint recessed channel
+   with a slim, fully rounded pill floating inside it, resting as an
+   accent-tinted grey, warming to the accent on hover and taking it fully while
+   dragged. The accent is the tenant's (--brand-accent, azure here), as kJubilee's
+   follows each page's.
+
+   Chrome, Edge and Safari ignore ::-webkit-scrollbar on any element that also
+   has scrollbar-width or scrollbar-color, so the standard properties go only to
+   engines without the pseudo-elements (Firefox). Containers with their own
+   treatment (.jv-scroll, .auth-panel, .album-exec and the rest) still win,
+   being more specific. */
+:root {
+  --sb-accent: var(--brand-accent, #3DA5FF);
+  --sb-size: 12px;
+  --sb-pad: 3px;
+  --sb-track: rgba(255, 255, 255, .035);
+  --sb-thumb: rgba(255, 255, 255, .17);
+  --sb-thumb-hover: rgba(255, 255, 255, .34);
+}
+@supports (color: color-mix(in srgb, #000, #fff)) {
+  :root {
+    --sb-thumb: color-mix(in srgb, var(--sb-accent) 26%, rgba(255, 255, 255, .15));
+    --sb-thumb-hover: color-mix(in srgb, var(--sb-accent) 78%, #ffffff);
+  }
+}
+::-webkit-scrollbar { width: var(--sb-size); height: var(--sb-size); }
+::-webkit-scrollbar-track { background: var(--sb-track); border-radius: 100px; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--sb-thumb);
+  background-clip: padding-box;
+  border: var(--sb-pad) solid transparent;
+  border-radius: 100px;
+  min-height: 42px;
+}
+::-webkit-scrollbar-thumb:hover { background-color: var(--sb-thumb-hover); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:active { background-color: var(--sb-accent); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:horizontal { min-height: 0; min-width: 42px; }
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; }
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sb-thumb) var(--sb-track);
+  }
+}
 
 /* Reusable themed scrollbar. Add `className="jv-scroll"` to any overflow:auto
    container. Slim, rounded, inset thumb on a transparent track that brightens to
@@ -1216,7 +1265,52 @@ a { color: inherit; }
    two positions — the SCRIM stays pinned to the bottom, only the image moves.
    (The first value was `center` while the scrim spanned the whole box; it is
    `bottom center` now for the same reason the base rule is.) */
-.album-exec .x-hero--support { background-position: bottom center, center top; }
+.album-exec .x-hero--support { background-position: bottom center, center var(--hero-y, 0%); }
+
+/* ══ SCAN TO LISTEN, TOP RIGHT OF EVERY HERO (2026-09-16) ══
+   components/HeroQr.tsx, on the home carousel and the album banner. kJubilee's
+   plate (its home.css .hero-qr): white, because a QR code needs contrast against
+   a dark picture; 53px of code in 4px of plate; no lift on hover, because a code
+   somebody is lining a phone up against must not move. */
+.jp-hero-qr {
+  position: absolute; top: 16px; right: 20px; z-index: 6;
+  display: block; padding: 4px; border: 0; border-radius: 6px; cursor: pointer;
+  background: #fff; box-shadow: 0 4px 18px rgba(0,0,0,.34);
+  opacity: .94; transition: opacity .18s ease;
+}
+.jp-hero-qr:hover, .jp-hero-qr:focus-visible { opacity: 1; outline: none; }
+.jp-hero-qr img { display: block; width: 53px; height: 53px; }
+.jp-hero-qr-tip {
+  position: absolute; top: 50%; right: calc(100% + 10px); transform: translateY(-50%);
+  white-space: nowrap; pointer-events: none;
+  padding: 6px 10px; border-radius: 6px;
+  background: rgba(0,0,0,.78); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  opacity: 0; transition: opacity .15s ease;
+}
+.jp-hero-qr:hover .jp-hero-qr-tip, .jp-hero-qr:focus-visible .jp-hero-qr-tip { opacity: 1; }
+
+/* The admin's framing arrows: kJubilee's flat red discs (.img-nudge), under the
+   code with the right edges aligned; in the corner when there is no code. */
+.jp-hero-nudge {
+  position: absolute; z-index: 6; top: calc(16px + 61px + 10px); right: calc(20px + 14px);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.jp-hero-nudge.no-qr { top: 16px; right: 20px; }
+.jp-hero-nudge-btn {
+  width: 32px; height: 32px; padding: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.35); background: rgba(198,40,40,.92); color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.45);
+  transition: background .15s ease, transform .12s ease;
+}
+.jp-hero-nudge-btn:hover { background: #e53935; transform: scale(1.08); }
+.jp-hero-nudge-btn:active { transform: scale(.94); }
+.jp-hero-nudge-btn svg { display: block; }
+/* A QR code is for the screen you are NOT holding; and a phone has no business
+   re-cropping a picture for the whole site. */
+@media (max-width: 820px), (hover: none) and (pointer: coarse) {
+  .jp-hero-qr, .jp-hero-nudge { display: none !important; }
+}
 /* The shadows are what let the scrim above stay light. A near-white serif at
    42px over a photograph needs an edge of its own — without one the band would
    have to be dark enough to guarantee contrast against the brightest pixel it

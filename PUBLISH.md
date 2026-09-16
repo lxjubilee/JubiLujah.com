@@ -594,6 +594,33 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-16 (late) · footer 👍/♥, gold spark line, hero QR + admin arrows, Now Playing, scrollbar (web, api AND db)
+
+Web `Z_66oAH_xAoybttFFCE_y → r5OV-E0xIpKESqEz9LR7v` (rollback `.next.bak-20260916-150118`, the build
+before both). Decisions: DECISIONS.md D-2026-09-16-9 … -11.
+
+- **DB:** `0034_like_kinds.sql` (like vs favorite on `production.user_likes`, PK widened). 🔴 **It had to
+  run as `sudo -u postgres psql -d jubilujah`**: `jubilujah_app` does not own `user_likes` ("must be
+  owner of table"), so any ALTER on a pre-existing table needs the superuser. New tables (0033) do not.
+  Recorded in `public._migrations` by hand; 17 existing likes kept as `kind='like'`.
+- **API:** `routes/me.js` replaced whole — prod's copy was byte-identical to repo HEAD first (checked
+  with diff). Backup `/var/www/.backup/me.js.bak-20260916-145920`.
+- **🔴 `content/hero-positions.json` is written by the LIVE site** (admin red arrows,
+  `/backstage/hero-position`). The release tarball names `content/playlists` and
+  `content/staff-picks.json` explicitly — never widen it to all of `content/`, or every deploy resets
+  the admins' framing.
+- **🔴 Deploy-script trap:** `c=$(curl …)` under `set -e` exits the whole remote script when curl
+  fails (exit 7) while the new build boots — the poll never runs and nothing restarts a dead process.
+  Poll with `|| true` and no `set -e`. (It was harmless this time: pm2 had restarted cleanly.)
+- **NOT done — needs the owner:** album QR scans still open the redirector landing page, without
+  autoplay. Making a scan open the album and play means `storage_url || '&t=1'` on the 791 album assets
+  and `landing_enabled=false` on their tokens. That changes what every printed album code does, so it
+  was stopped for a decision (see D-2026-09-16-10).
+- **Verified:** home, album, playlists, /now-playing and /backstage/hero-position all 200 on the
+  origin; QR plates render on both heroes (svg 200); footer order 👍 · Back · Play · Next · ♥; the
+  spark renderer was checked in a harness running the real component (guests cannot start playback, so
+  it cannot be seen signed out on the live site).
+
 ### 2026-09-16 · 30-day free plan, "For Your Season" playlists, ticket sign-in fix, no em dashes, album banner (web, api AND db)
 
 Run from HPC-GABRIEL (`gabriel.inspire`, `~/.ssh/id_ed25519_jubilee_prod`). Three web releases the same

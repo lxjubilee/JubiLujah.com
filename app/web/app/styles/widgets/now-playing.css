@@ -1,0 +1,99 @@
+/* ============================================================
+   /now-playing (components/NowPlayingView.tsx), 2026-09-16.
+   The playing album, large and centred, between the header and the always-on
+   footer bar, over its own cover blurred into the page's black.
+   ============================================================ */
+
+.np-stage {
+  position: relative; overflow: hidden; background: #000; color: #fff;
+  min-height: max(520px, calc(100dvh - var(--jvh-hdr-h, 98px) - var(--jv-player-h, 80px)));
+  display: flex; align-items: center; justify-content: center;
+  padding-block: 32px; padding-inline: 20px;
+}
+.np-backdrop {
+  position: absolute; inset: -40px; background-size: cover; background-position: center;
+  filter: blur(48px) saturate(1.25); opacity: .55; transform: scale(1.1);
+}
+.np-veil {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,.72) 70%, #000 100%);
+}
+
+.np-main {
+  position: relative; z-index: 1; width: 100%; max-width: 1180px;
+  display: grid; grid-template-columns: 1fr; justify-items: center; gap: 32px;
+}
+@media (min-width: 1100px) {
+  /* The queue sits to the right; the album stays in the middle of the screen. */
+  .np-main { grid-template-columns: 260px 1fr 260px; align-items: center; }
+  .np-center { grid-column: 2; }
+  .np-next { grid-column: 3; }
+}
+
+.np-center { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; max-width: 560px; }
+
+.np-cover {
+  width: min(420px, 46vh, 82vw); aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
+  transition: transform .5s ease, box-shadow .5s ease;
+  transform: scale(.96);
+}
+.np-stage.is-playing .np-cover {
+  transform: scale(1);
+  box-shadow: 0 30px 90px rgba(0,0,0,.7), 0 0 60px color-mix(in srgb, var(--brand-accent, #3DA5FF) 28%, transparent), 0 0 0 1px rgba(255,255,255,.1);
+}
+.np-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.np-cover-blank { width: 100%; height: 100%; display: grid; place-items: center; background: #11161f; color: rgba(255,255,255,.4); }
+
+.np-meta { margin-top: 26px; width: 100%; }
+.np-title {
+  margin: 0; font-size: clamp(22px, 3vw, 34px); font-weight: 700; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.np-sub { margin: 8px 0 0; color: rgba(255,255,255,.72); font-size: 15px; }
+.np-album-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.3); }
+.np-album-link:hover { color: var(--brand-accent, #3DA5FF); border-color: currentColor; }
+
+.np-progress-row { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 22px; }
+.np-time { font-size: 12px; color: rgba(255,255,255,.6); font-variant-numeric: tabular-nums; min-width: 36px; }
+.np-progress { flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,.16); cursor: pointer; position: relative; }
+.np-fill { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--brand-accent, #3DA5FF); }
+
+.np-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
+.np-btn {
+  background: transparent; border: 0; color: #fff; cursor: pointer; padding: 8px; border-radius: 50%;
+  display: grid; place-items: center; transition: color .15s ease, transform .12s ease, background .15s ease;
+}
+.np-btn:hover { color: var(--brand-accent, #3DA5FF); }
+.np-btn:active { transform: scale(.94); }
+.np-play { width: 64px; height: 64px; background: var(--brand-accent, #3DA5FF); color: #04233d; }
+.np-play:hover { color: #04233d; background: color-mix(in srgb, var(--brand-accent, #3DA5FF) 80%, white); }
+.np-react { color: rgba(255,255,255,.62); }
+.np-react.like.on, .np-react.like.on:hover { color: #46D07A; }
+.np-react.fav.on, .np-react.fav.on:hover { color: #FF4D6D; }
+
+.np-links { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.np-link {
+  display: inline-block; padding: 9px 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px;
+  color: #fff; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.06);
+}
+.np-link:hover { border-color: var(--brand-accent, #3DA5FF); color: var(--brand-accent, #3DA5FF); }
+.np-view { margin-top: 20px; }
+
+.np-next { width: 100%; max-width: 560px; align-self: center; }
+.np-next-title { margin: 0 0 10px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 700; }
+.np-next-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.np-next-item { display: flex; align-items: center; gap: 10px; padding: 6px; border-radius: 8px; background: rgba(255,255,255,.04); min-width: 0; }
+.np-next-item img, .np-next-blank { width: 40px; height: 40px; border-radius: 5px; object-fit: cover; flex: none; }
+.np-next-blank { display: grid; place-items: center; background: #11161f; color: rgba(255,255,255,.4); }
+.np-next-tx { display: flex; flex-direction: column; min-width: 0; text-align: left; }
+.np-next-name { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-next-sub { font-size: 12px; color: rgba(255,255,255,.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.np-empty-inner { position: relative; z-index: 1; text-align: center; }
+.np-empty-glyph { width: 96px; height: 96px; margin: 0 auto 18px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.06); color: var(--brand-accent, #3DA5FF); }
+.np-empty .np-title { white-space: normal; }
+
+@media (prefers-reduced-motion: reduce) {
+  .np-cover { transition: none; }
+}

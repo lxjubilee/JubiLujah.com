@@ -44,7 +44,9 @@
     ".next-azure/types/**/*.ts",
     ".next-azure2/types/**/*.ts",
     ".next-r1/types/**/*.ts",
-    ".next-r1b/types/**/*.ts"
+    ".next-r1b/types/**/*.ts",
+    ".next-r2/types/**/*.ts",
+    ".next-r3/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

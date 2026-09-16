@@ -247,20 +247,26 @@ router.patch('/playlists/:id/items', validate(reorderSchema), ah(async (req, res
 // like uses albums. Resolved to titles/covers via the manifest for the page.
 // ===========================================================================
 
-// Flat set of liked targets ("type:id") — drives the ✓/♥ state in the UI.
+// Flat set of liked targets — drives the ✓/♥ state in the UI. A like is
+// "type:id" (unchanged, so older clients keep working); a favorite (0034) is
+// "type:id:favorite".
 router.get('/likes/ids', ah(async (req, res) => {
   const r = await query(
-    'SELECT target_type, target_id FROM production.user_likes WHERE user_id = $1',
+    'SELECT target_type, target_id, kind FROM production.user_likes WHERE user_id = $1',
     [req.auth.user.id]
   );
-  res.json({ ids: r.rows.map((x) => `${x.target_type}:${x.target_id}`) });
+  res.json({ ids: r.rows.map((x) => (x.kind === 'favorite'
+    ? `${x.target_type}:${x.target_id}:favorite`
+    : `${x.target_type}:${x.target_id}`)) });
 }));
 
 // Resolved list for the "Liked" page, newest first.
 router.get('/likes', ah(async (req, res) => {
   const r = await query(
+    // Likes only: a favorite (0034) lives in the "My Favorites" playlist, and
+    // listing both kinds here would show a liked-and-favorited song twice.
     `SELECT target_type, target_id, created_at FROM production.user_likes
-      WHERE user_id = $1 ORDER BY created_at DESC`,
+      WHERE user_id = $1 AND kind = 'like' ORDER BY created_at DESC`,
     [req.auth.user.id]
   );
   const items = r.rows.map((row) => {
@@ -274,25 +280,70 @@ router.get('/likes', ah(async (req, res) => {
 const likeSchema = z.object({
   target_type: z.enum(['album', 'song']),
   target_id: z.string().uuid(),
+  kind: z.enum(['like', 'favorite']).optional(),
 });
+
+// THE FIRST PLAYLIST BUILDS ITSELF (owner, 2026-09-16): "the first 36 likes and
+// favorites that they select will automatically generate their first default
+// playlist." Every song a listener likes or favorites is appended to their
+// "My Favorites" playlist while it holds fewer than 36 songs. Past 36 the
+// playlist is theirs to curate; nothing is ever removed from it on an unlike.
+const FIRST_PLAYLIST_SIZE = 36;
+async function addToFirstPlaylist(userId, songId) {
+  await query(
+    `INSERT INTO production.user_playlists (owner_user_id, name, description)
+       SELECT $1, $2, 'Your go-to mix of saved songs.'
+        WHERE NOT EXISTS (SELECT 1 FROM production.user_playlists WHERE owner_user_id = $1 AND name = $2)`,
+    [userId, DEFAULT_PLAYLIST_NAME]
+  );
+  const pl = await query(
+    `SELECT pl.id, COUNT(pi.id)::int AS n
+       FROM production.user_playlists pl
+       LEFT JOIN production.user_playlist_items pi ON pi.playlist_id = pl.id
+      WHERE pl.owner_user_id = $1 AND pl.name = $2
+      GROUP BY pl.id ORDER BY pl.created_at ASC LIMIT 1`,
+    [userId, DEFAULT_PLAYLIST_NAME]
+  );
+  if (!pl.rowCount || pl.rows[0].n >= FIRST_PLAYLIST_SIZE) return false;
+  const exists = await query('SELECT 1 FROM catalog.songs WHERE id = $1', [songId]);
+  if (!exists.rowCount) return false;
+  const r = await query(
+    `INSERT INTO production.user_playlist_items (playlist_id, song_id, position)
+       SELECT $1, $2, COALESCE(MAX(position) + 1, 0)
+         FROM production.user_playlist_items WHERE playlist_id = $1
+     ON CONFLICT (playlist_id, song_id) DO NOTHING
+     RETURNING id`,
+    [pl.rows[0].id, songId]
+  );
+  if (r.rowCount) await query('UPDATE production.user_playlists SET updated_at = NOW() WHERE id = $1', [pl.rows[0].id]);
+  return r.rowCount > 0;
+}
+
 router.post('/likes', validate(likeSchema), ah(async (req, res) => {
   const { target_type, target_id } = req.body;
+  const kind = req.body.kind || 'like';
   await query(
-    `INSERT INTO production.user_likes (user_id, target_type, target_id)
-       VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`,
-    [req.auth.user.id, target_type, target_id]
+    `INSERT INTO production.user_likes (user_id, target_type, target_id, kind)
+       VALUES ($1, $2, $3, $4) ON CONFLICT DO NOTHING`,
+    [req.auth.user.id, target_type, target_id, kind]
   );
-  res.status(201).json({ liked: true, target_type, target_id });
+  let addedToPlaylist = false;
+  if (target_type === 'song') {
+    // Best-effort: a like must never fail because the playlist could not grow.
+    try { addedToPlaylist = await addToFirstPlaylist(req.auth.user.id, target_id); } catch { /* ignore */ }
+  }
+  res.status(201).json({ liked: true, target_type, target_id, kind, added_to_playlist: addedToPlaylist });
 }));
 
 router.delete('/likes/:type/:id', ah(async (req, res) => {
   const { type, id } = req.params;
+  const kind = req.query.kind === 'favorite' ? 'favorite' : 'like';
   if (!['album', 'song'].includes(type) || !isUuid(id)) throw new HttpError(400, 'invalid target');
   await query(
-    'DELETE FROM production.user_likes WHERE user_id = $1 AND target_type = $2 AND target_id = $3',
-    [req.auth.user.id, type, id]
+    'DELETE FROM production.user_likes WHERE user_id = $1 AND target_type = $2 AND target_id = $3 AND kind = $4',
+    [req.auth.user.id, type, id, kind]
   );
-  res.json({ liked: false, target_type: type, target_id: id });
+  res.json({ liked: false, target_type: type, target_id: id, kind });
 }));
 
 // ===========================================================================

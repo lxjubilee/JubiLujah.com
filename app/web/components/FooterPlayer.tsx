@@ -13,6 +13,10 @@ import { pingNowPlaying, stopNowPlaying } from '@/lib/analytics';
 import { useUpgradeModal } from '@/stores/upgradeModal';
 import AddToPlaylist from '@/components/AddToPlaylist';
 import PlayerWave from '@/components/PlayerWave';
+import { useAuth } from '@/components/AuthProvider';
+import { useLikes } from '@/stores/likes';
+import { useAuthGate } from '@/stores/authGate';
+import { reactionStream } from '@/lib/reactionStream';
 
 const I = {
   play: 'M7 5v14l12-7z',
@@ -26,6 +30,8 @@ const I = {
   expand: 'M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z',
   close: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z',
   note: 'M12 3v10.55A4 4 0 1014 17V7h4V3h-6z',
+  thumb: 'M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z',
+  heart: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
 };
 const Svg = ({ d, cls }: { d: string; cls?: string }) => (
   <svg viewBox="0 0 24 24" className={cls}><path d={d} /></svg>
@@ -175,6 +181,28 @@ export default function FooterPlayer() {
     return () => clearInterval(t);
   }, [song?.songId, p.isPlaying]);
 
+  // 👍 LIKE and ♥ FAVORITE for the playing song (owner, 2026-09-16), so listeners
+  // rate songs as they hear them. Each is held on the account (0034); the first 36
+  // of either also build the listener's first playlist, server-side. Turning one
+  // on sends the reaction stream up past the header; turning it off is quiet.
+  const { authenticated } = useAuth();
+  const ensureLikes = useLikes((s) => s.ensureLoaded);
+  const toggleLike = useLikes((s) => s.toggle);
+  const songId = song?.songId || '';
+  const liked = useLikes((s) => (songId ? s.has('song', songId) : false));
+  const favorite = useLikes((s) => (songId ? s.has('song', songId, 'favorite') : false));
+  useEffect(() => { if (authenticated) ensureLikes(); }, [authenticated, ensureLikes]);
+  const react = (e: React.MouseEvent<HTMLButtonElement>, kind: 'like' | 'favorite') => {
+    if (!songId) return;
+    if (!authenticated) {
+      useAuthGate.getState().show(kind === 'favorite' ? 'Sign in to save your favorites' : 'Sign in to like songs');
+      return;
+    }
+    const on = kind === 'favorite' ? favorite : liked;
+    if (!on) reactionStream(e.currentTarget, kind === 'favorite' ? 'heart' : 'thumb');
+    void toggleLike('song', songId, kind);
+  };
+
   const pct = p.duration > 0 ? Math.min(100, Math.max(0, (p.position / p.duration) * 100)) : 0;
   const sub = [song?.artist, song?.album].filter(Boolean).join(' · ');
 
@@ -194,7 +222,7 @@ export default function FooterPlayer() {
       <div className={`jv-player${song ? ' active' : ' idle'}${p.isPlaying ? ' jv-playing' : ''}`}>
         <PlayerWave />
         <div className="now">
-          <div className="cover" onClick={() => p.setExpanded(true)} title="Open now-playing">
+          <div className="cover" onClick={() => router.push('/now-playing')} title="Open now-playing">
             {song?.cover ? <Image src={song.cover} alt="" width={60} height={60} /> : <Svg d={I.note} cls="placeholder-glyph" />}
           </div>
           <div className="meta">
@@ -205,9 +233,11 @@ export default function FooterPlayer() {
 
         <div className="ctrls">
           <div className="buttons">
+            <button className={`react like${liked ? ' on' : ''}`} onClick={(e) => react(e, 'like')} title={liked ? 'Liked' : 'Like this song'} aria-label="Like" aria-pressed={liked} disabled={!songId}><Svg d={I.thumb} /></button>
             <button className="prev" onClick={() => p.prev()} title="Previous (P)" aria-label="Previous" disabled={!song}><Svg d={I.prev} /></button>
             <button className="play" onClick={() => (song ? p.togglePlay() : void startIdle())} title="Play/Pause (Space)" aria-label="Play"><Svg d={p.isPlaying ? I.pause : I.play} /></button>
             <button className="next" onClick={() => p.next()} title="Next (N)" aria-label="Next" disabled={!song}><Svg d={I.next} /></button>
+            <button className={`react fav${favorite ? ' on' : ''}`} onClick={(e) => react(e, 'favorite')} title={favorite ? 'In your favorites' : 'Add to favorites'} aria-label="Favorite" aria-pressed={favorite} disabled={!songId}><Svg d={I.heart} /></button>
           </div>
           <div className="progress-row">
             <div className="times"><span className="cur">{fmt(p.position)}</span> / <span className="dur">{fmt(p.duration)}</span></div>
@@ -231,7 +261,7 @@ export default function FooterPlayer() {
             <button className="mute-btn" onClick={() => p.toggleMute()} aria-label="Mute"><Svg d={p.muted || p.volume === 0 ? I.mute : I.vol} /></button>
             <input type="range" min={0} max={1} step={0.01} value={p.muted ? 0 : p.volume} onChange={(e) => p.setVolume(parseFloat(e.target.value))} aria-label="Volume" />
           </div>
-          <button className="expand" onClick={() => { if (song?.href) router.push(song.href); else p.setExpanded(true); }} title="Open now-playing page" aria-label="Open now-playing page"><Svg d={I.expand} /></button>
+          <button className="expand" onClick={() => router.push('/now-playing')} title="Open now-playing page" aria-label="Open now-playing page"><Svg d={I.expand} /></button>
         </div>
       </div>
 

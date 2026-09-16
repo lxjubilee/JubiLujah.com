@@ -8,6 +8,8 @@ import PublicAlbumRating from './PublicAlbumRating';
 import SongRatingControl from './SongRatingControl';
 import ReviewComposer from './ReviewComposer';
 import { useAuth } from './AuthProvider';
+import HeroQr from './HeroQr';
+import { heroKey, useHeroPositions } from '@/stores/heroPositions';
 import { usePlayer, PlayerSong } from '@/stores/player';
 import { albumUuid } from '@/lib/ids';
 import { api } from '@/lib/api';
@@ -120,7 +122,13 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
   const albumPicture = heroImages[current.code] || support[current.code] || '';
   const supportImage = albumPicture;
   const heroImage = albumPicture || heroFallback;
-  const heroStyle = { ['--persona-img' as string]: heroImage ? `url('${heroImage}')` : 'none' } as CSSProperties;
+  // An admin's framing for this album's picture (the red arrows; 0 = top).
+  const heroY = useHeroPositions((s) => s.map[heroKey(current.code)]);
+  useEffect(() => { useHeroPositions.getState().ensureLoaded(); }, []);
+  const heroStyle = {
+    ['--persona-img' as string]: heroImage ? `url('${heroImage}')` : 'none',
+    ...(heroY != null ? { ['--hero-y' as string]: `${heroY}%` } : {}),
+  } as CSSProperties;
 
 
   // ---- Public ratings (§2/§3/§6): album + per-song summaries -------------
@@ -263,6 +271,8 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
       {artistSlug
         ? <a className="x-album-ident" href={`/artist/${artistSlug}`} aria-label={`More from ${artist}`}>{artist}</a>
         : <span className="x-album-ident" aria-hidden="true">{artist}</span>}
+      {/* Scan to listen, top right (click plays here); admin framing arrows under it. */}
+      {supportImage && canPlay && <HeroQr code={current.code} title={current.title} onPlay={() => { if (bigPlayPaused) onBigPlay(); }} />}
     </header>
   );
 

@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePlayer, PlayerSong } from '@/stores/player';
 import { api } from '@/lib/api';
 import type { HeroSlide } from '@/lib/heroes';
+import HeroQr from './HeroQr';
+import { heroKey, useHeroPositions } from '@/stores/heroPositions';
 
 // ============================================================================
 // THE HOME HERO — a few album banners, cross-fading, over the content rows.
@@ -53,6 +55,10 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
   // `kj-player-state` event; here the store is already shared.)
   const nowHref = usePlayer((s) => s.nowPlaying?.href);
   const isPlaying = usePlayer((s) => s.isPlaying);
+
+  // Admin-set framing for each picture (0 = top, the default).
+  const positions = useHeroPositions((s) => s.map);
+  useEffect(() => { useHeroPositions.getState().ensureLoaded(); }, []);
 
   const count = slides.length;
   const slide = slides[Math.min(i, count - 1)];
@@ -158,6 +164,7 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
           aria-hidden="true"
           decoding="async"
           loading="eager"
+          style={positions[heroKey(s.code)] != null ? { objectPosition: `center ${positions[heroKey(s.code)]}%` } : undefined}
         />
       ))}
 
@@ -171,6 +178,10 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
           treatment. aria-hidden: it is the artwork's own lettering, and the
           name is already read out by the title link and the button. */}
       <span className="jp-hero-ident" aria-hidden="true">{slide.artistName}</span>
+
+      {/* The scan-to-listen code, top right; clicking it plays the album (never
+          pauses it: it is a Play, not a transport toggle). Admin arrows below. */}
+      <HeroQr code={slide.code} title={slide.title} onPlay={() => { if (!sounding) void onPlay(); }} />
 
       <div className="jp-hero-content" key={slide.code}>
         <h2 className="jp-hero-title">

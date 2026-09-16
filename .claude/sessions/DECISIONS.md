@@ -816,3 +816,34 @@ loop or an error page.
 (three releases: sign-out safety → plant → ask) was handed to the active kJubilee session
 (`kjubilee-com-02`) on 2026-09-16 rather than edited from here, because that session was deploying
 kJubilee the same hour and two sessions editing its auth files would collide.
+
+## D-2026-09-16-9 · A song is LIKED (👍) and, separately, FAVORITED (♥); the first 36 build a playlist
+
+Owner, 2026-09-16: 👍 left of Back and ♥ right of Next on the footer player, each sending the reaction
+stream up past the header, "so we can start collecting ratings." Held as two independent opinions
+(`production.user_likes.kind`, migration 0034), the way kJubilee keeps `vote` and `favorite`. Every
+song liked or favorited is appended to the listener's "My Favorites" playlist while it holds fewer
+than 36 songs ("the first 36 likes and favorites… automatically generate their first default
+playlist"); past 36 it is theirs to curate, and an unlike never removes anything from it. The Liked
+page lists likes only, so a song both liked and favorited is not shown twice.
+
+## D-2026-09-16-10 · QR code on every hero; album-scan autoplay is WAITING on the owner
+
+Owner, 2026-09-16: a QR on every hero, top right, "Scan to listen" on hover, click plays the album, a
+phone scan opens the site and plays it. Built after kJubilee's plate (white, 53px, hidden on phones and
+coarse pointers). The click and the plate are live. **The scan-autoplay half is not:** it needs every
+album redirector asset pointed at `/album?c=<code>&t=1` and the landing page switched off for album
+tokens (791 codes), which changes the behaviour of every album code already printed or shared. That
+bulk update was stopped for an explicit owner go-ahead. Until then a scan opens the landing page, then
+the album, without autoplay. `api/scripts/redirector-ingest-music.mjs` (`albumUrl`, `landing=true`)
+must change in the same step, or the next ingest undoes it.
+
+## D-2026-09-16-11 · The footer's music line becomes gold sparks, behind everything
+
+Owner, same day, superseding the fivefold-colour solid line of a few hours earlier: the line sits
+behind the cover, text and buttons, and dissolves into thousands of small sparks of different sizes and
+shapes, bursting like fireworks on the beat, "because it is Jubilee." One colour for now: bright yellow
+gold. Still driven by track tempo and energy, not the audio (the CDN sends no CORS). Also the same
+release: admin-only red arrows frame each album's hero picture for everyone
+(`content/hero-positions.json`, never shipped by a release); `/now-playing` opened from the footer; the
+page scrollbar ported from kjubilee.com's `scrollbars.css`, tinted with the tenant accent.
