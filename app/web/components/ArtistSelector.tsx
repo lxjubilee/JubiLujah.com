@@ -32,7 +32,7 @@ export default function ArtistSelector({
   function toggle(slug: string) {
     if (sel.has(slug)) {
       if (sel.size <= 1) { // §3.3 floor of one
-        setNotice('Keep at least one artist — a playlist needs a voice.');
+        setNotice('Keep at least one artist: a playlist needs a voice.');
         setTimeout(() => setNotice(null), 2600);
         return;
       }

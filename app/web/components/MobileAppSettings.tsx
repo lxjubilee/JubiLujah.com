@@ -170,7 +170,7 @@ export default function MobileAppSettings() {
   }, [flash, reload]);
 
   if (loading) return <p className="notice">Checking access…</p>;
-  if (!authenticated || !hasRole('admin')) return <p className="notice">Access denied — requires the admin role.</p>;
+  if (!authenticated || !hasRole('admin')) return <p className="notice">Access denied: requires the admin role.</p>;
 
   const cats = cfg?.categories ?? [];
   const pages = cats.filter((c) => c.kind !== 'music_type');
@@ -236,7 +236,7 @@ export default function MobileAppSettings() {
           <div>
             {selectedPage
               ? <PageEditor key={selectedPage.key} page={selectedPage} act={act} />
-              : <p className="muted">No pages yet — add one to start.</p>}
+              : <p className="muted">No pages yet. Add one to start.</p>}
           </div>
       </div>
       <Modal dialog={dialog} onResolve={resolveDialog} />
@@ -316,7 +316,7 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
         <>
           {page.hero_autorotate && (
             <p className="mas-hint">
-              Auto rotate is on — the hero shows one slide per Inspire Persona (Melody → Amir →
+              Auto rotate is on: the hero shows one slide per Inspire Persona (Melody → Amir →
               Jubilee → …), and every 24 hours each persona's slide moves to a new album of that
               persona. Only albums with a cover and a playable track are shown. The manual slides
               below are paused and resume when you turn Auto rotate off.
@@ -324,7 +324,7 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
           )}
           <div style={page.hero_autorotate ? { opacity: 0.5 } : undefined}>
           <p className="mas-hint">Full-width carousel at the top of this page{slides.length > 1 ? ' · drag the grip to reorder' : ', in this order'}.</p>
-          {slides.length === 0 && <p className="mas-empty">No slides yet — add an album below.</p>}
+          {slides.length === 0 && <p className="mas-empty">No slides yet. Add an album below.</p>}
           {slides.length > 0 && (
           <div className="mas-slidelist jv-scroll">
           {slides.map((s, i) => (
@@ -341,7 +341,7 @@ function HeroManager({ page, act }: { page: Page; act: Act }) {
                 <div className="mas-stitle">{s.title || s.album_ref}</div>
                 <div className="mas-smeta">
                   <Switch checked={s.is_active} onChange={(v) => void patchSlide(s.id, { is_active: v }, 'Updated')} label="Active" />
-                  <span>·</span><span>{s.artist || '—'}</span>
+                  <span>·</span><span>{s.artist || '-'}</span>
                 </div>
               </div>
               <div className="mas-sside">
@@ -486,20 +486,20 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
         </div>
       </div>
 
-      <p className="mas-label" style={{ margin: '16px 0 8px' }}>Content type — layout is fixed by type</p>
+      <p className="mas-label" style={{ margin: '16px 0 8px' }}>Content type (layout is fixed by type)</p>
       <div className="mas-seg" role="tablist" aria-label="Section content type">
         <button className={isArtists ? 'on' : ''} onClick={() => void setKind('artists')}>◍ Artists <span>circles</span></button>
         <button className={!isArtists ? 'on' : ''} onClick={() => void setKind('albums')}>▦ Albums <span>covers</span></button>
       </div>
 
       <p className="mas-label" style={{ margin: '18px 0 12px' }}>
-        In this section — {items.length} {isArtists ? 'artist' : 'album'}{items.length === 1 ? '' : 's'}
+        In this section: {items.length} {isArtists ? 'artist' : 'album'}{items.length === 1 ? '' : 's'}
         {!isArtists && section.auto_order ? ' · auto-ordered daily' : (items.length > 1 ? ' · drag to reorder' : '')}
       </p>
       {!isArtists && section.auto_order && (
-        <p className="mas-hint">Auto Order is on — these covers reshuffle automatically every 24 hours; every album stays visible, only the order changes. Your manual order is saved and resumes when you turn it off.</p>
+        <p className="mas-hint">Auto Order is on. These covers reshuffle automatically every 24 hours; every album stays visible, only the order changes. Your manual order is saved and resumes when you turn it off.</p>
       )}
-      {items.length === 0 && <p className="mas-empty">Nothing yet — add {isArtists ? 'artists' : 'albums'} below.</p>}
+      {items.length === 0 && <p className="mas-empty">Nothing yet. Add {isArtists ? 'artists' : 'albums'} below.</p>}
 
       {isArtists ? (
         <div className="mas-circrow mas-itemlist jv-scroll">
@@ -535,7 +535,7 @@ function SectionEditor({ page, section, act, index, count, onMove }: {
                     when this section shows genres, falling back to the album name
                     for the albums the catalog gives no genre. */}
                 <div className="mas-it-title">{(section.show_genre && it.genre) || it.title || it.item_ref}</div>
-                <div className="mas-it-sub">{it.artist || '—'}</div>
+                <div className="mas-it-sub">{it.artist || '-'}</div>
               </div>
               <button className="mm-btn sm" onClick={() => void act(api.del(`/api/admin/mobile/items/${it.id}`), 'Removed')}>Remove</button>
             </div>

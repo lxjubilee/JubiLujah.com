@@ -6,7 +6,7 @@
 //
 //   node scripts/gen-album-covers.mjs
 //
-// Cover location on the CDN: <CDN>/music/<album.path>/artwork/<CODE>.png
+// Cover location on the CDN: <CDN>/music/<album.path minus `albums/`>/artwork/<CODE>.png
 // ============================================================================
 import fs from 'node:fs';
 import path from 'node:path';
@@ -14,13 +14,19 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
-const CDN = (process.env.NEXT_PUBLIC_CDN_BASE || 'https://cdn.jubileeverse.com').replace(/\/$/, '');
+// Must match app/web/lib/cdn.ts — same default host AND same path shape. When they
+// disagree this file records covers at URLs the site never requests, and misses the
+// ones it does. Measured 2026-09-10: cd.jubilujah.com serves music/<path-without-
+// albums/>; cdn.jubileeverse.com serves music/albums/<path>. The site uses the former.
+const CDN = (process.env.NEXT_PUBLIC_CDN_BASE || 'https://cd.jubilujah.com').replace(/\/$/, '');
 const MANIFEST = path.join(ROOT, 'public', 'music', 'catalog-manifest.json');
 const OUT = path.join(ROOT, 'public', 'music', 'album-covers.json');
 const CONCURRENCY = 24;
 const TIMEOUT_MS = 8000;
 
-const coverUrl = (album) => `${CDN}/music/${album.path}/artwork/${album.code}.png`;
+// The serving bucket omits the manifest's leading `albums/` segment — the same strip
+// lib/cdn.ts musicUrl() performs. Leaving it in returns 404 for every album.
+const coverUrl = (album) => `${CDN}/music/${String(album.path).replace(/^albums\//, '')}/artwork/${album.code}.png`;
 
 async function exists(url) {
   const ctrl = new AbortController();

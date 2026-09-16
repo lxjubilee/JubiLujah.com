@@ -1,0 +1,370 @@
+{
+  "id": "when-you-feel-alone",
+  "title": "When You Feel Alone",
+  "type": "Emotional State",
+  "order": 8,
+  "description": "Songs that remind you that you are seen, known and never truly by yourself.",
+  "accent": "#7A9CC6",
+  "imagePrompt": "A young man walking along a beach at sunset being greeted warmly by a friend running up to him, open arms and bright smiles, golden light, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "tenderness",
+      "intimacy",
+      "comfort",
+      "longing",
+      "hope",
+      "reverence"
+    ],
+    "energy": [
+      15,
+      62
+    ],
+    "exclude": [
+      "exuberance"
+    ],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "El Rosario de Abuela",
+      "track": "La Noche Que Me Sostuvo (The Night Her Prayer Held Me)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 7
+    },
+    {
+      "slot": 2,
+      "album": "The Interrogation",
+      "track": "Wrestling at the Jordan",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 6
+    },
+    {
+      "slot": 3,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "Santo, Santo, Santo",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 2
+    },
+    {
+      "slot": 4,
+      "album": "Waiting Room",
+      "track": "The Surgeon Hasn't Come Out",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1018EN",
+      "n": 4
+    },
+    {
+      "slot": 5,
+      "album": "Miracle Worker (Subway Funk)",
+      "track": "What God Has Done (Altar Track)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1012EN",
+      "n": 8
+    },
+    {
+      "slot": 6,
+      "album": "Waiting Room",
+      "track": "The Door Finally Opens",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1018EN",
+      "n": 10
+    },
+    {
+      "slot": 7,
+      "album": "Avraham's God Still Walks",
+      "track": "Bind Me Like Yitzhak",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1023EN",
+      "n": 7
+    },
+    {
+      "slot": 8,
+      "album": "Miracle Worker (Subway Funk)",
+      "track": "Walk (Gate Beautiful Now)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1012EN",
+      "n": 5
+    },
+    {
+      "slot": 9,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "Quiero Conocerte",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 3
+    },
+    {
+      "slot": 10,
+      "album": "The Wisdom Road",
+      "track": "Memory Eternal",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1007EN",
+      "n": 12
+    },
+    {
+      "slot": 11,
+      "album": "My Kuleana",
+      "track": "My Kuleana",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 1
+    },
+    {
+      "slot": 12,
+      "album": "Ancestral Strength",
+      "track": "Wade in the Water Still",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1003EN",
+      "n": 4
+    },
+    {
+      "slot": 13,
+      "album": "Community Tending",
+      "track": "Growing Strong",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1012EN",
+      "n": 10
+    },
+    {
+      "slot": 14,
+      "album": "The Promise Walks In",
+      "track": "Every Step We Take Is Holy Ground",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1016EN",
+      "n": 9
+    },
+    {
+      "slot": 15,
+      "album": "No Greater Love",
+      "track": "A Quiet Heart on a Loud Floor",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1029EN",
+      "n": 9
+    },
+    {
+      "slot": 16,
+      "album": "La Calle Canta",
+      "track": "Cristo Sigue en la Cuadra (Christ Stays on the Block)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 12
+    },
+    {
+      "slot": 17,
+      "album": "My Kuleana",
+      "track": "Use What He Gave",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 7
+    },
+    {
+      "slot": 18,
+      "album": "Healing Administration",
+      "track": "Creating Space",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 4
+    },
+    {
+      "slot": 19,
+      "album": "Healing Wounds",
+      "track": "Balm for Gilead",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1009EN",
+      "n": 7
+    },
+    {
+      "slot": 20,
+      "album": "Shabbat Joy",
+      "track": "Lord Of The Sabbath",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1008EN",
+      "n": 7
+    },
+    {
+      "slot": 21,
+      "album": "Refuge",
+      "track": "When the Nations Rage",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 5
+    },
+    {
+      "slot": 22,
+      "album": "El Rosario de Abuela",
+      "track": "El Padre Escuchó (The Father Heard)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 5
+    },
+    {
+      "slot": 23,
+      "album": "Every Generation Prays",
+      "track": "Inheritance Of Prayer",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1010EN",
+      "n": 3
+    },
+    {
+      "slot": 24,
+      "album": "Hands That Mend",
+      "track": "Hands That Weave",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1006EN",
+      "n": 7
+    },
+    {
+      "slot": 25,
+      "album": "Anchor in the Storm",
+      "track": "Still Breathing",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1001EN",
+      "n": 2
+    },
+    {
+      "slot": 26,
+      "album": "Healing Administration",
+      "track": "Wounds Acknowledged",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 5
+    },
+    {
+      "slot": 27,
+      "album": "Whole Again",
+      "track": "Pass It To The Next Pew",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1056EN",
+      "n": 11
+    },
+    {
+      "slot": 28,
+      "album": "Healing Wounds",
+      "track": "The Long Mercy",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1009EN",
+      "n": 4
+    },
+    {
+      "slot": 29,
+      "album": "The Interrogation",
+      "track": "The God Who Argues Back",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 5
+    },
+    {
+      "slot": 30,
+      "album": "Anchor in the Storm",
+      "track": "Hold the Rope",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1001EN",
+      "n": 4
+    },
+    {
+      "slot": 31,
+      "album": "La Calle Canta",
+      "track": "Cantamos en la Bodega (We Sing in the Bodega)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 6
+    },
+    {
+      "slot": 32,
+      "album": "Whole Again",
+      "track": "Whole Again",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1056EN",
+      "n": 1
+    },
+    {
+      "slot": 33,
+      "album": "Hands That Mend",
+      "track": "Patterns of Belonging",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1006EN",
+      "n": 3
+    },
+    {
+      "slot": 34,
+      "album": "He Bent His Ear",
+      "track": "Maria's Boy Came Home",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1053EN",
+      "n": 6
+    },
+    {
+      "slot": 35,
+      "album": "Every Generation Prays",
+      "track": "Lay The Mantle Down",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1010EN",
+      "n": 9
+    },
+    {
+      "slot": 36,
+      "album": "He Bent His Ear",
+      "track": "I Will Call Upon Him",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1053EN",
+      "n": 9
+    }
+  ]
+}

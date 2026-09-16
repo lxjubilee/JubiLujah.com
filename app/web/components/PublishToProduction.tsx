@@ -35,7 +35,7 @@ export default function PublishToProduction() {
   };
 
   if (loading) return <div className="an-wrap"><div className="an-empty">Checking access…</div></div>;
-  if (!isAdmin) return <div className="an-wrap"><div className="an-403"><h1>403 — Access Denied</h1><p>Publish to Production is admin only.</p></div></div>;
+  if (!isAdmin) return <div className="an-wrap"><div className="an-403"><h1>403: Access Denied</h1><p>Publish to Production is admin only.</p></div></div>;
 
   const cands = data?.candidates || [];
   const allCodes = cands.map((c) => c.code);
@@ -50,12 +50,12 @@ export default function PublishToProduction() {
 
       {data && !data.available && (
         <div className="notice" style={{ borderColor: 'var(--accent-gold)' }}>
-          The J: studio drive isn&apos;t reachable from here. Open this page from the <strong>studio machine</strong> (http://localhost:3000/admin/publish-to-production)
-          — that&apos;s where the bridge to J: + the CDN runs.
+          The J: studio drive isn&apos;t reachable from here. Open this page from the <strong>studio machine</strong> (http://localhost:3000/admin/publish-to-production).
+          That&apos;s where the bridge to J: + the CDN runs.
         </div>
       )}
       {err && <div className="notice" style={{ borderColor: 'var(--accent)' }}>{err}</div>}
-      {busy && <div className="notice" style={{ borderColor: 'var(--accent-gold)' }}>Publishing {busy === 'all' ? `all ${allCodes.length} albums` : busy}… uploading to the CDN and deploying — this can take a couple of minutes. Keep this tab open.</div>}
+      {busy && <div className="notice" style={{ borderColor: 'var(--accent-gold)' }}>Publishing {busy === 'all' ? `all ${allCodes.length} albums` : busy}… uploading to the CDN and deploying. This can take a couple of minutes. Keep this tab open.</div>}
 
       {result && (
         <div className="notice" style={{ borderColor: result.ok ? 'var(--success)' : 'var(--accent)' }}>

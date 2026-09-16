@@ -35,7 +35,7 @@ export default function AdminOverview() {
               <td className="muted">{new Date(a.created_at).toLocaleString()}</td>
               <td><code>{a.action}</code></td>
               <td>{a.target_type}</td>
-              <td>{a.actor || '—'}</td>
+              <td>{a.actor || '-'}</td>
             </tr>
           ))}
           {audit.length === 0 && <tr><td colSpan={4} className="muted">No audit entries yet.</td></tr>}

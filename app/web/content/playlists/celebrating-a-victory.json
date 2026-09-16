@@ -1,0 +1,368 @@
+{
+  "id": "celebrating-a-victory",
+  "title": "Celebrating a Victory",
+  "type": "Emotional State",
+  "order": 12,
+  "description": "For answered prayers and breakthroughs. Lift your hands, it happened!",
+  "accent": "#F0A020",
+  "imagePrompt": "A crowd of friends cheering and celebrating together at an outdoor evening gathering, lifting someone up in joy, festival lights and genuine excitement, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "triumph",
+      "victory",
+      "celebration",
+      "thanksgiving",
+      "exuberance",
+      "joy"
+    ],
+    "energy": [
+      62,
+      100
+    ],
+    "exclude": [],
+    "arc": "steady",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "The Deliverance Decree",
+      "track": "Fear Don't Live Here No More",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1004EN",
+      "n": 4
+    },
+    {
+      "slot": 2,
+      "album": "Forever Rising",
+      "track": "Arise Shine",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1009EN",
+      "n": 4
+    },
+    {
+      "slot": 3,
+      "album": "The Deliverance Decree",
+      "track": "Tell It (He Got Me Out)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1004EN",
+      "n": 1
+    },
+    {
+      "slot": 4,
+      "album": "Forever Rising",
+      "track": "Every Tongue Will Rise",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1009EN",
+      "n": 11
+    },
+    {
+      "slot": 5,
+      "album": "Chains Break Open",
+      "track": "Stillness After the Snap",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1003EN",
+      "n": 9
+    },
+    {
+      "slot": 6,
+      "album": "Resurrection Sunday",
+      "track": "Sunday Morning Hallelujah",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1015EN",
+      "n": 2
+    },
+    {
+      "slot": 7,
+      "album": "Apostolic Deliverance",
+      "track": "We Came to Set the Captive Free",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1005EN",
+      "n": 3
+    },
+    {
+      "slot": 8,
+      "album": "Diaspora Daughters Rising",
+      "track": "Joy Like Lagos Sunrise",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1008EN",
+      "n": 9
+    },
+    {
+      "slot": 9,
+      "album": "Chains Break Open",
+      "track": "Chains Break Open",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1003EN",
+      "n": 1
+    },
+    {
+      "slot": 10,
+      "album": "Diaspora Daughters Rising",
+      "track": "Talking Drum Anthem",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1008EN",
+      "n": 5
+    },
+    {
+      "slot": 11,
+      "album": "Apostolic Deliverance",
+      "track": "Chains Hit the Floor",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1005EN",
+      "n": 8
+    },
+    {
+      "slot": 12,
+      "album": "Loved Forever",
+      "track": "Loved Forever (Sing It Loud)",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1030EN",
+      "n": 8
+    },
+    {
+      "slot": 13,
+      "album": "Ancestral Strength",
+      "track": "Cotton-Field Hallelujah",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1003EN",
+      "n": 5
+    },
+    {
+      "slot": 14,
+      "album": "Loved Forever",
+      "track": "Shout It Higher",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1030EN",
+      "n": 6
+    },
+    {
+      "slot": 15,
+      "album": "Haitian Heartbeat",
+      "track": "Dance With the Tanbou",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1010EN",
+      "n": 3
+    },
+    {
+      "slot": 16,
+      "album": "Together Again",
+      "track": "Clap Your Hands, We're Home",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1019EN",
+      "n": 6
+    },
+    {
+      "slot": 17,
+      "album": "Victory Proclaimed",
+      "track": "Chains Are Already Broken",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1023EN",
+      "n": 8
+    },
+    {
+      "slot": 18,
+      "album": "Breakthrough",
+      "track": "When the Walls Fall Down",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1003EN",
+      "n": 7
+    },
+    {
+      "slot": 19,
+      "album": "Dance Through the Storm",
+      "track": "The Fire Won't Burn",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1044EN",
+      "n": 7
+    },
+    {
+      "slot": 20,
+      "album": "Together Again",
+      "track": "Dance That Doesn't Stop",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1019EN",
+      "n": 10
+    },
+    {
+      "slot": 21,
+      "album": "Dance Through the Storm",
+      "track": "Dance Through the Storm",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1044EN",
+      "n": 1
+    },
+    {
+      "slot": 22,
+      "album": "Beulah Land",
+      "track": "Beulah Dance",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1037EN",
+      "n": 10
+    },
+    {
+      "slot": 23,
+      "album": "Light The Maccabee Flame",
+      "track": "Shamash Carries The Fire",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1005EN",
+      "n": 8
+    },
+    {
+      "slot": 24,
+      "album": "Victory Proclaimed",
+      "track": "Victory Proclaimed",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1023EN",
+      "n": 1
+    },
+    {
+      "slot": 25,
+      "album": "Light The Maccabee Flame",
+      "track": "Strike The Match, Strike It Loud",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1005EN",
+      "n": 3
+    },
+    {
+      "slot": 26,
+      "album": "Shame Missed The Party",
+      "track": "You Ran First",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1077EN",
+      "n": 2
+    },
+    {
+      "slot": 27,
+      "album": "Dust and Resurrection",
+      "track": "Dust to Glory",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1007EN",
+      "n": 12
+    },
+    {
+      "slot": 28,
+      "album": "The Marriage Supper",
+      "track": "Kingdom Feast Dance",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1039EN",
+      "n": 10
+    },
+    {
+      "slot": 29,
+      "album": "Eternal Apostle",
+      "track": "Jesus, Multiply Your Fire",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1017EN",
+      "n": 11
+    },
+    {
+      "slot": 30,
+      "album": "Shame Missed The Party",
+      "track": "Seven Times Up",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1077EN",
+      "n": 8
+    },
+    {
+      "slot": 31,
+      "album": "Appalachian Shout",
+      "track": "The Shout Will Rise",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1012EN",
+      "n": 12
+    },
+    {
+      "slot": 32,
+      "album": "The Night He Came for Me",
+      "track": "He Came in My Worst Hour",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1015EN",
+      "n": 7
+    },
+    {
+      "slot": 33,
+      "album": "The Outlaw Apostle",
+      "track": "The Gospel in the Margins",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1004EN",
+      "n": 7
+    },
+    {
+      "slot": 34,
+      "album": "La Cruz Que Baila",
+      "track": "Chicha de la Resurrección (Resurrection Chicha)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1006EN",
+      "n": 6
+    },
+    {
+      "slot": 35,
+      "album": "Appalachian Shout",
+      "track": "The Gift Overflows",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1012EN",
+      "n": 6
+    },
+    {
+      "slot": 36,
+      "album": "The Outlaw Apostle",
+      "track": "Go to the Margins",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1004EN",
+      "n": 1
+    }
+  ]
+}

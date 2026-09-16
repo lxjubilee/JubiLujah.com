@@ -37,6 +37,8 @@ import { isRtlLang } from '@/lib/i18n';
 import SiteFooter from '@/components/SiteFooter';
 import Particles from '@/components/Particles';
 import FooterPlayer from '@/components/FooterPlayer';
+import NoEmDash from '@/components/NoEmDash';
+import { noEmDash } from '@/lib/text';
 import PlaybackGate from '@/components/PlaybackGate';
 import UpgradeModal from '@/components/UpgradeModal';
 import CoverUploadModal from '@/components/CoverUploadModal';
@@ -61,18 +63,20 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = t.key === 'jubileepraise' ? SITE_URL : `https://${t.hosts[0]}`;
   return {
     metadataBase: new URL(url),
+    // " | ", not an em dash: no em dashes anywhere on the site (lib/text.ts). This
+    // template is in every page's <title>, and so in every search result and tab.
     title: {
-      default: `${t.name} — ${t.tagline}`,
-      template: `%s — ${t.name}`,
+      default: `${t.name} | ${t.tagline}`,
+      template: `%s | ${t.name}`,
     },
-    description: t.description,
+    description: noEmDash(t.description),
     /* The home page's own canonical. Every other route sets its own (via
        lib/seo `canonical()`); Next does NOT derive one from the path, so a
        route that omits it simply has none. */
     alternates: canonical('/'),
     openGraph: {
-      title: `${t.name} — ${t.tagline}`,
-      description: t.tagline,
+      title: `${t.name} | ${t.tagline}`,
+      description: noEmDash(t.tagline),
       url,
       siteName: t.name,
       type: 'website',
@@ -177,6 +181,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SiteFooter />
             {/* Mounted once here so playback survives client-side navigation. */}
             <FooterPlayer />
+            {/* Keeps em dashes out of text that arrives at runtime (API titles,
+                reviews): see components/NoEmDash.tsx. */}
+            <NoEmDash />
             {/* Gates playback behind sign-in; renders the "sign in to play" prompt. */}
             <PlaybackGate />
             {/* Free-plan daily-limit upgrade prompt (shown when a preview is capped). */}

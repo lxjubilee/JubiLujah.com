@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { goSignedIn } from '@/lib/familyGo';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTenant } from '@/components/TenantProvider';
 import { useState, useRef, useEffect } from 'react';
@@ -157,10 +158,16 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
   const nowPlayingHref = usePlayer((s) => s.nowPlaying?.href);
   const musicHref = nowPlayingHref || defaultMusicHref;
 
-  // Append an "Admin" link as the LAST media item — admins only (BRD: navigation).
-  const mediaItems: { href: string; key: TKey; ext: boolean }[] = hasRole('admin')
-    ? [...MEDIA, { href: '/admin/analytics', key: 'media.admin', ext: false }]
-    : MEDIA;
+  /* Admin is NO LONGER a media item. It used to be appended to this run, which
+     made it the last link in .jvh-media-links — so it inherited the run's grey
+     link styling and picked up a "|" divider in front of it, reading as one
+     more cross-property link rather than as the operator control it is.
+     kJubilee keeps it out of that run for the same reason: there it is
+     .nav-textlink--admin, a gold pill sitting between the text links and the
+     search box. It is rendered separately below, immediately before the search
+     form, which is that same position. */
+  const mediaItems: { href: string; key: TKey; ext: boolean }[] = MEDIA;
+  const isAdmin = hasRole('admin');
 
   const [q, setQ] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -204,7 +211,7 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
                 return (
                   <span key={m.key} className="jvh-media-item">
                     {m.ext ? (
-                      <a href={m.href} target="_blank" rel="noopener noreferrer">{label}</a>
+                      <a href={m.href} target="_blank" rel="noopener noreferrer" onClick={(e) => { void goSignedIn(e, m.href, true); }}>{label}</a>
                     ) : (
                       <Link href={m.href}>{label}</Link>
                     )}
@@ -214,11 +221,33 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
               })}
             </nav>
 
+            {/* The operator's way in, immediately left of the search box —
+                kJubilee's placement for .nav-textlink--admin. Outside the media
+                run above so it takes the pill styling rather than the run's
+                grey link styling, and so no "|" divider is printed before it. */}
+            {isAdmin && (
+              <Link href="/admin/analytics" className="jvh-admin-link">
+                {t('media.admin')}
+              </Link>
+            )}
+
+            {/* ONE MAGNIFYING GLASS, ON THE RIGHT, AND IT IS THE BUTTON —
+                kJubilee's arrangement (.searchbar / .search-go there).
+
+                This row used to say the same thing three times in the tightest
+                strip of the header: a decorative glass on the left, "Search..."
+                as the placeholder, and a filled "SEARCH" button on the right.
+                The filled button is gone at the Founder's request; rather than
+                leave the field with no click target, the glass moved to where
+                that button was and became the control. The row now reads
+                field-then-action instead of icon-field-word.
+
+                Still a real submit <button> with an aria-label: once the visible
+                word is gone the accessible name is all a screen reader has, and
+                an icon with no name is an unlabelled control. type="submit"
+                keeps the form's onSubmit as the single path, so Enter in the
+                field and a click on the glass do the same thing. */}
             <form className="jvh-search" onSubmit={submitSearch}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.35-4.35" />
-              </svg>
               <input
                 type="text"
                 value={q}
@@ -227,7 +256,12 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
                 autoComplete="off"
                 aria-label={t('search.aria')}
               />
-              <button type="submit" className="jvh-search-btn">{t('search.button')}</button>
+              <button type="submit" className="jvh-search-go" aria-label={t('search.aria')} title={t('search.title')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.2-3.2" />
+                </svg>
+              </button>
             </form>
 
             {authenticated ? (

@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 // Images live in /public/images/backstage. Add more .webp files and they slot
 // straight in here.
-const DEFAULT_SLIDES = [
+export const DEFAULT_SLIDES = [
   '/images/backstage/praise-is-the-sound-a-cancelled-debt-makes.webp',
   '/images/backstage/the-tambourine-on-the-far-shore.webp',
   '/images/backstage/the-sense-that-opens-first-and-closes-last.webp',

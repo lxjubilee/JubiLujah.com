@@ -98,8 +98,8 @@ export default function AdminSubscribers() {
                 )}
               </td>
               <td style={{ textAlign: 'right', fontWeight: 600 }}>{money(s.monthly_cents, s.currency)}</td>
-              <td className="muted">{s.current_period_end ? new Date(s.current_period_end).toLocaleDateString() : '—'}</td>
-              <td className="muted">{s.started_at ? new Date(s.started_at).toLocaleDateString() : '—'}</td>
+              <td className="muted">{s.current_period_end ? new Date(s.current_period_end).toLocaleDateString() : '-'}</td>
+              <td className="muted">{s.started_at ? new Date(s.started_at).toLocaleDateString() : '-'}</td>
             </tr>
           ))}
           {data && data.subscribers.length === 0 && (

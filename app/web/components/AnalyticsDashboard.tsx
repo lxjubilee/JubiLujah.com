@@ -14,10 +14,10 @@ import { api } from '@/lib/api';
 
 type Tab = 'overview' | 'trends' | 'albums' | 'songs' | 'users' | 'ratings' | 'reviews';
 
-const fmt = (n: number | null | undefined) => (n == null ? '—' : n.toLocaleString());
+const fmt = (n: number | null | undefined) => (n == null ? '-' : n.toLocaleString());
 const money = (cents: number | null | undefined, currency = 'usd') =>
-  (cents == null ? '—' : new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase() }).format(cents / 100));
-const fmtHrs = (h: number | null | undefined) => (h == null ? '—' : `${h.toLocaleString()} h`);
+  (cents == null ? '-' : new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase() }).format(cents / 100));
+const fmtHrs = (h: number | null | undefined) => (h == null ? '-' : `${h.toLocaleString()} h`);
 // Traditional studio-production equivalent of the live catalog, by track count:
 // 12 tracks = 8 months & $35,000, so per track = 8/12 month & 35000/12 dollars.
 // Time is shown as "YEARS.MM" (integer years + 2-digit months, not decimal years).
@@ -34,7 +34,7 @@ function fmtDur(sec: number | null | undefined) {
   const h = Math.floor(sec / 3600); const m = Math.floor((sec % 3600) / 60); const s = Math.floor(sec % 60);
   return h ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}` : `${m}:${String(s).padStart(2, '0')}`;
 }
-const dateStr = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString() : '—');
+const dateStr = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString() : '-');
 
 // ---- Inline charts ---------------------------------------------------------
 function LineChart({ points, color = 'var(--accent-gold)', height = 120 }: { points: { label: string; value: number }[]; color?: string; height?: number }) {
@@ -153,7 +153,7 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
     return (
       <div className="an-wrap">
         <div className="an-403">
-          <h1>403 — Access Denied</h1>
+          <h1>403: Access Denied</h1>
           <p>The Media Analytics Dashboard is restricted to administrators.</p>
         </div>
       </div>
@@ -171,7 +171,7 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
       <div className="an-head">
         <div>
           <h1 className="an-h1">Media Analytics</h1>
-          <p className="an-sub">Catalog, audience, revenue &amp; engagement — at a glance.</p>
+          <p className="an-sub">Catalog, audience, revenue &amp; engagement, at a glance.</p>
         </div>
         <button className="an-btn" onClick={() => window.print()} type="button">🖨 Print / PDF</button>
       </div>
@@ -203,7 +203,7 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
               </div>
               <div className="an-live-sep" />
               <div className="an-live-stat">
-                <div className="an-live-n">{avgBestseller ? `${avgBestseller.toFixed(2)}%` : '—'}</div>
+                <div className="an-live-n">{avgBestseller ? `${avgBestseller.toFixed(2)}%` : '-'}</div>
                 <div className="an-live-l">Avg Bestseller Score</div>
               </div>
             </div>
@@ -211,9 +211,9 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
 
           {/* Hero KPIs — the numbers that matter most, scannable at a glance. */}
           <div className="an-hero">
-            <Kpi tone="violet" icon={ICN.users} label="Subscribers" value={subs ? fmt(subs.count) : '—'}
+            <Kpi tone="violet" icon={ICN.users} label="Subscribers" value={subs ? fmt(subs.count) : '-'}
                  hint={subs ? `${fmt(subs.count)} on paid plans` : 'paid plans'} />
-            <Kpi tone="green" icon={ICN.dollar} label="Monthly Revenue" value={subs ? money(subs.monthly_total_cents, subs.currency) : '—'}
+            <Kpi tone="green" icon={ICN.dollar} label="Monthly Revenue" value={subs ? money(subs.monthly_total_cents, subs.currency) : '-'}
                  hint="recurring / month" />
             <Kpi tone="gold" icon={ICN.pulse} label="Active Listeners" value={fmt(overview.active_users)}
                  hint={`of ${fmt(overview.total_users)} registered · last 30d`} />
@@ -235,8 +235,8 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
 
             <Section icon={ICN.card} title="Subscriptions & Revenue">
               <div className="an-stats an-stats-2">
-                <Stat label="Subscribers" value={subs ? fmt(subs.count) : '—'} />
-                <Stat label="Monthly Revenue" tone="green" value={subs ? money(subs.monthly_total_cents, subs.currency) : '—'} />
+                <Stat label="Subscribers" value={subs ? fmt(subs.count) : '-'} />
+                <Stat label="Monthly Revenue" tone="green" value={subs ? money(subs.monthly_total_cents, subs.currency) : '-'} />
               </div>
               <PlanBars subs={subs} />
             </Section>
@@ -257,8 +257,8 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
               <div className="an-stats an-stats-2">
                 <Stat label="Total Ratings" value={fmt(overview.total_ratings)} />
                 <Stat label="Total Reviews" value={fmt(overview.total_reviews)} />
-                <Stat label="Avg Album ★" tone="gold" value={overview.avg_album_rating ?? '—'} />
-                <Stat label="Avg Song ★" tone="gold" value={overview.avg_song_rating ?? '—'} />
+                <Stat label="Avg Album ★" tone="gold" value={overview.avg_album_rating ?? '-'} />
+                <Stat label="Avg Song ★" tone="gold" value={overview.avg_song_rating ?? '-'} />
               </div>
             </Section>
           </div>
@@ -331,7 +331,7 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
           <div className="an-cards">
             <div className="an-card"><div className="an-card-v">{fmt(ratings.total_album_ratings)}</div><div className="an-card-l">Album Ratings</div></div>
             <div className="an-card"><div className="an-card-v">{fmt(ratings.total_song_ratings)}</div><div className="an-card-l">Song Ratings</div></div>
-            <div className="an-card"><div className="an-card-v">{ratings.average_rating ?? '—'}</div><div className="an-card-l">Average Rating</div></div>
+            <div className="an-card"><div className="an-card-v">{ratings.average_rating ?? '-'}</div><div className="an-card-l">Average Rating</div></div>
             <div className="an-card"><div className="an-card-v">{fmt(ratings.raters)}</div><div className="an-card-l">Users Who Rated</div></div>
           </div>
           <Panel title="Rating Distribution">
@@ -344,10 +344,10 @@ export default function AnalyticsDashboard({ avgBestseller }: { avgBestseller?: 
             </div>
           </Panel>
           <div className="an-2col">
-            <Panel title="Highest Rated Albums"><TopList rows={ratings.highest_rated_albums.map((r: any) => ({ ...r, __v: r.avg_rating }))} render={(r) => `${r.title || r.target_id} — ★${r.avg_rating} (${r.rating_count})`} /></Panel>
-            <Panel title="Lowest Rated Albums"><TopList rows={ratings.lowest_rated_albums.map((r: any) => ({ ...r, __v: 5 - r.avg_rating }))} render={(r) => `${r.title || r.target_id} — ★${r.avg_rating} (${r.rating_count})`} /></Panel>
-            <Panel title="Most Rated Albums"><TopList rows={ratings.most_rated_albums.map((r: any) => ({ ...r, __v: r.rating_count }))} render={(r) => `${r.title || r.target_id} — ${r.rating_count} ratings`} /></Panel>
-            <Panel title="Highest Rated Songs"><TopList rows={ratings.highest_rated_songs.map((r: any) => ({ ...r, __v: r.avg_rating }))} render={(r) => `${r.title || r.target_id} — ★${r.avg_rating} (${r.rating_count})`} /></Panel>
+            <Panel title="Highest Rated Albums"><TopList rows={ratings.highest_rated_albums.map((r: any) => ({ ...r, __v: r.avg_rating }))} render={(r) => `${r.title || r.target_id} · ★${r.avg_rating} (${r.rating_count})`} /></Panel>
+            <Panel title="Lowest Rated Albums"><TopList rows={ratings.lowest_rated_albums.map((r: any) => ({ ...r, __v: 5 - r.avg_rating }))} render={(r) => `${r.title || r.target_id} · ★${r.avg_rating} (${r.rating_count})`} /></Panel>
+            <Panel title="Most Rated Albums"><TopList rows={ratings.most_rated_albums.map((r: any) => ({ ...r, __v: r.rating_count }))} render={(r) => `${r.title || r.target_id} · ${r.rating_count} ratings`} /></Panel>
+            <Panel title="Highest Rated Songs"><TopList rows={ratings.highest_rated_songs.map((r: any) => ({ ...r, __v: r.avg_rating }))} render={(r) => `${r.title || r.target_id} · ★${r.avg_rating} (${r.rating_count})`} /></Panel>
           </div>
         </div>
       )}
@@ -451,7 +451,7 @@ function Highlight({ title, item, sub, name }: { title: string; item: any; sub: 
       {item ? (
         <>
           {item.cover && /* eslint-disable-next-line @next/next/no-img-element */ <img className="an-hl-cover" src={item.cover} alt="" />}
-          <div className="an-hl-name">{name ? name(item) : (item.title || '—')}</div>
+          <div className="an-hl-name">{name ? name(item) : (item.title || '-')}</div>
           {item.artist && <div className="an-muted">{item.artist}</div>}
           <div className="an-hl-sub">{sub(item)}</div>
         </>
@@ -469,8 +469,8 @@ function AlbumTable({ items }: { items: any[] }) {
         {items.map((a) => (
           <tr key={a.album_id}>
             <td className="an-td-name">{a.cover && /* eslint-disable-next-line @next/next/no-img-element */ <img src={a.cover} alt="" />}{a.title}</td>
-            <td>{a.artist || '—'}</td><td>{fmt(a.plays)}</td><td>{fmt(a.listeners)}</td><td>{fmtDur(a.listening_seconds)}</td>
-            <td>{a.avg_rating ?? '—'}</td><td>{fmt(a.rating_count)}</td><td>{fmt(a.review_count)}</td><td>{dateStr(a.last_played)}</td>
+            <td>{a.artist || '-'}</td><td>{fmt(a.plays)}</td><td>{fmt(a.listeners)}</td><td>{fmtDur(a.listening_seconds)}</td>
+            <td>{a.avg_rating ?? '-'}</td><td>{fmt(a.rating_count)}</td><td>{fmt(a.review_count)}</td><td>{dateStr(a.last_played)}</td>
           </tr>
         ))}
       </tbody>
@@ -485,8 +485,8 @@ function SongTable({ items }: { items: any[] }) {
       <tbody>
         {items.map((s) => (
           <tr key={s.song_id}>
-            <td className="an-td-name">{s.title}</td><td>{s.album || '—'}</td><td>{fmt(s.plays)}</td><td>{fmt(s.listeners)}</td>
-            <td>{fmt(s.complete_plays)}</td><td>{fmt(s.skips)}</td><td>{s.avg_completion}%</td><td>{s.avg_rating ?? '—'}</td>
+            <td className="an-td-name">{s.title}</td><td>{s.album || '-'}</td><td>{fmt(s.plays)}</td><td>{fmt(s.listeners)}</td>
+            <td>{fmt(s.complete_plays)}</td><td>{fmt(s.skips)}</td><td>{s.avg_completion}%</td><td>{s.avg_rating ?? '-'}</td>
           </tr>
         ))}
       </tbody>

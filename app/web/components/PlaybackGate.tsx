@@ -34,7 +34,7 @@ export default function PlaybackGate() {
         </div>
         <h3 className="gate-title">{title}</h3>
         <p className="gate-text">
-          Browsing is open to everyone — but you’ll need a free account to play tracks,
+          Browsing is open to everyone, but you’ll need a free account to play tracks,
           build playlists, and save your favorites.
         </p>
         <div className="gate-actions">

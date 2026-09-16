@@ -11,6 +11,8 @@ const CROSS = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 
 // Comparison matrix (BRD §Plan Comparison Table). value: true | false | string.
 const COMPARISON: { feature: string; free: boolean | string; individual: boolean | string; family: boolean | string }[] = [
   { feature: 'Full songs per day', free: '36', individual: 'Unlimited', family: 'Unlimited' },
+  // The free plan ends after 30 days of listening (migration 0032).
+  { feature: 'How long you can listen', free: '30 days', individual: 'No limit', family: 'No limit' },
   { feature: 'Unlimited streaming', free: false, individual: true, family: true },
   { feature: 'Unlimited albums', free: false, individual: true, family: true },
   { feature: 'Unlimited songs', free: false, individual: true, family: true },
@@ -105,7 +107,7 @@ export default function SubscriptionPlans() {
       </section>
 
       <div className="container">
-        {cancelled && <p className="acct-msg" style={{ marginTop: 24 }}>Checkout was cancelled — no charge was made. You can pick a plan again whenever you’re ready.</p>}
+        {cancelled && <p className="acct-msg" style={{ marginTop: 24 }}>Checkout was cancelled, so no charge was made. You can pick a plan again whenever you’re ready.</p>}
         {err && <p className="acct-msg err" style={{ marginTop: 24 }}>{err}</p>}
 
         {/* ---- Pricing cards ---- */}

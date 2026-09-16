@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Jubilee Prayers',
-  description: 'Tefillah b’shir — Hebraic cantorial Temple albums, twelve stations each, engineered as one-hour prayer disciplines.',
+  description: 'Tefillah b’shir: Hebraic cantorial Temple albums, twelve stations each, engineered as one-hour prayer disciplines.',
 };
 
 export default function PrayersPage() {
@@ -11,7 +11,7 @@ export default function PrayersPage() {
       <section className="page-hero">
         <div className="container">
           <div className="eyebrow">Jubilee Prayers</div>
-          <h1>Tefillah b&apos;shir &mdash; <em>prayer in song</em></h1>
+          <h1>Tefillah b&apos;shir: <em>prayer in song</em></h1>
           <p className="lead">
             Hebraic cantorial Temple albums, twelve stations each, engineered as one-hour prayer
             disciplines. Jubilee Inspire and Zev Inspire stand as the two prayer warriors, leading the

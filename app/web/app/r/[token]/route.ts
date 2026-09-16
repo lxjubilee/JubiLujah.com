@@ -39,7 +39,7 @@ function page(title: string, message: string, statusNote?: string): string {
   // Mobile-first branded shell. No JS, no external assets, no leaked internals.
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
-<title>${title} — JubileePraise.com</title><style>
+<title>${title} | JubileePraise.com</title><style>
 :root{color-scheme:dark;--brand-accent:#3DA5FF}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
 font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;

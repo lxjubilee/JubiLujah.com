@@ -38,7 +38,7 @@ export default function SendModal({
         {state !== 'done' ? (
           <>
             <h3 className="tpl-send-title">Send this playlist</h3>
-            <p className="tpl-send-sub">They’ll get the theme, your note, and your chosen artist mix — no account needed to listen.</p>
+            <p className="tpl-send-sub">They’ll get the theme, your note, and your chosen artist mix. No account needed to listen.</p>
             <textarea
               className="tpl-send-note" maxLength={280} placeholder="Add a short note (optional)…"
               value={note} onChange={(e) => setNote(e.target.value)}

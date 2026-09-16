@@ -6,7 +6,7 @@ import MediaRow, { TileData } from '@/components/MediaRow';
 export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Family Friendly',
-  description: 'Melody Inspire — family-friendly music for all ages.',
+  description: 'Melody Inspire: family-friendly music for all ages.',
 };
 
 // Family Friendly is Melody Inspire's home: it shows ONLY Melody's albums, and

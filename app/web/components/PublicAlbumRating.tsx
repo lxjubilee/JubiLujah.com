@@ -25,11 +25,11 @@ export default function PublicAlbumRating({ summary, code, onRate }: Props) {
         <StarRating value={avg ?? 0} size="md" />
         {avg != null
           ? <span className="rv-avg">{avg.toFixed(1)}</span>
-          : <span className="rv-avg rv-avg-none">—</span>}
+          : <span className="rv-avg rv-avg-none">-</span>}
         <span className="rv-count">
           {count > 0
             ? <>Based on {count.toLocaleString()} rating{count === 1 ? '' : 's'}</>
-            : 'No ratings yet — be the first'}
+            : 'No ratings yet. Be the first'}
         </span>
       </div>
       <div className="rv-album-rating-actions">

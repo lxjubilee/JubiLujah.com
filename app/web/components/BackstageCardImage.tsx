@@ -76,7 +76,7 @@ export default function BackstageCardImage({
       // and keep waiting (no timeout) — it'll generate once opened + logged in.
       if (res.studioOnline === false) {
         setPhase('offline');
-        setMessage('Image Studio is offline — open it and sign into ChatGPT.');
+        setMessage('Image Studio is offline. Open it and sign into ChatGPT.');
         startedRef.current = Date.now(); // don't time out while waiting on the Studio
         return;
       }
@@ -85,7 +85,7 @@ export default function BackstageCardImage({
       if (Date.now() - startedRef.current > TIMEOUT_MS) {
         stopPolling();
         setPhase('error');
-        setMessage('Timed out — the Studio is running but did not produce an image.');
+        setMessage('Timed out: the Studio is running but did not produce an image.');
       }
     } catch {
       /* transient — keep polling */
@@ -109,7 +109,7 @@ export default function BackstageCardImage({
         // Immediate, actionable feedback instead of a silent spinner.
         if (res.studioOnline === false) {
           setPhase('offline');
-          setMessage('Image Studio is offline — open it and sign into ChatGPT.');
+          setMessage('Image Studio is offline. Open it and sign into ChatGPT.');
         } else {
           setPhase('working');
         }
@@ -142,9 +142,9 @@ export default function BackstageCardImage({
           disabled={busy}
           title={
             phase === 'offline'
-              ? message || 'Image Studio is offline — open it and sign into ChatGPT.'
+              ? message || 'Image Studio is offline. Open it and sign into ChatGPT.'
               : phase === 'error'
-                ? message || 'Generation failed — click to retry'
+                ? message || 'Generation failed. Click to retry'
                 : busy
                   ? 'Generating a new image in the Studio…'
                   : 'Regenerate this image'

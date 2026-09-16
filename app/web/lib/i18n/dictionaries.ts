@@ -56,7 +56,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} canciones",
     "count.songsOne": "{n} canción",
     "home.title": "Inicio",
-    "home.comingSoon": "Aún no hay música en {language} disponible — pronto añadiremos más idiomas. Vuelve a English desde la barra de banderas de arriba para explorar todo el catálogo."
+    "home.comingSoon": "Aún no hay música en {language} disponible. Pronto añadiremos más idiomas. Vuelve a English desde la barra de banderas de arriba para explorar todo el catálogo."
   },
   "fr": {
     "media.articles": "Articles",
@@ -112,7 +112,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} chansons",
     "count.songsOne": "{n} chanson",
     "home.title": "Accueil",
-    "home.comingSoon": "Aucune musique en {language} n'est encore disponible — nous ajoutons bientôt d'autres langues. Revenez à English depuis la barre de drapeaux ci-dessus pour parcourir tout le catalogue."
+    "home.comingSoon": "Aucune musique en {language} n'est encore disponible. Nous ajoutons bientôt d'autres langues. Revenez à English depuis la barre de drapeaux ci-dessus pour parcourir tout le catalogue."
   },
   "de": {
     "media.articles": "Artikel",
@@ -168,7 +168,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} Lieder",
     "count.songsOne": "{n} Lied",
     "home.title": "Start",
-    "home.comingSoon": "Es ist noch keine Musik auf {language} verfügbar — wir fügen bald weitere Sprachen hinzu. Wechsle über die Flaggenleiste oben zurück zu English, um den gesamten Katalog zu durchsuchen."
+    "home.comingSoon": "Es ist noch keine Musik auf {language} verfügbar. Wir fügen bald weitere Sprachen hinzu. Wechsle über die Flaggenleiste oben zurück zu English, um den gesamten Katalog zu durchsuchen."
   },
   "it": {
     "media.articles": "Articoli",
@@ -224,7 +224,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} canzoni",
     "count.songsOne": "{n} canzone",
     "home.title": "Home",
-    "home.comingSoon": "Non è ancora disponibile musica in {language} — aggiungeremo presto altre lingue. Torna a English dalla barra delle bandiere qui sopra per sfogliare l'intero catalogo."
+    "home.comingSoon": "Non è ancora disponibile musica in {language}. Aggiungeremo presto altre lingue. Torna a English dalla barra delle bandiere qui sopra per sfogliare l'intero catalogo."
   },
   "pt-BR": {
     "media.articles": "Artigos",
@@ -280,7 +280,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} músicas",
     "count.songsOne": "{n} música",
     "home.title": "Início",
-    "home.comingSoon": "Ainda não há música em {language} disponível — em breve adicionaremos mais idiomas. Volte para English na barra de bandeiras acima para navegar pelo catálogo completo."
+    "home.comingSoon": "Ainda não há música em {language} disponível. Em breve adicionaremos mais idiomas. Volte para English na barra de bandeiras acima para navegar pelo catálogo completo."
   },
   "pt-PT": {
     "media.articles": "Artigos",
@@ -336,7 +336,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} músicas",
     "count.songsOne": "{n} música",
     "home.title": "Início",
-    "home.comingSoon": "Ainda não há música em {language} disponível — vamos adicionar mais idiomas em breve. Volta para English na barra de bandeiras acima para explorar todo o catálogo."
+    "home.comingSoon": "Ainda não há música em {language} disponível. Vamos adicionar mais idiomas em breve. Volta para English na barra de bandeiras acima para explorar todo o catálogo."
   },
   "nl": {
     "media.articles": "Artikelen",
@@ -392,7 +392,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} nummers",
     "count.songsOne": "{n} nummer",
     "home.title": "Home",
-    "home.comingSoon": "Er is nog geen muziek in het {language} beschikbaar — we voegen binnenkort meer talen toe. Schakel via de vlaggenbalk hierboven terug naar English om de volledige catalogus te bekijken."
+    "home.comingSoon": "Er is nog geen muziek in het {language} beschikbaar. We voegen binnenkort meer talen toe. Schakel via de vlaggenbalk hierboven terug naar English om de volledige catalogus te bekijken."
   },
   "ru": {
     "media.articles": "Статьи",
@@ -448,7 +448,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} песен",
     "count.songsOne": "{n} песня",
     "home.title": "Главная",
-    "home.comingSoon": "Музыки на {language} пока нет — мы скоро добавим больше языков. Вернитесь к English на панели флагов выше, чтобы просмотреть весь каталог."
+    "home.comingSoon": "Музыки на {language} пока нет. Мы скоро добавим больше языков. Вернитесь к English на панели флагов выше, чтобы просмотреть весь каталог."
   },
   "pl": {
     "media.articles": "Artykuły",
@@ -504,7 +504,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} utworów",
     "count.songsOne": "{n} utwór",
     "home.title": "Strona główna",
-    "home.comingSoon": "Nie ma jeszcze muzyki w języku {language} — wkrótce dodamy więcej języków. Przełącz się z powrotem na English na pasku flag powyżej, aby przeglądać pełny katalog."
+    "home.comingSoon": "Nie ma jeszcze muzyki w języku {language}. Wkrótce dodamy więcej języków. Przełącz się z powrotem na English na pasku flag powyżej, aby przeglądać pełny katalog."
   },
   "zh": {
     "media.articles": "文章",
@@ -560,7 +560,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} 首歌曲",
     "count.songsOne": "{n} 首歌曲",
     "home.title": "首页",
-    "home.comingSoon": "目前还没有{language}音乐 — 我们很快会添加更多语言。请通过上方的旗帜栏切换回 English 以浏览完整目录。"
+    "home.comingSoon": "目前还没有{language}音乐，我们很快会添加更多语言。请通过上方的旗帜栏切换回 English 以浏览完整目录。"
   },
   "ja": {
     "media.articles": "記事",
@@ -616,7 +616,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} 曲",
     "count.songsOne": "{n} 曲",
     "home.title": "ホーム",
-    "home.comingSoon": "{language}の音楽はまだご利用いただけません — 近日中にさらに多くの言語を追加予定です。すべてのカタログを閲覧するには、上の国旗バーから英語（English）に戻してください。"
+    "home.comingSoon": "{language}の音楽はまだご利用いただけません。近日中にさらに多くの言語を追加予定です。すべてのカタログを閲覧するには、上の国旗バーから英語（English）に戻してください。"
   },
   "ko": {
     "media.articles": "아티클",
@@ -672,7 +672,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "곡 {n}개",
     "count.songsOne": "곡 {n}개",
     "home.title": "홈",
-    "home.comingSoon": "{language} 음악은 아직 제공되지 않습니다 — 곧 더 많은 언어를 추가할 예정입니다. 전체 카탈로그를 둘러보려면 위의 국기 바에서 영어(English)로 다시 전환하세요."
+    "home.comingSoon": "{language} 음악은 아직 제공되지 않습니다. 곧 더 많은 언어를 추가할 예정입니다. 전체 카탈로그를 둘러보려면 위의 국기 바에서 영어(English)로 다시 전환하세요."
   },
   "ar": {
     "media.articles": "المقالات",
@@ -728,7 +728,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} أغنية",
     "count.songsOne": "أغنية واحدة",
     "home.title": "الرئيسية",
-    "home.comingSoon": "لا تتوفر موسيقى بلغة {language} بعد — سنضيف المزيد من اللغات قريبًا. عُد إلى الإنجليزية (English) من شريط الأعلام أعلاه لتصفح الكتالوج كاملًا."
+    "home.comingSoon": "لا تتوفر موسيقى بلغة {language} بعد. سنضيف المزيد من اللغات قريبًا. عُد إلى الإنجليزية (English) من شريط الأعلام أعلاه لتصفح الكتالوج كاملًا."
   },
   "hi": {
     "media.articles": "लेख",
@@ -784,7 +784,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} गाने",
     "count.songsOne": "{n} गाना",
     "home.title": "होम",
-    "home.comingSoon": "{language} संगीत अभी उपलब्ध नहीं है — हम जल्द ही और भाषाएँ जोड़ रहे हैं। पूरा कैटलॉग ब्राउज़ करने के लिए ऊपर दिए गए फ़्लैग बार से अंग्रेज़ी (English) पर वापस जाएँ।"
+    "home.comingSoon": "{language} संगीत अभी उपलब्ध नहीं है। हम जल्द ही और भाषाएँ जोड़ रहे हैं। पूरा कैटलॉग ब्राउज़ करने के लिए ऊपर दिए गए फ़्लैग बार से अंग्रेज़ी (English) पर वापस जाएँ।"
   },
   "th": {
     "media.articles": "บทความ",
@@ -840,7 +840,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} เพลง",
     "count.songsOne": "{n} เพลง",
     "home.title": "หน้าแรก",
-    "home.comingSoon": "ยังไม่มีเพลงภาษา{language}ในขณะนี้ — เรากำลังเพิ่มภาษาอื่น ๆ เร็ว ๆ นี้ สลับกลับเป็นภาษาอังกฤษ (English) จากแถบธงด้านบนเพื่อเรียกดูแคตตาล็อกทั้งหมด"
+    "home.comingSoon": "ยังไม่มีเพลงภาษา{language}ในขณะนี้ เรากำลังเพิ่มภาษาอื่น ๆ เร็ว ๆ นี้ สลับกลับเป็นภาษาอังกฤษ (English) จากแถบธงด้านบนเพื่อเรียกดูแคตตาล็อกทั้งหมด"
   },
   "tr": {
     "media.articles": "Makaleler",
@@ -896,7 +896,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} şarkı",
     "count.songsOne": "{n} şarkı",
     "home.title": "Ana Sayfa",
-    "home.comingSoon": "Henüz {language} müziği mevcut değil — yakında daha fazla dil ekliyoruz. Tüm kataloğa göz atmak için yukarıdaki bayrak çubuğundan English diline geri dönün."
+    "home.comingSoon": "Henüz {language} müziği mevcut değil. Yakında daha fazla dil ekliyoruz. Tüm kataloğa göz atmak için yukarıdaki bayrak çubuğundan English diline geri dönün."
   },
   "vi": {
     "media.articles": "Bài viết",
@@ -952,7 +952,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} bài hát",
     "count.songsOne": "{n} bài hát",
     "home.title": "Trang chủ",
-    "home.comingSoon": "Chưa có nhạc {language} — chúng tôi sẽ sớm bổ sung thêm ngôn ngữ. Chuyển về English từ thanh cờ phía trên để duyệt toàn bộ danh mục."
+    "home.comingSoon": "Chưa có nhạc {language}. Chúng tôi sẽ sớm bổ sung thêm ngôn ngữ. Chuyển về English từ thanh cờ phía trên để duyệt toàn bộ danh mục."
   },
   "tl": {
     "media.articles": "Mga Artikulo",
@@ -1008,7 +1008,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} na kanta",
     "count.songsOne": "{n} kanta",
     "home.title": "Home",
-    "home.comingSoon": "Wala pang available na {language} na musika — magdaragdag kami ng mas maraming wika sa lalong madaling panahon. Bumalik sa English mula sa flag bar sa itaas upang tingnan ang buong katalogo."
+    "home.comingSoon": "Wala pang available na {language} na musika. Magdaragdag kami ng mas maraming wika sa lalong madaling panahon. Bumalik sa English mula sa flag bar sa itaas upang tingnan ang buong katalogo."
   },
   "he": {
     "media.articles": "מאמרים",
@@ -1064,7 +1064,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} שירים",
     "count.songsOne": "שיר {n}",
     "home.title": "בית",
-    "home.comingSoon": "עדיין אין מוזיקה ב{language} — אנחנו מוסיפים שפות נוספות בקרוב. חזור ל-English משורת הדגלים למעלה כדי לעיין בקטלוג המלא."
+    "home.comingSoon": "עדיין אין מוזיקה ב{language}. אנחנו מוסיפים שפות נוספות בקרוב. חזור ל-English משורת הדגלים למעלה כדי לעיין בקטלוג המלא."
   },
   "sv": {
     "media.articles": "Artiklar",
@@ -1120,7 +1120,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} låtar",
     "count.songsOne": "{n} låt",
     "home.title": "Hem",
-    "home.comingSoon": "Ingen {language}-musik är tillgänglig ännu — vi lägger till fler språk snart. Byt tillbaka till English från flaggraden ovan för att bläddra i hela katalogen."
+    "home.comingSoon": "Ingen {language}-musik är tillgänglig ännu. Vi lägger till fler språk snart. Byt tillbaka till English från flaggraden ovan för att bläddra i hela katalogen."
   },
   "da": {
     "media.articles": "Artikler",
@@ -1176,7 +1176,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} sange",
     "count.songsOne": "{n} sang",
     "home.title": "Forside",
-    "home.comingSoon": "Der er endnu ingen {language} musik tilgængelig — vi tilføjer flere sprog snart. Skift tilbage til English fra flagbjælken ovenfor for at gennemse hele kataloget."
+    "home.comingSoon": "Der er endnu ingen {language} musik tilgængelig. Vi tilføjer flere sprog snart. Skift tilbage til English fra flagbjælken ovenfor for at gennemse hele kataloget."
   },
   "cs": {
     "media.articles": "Články",
@@ -1232,7 +1232,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} skladeb",
     "count.songsOne": "{n} skladba",
     "home.title": "Domů",
-    "home.comingSoon": "Zatím není k dispozici žádná {language} hudba — brzy přidáme další jazyky. Pro procházení celého katalogu se v liště s vlajkami výše přepněte zpět na English."
+    "home.comingSoon": "Zatím není k dispozici žádná {language} hudba. Brzy přidáme další jazyky. Pro procházení celého katalogu se v liště s vlajkami výše přepněte zpět na English."
   },
   "hu": {
     "media.articles": "Cikkek",
@@ -1288,7 +1288,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} dal",
     "count.songsOne": "{n} dal",
     "home.title": "Kezdőlap",
-    "home.comingSoon": "Még nem érhető el {language} nyelvű zene — hamarosan további nyelveket adunk hozzá. A teljes katalógus böngészéséhez válts vissza az English nyelvre a fenti zászlósávon."
+    "home.comingSoon": "Még nem érhető el {language} nyelvű zene. Hamarosan további nyelveket adunk hozzá. A teljes katalógus böngészéséhez válts vissza az English nyelvre a fenti zászlósávon."
   },
   "bg": {
     "media.articles": "Статии",
@@ -1344,7 +1344,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} песни",
     "count.songsOne": "{n} песен",
     "home.title": "Начало",
-    "home.comingSoon": "Все още няма налична музика на {language} — скоро добавяме още езици. Превключете обратно на English от лентата с флагове по-горе, за да разгледате целия каталог."
+    "home.comingSoon": "Все още няма налична музика на {language}. Скоро добавяме още езици. Превключете обратно на English от лентата с флагове по-горе, за да разгледате целия каталог."
   },
   "hr": {
     "media.articles": "Članci",
@@ -1400,7 +1400,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} pjesama",
     "count.songsOne": "{n} pjesma",
     "home.title": "Početna",
-    "home.comingSoon": "Još nema dostupne glazbe na jeziku {language} — uskoro dodajemo više jezika. Vratite se na English u traci sa zastavama iznad kako biste pregledali cijeli katalog."
+    "home.comingSoon": "Još nema dostupne glazbe na jeziku {language}. Uskoro dodajemo više jezika. Vratite se na English u traci sa zastavama iznad kako biste pregledali cijeli katalog."
   },
   "id": {
     "media.articles": "Artikel",
@@ -1456,7 +1456,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} lagu",
     "count.songsOne": "{n} lagu",
     "home.title": "Beranda",
-    "home.comingSoon": "Belum ada musik {language} yang tersedia — kami akan segera menambahkan lebih banyak bahasa. Beralih kembali ke English dari bilah bendera di atas untuk menjelajahi katalog lengkap."
+    "home.comingSoon": "Belum ada musik {language} yang tersedia. Kami akan segera menambahkan lebih banyak bahasa. Beralih kembali ke English dari bilah bendera di atas untuk menjelajahi katalog lengkap."
   },
   "ro": {
     "media.articles": "Articole",
@@ -1512,7 +1512,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} melodii",
     "count.songsOne": "{n} melodie",
     "home.title": "Acasă",
-    "home.comingSoon": "Încă nu este disponibilă muzică în {language} — adăugăm mai multe limbi în curând. Comută înapoi la English din bara cu steaguri de mai sus pentru a răsfoi întregul catalog."
+    "home.comingSoon": "Încă nu este disponibilă muzică în {language}. Adăugăm mai multe limbi în curând. Comută înapoi la English din bara cu steaguri de mai sus pentru a răsfoi întregul catalog."
   },
   "uk": {
     "media.articles": "Статті",
@@ -1568,7 +1568,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} пісень",
     "count.songsOne": "{n} пісня",
     "home.title": "Головна",
-    "home.comingSoon": "Музики мовою {language} поки що немає — ми незабаром додамо більше мов. Поверніться до English за допомогою панелі прапорів вище, щоб переглянути повний каталог."
+    "home.comingSoon": "Музики мовою {language} поки що немає. Ми незабаром додамо більше мов. Поверніться до English за допомогою панелі прапорів вище, щоб переглянути повний каталог."
   },
   "el": {
     "media.articles": "Άρθρα",
@@ -1624,7 +1624,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} τραγούδια",
     "count.songsOne": "{n} τραγούδι",
     "home.title": "Αρχική",
-    "home.comingSoon": "Δεν υπάρχει ακόμη διαθέσιμη μουσική στα {language} — προσθέτουμε σύντομα περισσότερες γλώσσες. Επιστρέψτε στα English από τη μπάρα σημαιών παραπάνω για να περιηγηθείτε στον πλήρη κατάλογο."
+    "home.comingSoon": "Δεν υπάρχει ακόμη διαθέσιμη μουσική στα {language}. Προσθέτουμε σύντομα περισσότερες γλώσσες. Επιστρέψτε στα English από τη μπάρα σημαιών παραπάνω για να περιηγηθείτε στον πλήρη κατάλογο."
   },
   "yue": {
     "media.articles": "文章",
@@ -1680,7 +1680,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} 首歌",
     "count.songsOne": "{n} 首歌",
     "home.title": "主頁",
-    "home.comingSoon": "暫時未有 {language} 音樂 —— 我哋好快會加入更多語言。喺上面嘅旗幟列切換返 English 就可以瀏覽完整目錄。"
+    "home.comingSoon": "暫時未有 {language} 音樂，我哋好快會加入更多語言。喺上面嘅旗幟列切換返 English 就可以瀏覽完整目錄。"
   },
   "ms": {
     "media.articles": "Artikel",
@@ -1736,7 +1736,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} lagu",
     "count.songsOne": "{n} lagu",
     "home.title": "Laman Utama",
-    "home.comingSoon": "Belum ada muzik {language} yang tersedia — kami sedang menambah lebih banyak bahasa tidak lama lagi. Tukar semula ke English dari bar bendera di atas untuk melayari katalog penuh."
+    "home.comingSoon": "Belum ada muzik {language} yang tersedia. Kami sedang menambah lebih banyak bahasa tidak lama lagi. Tukar semula ke English dari bar bendera di atas untuk melayari katalog penuh."
   },
   "ur": {
     "media.articles": "مضامین",
@@ -1792,7 +1792,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} گانے",
     "count.songsOne": "{n} گانا",
     "home.title": "ہوم",
-    "home.comingSoon": "ابھی تک کوئی {language} موسیقی دستیاب نہیں ہے — ہم جلد ہی مزید زبانیں شامل کر رہے ہیں۔ مکمل کیٹلاگ دیکھنے کے لیے اوپر فلیگ بار سے واپس English پر جائیں۔"
+    "home.comingSoon": "ابھی تک کوئی {language} موسیقی دستیاب نہیں ہے۔ ہم جلد ہی مزید زبانیں شامل کر رہے ہیں۔ مکمل کیٹلاگ دیکھنے کے لیے اوپر فلیگ بار سے واپس English پر جائیں۔"
   },
   "bn": {
     "media.articles": "প্রবন্ধ",
@@ -1848,7 +1848,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n}টি গান",
     "count.songsOne": "{n}টি গান",
     "home.title": "হোম",
-    "home.comingSoon": "এখনও কোনো {language} সঙ্গীত উপলব্ধ নেই — আমরা শীঘ্রই আরও ভাষা যোগ করছি। সম্পূর্ণ ক্যাটালগ দেখতে উপরের পতাকা বার থেকে English-এ ফিরে যান।"
+    "home.comingSoon": "এখনও কোনো {language} সঙ্গীত উপলব্ধ নেই। আমরা শীঘ্রই আরও ভাষা যোগ করছি। সম্পূর্ণ ক্যাটালগ দেখতে উপরের পতাকা বার থেকে English-এ ফিরে যান।"
   },
   "ta": {
     "media.articles": "கட்டுரைகள்",
@@ -1904,7 +1904,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} பாடல்கள்",
     "count.songsOne": "{n} பாடல்",
     "home.title": "முகப்பு",
-    "home.comingSoon": "{language} இசை இன்னும் கிடைக்கவில்லை — விரைவில் மேலும் மொழிகளைச் சேர்க்கிறோம். முழு பட்டியலையும் உலாவ மேலே உள்ள கொடிப் பட்டியிலிருந்து English க்குத் திரும்பவும்."
+    "home.comingSoon": "{language} இசை இன்னும் கிடைக்கவில்லை. விரைவில் மேலும் மொழிகளைச் சேர்க்கிறோம். முழு பட்டியலையும் உலாவ மேலே உள்ள கொடிப் பட்டியிலிருந்து English க்குத் திரும்பவும்."
   },
   "fa": {
     "media.articles": "مقالات",
@@ -1960,7 +1960,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} آهنگ",
     "count.songsOne": "{n} آهنگ",
     "home.title": "خانه",
-    "home.comingSoon": "هنوز هیچ موسیقی {language} در دسترس نیست — به‌زودی زبان‌های بیشتری اضافه می‌کنیم. برای مرور فهرست کامل، از نوار پرچم بالا به English بازگردید."
+    "home.comingSoon": "هنوز هیچ موسیقی {language} در دسترس نیست. به‌زودی زبان‌های بیشتری اضافه می‌کنیم. برای مرور فهرست کامل، از نوار پرچم بالا به English بازگردید."
   },
   "sw": {
     "media.articles": "Makala",
@@ -2016,7 +2016,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "Nyimbo {n}",
     "count.songsOne": "Wimbo {n}",
     "home.title": "Nyumbani",
-    "home.comingSoon": "Hakuna muziki wa {language} unaopatikana bado — tunaongeza lugha zaidi hivi karibuni. Rudi kwa English kutoka kwenye upau wa bendera hapo juu ili kuvinjari katalogi kamili."
+    "home.comingSoon": "Hakuna muziki wa {language} unaopatikana bado. Tunaongeza lugha zaidi hivi karibuni. Rudi kwa English kutoka kwenye upau wa bendera hapo juu ili kuvinjari katalogi kamili."
   },
   "no": {
     "media.articles": "Artikler",
@@ -2072,7 +2072,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} sanger",
     "count.songsOne": "{n} sang",
     "home.title": "Hjem",
-    "home.comingSoon": "Ingen {language}-musikk er tilgjengelig ennå — vi legger til flere språk snart. Bytt tilbake til English fra flagglinjen ovenfor for å bla gjennom hele katalogen."
+    "home.comingSoon": "Ingen {language}-musikk er tilgjengelig ennå. Vi legger til flere språk snart. Bytt tilbake til English fra flagglinjen ovenfor for å bla gjennom hele katalogen."
   },
   "fi": {
     "media.articles": "Artikkelit",
@@ -2128,7 +2128,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} kappaletta",
     "count.songsOne": "{n} kappale",
     "home.title": "Koti",
-    "home.comingSoon": "{language}kielistä musiikkia ei ole vielä saatavilla — lisäämme lisää kieliä pian. Vaihda takaisin kieleen English yllä olevasta lippupalkista selataksesi koko luetteloa."
+    "home.comingSoon": "{language}kielistä musiikkia ei ole vielä saatavilla. Lisäämme lisää kieliä pian. Vaihda takaisin kieleen English yllä olevasta lippupalkista selataksesi koko luetteloa."
   },
   "af": {
     "media.articles": "Artikels",
@@ -2184,7 +2184,7 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} liedjies",
     "count.songsOne": "{n} liedjie",
     "home.title": "Tuis",
-    "home.comingSoon": "Geen {language}-musiek is nog beskikbaar nie — ons voeg binnekort meer tale by. Skakel terug na English vanaf die vlagbalk hierbo om die volledige katalogus te blaai."
+    "home.comingSoon": "Geen {language}-musiek is nog beskikbaar nie. Ons voeg binnekort meer tale by. Skakel terug na English vanaf die vlagbalk hierbo om die volledige katalogus te blaai."
   },
   "la": {
     "media.articles": "Commentationes",
@@ -2240,6 +2240,6 @@ export const DICTIONARIES: Record<string, Record<string, string>> = {
     "count.songs": "{n} cantiones",
     "count.songsOne": "{n} cantio",
     "home.title": "Domus",
-    "home.comingSoon": "Nulla musica linguae {language} adhuc praesto est — mox plures linguas addemus. Reverte ad English ex vexillorum taenia supra ut totum catalogum perlustres."
+    "home.comingSoon": "Nulla musica linguae {language} adhuc praesto est. Mox plures linguas addemus. Reverte ad English ex vexillorum taenia supra ut totum catalogum perlustres."
   }
 };

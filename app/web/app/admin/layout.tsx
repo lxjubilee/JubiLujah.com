@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
       <section className="standard"><div className="container">
         <h1>Admin</h1>
-        <p className="notice">Access denied — the admin console requires the <code>admin</code> role.</p>
+        <p className="notice">Access denied: the admin console requires the <code>admin</code> role.</p>
       </div></section>
     );
   }

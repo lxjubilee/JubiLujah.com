@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'How JubileePraise.com collects, uses, protects, and shares your personal information — accounts, cookies, email, and your privacy choices.',
+    'How JubileePraise.com collects, uses, protects, and shares your personal information: accounts, cookies, email, and your privacy choices.',
   robots: { index: true, follow: true },
 };
 
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
             <ul>
               <li>
                 <strong>Account details.</strong> When you sign up we collect your first and last name, date of
-                birth, and email address. Your password is stored only in a securely hashed form &mdash; we never
+                birth, and email address. Your password is stored only in a securely hashed form. We never
                 keep it in plain text.
               </li>
               <li>
@@ -87,7 +87,7 @@ export default function PrivacyPage() {
             <h2>2. How We Use Your Information</h2>
             <ul>
               <li>Create and manage your account, authenticate you, and keep your session secure.</li>
-              <li>Provide the core experience &mdash; streaming the catalog and saving your playlists, ratings, comments, and nominations.</li>
+              <li>Provide the core experience: streaming the catalog and saving your playlists, ratings, comments, and nominations.</li>
               <li>Send you service-related (transactional) email, such as verification codes, password-reset links, and important account or security notices.</li>
               <li>Detect, prevent, and respond to fraud, abuse, and security incidents.</li>
               <li>Maintain, analyze, and improve the Service.</li>
@@ -126,7 +126,7 @@ export default function PrivacyPage() {
             <ul>
               <li>
                 <strong>Service providers.</strong> Vendors who process data on our behalf and under our
-                instructions &mdash; for example our email delivery provider (SendGrid), security and content
+                instructions, for example our email delivery provider (SendGrid), security and content
                 delivery (Cloudflare), and our hosting infrastructure.
               </li>
               <li>

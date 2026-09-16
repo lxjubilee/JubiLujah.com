@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const artist = getArtist(params.slug);
   if (!artist) return { title: 'Artist not found', robots: { index: false, follow: false } };
-  const description = `${artist.name} — ${artist.role || 'Jubilee artist'}. ${artist.albums?.length || 0} albums.`;
+  const description = `${artist.name}, ${artist.role || 'Jubilee artist'}. ${artist.albums?.length || 0} albums.`;
   return {
     title: artist.name,
     description,

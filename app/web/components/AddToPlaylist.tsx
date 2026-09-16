@@ -142,7 +142,7 @@ export default function AddToPlaylist({ songId, songIds, label, getSongIds, icon
             <>
               <div className="head">{headLabel}</div>
               {!loaded && <div className="empty">Loading…</div>}
-              {loaded && lists.length === 0 && <div className="empty">No Playlists yet — create one below.</div>}
+              {loaded && lists.length === 0 && <div className="empty">No Playlists yet. Create one below.</div>}
               {lists.map((pl) => (
                 <button key={pl.id} className="row" role="menuitem" onClick={() => addTo(pl.id)} disabled={busy}>
                   <span>{pl.name}{pl.is_default && <span className="pl-default-tag">Default</span>}</span>

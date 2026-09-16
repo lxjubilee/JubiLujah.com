@@ -24,10 +24,10 @@ export default function LanguageHome({ otherAlbums, children }: { otherAlbums: (
       {userVisible.length > 0 ? (
         // Pass the FULL set (incl. studio): MediaRow gates studio to the
         // privileged tier, shows the LIVE/TOTAL count, and the yellow studio borders.
-        <MediaRow title={`${t('home.title')} — ${langName(lang)}`} items={items} />
+        <MediaRow title={`${t('home.title')}: ${langName(lang)}`} items={items} />
       ) : (
         <div className="lang-empty">
-          <h2>{t('home.title')} — {langName(lang)}</h2>
+          <h2>{t('home.title')}: {langName(lang)}</h2>
           <p>{t('home.comingSoon', { language: langName(lang) })}</p>
         </div>
       )}

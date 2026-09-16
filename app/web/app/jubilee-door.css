@@ -1,0 +1,530 @@
+/* ============================================================================
+   The Jubilee ID door — JubileeInspire's sign-in page, carried over exactly.
+
+   Source of truth: W:\JubileeInspire.com\src\styles\auth.css plus the door's own
+   rules in src\app\(auth)\JubileeIdDoor.tsx. Same layout, the same type (Open Sans
+   body, Orbitron wordmark and caps heading), the same sizes written the same way
+   — calc(1.55rem * 0.75 * 0.9 * 0.9) and all — so the two doors measure alike.
+
+   TWO DELIBERATE DIFFERENCES:
+   1. SCOPED under .jid-door. JubileeInspire's rules are global there; here the
+      site's own globals already own names like .auth-switch and .spinner, so
+      every selector below is prefixed rather than risk repainting the app.
+   2. THE ACCENT IS THIS SITE'S. JubileeInspire's auth.css says why in its own
+      words: the door holds the site's own colour "so the door still wears the
+      site you came to". Its six --ji-accent slots are therefore derived from
+      the tenant's --brand-accent (layout.tsx) rather than hard-coded gold.
+   ========================================================================== */
+
+.jid-door {
+  --ji-accent: var(--brand-accent, #3DA5FF);
+  --ji-accent-hi: color-mix(in srgb, var(--ji-accent) 70%, white);
+  --ji-accent-lo: color-mix(in srgb, var(--ji-accent) 82%, black);
+  --ji-accent-ink: #04233d;
+  --ji-accent-link: color-mix(in srgb, var(--ji-accent) 62%, white);
+  --ji-accent-08: color-mix(in srgb, var(--ji-accent) 8%, transparent);
+  --ji-accent-25: color-mix(in srgb, var(--ji-accent) 25%, transparent);
+  --ji-accent-30: color-mix(in srgb, var(--ji-accent) 30%, transparent);
+  --ji-accent-40: color-mix(in srgb, var(--ji-accent) 40%, transparent);
+
+  /* A focused full-screen page over the site chrome, as the previous door was.
+
+     🔴 1200, RAISED FROM 1000 ON 2026-09-15, for the same reason .auth-split
+     was (globals.css). "Over the site chrome" was only ever true by accident:
+     1000 TIES with .jvh-header, and a tie is settled by document order, not by
+     intent. That left no rank between the header and this screen — and the
+     Inspire rail needs one, because its hover tooltip and its expanded panel
+     both have to clear the header (see the z-index note in inspire-rail.css).
+     With the rail at 1050, a door left at 1000 would have had the rail painted
+     across it. Raising the door restores "over the chrome" as a fact.
+     Still below .modal-overlay (2000) and .cover-modal-overlay (3000). */
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  overflow-y: auto;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  font-family: var(--font-open-sans), 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  text-align: left;
+}
+.jid-door *, .jid-door *::before, .jid-door *::after { box-sizing: border-box; }
+.jid-door p, .jid-door h2, .jid-door blockquote, .jid-door ul { margin: 0; padding: 0; }
+
+/* Wave bar -- one accent gradient sliding under itself. */
+.jid-door .wave-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 6px;
+  background: linear-gradient(90deg, var(--ji-accent), var(--ji-accent-hi), var(--ji-accent));
+  background-size: 200% 100%;
+  animation: jidWaveSlide 3s linear infinite;
+  z-index: 9999;
+  overflow: hidden;
+}
+@keyframes jidWaveSlide {
+  0%   { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Two-panel layout */
+.jid-door .auth-row { display: flex; min-height: 100vh; }
+
+.jid-door .auth-form-panel {
+  width: 33%;
+  min-width: 380px;
+  max-width: 520px;
+  background-color: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 30px 70px;
+  overflow-y: auto;
+  /* Both edges, so the column centres on the panel whatever this site's
+     scrollbar width is, level with the footer (owner, 2026-09-16; the full
+     reasoning is on JubileeInspire's src/styles/auth.css). */
+  scrollbar-gutter: stable both-edges;
+  position: relative;
+}
+.jid-door .auth-form-content { width: 100%; max-width: 380px; container-type: inline-size; }
+.jid-door .auth-form-inner { display: flex; flex-direction: column; min-height: calc(100vh - 100px); }
+
+/* Logo */
+.jid-door .auth-logo {
+  text-align: center;
+  margin-bottom: 0.25rem;
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+.jid-door .auth-logo-img {
+  width: 69px; height: 69px;
+  border-radius: 50%;
+  /* No ring, no glow: the persona artwork draws its own circle, so an accent
+     border around it read as a double circle (owner, 2026-09-16). */
+  object-fit: cover;
+  background: #1f1f1f;
+}
+.jid-door .auth-logo-text {
+  font-family: var(--font-orbitron), 'Orbitron', 'Agency FB', sans-serif;
+  margin-top: 0.75rem;
+  font-size: min(32px, 8.8cqw);
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #ffffff;
+}
+.jid-door .auth-logo-text .inspire { color: var(--ji-accent); }
+
+/* Alerts */
+.jid-door .auth-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+}
+.jid-door .auth-alert--error { background-color: rgba(248, 113, 113, 0.15); border: 1px solid rgba(248, 113, 113, 0.3); color: #f87171; }
+.jid-door .auth-alert--success { background-color: rgba(74, 222, 128, 0.15); border: 1px solid #4ade80; color: #4ade80; }
+
+/* Floating label group */
+.jid-door .floating-label-group { position: relative; margin-bottom: 1.25rem; }
+.jid-door .floating-label {
+  position: absolute;
+  top: 8px; left: 16px;
+  color: var(--ji-accent);
+  font-size: 0.75rem;
+  pointer-events: none;
+  z-index: 5;
+}
+.jid-door .form-control {
+  display: block;
+  width: 100%;
+  /* JubileeInspire's own field, to the value (2026-09-16): a transparent box
+     inside a white hairline, not a grey fill. The doors are meant to be the
+     same page with a different name on it. */
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 22px 16px 8px 16px;
+  height: 58px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  box-shadow: none;
+  margin: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.jid-door .form-control:-webkit-autofill,
+.jid-door .form-control:-webkit-autofill:hover,
+.jid-door .form-control:-webkit-autofill:focus,
+.jid-door .form-control:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  transition: background-color 8000s ease-in-out 0s, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.jid-door input[type="password"].form-control:-webkit-autofill { -webkit-text-fill-color: var(--ji-accent); }
+.jid-door .form-control:autofill {
+  background-color: transparent;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  transition: background-color 8000s ease-in-out 0s, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.jid-door .form-control:focus { border-color: var(--ji-accent-hi); box-shadow: 0 0 0 3px var(--ji-accent-25); }
+.jid-door .form-control[readonly] { opacity: 0.75; cursor: default; }
+.jid-door input[type="password"].form-control { color: var(--ji-accent); letter-spacing: 3px; }
+
+/* Password wrapper + eye */
+.jid-door .password-wrapper { position: relative; }
+.jid-door .password-wrapper .form-control { padding-right: 46px; }
+.jid-door .btn-eye {
+  position: absolute;
+  right: 2px; top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  min-width: 44px; min-height: 44px;
+  background: transparent;
+  border: none;
+  color: #999999;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jid-door .btn-eye:hover { color: var(--ji-accent); }
+.jid-door .btn-eye svg { width: 20px; height: 20px; }
+
+/* Date input -- the door's own rules, carried with it */
+.jid-door input[type="date"].form-control {
+  color-scheme: dark;
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+  padding-right: 44px;
+  position: relative;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233DA5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px 20px;
+}
+.jid-door input[type="date"].form-control::-webkit-calendar-picker-indicator {
+  position: absolute; right: 0; top: 0;
+  width: 44px; height: 100%;
+  opacity: 0; cursor: pointer; background: transparent;
+}
+.jid-door input[type="date"].form-control::-webkit-date-and-time-value { text-align: left; font-size: 16px; line-height: 20px; min-height: 20px; font-weight: 400; margin: 0; padding: 0; }
+.jid-door input[type="date"].form-control::-webkit-datetime-edit { font-size: 16px; line-height: 20px; font-weight: 400; padding: 0; }
+.jid-door input[type="date"].form-control::-webkit-datetime-edit-fields-wrapper { color: rgba(255,255,255,0.55); }
+.jid-door input[type="date"].form-control:focus::-webkit-datetime-edit-fields-wrapper,
+.jid-door input[type="date"].form-control:not(:placeholder-shown)::-webkit-datetime-edit-fields-wrapper { color: #ffffff; }
+
+/* Forgot password row */
+.jid-door .forgot-row { text-align: right; margin: -0.55rem 0 1.35rem; font-size: 0.85rem; }
+.jid-door .forgot-link { color: var(--ji-accent); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+.jid-door .forgot-link:hover { text-decoration: underline; }
+
+/* Remember me row */
+.jid-door .remember-row { margin: 1.25rem 0 1.35rem; }
+.jid-door .checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cccccc;
+  font-size: 0.875rem;
+  cursor: pointer;
+  user-select: none;
+}
+.jid-door .checkbox-wrapper input[type="checkbox"] { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.jid-door .checkmark {
+  width: 18px; height: 18px;
+  border: 2px solid var(--ji-accent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+.jid-door .checkbox-wrapper input[type="checkbox"]:checked + .checkmark { background-color: var(--ji-accent); }
+.jid-door .checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  width: 5px; height: 10px;
+  border: solid var(--ji-accent-ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+.jid-door .checkbox-wrapper input[type="checkbox"]:focus-visible + .checkmark { outline: 2px solid var(--ji-accent-hi); outline-offset: 2px; }
+.jid-door .checkbox-label { font-size: 0.875rem; color: #cccccc; }
+
+/* Submit button */
+.jid-door .btn-login {
+  width: 100%;
+  background: linear-gradient(135deg, var(--ji-accent), var(--ji-accent-lo));
+  border: none;
+  border-radius: 8px;
+  color: var(--ji-accent-ink);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px var(--ji-accent-30);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.jid-door .btn-login:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--ji-accent-lo), var(--ji-accent-lo));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--ji-accent-40);
+}
+.jid-door .btn-login:active:not(:disabled) { transform: translateY(0); }
+.jid-door .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Spinner */
+.jid-door .spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+  border-top-color: var(--ji-accent-ink);
+  animation: jidSpin 0.6s linear infinite;
+  flex: none;
+  vertical-align: middle;
+}
+@keyframes jidSpin { to { transform: rotate(360deg); } }
+
+/* Footer */
+.jid-door .auth-footer {
+  position: fixed;
+  bottom: 20px; left: 0;
+  width: 33%;
+  min-width: 380px;
+  max-width: 520px;
+  text-align: center;
+  padding: 0 30px;
+}
+.jid-door .copyright { font-size: 8pt; color: #ffffff; }
+.jid-door .copyright a { color: var(--ji-accent-link); text-decoration: none; transition: color 0.2s ease; }
+.jid-door .copyright a:hover { color: #ffffff; }
+
+/* -- Right panel -- */
+.jid-door .auth-bg-panel {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+/* THE CROSS-FADE. All ten pictures are stacked here and trade opacity, so a
+   slide change is a dissolve between two things already decoded rather than a
+   fetch the reader waits through. 1.5s ease is kJubilee's value for this same
+   panel (.auth-bg-panel .bg-slide in its jubilee-id.css), paired with the
+   5000ms interval in JubileeDoor.tsx.
+
+   No z-index: .bg-overlay and .bg-bubbles below have none either, so the three
+   layers stack in document order and the slides — rendered first — sit under
+   both. Giving this one a z-index would lift the pictures over the scrim and
+   wash out the form beside them. */
+.jid-door .auth-bg-panel .bg-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  opacity: 0; transition: opacity 1.5s ease;
+}
+.jid-door .auth-bg-panel .bg-slide.active { opacity: 1; }
+/* A 1.5s dissolve is motion; anyone who asked for less gets the change without
+   the fade rather than a picture that never arrives. */
+@media (prefers-reduced-motion: reduce) {
+  .jid-door .auth-bg-panel .bg-slide { transition: none; }
+}
+
+.jid-door .bg-overlay { position: absolute; inset: 0; background-color: rgba(0,0,0,0.5); }
+.jid-door .bg-bubbles { position: absolute; inset: 0; list-style: none; overflow: hidden; margin: 0; padding: 0; }
+.jid-door .bg-bubbles li {
+  position: absolute;
+  display: block;
+  width: 40px; height: 40px;
+  background-color: var(--ji-accent-08);
+  bottom: -160px;
+  border-radius: 50%;
+  animation: jidFloatUp 25s linear infinite;
+}
+.jid-door .bg-bubbles li:nth-child(1)  { left: 10%; width: 80px;  height: 80px;  animation-delay: 0s;  animation-duration: 18s; }
+.jid-door .bg-bubbles li:nth-child(2)  { left: 20%; width: 40px;  height: 40px;  animation-delay: 2s;  animation-duration: 22s; }
+.jid-door .bg-bubbles li:nth-child(3)  { left: 25%; width: 60px;  height: 60px;  animation-delay: 4s;  animation-duration: 20s; }
+.jid-door .bg-bubbles li:nth-child(4)  { left: 40%; width: 50px;  height: 50px;  animation-delay: 0s;  animation-duration: 23s; }
+.jid-door .bg-bubbles li:nth-child(5)  { left: 60%; width: 30px;  height: 30px;  animation-delay: 6s;  animation-duration: 19s; }
+.jid-door .bg-bubbles li:nth-child(6)  { left: 70%; width: 70px;  height: 70px;  animation-delay: 3s;  animation-duration: 24s; }
+.jid-door .bg-bubbles li:nth-child(7)  { left: 80%; width: 45px;  height: 45px;  animation-delay: 7s;  animation-duration: 21s; }
+.jid-door .bg-bubbles li:nth-child(8)  { left: 55%; width: 55px;  height: 55px;  animation-delay: 1s;  animation-duration: 26s; }
+.jid-door .bg-bubbles li:nth-child(9)  { left: 35%; width: 35px;  height: 35px;  animation-delay: 5s;  animation-duration: 17s; }
+.jid-door .bg-bubbles li:nth-child(10) { left: 90%; width: 90px;  height: 90px;  animation-delay: 9s;  animation-duration: 28s; }
+@keyframes jidFloatUp {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+}
+.jid-door .bg-content {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+  padding: 0;
+  max-width: 80%;
+  width: 100%;
+}
+.jid-door .bg-quote blockquote {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.jid-door .bg-quote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  font-style: normal;
+  letter-spacing: 1px;
+  color: var(--ji-accent-link);
+}
+
+/* -- The door's own screens (JubileeIdDoor.tsx extraStyles) -- */
+.jid-door .signup-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+.jid-door .signup-form-row .floating-label-group { margin-bottom: 0; }
+.jid-door .password-strength { margin-top: 8px; }
+.jid-door .strength-bar { height: 4px; background-color: #444; border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+.jid-door .strength-fill { height: 100%; border-radius: 2px; transition: width 0.2s ease, background-color 0.2s ease; }
+.jid-door .strength-fill.weak   { width: 33%;  background-color: #f87171; }
+.jid-door .strength-fill.fair   { width: 66%;  background-color: #fbbf24; }
+.jid-door .strength-fill.strong { width: 100%; background-color: #4ade80; }
+.jid-door .strength-text { font-size: 0.7rem; }
+.jid-door .password-hint { font-size: 0.75rem; color: #bdbdbd; margin-top: 6px; }
+.jid-door .password-match-status { font-size: 0.72rem; margin-top: 6px; min-height: 18px; }
+.jid-door .password-match-status.matched     { color: #4ade80; }
+.jid-door .password-match-status.not-matched { color: #ff4444; }
+
+.jid-door .door-heading { font-size: calc(1.55rem * 0.75); color: #ffffff; font-weight: 700; margin-bottom: 0.6rem; text-align: center; line-height: 1.3; letter-spacing: 0.2px; }
+.jid-door .door-heading--caps {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-orbitron), 'Orbitron', 'Agency FB', sans-serif;
+  font-size: calc(1.55rem * 0.75 * 0.9 * 0.9);
+  margin-bottom: 0.15rem;
+}
+.jid-door .door-helper { font-size: calc(0.95rem * 0.75); color: #b0b4bd; margin-bottom: 1.9rem; text-align: center; line-height: 1.55; }
+.jid-door .door-subtext { font-size: 0.92rem; color: #b0b4bd; margin-bottom: 1.6rem; line-height: 1.6; text-align: center; }
+.jid-door .door-disclaimer { font-size: 0.84rem; color: #b0b4bd; text-align: center; margin-top: 0.4rem; }
+.jid-door .door-turnstile { width: 100%; margin: 0 0 1.35rem; overflow: hidden; }
+.jid-door .door-turnstile:empty { margin: 0; }
+.jid-door .door-turnstile-inner { width: 300px; transform-origin: top left; }
+
+.jid-door .account-row { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; margin-bottom: 1.35rem; color: #ffffff; text-align: center; }
+.jid-door .account-row .account-email {
+  max-width: 100%; margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--font-orbitron), 'Orbitron', 'Agency FB', sans-serif;
+  font-size: calc(1.55rem * 0.75 * 0.9 * 0.9);
+  letter-spacing: 1px;
+}
+.jid-door .account-row .use-different {
+  background: none; border: none; color: var(--ji-accent); font-size: 0.8rem; cursor: pointer;
+  white-space: nowrap; text-decoration: underline; padding: 0; font-family: inherit;
+}
+.jid-door .account-row .use-different:hover { color: var(--ji-accent-hi); }
+.jid-door .consent-line { font-size: 0.78rem; color: #bdbdbd; margin: 0 0 1.15rem; line-height: 1.55; text-align: center; }
+.jid-door .consent-line a { color: var(--ji-accent); text-decoration: none; }
+.jid-door .consent-line a:hover { text-decoration: underline; }
+.jid-door .back-link-signup { text-align: center; margin-top: 1rem; }
+.jid-door .back-link-signup button { background: none; border: none; color: var(--ji-accent); font-size: 0.875rem; font-family: inherit; cursor: pointer; text-decoration: underline; }
+.jid-door .back-link-signup button:hover { color: var(--ji-accent-hi); }
+.jid-door .back-link-signup button:disabled { opacity: 0.55; cursor: default; text-decoration: none; }
+.jid-door .code-row { display: flex; justify-content: space-between; gap: 12px; }
+.jid-door .success-state-signup { text-align: center; padding: 1rem 0; }
+.jid-door .success-icon-circle {
+  width: 80px; height: 80px;
+  margin: 0 auto 1rem;
+  background-color: rgba(74, 222, 128, 0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.jid-door .success-icon-circle svg { width: 40px; height: 40px; color: #4ade80; }
+.jid-door .success-state-signup h2 { font-size: 1.35rem; color: #ffffff; margin-bottom: 0.5rem; }
+.jid-door .success-state-signup p { font-size: 0.9rem; color: #bdbdbd; line-height: 1.6; margin-bottom: 2rem; }
+
+/* Validation modal (the create screen's, as JubileeInspire's) */
+.jid-door .validation-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000; cursor: pointer;
+}
+.jid-door .validation-modal {
+  background-color: #2b2b2b; border-radius: 16px; padding: 30px 40px;
+  text-align: center; max-width: 460px; width: 90%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.jid-door .validation-modal-icon { margin-bottom: 1.15rem; display: flex; justify-content: center; }
+.jid-door .validation-modal p { color: #dcdcdc; font-size: 1rem; line-height: 1.55; margin-bottom: 0; }
+
+/* -- Mobile -- */
+@media (max-width: 1024px) {
+  .jid-door .auth-row { flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+  .jid-door .auth-form-panel {
+    width: 100%; min-width: 0; max-width: 100%;
+    min-height: 100vh; min-height: 100dvh;
+    padding: 30px 20px 70px;
+    flex-direction: column; align-items: stretch; justify-content: flex-start;
+  }
+  .jid-door .auth-form-content { flex: 1; display: flex; flex-direction: column; max-width: 100%; }
+  .jid-door .auth-form-inner { flex: 1; min-height: 0; }
+  .jid-door .auth-bg-panel { display: none; }
+  .jid-door .auth-footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    width: 100%; max-width: 100%; min-width: 0;
+    margin: 0; padding: 14px 20px 16px 20px;
+    background-color: #2b2b2b; z-index: 10;
+  }
+}
+@media (max-width: 480px) {
+  .jid-door .auth-logo-img { width: 57px; height: 57px; }
+  .jid-door .auth-logo-text { font-size: 1.6rem; }
+  .jid-door .form-control { height: 52px; padding: 22px 16px 8px 16px; }
+  .jid-door .signup-form-row { grid-template-columns: 1fr; }
+  .jid-door .door-heading { font-size: calc(1.3rem * 0.75); }
+  .jid-door .door-heading--caps { font-size: calc(1.3rem * 0.75 * 0.9 * 0.9); }
+}
+
+/* -- Reduced motion (the spinner is exempt: it is the only sign a submit is in flight) -- */
+@media (prefers-reduced-motion: reduce) {
+  .jid-door *, .jid-door *::before, .jid-door *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .jid-door .bg-bubbles { display: none; }
+  .jid-door .spinner { animation-duration: 0.6s !important; animation-iteration-count: infinite !important; }
+}

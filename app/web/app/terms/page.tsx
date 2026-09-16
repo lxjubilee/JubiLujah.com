@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description:
-    'The terms and conditions that govern your use of JubileePraise.com — accounts, acceptable use, content, intellectual property, and your rights and responsibilities.',
+    'The terms and conditions that govern your use of JubileePraise.com: accounts, acceptable use, content, intellectual property, and your rights and responsibilities.',
   robots: { index: true, follow: true },
 };
 
@@ -19,8 +19,8 @@ export default function TermsPage() {
           <div className="eyebrow">Legal</div>
           <h1>Terms of <em>Use</em></h1>
           <p className="lead">
-            These terms are the agreement between you and JubileePraise.com. Please read them carefully &mdash;
-            by creating an account or using the Service, you agree to be bound by them.
+            These terms are the agreement between you and JubileePraise.com. Please read them carefully.
+            By creating an account or using the Service, you agree to be bound by them.
           </p>
         </div>
       </section>
@@ -74,8 +74,8 @@ export default function TermsPage() {
 
             <h2>5. Content and Intellectual Property</h2>
             <p>
-              The Service and all of its content &mdash; including music, recordings, lyrics, artwork, album
-              titles, artist and persona names, text, graphics, logos, and software &mdash; are owned by Jubilee
+              The Service and all of its content (including music, recordings, lyrics, artwork, album
+              titles, artist and persona names, text, graphics, logos, and software) are owned by Jubilee
               Software, Inc., its affiliates, artists, or licensors and are protected by copyright, trademark, and
               other laws. Except as expressly permitted by these Terms, you may not copy, download, reproduce,
               distribute, publicly perform, broadcast, sell, rent, modify, create derivative works from, or

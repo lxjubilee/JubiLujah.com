@@ -1,6 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useCallback, useEffect, useState } from 'react';
+import { api } from '@/lib/api';
+import { getAccessToken, getRefreshToken } from '@/lib/auth';
+import { FAMILY_RAIL_SOURCE, toFamilyRows } from '@/lib/family-rail';
 
 /*
  * THE JUBILEEINSPIRE RAIL, MOUNTED ON EVERY JUBILEEPRAISE PAGE.
@@ -68,13 +72,19 @@ const NAV_ITEMS: NavItem[] = [
         icon: 'M120-160v-600q0-33 23.5-56.5T200-840h480q33 0 56.5 23.5T760-760v203q-10-2-20-2.5t-20-.5q-10 0-20 .5t-20 2.5v-203H200v400h283q-2 10-2.5 20t-.5 20q0 10 .5 20t2.5 20H240L120-160Zm160-440h320v-80H280v80Zm0 160h200v-80H280v80Zm400 280v-120H560v-80h120v-120h80v120h120v80H760v120h-80ZM200-360v-400 400Z',
     },
     {
-        key: 'jsv',
-        label: 'Jubilee Bible (JSV)',
-        href: 'https://jsvbible.com',
+        key: 'bibletalks',
+        label: 'Bible Talks',
+        // Repointed 2026-09-15 at the Founder's request: this row was
+        // "Jubilee Bible (JSV)" → https://jsvbible.com. The label is the single
+        // source for all three surfaces the row presents — the collapsed
+        // tooltip (data-tip), the expanded text (.jir-label) and the accessible
+        // name (aria-label) — so changing it here changes all of them together.
+        href: 'https://jubileebibletalks.com/',
         // Supplied artwork, Material Symbols 960 grid: an OPEN bible, pages
         // spread. It replaced a hand-built closed book with a cross knocked
         // out of the cover, which was the only icon needing an even-odd
-        // fill to punch that hole — so that mode went with it.
+        // fill to punch that hole — so that mode went with it. Kept for Bible
+        // Talks: an open bible reads as well for the talks as for the text.
         viewBox: '0 -960 960 960',
         icon: 'M260-319.23q49.69 0 96.69 11.27T450-272.61v-393.24q-42.15-27.46-91.23-41.19-49.08-13.73-98.77-13.73-36 0-67.27 5.65-31.27 5.66-64.27 18.5-4.61 1.54-6.54 4.43-1.92 2.88-1.92 6.34v378.31q0 5.39 3.85 7.89 3.84 2.5 8.46.57 28.46-9.69 60.07-14.92 31.62-5.23 67.62-5.23Zm250 46.62q46.31-24.08 93.31-35.35 47-11.27 96.69-11.27 36 0 67.62 5.23 31.61 5.23 60.07 14.92 4.62 1.93 8.46-.57 3.85-2.5 3.85-7.89v-378.31q0-3.46-1.92-6.15-1.93-2.69-6.54-4.62-33-12.84-64.27-18.5-31.27-5.65-67.27-5.65-49.69 0-98.77 13.73T510-665.85v393.24Zm-30 87.99q-48.38-35.69-104.38-55.15-56-19.46-115.62-19.46-36.61 0-71.92 8.11Q152.77-243 120-227.23q-21.38 9.84-40.69-3.12T60-267.08v-434.3q0-12.93 6.66-24.27Q73.31-737 85.85-742q40.61-19.77 84.65-29.27 44.04-9.5 89.5-9.5 58.38 0 114.08 15.96 55.69 15.97 105.92 47.12 50.23-31.15 105.92-47.12 55.7-15.96 114.08-15.96 45.46 0 89.5 9.5T874.15-742q12.54 5 19.19 16.35 6.66 11.34 6.66 24.27v434.3q0 23.77-20.08 36.35-20.08 12.57-42.23 2.73-32.38-15.39-67.11-23.31-34.73-7.92-70.58-7.92-59.62 0-115.62 19.46-56 19.46-104.38 55.15ZM285-496.69Z',
     },
@@ -129,6 +139,11 @@ const NAV_ITEMS: NavItem[] = [
     {
         key: 'books',
         label: 'Jubilee Books',
+        // HIDDEN 2026-09-03 at the Founder's request, the same way the Bible
+        // References row below is: the entry is kept rather than deleted so the
+        // chosen artwork and the note explaining it survive, and clearing the
+        // flag is the whole of putting the row back.
+        hidden: true,
         href: 'https://jubileebooks.com',
         // Supplied artwork, Material Symbols 960 grid. A row of upright spines
         // on a shelf, one leaning — which reads as SEVERAL books, where the
@@ -164,7 +179,53 @@ const NAV_ITEMS: NavItem[] = [
         viewBox: '0 -960 960 960',
         icon: 'M480-240 63-467l84-46 333 182 333-182 84 46-417 227Zm0 160L63-307l84-46 333 182 333-182 84 46L480-80Zm0-320L40-640l440-240 40 22v178h327l73 40-440 240Zm0-91 200-109H440v-167L207-640l273 149Zm-40-109Z'
     },
+    // ── Added 2026-09-15 so every family site links to every other ──────────
+    // NO JUBILEE PRAISE ROW, on this site or any other: Jubilee Praise is a
+    // header button, not a rail row (owner's instruction, 2026-09-15). One was
+    // added here the same day and taken back out.
+    //
+    // 🔴 AND NO SECOND BIBLE TALKS ROW. One was added here in this same pass,
+    // and removed 2026-09-15: the Bible Talks row ALREADY EXISTS — it is the
+    // second row in this list, the one that used to be "Jubilee Bible (JSV)"
+    // and was repointed to jubileebibletalks.com earlier the same day. The two
+    // were added hours apart by people who could not see each other's change,
+    // and they were not merely a visual duplicate: both carried
+    // `key: 'bibletalks'`, so the .map() below rendered two children with the
+    // same React key as well as two identical rows and two identical tooltips.
+    //
+    // Before adding a family row here, search this array for its href — a
+    // property can already be present under an older label.
 ];
+
+/* FAMILY ROWS TRAVEL SIGNED IN.
+   A click on a row to another family site asks this site's API for a one-time
+   Jubilee ID ticket (POST /api/auth/sso/go-url) and navigates with it, so a
+   signed-in reader arrives signed in — or with an account made for them if they
+   had none there. The session lives in localStorage, which a plain link cannot
+   carry, hence the click handler. Signed out, a modified click (new tab, ctrl,
+   middle button) or any failure: the plain link, exactly as before. */
+const FAMILY_HOSTS = ['jubileeinspire.com', 'bornagaindna.com', 'kjubilee.com', 'jubileebibletalks.com', 'jubileeverse.com', 'inspiremanna.com'];
+
+function isFamilyHref(href: string): boolean {
+  try {
+    return FAMILY_HOSTS.indexOf(new URL(href).hostname.toLowerCase().replace(/^www\./, '')) >= 0;
+  } catch {
+    return false;
+  }
+}
+
+async function goSignedIn(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!isFamilyHref(href)) return;
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  if (!getAccessToken() && !getRefreshToken()) return;
+  e.preventDefault();
+  try {
+    const r = await api.post<{ url?: string | null }>('/api/auth/sso/go-url', { to: href });
+    window.location.href = (r && r.url) || href;
+  } catch {
+    window.location.href = href;
+  }
+}
 
 /* WHICH ROW IS THE PROPERTY YOU ARE ALREADY ON.
    On kJubilee this matched the Jubilee Radio row, because that site IS the
@@ -199,6 +260,27 @@ const HAMBURGER = 'M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z';
 
 const VIEWBOX_24 = '0 0 24 24';
 
+/* CHAT HISTORY, AS JUBILEEINSPIRE'S SIDEBAR HAS IT — the same section every
+   family rail carries (first shipped on JubileeBibleTalks, 2026-09-15).
+   Ported from W:/JubileeInspire.com/src/components/layout/Sidebar.tsx: the last
+   row is a toggle, not a link, and it opens the reader's saved JubileeInspire
+   conversations inline beneath the other rows — search box, titles, "Load more"
+   twenty at a time, the same icon and the same words. The list comes from this
+   site's API, GET /api/chat-history (Bearer; the key to JI's history API stays
+   on the server). A row opens that conversation on JubileeInspire through
+   goSignedIn, so the reader arrives signed in.
+   What JI's list has and this one does not: the delete button and the topic
+   tree — the history API is read-only and carries no categories.
+   Loaded after mount only, so the server's HTML never differs from the first
+   client render. Styling: .jir-history* in app/inspire-rail.css. */
+const HISTORY_ICON =
+  'M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z';
+const CHEVRON = 'M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z';
+const HISTORY_PAGE_SIZE = 20;
+
+type HistoryRow = { id: string; title: string; lastMessageAt: string | null; href: string | null };
+type HistoryState = { conversations: HistoryRow[] } | { error: 'signed_out' | 'unavailable' };
+
 /* `viewBox` carries a glyph's own coordinate grid. The supplied icons are
    Material Symbols, drawn on 960 units with the origin at the BOTTOM left; the
    hamburger and the collapse chevron are the 24-unit, top-left kind. The two
@@ -214,6 +296,37 @@ function Icon({ d, viewBox }: { d: string; viewBox?: string }) {
 export default function InspireRail() {
   const [open, setOpen] = useState(false);
 
+  /* THE ROWS, LIVE FROM JUBILEEINSPIRE (2026-09-15). NAV_ITEMS is the first
+     paint and the fallback; then JubileeInspire's admin-managed rail
+     (lib/family-rail.js) replaces it — the same list every family property
+     renders, New Chat first. A failed or malformed answer keeps NAV_ITEMS. */
+  const [navItems, setNavItems] = useState<NavItem[]>(NAV_ITEMS);
+  useEffect(() => {
+    let live = true;
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 6000);
+    const baked = NAV_ITEMS.map((i) => ({ href: i.href, vb: i.viewBox, icon: i.icon }));
+    fetch(FAMILY_RAIL_SOURCE, { signal: ctl.signal, cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const rows = live ? toFamilyRows(j, baked) : null;
+        if (rows && rows.length) {
+          type Row = { key: string; label: string; href: string; vb: string; icon: string };
+          setNavItems(
+            (rows as Array<Row | null>)
+              .filter((r): r is Row => r !== null)
+              .map((r) => ({ key: r.key, label: r.label, href: r.href, viewBox: r.vb, icon: r.icon })),
+          );
+        }
+      })
+      .catch(() => {})
+      .finally(() => clearTimeout(timer));
+    return () => {
+      live = false;
+      ctl.abort();
+    };
+  }, []);
+
   /* body.jir-on is what moves the page out from under the fixed rail, and it is
      set from here rather than written into the layout's markup so that a page
      rendered before this component mounts is never padded for a rail that is not
@@ -222,6 +335,55 @@ export default function InspireRail() {
     document.body.classList.add('jir-on');
     return () => document.body.classList.remove('jir-on');
   }, []);
+
+  /* ── Chat History ────────────────────────────────────────────────────── */
+  const [historyOpen, setHistoryOpen] = useState(false);
+  // null until the first load answers.
+  const [history, setHistory] = useState<HistoryState | null>(null);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [historySearch, setHistorySearch] = useState('');
+  const [visibleCount, setVisibleCount] = useState(HISTORY_PAGE_SIZE);
+
+  const loadHistory = useCallback(async () => {
+    // No session in this browser: no request, the sign-in prompt straight away.
+    if (!getAccessToken() && !getRefreshToken()) {
+      setHistory({ error: 'signed_out' });
+      return;
+    }
+    setHistoryLoading(true);
+    try {
+      const j = await api.get<{ conversations?: HistoryRow[] }>('/api/chat-history');
+      setHistory({ conversations: Array.isArray(j?.conversations) ? j.conversations : [] });
+    } catch (err) {
+      const status = (err as { status?: number })?.status;
+      if (status === 401) setHistory({ error: 'signed_out' });
+      else setHistory((prev) => (prev && 'conversations' in prev ? prev : { error: 'unavailable' }));
+    } finally {
+      setHistoryLoading(false);
+    }
+  }, []);
+
+  // Re-fetch EVERY time the section opens, as JI does, so a conversation saved
+  // there since the last look is here without a reload.
+  useEffect(() => {
+    if (historyOpen) void loadHistory();
+  }, [historyOpen, loadHistory]);
+
+  // Opening the list, or changing the search, starts again at the latest twenty.
+  useEffect(() => {
+    setVisibleCount(HISTORY_PAGE_SIZE);
+  }, [historySearch, historyOpen]);
+
+  // The list only belongs in the open rail: closing the rail closes it.
+  useEffect(() => {
+    if (!open) setHistoryOpen(false);
+  }, [open]);
+
+  const allConversations = history && 'conversations' in history ? history.conversations : [];
+  const q = historySearch.trim().toLowerCase();
+  const filtered = q ? allConversations.filter((c) => c.title.toLowerCase().includes(q)) : allConversations;
+  const visibleConversations = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
 
   /* Escape closes the drawer. */
   useEffect(() => {
@@ -277,34 +439,117 @@ export default function InspireRail() {
           <span className="jir-label">NAVIGATION</span>
         </button>
 
-        {NAV_ITEMS.filter((item) => !item.hidden).map((item) => (
+        {navItems.filter((item) => !item.hidden).map((item) => (
           <a
             key={item.key}
             className={'jir-item' + (isCurrentProperty(item) ? ' is-active' : '')}
             aria-current={isCurrentProperty(item) ? 'page' : undefined}
             href={item.href}
             data-tip={item.label}
-            title={item.label}
+            /* aria-label, NOT title — and the difference is the bug. `title`
+               makes the BROWSER draw its own tooltip, and this row already has
+               one: data-tip is painted by .jir-item[data-tip]:hover::after in
+               inspire-rail.css. Hovering a collapsed row therefore produced two
+               labels, the styled one immediately and the OS one a second later,
+               overlapping it. Only the styled tooltip should ever appear.
+
+               It could not simply be deleted. .jir-label is `visibility:hidden`
+               while the rail is collapsed, which takes it out of the
+               accessibility tree, and ::after content is not an accessible name
+               either — so `title` was the only thing naming these links to a
+               screen reader. aria-label names them without drawing anything. */
+            aria-label={item.label}
             rel="noopener"
-            onClick={() => setOpen(false)}
+            onClick={(e) => { setOpen(false); void goSignedIn(e, item.href); }}
           >
             <Icon d={item.icon} viewBox={item.viewBox} />
             <span className="jir-label">{item.label}</span>
           </a>
         ))}
 
-        <div className="jir-spacer" />
+        {/* CHAT HISTORY — the last row, a toggle for the list below it. Like
+            JI's, it does not take the active look when open; only the chevron
+            turns. */}
+        <button
+          type="button"
+          className="jir-item"
+          onClick={() => { setOpen(true); setHistoryOpen((v) => !v); }}
+          data-tip="Chat History"
+          aria-label="Chat History"
+          aria-expanded={historyOpen}
+        >
+          <Icon d={HISTORY_ICON} />
+          <span className="jir-label">Chat History</span>
+          <svg className={'jir-history-chevron' + (historyOpen ? ' is-open' : '')} viewBox="0 0 24 24" aria-hidden="true">
+            <path d={CHEVRON} />
+          </svg>
+        </button>
+
+        {historyOpen ? (
+          <div className="jir-history">
+            <input
+              className="jir-history-search"
+              type="text"
+              placeholder="Search conversations…"
+              aria-label="Search conversations"
+              value={historySearch}
+              onChange={(e) => setHistorySearch(e.target.value)}
+            />
+            <div className="jir-history-scroll">
+              {history && 'error' in history && history.error === 'signed_out' ? (
+                <div className="jir-history-empty">
+                  <Link href="/signin" onClick={() => setOpen(false)}>Sign in</Link> to see your chat history
+                </div>
+              ) : !history || (historyLoading && allConversations.length === 0) ? (
+                <div className="jir-history-empty">Loading…</div>
+              ) : 'error' in history ? (
+                <div className="jir-history-empty">Chat history is unavailable right now</div>
+              ) : filtered.length === 0 ? (
+                <div className="jir-history-empty">
+                  {allConversations.length === 0 ? 'No conversations yet' : 'No matches'}
+                </div>
+              ) : (
+                <>
+                  {visibleConversations.map((c) => (
+                    <a
+                      key={c.id}
+                      className="jir-history-item"
+                      href={c.href || undefined}
+                      title={c.title}
+                      rel="noopener"
+                      onClick={(e) => { if (c.href) void goSignedIn(e, c.href); }}
+                    >
+                      <span className="jir-history-title">{c.title}</span>
+                    </a>
+                  ))}
+                  {hasMore && (
+                    <button
+                      type="button"
+                      className="jir-history-more"
+                      onClick={() => setVisibleCount((v) => v + HISTORY_PAGE_SIZE)}
+                    >
+                      Load more
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="jir-spacer" />
+        )}
 
         {/* The branding in the bottom corner: the vertical wordmark and the
             avatar under it, and nothing else. */}
-        <a className="jir-brand" href={ORIGIN + '/'} tabIndex={-1} rel="noopener">
+        {/* Signed in, like the rows (goSignedIn): a link to JubileeInspire arrives signed in. */}
+        <a className="jir-brand" href={ORIGIN + '/'} tabIndex={-1} rel="noopener" onClick={(e) => { void goSignedIn(e, ORIGIN + '/'); }}>
           <div className="jir-brand-text">
             Jubilee<span className="jir-brand-accent">Inspire</span>
             <span className="jir-brand-tld">.com</span>
           </div>
         </a>
 
-        <a className="jir-avatar" href={ORIGIN + '/'} title="JubileeInspire.com" rel="noopener">
+        <a className="jir-avatar" href={ORIGIN + '/'} title="JubileeInspire.com" rel="noopener" onClick={(e) => { void goSignedIn(e, ORIGIN + '/'); }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/members/jubilee-profile.png" alt="JubileeInspire" width="36" height="36" />
         </a>

@@ -104,7 +104,7 @@ export default function TrackManagerModal() {
                     </button>
                   </div>
                 ))}
-                {data.tracks.length === 0 && <div className="muted" style={{ padding: '8px 2px' }}>No .mp3 files on J: yet — upload some below.</div>}
+                {data.tracks.length === 0 && <div className="muted" style={{ padding: '8px 2px' }}>No .mp3 files on J: yet. Upload some below.</div>}
               </div>
 
               <div className="cover-modal-drop" style={{ aspectRatio: 'auto', minHeight: 120, maxHeight: 160 }}

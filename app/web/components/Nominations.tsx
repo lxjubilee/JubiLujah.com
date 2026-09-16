@@ -62,7 +62,7 @@ export default function Nominations({ type, id }: { type: 'song' | 'album'; id: 
       {open && canNominate && (
         <div className="jv-nominate-modal">
           <h4>Nominate for Award</h4>
-          <p className="muted" style={{ fontSize: 12 }}>Nomination is a recommendation for admin review — not an auto-tallied vote.</p>
+          <p className="muted" style={{ fontSize: 12 }}>Nomination is a recommendation for admin review, not an auto-tallied vote.</p>
           <label>Category
             <select value={periodId} onChange={(e) => setPeriodId(e.target.value)}>
               <option value="">Select a category…</option>

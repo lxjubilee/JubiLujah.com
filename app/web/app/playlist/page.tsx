@@ -5,7 +5,7 @@ import PlaylistApp from '@/components/PlaylistApp';
 // A single user playlist rendered as a music page. URL: /playlist?id=<uuid>
 // The playlist itself is fetched client-side (it's user-owned, Bearer-auth).
 export const metadata: Metadata = {
-  title: 'Playlist — JubileePraise',
+  title: 'Playlist | JubileePraise',
   robots: { index: false, follow: false },
 };
 

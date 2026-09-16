@@ -9,9 +9,9 @@ export const revalidate = 3600; // ISR — the shell is static; reviews load cli
 
 export function generateMetadata({ searchParams }: { searchParams: { code?: string } }): Metadata {
   const album = searchParams.code ? getAlbumByCode(searchParams.code) : null;
-  if (!album) return { title: 'Reviews — album not found' };
+  if (!album) return { title: 'Reviews: album not found' };
   return {
-    title: `Ratings & Reviews — ${album.title}`,
+    title: `Ratings & Reviews | ${album.title}`,
     description: `Community ratings and reviews for ${album.title} by ${album.artistName}.`,
   };
 }

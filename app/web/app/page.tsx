@@ -11,6 +11,8 @@ import MediaRow, { TileData } from '@/components/MediaRow';
 import LanguageHome from '@/components/LanguageHome';
 import FeaturedArtists from '@/components/FeaturedArtists';
 import TenantHome from '@/components/TenantHome';
+import HomeHero from '@/components/HomeHero';
+import { heroSlides } from '@/lib/heroes';
 import TorahSingsHome from '@/components/torahsings/TorahSingsHome';
 import { currentTenant } from '@/lib/tenant';
 import { usesAngelsCatalog } from '@/lib/tenants';
@@ -152,7 +154,13 @@ export default function HomePage() {
             absent — thirteen <h2> row titles under no <h1> is a broken outline
             for a crawler and for a screen reader alike. It names the property,
             which is what the page is. */}
-        <h1 className="sr-only">{tenant.name} — {tenant.tagline}</h1>
+        <h1 className="sr-only">{tenant.name}: {tenant.tagline}</h1>
+        {/* Three album banners, drawn at random from the hero pictures Cover Art
+            Studio has produced (lib/heroes.ts). INSIDE LanguageHome's children,
+            so it appears on the English home only: the blurbs are composed from
+            English theme and genre data, and a banner in one language over rows
+            in another is worse than no banner. */}
+        <HomeHero slides={heroSlides(3)} />
         <div className="nf-rows">
           {THEMES.filter((t) => buckets[t.key].length > 0).map((t) => (
             <MediaRow key={t.key} title={t.label} items={buckets[t.key]} />

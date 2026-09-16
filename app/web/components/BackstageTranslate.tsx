@@ -237,7 +237,7 @@ export default function BackstageTranslate({
       ) : null}
       {status === 'error' ? (
         <div className="translate-status translate-error">
-          <span>Couldn’t translate — please try again.</span>
+          <span>Couldn’t translate. Please try again.</span>
         </div>
       ) : null}
 

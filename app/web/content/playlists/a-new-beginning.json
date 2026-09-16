@@ -1,0 +1,367 @@
+{
+  "id": "a-new-beginning",
+  "title": "A New Beginning",
+  "type": "Emotional State",
+  "order": 10,
+  "description": "A new job, a new home, a new baby, a fresh start: songs for stepping forward.",
+  "accent": "#3DA5FF",
+  "imagePrompt": "A young couple carrying boxes into their new home laughing together, sunlight pouring through the open door, excitement and fresh-start energy, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "hope",
+      "wonder",
+      "joy",
+      "awe",
+      "gratitude"
+    ],
+    "energy": [
+      40,
+      85
+    ],
+    "exclude": [],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "Heaven Coronation",
+      "track": "Crowned Forever Now",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1032EN",
+      "n": 12
+    },
+    {
+      "slot": 2,
+      "album": "Courage and Conviction",
+      "track": "Christ, You Are My Courage [HIT SINGLE #2]",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1013EN",
+      "n": 6
+    },
+    {
+      "slot": 3,
+      "album": "Happy Father's Day",
+      "track": "The Father Who Runs",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1071EN",
+      "n": 7
+    },
+    {
+      "slot": 4,
+      "album": "Gather Round",
+      "track": "The Warmth of the Hearth",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1008EN",
+      "n": 4
+    },
+    {
+      "slot": 5,
+      "album": "Whole Again",
+      "track": "Scar Is The Story",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1056EN",
+      "n": 9
+    },
+    {
+      "slot": 6,
+      "album": "Coming Back Whole",
+      "track": "Walking Past the Old House",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1007EN",
+      "n": 7
+    },
+    {
+      "slot": 7,
+      "album": "Refuge",
+      "track": "Forever My Refuge",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 12
+    },
+    {
+      "slot": 8,
+      "album": "Gather Round",
+      "track": "The Gathering Song",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1008EN",
+      "n": 9
+    },
+    {
+      "slot": 9,
+      "album": "Family Blessing",
+      "track": "The Table Is Long (Album Peak)",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1006EN",
+      "n": 8
+    },
+    {
+      "slot": 10,
+      "album": "Whole Again",
+      "track": "Morning Came At Last",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1056EN",
+      "n": 6
+    },
+    {
+      "slot": 11,
+      "album": "The Line Holds",
+      "track": "Grandma Goes Home (The Line Still Holds)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1008EN",
+      "n": 8
+    },
+    {
+      "slot": 12,
+      "album": "Happy Father's Day",
+      "track": "Best Dad in the Universe",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1071EN",
+      "n": 6
+    },
+    {
+      "slot": 13,
+      "album": "No Greater Love",
+      "track": "Run to the Cross",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1029EN",
+      "n": 2
+    },
+    {
+      "slot": 14,
+      "album": "Dancehall Redemption",
+      "track": "Chant Down Babylon Lies",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 5
+    },
+    {
+      "slot": 15,
+      "album": "Jesus Is Here",
+      "track": "Run to Where He Stands",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1022EN",
+      "n": 7
+    },
+    {
+      "slot": 16,
+      "album": "Forever Apostle",
+      "track": "Jesus Your Work Multiplies",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1014EN",
+      "n": 7
+    },
+    {
+      "slot": 17,
+      "album": "The Sent Ones",
+      "track": "March On the Nation",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1018EN",
+      "n": 8
+    },
+    {
+      "slot": 18,
+      "album": "Comfort Comes Singing",
+      "track": "Speak Tenderly To My City",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 7
+    },
+    {
+      "slot": 19,
+      "album": "Roots and Rising",
+      "track": "Foundation Strong",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1004EN",
+      "n": 2
+    },
+    {
+      "slot": 20,
+      "album": "Ancestral Strength",
+      "track": "Cloud of Witnesses March",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1003EN",
+      "n": 12
+    },
+    {
+      "slot": 21,
+      "album": "Family Blessing",
+      "track": "The Blessing Breaks (Altar Track)",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1006EN",
+      "n": 7
+    },
+    {
+      "slot": 22,
+      "album": "Daughters and Mothers",
+      "track": "Grandmothers Knew the Lord",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1007EN",
+      "n": 3
+    },
+    {
+      "slot": 23,
+      "album": "La Cruz Que Baila",
+      "track": "Lleva la Cumbia a Cada Pueblo (Carry the Cumbia to Every Village)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1006EN",
+      "n": 10
+    },
+    {
+      "slot": 24,
+      "album": "The Line Holds",
+      "track": "The Line Is In My Hand",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1008EN",
+      "n": 10
+    },
+    {
+      "slot": 25,
+      "album": "Dancehall Redemption",
+      "track": "Riddim of the Redeemed",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 12
+    },
+    {
+      "slot": 26,
+      "album": "Light The Maccabee Flame",
+      "track": "Dedicate The Whole Street",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1005EN",
+      "n": 10
+    },
+    {
+      "slot": 27,
+      "album": "Apostolic Legacy",
+      "track": "You Carry It",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1016EN",
+      "n": 6
+    },
+    {
+      "slot": 28,
+      "album": "Courage and Conviction",
+      "track": "Strong in the Lord Forever",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1013EN",
+      "n": 12
+    },
+    {
+      "slot": 29,
+      "album": "Frontier Apostle",
+      "track": "Build It Strong",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1019EN",
+      "n": 5
+    },
+    {
+      "slot": 30,
+      "album": "Comfort Comes Singing",
+      "track": "Comforted, We Comfort Now",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 12
+    },
+    {
+      "slot": 31,
+      "album": "Standing Strong",
+      "track": "Christ the Foundation Holds",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1023EN",
+      "n": 4
+    },
+    {
+      "slot": 32,
+      "album": "Healing Diaspora",
+      "track": "Stripes We Are Healed",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1011EN",
+      "n": 4
+    },
+    {
+      "slot": 33,
+      "album": "Coming Back Whole",
+      "track": "The Mirror Doesn't Lie Anymore",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1007EN",
+      "n": 3
+    },
+    {
+      "slot": 34,
+      "album": "The Marriage Supper",
+      "track": "Wine That Won't Run Out",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1039EN",
+      "n": 9
+    },
+    {
+      "slot": 35,
+      "album": "Standing Strong",
+      "track": "You Are Undeterred",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1023EN",
+      "n": 9
+    },
+    {
+      "slot": 36,
+      "album": "Healing Diaspora",
+      "track": "Roots Run to Jesus",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1011EN",
+      "n": 3
+    }
+  ]
+}

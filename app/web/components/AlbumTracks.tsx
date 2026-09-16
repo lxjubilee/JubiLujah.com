@@ -29,7 +29,7 @@ export default function AlbumTracks({ album }: { album: Album }) {
   };
 
   if (!album.tracks.length) {
-    return <p className="notice">This album is in the studio — no audio tracks have been uploaded yet.</p>;
+    return <p className="notice">This album is in the studio. No audio tracks have been uploaded yet.</p>;
   }
 
   return (

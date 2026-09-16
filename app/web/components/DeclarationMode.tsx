@@ -28,7 +28,7 @@ export default function DeclarationMode({ track, onClose }: { track: TrackEntry 
         <p className="tpl-decl-artist">{track.personaName}</p>
         {/* Lyrics render here when a lyrics record (with declaration flags) exists
             for this track in the active language. */}
-        <p className="tpl-decl-empty">Synchronized lyrics aren’t published for this song yet — declaration mode will
+        <p className="tpl-decl-empty">Synchronized lyrics aren’t published for this song yet. Declaration mode will
           light up the words to speak the moment they are. For now, the screen stays awake and the song keeps playing.</p>
       </div>
     </div>

@@ -111,7 +111,7 @@ export default function ReviewsBrowser({ album, songs }: { album: AlbumRef; song
           <a className="rv-summary-artist" href={`/artist/${album.artistSlug}`}>{album.artistName}</a>
 
           <div className="rv-summary-score">
-            <div className="rv-summary-big">{summary?.average != null ? summary.average.toFixed(1) : '—'}</div>
+            <div className="rv-summary-big">{summary?.average != null ? summary.average.toFixed(1) : '-'}</div>
             <div className="rv-summary-stars">
               <StarRating value={summary?.average ?? 0} size="md" />
               <div className="rv-summary-counts">

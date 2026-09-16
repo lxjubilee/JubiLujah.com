@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { api } from '@/lib/api';
 import { clearTokens, getRefreshToken } from '@/lib/auth';
+import { stripSsoMarkers } from '@/lib/familySso';
 
 // Mirrors the server RBAC ladder (api/src/config.js ROLE_ORDER), weakest→strongest.
 const ROLE_ORDER = ['viewer', 'reviewer', 'content_editor', 'executive', 'admin'];
@@ -52,6 +53,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => { refresh(); }, [refresh]);
+
+  // Cross-site sign-in (middleware.ts + lib/familySso.ts). The middleware renders
+  // on the ticket URL rather than redirecting to a clean one, so the spent ticket
+  // and the ?sso marker are tidied here, with no reload and no history entry.
+  useEffect(() => { stripSsoMarkers(); }, []);
+
+  // Once the session is known: signed in → make sure the SSO knows this browser
+  // (keyed to WHO, so a change of account re-plants); signed out with a stale
+  // "signed in" marker just cleared → ask the SSO once, directly.
+  // No plant and no silent ask since 2026-09-15 (owner decision): another family
+  // site signs the reader in here only by a rail link with a ticket, and a
+  // sign-in here does not teach the SSO cookie this browser.
 
   // Keep the session warm: periodically re-validate (which transparently mints a
   // fresh access token via the refresh token) so a long-running or idle tab never

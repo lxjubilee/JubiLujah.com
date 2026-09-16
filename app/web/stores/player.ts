@@ -153,9 +153,19 @@ export const usePlayer = create<PlayerState>((set, get) => ({
     resolvePlayIntent(songId).then((intent) => {
       if (!intent) return;
       if (get().nowPlaying?.songId !== songId) return;
+      if (intent.mode === 'expired') {
+        // The free plan's 30 days are over. Nothing plays: stop now rather than
+        // wait for FooterPlayer's timeupdate to notice a cap of 0, and ask.
+        useUpgradeModal.getState().arm(intent);
+        set({ capSeconds: 0 });
+        get().audio?.pause();
+        useUpgradeModal.getState().show();
+        return;
+      }
       if (intent.mode === 'limited') {
         useUpgradeModal.getState().arm(intent);
-        set({ capSeconds: intent.preview_seconds || 60 });
+        // ?? not ||: a preview of 0 seconds must stay 0, not become 60.
+        set({ capSeconds: intent.preview_seconds ?? 60 });
       }
     }).catch(() => { /* fail open */ });
   },

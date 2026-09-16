@@ -9,7 +9,7 @@ import styles from './page.module.css';
 export const metadata: Metadata = {
   title: 'The Book',
   description:
-    'Fragments of a Song — the whole account of how the songs were found in the Paleo-Hebrew, and what else came loose from the text along the way.',
+    'Fragments of a Song: the whole account of how the songs were found in the Paleo-Hebrew, and what else came loose from the text along the way.',
 };
 
 const CHAPTERS: readonly { title: string; body: string }[] = [
@@ -35,7 +35,7 @@ const CHAPTERS: readonly { title: string; body: string }[] = [
   },
   {
     title: 'What We Have Not Told You',
-    body: 'An honest accounting of the withheld layer — what stays proprietary, why, and what a serious student can still reconstruct.',
+    body: 'An honest accounting of the withheld layer: what stays proprietary, why, and what a serious student can still reconstruct.',
   },
 ];
 
@@ -49,7 +49,7 @@ export default function BookPage() {
           <h1 className={styles.title}>Fragments of a Song</h1>
 
           <p className={styles.lede}>
-            The albums let you hear it. This is the account of how it was found — where the first sequence turned
+            The albums let you hear it. This is the account of how it was found: where the first sequence turned
             up, what the symbols were doing, why the fold is sevenfold, and what else came loose from the text
             once we stopped reading it the way we had been taught to. It is the argument in full, set down for
             anyone willing to check the work. It is not offered as canon. It is offered as something to consider.

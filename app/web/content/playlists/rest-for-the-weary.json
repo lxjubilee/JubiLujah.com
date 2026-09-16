@@ -1,0 +1,372 @@
+{
+  "id": "rest-for-the-weary",
+  "title": "Rest for the Weary",
+  "type": "Emotional State",
+  "order": 7,
+  "description": "Quiet, gentle worship for when you are tired and simply need to rest.",
+  "accent": "#6C8EAD",
+  "imagePrompt": "A woman resting peacefully in a hammock under shady trees on a quiet afternoon, eyes closed, dappled sunlight, deeply restful mood, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "peace",
+      "intimacy",
+      "tenderness",
+      "contemplative",
+      "comfort",
+      "surrender"
+    ],
+    "energy": [
+      5,
+      50
+    ],
+    "exclude": [
+      "exuberance",
+      "celebration",
+      "triumph"
+    ],
+    "arc": "settle",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "Every Generation Prays",
+      "track": "Generations Still Pray",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1010EN",
+      "n": 12
+    },
+    {
+      "slot": 2,
+      "album": "Refuge",
+      "track": "Be Still and Know",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 6
+    },
+    {
+      "slot": 3,
+      "album": "Haitian Heartbeat",
+      "track": "Heart Inside the Heart",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1010EN",
+      "n": 8
+    },
+    {
+      "slot": 4,
+      "album": "The Voicemail",
+      "track": "The Voice I Still Hear",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1016EN",
+      "n": 10
+    },
+    {
+      "slot": 5,
+      "album": "El Rosario de Abuela",
+      "track": "Una Cuenta, Un Nombre (One Bead, One Name)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 2
+    },
+    {
+      "slot": 6,
+      "album": "Kingdom Roars",
+      "track": "Lion Roars Forever",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1012EN",
+      "n": 12
+    },
+    {
+      "slot": 7,
+      "album": "Community Tending",
+      "track": "Gather the People",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1012EN",
+      "n": 1
+    },
+    {
+      "slot": 8,
+      "album": "Healing Wounds",
+      "track": "The Wound Is Still Here",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1009EN",
+      "n": 1
+    },
+    {
+      "slot": 9,
+      "album": "La Calle Canta",
+      "track": "Cristo Es el Vecino Nuevo (Christ Is the New Neighbor)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 3
+    },
+    {
+      "slot": 10,
+      "album": "No Greater Love",
+      "track": "Hands Up, Heart Wide",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1029EN",
+      "n": 3
+    },
+    {
+      "slot": 11,
+      "album": "Lōkahi (One in Him)",
+      "track": "Lei of Many Flowers",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1049EN",
+      "n": 10
+    },
+    {
+      "slot": 12,
+      "album": "Waiting Room",
+      "track": "Wait For the Lord",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1018EN",
+      "n": 8
+    },
+    {
+      "slot": 13,
+      "album": "Lōkahi (One in Him)",
+      "track": "No Walls in His House",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1049EN",
+      "n": 7
+    },
+    {
+      "slot": 14,
+      "album": "Forever Flourishing",
+      "track": "Bloom That Never Fades",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1064EN",
+      "n": 10
+    },
+    {
+      "slot": 15,
+      "album": "The Last Text",
+      "track": "Their Number Still in My Phone",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1012EN",
+      "n": 10
+    },
+    {
+      "slot": 16,
+      "album": "La Calle Canta",
+      "track": "La Calle Canta (The Street Sings)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 1
+    },
+    {
+      "slot": 17,
+      "album": "Healing Wounds",
+      "track": "Slow Mercy",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1009EN",
+      "n": 2
+    },
+    {
+      "slot": 18,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "Solo Tú Mereces",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 10
+    },
+    {
+      "slot": 19,
+      "album": "Redemption Road",
+      "track": "One Step Closer",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1022EN",
+      "n": 4
+    },
+    {
+      "slot": 20,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "En Tu Pecho Descanso",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 7
+    },
+    {
+      "slot": 21,
+      "album": "Stolen Land Sacred Covenant",
+      "track": "Return to the Beginning",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1005EN",
+      "n": 3
+    },
+    {
+      "slot": 22,
+      "album": "The Last Text",
+      "track": "The Voicemail I Saved",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1012EN",
+      "n": 3
+    },
+    {
+      "slot": 23,
+      "album": "El Rosario de Abuela",
+      "track": "Las Oraciones Cruzan el Mar (The Prayers Cross the Sea)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 4
+    },
+    {
+      "slot": 24,
+      "album": "Kingdom Roars",
+      "track": "Cub Before The Lion",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1012EN",
+      "n": 9
+    },
+    {
+      "slot": 25,
+      "album": "My Kuleana",
+      "track": "Show Up Anyway",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 9
+    },
+    {
+      "slot": 26,
+      "album": "Forever Flourishing",
+      "track": "Ever Green",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1064EN",
+      "n": 8
+    },
+    {
+      "slot": 27,
+      "album": "My Kuleana",
+      "track": "Light to My Block",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 5
+    },
+    {
+      "slot": 28,
+      "album": "Behind The Veil",
+      "track": "Held in the Holy Place",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1063EN",
+      "n": 7
+    },
+    {
+      "slot": 29,
+      "album": "Healing Administration",
+      "track": "Time to Rest",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 7
+    },
+    {
+      "slot": 30,
+      "album": "Miracle Worker (Subway Funk)",
+      "track": "I Need a Miracle (149th Street Cry)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1012EN",
+      "n": 1
+    },
+    {
+      "slot": 31,
+      "album": "The Seasons Turn",
+      "track": "Sacred Seasons",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1003EN",
+      "n": 12
+    },
+    {
+      "slot": 32,
+      "album": "Waiting Room",
+      "track": "The Vinyl Chairs",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1018EN",
+      "n": 1
+    },
+    {
+      "slot": 33,
+      "album": "The Wisdom Road",
+      "track": "Honoring the Ancestors",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1007EN",
+      "n": 8
+    },
+    {
+      "slot": 34,
+      "album": "The Voicemail",
+      "track": "Her Voice Still On Record",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1016EN",
+      "n": 4
+    },
+    {
+      "slot": 35,
+      "album": "The Wisdom Road",
+      "track": "Voices in the Night",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1007EN",
+      "n": 5
+    },
+    {
+      "slot": 36,
+      "album": "Hand-Me-Down Faith",
+      "track": "Questions in the Quiet",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1005EN",
+      "n": 3
+    }
+  ]
+}

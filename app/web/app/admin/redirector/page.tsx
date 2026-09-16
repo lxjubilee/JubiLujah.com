@@ -136,7 +136,7 @@ export default function RedirectorConsole() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap', marginBottom: 16 }}>
         <div>
           <h1 style={{ margin: 0 }}>Redirector &amp; QR</h1>
-          <p style={{ margin: '4px 0 0', color: 'var(--ink-muted)', fontSize: 13 }}>Short links, QR codes &amp; scan analytics — Music · Articles · Books</p>
+          <p style={{ margin: '4px 0 0', color: 'var(--ink-muted)', fontSize: 13 }}>Short links, QR codes &amp; scan analytics: Music · Articles · Books</p>
         </div>
         <button onClick={refresh} style={{ ...pill(false), fontWeight: 600 }} title="Reload">↻ Refresh</button>
       </div>
@@ -179,11 +179,11 @@ export default function RedirectorConsole() {
                 <div key={c.token} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, padding: '9px 2px', borderBottom: '1px solid var(--line)' }}>
                   <span style={{ display: 'flex', gap: 8, alignItems: 'center', minWidth: 0 }}>
                     <code style={{ fontSize: 12, whiteSpace: 'nowrap' }}>{c.token}</code>
-                    <Badge text={c.kind || '—'} />
+                    <Badge text={c.kind || '-'} />
                   </span>
                   <span style={{ fontWeight: 800 }}>{c.resolve_count.toLocaleString()}</span>
                 </div>
-              )) : <p className="notice">No scans recorded yet — codes resolve here once they’re scanned.</p>}
+              )) : <p className="notice">No scans recorded yet. Codes resolve here once they’re scanned.</p>}
             </div>
           </div>
         </div>
@@ -217,8 +217,8 @@ export default function RedirectorConsole() {
                   {topTokens.map((tk) => (
                     <tr key={tk.token}>
                       <td style={{ padding: 6 }}><code>{tk.token}</code></td>
-                      <td style={{ padding: 6 }}>{tk.kind || '—'}</td>
-                      <td style={{ padding: 6 }}>{tk.placement || '—'}</td>
+                      <td style={{ padding: 6 }}>{tk.kind || '-'}</td>
+                      <td style={{ padding: 6 }}>{tk.placement || '-'}</td>
                       <td style={{ padding: 6, fontWeight: 700 }}>{tk.resolutions}</td>
                     </tr>
                   ))}
@@ -250,7 +250,7 @@ export default function RedirectorConsole() {
       {/* ---- Audit ---- */}
       {view === 'audit' && (
         <div style={panel}>
-          <div style={{ ...eyebrow, marginBottom: 10 }}>Audit trail — last 200 changes</div>
+          <div style={{ ...eyebrow, marginBottom: 10 }}>Audit trail: last 200 changes</div>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
             <thead><tr>{['When', 'Actor', 'Action', 'Entity'].map((h) => <th key={h} style={{ textAlign: 'left', padding: 6, borderBottom: '1px solid var(--line)', color: 'var(--ink-muted)' }}>{h}</th>)}</tr></thead>
             <tbody>
@@ -271,7 +271,7 @@ export default function RedirectorConsole() {
       {/* ---- Health ---- */}
       {view === 'health' && (
         <div style={panel}>
-          <div style={{ ...eyebrow, marginBottom: 10 }}>Asset health — flagged assets</div>
+          <div style={{ ...eyebrow, marginBottom: 10 }}>Asset health: flagged assets</div>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
             <thead><tr>{['Title', 'Kind', 'Status', 'Checked'].map((h) => <th key={h} style={{ textAlign: 'left', padding: 6, borderBottom: '1px solid var(--line)', color: 'var(--ink-muted)' }}>{h}</th>)}</tr></thead>
             <tbody>
@@ -280,7 +280,7 @@ export default function RedirectorConsole() {
                   <td style={{ padding: 6 }}>{a.title}</td>
                   <td style={{ padding: 6 }}>{a.content_kind}</td>
                   <td style={{ padding: 6 }}><Badge text={a.health_status} color={HEALTH_COLOR[a.health_status]} /></td>
-                  <td style={{ padding: 6 }}>{a.health_checked_at ? new Date(a.health_checked_at).toLocaleString() : '—'}</td>
+                  <td style={{ padding: 6 }}>{a.health_checked_at ? new Date(a.health_checked_at).toLocaleString() : '-'}</td>
                 </tr>
               ))}
               {!health.length && <tr><td colSpan={4} className="notice" style={{ padding: 10 }}>No flagged assets. All healthy.</td></tr>}

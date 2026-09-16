@@ -37,9 +37,9 @@ const DURATIONS: { label: string; seconds: number | null }[] = [
 ];
 const ARC_LABEL: Record<Arc, string> = { steady: 'Steady', build: 'Build', worship_set: 'Worship set' };
 const ARC_HELP: Record<Arc, string> = {
-  steady: 'A consistent energy band — for workouts, driving, background praise.',
-  build: 'Starts lower and climbs — for warming up, getting ready to go.',
-  worship_set: 'Four movements — gather, rise, crest, land — for personal or corporate worship.',
+  steady: 'A consistent energy band for workouts, driving, background praise.',
+  build: 'Starts lower and climbs, for warming up and getting ready to go.',
+  worship_set: 'Four movements (gather, rise, crest, land) for personal or corporate worship.',
 };
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
 const fmtLong = (s: number) => { const m = Math.round(s / 60); return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m} min`; };
@@ -161,7 +161,7 @@ export default function ThemePlaylistApp({ themeId, initial, shared }: { themeId
   // ── playback ────────────────────────────────────────────────────────────────
   const toPlayerSongs = useCallback((entries: Entry[]): PlayerSong[] => entries.map((e) => e.type === 'track'
     ? { id: e.songId, songId: e.songId, title: e.title, artist: e.personaName, album: e.albumTitle, url: e.url, cover: e.cover, href: `/playlist/${themeId}` }
-    : { id: e.id, title: `Testimony — ${e.title}`, artist: 'Testimony', url: e.url, cover: e.image || null, href: `/playlist/${themeId}` }), [themeId]);
+    : { id: e.id, title: `Testimony: ${e.title}`, artist: 'Testimony', url: e.url, cover: e.image || null, href: `/playlist/${themeId}` }), [themeId]);
 
   const playFrom = useCallback((index: number) => {
     if (!data) return;
@@ -189,7 +189,7 @@ export default function ThemePlaylistApp({ themeId, initial, shared }: { themeId
           <p className="tpl-statement">{data?.theme.statement || initial.statement}</p>
           {shared?.senderName && (
             <p className="tpl-shared-note">
-              Shared by {shared.senderName}{shared.note ? <> — “{shared.note}”</> : null}
+              Shared by {shared.senderName}{shared.note ? <>: “{shared.note}”</> : null}
             </p>
           )}
           <p className="tpl-meta">
@@ -208,10 +208,10 @@ export default function ThemePlaylistApp({ themeId, initial, shared }: { themeId
       </div>
 
       {data?.underfilled && (
-        <p className="tpl-warn">This mix is shorter than a full set for the current filters — add an artist or switch language for more.</p>
+        <p className="tpl-warn">This mix is shorter than a full set for the current filters. Add an artist or switch language for more.</p>
       )}
       {!loading && trackEntries.length > 0 && trackEntries.length < 30 && (
-        <p className="tpl-warn">Only {trackEntries.length} tracks match right now — add an artist back for a fuller set.</p>
+        <p className="tpl-warn">Only {trackEntries.length} tracks match right now. Add an artist back for a fuller set.</p>
       )}
 
       {/* 3 — Session shapers */}
@@ -267,7 +267,7 @@ export default function ThemePlaylistApp({ themeId, initial, shared }: { themeId
           <li key={`i-${e.id}`} className="tpl-row tpl-row-interlude">
             <span className="tpl-row-idx">✦</span>
             <span className="tpl-row-main">
-              <span className="tpl-row-title">Testimony — {e.title}</span>
+              <span className="tpl-row-title">Testimony: {e.title}</span>
               <span className="tpl-row-sub">{e.category} · {fmt(e.durationSeconds)}</span>
             </span>
             <button type="button" className="tpl-row-play" onClick={() => playFrom(i)} aria-label="Play testimony">▶</button>

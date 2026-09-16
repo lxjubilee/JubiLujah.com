@@ -52,7 +52,7 @@ function ReviewRow({ row, onAction }: { row: AdminReviewRow; onAction: (id: stri
               <div key={h.id} className="mod-history-row">
                 <strong>{h.action}</strong>
                 {h.prev_status && <> {h.prev_status} → {h.new_status}</>}
-                {h.reason && <> — “{h.reason}”</>}
+                {h.reason && <>: “{h.reason}”</>}
                 <span className="rv-muted"> · {h.moderator_name || 'system'} · {new Date(h.created_at).toLocaleString()}</span>
               </div>
             ))}
@@ -171,17 +171,17 @@ export default function ModerationDashboard() {
       {tab === 'analytics' && analytics && (
         <div className="mod-analytics">
           <div className="mod-stat-grid">
-            <div className="rv-contrib-card"><div className="rv-contrib-num">{analytics.platform.average ?? '—'}</div><div className="rv-contrib-lbl">Avg platform rating</div></div>
+            <div className="rv-contrib-card"><div className="rv-contrib-num">{analytics.platform.average ?? '-'}</div><div className="rv-contrib-lbl">Avg platform rating</div></div>
             <div className="rv-contrib-card"><div className="rv-contrib-num">{(analytics.platform.total_ratings || 0).toLocaleString()}</div><div className="rv-contrib-lbl">Total ratings</div></div>
             <div className="rv-contrib-card"><div className="rv-contrib-num">{(analytics.platform.total_reviews || 0).toLocaleString()}</div><div className="rv-contrib-lbl">Total reviews</div></div>
           </div>
           <div className="mod-analytics-cols">
-            <AnalyticsList title="Highest-rated albums" rows={analytics.highest_rated_albums} render={(r: any) => `${r.title || r.target_id} — ★${r.avg_stars} (${r.rating_count})`} />
-            <AnalyticsList title="Highest-rated songs" rows={analytics.highest_rated_songs} render={(r: any) => `${r.title || r.target_id} — ★${r.avg_stars} (${r.rating_count})`} />
-            <AnalyticsList title="Most-reviewed albums" rows={analytics.most_reviewed_albums} render={(r: any) => `${r.title || r.target_id} — ${r.review_count} reviews`} />
-            <AnalyticsList title="Most-reviewed songs" rows={analytics.most_reviewed_songs} render={(r: any) => `${r.title || r.target_id} — ${r.review_count} reviews`} />
-            <AnalyticsList title="Most active reviewers" rows={analytics.most_active_reviewers} render={(r: any) => `${r.display_name} — ${r.contributions} (${r.reviews} reviews)`} />
-            <AnalyticsList title="Most helpful reviews" rows={analytics.most_helpful_reviews} render={(r: any) => `👍 ${r.helpful_count} — ${r.title || r.target_title || r.target_id} by ${r.author_name}`} />
+            <AnalyticsList title="Highest-rated albums" rows={analytics.highest_rated_albums} render={(r: any) => `${r.title || r.target_id} · ★${r.avg_stars} (${r.rating_count})`} />
+            <AnalyticsList title="Highest-rated songs" rows={analytics.highest_rated_songs} render={(r: any) => `${r.title || r.target_id} · ★${r.avg_stars} (${r.rating_count})`} />
+            <AnalyticsList title="Most-reviewed albums" rows={analytics.most_reviewed_albums} render={(r: any) => `${r.title || r.target_id} · ${r.review_count} reviews`} />
+            <AnalyticsList title="Most-reviewed songs" rows={analytics.most_reviewed_songs} render={(r: any) => `${r.title || r.target_id} · ${r.review_count} reviews`} />
+            <AnalyticsList title="Most active reviewers" rows={analytics.most_active_reviewers} render={(r: any) => `${r.display_name} · ${r.contributions} (${r.reviews} reviews)`} />
+            <AnalyticsList title="Most helpful reviews" rows={analytics.most_helpful_reviews} render={(r: any) => `👍 ${r.helpful_count} · ${r.title || r.target_title || r.target_id} by ${r.author_name}`} />
           </div>
           <div className="mod-trend">
             <h3>Ratings &amp; reviews over time (90 days)</h3>

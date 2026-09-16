@@ -13,6 +13,7 @@ import { albumUuid } from '@/lib/ids';
 import { api } from '@/lib/api';
 import { batchSummaries, type ReviewSummary, type TargetType } from '@/lib/reviews';
 import { genrePair } from '@/lib/genres';
+import { albumBlurb } from '@/lib/albumBlurb';
 import { useLang } from '@/lib/useLang';
 import { albumVisibleInLang, albumBcp47 } from '@/lib/languages';
 
@@ -52,7 +53,9 @@ function fmt(s: number) {
   return `${m}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFallback = '', albums, initial, similar = [], support = {} }: { artist: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string> }) {
+// artistRole is still accepted (and still passed by app/album/page.tsx) but no
+// longer shown: the banner names the album now, not the persona's role.
+export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {} }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string> }) {
   const playQueue = usePlayer((s) => s.playQueue);
   const togglePlay = usePlayer((s) => s.togglePlay);
   const nowPlaying = usePlayer((s) => s.nowPlaying);
@@ -79,25 +82,6 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
   const heroImage = supportImage || heroFallback;
   const heroStyle = { ['--persona-img' as string]: heroImage ? `url('${heroImage}')` : 'none' } as CSSProperties;
 
-  // Rendered by both return paths below, so a studio album a guest cannot see
-  // still gets the same header it gets today.
-  //
-  // THE MODIFIER CLASS IS ONLY FOR THE SUPPORTING IMAGE, and it exists because
-  // the two pictures crop differently. The hero is far wider than it is tall, so
-  // `cover` scales any backdrop to the width and lets the height overflow — with
-  // the default `center` anchoring, that overflow is taken evenly off the top and
-  // the bottom, which on a 16:9 photograph is where the faces are. The persona
-  // banners were composed for this box and still want centre; an album photograph
-  // was not, so it is anchored to the top instead. See .x-hero--support.
-  const hero = (
-    <header className={`x-hero${supportImage ? ' x-hero--support' : ''}`} style={heroStyle}>
-      <div className="x-container">
-        <div className="x-inner">
-          <h1>{artist}<em>{artistRole}</em></h1>
-        </div>
-      </div>
-    </header>
-  );
 
   // ---- Public ratings (§2/§3/§6): album + per-song summaries -------------
   const [summaries, setSummaries] = useState<Record<string, ReviewSummary>>({});
@@ -180,6 +164,55 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
     const playable = all.filter((x) => x.url);
     playQueue(playable, Math.max(0, playable.findIndex((x) => x.id === all[i].id)));
   };
+
+  // ---- The banner ----------------------------------------------------------
+  // Rendered by both return paths below, so a studio album a guest cannot see
+  // still gets the same header it gets today.
+  //
+  // WHAT IT SAYS (owner direction, 2026-09-16): the ALBUM, not the artist. It
+  // used to be the artist's name over their persona role, which told a visitor
+  // who they were looking at but not what. Now: the album title, one sentence
+  // about it, a Play Album button with the artist named beside it, and the genres
+  // as pills — everything else is one scroll down. The button is the same
+  // control as the big round one in the track panel (onBigPlay), so the two can
+  // never disagree about whether this album is playing.
+  //
+  // THE MODIFIER CLASS IS ONLY FOR THE SUPPORTING IMAGE, and it exists because
+  // the two pictures crop differently. The hero is far wider than it is tall, so
+  // `cover` scales any backdrop to the width and lets the height overflow — with
+  // the default `center` anchoring, that overflow is taken evenly off the top and
+  // the bottom, which on a 16:9 photograph is where the faces are. The persona
+  // banners were composed for this box and still want centre; an album photograph
+  // was not, so it is anchored to the top instead. See .x-hero--support.
+  const canPlay = current.tracks.some((t) => t.url);
+  const blurb = albumBlurb(current.code, current.title, artist, current.trackCount || current.tracks.length, current.tracks[0]?.title);
+  const genres = [gp.primary, gp.secondary].filter(Boolean);
+  const hero = (
+    <header className={`x-hero${supportImage ? ' x-hero--support' : ''}`} style={heroStyle}>
+      <div className="x-container">
+        <div className="x-inner x-album-inner">
+          <h1 lang={albumBcp47(current.code)}>{current.title}</h1>
+          <p className="x-sub x-album-desc">{blurb}</p>
+          <div className="x-album-actions">
+            {canPlay && (
+              <button type="button" className="x-album-play" onClick={onBigPlay} aria-pressed={!bigPlayPaused}>
+                <TransportIcon paused={bigPlayPaused} />
+                <span>{!bigPlayPaused ? 'Pause' : albumIsActive ? 'Resume' : 'Play Album'}</span>
+              </button>
+            )}
+            {artistSlug
+              ? <a className="x-album-artist" href={`/artist/${artistSlug}`}>by <strong>{artist}</strong></a>
+              : <span className="x-album-artist">by <strong>{artist}</strong></span>}
+          </div>
+          {genres.length > 0 && (
+            <ul className="x-album-genres" aria-label="Genres">
+              {genres.map((g) => <li key={g} className="x-album-pill">{g}</li>)}
+            </ul>
+          )}
+        </div>
+      </div>
+    </header>
+  );
 
   // Song QR deep-link: /album?c=<code>&t=<n> auto-plays track n on arrival. Album
   // QR codes carry no `t`, so they just open the album (no autoplay). Best-effort:
@@ -315,7 +348,7 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
                       />
                     </span>
                     <span className="jv-tadd" onClick={(e) => e.stopPropagation()}><AddToPlaylist songId={t.id} /></span>
-                    <span className="jv-tdur">{t.url ? fmt(durations[id]) : '—'}</span>
+                    <span className="jv-tdur">{t.url ? fmt(durations[id]) : '-'}</span>
                   </div>
                 );
               })}
@@ -348,7 +381,7 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
           <div onClick={(e) => e.stopPropagation()}
             style={{ background: '#161622', border: '1px solid rgba(255,255,255,.1)', borderRadius: 14, padding: 20, maxWidth: 460, width: '100%', maxHeight: '85vh', overflowY: 'auto', color: '#e8e8e8' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-              <h3 style={{ margin: 0, fontSize: 16 }}>QR code — {current.title}</h3>
+              <h3 style={{ margin: 0, fontSize: 16 }}>QR code: {current.title}</h3>
               <button onClick={() => setQrOpen(false)} aria-label="Close" style={{ background: 'transparent', border: 'none', color: '#b7b7b7', fontSize: 22, cursor: 'pointer', lineHeight: 1 }}>×</button>
             </div>
             {!codes && <p className="notice">Loading…</p>}
@@ -358,7 +391,7 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={`/qr/${codes.album.token}.svg?qz=2`} alt="Album QR code" width={150} height={150} style={{ background: '#fff', borderRadius: 8, padding: 0 }} />
                 <div style={{ minWidth: 0, flex: 1 }}>
-                  <p style={{ fontSize: 13, color: '#b7b7b7', margin: '2px 0 8px' }}>Scan to open this album — it won’t auto-play.</p>
+                  <p style={{ fontSize: 13, color: '#b7b7b7', margin: '2px 0 8px' }}>Scan to open this album. It won’t auto-play.</p>
                   <div style={{ display: 'flex', gap: 12, fontSize: 12, flexWrap: 'wrap' }}>
                     <a href={`/qr/${codes.album.token}.svg`} download>SVG</a>
                     <a href={`/qr/${codes.album.token}.png?size=1024`} download>PNG</a>
@@ -368,7 +401,7 @@ export default function AlbumApp({ artist, artistRole = 'Inspire Family', heroFa
             )}
             {codes && codes.songs.length > 0 && (
               <>
-                <div style={{ margin: '18px 0 8px', fontSize: 12, textTransform: 'uppercase', letterSpacing: '.5px', color: '#8f8f9f' }}>Song QR codes — scan to play that song</div>
+                <div style={{ margin: '18px 0 8px', fontSize: 12, textTransform: 'uppercase', letterSpacing: '.5px', color: '#8f8f9f' }}>Song QR codes: scan to play that song</div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(84px,1fr))', gap: 12 }}>
                   {codes.songs.map((s) => {
                     const tr = current.tracks.find((x) => x.n === s.n);

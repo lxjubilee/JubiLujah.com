@@ -7,7 +7,7 @@ export const revalidate = 3600; // ISR — refresh hourly
 
 export const metadata: Metadata = {
   title: 'Children Music',
-  description: 'Party Giggles (ages 6–13) and Tiny Tiggles (ages 3–5) — dance parties, lullabies, and stable stories.',
+  description: 'Party Giggles (ages 6–13) and Tiny Tiggles (ages 3–5): dance parties, lullabies, and stable stories.',
 };
 
 // Two labels, each its own section. Order is fixed: Party Giggles, then Tiny Tiggles.

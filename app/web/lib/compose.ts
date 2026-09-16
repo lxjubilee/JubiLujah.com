@@ -264,7 +264,7 @@ export function compose(opts: ComposeOptions): ComposedPlaylist {
   if (!opts.durationSeconds && selected.length < target) {
     warnings.push(`pool_underfill: theme=${opts.theme.theme_id} lang=${opts.lang} personas=${opts.personas.length} shortfall=${target - selected.length} (have ${selected.length}/${target}, ${distinctAlbums} albums)`);
   }
-  if (selected.length < 30) warnings.push('sparse_selection: fewer than 30 tracks — invite the listener to add an artist (§3.3).');
+  if (selected.length < 30) warnings.push('sparse_selection: fewer than 30 tracks. Invite the listener to add an artist (§3.3).');
 
   // 5. arc ordering + §5.3 sequencing + adjacency rules.
   let ordered = orderByArc(selected, opts);

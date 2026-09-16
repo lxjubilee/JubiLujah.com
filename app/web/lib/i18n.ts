@@ -79,7 +79,7 @@ export const EN = {
   'count.songsOne': '{n} song',
   // Per-language Home (when a language has no catalog yet)
   'home.title': 'Home',
-  'home.comingSoon': "No {language} music is available yet — we're adding more languages soon. Switch back to English from the flag bar above to browse the full catalog.",
+  'home.comingSoon': "No {language} music is available yet. We're adding more languages soon. Switch back to English from the flag bar above to browse the full catalog.",
 } as const;
 
 export type TKey = keyof typeof EN;

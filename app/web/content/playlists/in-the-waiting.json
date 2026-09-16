@@ -1,0 +1,370 @@
+{
+  "id": "in-the-waiting",
+  "title": "In the Waiting",
+  "type": "Emotional State",
+  "order": 4,
+  "description": "For seasons that feel stuck. Patient songs for when the answer has not come yet.",
+  "accent": "#4FB3A9",
+  "imagePrompt": "A thoughtful man standing at the edge of a quiet lake at sunrise looking toward the horizon, mist on the water, a sense of patient hope, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "hope",
+      "longing",
+      "contemplative",
+      "reflective",
+      "surrender",
+      "peace"
+    ],
+    "energy": [
+      15,
+      65
+    ],
+    "exclude": [
+      "exuberance"
+    ],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "The Interrogation",
+      "track": "I Need Better Reasons",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 4
+    },
+    {
+      "slot": 2,
+      "album": "Stolen Land Sacred Covenant",
+      "track": "The Land Will Return",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1005EN",
+      "n": 11
+    },
+    {
+      "slot": 3,
+      "album": "Roots By the River",
+      "track": "Leaves Stay Green",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1005EN",
+      "n": 4
+    },
+    {
+      "slot": 4,
+      "album": "Passing It Down",
+      "track": "Jesus Christ the Same Forever",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1018EN",
+      "n": 12
+    },
+    {
+      "slot": 5,
+      "album": "Happy Father's Day",
+      "track": "Happy Father's Day",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1071EN",
+      "n": 1
+    },
+    {
+      "slot": 6,
+      "album": "Standing Tehillim",
+      "track": "Be Still, And Stand Up (Psalm 46)",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1010EN",
+      "n": 9
+    },
+    {
+      "slot": 7,
+      "album": "All That Remains",
+      "track": "What Lasts Forever",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1009EN",
+      "n": 8
+    },
+    {
+      "slot": 8,
+      "album": "Comfort Comes Singing",
+      "track": "Every Valley Lifted",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 4
+    },
+    {
+      "slot": 9,
+      "album": "Legacy of Light",
+      "track": "Carrying the Flame",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1011EN",
+      "n": 8
+    },
+    {
+      "slot": 10,
+      "album": "Every Generation Prays",
+      "track": "Watchmen On The Wall",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1010EN",
+      "n": 10
+    },
+    {
+      "slot": 11,
+      "album": "Legacy of Light",
+      "track": "Generations of Faith",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1011EN",
+      "n": 5
+    },
+    {
+      "slot": 12,
+      "album": "Shofar Shake The Earth",
+      "track": "Shevarim (Broken Calls Mend)",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1009EN",
+      "n": 6
+    },
+    {
+      "slot": 13,
+      "album": "Refuge",
+      "track": "My Refuge and Fortress",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 1
+    },
+    {
+      "slot": 14,
+      "album": "Homemaking Faith",
+      "track": "Jesus, You Are Home",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1016EN",
+      "n": 1
+    },
+    {
+      "slot": 15,
+      "album": "Called & Chosen",
+      "track": "The Weight of Grace",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 3
+    },
+    {
+      "slot": 16,
+      "album": "Better Than One Day",
+      "track": "Presence Was The Promise",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1057EN",
+      "n": 8
+    },
+    {
+      "slot": 17,
+      "album": "Bridge of Yahuah's Love",
+      "track": "Stand on Each Other's Holy Ground",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1001EN",
+      "n": 6
+    },
+    {
+      "slot": 18,
+      "album": "Called & Chosen",
+      "track": "Manifesting His Kingdom",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 9
+    },
+    {
+      "slot": 19,
+      "album": "Homemaking Faith",
+      "track": "The Lord Tends the Garden",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1016EN",
+      "n": 4
+    },
+    {
+      "slot": 20,
+      "album": "Gathering Fire",
+      "track": "The Coals Beneath the Ash",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1009EN",
+      "n": 1
+    },
+    {
+      "slot": 21,
+      "album": "Dancehall Redemption",
+      "track": "Pass the Riddim On",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 11
+    },
+    {
+      "slot": 22,
+      "album": "Echad, the Name Is One",
+      "track": "Adonai Echad (We Carry the Name Home)",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1025EN",
+      "n": 12
+    },
+    {
+      "slot": 23,
+      "album": "Healing Diaspora",
+      "track": "Bind Up the Broken",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1011EN",
+      "n": 5
+    },
+    {
+      "slot": 24,
+      "album": "Refuge",
+      "track": "Safe in Your Shadow",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 2
+    },
+    {
+      "slot": 25,
+      "album": "Roots By the River",
+      "track": "Every Generation Roots",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1005EN",
+      "n": 11
+    },
+    {
+      "slot": 26,
+      "album": "Healing Diaspora",
+      "track": "Walk in the Healing",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1011EN",
+      "n": 10
+    },
+    {
+      "slot": 27,
+      "album": "Comfort Comes Singing",
+      "track": "The Long Night Bends To Morning",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 3
+    },
+    {
+      "slot": 28,
+      "album": "Standing Strong",
+      "track": "Your Word Unchanged",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1023EN",
+      "n": 7
+    },
+    {
+      "slot": 29,
+      "album": "Gathering Fire",
+      "track": "The Fire That Doesn't Consume",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1009EN",
+      "n": 7
+    },
+    {
+      "slot": 30,
+      "album": "Passing It Down",
+      "track": "Taking Up the Cross",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1018EN",
+      "n": 9
+    },
+    {
+      "slot": 31,
+      "album": "The Interrogation",
+      "track": "Where Were You",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 2
+    },
+    {
+      "slot": 32,
+      "album": "Daughters and Mothers",
+      "track": "Prayer That Crossed the Sea",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1007EN",
+      "n": 7
+    },
+    {
+      "slot": 33,
+      "album": "Coming Back Whole",
+      "track": "The Song I Stopped Singing",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1007EN",
+      "n": 8
+    },
+    {
+      "slot": 34,
+      "album": "Hands That Mend",
+      "track": "The Unraveling and Re-weaving",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1006EN",
+      "n": 6
+    },
+    {
+      "slot": 35,
+      "album": "Coming Back Whole",
+      "track": "Coming Back Whole",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1007EN",
+      "n": 10
+    },
+    {
+      "slot": 36,
+      "album": "Happy Father's Day",
+      "track": "Carried",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1071EN",
+      "n": 11
+    }
+  ]
+}

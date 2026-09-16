@@ -4,6 +4,7 @@ import { albumUuid, songUuid } from './ids';
 import { coverFor } from './covers';
 import { musicUrl } from './cdn';
 import { currentTenant } from './tenant';
+import { noEmDash } from './text';
 import type { Album, Artist, CategorySummary, StatusCounts, Track } from './types';
 
 // ============================================================================
@@ -23,10 +24,29 @@ function loadRaw(): RawManifest {
   if (cached) return cached;
   try {
     cached = JSON.parse(fs.readFileSync(MANIFEST_FILE, 'utf8'));
+    stripEmDashes(cached!);
   } catch {
     cached = { categories: [] };
   }
   return cached!;
+}
+
+// No em dashes on the site (lib/text.ts). Titles come from the music drive — 1
+// album and 29 tracks carried one on 2026-09-16, e.g. "I Believe — Help Me
+// Believe More" — and the manifest is regenerated from there, so they are cleaned
+// here, once, where the catalogue is read, rather than in a file that would be
+// overwritten. 'colon' because these are titles: "I Believe: Help Me Believe More".
+function stripEmDashes(m: RawManifest) {
+  for (const c of m.categories || []) {
+    c.label = noEmDash(c.label, 'colon');
+    for (const a of c.artists || []) {
+      a.name = noEmDash(a.name, 'colon');
+      for (const al of a.albums || []) {
+        al.title = noEmDash(al.title, 'colon');
+        for (const t of al.tracks || []) t.title = noEmDash(t.title, 'colon');
+      }
+    }
+  }
 }
 
 // Per-tenant view of the manifest, built once and kept.

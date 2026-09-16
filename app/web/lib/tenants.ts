@@ -99,7 +99,7 @@ export const TENANTS: Tenant[] = [
     brandTail: 'Praise',
     tagline: 'Feel the Spirit Move',
     description:
-      'JubileePraise.com — music that celebrates, restores, and resounds. The Inspire Family, Children Music, Faith-Based Believers, General Audiences, and Jubilee Prayers.',
+      'JubileePraise.com: music that celebrates, restores, and resounds. The Inspire Family, Children Music, Faith-Based Believers, General Audiences, and Jubilee Prayers.',
     catalog: 'manifest',
     categories: null, // the whole collection
     nav: [
@@ -123,7 +123,7 @@ export const TENANTS: Tenant[] = [
     brandTail: 'Giggles',
     tagline: 'Big Songs for Big Kids',
     description:
-      'goPartyGiggles.com — dance-along, sing-along music for ages 6 and up. Party Giggles from the JubileePraise collection.',
+      'goPartyGiggles.com: dance-along, sing-along music for ages 6 and up. Party Giggles from the JubileePraise collection.',
     catalog: 'manifest',
     categories: ['party-giggles'],
     nav: [
@@ -143,7 +143,7 @@ export const TENANTS: Tenant[] = [
     brandTail: 'Tiggles',
     tagline: 'Little Songs for Little Ones',
     description:
-      'MyTinyTiggles.com — gentle songs, lullabies and stable stories for ages 3 to 5. Tiny Tiggles from the JubileePraise collection.',
+      'MyTinyTiggles.com: gentle songs, lullabies and stable stories for ages 3 to 5. Tiny Tiggles from the JubileePraise collection.',
     catalog: 'manifest',
     categories: ['tiny-tiggles'],
     nav: [
@@ -163,7 +163,7 @@ export const TENANTS: Tenant[] = [
     brandTail: 'Sings',
     tagline: 'The stars sang. The angels sang. Now you can hear it.',
     description:
-      'Torah Sings — there are songs hidden inside the Scriptures. Taken symbol by symbol, the Paleo-Hebrew text surfaces melodies that read as sung from the angelic perspective. Not canon — something to consider.',
+      'Torah Sings: there are songs hidden inside the Scriptures. Taken symbol by symbol, the Paleo-Hebrew text surfaces melodies that read as sung from the angelic perspective. Not canon, but something to consider.',
     // The ANSMX Bible-book tree, NOT the shared manifest.
     catalog: 'angels',
     // Deliberately empty, not null: Torah Sings may see nothing of the shared
@@ -187,7 +187,7 @@ export const TENANTS: Tenant[] = [
     brandTail: 'Done',
     tagline: 'Sing what He has already said',
     description:
-      'SingItDone.com — declaration albums from the Inspire Family. Scripture sung in the first person, as what Yahuah has already spoken and already finished. One declaration per album, one artist on each.',
+      'SingItDone.com: declaration albums from the Inspire Family. Scripture sung in the first person, as what Yahuah has already spoken and already finished. One declaration per album, one artist on each.',
     catalog: 'manifest',
     // Its own category key, and the reason it is a scope rather than a second
     // catalogue: these albums are built into catalog-manifest.json like any

@@ -127,7 +127,7 @@ export default function BackstagePiecePage({ params }: { params: { slug: string 
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-                Listen — {piece.albumTitle || piece.song}
+                Listen to {piece.albumTitle || piece.song}
               </Link>
             ) : null}
           </div>
@@ -147,7 +147,7 @@ export default function BackstagePiecePage({ params }: { params: { slug: string 
           </span>
           <span className="bsa-listen-cta-text">
             <span className="bsa-listen-cta-label">Now listen the song</span>
-            <span className="bsa-listen-cta-title">Listen — {piece.albumTitle || piece.song}</span>
+            <span className="bsa-listen-cta-title">Listen to {piece.albumTitle || piece.song}</span>
             <span className="bsa-listen-cta-sub">
               Press play and let “{piece.song}” by {piece.artist} speak for itself.
             </span>

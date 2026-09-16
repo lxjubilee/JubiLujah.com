@@ -88,3 +88,53 @@
   padding: 1px 5px; border-radius: 999px; color: var(--accent-gold);
   background: rgba(254, 202, 87, 0.14); border: 1px solid rgba(254, 202, 87, 0.5);
 }
+
+/* ======================= "FOR YOUR SEASON" (2026-09-16) =======================
+   The twelve default Emotional State playlists: components/SeasonPlaylists.tsx
+   (the grid on /playlists) and components/SeasonPlaylistView.tsx (/playlists/<id>).
+   The cards reuse .plx-card; only what is different is here. Buttons read the
+   tenant's --brand-accent, not --accent (bound to the JV red in site.css). */
+.spl-lead { margin: -8px 0 18px; color: var(--ink-soft); font-size: 14px; }
+/* 16:9, not the square of a user playlist: the pictures are hero banners. */
+.spl-art { aspect-ratio: 16 / 9; align-items: flex-end; justify-content: flex-start; text-decoration: none; }
+.spl-art-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.72)); }
+.spl-art-title {
+  position: relative; z-index: 1; margin: 0 12px 34px; color: #fff;
+  font-size: 18px; font-weight: 800; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+.spl-desc { -webkit-line-clamp: 3; font-size: 13px; color: var(--ink-soft); }
+.spl-card .plx-btn-primary { background: var(--brand-accent); border-color: var(--brand-accent); color: #04233d; display: inline-flex; align-items: center; gap: 4px; }
+
+.spl-banner { position: relative; overflow: hidden; min-height: clamp(260px, 42vh, 420px); display: flex; align-items: flex-end; background: #000; }
+.spl-banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+.spl-banner-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, transparent 35%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.88)); }
+.spl-banner-body { position: relative; z-index: 1; padding-block: 28px 30px; width: 100%; box-sizing: border-box; }
+.spl-back { color: rgba(255,255,255,.8); text-decoration: none; font-size: 13px; font-weight: 600; }
+.spl-back:hover { color: #fff; text-decoration: underline; }
+.spl-eyebrow { margin: 14px 0 4px; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 700; color: var(--brand-accent); }
+.spl-title { margin: 0 0 8px; color: #fff; font-size: clamp(28px, 4.2vw, 44px); font-weight: 800; line-height: 1.1; }
+.spl-description { margin: 0 0 6px; max-width: 720px; color: rgba(255,255,255,.88); font-size: 16px; line-height: 1.5; }
+.spl-meta { margin: 0 0 16px; color: rgba(255,255,255,.66); font-size: 13px; }
+.spl-play {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none;
+  background: var(--brand-accent); color: #04233d; font: inherit; font-weight: 700; font-size: 14px;
+  padding: 11px 22px; border-radius: 100px; transition: filter .15s ease;
+}
+.spl-play:hover { filter: brightness(1.06); }
+
+.spl-tracks { list-style: none; margin: 0; padding: 0; }
+.spl-track { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 10px; }
+.spl-track + .spl-track { border-top: 1px solid var(--line); }
+.spl-track:hover, .spl-track.is-active { background: var(--surface-2); }
+.spl-track-play { position: relative; flex: none; width: 34px; height: 34px; border: none; background: transparent; color: var(--ink-soft); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.spl-track-n { font-size: 13px; font-weight: 600; }
+.spl-track-icon { position: absolute; opacity: 0; color: var(--brand-accent); }
+.spl-track:hover .spl-track-n, .spl-track.is-active .spl-track-n { opacity: 0; }
+.spl-track:hover .spl-track-icon, .spl-track.is-active .spl-track-icon { opacity: 1; }
+.spl-track-cover { flex: none; width: 44px; height: 44px; border-radius: 6px; object-fit: cover; background: var(--surface-3); }
+.spl-track-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.spl-track-title { color: var(--ink); font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spl-track.is-active .spl-track-title { color: var(--brand-accent); }
+.spl-track-sub { color: var(--ink-muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spl-track-sub a { color: inherit; text-decoration: none; }
+.spl-track-sub a:hover { text-decoration: underline; }

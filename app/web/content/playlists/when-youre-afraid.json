@@ -1,0 +1,370 @@
+{
+  "id": "when-youre-afraid",
+  "title": "When You're Afraid",
+  "type": "Emotional State",
+  "order": 2,
+  "description": "Steady, peaceful songs for anxious nights and worried mornings.",
+  "accent": "#5B8DEF",
+  "imagePrompt": "A calm young woman sitting by a window at dawn with a warm cup of tea, soft morning light filling the room, a peaceful hopeful expression, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "peace",
+      "comfort",
+      "hope",
+      "tenderness",
+      "reverence",
+      "reflective"
+    ],
+    "energy": [
+      15,
+      62
+    ],
+    "exclude": [
+      "exuberance"
+    ],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "My Kuleana",
+      "track": "Answer to the Maker",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 11
+    },
+    {
+      "slot": 2,
+      "album": "The Interrogation",
+      "track": "The Questions That Stayed",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 9
+    },
+    {
+      "slot": 3,
+      "album": "Called & Chosen",
+      "track": "Chosen One",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 2
+    },
+    {
+      "slot": 4,
+      "album": "Forever Flourishing",
+      "track": "Fruit in Old Age",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1064EN",
+      "n": 7
+    },
+    {
+      "slot": 5,
+      "album": "Called & Chosen",
+      "track": "Election Love",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 5
+    },
+    {
+      "slot": 6,
+      "album": "Counter-Clockwise",
+      "track": "Making Peace With the Past",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1008EN",
+      "n": 8
+    },
+    {
+      "slot": 7,
+      "album": "This Land This Name",
+      "track": "Pray for the Peace of Yerushalayim",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1024EN",
+      "n": 7
+    },
+    {
+      "slot": 8,
+      "album": "The Interrogation",
+      "track": "The Limp I Left With",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 7
+    },
+    {
+      "slot": 9,
+      "album": "Miracle Worker (Subway Funk)",
+      "track": "Ravens at My Window (Webster Ave Kitchen)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1012EN",
+      "n": 9
+    },
+    {
+      "slot": 10,
+      "album": "Forever Flourishing",
+      "track": "Streams Don't Run Dry",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1064EN",
+      "n": 4
+    },
+    {
+      "slot": 11,
+      "album": "Healing Administration",
+      "track": "Mending Broken [HIT SINGLE]",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 6
+    },
+    {
+      "slot": 12,
+      "album": "Avraham's God Still Walks",
+      "track": "Elohim of Three Names",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1023EN",
+      "n": 2
+    },
+    {
+      "slot": 13,
+      "album": "Passing It Down",
+      "track": "Time to Learn the Lord",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1018EN",
+      "n": 4
+    },
+    {
+      "slot": 14,
+      "album": "My Kuleana",
+      "track": "Pass the Mic",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 10
+    },
+    {
+      "slot": 15,
+      "album": "Homemaking Faith",
+      "track": "Jesus, the Wisdom I Pass Down",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1016EN",
+      "n": 9
+    },
+    {
+      "slot": 16,
+      "album": "Refuge",
+      "track": "Selah Refuge",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 11
+    },
+    {
+      "slot": 17,
+      "album": "Thin Places",
+      "track": "What the Celts Called It",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1017EN",
+      "n": 1
+    },
+    {
+      "slot": 18,
+      "album": "Lōkahi (One in Him)",
+      "track": "One in Him Forever",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1049EN",
+      "n": 12
+    },
+    {
+      "slot": 19,
+      "album": "Fatherhood and Faith",
+      "track": "Jesus, Lead with Love",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1018EN",
+      "n": 5
+    },
+    {
+      "slot": 20,
+      "album": "Legacy of Light",
+      "track": "Children of the Day",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1011EN",
+      "n": 11
+    },
+    {
+      "slot": 21,
+      "album": "Thin Places",
+      "track": "Iona at Dawn",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1017EN",
+      "n": 3
+    },
+    {
+      "slot": 22,
+      "album": "This Land This Name",
+      "track": "Olive Root Still Holds",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1024EN",
+      "n": 4
+    },
+    {
+      "slot": 23,
+      "album": "Honor the Kūpuna",
+      "track": "Honor the Kūpuna",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1048EN",
+      "n": 1
+    },
+    {
+      "slot": 24,
+      "album": "Kingdom Roars",
+      "track": "Tribe Of Judah Stands",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1012EN",
+      "n": 2
+    },
+    {
+      "slot": 25,
+      "album": "Refuge",
+      "track": "The Strong Tower",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 4
+    },
+    {
+      "slot": 26,
+      "album": "Vamp Forever",
+      "track": "Holy Ghost Language (Speak It)",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1013EN",
+      "n": 4
+    },
+    {
+      "slot": 27,
+      "album": "Throne Of My Heart",
+      "track": "Quiet Throne (Still Yours)",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1024EN",
+      "n": 11
+    },
+    {
+      "slot": 28,
+      "album": "Healing Administration",
+      "track": "Teaching Care",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 11
+    },
+    {
+      "slot": 29,
+      "album": "Lōkahi (One in Him)",
+      "track": "The Day Two Villages Sang",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1049EN",
+      "n": 8
+    },
+    {
+      "slot": 30,
+      "album": "Kingdom Roars",
+      "track": "The Lion Stayed Awake",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1012EN",
+      "n": 8
+    },
+    {
+      "slot": 31,
+      "album": "Hand-Me-Down Faith",
+      "track": "The Testimony I Carry",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1005EN",
+      "n": 8
+    },
+    {
+      "slot": 32,
+      "album": "Year of Jubilee Forever",
+      "track": "Fields Lay Fallow Rest",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1027EN",
+      "n": 6
+    },
+    {
+      "slot": 33,
+      "album": "Homemaking Faith",
+      "track": "Jesus, My Whole House Is Praying",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1016EN",
+      "n": 6
+    },
+    {
+      "slot": 34,
+      "album": "Better Than One Day",
+      "track": "Forever In The Courts",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1057EN",
+      "n": 12
+    },
+    {
+      "slot": 35,
+      "album": "Avraham's God Still Walks",
+      "track": "A New Family in the Old Tents",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1023EN",
+      "n": 11
+    },
+    {
+      "slot": 36,
+      "album": "Miracle Worker (Subway Funk)",
+      "track": "The Streets Still Sing",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1012EN",
+      "n": 12
+    }
+  ]
+}

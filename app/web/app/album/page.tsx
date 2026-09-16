@@ -28,14 +28,14 @@ export function generateMetadata({ searchParams }: { searchParams: { c?: string;
   const cover = coverFor(album.code, album.path);
   const description = `${album.title} by ${album.artistName}. ${album.trackCount} tracks · ${album.status === 'ready' ? 'Ready to play' : 'In the studio'}.`;
   return {
-    title: `${album.title} — ${album.artistName}`,
+    title: `${album.title} by ${album.artistName}`,
     description,
     /* Canonical on the ?c= form. The route also answers to the legacy ?code=
        parameter (see albumCode above), so without this every album is reachable
        at two URLs and reads as duplicated. Both now point at the ?c= one. */
     alternates: canonical(`/album?c=${album.code}`),
     openGraph: {
-      title: `${album.title} — ${album.artistName}`,
+      title: `${album.title} by ${album.artistName}`,
       description,
       type: 'music.album',
       url: `/album?c=${album.code}`,
@@ -135,6 +135,7 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
       />
       <AlbumApp
         artist={album.artistName}
+        artistSlug={album.artistSlug}
         artistRole={artist?.role || 'Inspire Family'}
         heroFallback={heroImage(album.artistSlug)}
         albums={albums}

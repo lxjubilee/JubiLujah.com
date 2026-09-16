@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Membership',
   description:
-    'Support the discovery. Fund the biblical archaeology. Access the treasury. $87.95 a year — the full Torah Sings library, current and future.',
+    'Support the discovery. Fund the biblical archaeology. Access the treasury. $87.95 a year for the full Torah Sings library, current and future.',
 };
 
 export default function MembershipPage() {
@@ -31,7 +31,7 @@ export default function MembershipPage() {
         eyebrow="Partners in ongoing revelation"
         title="Support the discovery. Fund the biblical archaeology. Access the treasury."
       >
-        One yearly commitment. It covers everything that has been uncovered so far — and everything uncovered
+        One yearly commitment. It covers everything that has been uncovered so far, and everything uncovered
         while your membership is active. The work continues either way; the question is whether you are inside it
         while it happens.
       </PageHero>
@@ -45,7 +45,7 @@ export default function MembershipPage() {
         }`}
         freeLessonLevel={
           freeLesson
-            ? `Level ${freeLesson.level} of Learn Hebrew — ${freeLesson.title}`
+            ? `Level ${freeLesson.level} of Learn Hebrew: ${freeLesson.title}`
             : 'The doorway into Learn Hebrew'
         }
         freeLessonShort={freeLesson ? `Level ${freeLesson.level} only` : 'The first level'}
@@ -53,7 +53,7 @@ export default function MembershipPage() {
 
         <div className={styles.closing}>
           <p className={styles.closingLine}>
-            An investment in ongoing spiritual archaeology — not merely a purchase. As more is uncovered, active
+            An investment in ongoing spiritual archaeology, not merely a purchase. As more is uncovered, active
             members receive it.
           </p>
         </div>

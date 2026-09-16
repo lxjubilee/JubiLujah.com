@@ -12,11 +12,11 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { theme: string } }): Metadata {
   const theme = getTheme(params.theme);
-  if (!theme) return { title: 'Playlist — JubileePraise' };
+  if (!theme) return { title: 'Playlist | JubileePraise' };
   return {
-    title: `${theme.theme_name} — JubileePraise`,
+    title: `${theme.theme_name} | JubileePraise`,
     description: theme.theme_statement,
-    openGraph: { title: `${theme.theme_name} — JubileePraise`, description: theme.theme_statement },
+    openGraph: { title: `${theme.theme_name} | JubileePraise`, description: theme.theme_statement },
   };
 }
 

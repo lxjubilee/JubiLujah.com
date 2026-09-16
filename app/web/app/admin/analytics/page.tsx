@@ -6,7 +6,7 @@ import { liveBestsellerAverage } from '@/lib/bestseller';
 // dashboard shows a 403 notice to non-admins) and server-side (every
 // /api/analytics admin endpoint requires the admin role).
 export const metadata: Metadata = {
-  title: 'Media Analytics — JubileePraise',
+  title: 'Media Analytics | JubileePraise',
   robots: { index: false, follow: false },
 };
 export const revalidate = 3600;

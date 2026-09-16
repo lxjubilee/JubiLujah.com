@@ -1,0 +1,371 @@
+{
+  "id": "broken-but-held",
+  "title": "Broken but Held",
+  "type": "Emotional State",
+  "order": 3,
+  "description": "For grief and loss: songs that sit with you and still hold on to hope.",
+  "accent": "#8E7CC3",
+  "imagePrompt": "Two people of different generations embracing warmly in a sunlit garden, one comforting the other, tender and hopeful, soft natural light, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "comfort",
+      "tenderness",
+      "longing",
+      "hope",
+      "reflective",
+      "contemplative"
+    ],
+    "energy": [
+      10,
+      58
+    ],
+    "exclude": [
+      "exuberance",
+      "celebration"
+    ],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "Fatherhood and Faith",
+      "track": "Father, Heal the Wound",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1018EN",
+      "n": 4
+    },
+    {
+      "slot": 2,
+      "album": "When the Doctor Said",
+      "track": "Side Effects Are Sacred Too",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1019EN",
+      "n": 7
+    },
+    {
+      "slot": 3,
+      "album": "My Kuleana",
+      "track": "carry my brother",
+      "artist": "Tahoma Inspire",
+      "description": "",
+      "code": "THIM1050EN",
+      "n": 6
+    },
+    {
+      "slot": 4,
+      "album": "The Interrogation",
+      "track": "The Questions I Brought",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 1
+    },
+    {
+      "slot": 5,
+      "album": "El Rosario de Abuela",
+      "track": "El Rosario de Abuela",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 1
+    },
+    {
+      "slot": 6,
+      "album": "Legacy of Light",
+      "track": "Written on Our Hearts",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1011EN",
+      "n": 6
+    },
+    {
+      "slot": 7,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "Lágrimas Sobre Tus Pies",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 4
+    },
+    {
+      "slot": 8,
+      "album": "Healing Administration",
+      "track": "Structures of Care [HIT SINGLE]",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 2
+    },
+    {
+      "slot": 9,
+      "album": "Prophetic Wilderness",
+      "track": "Clear Calling",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1021EN",
+      "n": 3
+    },
+    {
+      "slot": 10,
+      "album": "La Calle Canta",
+      "track": "El Barrio Entero Baila (The Whole Barrio Dances)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 8
+    },
+    {
+      "slot": 11,
+      "album": "All That Remains",
+      "track": "The Treasure Untaken",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1009EN",
+      "n": 9
+    },
+    {
+      "slot": 12,
+      "album": "Cuánto Te Adoro (How I Adore You)",
+      "track": "Cuánto Te Adoro",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1025EN",
+      "n": 1
+    },
+    {
+      "slot": 13,
+      "album": "Passing It Down",
+      "track": "Christ Is Rising in You",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1018EN",
+      "n": 5
+    },
+    {
+      "slot": 14,
+      "album": "La Calle Canta",
+      "track": "La Familia Entera Alaba (The Whole Family Praises)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1004EN",
+      "n": 11
+    },
+    {
+      "slot": 15,
+      "album": "Passing It Down",
+      "track": "Listen, Daughter (To Jesus)",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1018EN",
+      "n": 1
+    },
+    {
+      "slot": 16,
+      "album": "Roots By the River",
+      "track": "He Prunes Because He Loves",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1005EN",
+      "n": 6
+    },
+    {
+      "slot": 17,
+      "album": "Dancehall Redemption",
+      "track": "Riddim of My Repentance",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 6
+    },
+    {
+      "slot": 18,
+      "album": "Out Of Ashes Yahuah Sings",
+      "track": "Dry Bones Stand Up",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1013EN",
+      "n": 10
+    },
+    {
+      "slot": 19,
+      "album": "Called & Chosen",
+      "track": "Standing in My Place",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 6
+    },
+    {
+      "slot": 20,
+      "album": "Whole Again",
+      "track": "Walking In The Healing",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1056EN",
+      "n": 10
+    },
+    {
+      "slot": 21,
+      "album": "Called & Chosen",
+      "track": "Established Forever",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 10
+    },
+    {
+      "slot": 22,
+      "album": "Roots By the River",
+      "track": "Forever Bearing",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1005EN",
+      "n": 12
+    },
+    {
+      "slot": 23,
+      "album": "The Interrogation",
+      "track": "The Whirlwind Answer",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1011EN",
+      "n": 3
+    },
+    {
+      "slot": 24,
+      "album": "El Rosario de Abuela",
+      "track": "Mi Abuela Oró por Mí (My Abuela Prayed for Me)",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1002EN",
+      "n": 10
+    },
+    {
+      "slot": 25,
+      "album": "Healing Administration",
+      "track": "Listening Deep",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1015EN",
+      "n": 3
+    },
+    {
+      "slot": 26,
+      "album": "Hiding Place",
+      "track": "Refuge and Strength",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1059EN",
+      "n": 1
+    },
+    {
+      "slot": 27,
+      "album": "Comfort Comes Singing",
+      "track": "First Notes After The Years",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 9
+    },
+    {
+      "slot": 28,
+      "album": "Legacy of Light",
+      "track": "For Those Who Come After",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1011EN",
+      "n": 10
+    },
+    {
+      "slot": 29,
+      "album": "Comfort Comes Singing",
+      "track": "Lift Your Voice With Strength",
+      "artist": "Zev Inspire",
+      "description": "",
+      "code": "ZEIM1006EN",
+      "n": 2
+    },
+    {
+      "slot": 30,
+      "album": "No Greater Love",
+      "track": "Carry Me to the Table",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1029EN",
+      "n": 7
+    },
+    {
+      "slot": 31,
+      "album": "Better Than One Day",
+      "track": "Court Of The Lord",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1057EN",
+      "n": 2
+    },
+    {
+      "slot": 32,
+      "album": "Gathering Fire",
+      "track": "Slow Burn",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1009EN",
+      "n": 4
+    },
+    {
+      "slot": 33,
+      "album": "All That Remains",
+      "track": "Incorruptible Inheritance",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1009EN",
+      "n": 10
+    },
+    {
+      "slot": 34,
+      "album": "Refuge",
+      "track": "Under Your Wings",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1012EN",
+      "n": 3
+    },
+    {
+      "slot": 35,
+      "album": "Bought Back Whole",
+      "track": "How Long O Lord How Long",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1044EN",
+      "n": 7
+    },
+    {
+      "slot": 36,
+      "album": "Fatherhood and Faith",
+      "track": "Father, Bless My Son",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1018EN",
+      "n": 11
+    }
+  ]
+}

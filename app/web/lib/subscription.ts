@@ -52,13 +52,21 @@ export interface Entitlement {
 }
 
 export interface PlayIntent {
-  mode: 'full' | 'limited';
+  // 'expired': the free plan's 30 days are over (migration 0032). Nothing plays;
+  // the listener is asked to start a subscription.
+  mode: 'full' | 'limited' | 'expired';
+  reason?: 'free_period_ended';
   unlimited: boolean;
   plays_today: number | null;
   daily_limit: number | null;
   remaining: number | null;
   preview_seconds: number;
   status: string;
+  // The free period. All null for paid listeners and for a plan with no end.
+  free_access_days?: number | null;
+  free_started_at?: string | null;
+  free_ends_at?: string | null;
+  free_days_left?: number | null;
 }
 
 export const getPlans = () => api.get<{ plans: Plan[] }>('/api/subscriptions/plans');
@@ -84,4 +92,7 @@ export async function resolvePlayIntent(songId?: string): Promise<PlayIntent | n
 }
 
 export const getListeningStatus = () =>
-  api.get<{ unlimited: boolean; plays_today: number; daily_limit: number | null; remaining: number | null; preview_seconds: number }>('/api/listening/status');
+  api.get<{
+    unlimited: boolean; plays_today: number; daily_limit: number | null; remaining: number | null; preview_seconds: number;
+    expired?: boolean; free_access_days?: number | null; free_ends_at?: string | null; free_days_left?: number | null;
+  }>('/api/listening/status');

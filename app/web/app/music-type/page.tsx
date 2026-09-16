@@ -7,7 +7,7 @@ import MediaRow, { TileData } from '@/components/MediaRow';
 export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Music Type',
-  description: 'Browse JubileePraise by music type — worship, gospel, praise, contemporary, country and more, grouped by each album’s primary genre.',
+  description: 'Browse JubileePraise by music type: worship, gospel, praise, contemporary, country and more, grouped by each album’s primary genre.',
 };
 
 // Same layout/style as the Home page (nf-rows + MediaRow), except each row is a

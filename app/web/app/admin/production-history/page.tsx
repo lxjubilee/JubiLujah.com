@@ -3,7 +3,7 @@ import { productionHistory, ALBUM_QUOTA, SONG_QUOTA } from '@/lib/productionHist
 
 export const revalidate = 600;
 export const metadata: Metadata = {
-  title: 'Production History — JubileePraise',
+  title: 'Production History | JubileePraise',
   robots: { index: false, follow: false },
 };
 
@@ -29,7 +29,7 @@ export default function ProductionHistoryPage() {
           <>
             <div className="kpi">
               <div className="n" style={{ color: scoreColor(current.quotaScore) }}>{current.quotaScore}%</div>
-              <div className="l">This Week — In Progress ({current.yyww})</div>
+              <div className="l">This Week: In Progress ({current.yyww})</div>
             </div>
             <div className="kpi"><div className="n">{fmt(current.albums)} / {fmt(current.songs)}</div><div className="l">Albums / Songs this week</div></div>
           </>

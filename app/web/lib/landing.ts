@@ -70,7 +70,7 @@ export function renderLanding(d: LandingData, appLinks?: AppLinks): string {
     : `<div class="cover cover--placeholder" aria-hidden="true">♪</div>`;
 
   const persona = d.persona
-    ? `<div class="persona"><span class="persona-name">${esc(d.persona.name)}</span> — ${esc(d.persona.reason)}</div>`
+    ? `<div class="persona"><span class="persona-name">${esc(d.persona.name)}</span>: ${esc(d.persona.reason)}</div>`
     : '';
 
   const resume = d.resume
@@ -89,7 +89,7 @@ export function renderLanding(d: LandingData, appLinks?: AppLinks): string {
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
-<title>${esc(hero.title)} — JubileePraise.com</title><style>
+<title>${esc(hero.title)} | JubileePraise.com</title><style>
 :root{color-scheme:dark;--brand-accent:#3DA5FF}*{box-sizing:border-box;margin:0;padding:0}
 body{min-height:100vh;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:#e8e8e8;
 background:radial-gradient(ellipse at top,rgba(15,52,96,.4),transparent 60%),linear-gradient(135deg,#0f0f1e,#141422,#0d0d16);

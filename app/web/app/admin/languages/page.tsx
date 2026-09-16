@@ -3,7 +3,7 @@ import { languageStats } from '@/lib/languageStats';
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
-  title: 'Languages — JubileePraise',
+  title: 'Languages | JubileePraise',
   robots: { index: false, follow: false },
 };
 
@@ -44,7 +44,7 @@ export default function LanguagesPage() {
                     </span>
                     <span className="muted" style={{ fontSize: 11 }}>{s.totalAlbums ? Math.round((r.albums / s.totalAlbums) * 100) : 0}%</span>
                   </span>
-                ) : <span className="muted" style={{ fontSize: 11 }}>—</span>}
+                ) : <span className="muted" style={{ fontSize: 11 }}>-</span>}
               </td>
             </tr>
           ))}

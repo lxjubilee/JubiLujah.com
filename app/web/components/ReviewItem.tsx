@@ -50,7 +50,7 @@ export default function ReviewItem({ review, onEdit }: Props) {
         </div>
         {review.body && <p className="rv-item-text">{review.body}</p>}
         <div className="rv-item-meta">
-          <span className="rv-item-author">— {review.author.display_name}</span>
+          <span className="rv-item-author">by {review.author.display_name}</span>
           <span className="rv-dot">·</span>
           <span className="rv-item-date">{reviewDate(review.created_at)}</span>
           {review.edited && <span className="rv-item-edited">(edited)</span>}

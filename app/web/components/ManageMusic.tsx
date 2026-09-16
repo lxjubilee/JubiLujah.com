@@ -48,9 +48,9 @@ function VisBadge({ v }: { v: string }) {
   return <span className={`mm-badge ${v}`}><span className="mm-dot">{dot}</span>{v}</span>;
 }
 
-function fmtDate(s?: string | null) { return s ? new Date(s).toLocaleString() : '—'; }
+function fmtDate(s?: string | null) { return s ? new Date(s).toLocaleString() : '-'; }
 function fmtDur(s?: number | null) {
-  if (!s && s !== 0) return '—';
+  if (!s && s !== 0) return '-';
   const m = Math.floor(s / 60); const sec = s % 60; return `${m}:${String(sec).padStart(2, '0')}`;
 }
 
@@ -74,7 +74,7 @@ export default function ManageMusic() {
     setSyncing(true); setMsg(null);
     try {
       const r = await api.post<any>('/api/admin/music/sync', { probe });
-      flash('ok', `Sync complete — ${r.albums_new} new albums, ${r.songs_new} new songs, ${r.albums_updated} updated, ${r.missing_covers} missing covers, ${r.missing_audio} missing audio.`);
+      flash('ok', `Sync complete: ${r.albums_new} new albums, ${r.songs_new} new songs, ${r.albums_updated} updated, ${r.missing_covers} missing covers, ${r.missing_audio} missing audio.`);
       loadDash();
     } catch (e) { flash('err', `Sync failed: ${errText(e)}`); }
     finally { setSyncing(false); }
@@ -129,7 +129,7 @@ function DashboardView({ dash, onCard, initialized, onSync, syncing }: {
       <div className="mm-note">
         No music has been synchronized yet. Click <strong>Sync with CDN</strong> above (or
         {' '}<button className="mm-btn sm" disabled={syncing} onClick={onSync}>run the first sync now</button>)
-        to import album &amp; song metadata from cd.jubilujah.com. No media files are copied — only references.
+        to import album &amp; song metadata from cd.jubilujah.com. No media files are copied, only references.
       </div>
     );
   }
@@ -264,9 +264,9 @@ function AlbumsView({ seedFilter, flash, onChanged }: {
                   onClick={() => setDetail(a.album_code)}>{a.title || a.album_code}</button>
                   <div className="mm-muted" style={{ fontSize: 11 }}>{a.album_code}{!a.present_in_manifest && ' · ⚠ broken ref'}</div></td>
                 <td>{a.artist_name}</td>
-                <td>{a.release_year || '—'}</td>
+                <td>{a.release_year || '-'}</td>
                 <td>{a.song_count}</td>
-                <td>{a.cover_present === null ? '—' : a.cover_present ? <span className="mm-check pass">✓</span> : <span className="mm-check fail">✗</span>}</td>
+                <td>{a.cover_present === null ? '-' : a.cover_present ? <span className="mm-check pass">✓</span> : <span className="mm-check fail">✗</span>}</td>
                 <td>{a.audio_missing_count === 0 ? <span className="mm-check pass">✓</span> : <span className="mm-check fail">{a.audio_present_count}/{a.song_count}</span>}</td>
                 <td><VisBadge v={a.visibility} /></td>
                 <td className="mm-muted">{fmtDate(a.last_synced_at)}</td>
@@ -337,10 +337,10 @@ function AlbumDrawer({ code, onClose, flash, onChanged }: {
 
             <div className="mm-section-h">Album Information</div>
             <dl className="mm-kv">
-              <dt>CDN folder</dt><dd>{a.cdn_path || '—'}</dd>
-              <dt>Cover URL</dt><dd>{a.cover_url ? <a href={a.cover_url} target="_blank" rel="noreferrer">{a.cover_url}</a> : '—'}</dd>
-              <dt>Category</dt><dd>{a.category || '—'}</dd>
-              <dt>Release year</dt><dd>{a.release_year || '—'}</dd>
+              <dt>CDN folder</dt><dd>{a.cdn_path || '-'}</dd>
+              <dt>Cover URL</dt><dd>{a.cover_url ? <a href={a.cover_url} target="_blank" rel="noreferrer">{a.cover_url}</a> : '-'}</dd>
+              <dt>Category</dt><dd>{a.category || '-'}</dd>
+              <dt>Release year</dt><dd>{a.release_year || '-'}</dd>
               <dt>Songs</dt><dd>{a.song_count} ({a.audio_present_count} with audio)</dd>
               <dt>Metadata</dt><dd>{a.metadata_complete ? 'Complete' : 'Incomplete'}</dd>
               <dt>On CDN</dt><dd>{a.present_in_manifest ? 'Yes' : '⚠ Broken reference (no longer in manifest)'}</dd>
@@ -354,7 +354,7 @@ function AlbumDrawer({ code, onClose, flash, onChanged }: {
                   <dt>{c.check_name}</dt>
                   <dd className={c.passed ? 'mm-check pass' : 'mm-check fail'}>{c.passed ? '✓' : '✗'} {c.detail}</dd>
                 </div>
-              )) : <dd className="mm-muted">No validation recorded — click Validate.</dd>}
+              )) : <dd className="mm-muted">No validation recorded. Click Validate.</dd>}
             </dl>
 
             <div className="mm-section-h">Track List ({d.songs?.length || 0})</div>
@@ -424,7 +424,7 @@ function SongsView({ seedFilter, flash }: { seedFilter: Record<string, string> |
                 <td>{s.title}<div className="mm-muted" style={{ fontSize: 11 }}>#{s.track_number}</div></td>
                 <td>{s.album_code}</td><td>{s.artist_name}</td><td>{fmtDur(s.duration_seconds)}</td>
                 <td>{s.mp3_available ? <span className="mm-check pass">✓</span> : <span className="mm-check fail">✗</span>}</td>
-                <td>{s.lyrics_available ? '✓' : '—'}</td>
+                <td>{s.lyrics_available ? '✓' : '-'}</td>
                 <td><VisBadge v={s.visibility} /></td>
                 <td><button className="mm-btn sm" onClick={() => setVis(s.song_id, s.visibility === 'hidden' ? 'published' : 'hidden')}>{s.visibility === 'hidden' ? 'Publish' : 'Hide'}</button></td>
               </tr>
@@ -457,12 +457,12 @@ function MissingView() {
   return (
     <div>
       <CsvButton kind="missing" />
-      <Group title="Albums Missing Cover Images" rows={d.albums_missing_cover} render={(r) => <>{r.title} <span className="mm-muted">— {r.artist_name} ({r.album_code})</span></>} />
-      <Group title="Albums Missing Metadata" rows={d.albums_missing_metadata} render={(r) => <>{r.title} <span className="mm-muted">— {r.artist_name} ({r.album_code})</span></>} />
-      <Group title="Songs Missing MP3 Files" rows={d.songs_missing_audio} render={(r) => <>{r.title} <span className="mm-muted">— {r.album_code} #{r.track_number}</span></>} />
-      <Group title="Songs Missing Metadata" rows={d.songs_missing_metadata} render={(r) => <>{r.title || '(untitled)'} <span className="mm-muted">— {r.album_code} #{r.track_number}</span></>} />
-      <Group title="Broken Cover / CDN References" rows={d.broken_cover_references} render={(r) => <>{r.title} <span className="mm-muted">— {r.album_code}</span></>} />
-      <Group title="Broken Audio References" rows={d.broken_audio_references} render={(r) => <>{r.title} <span className="mm-muted">— {r.album_code} #{r.track_number}</span></>} />
+      <Group title="Albums Missing Cover Images" rows={d.albums_missing_cover} render={(r) => <>{r.title} <span className="mm-muted">· {r.artist_name} ({r.album_code})</span></>} />
+      <Group title="Albums Missing Metadata" rows={d.albums_missing_metadata} render={(r) => <>{r.title} <span className="mm-muted">· {r.artist_name} ({r.album_code})</span></>} />
+      <Group title="Songs Missing MP3 Files" rows={d.songs_missing_audio} render={(r) => <>{r.title} <span className="mm-muted">· {r.album_code} #{r.track_number}</span></>} />
+      <Group title="Songs Missing Metadata" rows={d.songs_missing_metadata} render={(r) => <>{r.title || '(untitled)'} <span className="mm-muted">· {r.album_code} #{r.track_number}</span></>} />
+      <Group title="Broken Cover / CDN References" rows={d.broken_cover_references} render={(r) => <>{r.title} <span className="mm-muted">· {r.album_code}</span></>} />
+      <Group title="Broken Audio References" rows={d.broken_audio_references} render={(r) => <>{r.title} <span className="mm-muted">· {r.album_code} #{r.track_number}</span></>} />
     </div>
   );
 }
@@ -482,7 +482,7 @@ function ActivityView() {
           {d?.items?.map((r: any) => (
             <tr key={r.id}>
               <td className="mm-muted">{fmtDate(r.created_at)}</td>
-              <td>{r.actor_name || '—'}</td>
+              <td>{r.actor_name || '-'}</td>
               <td>{r.action}</td>
               <td>{r.target_type}{r.target_id ? `: ${r.target_id}` : ''}</td>
               <td className="mm-muted" style={{ fontSize: 11 }}>
@@ -566,7 +566,7 @@ function SyncView({ flash }: { flash: (k: 'ok' | 'err', t: string) => void }) {
       </table>
       {openRun != null && runDetail && (
         <div className="mm-log" style={{ marginTop: 12 }}>
-          {(runDetail.log || []).map((l: any) => `${l.at}  ${l.msg}${l.error ? ' — ' + l.error : ''}`).join('\n')}
+          {(runDetail.log || []).map((l: any) => `${l.at}  ${l.msg}${l.error ? ': ' + l.error : ''}`).join('\n')}
           {runDetail.error && `\nERROR: ${runDetail.error}`}
         </div>
       )}

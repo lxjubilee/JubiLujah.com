@@ -5,7 +5,7 @@ import ModerationDashboard from '@/components/ModerationDashboard';
 // (the dashboard renders an access notice for non-admins) and server-side (the
 // /api/admin/reviews endpoints require the admin role).
 export const metadata: Metadata = {
-  title: 'Review Moderation — JubileePraise',
+  title: 'Review Moderation | JubileePraise',
   robots: { index: false, follow: false },
 };
 

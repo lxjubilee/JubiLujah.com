@@ -63,7 +63,7 @@ export default function ActiveListeners() {
   }, [isAdmin]);
 
   if (loading) return <div className="an-wrap"><div className="an-empty">Checking access…</div></div>;
-  if (!isAdmin) return <div className="an-wrap"><div className="an-403"><h1>403 — Access Denied</h1><p>Active Listeners is restricted to administrators.</p></div></div>;
+  if (!isAdmin) return <div className="an-wrap"><div className="an-403"><h1>403: Access Denied</h1><p>Active Listeners is restricted to administrators.</p></div></div>;
 
   return (
     <>

@@ -14,7 +14,7 @@ export function generateMetadata({ params }: { params: { type: string } }): Meta
   if (!r) return { title: 'Music Type' };
   return {
     title: `${r.type} Music`,
-    description: `${r.type} albums on JubileePraise — every album whose primary music style is ${r.type}.`,
+    description: `${r.type} albums on JubileePraise: every album whose primary music style is ${r.type}.`,
   };
 }
 

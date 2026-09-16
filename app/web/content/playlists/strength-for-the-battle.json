@@ -1,0 +1,367 @@
+{
+  "id": "strength-for-the-battle",
+  "title": "Strength for the Battle",
+  "type": "Emotional State",
+  "order": 6,
+  "description": "Courage for the hard fight in front of you. You are not facing it alone.",
+  "accent": "#D9534F",
+  "imagePrompt": "A determined young athlete lacing up running shoes at dawn on a city rooftop, focused and strong, dramatic sunrise behind, photorealistic cinematic 16:9 banner, no text.",
+  "imageAspectRatio": "16:9",
+  "linkedImage": "",
+  "journey": {
+    "isJourney": false,
+    "days": null,
+    "nextPlaylistId": null
+  },
+  "surfacing": {
+    "timeOfDay": [],
+    "calendar": []
+  },
+  "songCount": 36,
+  "generated": "2026-09-16T19:30:02.616Z",
+  "rules": {
+    "moods": [
+      "courage",
+      "determination",
+      "triumph",
+      "victory",
+      "hope"
+    ],
+    "energy": [
+      60,
+      100
+    ],
+    "exclude": [],
+    "arc": "rise",
+    "widen": 0,
+    "perAlbum": 2,
+    "perPersona": 6,
+    "reuse": false
+  },
+  "songs": [
+    {
+      "slot": 1,
+      "album": "Homemaking Faith",
+      "track": "Jesus in the Daily Rhythms",
+      "artist": "Eliana Inspire",
+      "description": "",
+      "code": "EAIM1016EN",
+      "n": 5
+    },
+    {
+      "slot": 2,
+      "album": "Hiding Place",
+      "track": "A Mighty Fortress Holds",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1059EN",
+      "n": 9
+    },
+    {
+      "slot": 3,
+      "album": "Cristo en la Lucha",
+      "track": "Generación Que Cree",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1012EN",
+      "n": 11
+    },
+    {
+      "slot": 4,
+      "album": "Counter-Clockwise",
+      "track": "Forward Facing",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1008EN",
+      "n": 11
+    },
+    {
+      "slot": 5,
+      "album": "Standing Strong",
+      "track": "Your Iron in My Spine",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1023EN",
+      "n": 5
+    },
+    {
+      "slot": 6,
+      "album": "Counter-Clockwise",
+      "track": "Restoration of the Years",
+      "artist": "Nova Inspire",
+      "description": "",
+      "code": "NVIM1008EN",
+      "n": 4
+    },
+    {
+      "slot": 7,
+      "album": "Healing Diaspora",
+      "track": "Stripes That Healed Me",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1011EN",
+      "n": 2
+    },
+    {
+      "slot": 8,
+      "album": "Pit To The Party",
+      "track": "Grace on a Wednesday",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1044EN",
+      "n": 9
+    },
+    {
+      "slot": 9,
+      "album": "Breakthrough",
+      "track": "His Arms Around Me",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1003EN",
+      "n": 5
+    },
+    {
+      "slot": 10,
+      "album": "Cristo en la Lucha",
+      "track": "Mami Soltera",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1012EN",
+      "n": 6
+    },
+    {
+      "slot": 11,
+      "album": "The Outlaw Apostle",
+      "track": "Restore the Land",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1004EN",
+      "n": 8
+    },
+    {
+      "slot": 12,
+      "album": "Crown Him King",
+      "track": "Name Above Every Name",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1008EN",
+      "n": 3
+    },
+    {
+      "slot": 13,
+      "album": "Loved Forever",
+      "track": "Shake the Rooftops",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1030EN",
+      "n": 3
+    },
+    {
+      "slot": 14,
+      "album": "Justicia y Redención",
+      "track": "Caminando la Redención",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1011EN",
+      "n": 12
+    },
+    {
+      "slot": 15,
+      "album": "King Jesus Reigns",
+      "track": "Lift the Banner High",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1023EN",
+      "n": 4
+    },
+    {
+      "slot": 16,
+      "album": "Dancehall Redemption",
+      "track": "Bass Drop, Soul Stand Up",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 7
+    },
+    {
+      "slot": 17,
+      "album": "King Jesus Reigns",
+      "track": "Shake the Old Kingdoms",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1023EN",
+      "n": 6
+    },
+    {
+      "slot": 18,
+      "album": "Mercy Unrehearsed",
+      "track": "Free Indeed",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1015EN",
+      "n": 8
+    },
+    {
+      "slot": 19,
+      "album": "Justicia y Redención",
+      "track": "La Sangre Habla Justicia",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1011EN",
+      "n": 4
+    },
+    {
+      "slot": 20,
+      "album": "Trumpet of Jubilee",
+      "track": "Trumpet Holds Forever",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1031EN",
+      "n": 12
+    },
+    {
+      "slot": 21,
+      "album": "Called & Chosen",
+      "track": "Chosen for Glory",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1004EN",
+      "n": 4
+    },
+    {
+      "slot": 22,
+      "album": "Dance Through the Storm",
+      "track": "Joy Is My Weapon",
+      "artist": "Santiago Inspire",
+      "description": "",
+      "code": "SAIM1044EN",
+      "n": 2
+    },
+    {
+      "slot": 23,
+      "album": "The Outlaw Apostle",
+      "track": "Walking Forward",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1004EN",
+      "n": 11
+    },
+    {
+      "slot": 24,
+      "album": "Crown Him King",
+      "track": "Crown Him King",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1008EN",
+      "n": 1
+    },
+    {
+      "slot": 25,
+      "album": "Dancehall Redemption",
+      "track": "Chains Beneath My Feet",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1006EN",
+      "n": 4
+    },
+    {
+      "slot": 26,
+      "album": "The Sound of Deliverance",
+      "track": "Carry This Sound",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1001EN",
+      "n": 12
+    },
+    {
+      "slot": 27,
+      "album": "Breakthrough",
+      "track": "Nothing Stands Against",
+      "artist": "Caleb Inspire",
+      "description": "",
+      "code": "CAIM1003EN",
+      "n": 2
+    },
+    {
+      "slot": 28,
+      "album": "Pit To The Party",
+      "track": "Dance Out the Door",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1044EN",
+      "n": 12
+    },
+    {
+      "slot": 29,
+      "album": "Diaspora Daughters Rising",
+      "track": "Diaspora Daughters Roar",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1008EN",
+      "n": 12
+    },
+    {
+      "slot": 30,
+      "album": "The Sound of Deliverance",
+      "track": "Midnight Kitchen pray",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1001EN",
+      "n": 7
+    },
+    {
+      "slot": 31,
+      "album": "Forever Rising",
+      "track": "Standing Army Now",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1009EN",
+      "n": 10
+    },
+    {
+      "slot": 32,
+      "album": "Break These Chains",
+      "track": "Armor On",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1002EN",
+      "n": 10
+    },
+    {
+      "slot": 33,
+      "album": "Haitian Heartbeat",
+      "track": "Stronghold of My Life",
+      "artist": "Zariah Inspire",
+      "description": "",
+      "code": "ZHIM1010EN",
+      "n": 5
+    },
+    {
+      "slot": 34,
+      "album": "Break These Chains",
+      "track": "Fear Has No Address",
+      "artist": "Imani Inspire",
+      "description": "",
+      "code": "IMIM1002EN",
+      "n": 6
+    },
+    {
+      "slot": 35,
+      "album": "Trumpet of Jubilee",
+      "track": "Shofar Across the Hills",
+      "artist": "Jubilee Inspire",
+      "description": "",
+      "code": "JEIM1031EN",
+      "n": 10
+    },
+    {
+      "slot": 36,
+      "album": "Appalachian Shout",
+      "track": "Shake the Mountains",
+      "artist": "Elias Inspire",
+      "description": "",
+      "code": "ELIM1012EN",
+      "n": 2
+    }
+  ]
+}

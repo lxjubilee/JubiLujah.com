@@ -146,7 +146,7 @@ export default function RedirectorCatalog() {
                 <Crumbs />
 
                 {/* BOOKS */}
-                {section === 'books' && <p className="notice">No books yet — this section is scaffolded and ready for a books source.</p>}
+                {section === 'books' && <p className="notice">No books yet. This section is scaffolded and ready for a books source.</p>}
 
                 {/* PERSONA GRID (music or articles) */}
                 {section !== 'books' && !persona && (

@@ -158,7 +158,7 @@ export default function PlaylistApp({ id, autoplay = false }: { id: string; auto
                       <AddToPlaylist songId={it.song_id} />
                       <button className="pl-trash" title="Remove from Playlist" aria-label="Remove from Playlist" onClick={() => onRemove(it.id, it.song_id)}>✕</button>
                     </span>
-                    <span className="jv-tdur">{it.url ? fmt(durations[id2]) : '—'}</span>
+                    <span className="jv-tdur">{it.url ? fmt(durations[id2]) : '-'}</span>
                   </div>
                 );
               })}

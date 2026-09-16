@@ -15,7 +15,11 @@ export default function UpgradeModal() {
   if (!open) return null;
 
   const go = (path: string) => { hide(); router.push(path); };
-  const limit = info?.daily_limit ?? 7;
+  const limit = info?.daily_limit ?? 36;
+  // Two reasons to be here, and they ask for different things: the daily cap is
+  // "come back tomorrow, or subscribe"; the end of the free period is "subscribe".
+  const expired = info?.mode === 'expired';
+  const days = info?.free_access_days ?? 30;
 
   return (
     <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) hide(); }}>
@@ -26,13 +30,28 @@ export default function UpgradeModal() {
         <div className="sub-upgrade-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z" /></svg>
         </div>
-        <h3 id="upg-title" className="modal-title" style={{ textAlign: 'center' }}>Enjoy Unlimited Christian Music</h3>
-        <p className="modal-body" style={{ textAlign: 'center' }}>
-          You’ve reached your free daily listening limit of {limit} songs. Upgrade your subscription to enjoy
-          unlimited streaming without interruptions.
-        </p>
+        {expired ? (
+          <>
+            <h3 id="upg-title" className="modal-title" style={{ textAlign: 'center' }}>Your Free {days} Days Are Complete</h3>
+            <p className="modal-body" style={{ textAlign: 'center' }}>
+              We hope this music has blessed you. To keep listening, start your subscription. It keeps
+              the music playing for you and supports this ministry in sharing it with others.
+            </p>
+          </>
+        ) : (
+          <>
+            <h3 id="upg-title" className="modal-title" style={{ textAlign: 'center' }}>Enjoy Unlimited Christian Music</h3>
+            <p className="modal-body" style={{ textAlign: 'center' }}>
+              You’ve reached your free daily listening limit of {limit} songs. Upgrade your subscription to enjoy
+              unlimited streaming without interruptions.
+              {typeof info?.free_days_left === 'number' && info.free_days_left > 0 && (
+                <> Your free plan has {info.free_days_left} {info.free_days_left === 1 ? 'day' : 'days'} left.</>
+              )}
+            </p>
+          </>
+        )}
         <div className="sub-upgrade-actions">
-          <button className="btn primary" onClick={() => go('/subscription#plans')}>Subscribe Now</button>
+          <button className="btn primary" onClick={() => go('/subscription#plans')}>{expired ? 'Start My Subscription' : 'Subscribe Now'}</button>
           <button className="btn ghost" onClick={() => go('/subscription')}>View Plans</button>
           <button className="gate-dismiss" type="button" onClick={hide}>Maybe Later</button>
         </div>

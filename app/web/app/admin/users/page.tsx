@@ -141,7 +141,7 @@ function UserRow({
         </div>
       </td>
       <td className="muted">{u.email}</td>
-      <td className="muted">{u.last_login_at ? new Date(u.last_login_at).toLocaleDateString() : '—'}</td>
+      <td className="muted">{u.last_login_at ? new Date(u.last_login_at).toLocaleDateString() : '-'}</td>
       <td>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
           <span

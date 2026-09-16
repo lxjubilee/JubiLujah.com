@@ -149,7 +149,7 @@ export default function FooterPlayer() {
   }, [song?.songId, p.isPlaying]);
 
   const pct = p.duration > 0 ? Math.min(100, Math.max(0, (p.position / p.duration) * 100)) : 0;
-  const sub = [song?.artist, song?.album].filter(Boolean).join(' — ');
+  const sub = [song?.artist, song?.album].filter(Boolean).join(' · ');
 
   const seekFromClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -212,7 +212,7 @@ export default function FooterPlayer() {
         <div className="ov-main">
           <div className="ov-cover">{song?.cover ? <Image src={song.cover} alt="" width={360} height={360} /> : <Svg d={I.note} />}</div>
           <div className="ov-info">
-            <div className="ov-title">{song?.title || '—'}</div>
+            <div className="ov-title">{song?.title || '-'}</div>
             <div className="ov-artist">{song?.artist || ''}</div>
             <div className="ov-album">{song?.album || ''}</div>
           </div>

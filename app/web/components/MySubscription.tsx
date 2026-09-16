@@ -15,7 +15,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 function fmtDate(d?: string | null) {
-  return d ? new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '—';
+  return d ? new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '-';
 }
 
 export default function MySubscription() {
@@ -59,7 +59,7 @@ export default function MySubscription() {
         try {
           const r = await confirmCheckout(sessionId);
           if (r.activated) setOk('Your subscription is active. Welcome to JubileePraise Premium!');
-          else if (r.pending) setOk('Payment received — finalizing your subscription. This can take a moment.');
+          else if (r.pending) setOk('Payment received. Finalizing your subscription. This can take a moment.');
         } catch { /* fall through to load; webhook may still activate */ }
       } else if (justSubscribed) {
         setOk('Your subscription is active. Welcome to JubileePraise Premium!');
@@ -117,7 +117,8 @@ export default function MySubscription() {
             <div className="acct-card-head">
               <h2 className="acct-card-title">You’re on the Free plan</h2>
               <p className="acct-card-note">
-                You can listen to {entitlement?.dailySongLimit ?? 36} full songs each day. Upgrade for unlimited streaming with no interruptions.
+                You can listen to {entitlement?.dailySongLimit ?? 36} full songs each day for your first 30 days of
+                listening. Subscribe for unlimited streaming with no interruptions, and help support this ministry.
               </p>
             </div>
             <Link className="btn primary" href="/subscription">Upgrade to Unlimited Listening</Link>
@@ -133,10 +134,10 @@ export default function MySubscription() {
                 <div><span className="sub-detail-label">Plan</span><span className="sub-detail-value">{planName}</span></div>
                 <div><span className="sub-detail-label">Status</span><span className={`sub-status sub-status-${status}`}>{STATUS_LABEL[status] || status}{willNotRenew ? ' · ends at period end' : ''}</span></div>
                 <div><span className="sub-detail-label">{willNotRenew ? 'Access until' : 'Renews on'}</span><span className="sub-detail-value">{fmtDate(sub?.current_period_end)}</span></div>
-                <div><span className="sub-detail-label">Next billing amount</span><span className="sub-detail-value">{willNotRenew ? '—' : (sub?.next_billing_amount || '—')}</span></div>
-                <div><span className="sub-detail-label">Payment method</span><span className="sub-detail-value">{sub?.provider === 'stripe' ? 'Card (Stripe)' : sub?.provider === 'mock' ? 'Test gateway' : '—'}</span></div>
+                <div><span className="sub-detail-label">Next billing amount</span><span className="sub-detail-value">{willNotRenew ? '-' : (sub?.next_billing_amount || '-')}</span></div>
+                <div><span className="sub-detail-label">Payment method</span><span className="sub-detail-value">{sub?.provider === 'stripe' ? 'Card (Stripe)' : sub?.provider === 'mock' ? 'Test gateway' : '-'}</span></div>
                 <div><span className="sub-detail-label">Member since</span><span className="sub-detail-value">{fmtDate(sub?.started_at)}</span></div>
-                <div className="sub-detail-wide"><span className="sub-detail-label">Subscription reference</span><span className="sub-detail-value sub-detail-mono">{sub?.reference || sub?.id || '—'}</span></div>
+                <div className="sub-detail-wide"><span className="sub-detail-label">Subscription reference</span><span className="sub-detail-value sub-detail-mono">{sub?.reference || sub?.id || '-'}</span></div>
               </div>
 
               <div className="acct-actions sub-actions">
@@ -182,7 +183,7 @@ export default function MySubscription() {
                               {p.invoice_url && p.invoice_pdf_url ? ' · ' : null}
                               {p.invoice_pdf_url ? <a className="pl-link" href={p.invoice_pdf_url} target="_blank" rel="noopener noreferrer">Download</a> : null}
                             </span>
-                          ) : '—'}
+                          ) : '-'}
                         </td>
                       </tr>
                     ))}
