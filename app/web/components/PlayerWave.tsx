@@ -19,7 +19,14 @@ import { usePlayer } from '@/stores/player';
 // opacity, footer-player.css); a GLITTER layer so it reads as a little magic
 // stream: twinkling four-point glints that flash as they drift, fine dust that
 // floats up off the line, and a faint glowing ribbon under it all; and it shows
-// ONLY while music is actually sounding. A pause, the end of a track, or a
+// ONLY while music is actually sounding.
+//
+// THREE LINES (owner, 2026-09-16, later still): a PRIMARY line that moves to the
+// music, as before, and a SECONDARY and a TERTIARY line that wander randomly
+// around it, "a little bit extra pizzazz." The two companions follow the primary
+// line's shape and add their own drift from smooth noise, so they cross it,
+// part from it and come back, never repeating. They are fainter, shed fewer
+// sparks, and pop small bursts on the off-beats between the primary's fireworks. A pause, the end of a track, or a
 // stall while the audio is still loading fades it out within a quarter second.
 //
 // 🔴 WHY IT IS DRIVEN BY THE SONG'S TEMPO AND ENERGY, NOT BY THE AUDIO SAMPLES.
@@ -157,6 +164,7 @@ export default function PlayerWave() {
     let t0 = performance.now();
     let last = t0;
     let lastBeat = -1;
+    let lastHalf = -1;
     let carry = 0;
 
     // Where the line is at horizontal fraction u, as an offset from the middle.
@@ -164,6 +172,32 @@ export default function PlayerWave() {
       Math.sin(u * 14 + t * beatHz * 2.1) * 0.55 +
       Math.sin(u * 31 - t * beatHz * 3.3) * 0.28 +
       Math.sin(u * 5.5 + t * 0.9) * 0.17;
+
+    // SMOOTH NOISE for the companion lines: a hashed lattice with smoothstep
+    // interpolation, so the drift is random but never jumps.
+    const hash = (n: number) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+    const noise = (x: number) => {
+      const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f);
+      return (hash(i) * (1 - u) + hash(i + 1) * u) * 2 - 1;
+    };
+    const seeds = [0, Math.random() * 1000, Math.random() * 1000];
+
+    /** Line 0 is the primary; 1 and 2 wander around it. y in canvas pixels. */
+    const lineY = (li: number, u: number, t: number, beatHz: number, amp: number, mid: number, h: number) => {
+      const taper = Math.sin(Math.PI * Math.min(1, Math.max(0, u)));
+      const primary = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * taper);
+      if (li === 0) return primary;
+      const sd = seeds[li];
+      // Secondary drifts wider and slower; tertiary tighter and quicker.
+      const reach = li === 1 ? 0.42 : 0.32;
+      const speed = li === 1 ? 0.45 : 0.8;
+      const drift =
+        noise(u * 2.6 + t * speed + sd) * 0.65 +
+        noise(u * 7.3 - t * speed * 1.7 + sd * 1.3) * 0.35;
+      const y = primary + drift * h * reach * (0.4 + 0.6 * taper);
+      return Math.max(3, Math.min(h - 3, y));
+    };
+    const pickLine = () => { const r = Math.random(); return r < 0.6 ? 0 : r < 0.85 ? 1 : 2; };
 
     // A firework: a ring of sparks thrown out from one point on the line.
     const burst = (x: number, y: number, power: number, h: number) => {
@@ -204,9 +238,8 @@ export default function PlayerWave() {
         while (carry >= 1) {
           carry -= 1;
           const u = Math.random();
-          const taper = Math.sin(Math.PI * u);
           const x = u * w;
-          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * taper);
+          const y = lineY(pickLine(), u, t, beatHz, amp, mid, h);
           const r = Math.random();
           const sh = r < 0.62 ? DOT : r < 0.84 ? FLECK : r < 0.95 ? STREAK : TWINKLE;
           spawn(x + (Math.random() - 0.5) * 6, y + (Math.random() - 0.5) * 5,
@@ -219,7 +252,7 @@ export default function PlayerWave() {
         while (glintCarry >= 1) {
           glintCarry -= 1;
           const u = Math.random();
-          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * u));
+          const y = lineY(pickLine(), u, t, beatHz, amp, mid, h);
           spawn(u * w, y + (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 18, -4 - Math.random() * 10,
             0.7 + Math.random() * 1.1, 1.6 + Math.random() * 2.6, GLINT, -2, 0.8);
         }
@@ -227,7 +260,7 @@ export default function PlayerWave() {
         while (dustCarry >= 1) {
           dustCarry -= 1;
           const u = Math.random();
-          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * u));
+          const y = lineY(pickLine(), u, t, beatHz, amp, mid, h);
           spawn(u * w, y, (Math.random() - 0.5) * 14, -8 - Math.random() * 22,
             1 + Math.random() * 1.6, 0.35 + Math.random() * 0.7, DUST, -6, 0.5);
         }
@@ -240,11 +273,20 @@ export default function PlayerWave() {
             const shots = down ? 2 : 1;
             for (let s = 0; s < shots; s++) {
               const u = 0.08 + Math.random() * 0.84;
-              const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * u));
-              burst(u * w, y, (down ? 1 : 0.55) * (0.5 + 0.5 * e), h);
+              burst(u * w, lineY(0, u, t, beatHz, amp, mid, h), (down ? 1 : 0.55) * (0.5 + 0.5 * e), h);
             }
           }
           lastBeat = whole;
+        }
+        // PIZZAZZ ON THE OFF-BEATS: a small pop on one of the companion lines,
+        // halfway between the primary's bursts.
+        const half = Math.floor(beatPos + 0.5);
+        if (half !== lastHalf) {
+          if (lastHalf >= 0 && !reduce) {
+            const u = 0.06 + Math.random() * 0.88;
+            burst(u * w, lineY(1 + (Math.random() < 0.5 ? 1 : 0), u, t, beatHz, amp, mid, h), 0.25 + 0.15 * e, h);
+          }
+          lastHalf = half;
         }
       }
 
@@ -262,17 +304,24 @@ export default function PlayerWave() {
       ctx.globalAlpha = fade;
       ctx.globalCompositeOperation = 'lighter';
 
-      // THE RIBBON: a faint glow along the line itself, under the sparks.
+      // THE RIBBONS: a faint glow along each line, under the sparks. The
+      // primary is the brightest; the two companions are thinner and fainter.
       if (w > 0) {
-        ctx.beginPath();
-        for (let x = 0; x <= w + 8; x += 8) {
-          const u = x / w;
-          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * Math.min(1, u)));
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
         ctx.lineJoin = 'round';
-        ctx.strokeStyle = STYLES[0][2]; ctx.lineWidth = 7; ctx.stroke();
-        ctx.strokeStyle = STYLES[4][4]; ctx.lineWidth = 1.2; ctx.stroke();
+        for (let li = 2; li >= 0; li--) {
+          ctx.beginPath();
+          for (let x = 0; x <= w + 8; x += 8) {
+            const y = lineY(li, x / w, t, beatHz, amp, mid, h);
+            if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          }
+          if (li === 0) {
+            ctx.strokeStyle = STYLES[0][2]; ctx.lineWidth = 7; ctx.stroke();
+            ctx.strokeStyle = STYLES[4][4]; ctx.lineWidth = 1.2; ctx.stroke();
+          } else {
+            ctx.strokeStyle = STYLES[li === 1 ? 1 : 3][1]; ctx.lineWidth = li === 1 ? 5 : 4; ctx.stroke();
+            ctx.strokeStyle = STYLES[2][li === 1 ? 3 : 2]; ctx.lineWidth = li === 1 ? 0.9 : 0.7; ctx.stroke();
+          }
+        }
       }
 
       let j = 0;
