@@ -594,6 +594,21 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-16 (late night) · admin Hero Image Preview, 1,071 album descriptions, Now Playing trimmed, kJubilee volume control
+
+Web `ONjYiXrZXwJV853bWaxrh → BwtmaZT1ovAWDnvxK9eg5` from commit `e6f56ae` (rollback
+`.next.bak-20260916-162335`). Shipped `.next` plus `public/music/album-descriptions.json` (new file, so no
+public backup was needed); `content/` untouched. Built with `NEXT_DIST_DIR=.next-r7` and
+`NEXT_PUBLIC_SITE_URL=https://www.jubileepraise.com`. Origin 200 nine seconds after `pm2 restart`
+(load ~22); `/`, `/now-playing`, `/now-playing/about`, `/admin/hero-images`, `/admin/subscribers`,
+`/album?c=…`, `/backstage/hero-position`, `/playlists` all 200, and the new descriptions verified in
+the public home hero and the album meta description.
+
+- **Gate fix:** `tools/check-tenants.mjs` was failing on the committed tree itself: `lib/tenants.ts` had lost its
+  em dashes and `tenants/*.json` had not. The JSON was synced to the TS in the same commit.
+- **Hero framing must be done on the live admin page.** Positions saved on a local server land in that
+  machine's `content/hero-positions.json`, which a release never ships.
+
 ### 2026-09-16 (night) · family carousel, Orbitron hero titles, magic-stream sparks, admin framing save fix · and a 70 s outage
 
 Web `r5OV-E0xIpKESqEz9LR7v → 1dFFvjuTpKHsqku0ZV12j` (rollback `.next.bak-20260916-152151`).
