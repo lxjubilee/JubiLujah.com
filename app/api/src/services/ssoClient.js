@@ -57,9 +57,31 @@ async function getToken(forceRefresh = false) {
   return fetchToken();
 }
 
+// ---- Keep the service bearer warm ------------------------------------------
+// 🔴 A TICKET ARRIVAL MUST NOT PAY FOR A TOKEN. Family-ticket arrivals are rare,
+// so the cached bearer had nearly always expired when one came in, and every
+// arrival spent ~700 ms fetching a fresh one — on a redeem the web middleware
+// was abandoning at 2.5 s (measured 2026-09-16; see middleware.ts). Fetch once at
+// start-up and refresh ahead of expiry, so the token is simply there.
+//
+// Failures are logged and retried on the next tick; nothing here can stop the
+// API starting. unref(): the timer never keeps the process alive on its own.
+const KEEP_WARM_MS = 5 * 60_000;
+function keepTokenWarm() {
+  if (!ssoEnabled()) return;
+  const refresh = () => {
+    // Refresh when less than two ticks of life remain.
+    if (cached && cached.expiresAt - Date.now() > 2 * KEEP_WARM_MS) return;
+    fetchToken().catch((err) => logger.warn({ err: String(err?.message || err) }, 'SSO service token pre-fetch failed'));
+  };
+  refresh();
+  setInterval(refresh, KEEP_WARM_MS).unref();
+}
+if (process.env.NODE_ENV !== 'test') keepTokenWarm();
+
 // Call a service-gated SSO endpoint with the cached bearer; refresh once on 401.
 // Returns { status, body } — the caller decides how to interpret it.
-async function callSso(path, payload) {
+async function callSso(path, payload, { retryOn401 = true } = {}) {
   const doPost = (token) =>
     fetch(`${config.sso.baseUrl}${path}`, {
       method: 'POST',
@@ -68,7 +90,7 @@ async function callSso(path, payload) {
     });
   let token = await getToken();
   let res = await doPost(token);
-  if (res.status === 401) {
+  if (res.status === 401 && retryOn401) {
     cached = null;
     token = await getToken(true);
     res = await doPost(token);
@@ -140,6 +162,83 @@ export async function ssoSetPassword(email, newPassword) {
     return { ok: false, status };
   } catch (err) {
     logger.error({ err, email }, 'SSO set-password error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+// ---- Cross-site sign-in (SSO migration 003) --------------------------------
+//
+// The same four calls JubileeInspire's API makes (api/services/sso-authority.js
+// on that box). A family session lives 90 days at the SSO; what travels between
+// sites is a TICKET — 32 random bytes, one use, about a minute — so a URL caught
+// in a log or a Referer header is dead before anyone can replay it.
+//
+// None of these throw. Every failure comes back as { ok:false }, and every
+// caller treats that as "carry on signed out", never as an error to show.
+
+// Spend a one-time ticket and learn who it belongs to. The SSO burns the ticket
+// on the first call whether or not the rest succeeds, so NEVER retry this on a
+// non-network failure — the second attempt can only be invalid_ticket.
+//   { ok:true, user } | { ok:false, status|error }
+export async function ssoRedeemTicket(ticket, audience = null) {
+  if (!ticket) return { ok: false, error: 'no_ticket' };
+  try {
+    // No retry on 401, as the note above says and as this call did anyway until
+    // 2026-09-16: callSso's generic 401-refresh re-posted the SAME ticket, which
+    // the SSO had already burned, so the retry could only answer invalid_ticket —
+    // after a second token fetch. The warm token (keepTokenWarm) is what prevents
+    // a stale bearer here; a retry never could.
+    const { status, body } = await callSso('/api/auth/ticket/redeem', { ticket, audience }, { retryOn401: false });
+    if (status === 200 && body?.user?.email) return { ok: true, user: body.user };
+    return { ok: false, status, error: body?.error };
+  } catch (err) {
+    logger.warn({ err }, 'SSO ticket redeem error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+// Open a 90-day family session for someone THIS site has already signed in.
+// The session token never leaves the server: plant-url spends it for a ticket
+// inside the same request.
+//   { ok:true, sessionToken } | { ok:false, status|error }
+export async function ssoOpenSession(email) {
+  if (!email) return { ok: false, error: 'no_email' };
+  try {
+    const { status, body } = await callSso('/api/auth/session/open', { email, site: config.sso.site });
+    if (status === 200 && body?.sessionToken) return { ok: true, sessionToken: body.sessionToken };
+    return { ok: false, status };
+  } catch (err) {
+    logger.warn({ err, email }, 'SSO session open error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+// Mint a one-time ticket from a live family session.
+//   { ok:true, ticket } | { ok:false, status|error }
+export async function ssoIssueTicket(sessionToken, audience = null) {
+  if (!sessionToken) return { ok: false, error: 'no_session' };
+  try {
+    const { status, body } = await callSso('/api/auth/ticket/issue', { sessionToken, audience });
+    if (status === 200 && body?.ticket) return { ok: true, ticket: body.ticket };
+    return { ok: false, status };
+  } catch (err) {
+    logger.warn({ err }, 'SSO ticket issue error');
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+// End EVERY family session for an identity — what signing out has to mean once
+// a browser holds one session per sign-in plus one per plant. Revoking only one
+// token left the planted session alive to sign the person straight back in.
+//   { ok:true, revoked } | { ok:false, status|error }
+export async function ssoRevokeAllSessions(email) {
+  if (!email) return { ok: false, error: 'no_email' };
+  try {
+    const { status, body } = await callSso('/api/auth/session/revoke-all', { email });
+    if (status === 200) return { ok: true, revoked: body?.revoked || 0 };
+    return { ok: false, status };
+  } catch (err) {
+    logger.warn({ err, email }, 'SSO revoke-all error');
     return { ok: false, error: String(err?.message || err) };
   }
 }

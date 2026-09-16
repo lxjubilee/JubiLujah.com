@@ -45,7 +45,7 @@ export const config = {
     ? (process.env.AUTH_LOGIN_MODE || '').toLowerCase()
     : 'local'),
 
-  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise'),
+  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah'),
 
   corsOrigins: (process.env.CORS_ORIGIN || 'http://localhost:3000')
     .split(',').map((s) => s.trim()).filter(Boolean),
@@ -138,7 +138,7 @@ export const config = {
   // which platform the login came from. See services/jiLogin.js.
   jiLogin: {
     baseUrl: (process.env.JI_LOGIN_BASE || process.env.JI_API_BASE || 'https://api.jubileeinspire.com').replace(/\/$/, ''),
-    source: process.env.JI_LOGIN_SOURCE || 'jubileepraise',
+    source: process.env.JI_LOGIN_SOURCE || 'jubilujah',
   },
 
   // SSO delegation -> the Jubilee Identity Authority (sso.jubileeinspire.com), used
@@ -149,9 +149,9 @@ export const config = {
   // tags which family site the identity is signing in on. See services/ssoClient.js.
   sso: {
     baseUrl: (process.env.SSO_API_BASE || 'https://sso.jubileeinspire.com').replace(/\/$/, ''),
-    clientId: process.env.SSO_CLIENT_ID || 'jubileepraise',
+    clientId: process.env.SSO_CLIENT_ID || 'jubilujah',
     clientSecret: process.env.SSO_CLIENT_SECRET || '',
-    site: process.env.SSO_SITE || 'jubileepraise',
+    site: process.env.SSO_SITE || 'jubilujah',
   },
 
   // ---- Subscriptions & billing ---------------------------------------------

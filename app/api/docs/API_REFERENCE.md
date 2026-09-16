@@ -594,7 +594,7 @@ Three helpers implement the `ji` path:
 | `config.jiSync.clientSecret` | `JI_SERVICE_CLIENT_SECRET` | `''` |
 | `config.jiSync.checkEmailTimeoutMs` | `JI_CHECK_EMAIL_TIMEOUT_MS` | `4000` |
 | `config.jiLogin.baseUrl` | `JI_LOGIN_BASE` ‖ `JI_API_BASE` | `https://api.jubileeinspire.com` |
-| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubileepraise` |
+| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubilujah` |
 
 `jiSyncEnabled()` = both `clientId` **and** `clientSecret` non-empty (`services/jiSync.js:34`).
 
@@ -620,7 +620,7 @@ The result object is returned to the client verbatim as the `jiSync` field of th
 
 #### `provisionUserToJI({email, password, displayName, role, emailVerified})`
 
-`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform:'jubileepraise'}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubileepraise` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
+`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform:'jubileepraise'}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubilujah` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
 
 #### `checkEmailOnJI(email)` — pre-signup gate
 
@@ -4187,13 +4187,13 @@ new Pool({ connectionString: config.databaseUrl, max: 10, idleTimeoutMillis: 30_
 | `web` (`jubileepraise-web`) | **Next.js 14.2.33**, React 18.3.1, TypeScript 5.9.3, `zustand` 4.5 | dev/start on **:3000** |
 | `mock-oidc` | Express + `jose` only | :4010 |
 
-There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePraise.com\package.json`, `@jubilee/jubileepraise`) whose `main` is `server.js` — a zero-dependency 36 KB Node server. **This is what actually runs in production** (PM2 `jubileepraise`, port 3119); the `app/` Next.js+API stack is the migration target, not the deployed artifact. See §2.9.
+There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePraise.com\package.json`, `@jubilee/jubileepraise`) whose `main` is `server.js` — a zero-dependency 36 KB Node server. **This is what actually runs in production** (PM2 `jubilujah`, port 3119); the `app/` Next.js+API stack is the migration target, not the deployed artifact. See §2.9.
 
 #### 2.2 `docker-compose.yml` — local stack
 
 | Service | Image / build | Ports | Notes |
 |---|---|---|---|
-| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubileepraise`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
+| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubilujah`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
 | `mock-oidc` | build `./mock-oidc` (node:20-alpine) | 4010:4010 | env: `MOCK_OIDC_PORT/ISSUER`, `OIDC_CLIENT_ID/SECRET`, `OIDC_REDIRECT_URI` |
 
 ⚠️ **Two ops traps in the compose init path:**
@@ -4207,7 +4207,7 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePra
 
 | Variable | Default in example | Purpose |
 |---|---|---|
-| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise` | Postgres DSN. Prod alternative (commented) points at `jubileepraise_app@94.72.120.231/jubileepraise`. |
+| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah` | Postgres DSN. Prod alternative (commented) points at `jubilujah_app@94.72.120.231/jubilujah`. |
 | `PGSSLMODE` | `disable` | Only the literal `require` turns on TLS, and then without cert validation (`db.js:11`). |
 | `API_PORT` | `4000` | Express listen port. |
 | `NODE_ENV` | `development` | Drives default log level and general env gating. |
@@ -4217,7 +4217,7 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePra
 | `SESSION_TTL_HOURS` | `12` | **DEAD** — not referenced anywhere. |
 | `AUTH_LOGIN_MODE` | `local` | `local` = verify against `identity.credentials`; `ji` = delegate to JubileeInspire's `/api/auth/login`. Anything other than `ji` normalizes to `local` (`config.js:40`). Rollback is env-only + restart, no redeploy. |
 | `JI_LOGIN_BASE` | `https://api.jubileeinspire.com` | JI login API base; falls back to `JI_API_BASE` then the prod default. |
-| `JI_LOGIN_SOURCE` | `jubileepraise` | Platform tag sent as `source` so JI knows the origin app. |
+| `JI_LOGIN_SOURCE` | `jubilujah` | Platform tag sent as `source` so JI knows the origin app. |
 | `JI_API_BASE` | `https://api.jubileeinspire.com` | JI service/admin API: password sync, provisioning, pre-signup `check-email`. |
 | `JI_SERVICE_CLIENT_ID` | *(blank)* | Client-credentials id for JI's `/api/auth/service/token`. Blank ⇒ sync/provisioning no-op. |
 | `JI_SERVICE_CLIENT_SECRET` | *(blank)* | Matching secret. Blank ⇒ `check-email` degrades to the unauthenticated call. |
@@ -4384,13 +4384,13 @@ Three seed accounts mirroring `identity.users`: `gabriel` (admin + production_ma
 |---|---|
 | Host | `root@94.72.120.231` — `SEAIIS01SERVER`, Ubuntu, nginx 1.24, Node 20.20.0, PM2 6.0.14 |
 | Code dir | `/var/www/JubileePraise.com/` |
-| PM2 process | name `jubileepraise`, script `/var/www/JubileePraise.com/server.js`, **port 3119** |
+| PM2 process | name `jubilujah`, script `/var/www/JubileePraise.com/server.js`, **port 3119** |
 | Nginx | vhost `/etc/nginx/sites-available/jubileepraise.com`, proxies `:80` → `127.0.0.1:3119`; logs `/var/log/nginx/JubileePraise.com_{access,error}.log` |
 | PM2 logs | `/root/.pm2/logs/jubileepraise-{out,error}.log` |
 | DNS/TLS | `jubileepraise.com` + `www` proxied through Cloudflare; TLS terminates at the CF edge (zone `5a4817eed553c36db47e8b7b3390120b`) |
 | CDN | R2 bucket `jubileeverse-cdn`, prefix `music/`, public host `cdn.jubileeverse.com` |
 | SSH key | `C:\Users\zariah.inspire\.ssh\id_ed25519_jubilee_prod` |
-| DB (prod, per `.env.example` comment) | `postgres://jubileepraise_app:<PW>@94.72.120.231:5432/jubileepraise` with `PGSSLMODE=require` — same box as the web host |
+| DB (prod, per `.env.example` comment) | `postgres://jubilujah_app:<PW>@94.72.120.231:5432/jubilujah` with `PGSSLMODE=require` — same box as the web host |
 
 **No rollback exists.** PUBLISH.md:155 states the prior code is not snapshotted; if rollback matters you must manually tar `/var/www/JubileePraise.com` into `/var/www/.backup/JubileePraise.com.$(date +%Y%m%d-%H%M%S).tgz` *before* deploying. There is also no migration step anywhere in the publish flow — schema changes are applied out-of-band via `db/run-migrations.js`.
 

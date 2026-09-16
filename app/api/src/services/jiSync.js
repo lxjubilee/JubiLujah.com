@@ -140,7 +140,7 @@ export async function provisionUserToJI({ email, password, displayName, role, em
     password,
     role: role || 'user',                 // JI role enum (user|admin|guest)
     emailVerified: emailVerified === true,
-    sourcePlatform: 'jubileepraise',
+    sourcePlatform: 'jubilujah',
   };
   if (displayName) payload.displayName = displayName;
 

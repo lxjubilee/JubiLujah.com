@@ -14,7 +14,8 @@ import { hashPassword, verifyPassword } from '../auth/password.js';
 import { sendPasswordResetEmail, sendLoginVerificationEmail, sendSignupVerificationEmail } from '../services/email.js';
 import { syncPasswordToJI, provisionUserToJI, checkEmailOnJI } from '../services/jiSync.js';
 import { jiLogin } from '../services/jiLogin.js';
-import { ssoLogin, ssoLookup, ssoProvisionHash, ssoSetPassword, ssoUpdateProfile } from '../services/ssoClient.js';
+import { ssoLogin, ssoLookup, ssoProvisionHash, ssoSetPassword, ssoUpdateProfile, ssoRevokeAllSessions } from '../services/ssoClient.js';
+import { verifyToken } from '../auth/token.js';
 import { logger } from '../logger.js';
 
 // Default role for self-service sign-ups (configurable). content_editor lets a
@@ -253,6 +254,36 @@ router.post('/logout', ah(async (req, res) => {
   // Bearer clients pass their refresh token in the body so it can be revoked
   // (it isn't carried on the request otherwise). Optional; ignored if absent.
   if (req.body?.refreshToken) await revokeRefreshToken(req.body.refreshToken);
+
+  // SIGNING OUT ENDS THE FAMILY SESSION TOO (routes/ssoBridge.js).
+  //
+  // With cross-site sign-in on, a signed-out page asks the SSO whether this
+  // browser is signed in to the family — so leaving the family session alive
+  // would sign the reader straight back in on the next navigation. Same rule as
+  // JubileeInspire (owner decision 2026-09-07): signed out means everywhere.
+  //
+  // By identity, not by token: a browser holds one family session per sign-in
+  // plus one per plant. Identified from the bearer, falling back to the refresh
+  // token for a sign-out whose access token has already lapsed. Best-effort —
+  // a sign-out must never fail because the SSO is slow or unreachable.
+  if (config.loginMode === 'sso') {
+    try {
+      let email = req.auth?.user?.email || null;
+      if (!email && req.body?.refreshToken) {
+        const p = verifyToken(req.body.refreshToken, 'refresh');
+        if (p?.userId) {
+          const r = await query('SELECT email FROM identity.users WHERE id = $1', [p.userId]);
+          email = r.rows[0]?.email || null;
+        }
+      }
+      if (email) {
+        const out = await ssoRevokeAllSessions(email);
+        if (!out.ok) logger.warn({ email, out }, 'family session revoke on logout failed');
+      }
+    } catch (err) {
+      logger.warn({ err }, 'family session revoke on logout errored');
+    }
+  }
   res.json({ ok: true });
 }));
 
@@ -357,6 +388,10 @@ const verifySignupSchema = z.object({
   verificationGuid: z.string().uuid(),
   verificationCode: z.string().regex(/^\d{6}$/),
   rememberMe: z.boolean().optional(),
+  // The Jubilee ID door asks for a date of birth, as JubileeInspire's does. It
+  // belongs to the IDENTITY, not to this site's mirror, so it is written to the
+  // SSO after provisioning (below) and never stored locally.
+  date_of_birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 });
 router.post('/verify-signup', validate(verifySignupSchema), ah(async (req, res) => {
   const { verificationGuid, verificationCode } = req.body;
@@ -412,6 +447,13 @@ router.post('/verify-signup', validate(verifySignupSchema), ah(async (req, res) 
     const firstName = parts.shift() || user.email.split('@')[0];
     const prov = await ssoProvisionHash({ email: user.email, firstName, lastName: parts.join(' '), passwordHash: user._hash });
     if (!prov.ok && !prov.conflict) logger.error({ email: user.email, prov }, 'SSO provision on signup failed');
+    // /service/provision takes no date of birth, so set it on the identity we
+    // just created. Only on a fresh create — a 409 means someone else's existing
+    // Jubilee ID, whose details this sign-up has no business changing.
+    if (prov.ok && req.body.date_of_birth) {
+      const upd = await ssoUpdateProfile(user.email, { date_of_birth: req.body.date_of_birth });
+      if (!upd.ok) logger.warn({ email: user.email, upd }, 'SSO date of birth on signup not saved');
+    }
   }
 
   const t = await issueTokens({ userId: user.id, extended: !!req.body.rememberMe });

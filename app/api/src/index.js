@@ -39,6 +39,8 @@ import appVersionRouter from './routes/appVersion.js';
 import mobileRouter from './routes/mobile.js';
 import mobileAdminRouter from './routes/mobileAdmin.js';
 import redirectorRouter from './routes/redirector.js';
+import ssoBridgeRouter from './routes/ssoBridge.js';
+import chatHistoryRouter from './routes/chatHistory.js';
 import { serviceRateKey } from './middleware/serviceAuth.js';
 import { redirectorRateKey } from './middleware/redirectorAuth.js';
 import { startMusicScheduler } from './services/musicScheduler.js';
@@ -100,6 +102,15 @@ const redirectorLimiter = rateLimit({
   skip: (req) => req.path.includes('/qr/') || req.path.includes('/resolve/'),
 });
 
+// Cross-site sign-in (routes/ssoBridge.js). Its own limiter, NOT authLimiter:
+// redeem-ticket is called by the web server's middleware over loopback, so under
+// the shared 50-per-15-minutes budget every arrival on the whole site would count
+// against one address. The middleware forwards the visitor's address as
+// X-Forwarded-For, which `trust proxy` above turns into req.ip, so the budget is
+// still per reader. Brute force is not the threat here — a ticket is 32 random
+// bytes and single-use — so this only has to stop a flood.
+const ssoBridgeLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 300, standardHeaders: true, legacyHeaders: false });
+
 // ---- Health + OpenAPI -------------------------------------------------------
 app.get('/health', async (req, res) => {
   const db = await healthCheck();
@@ -121,7 +132,12 @@ app.use('/api/auth/admin', serviceLimiter, serviceRouter);
 // (no ambient session cookie), so cross-site requests carry no usable credential.
 
 // ---- Routes -----------------------------------------------------------------
+// Before /api/auth so its own limiter applies instead of authLimiter (see above).
+app.use('/api/auth/sso', ssoBridgeLimiter, ssoBridgeRouter);
 app.use('/api/auth', authLimiter, authRouter);
+// The rail's JubileeInspire Chat History (Bearer). Ahead of the catch-all /api
+// routers below so none of them can answer for it.
+app.use('/api/chat-history', writeLimiter, chatHistoryRouter);
 app.use('/api', catalogRouter);                  // public catalog (manifest-backed)
 app.use('/api/app-version', appVersionRouter);   // public mobile update-check
 app.use('/api/mobile', mobileRouter);            // public mobile app config (categories)

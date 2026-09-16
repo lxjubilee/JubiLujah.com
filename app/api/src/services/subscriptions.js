@@ -47,6 +47,7 @@ export function planView(p) {
     max_members: p.max_members,
     daily_song_limit: p.daily_song_limit,         // null = unlimited
     preview_seconds: p.preview_seconds,
+    free_access_days: p.free_access_days ?? null, // null = no end (see 0032)
     is_paid: p.is_paid,
     highlighted: p.highlighted,
     cta_label: p.cta_label,
@@ -305,10 +306,58 @@ export function monthFrom(d) {
   return n;
 }
 
+// ---- The free plan's 30 days (migration 0032) ------------------------------
+// How long a listener may stay on the free plan, and how much of it is left.
+//
+// `start: true` writes the row if there is none — the FIRST PLAY that needs one
+// begins the period. `start: false` only reads, so looking at your account never
+// starts the clock. Returns null when the plan has no end (free_access_days NULL),
+// which is also what an older database without 0032 yields — the column simply
+// is not there, so the plan reads as unending rather than the API falling over.
+async function freePeriod(userId, plan, { start }) {
+  const days = plan?.free_access_days;
+  if (!days) return null;
+
+  if (start) {
+    // ON CONFLICT DO NOTHING: two plays racing on a first listen both land on
+    // the same started_at, and a row that exists is never moved.
+    await query(
+      `INSERT INTO production.free_listening_periods (user_id) VALUES ($1)
+       ON CONFLICT (user_id) DO NOTHING`,
+      [userId],
+    );
+  }
+  const r = await query(
+    'SELECT started_at FROM production.free_listening_periods WHERE user_id = $1',
+    [userId],
+  );
+  if (!r.rowCount) return { days, startedAt: null, endsAt: null, daysLeft: days, expired: false };
+
+  const startedAt = new Date(r.rows[0].started_at);
+  const endsAt = new Date(startedAt.getTime() + days * 86_400_000);
+  const msLeft = endsAt.getTime() - Date.now();
+  return {
+    days,
+    startedAt,
+    endsAt,
+    // Whole days, rounded UP: with six hours to go a listener has "1 day left",
+    // not "0 days left" while the music still plays.
+    daysLeft: Math.max(0, Math.ceil(msLeft / 86_400_000)),
+    expired: msLeft <= 0,
+  };
+}
+
+function periodFields(p) {
+  return p
+    ? { free_access_days: p.days, free_started_at: p.startedAt, free_ends_at: p.endsAt, free_days_left: p.daysLeft }
+    : { free_access_days: null, free_started_at: null, free_ends_at: null, free_days_left: null };
+}
+
 // ---- Free-plan daily listening counter -------------------------------------
 // Atomically resolves "can this user play THIS next song in full?" and advances
 // the daily counter. Paid users always get full; free users get full for the
-// first `dailySongLimit` songs/day, then a `previewSeconds` preview.
+// first `dailySongLimit` songs/day, then a `previewSeconds` preview — for as long
+// as their free period lasts, after which every play is `expired`.
 export async function resolvePlayIntent(userId) {
   const ent = await getEntitlement(userId);
   if (ent.isPaid) {
@@ -318,6 +367,20 @@ export async function resolvePlayIntent(userId) {
   const limit = ent.dailySongLimit ?? 36;
   const preview = ent.previewSeconds ?? 60;
   const tz = config.listening.timezone;
+
+  // 🔴 THE PERIOD IS CHECKED BEFORE THE COUNTER, AND AN EXPIRED PLAY IS NOT
+  // COUNTED. It is not a play — nothing was heard — and counting it would put
+  // phantom numbers into the daily listening figures the admin analytics read.
+  const period = await freePeriod(userId, ent.plan, { start: true });
+  if (period?.expired) {
+    return {
+      mode: 'expired', reason: 'free_period_ended', unlimited: false,
+      plays_today: null, daily_limit: limit, remaining: 0,
+      // 0, not the plan's 60: the daily cap still lets a preview through, but a
+      // free period that has ended plays nothing. The client pauses at 0.
+      preview_seconds: 0, status: 'free', ...periodFields(period),
+    };
+  }
 
   return withTransaction(async (client) => {
     // Lock/insert today's row, read the current count.
@@ -339,7 +402,7 @@ export async function resolvePlayIntent(userId) {
         [userId, day],
       );
       const n = upd.rows[0].songs_played;
-      return { mode: 'full', unlimited: false, plays_today: n, daily_limit: limit, remaining: Math.max(0, limit - n), preview_seconds: preview, status: 'free' };
+      return { mode: 'full', unlimited: false, plays_today: n, daily_limit: limit, remaining: Math.max(0, limit - n), preview_seconds: preview, status: 'free', ...periodFields(period) };
     }
 
     await client.query(
@@ -348,11 +411,12 @@ export async function resolvePlayIntent(userId) {
         WHERE user_id = $1 AND day = $2`,
       [userId, day],
     );
-    return { mode: 'limited', unlimited: false, plays_today: played, daily_limit: limit, remaining: 0, preview_seconds: preview, status: 'free' };
+    return { mode: 'limited', unlimited: false, plays_today: played, daily_limit: limit, remaining: 0, preview_seconds: preview, status: 'free', ...periodFields(period) };
   });
 }
 
-// Read-only view of today's usage (no increment).
+// Read-only view of today's usage (no increment, and it never starts the free
+// period — opening your account page is not listening).
 export async function getListeningStatus(userId) {
   const ent = await getEntitlement(userId);
   if (ent.isPaid) {
@@ -366,5 +430,12 @@ export async function getListeningStatus(userId) {
   );
   const played = r.rowCount ? r.rows[0].songs_played : 0;
   const limit = ent.dailySongLimit ?? 36;
-  return { unlimited: false, plays_today: played, daily_limit: limit, remaining: Math.max(0, limit - played), preview_seconds: ent.previewSeconds };
+  const period = await freePeriod(userId, ent.plan, { start: false });
+  return {
+    unlimited: false, plays_today: played, daily_limit: limit,
+    remaining: period?.expired ? 0 : Math.max(0, limit - played),
+    preview_seconds: period?.expired ? 0 : ent.previewSeconds,
+    expired: !!period?.expired,
+    ...periodFields(period),
+  };
 }
