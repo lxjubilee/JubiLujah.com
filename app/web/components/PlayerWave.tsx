@@ -13,8 +13,14 @@ import { usePlayer } from '@/stores/player';
 // further back), and it is no longer solid. It dissolves into thousands of small
 // sparks of different sizes and shapes that ride the line, and on the beat it
 // bursts like fireworks, "because it is Jubilee, and that is celebration."
-// One colour for now: bright yellow gold. While nothing is playing there are no
-// sparks; on pause the ones in the air finish falling and the bar goes quiet.
+// One colour for now: bright yellow gold.
+//
+// Later the same day (owner): 50% more transparent (the canvas is at .5
+// opacity, footer-player.css); a GLITTER layer so it reads as a little magic
+// stream: twinkling four-point glints that flash as they drift, fine dust that
+// floats up off the line, and a faint glowing ribbon under it all; and it shows
+// ONLY while music is actually sounding. A pause, the end of a track, or a
+// stall while the audio is still loading fades it out within a quarter second.
 //
 // 🔴 WHY IT IS DRIVEN BY THE SONG'S TEMPO AND ENERGY, NOT BY THE AUDIO SAMPLES.
 // Reading the actual waveform needs the Web Audio API to analyse the <audio>
@@ -59,7 +65,7 @@ function loadMeta(): Promise<Record<string, Meta>> {
 
 // Spark shapes: a round dot, a square fleck, a streak drawn along its motion,
 // and a four-point twinkle.
-const DOT = 0, FLECK = 1, STREAK = 2, TWINKLE = 3;
+const DOT = 0, FLECK = 1, STREAK = 2, TWINKLE = 3, GLINT = 4, DUST = 5;
 
 // A fixed pool in flat typed arrays: thousands of sparks a frame without
 // creating a single object.
@@ -104,6 +110,7 @@ export default function PlayerWave() {
     const life = new Float32Array(MAX), ttl = new Float32Array(MAX);
     const sz = new Float32Array(MAX), drag = new Float32Array(MAX), grav = new Float32Array(MAX);
     const shape = new Uint8Array(MAX), tone = new Uint8Array(MAX);
+    const phase = new Float32Array(MAX);
     let count = 0;
 
     const spawn = (x: number, y: number, vxx: number, vyy: number, t: number, s: number, sh: number, g: number, d: number) => {
@@ -112,7 +119,20 @@ export default function PlayerWave() {
       px[i] = x; py[i] = y; vx[i] = vxx; vy[i] = vyy;
       life[i] = 0; ttl[i] = t; sz[i] = s; shape[i] = sh; grav[i] = g; drag[i] = d;
       tone[i] = (Math.random() * GOLD.length) | 0;
+      phase[i] = Math.random() * Math.PI * 2;
     };
+
+    // Is the music actually sounding? The store's isPlaying turns true on the
+    // <audio> 'play' event, before a single sample may have loaded, and stays
+    // true through a stall. The element itself is the truth.
+    const sounding = () => {
+      if (!playingRef.current) return false;
+      const a = usePlayer.getState().audio;
+      return !a || (!a.paused && !a.ended && a.readyState >= 3);
+    };
+    let fade = 0;
+    let glintCarry = 0;
+    let dustCarry = 0;
 
     const size = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -124,6 +144,12 @@ export default function PlayerWave() {
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       return { w, h };
+    };
+
+    const copy = (j: number, i: number) => {
+      px[j] = px[i]; py[j] = py[i]; vx[j] = vx[i]; vy[j] = vy[i];
+      life[j] = life[i]; ttl[j] = ttl[i]; sz[j] = sz[i]; drag[j] = drag[i];
+      grav[j] = grav[i]; shape[j] = shape[i]; tone[j] = tone[i]; phase[j] = phase[i];
     };
 
     let raf = 0;
@@ -158,7 +184,9 @@ export default function PlayerWave() {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       const t = (now - t0) / 1000;
-      const playing = playingRef.current;
+      const playing = sounding();
+      // Fade in over ~150ms, out over ~250ms: gone, not lingering, when it stops.
+      fade = playing ? Math.min(1, fade + dt * 7) : Math.max(0, fade - dt * 4);
       const { energy, tempo } = metaRef.current;
       const beatHz = Math.max(0.6, Math.min(3.2, tempo / 60));
       const e = Math.max(0.15, Math.min(1, energy / 100));
@@ -185,6 +213,24 @@ export default function PlayerWave() {
             (Math.random() - 0.5) * 40, (Math.random() - 0.5) * 36 - 6,
             0.35 + Math.random() * 0.8, 0.5 + Math.random() * 1.9, sh, 14, 2.2);
         }
+        // GLITTER: bright glints that twinkle as they drift, and fine dust that
+        // floats up off the line, so the stream shimmers between the bursts.
+        glintCarry += (reduce ? 10 : 70 + 90 * e) * dt;
+        while (glintCarry >= 1) {
+          glintCarry -= 1;
+          const u = Math.random();
+          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * u));
+          spawn(u * w, y + (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 18, -4 - Math.random() * 10,
+            0.7 + Math.random() * 1.1, 1.6 + Math.random() * 2.6, GLINT, -2, 0.8);
+        }
+        dustCarry += (reduce ? 20 : 160 + 160 * e) * dt;
+        while (dustCarry >= 1) {
+          dustCarry -= 1;
+          const u = Math.random();
+          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * u));
+          spawn(u * w, y, (Math.random() - 0.5) * 14, -8 - Math.random() * 22,
+            1 + Math.random() * 1.6, 0.35 + Math.random() * 0.7, DUST, -6, 0.5);
+        }
         // FIREWORKS ON THE BEAT: a burst each beat, a bigger double burst on the
         // first beat of every bar of four.
         const whole = Math.floor(beatPos);
@@ -203,7 +249,31 @@ export default function PlayerWave() {
       }
 
       ctx.clearRect(0, 0, w, h);
+      if (!playing && fade === 0) {
+        // Not sounding: nothing on the bar, and nothing left to finish falling.
+        count = 0;
+        // Paused or stopped: rest until play is pressed again. Still "playing"
+        // but stalled while the audio loads: keep watching, cheaply, so the
+        // sparks come back the moment it sounds.
+        if (!playingRef.current) { running = false; return; }
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+      ctx.globalAlpha = fade;
       ctx.globalCompositeOperation = 'lighter';
+
+      // THE RIBBON: a faint glow along the line itself, under the sparks.
+      if (w > 0) {
+        ctx.beginPath();
+        for (let x = 0; x <= w + 8; x += 8) {
+          const u = x / w;
+          const y = mid + spine(u, t, beatHz) * amp * (0.35 + 0.65 * Math.sin(Math.PI * Math.min(1, u)));
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = STYLES[0][2]; ctx.lineWidth = 7; ctx.stroke();
+        ctx.strokeStyle = STYLES[4][4]; ctx.lineWidth = 1.2; ctx.stroke();
+      }
 
       let j = 0;
       for (let i = 0; i < count; i++) {
@@ -215,7 +285,10 @@ export default function PlayerWave() {
 
         const f = life[i] / ttl[i];
         // Flash in, then fade; a little flicker so the field twinkles.
-        const alpha = Math.min(1, f * 8) * (1 - f) * (0.75 + 0.25 * Math.random());
+        let alpha = Math.min(1, f * 8) * (1 - f) * (0.75 + 0.25 * Math.random());
+        // Glints and dust twinkle: a sharp flash a few times a second.
+        if (shape[i] >= GLINT) alpha = Math.min(1, f * 6) * (1 - f) * Math.pow(0.5 + 0.5 * Math.sin(life[i] * 11 + phase[i]), 3) * 1.4;
+        if (alpha <= 0.02) { if (j !== i) copy(j, i); j++; continue; }
         ctx.fillStyle = ctx.strokeStyle = STYLES[tone[i]][Math.min(LEVELS - 1, (alpha * LEVELS) | 0)];
         const s = sz[i] * (1 - f * 0.5);
         switch (shape[i]) {
@@ -235,6 +308,21 @@ export default function PlayerWave() {
             ctx.stroke();
             break;
           }
+          case GLINT: {
+            // A four-point star: long thin rays and a bright core.
+            const r = s * 2.6;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(px[i] - r, py[i]); ctx.lineTo(px[i] + r, py[i]);
+            ctx.moveTo(px[i], py[i] - r); ctx.lineTo(px[i], py[i] + r);
+            ctx.stroke();
+            ctx.fillStyle = STYLES[4][Math.min(LEVELS - 1, (alpha * LEVELS) | 0)];
+            ctx.beginPath(); ctx.arc(px[i], py[i], s * 0.45, 0, Math.PI * 2); ctx.fill();
+            break;
+          }
+          case DUST:
+            ctx.fillRect(px[i] - s * 0.5, py[i] - s * 0.5, s, s);
+            break;
           default: {
             const r = s * 1.8;
             ctx.lineWidth = 0.8;
@@ -246,22 +334,12 @@ export default function PlayerWave() {
         }
 
         // Keep the live ones packed at the front of the pool.
-        if (j !== i) {
-          px[j] = px[i]; py[j] = py[i]; vx[j] = vx[i]; vy[j] = vy[i];
-          life[j] = life[i]; ttl[j] = ttl[i]; sz[j] = sz[i]; drag[j] = drag[i];
-          grav[j] = grav[i]; shape[j] = shape[i]; tone[j] = tone[i];
-        }
+        if (j !== i) copy(j, i);
         j++;
       }
       count = j;
       ctx.globalCompositeOperation = 'source-over';
-
-      // Paused and every spark has landed: stop drawing until play resumes.
-      if (!playing && count === 0) {
-        ctx.clearRect(0, 0, w, h);
-        running = false;
-        return;
-      }
+      ctx.globalAlpha = 1;
       raf = requestAnimationFrame(frame);
     };
 

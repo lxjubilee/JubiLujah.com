@@ -138,3 +138,24 @@ export function heroSlides(count = 3): HeroSlide[] {
   }
   return pool.slice(0, Math.max(0, count));
 }
+
+/**
+ * THE FAMILY CAROUSEL (owner, 2026-09-16): twelve slides, one for each Inspire
+ * family member. Each member's picture is drawn at random from their own albums,
+ * and the order of the twelve is shuffled too, so every visit opens on a
+ * different face. Grouped by the album's artist, so a tenant that cannot see a
+ * member's albums simply gets one slide fewer.
+ */
+export function familyHeroSlides(): HeroSlide[] {
+  const byArtist = new Map<string, HeroSlide[]>();
+  for (const s of heroPool()) {
+    const list = byArtist.get(s.artistName);
+    if (list) list.push(s); else byArtist.set(s.artistName, [s]);
+  }
+  const picks = Array.from(byArtist.values(), (list) => list[Math.floor(Math.random() * list.length)]);
+  for (let i = picks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [picks[i], picks[j]] = [picks[j], picks[i]];
+  }
+  return picks;
+}

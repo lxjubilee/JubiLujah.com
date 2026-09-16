@@ -146,6 +146,9 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
       {/* Every picture is in the markup from the first paint and they trade
           opacity, which is what makes the change a dissolve rather than a
           swap.
+          (Superseded in part 2026-09-16: with twelve slides only the live, previous
+          and next pictures are in the markup; see below. Those still load eagerly,
+          for the reasons that follow.)
           🔴 ALL THREE LOAD EAGERLY. The first one has to: it is the largest
           thing above the fold, so lazy-loading it would hand the page its own
           LCP as a late repaint. The other two have to for a worse reason — a
@@ -154,7 +157,13 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
           unfetched until the carousel turns. Seen in a headless capture: slide
           two came up as a black rectangle with the words still on it. Three
           pictures at ~200 KB is a cheap way to make that impossible. */}
-      {slides.map((s, n) => (
+      {slides.map((s, n) => {
+        // TWELVE SLIDES NOW (one per family member), so not all twelve pictures
+        // load up front: the live one, the one before it (still fading out) and
+        // the next one (fetched ahead so it is ready when the carousel turns).
+        const near = n === i || n === (i + 1) % count || n === (i - 1 + count) % count;
+        if (!near) return null;
+        return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={s.code}
@@ -166,7 +175,8 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
           loading="eager"
           style={positions[heroKey(s.code)] != null ? { objectPosition: `center ${positions[heroKey(s.code)]}%` } : undefined}
         />
-      ))}
+        );
+      })}
 
       <div className="jp-hero-scrim" aria-hidden="true" />
 

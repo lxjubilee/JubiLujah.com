@@ -31,7 +31,13 @@ import path from 'node:path';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000').replace(/\/$/, '');
+// 🔴 NOT NEXT_PUBLIC_API_BASE FIRST. That one is inlined at BUILD time, from the
+// workstation's env (http://localhost:4000), so on production every admin check
+// went to a port nothing listens on and every save was refused with a 403: the
+// red arrows moved the picture for the admin and saved it for nobody (found
+// 2026-09-16). REDIRECTOR_API_BASE is read at runtime from prod's own .env
+// (http://127.0.0.1:4030), which is why the QR routes beside this one work.
+const API_BASE = (process.env.REDIRECTOR_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000').replace(/\/$/, '');
 const POS_FILE = path.join(process.cwd(), 'public', 'backstage', 'hero-positions.json');
 const HERO_FILE = path.join(process.cwd(), 'content', 'hero-positions.json');
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,120}$/;

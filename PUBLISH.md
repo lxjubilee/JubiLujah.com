@@ -594,6 +594,30 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-16 (night) · family carousel, Orbitron hero titles, magic-stream sparks, admin framing save fix · and a 70 s outage
+
+Web `r5OV-E0xIpKESqEz9LR7v → 1dFFvjuTpKHsqku0ZV12j` (rollback `.next.bak-20260916-152151`).
+
+- **Home hero:** twelve slides, one random picture per Inspire family member, order shuffled
+  (`familyHeroSlides()` in lib/heroes.ts). Only the live, previous and next pictures are in the markup.
+- **Hero titles in Orbitron at kJubilee's `.hero-title` sizes** (40 / 34 at ≤1024px / 26 on phones),
+  home and album page. The faint artist name is raised 22px on both.
+- **Footer sparks:** canvas at 50% opacity, a glitter layer (glints, dust, glowing ribbon), and drawn
+  only while the `<audio>` element is actually sounding (not paused, not ended, `readyState >= 3`).
+- **🔴 Admin red arrows never saved on production, fixed.** `/backstage/hero-position` checked admin
+  rights against `NEXT_PUBLIC_API_BASE`, which Next inlines at BUILD time from the workstation
+  (`http://localhost:4000`); nothing listens there on prod, so every save got a 403 while the picture
+  still moved on the admin's own screen. It now reads `REDIRECTOR_API_BASE` first (runtime,
+  `http://127.0.0.1:4030` in prod's .env). The same trap sits behind the recurring `ECONNREFUSED
+  127.0.0.1:4000` lines in the web error log from other routes; not chased this round.
+- **🔴 OUTAGE, ~70 s, 22:22:16 → 22:23:31 UTC, caused by the restart, not a crash.** Server load was
+  ~20 on 6 cores; `pm2 restart` could not stop the old process in its 8 s window, SIGKILLed it, and pm2
+  took another minute to start the new one. The owner saw Cloudflare 502 at 22:23:01. **The load is
+  six orphaned `torahsings.com` Next build workers** (`jest-worker/processChild.js`, parent `init`,
+  started 2026-09-07 16:15, ~77% CPU each for nine days). They belong to another property and were NOT
+  killed; that is the owner's call. Until they are gone, expect a restart here to take a minute: poll
+  the origin for up to 120 s before calling a release failed, and do not restart twice in a row.
+
 ### 2026-09-16 (late) · footer 👍/♥, gold spark line, hero QR + admin arrows, Now Playing, scrollbar (web, api AND db)
 
 Web `Z_66oAH_xAoybttFFCE_y → r5OV-E0xIpKESqEz9LR7v` (rollback `.next.bak-20260916-150118`, the build

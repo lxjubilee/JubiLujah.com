@@ -661,7 +661,9 @@ body.jv-has-player { padding-bottom: 84px; }
    zoom ever shaves the very tip, THIS is the number to nudge — not the
    line-height, which is what makes the glyph overflow its box to begin with. */
 .jp-hero-ident {
-  position: absolute; right: 14px; bottom: .12em; z-index: 2;
+  /* RAISED 22px (owner, 2026-09-16: "up about 20, 25 pixels") so the name sits
+     inside the picture instead of on its bottom edge. */
+  position: absolute; right: 14px; bottom: calc(.12em + 22px); z-index: 2;
   pointer-events: none;
   font-family: var(--font-orbitron), 'Orbitron', sans-serif;
   font-weight: 700; font-size: clamp(30px, 5.4vw, 92px);
@@ -691,7 +693,12 @@ body.jv-has-player { padding-bottom: 84px; }
 .jp-hero-title {
   font-size: 40px; font-weight: 700; line-height: 1.05; color: #fff; max-width: 100%;
   margin: 0 0 -0.12em; padding-bottom: 0.12em; position: relative; top: 3px;
+  /* ORBITRON AT kJubilee's SIZE (owner, 2026-09-16): the album title on every
+     hero takes kJubilee's .hero-title face and size: 40px, 34px at 1024px and
+     under, 26px on a phone. Only the title; the sentence keeps the reading face. */
+  font-family: var(--font-orbitron), 'Orbitron', 'Segoe UI', sans-serif;
 }
+@media (max-width: 1024px) { .jp-hero-title { font-size: 34px; } }
 .jp-hero-title, .jp-hero-title a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* NO UNDERLINE ON HOVER. The title link and .jp-hero-hit — the anchor inset
    over the whole picture — go to the same album, so the headline is a second
@@ -1337,7 +1344,9 @@ a { color: inherit; }
    nowrap and ellipsis are what hold before that script has run. */
 .album-exec .x-hero h1.x-album-title {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
-  font-size: clamp(30px, 4.4vw, 60px);
+  /* ORBITRON AT kJubilee's SIZE, as on the home hero (.jp-hero-title). */
+  font-family: var(--font-orbitron), 'Orbitron', 'Segoe UI', sans-serif; font-weight: 700;
+  font-size: 40px;
   /* Title close on the description, as on the home hero (about 80% less space). */
   line-height: 1.05; margin-bottom: -0.12em; padding-bottom: 0.12em; position: relative; top: 3px;
 }
@@ -1345,7 +1354,8 @@ a { color: inherit; }
    a long name simply reaches further across the picture. A link, unlike the home
    one (which sits under a click-through banner): here it is the way to the artist. */
 .album-exec .x-album-ident {
-  position: absolute; right: 14px; bottom: -0.1em; z-index: 1;
+  /* Raised 22px, as on the home hero. */
+  position: absolute; right: 14px; bottom: calc(-0.1em + 22px); z-index: 1;
   font-family: var(--font-orbitron), 'Orbitron', sans-serif;
   font-weight: 700; font-size: clamp(30px, 5.4vw, 92px);
   line-height: 1; letter-spacing: -0.03em; white-space: nowrap;
@@ -1364,7 +1374,10 @@ a { color: inherit; }
    line wraps rather than running off the screen. */
 @media (max-width: 640px) {
   .album-exec .x-album-actions { flex-wrap: wrap; gap: 10px 12px; }
-  .album-exec .x-hero h1.x-album-title { font-size: 30px; }
+  .album-exec .x-hero h1.x-album-title { font-size: 26px; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .album-exec .x-hero h1.x-album-title { font-size: 34px; }
 }
 .album-exec .x-album-play {
   display: inline-flex; align-items: center; gap: 9px; cursor: pointer; border: none;

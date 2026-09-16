@@ -12,7 +12,7 @@ import LanguageHome from '@/components/LanguageHome';
 import FeaturedArtists from '@/components/FeaturedArtists';
 import TenantHome from '@/components/TenantHome';
 import HomeHero from '@/components/HomeHero';
-import { heroSlides } from '@/lib/heroes';
+import { familyHeroSlides } from '@/lib/heroes';
 import { featuredToday, isStaffPick } from '@/lib/editorial';
 import TorahSingsHome from '@/components/torahsings/TorahSingsHome';
 import { currentTenant } from '@/lib/tenant';
@@ -171,7 +171,7 @@ export default function HomePage() {
             so it appears on the English home only: the blurbs are composed from
             English theme and genre data, and a banner in one language over rows
             in another is worse than no banner. */}
-        <HomeHero slides={heroSlides(3)} />
+        <HomeHero slides={familyHeroSlides()} />
         <div className="nf-rows">
           {featured.length > 0 && <MediaRow key="featured-today" title="Featured Today" items={featured} />}
           {THEMES.filter((t) => buckets[t.key].length > 0).map((t) => (

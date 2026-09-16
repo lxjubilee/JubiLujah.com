@@ -847,3 +847,13 @@ gold. Still driven by track tempo and energy, not the audio (the CDN sends no CO
 release: admin-only red arrows frame each album's hero picture for everyone
 (`content/hero-positions.json`, never shipped by a release); `/now-playing` opened from the footer; the
 page scrollbar ported from kjubilee.com's `scrollbars.css`, tinted with the tenant accent.
+
+## D-2026-09-16-12 · The home carousel is the twelve family members; hero titles are Orbitron
+
+Owner, 2026-09-16: the home hero rotates through twelve pictures, one for each Inspire family member
+(supersedes three random albums, D-2026-09-12 home hero), and the album title on every hero takes
+Orbitron at kJubilee's size (40px; 34px at 1024px and under; 26px on phones). Same evening: the
+footer sparks at half the opacity with a glitter layer, shown only while music is sounding; the faint
+artist name raised 22px; admin framing arrows fixed so a saved position really is what every visitor
+sees. The owner's words "the coloring should be changed to update the…" were cut off mid-sentence;
+the sparks were left gold (the last complete instruction) pending clarification.
