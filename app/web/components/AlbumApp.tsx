@@ -94,7 +94,7 @@ function fmt(s: number) {
 // longer shown: the banner names the album now, not the persona's role.
 // staffPicks: every Staff Pick code, not a flag — the page switches albums in
 // place, so the banner has to know for whichever album is current.
-export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {}, heroImages = {}, staffPicks = [] }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string>; heroImages?: Record<string, string>; staffPicks?: string[] }) {
+export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', albums, initial, similar = [], support = {}, heroImages = {}, descriptions = {}, staffPicks = [] }: { artist: string; artistSlug?: string; artistRole?: string; heroFallback?: string; albums: AlbumLink[]; initial: CurrentAlbum; similar?: SimilarAlbum[]; support?: Record<string, string>; heroImages?: Record<string, string>; descriptions?: Record<string, string>; staffPicks?: string[] }) {
   const playQueue = usePlayer((s) => s.playQueue);
   const togglePlay = usePlayer((s) => s.togglePlay);
   const nowPlaying = usePlayer((s) => s.nowPlaying);
@@ -234,7 +234,9 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
   // was not, so it is anchored to the top instead. See .x-hero--support.
   const titleRef = useFitOneLine<HTMLHeadingElement>(current.title);
   const canPlay = current.tracks.some((t) => t.url);
-  const blurb = albumBlurb(current.code, current.title, artist, current.trackCount || current.tracks.length, current.tracks[0]?.title);
+  // The written sentence (lib/albumDescriptions.ts, resolved on the server); the
+  // composed line only for an album nobody has written one for yet.
+  const blurb = descriptions[current.code] || albumBlurb(current.code, current.title, artist, current.trackCount || current.tracks.length, current.tracks[0]?.title);
   const genres = [gp.primary, gp.secondary].filter(Boolean);
   // LAYOUT (owner direction, second pass, 2026-09-16): everything sits LOW in the
   // picture, top to bottom — the title on ONE line, the description, then one

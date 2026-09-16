@@ -1,9 +1,13 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useT } from '@/lib/useT';
 
 export default function SiteFooter() {
   const t = useT();
+  // No footer on Now Playing (owner, 2026-09-16): that page fits the screen
+  // between the header and the player bar, with nothing to scroll to.
+  if (usePathname() === '/now-playing') return null;
   return (
     <footer className="site-footer">
       <div className="container">

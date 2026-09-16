@@ -15,6 +15,7 @@
 @import './styles/widgets/search.css';
 @import './styles/widgets/manage-music.css';
 @import './styles/widgets/mobile-settings.css';
+@import './styles/widgets/hero-preview.css';
 
 /* THE BRAND ACCENT FLOOR.
    Every rule below that used to hard-code #E6AC00 now reads var(--brand-accent).
@@ -217,8 +218,7 @@ body.jv-has-player { padding-bottom: 84px; }
 /* GOLD RETIRED (2026-09-16): the site's theme is the tenant accent, azure on
    JubileePraise, "blue items throughout the website" — the admin pill, the radio
    pill and the account chip all read var(--brand-accent) now. */
-.jvh-admin-link,
-.jvh-radio-link {
+.jvh-admin-link {
   flex: 0 0 auto;
   display: inline-flex; align-items: center;
   color: var(--brand-accent); font-size: 12px; font-weight: 600; white-space: nowrap;
@@ -228,12 +228,35 @@ body.jv-has-player { padding-bottom: 84px; }
   background: color-mix(in srgb, var(--brand-accent) 12%, transparent);
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
-.jvh-admin-link:hover,
-.jvh-radio-link:hover {
+.jvh-admin-link:hover {
   color: #fff;
   background: color-mix(in srgb, var(--brand-accent) 28%, transparent);
   border-color: var(--brand-accent);
 }
+/* THE kJubilee RADIO PILL MATCHES kjubilee.com's "Jubilee Praise App" pill
+   (.hdr-cta there; owner, 2026-09-16, values sent by the kJubilee session): the
+   two sites point at each other with the same control. Orbitron, accent text on
+   black, a 70% accent border; on hover white text, the full accent border, a 1px
+   ring and a soft glow. */
+.jvh-radio-link {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center;
+  padding: 4px 13px; border-radius: 999px;
+  background: #000;
+  border: 1px solid color-mix(in srgb, var(--brand-accent) 70%, transparent);
+  color: var(--brand-accent);
+  font-family: var(--font-orbitron), 'Orbitron', 'Segoe UI', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .04em; white-space: nowrap;
+  text-decoration: none;
+  transition: color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.jvh-radio-link:hover {
+  color: #fff;
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-accent) 45%, transparent),
+              0 0 12px color-mix(in srgb, var(--brand-accent) 55%, transparent);
+}
+.jvh-radio-link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 /* THE GLASS IS THE SUBMIT CONTROL NOW — kJubilee's .search-go. Quiet grey until
    you reach for it, then the header's accent: with no filled button saying what
    it does, the colour change is the whole affordance.
@@ -662,8 +685,10 @@ body.jv-has-player { padding-bottom: 84px; }
    line-height, which is what makes the glyph overflow its box to begin with. */
 .jp-hero-ident {
   /* RAISED 22px (owner, 2026-09-16: "up about 20, 25 pixels") so the name sits
-     inside the picture instead of on its bottom edge. */
-  position: absolute; right: 14px; bottom: calc(.12em + 22px); z-index: 2;
+     inside the picture instead of on its bottom edge. LOWERED 20px again the
+     same evening (owner: "move the artist name down by 20 pixels"), so 2px net.
+     The .12em descender clearance above is untouched. */
+  position: absolute; right: 14px; bottom: calc(.12em + 2px); z-index: 2;
   pointer-events: none;
   font-family: var(--font-orbitron), 'Orbitron', sans-serif;
   font-weight: 700; font-size: clamp(30px, 5.4vw, 92px);
@@ -1299,7 +1324,12 @@ a { color: inherit; }
 /* The admin's framing arrows: kJubilee's flat red discs (.img-nudge), under the
    code with the right edges aligned; in the corner when there is no code. */
 .jp-hero-nudge {
-  position: absolute; z-index: 6; top: calc(16px + 61px + 10px); right: calc(20px + 14px);
+  /* right: 20px LINES THE DISCS UP UNDER THE HEADER'S ROUND ICONS (owner,
+     2026-09-16), as on kJubilee. Measured at 1280, 1600 and 1920 wide: the flag
+     button (and the account circle above it) is 32px with its right edge 20px in
+     from the hero's, and these discs are 32px, so the centres coincide. They were
+     centred under the wider QR plate, 14px further left. */
+  position: absolute; z-index: 6; top: calc(16px + 61px + 10px); right: 20px;
   display: flex; flex-direction: column; gap: 8px;
 }
 .jp-hero-nudge.no-qr { top: 16px; right: 20px; }

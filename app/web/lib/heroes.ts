@@ -30,6 +30,7 @@ import path from 'node:path';
 import { getAlbumByCode } from './manifest';
 import { coverFor } from './covers';
 import { albumBlurb } from './albumBlurb';
+import { albumDescription } from './albumDescriptions';
 
 const HERO_DIR = path.join(process.cwd(), 'public', 'images', 'heroes');
 const EXTENSIONS = new Set(['.webp', '.png', '.jpg', '.jpeg']);
@@ -103,7 +104,7 @@ export function heroPool(): HeroSlide[] {
         href: `/album?c=${code}`,
         image: `/images/heroes/${persona}/${encodeURIComponent(file)}`,
         cover: coverFor(code, album.path),
-        blurb: heroBlurb(code, album.title, album.artistName, album.trackCount, album.tracks?.[0]?.title),
+        blurb: albumDescription(code, album.title, album.artistName, album.trackCount, album.tracks?.[0]?.title),
         trackCount: album.trackCount,
       });
     }

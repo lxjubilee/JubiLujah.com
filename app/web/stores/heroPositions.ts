@@ -23,6 +23,12 @@ interface HeroPositionsState {
   ensureLoaded: () => void;
   /** Move a picture by `delta` percentage points, live, and save shortly after. */
   nudge: (code: string, delta: number) => void;
+  /**
+   * Set a picture's framing outright and save it now (the admin Hero Image
+   * Preview's "Save"). Resolves true once the server has stored it. Cancels any
+   * nudge still waiting to save for the same picture, so the two cannot race.
+   */
+  save: (code: string, y: number) => Promise<boolean>;
 }
 
 function flush(key: string, y: number, keepalive = false) {
@@ -72,5 +78,19 @@ export const useHeroPositions = create<HeroPositionsState>((set, get) => ({
       if (val == null) return;
       flush(key, val).then((r) => { if (r.ok && pending.get(key) === val) pending.delete(key); }).catch(() => {});
     }, SAVE_DELAY));
+  },
+
+  save: async (code, y) => {
+    const key = heroKey(code);
+    const val = Math.round(Math.max(0, Math.min(100, y)) * 10) / 10;
+    clearTimeout(timers.get(key));
+    pending.delete(key);
+    set({ map: { ...get().map, [key]: val } });
+    try {
+      const r = await flush(key, val);
+      return r.ok;
+    } catch {
+      return false;
+    }
   },
 }));

@@ -473,41 +473,38 @@
   pointer-events: none;
 }
 
+/* THE VOLUME CONTROL IS kJubilee's (owner, 2026-09-16: "the volume control on
+   kJubilee.com looks really good, duplicate that here"). Its footer player
+   (kJubilee.com public/js/kj-footer-player.js, #kjPlayer .volume) draws the
+   speaker in near-white that lights azure on hover, and a NATIVE range input
+   tinted with accent-color: the browser's own filled track and round thumb in
+   the site accent, 88px wide. The custom flat grey track and peach thumb this
+   replaced were styled by hand with appearance:none. */
 .jv-player .right .volume {
   display: flex;
   align-items: center;
   gap: 6px;
-  cursor: pointer;
+}
+
+.jv-player .right .volume .mute-btn {
+  color: #f3f2ee;
+  border-radius: 4px;
+  transition: color .15s ease, transform .15s ease;
+}
+
+.jv-player .right .volume .mute-btn:hover {
+  color: #7CC4FF;
+}
+
+.jv-player .right .volume .mute-btn:active {
+  transform: scale(.94);
 }
 
 .jv-player .right .volume input[type="range"] {
-  width: 80px;
-  height: 4px;
-  -webkit-appearance: none;
-  appearance: none;
-  background: var(--surface-2);
-  border-radius: 2px;
-  outline: none;
+  width: 88px;
+  margin: 0;
+  accent-color: var(--brand-accent, #3DA5FF);
   cursor: pointer;
-}
-
-.jv-player .right .volume input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: var(--accent-peach);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.jv-player .right .volume input[type="range"]::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  background: var(--accent-peach);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
 }
 
 .jv-player .right .expand {

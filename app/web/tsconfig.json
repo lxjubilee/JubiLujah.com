@@ -47,7 +47,9 @@
     ".next-r1b/types/**/*.ts",
     ".next-r2/types/**/*.ts",
     ".next-r3/types/**/*.ts",
-    ".next-r4/types/**/*.ts"
+    ".next-r4/types/**/*.ts",
+    ".next-r5/types/**/*.ts",
+    ".next-r7/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -12,6 +12,7 @@ import { canonical, musicAlbumLd, breadcrumbLd } from '@/lib/seo';
 import JsonLd from '@/components/JsonLd';
 import AlbumApp, { AlbumLink, CurrentAlbum, SimilarAlbum } from '@/components/AlbumApp';
 import { staffPickCodes } from '@/lib/editorial';
+import { albumDescription } from '@/lib/albumDescriptions';
 
 export const revalidate = 3600; // ISR
 
@@ -28,7 +29,10 @@ export function generateMetadata({ searchParams }: { searchParams: { c?: string;
   // "Album not found" body indexable under the site's title template.
   if (!album) return { title: 'Album not found', robots: { index: false, follow: false } };
   const cover = coverFor(album.code, album.path);
-  const description = `${album.title} by ${album.artistName}. ${album.trackCount} tracks · ${album.status === 'ready' ? 'Ready to play' : 'In the studio'}.`;
+  // The album's own sentence (lib/albumDescriptions.ts), which is what a search
+  // result or a shared link should say about it; the title and artist are already
+  // in the <title>.
+  const description = albumDescription(album.code, album.title, album.artistName, album.trackCount, album.tracks[0]?.title);
   return {
     title: `${album.title} by ${album.artistName}`,
     description,
@@ -114,6 +118,14 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
   const wanted = new Set([album.code, ...artistAlbums.map((a) => a.code)]);
   const heroImages: Record<string, string> = {};
   for (const h of heroPool()) if (wanted.has(h.code)) heroImages[h.code] = h.image;
+  // Each album's written sentence, for the same reason as the maps above: the
+  // banner switches albums in place. Built here so the ~150 KB of descriptions
+  // stays on the server.
+  const descriptions: Record<string, string> = {};
+  for (const a of [album, ...artistAlbums]) {
+    const full = a.code === album.code ? album : getAlbumByCode(a.code);
+    if (full) descriptions[full.code] = albumDescription(full.code, full.title, full.artistName, full.trackCount, full.tracks[0]?.title);
+  }
 
   // THE HERO IS RENDERED BY AlbumApp, not here, and that is a deliberate move.
   // Its backdrop is now the album's own supporting image when one exists, and
@@ -152,6 +164,7 @@ export default function AlbumPage({ searchParams }: { searchParams: { c?: string
         similar={similar}
         support={support}
         heroImages={heroImages}
+        descriptions={descriptions}
       />
     </div>
   );
