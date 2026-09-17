@@ -594,6 +594,71 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-17 (night) · share box under the hero QR, backstage arrows, 15px under the title (web only)
+
+Web `eaHiOWJWfrKwnu33aCxjj → u70DMdA0x4T000wgvZ9cD` from commit `927d1d8`, rollback
+`/var/www/jubilujah.com/web/.next.bak-20260917-073756` (21 MB). `.next` only. Built from the `app/.wt-hero`
+worktree with **every** uncommitted file of the shared tree copied in — including the three from the two
+evening releases above (`JubileeDoor.tsx`, `inspire-rail.css`, `Header.tsx`), which were committed
+first as `aabf4fc` so this release is a superset of prod rather than a revert of it. 🔴 **Always check
+prod's BUILD_ID against the last entry here before shipping: two sessions were releasing from this
+tree on the same day.** Origin 200 in 21 s.
+
+- **Share box:** clicking the QR plate opens one horizontal black box with Facebook / X / LinkedIn /
+  copy-link directly under it (album URL, popups, copy turns green); click, Escape, outside click or a
+  carousel move closes it. Plate + box + admin arrows are one flex column, so the arrows drop by the
+  box's height and return by layout — live: 186 → 240 → 186. The plate no longer plays on click.
+- **Backstage article heroes** carry the banner's red-disc arrows (`.jp-hero-corner`), 16px/20px in
+  the corner; the old glass panel and its CSS are gone. Hidden on phones now, like the banner's.
+- **Title gap:** kJubilee's `top:15px` pull-down dropped on both heroes — album titles' descenders
+  were landing on the sentence (kJubilee's station names have none). ~15px clear now (owner: "9 to 15").
+- **Verified live:** 8 routes 200; share box `1108 186 152×44`; backstage disc `1228 115 32×32`;
+  title text area 6–7px above the sentence box on both heroes; "Admin Console" absent from the layout
+  chunk (the evening fix intact).
+- The 13 delete-pending directories from the morning finally cleared and were restored from git; the
+  main tree is whole again. `app/.wt-hero` remains (git-excluded) as the build worktree.
+
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260917-073756 .next && pm2 restart jubilujah-web --update-env"
+```
+
+### 2026-09-17 (evening) · no "Admin Console" in the profile menu (web only)
+
+Web `_uvek25ISP-DWvhXu2rcp → eaHiOWJWfrKwnu33aCxjj`, rollback
+`/var/www/jubilujah.com/web/.next.bak-20260917-noadminmenu`. The build uses the same worktree `app/.wt-door`
+(`1d73120` plus the three UNCOMMITTED files: the two below and `components/Header.tsx`). The owner rule for
+every family site is that the profile menu carries no way into the admin panel, because the gold Admin pill
+is the one door. "Review moderation" stays, because nothing else links to /moderation. Verified live with an
+admin session: the menu reads Your Profile · My subscription · Liked albums · Review moderation · Sign out,
+and the Admin pill is present.
+
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260917-noadminmenu .next && pm2 restart jubilujah-web --update-env"
+```
+
+### 2026-09-17 (late afternoon) · sign-in door loop + rail Chat History above the player (web only)
+
+Web `2b9_gTWPaoqZgbwPPaciq → _uvek25ISP-DWvhXu2rcp`, rollback
+`/var/www/jubilujah.com/web/.next.bak-20260917-doorhist`. `.next` only. The build came from a detached
+worktree `app/.wt-door` (git-excluded) at `1d73120`, the same code as the hero release, plus two
+UNCOMMITTED files:
+- `components/JubileeDoor.tsx`: the "already signed in" check uses `useAuth()` (loading/authenticated
+  from /api/auth/me), not `getTokens()`. Before this, stored tokens the API had rejected left the header
+  saying "Sign In" while /signin sent the reader straight home, so they could not sign in (owner report).
+- `app/inspire-rail.css`: while `.jv-player` is `.active`/`.idle`, `.jir-history` keeps
+  `--jv-player-h` clear at the bottom, so the list ends above the bar (same rule on kJubilee and BornAgainDNA).
+
+Env: `.env.local` copied from the main tree, the same file `.wt-hero` used. Built with
+`NEXT_DIST_DIR=.next-door NEXT_PUBLIC_SITE_URL=https://www.jubileepraise.com`, and the Turnstile key is in
+the chunks. Verified live:
+- /, /signin, /playlists and /now-playing all return 200.
+- Dead-token sessions stay on the door, and a session /api/auth/me confirms is still sent on.
+- The history list ends at 808 with the player at 820 (1440×900).
+
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260917-doorhist .next && pm2 restart jubilujah-web --update-env"
+```
+
 ### 2026-09-17 (afternoon) · hero typography/spacing = kJubilee's, QR label + arrows, one tooltip (web only)
 
 Web `KRFdPUkQz2XTtKiMDiqPi → 2b9_gTWPaoqZgbwPPaciq` from commit `7326142`, rollback
