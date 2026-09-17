@@ -191,7 +191,9 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
 
       {/* The scan-to-listen code, top right; clicking it plays the album (never
           pauses it: it is a Play, not a transport toggle). Admin arrows below. */}
-      <HeroQr code={slide.code} title={slide.title} onPlay={() => { if (!sounding) void onPlay(); }} />
+      {/* Clicking the code opens its share row (owner, 2026-09-17); it no longer
+          plays — Play Album, one line down, does that. */}
+      <HeroQr code={slide.code} title={slide.title} />
 
       <div className="jp-hero-content" key={slide.code}>
         <h2 className="jp-hero-title">

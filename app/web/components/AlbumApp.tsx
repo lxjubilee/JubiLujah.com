@@ -273,8 +273,8 @@ export default function AlbumApp({ artist, artistSlug = '', heroFallback = '', a
       {artistSlug
         ? <a className="x-album-ident" href={`/artist/${artistSlug}`} aria-label={`More from ${artist}`}>{artist}</a>
         : <span className="x-album-ident" aria-hidden="true">{artist}</span>}
-      {/* Scan to listen, top right (click plays here); admin framing arrows under it. */}
-      {supportImage && canPlay && <HeroQr code={current.code} title={current.title} onPlay={() => { if (bigPlayPaused) onBigPlay(); }} />}
+      {/* Scan to listen, top right (click opens the share row); admin framing arrows under it. */}
+      {supportImage && canPlay && <HeroQr code={current.code} title={current.title} />}
     </header>
   );
 

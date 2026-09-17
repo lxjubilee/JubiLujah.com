@@ -99,8 +99,11 @@ export default function BackstageHeroImage({
     [scheduleSave],
   );
 
-  const badge =
-    status === 'saving' ? '…' : status === 'ok' ? '✓' : status === 'err' ? '✗' : '';
+  // The framing and the save state ride in the buttons' tooltips, as on the
+  // banner's arrows (HeroQr.tsx), where the discs carry no visible readout.
+  const state =
+    status === 'saving' ? ' · saving' : status === 'ok' ? ' · saved' : status === 'err' ? ' · SAVE FAILED' : '';
+  const framing = `${Math.round(y)}%${state}`;
 
   return (
     <>
@@ -113,21 +116,22 @@ export default function BackstageHeroImage({
         </div>
       )}
 
+      {/* THE SAME ARROWS AS THE BANNER'S (owner, 2026-09-17: "keep the same
+          design of banner adjustment arrow on backstage pages"): kJubilee's flat
+          red discs with its shaft-and-head icons, in the hero's corner column
+          (.jp-hero-corner / .jp-hero-nudge, globals.css) — there is no QR code
+          on an article, so the discs take the corner. Replaces the glass panel
+          with chevrons and a "%" readout this control used to be. */}
       {isAdmin && src && (
-        <div className="bsa-hero-reposition" role="group" aria-label="Reposition hero image">
-          <button type="button" className="bsa-hero-move" onClick={nudge(STEP)} title="Move image up" aria-label="Move image up">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
-              <polyline points="6 15 12 9 18 15" />
-            </svg>
-          </button>
-          <span className="bsa-hero-pos">
-            {Math.round(y)}%{badge ? ` ${badge}` : ''}
-          </span>
-          <button type="button" className="bsa-hero-move" onClick={nudge(-STEP)} title="Move image down" aria-label="Move image down">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
+        <div className="jp-hero-corner">
+          <div className="jp-hero-nudge" role="group" aria-label="Reposition hero image">
+            <button type="button" className="jp-hero-nudge-btn" onClick={nudge(STEP)} title={`Move image up (${framing})`} aria-label="Move image up">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+            </button>
+            <button type="button" className="jp-hero-nudge-btn" onClick={nudge(-STEP)} title={`Move image down (${framing})`} aria-label="Move image down">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+            </button>
+          </div>
         </div>
       )}
     </>

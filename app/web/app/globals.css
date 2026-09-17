@@ -791,13 +791,20 @@ body.jv-has-player { padding-bottom: 84px; }
    the body's reading face — kJubilee moved its title off Orbitron that morning
    ("matching inspiremanna.com"), and the 2026-09-16 Orbitron title here was only
    ever "kJubilee's face", so it follows — 40px, 700, a 1.18 line box, 6px under
-   it, the painted title 15px down, and 4px of padding inside the overflow box
-   so descenders (g, y, p) are not clipped. No font-family: body is already
-   kJubilee's stack. Supersedes the 09-16 "eighty percent less space" numbers.
-   Applies to every hero (the album banner's .x-album-title repeats it). */
+   it, and 4px of padding inside the overflow box so descenders (g, y, p) are not
+   clipped. No font-family: body is already kJubilee's stack. Supersedes the
+   09-16 "eighty percent less space" numbers.
+
+   ONE NUMBER IS NOT kJubilee's: it paints its title 15px down (top:15px), which
+   puts the descender zone 9px into the sentence's box. Its station names carry
+   no descenders, so nothing shows; album titles do ("Daily Bread Yes", "The
+   Homecoming Hallel"), and the tails landed on the sentence. No offset here
+   (owner, 2026-09-17: "increase gap 9 to 15px"): the deepest descender clears
+   the sentence by about 15px. Applies to every hero (the album banner's
+   .x-album-title repeats it). */
 .jp-hero-title {
   font-size: 40px; font-weight: 700; line-height: 1.18; color: #fff; max-width: 100%;
-  margin: 0 0 6px; position: relative; top: 15px;
+  margin: 0 0 6px; position: relative; top: 0;
 }
 @media (max-width: 1024px) { .jp-hero-title { font-size: 34px; } }
 .jp-hero-title, .jp-hero-title a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1379,13 +1386,27 @@ a { color: inherit; }
    `bottom center` now for the same reason the base rule is.) */
 .album-exec .x-hero--support { background-position: bottom center, center var(--hero-y, 0%); }
 
-/* ══ SCAN TO LISTEN, TOP RIGHT OF EVERY HERO (2026-09-16) ══
-   components/HeroQr.tsx, on the home carousel and the album banner. kJubilee's
-   plate (its home.css .hero-qr): white, because a QR code needs contrast against
-   a dark picture; 53px of code in 4px of plate; no lift on hover, because a code
-   somebody is lining a phone up against must not move. */
-.jp-hero-qr {
+/* ══ THE HERO'S CORNER: THE QR CODE, ITS SHARE ROW, THE ADMIN ARROWS ══
+   components/HeroQr.tsx, on the home carousel and the album banner. ONE flex
+   column pinned where kJubilee pins its plate (top 16px, right 20px), stacking
+   plate → share row (only while open) → arrows with 10px between neighbours.
+   So the arrows sit 10px under the plate (kJubilee's .img-nudge: 16 + 61 + 10),
+   move down by exactly the share row's height when the code is clicked open,
+   and come back when it is closed — by layout, nothing measured (owner,
+   2026-09-17). The column itself lets clicks through to the hero; only its
+   children take them. */
+.jp-hero-corner {
   position: absolute; top: 16px; right: 20px; z-index: 6;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  pointer-events: none;
+}
+.jp-hero-corner > * { pointer-events: auto; }
+/* ══ SCAN TO LISTEN (2026-09-16) ══ kJubilee's plate (its home.css .hero-qr):
+   white, because a QR code needs contrast against a dark picture; 53px of code
+   in 4px of plate; no lift on hover, because a code somebody is lining a phone
+   up against must not move. position:relative anchors the label beside it. */
+.jp-hero-qr {
+  position: relative;
   display: block; padding: 4px; border: 0; border-radius: 6px; cursor: pointer;
   background: #fff; box-shadow: 0 4px 18px rgba(0,0,0,.34);
   opacity: .94; transition: opacity .18s ease;
@@ -1408,19 +1429,44 @@ a { color: inherit; }
   opacity: 0; transition: opacity .15s ease;
 }
 .jp-hero-qr:hover .jp-hero-qr-tip, .jp-hero-qr:focus-visible .jp-hero-qr-tip { opacity: 1; }
+/* While the share row is open the label would sit on top of nothing useful;
+   the open plate says what it is by what is under it. */
+.jp-hero-qr.is-open .jp-hero-qr-tip { display: none; }
+
+/* ══ THE SHARE ROW (owner, 2026-09-17) ══ kJubilee's share card buttons
+   (.share-btn in its home.css: equal squares, an 18px glyph centred, lifting a
+   pixel on hover and taking the network's own colour — 1877f2, 1d9bf0, 0a66c2,
+   literals for the same reason a logo is), sized to the arrows' 32px discs and
+   right-aligned under the plate. Dark, translucent and bordered like the
+   label, so they read on any picture. Copy turns green while the link is held. */
+.jp-hero-share { display: flex; gap: 8px; }
+.jp-hero-share-btn {
+  width: 32px; height: 32px; padding: 0; border-radius: 8px; cursor: pointer;
+  display: grid; place-items: center;
+  background: rgba(10, 11, 16, .78); border: 1px solid hsla(0, 0%, 100%, .22); color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.45);
+  transition: background .2s, border-color .2s, color .2s, transform .1s;
+}
+.jp-hero-share-btn svg { width: 18px; height: 18px; display: block; }
+.jp-hero-share-btn:hover { color: #fff; border-color: hsla(0, 0%, 100%, .35); transform: translateY(-1px); }
+.jp-hero-share-btn:active { transform: translateY(0); }
+.jp-hero-share-btn.share-facebook:hover { background: #1877f2; border-color: #1877f2; }
+.jp-hero-share-btn.share-twitter:hover  { background: #1d9bf0; border-color: #1d9bf0; }
+.jp-hero-share-btn.share-linkedin:hover { background: #0a66c2; border-color: #0a66c2; }
+.jp-hero-share-btn.share-copy:hover { background: var(--brand-accent); border-color: var(--brand-accent); color: #04233d; }
+.jp-hero-share-btn.copied, .jp-hero-share-btn.copied:hover { background: #2e7d32; border-color: #2e7d32; color: #fff; }
 
 /* The admin's framing arrows: kJubilee's flat red discs (.img-nudge), under the
-   code with the right edges aligned; in the corner when there is no code. */
+   code — or under the share row while it is open — with the right edges
+   aligned; in the corner when there is no code. */
 .jp-hero-nudge {
-  /* right: 20px LINES THE DISCS UP UNDER THE HEADER'S ROUND ICONS (owner,
-     2026-09-16), as on kJubilee. Measured at 1280, 1600 and 1920 wide: the flag
-     button (and the account circle above it) is 32px with its right edge 20px in
-     from the hero's, and these discs are 32px, so the centres coincide. They were
-     centred under the wider QR plate, 14px further left. */
-  position: absolute; z-index: 6; top: calc(16px + 61px + 10px); right: 20px;
+  /* right: 20px (the column's) LINES THE DISCS UP UNDER THE HEADER'S ROUND
+     ICONS (owner, 2026-09-16), as on kJubilee. Measured at 1280, 1600 and 1920
+     wide: the flag button (and the account circle above it) is 32px with its
+     right edge 20px in from the hero's, and these discs are 32px, so the
+     centres coincide. */
   display: flex; flex-direction: column; gap: 8px;
 }
-.jp-hero-nudge.no-qr { top: 16px; right: 20px; }
 .jp-hero-nudge-btn {
   width: 32px; height: 32px; padding: 0; border-radius: 50%; cursor: pointer;
   display: grid; place-items: center;
@@ -1434,7 +1480,7 @@ a { color: inherit; }
 /* A QR code is for the screen you are NOT holding; and a phone has no business
    re-cropping a picture for the whole site. */
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
-  .jp-hero-qr, .jp-hero-nudge { display: none !important; }
+  .jp-hero-corner { display: none !important; }
 }
 /* The shadows are what let the scrim above stay light. A near-white serif at
    42px over a photograph needs an edge of its own — without one the band would
@@ -1470,13 +1516,14 @@ a { color: inherit; }
 }
 /* ONE LINE. components/AlbumApp.tsx useFitOneLine shrinks the font to fit; the
    nowrap and ellipsis are what hold before that script has run. */
-/* kJubilee's .hero-title, exactly — the same numbers as .jp-hero-title above,
-   and for the same reason. Georgia, the shadow and the 42px of the generic
+/* kJubilee's .hero-title — the same numbers as .jp-hero-title above, including
+   the one that is not kJubilee's (no 15px pull-down: the descenders were landing
+   on the sentence; see there). Georgia, the shadow and the 42px of the generic
    .x-hero h1 are all overridden here; kJubilee's title carries no shadow. */
 .album-exec .x-hero h1.x-album-title {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
   font-family: inherit; font-weight: 700; font-size: 40px; color: #fff; text-shadow: none;
-  line-height: 1.18; margin: 0 0 6px; padding-bottom: 4px; position: relative; top: 15px;
+  line-height: 1.18; margin: 0 0 6px; padding-bottom: 4px; position: relative; top: 0;
 }
 /* THE ARTIST, AS ON THE HOME HERO: huge, faint, right-justified in the corner, so
    a long name simply reaches further across the picture. A link, unlike the home
@@ -2151,26 +2198,10 @@ body:has(.bsa-article) { background: #000; }
 .bsa-hero { position: relative; width: 100%; height: calc(100vh - 48px - 50px); overflow: hidden; background: #1b1b1b; }
 .bsa-hero-image { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* Admin-only hero reposition control (top-right of the hero). */
-.bsa-hero-reposition {
-  position: absolute; top: 16px; right: 16px; z-index: 3;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  padding: 8px 6px; border-radius: 10px;
-  background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px);
-}
-.bsa-hero-move {
-  width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
-  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
-}
-.bsa-hero-move:hover { background: rgba(198, 40, 40, 0.92); border-color: rgba(198, 40, 40, 0.92); color: #fff; }
-.bsa-hero-move:active { transform: scale(0.92); }
-.bsa-hero-move svg { width: 18px; height: 18px; }
-.bsa-hero-pos {
-  font-size: 11px; font-weight: 700; color: #fff; min-width: 34px; text-align: center;
-  font-variant-numeric: tabular-nums;
-}
+/* The admin's reposition arrows on an article hero are the banner's own —
+   .jp-hero-corner / .jp-hero-nudge / .jp-hero-nudge-btn above (owner,
+   2026-09-17). The glass panel with chevrons and a "%" readout that lived here
+   (.bsa-hero-reposition / .bsa-hero-move / .bsa-hero-pos) is gone with its markup. */
 .bsa-hero-fallback {
   display: flex; align-items: center; justify-content: center; padding: 0 24px; text-align: center;
   background: radial-gradient(ellipse at center, #2d2d2d, #141414);
