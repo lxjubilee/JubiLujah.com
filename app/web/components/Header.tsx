@@ -327,9 +327,8 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
                     <Link href="/account" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.account')}</Link>
                     <Link href="/account/subscription" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.subscription')}</Link>
                     <Link href="/liked" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.liked')}</Link>
-                    {hasRole('admin') && (
-                      <Link href="/admin" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.adminConsole')}</Link>
-                    )}
+                    {/* No Admin Console entry (owner, 2026-09-17, every family site):
+                        the gold Admin pill in the header is the one door in. */}
                     {hasRole('admin') && (
                       <Link href="/moderation" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.moderation')}</Link>
                     )}

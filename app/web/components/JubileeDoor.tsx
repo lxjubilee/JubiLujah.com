@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { useSearchParams } from 'next/navigation';
 import { api, ApiError } from '@/lib/api';
-import { getTokens, setTokens } from '@/lib/auth';
+import { setTokens } from '@/lib/auth';
+import { useAuth } from '@/components/AuthProvider';
 import { useTenant } from '@/components/TenantProvider';
 import { DEFAULT_SLIDES } from '@/components/AuthHero';
 import '@/app/jubilee-door.css';
@@ -236,18 +237,23 @@ function JubileeDoor() {
      family site). Signed in on one tab, a new tab opened straight on /signin
      showed the form again although the session was sitting in localStorage,
      shared by every tab. JubileeInspire's door checks on arrival and sends the
-     reader on; this does the same. getTokens() counts a session whose access
-     token has lapsed but can still be renewed — lib/api.ts refreshes it on the
-     next call. replace(), so Back does not bring the form back; and only to a
-     path on this site that is not the door itself, or ?returnTo=/signin would
-     loop and an absolute returnTo would leave the site. */
+     reader on; this does the same. replace(), so Back does not bring the form
+     back; and only to a path on this site that is not the door itself, or
+     ?returnTo=/signin would loop and an absolute returnTo would leave the site.
+
+     "Signed in" is THE HEADER'S TEST: AuthProvider's answer from /api/auth/me
+     (which renews a lapsed access token on the way). This used to be getTokens(),
+     any stored access token at all, so a dead session the API had rejected left
+     the header saying "Sign In" while this page sent the reader straight back
+     home: they could not sign in (owner, 2026-09-17). */
+  const { loading: authLoading, authenticated } = useAuth();
   useEffect(() => {
-    if (!getTokens()) return;
+    if (authLoading || !authenticated) return;
     const path = returnTo.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
     const safe = returnTo.startsWith('/') && !returnTo.startsWith('//') && !['/signin', '/signup', '/login'].includes(path);
     window.location.replace(safe ? returnTo : '/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authLoading, authenticated]);
 
   useEffect(() => {
     if (cooldown <= 0) return;

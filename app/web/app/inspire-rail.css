@@ -326,6 +326,14 @@
   margin: 2px 8px 8px var(--jir-w);
 }
 .jir-rail:not(.is-open) .jir-history { display: none; }
+/* THE LIST STOPS ABOVE THE PLAYER (owner, 2026-09-17: "I don't want my history
+   covered by the player, it should respect the player height"). The rail runs to
+   the foot of the window, so while the footer .jv-player is up (.active or .idle,
+   the states that slide it in) the list ended across the bar. It keeps the bar's
+   height clear instead, as it does on kJubilee and BornAgainDNA. */
+body:has(.jv-player.active, .jv-player.idle) .jir-history {
+  margin-bottom: calc(8px + var(--jv-player-h, 80px));
+}
 
 .jir-history-search {
   width: 100%;
