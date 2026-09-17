@@ -1433,26 +1433,44 @@ a { color: inherit; }
    the open plate says what it is by what is under it. */
 .jp-hero-qr.is-open .jp-hero-qr-tip { display: none; }
 
-/* ══ THE SHARE ROW (owner, 2026-09-17) ══ ONE HORIZONTAL BLACK BOX holding the
-   four icons (owner, same evening: "contained inside a horizontal black box"),
-   right-aligned under the plate: the label's black at the same depth, a hair of
-   border and the plate's shadow, 5px inside. The icons are kJubilee's share-card
-   glyphs (18px), each on a 32px transparent seat — the discs' size — that takes
-   the network's own colour on hover (1877f2, 1d9bf0, 0a66c2: literals for the
-   same reason a logo is) and green while a copied link is held. */
+/* ══ THE SHARE POPUP (owner, 2026-09-17) ══ ONE SMALL HORIZONTAL BLACK BOX
+   holding the four icons, right-aligned under the plate, WITH A CARET on its
+   top edge pointing up at the code — so it reads as the popup a scanned QR
+   would open (owner, same night: "reduce the overall size … decrease the
+   icons … a small arrow indicator pointing towards the box"). The label's
+   black at the same depth, a hair of border, the plate's shadow, 4px inside.
+   The icons are kJubilee's share-card glyphs at 12px, each on an 18px
+   transparent seat that takes the network's own colour on hover (1877f2,
+   1d9bf0, 0a66c2: literals for the same reason a logo is) and green while a
+   copied link is held. 84 × 26 in all — a bubble, not a bar (owner, after a
+   first 112 × 34 cut read as unchanged); the admin arrows under it move by
+   exactly that (see .jp-hero-corner). */
 .jp-hero-share {
-  display: flex; align-items: center; gap: 4px;
-  padding: 5px; border-radius: 8px;
-  background: rgba(0, 0, 0, .82); border: 1px solid hsla(0, 0%, 100%, .16);
+  position: relative;
+  display: flex; align-items: center; gap: 2px;
+  padding: 3px; border-radius: 6px;
+  background: rgba(0, 0, 0, .86); border: 1px solid hsla(0, 0%, 100%, .18);
   box-shadow: 0 4px 18px rgba(0,0,0,.34);
 }
+/* The pointer: a 16px-wide, 8px-tall triangle on the top edge, centred under
+   the 61px plate the box is right-aligned with (30.5px in from the right, less
+   half the caret). Drawn in the box's own black; ::after lays its border over it. */
+.jp-hero-share::before {
+  content: ''; position: absolute; top: -8px; right: 22px;
+  border: 8px solid transparent; border-top: 0; border-bottom-color: rgba(0, 0, 0, .86);
+}
+.jp-hero-share::after {
+  content: ''; position: absolute; top: -9px; right: 22px;
+  border: 8px solid transparent; border-top: 0; border-bottom-color: hsla(0, 0%, 100%, .18);
+  z-index: -1;
+}
 .jp-hero-share-btn {
-  width: 32px; height: 32px; padding: 0; border-radius: 6px; cursor: pointer;
+  width: 18px; height: 18px; padding: 0; border-radius: 4px; cursor: pointer;
   display: grid; place-items: center;
   background: transparent; border: 0; color: #fff;
   transition: background .2s, color .2s, transform .1s;
 }
-.jp-hero-share-btn svg { width: 18px; height: 18px; display: block; }
+.jp-hero-share-btn svg { width: 12px; height: 12px; display: block; }
 .jp-hero-share-btn:hover { color: #fff; background: hsla(0, 0%, 100%, .12); transform: translateY(-1px); }
 .jp-hero-share-btn:active { transform: translateY(0); }
 .jp-hero-share-btn.share-facebook:hover { background: #1877f2; }
