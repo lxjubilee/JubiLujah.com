@@ -267,12 +267,15 @@
   font-family: "Agency FB", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 22px;
   font-weight: bold;
-  color: var(--jir-text);
+  color: #ececec;
   letter-spacing: 0.5px;
+  /* line-height normal, as on jubileeinspire.com: the box is 26px across there,
+     so centred on the 52px icon column it starts at x13 (owner, 2026-09-17). */
+  line-height: normal;
 }
 /* The accented middle word — the one piece of the wordmark that is not --jir-text. */
 .jir-brand-accent { color: var(--jir-azure); }
-.jir-brand-tld { color: var(--jir-text); font-weight: normal; }
+.jir-brand-tld { color: #ececec; font-weight: normal; }
 
 .jir-avatar {
   position: absolute;
@@ -550,4 +553,22 @@ body.jir-on .jv-player { left: var(--jir-w); }
 @media (prefers-reduced-motion: reduce) {
   .jir-rail { transition: none; }
   .jir-label { transition: none; }
+}
+
+/* AGENCY FB, SERVED FROM THIS SITE (owner, 2026-09-17: the rail's wordmark must
+   match on every site). The wordmark is jubileeinspire.com's, and there the face
+   is a web font (/fonts/AGENCYB.TTF). Named here without the file, every visitor
+   who has not installed Agency FB got the Cambria fallback: a wider serif, and a
+   different look from the site the wordmark belongs to. Same two files. */
+@font-face {
+  font-family: 'Agency FB';
+  font-weight: bold;
+  font-display: block;
+  src: url('/fonts/AGENCYB.TTF') format('truetype');
+}
+@font-face {
+  font-family: 'Agency FB';
+  font-weight: normal;
+  font-display: block;
+  src: url('/fonts/AGENCYR.TTF') format('truetype');
 }

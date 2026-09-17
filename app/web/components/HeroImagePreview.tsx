@@ -18,7 +18,7 @@ import { heroKey, useHeroPositions } from '@/stores/heroPositions';
 // top was right. Saving 0 is a decision; it takes the picture out of the queue.
 //
 // 🔴 THE PREVIEW IS THE HOME HERO AT REAL SIZE, SCALED DOWN — NOT A SMALL HERO.
-// The banner is full width by (viewport − 98px header − 80px player), and its
+// The banner is full width by (viewport − 99px header − 80px player), and its
 // lettering is in absolute pixels. Drawn natively at, say, 1920×902 and shrunk
 // with a transform, the crop AND the words sitting over it are in true
 // proportion; a thumbnail-sized banner would put 40px titles over a third of the

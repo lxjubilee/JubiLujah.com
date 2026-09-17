@@ -59,7 +59,8 @@ export function SiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              AI Bible Chat
+              {/* "Bible Chat", not "AI Bible Chat", on every family header (owner, 2026-09-16). */}
+              Bible Chat
             </a>
 
             {/* Admins only. Rendered after `status === 'ready'` so it appears

@@ -12,7 +12,7 @@ import { DICTIONARIES } from './i18n/dictionaries';
 export const EN = {
   // Top-row media / cross-property links
   'media.articles': 'Articles',
-  'media.bibleChat': 'AI Bible Chat',
+  'media.bibleChat': 'Bible Chat',
   'media.admin': 'Admin',
   // Search box (header)
   'search.placeholder': 'Search...',
@@ -20,7 +20,8 @@ export const EN = {
   'search.aria': 'Search the catalog',
   // Auth / profile menu
   'auth.signIn': 'Sign In',
-  'menu.account': 'Account',
+  // "Your Profile" on every family site's header dropdown (owner, 2026-09-16).
+  'menu.account': 'Your Profile',
   'menu.subscription': 'My subscription',
   'menu.liked': 'Liked albums',
   'menu.adminConsole': 'Admin console',

@@ -29,6 +29,31 @@ const MEDIA: { href: string; key: TKey; ext: boolean }[] = [];
 // arrives on kJubilee already signed in (goSignedIn, a one-time Jubilee ID ticket).
 const KJUBILEE_RADIO = 'https://www.kjubilee.com/';
 
+// Two initials, as kJubilee's circle shows ("Gabriel Ungureanu" → "GU"): one
+// letter is not an identity. Falls back to one letter, then the address.
+// TWO LETTERS, ALWAYS (owner, 2026-09-17), and the same rule on every family
+// site: first + last name; else the first and last words of the display name;
+// else the first two letters of a one-word name ("Gabe" -> "GA"); else the
+// address before the @ ("gabe.example" -> "GE", "gabe" -> "GA").
+function twoInitials(first?: string | null, last?: string | null, name?: string | null, email?: string | null): string {
+  const f = String(first || '').trim();
+  const l = String(last || '').trim();
+  if (f && l) return (f[0] + l[0]).toUpperCase();
+  const words = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  const single = f || l || words[0] || '';
+  if (single.length >= 2) return single.slice(0, 2).toUpperCase();
+  const local = String(email || '').split('@')[0].trim();
+  const parts = local.split(/[._+-]+/).filter(Boolean);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  if (local.length >= 2) return local.slice(0, 2).toUpperCase();
+  const domain = String(email || '').split('@')[1] || '';
+  return ((single || local) + (domain || '?')).slice(0, 2).toUpperCase();
+}
+function initialsOf(name?: string, email?: string): string {
+  return twoInitials('', '', name, email);
+}
+
 /*
  * WHEN THE CATEGORIES STOP FITTING, THEY BECOME A HAMBURGER.
  *
@@ -186,8 +211,11 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
     const onClick = (e: MouseEvent) => {
       if (userRef.current && !userRef.current.contains(e.target as Node)) setMenuOpen(false);
     };
+    // Escape closes it too, as kJubilee's does.
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false); };
     document.addEventListener('mousedown', onClick);
-    return () => document.removeEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('mousedown', onClick); document.removeEventListener('keydown', onKey); };
   }, []);
 
   const submitSearch = (e: React.FormEvent) => {
@@ -227,18 +255,8 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
               })}
             </nav>
 
-            {/* The operator's way in, immediately left of the search box —
-                kJubilee's placement for .nav-textlink--admin. Outside the media
-                run above so it takes the pill styling rather than the run's
-                grey link styling, and so no "|" divider is printed before it. */}
-            {isAdmin && (
-              <Link href="/admin/analytics" className="jvh-admin-link">
-                {t('media.admin')}
-              </Link>
-            )}
-
-            {/* kJubilee Radio: the family's radio site, a pill directly left of
-                the search box. Opens in a new tab so the music here keeps playing. */}
+            {/* kJubilee Radio: the family's radio site. Opens in a new tab so the
+                music here keeps playing. */}
             <a
               href={KJUBILEE_RADIO}
               className="jvh-radio-link"
@@ -248,6 +266,15 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
             >
               kJubilee Radio
             </a>
+
+            {/* ADMIN IS ALWAYS THE LAST PILL (owner, 2026-09-17), on every family
+                header: after the cross-site pills, immediately left of the search
+                box. Outside the media run above so no "|" divider precedes it. */}
+            {isAdmin && (
+              <Link href="/admin/analytics" className="jvh-admin-link">
+                {t('media.admin')}
+              </Link>
+            )}
 
             {/* ONE MAGNIFYING GLASS, ON THE RIGHT, AND IT IS THE BUTTON —
                 kJubilee's arrangement (.searchbar / .search-go there).
@@ -284,22 +311,29 @@ export default function Header({ defaultMusicHref, langWithContent = [] }: { def
 
             {authenticated ? (
               <div className="jvh-profile" ref={userRef}>
-                <button className="jvh-profile-btn" onClick={() => setMenuOpen(!menuOpen)} aria-haspopup="true" aria-expanded={menuOpen}>
-                  {(user?.displayName || '?').charAt(0).toUpperCase()}
+                {/* kJubilee's circle and menu (owner, 2026-09-16): two initials;
+                    the name and the address on top; "Your Profile" first, this
+                    site's own entries after it, Sign out last — all one style. */}
+                <button className="jvh-profile-btn" onClick={() => setMenuOpen(!menuOpen)} aria-haspopup="menu" aria-expanded={menuOpen}
+                  aria-label="Account menu" title={user?.email}>
+                  {initialsOf(user?.displayName, user?.email)}
                 </button>
                 {menuOpen && (
-                  <div className="jvh-dropdown open">
-                    <div className="jvh-dropdown-name">{user?.displayName}</div>
-                    <Link href="/account" className="jvh-dropdown-item" onClick={() => setMenuOpen(false)}>{t('menu.account')}</Link>
-                    <Link href="/account/subscription" className="jvh-dropdown-item" onClick={() => setMenuOpen(false)}>{t('menu.subscription')}</Link>
-                    <Link href="/liked" className="jvh-dropdown-item" onClick={() => setMenuOpen(false)}>{t('menu.liked')}</Link>
+                  <div className="jvh-dropdown open" role="menu">
+                    <div className="jvh-dropdown-who">
+                      <div className="jvh-dropdown-name">{user?.displayName || user?.email}</div>
+                      {user?.email && <div className="jvh-dropdown-email" title={user.email}>{user.email}</div>}
+                    </div>
+                    <Link href="/account" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.account')}</Link>
+                    <Link href="/account/subscription" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.subscription')}</Link>
+                    <Link href="/liked" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.liked')}</Link>
                     {hasRole('admin') && (
-                      <Link href="/admin" className="jvh-dropdown-item" onClick={() => setMenuOpen(false)}>{t('menu.adminConsole')}</Link>
+                      <Link href="/admin" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.adminConsole')}</Link>
                     )}
                     {hasRole('admin') && (
-                      <Link href="/moderation" className="jvh-dropdown-item" onClick={() => setMenuOpen(false)}>{t('menu.moderation')}</Link>
+                      <Link href="/moderation" className="jvh-dropdown-item" role="menuitem" onClick={() => setMenuOpen(false)}>{t('menu.moderation')}</Link>
                     )}
-                    <button className="jvh-dropdown-item" onClick={() => logout()}>{t('menu.signOut')}</button>
+                    <button type="button" className="jvh-dropdown-item" role="menuitem" onClick={() => logout()}>{t('menu.signOut')}</button>
                   </div>
                 )}
               </div>
