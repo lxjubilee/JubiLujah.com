@@ -48,12 +48,16 @@ export default function HeroQr({ code, title, onPlay }: { code: string; title: s
 
   return (
     <>
+      {/* No title attribute on the button: the .jp-hero-qr-tip span IS the
+          label, and a title on top of it drew the browser's own tooltip a second
+          later — "Scan to listen" twice (owner, 2026-09-17). kJubilee's
+          kj-qr-tip.js replaced its title for the same reason. The aria-label
+          carries the accessible name. */}
       {token && (
         <button
           type="button"
           className="jp-hero-qr"
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPlay(); }}
-          title="Scan to listen"
           aria-label={`Play ${title}. Or scan the code to listen on your phone`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -63,11 +67,14 @@ export default function HeroQr({ code, title, onPlay }: { code: string; title: s
       )}
       {isAdmin && (
         <div className={`jp-hero-nudge${token ? '' : ' no-qr'}`} role="group" aria-label="Move the hero picture">
+          {/* The arrows are kJubilee's exactly (owner, 2026-09-17): its NUDGE_UP /
+              NUDGE_DOWN in public/js/pages/home.js — a shaft with a head, 15px,
+              stroke 2.4, round caps and joins — not the bare chevrons these were. */}
           <button type="button" className="jp-hero-nudge-btn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); nudge(code, 5); }} title={`Move picture up (${Math.round(y)}%)`} aria-label="Move picture up">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><polyline points="6 15 12 9 18 15" /></svg>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
           </button>
           <button type="button" className="jp-hero-nudge-btn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); nudge(code, -5); }} title={`Move picture down (${Math.round(y)}%)`} aria-label="Move picture down">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9" /></svg>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
           </button>
         </div>
       )}
