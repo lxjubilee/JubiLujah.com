@@ -924,3 +924,42 @@ same day: the local API uses the PRODUCTION `jubileepraise` database through the
 (`jubileepraise_app`), because the local PostgreSQL 18's `jubilee` role cannot CREATE DATABASE; the
 web runs as a production build (`NEXT_DIST_DIR=.next-local`, `next start -p 3001`) because `next dev`'s
 watchers fail on the W: share.
+
+## D-2026-09-17-6 · The hero title is painted with NO pull-down; every other hero number is kJubilee's
+
+**Decided:** 2026-09-17 evening · **By:** Appa ("increase gap 9 to 15px please"), after asking why the
+gap between title and sentence was not maintained.
+**Why:** kJubilee's `.hero-title` has `top:15px`, which puts the title's descender zone 9px into the
+sentence's box — invisible on kJubilee, whose station names have no descenders, visible here on
+"Daily Bread Yes" and "The Homecoming Hallel". Matching that one number was too literal.
+**Changed:** `.jp-hero-title` and `.album-exec .x-hero h1.x-album-title` in `app/web/app/globals.css`:
+`top: 0`; line-height, margins, sizes and face stay matched. Live in `u70DMdA0x4T000wgvZ9cD`.
+
+## D-2026-09-17-7 · Clicking the hero QR opens a share box; it no longer plays the album
+
+**Decided:** 2026-09-17 evening · **By:** Appa ("add share icons directly below the QR code when it is
+clicked … clicked again to close it"; then "contained inside a horizontal black box").
+**Why:** a toggle cannot also play (closing it would play); Play Album, one line down, plays.
+**Changed:** `app/web/components/HeroQr.tsx` — plate, share box (Facebook / X / LinkedIn / copy the
+album's `/album?c=` address) and admin arrows are one flex column `.jp-hero-corner`, so the arrows drop
+by the box's height and return by layout. `onPlay` removed from the two call sites. Supersedes the
+09-16 "clicking it plays the album right here".
+
+## D-2026-09-17-8 · Backstage article heroes carry the banner's arrows, and the classes are shared
+
+**Decided:** 2026-09-17 evening · **By:** Appa ("keep the same design of banner adjustment arrow on
+backstage pages").
+**Changed:** `app/web/components/BackstageHeroImage.tsx` renders `.jp-hero-corner` / `.jp-hero-nudge`
+/ `.jp-hero-nudge-btn` — the same rules as the banners, so they cannot drift; the % and save state moved
+into the tooltips; the old `.bsa-hero-reposition` panel and its CSS were deleted. Consequence accepted:
+the arrows are hidden on phones and coarse pointers there too, as on the banners.
+
+## D-2026-09-17-9 · A release from the shared tree must first be checked against prod's BUILD_ID
+
+**Decided:** 2026-09-17 evening · **By:** this session, after finding prod at `eaHiOWJ…` (two releases
+by a concurrent session from `app/.wt-door`) when the last PUBLISH.md entry named `2b9_gTW…`, and their
+three files uncommitted in the tree.
+**Why:** a build that lacks another session's uncommitted files reverts their release.
+**Changed:** their files were committed first (`aabf4fc`) and the build made from the merged tree;
+PUBLISH.md's night entry and CONTINUITY.md carry the rule: compare prod's `BUILD_ID` with the newest
+entry, and `git status` for foreign uncommitted files, before any Step 2b.
