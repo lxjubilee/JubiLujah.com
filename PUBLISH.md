@@ -594,6 +594,30 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-17 (afternoon) · hero typography/spacing = kJubilee's, QR label + arrows, one tooltip (web only)
+
+Web `KRFdPUkQz2XTtKiMDiqPi → 2b9_gTWPaoqZgbwPPaciq` from commit `7326142`, rollback
+`/var/www/jubilujah.com/web/.next.bak-20260917-054653` (20 MB). `.next` only — no `public/` or `content/`
+changes. Built with `NEXT_DIST_DIR=.next-hero4` and `NEXT_PUBLIC_SITE_URL=https://www.jubileepraise.com`;
+Turnstile key checked in the static chunks. Origin 200 nine seconds after `pm2 restart`.
+
+- **Both heroes measured against the live kjubilee.com at 1746 wide, to the pixel** (copy block
+  `125 482 1548×142`, title `141 497 1516×51`, blurb `141 540`, 43px button at y 581): 38px frame,
+  site-measure column with a 16px gutter, title in the reading face (kJubilee left Orbitron the same
+  morning), 40/700 on 1.18, one-line description, 18px action gap, 14px pill on line-height 1.5.
+- QR label in kJubilee's `.kj-qrtip` type (Orbitron 10/700 uppercase); admin arrows are its icons.
+- **Bug fixed:** the QR button's `title` drew the browser's tooltip under the custom label — twice.
+- **Verified live:** 8 routes 200 (home, two albums, signin, playlists, now-playing, two admin pages);
+  `www.jubilujah.com` 200; live computed styles match kJubilee's; QR button has no `title`, one label.
+- 🔴 **Built from a detached worktree** (`app/.wt-hero`, git-excluded) because the main tree still has
+  13 directories stuck in Windows delete-pending after the 2026-09-17 `git checkout main` (see
+  CONTINUITY.md); a build there fails on the missing Torah Sings modules. The worktree is at the same
+  commit plus the two edited files, so the build is what `7326142` describes.
+
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260917-054653 .next && pm2 restart jubilujah-web --update-env"
+```
+
 ### 2026-09-17 · BACKEND release: the `jubileepraise` database, api.jubileepraise.com, JubileePraise credentials (api AND db — web untouched)
 
 Run from HPC-CALEB (`caleb.inspire`, `~/.ssh/id_ed25519_jubilee_prod`) with **`deploy/release-api.sh`**, a
