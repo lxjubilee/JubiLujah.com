@@ -1433,28 +1433,33 @@ a { color: inherit; }
    the open plate says what it is by what is under it. */
 .jp-hero-qr.is-open .jp-hero-qr-tip { display: none; }
 
-/* ══ THE SHARE ROW (owner, 2026-09-17) ══ kJubilee's share card buttons
-   (.share-btn in its home.css: equal squares, an 18px glyph centred, lifting a
-   pixel on hover and taking the network's own colour — 1877f2, 1d9bf0, 0a66c2,
-   literals for the same reason a logo is), sized to the arrows' 32px discs and
-   right-aligned under the plate. Dark, translucent and bordered like the
-   label, so they read on any picture. Copy turns green while the link is held. */
-.jp-hero-share { display: flex; gap: 8px; }
+/* ══ THE SHARE ROW (owner, 2026-09-17) ══ ONE HORIZONTAL BLACK BOX holding the
+   four icons (owner, same evening: "contained inside a horizontal black box"),
+   right-aligned under the plate: the label's black at the same depth, a hair of
+   border and the plate's shadow, 5px inside. The icons are kJubilee's share-card
+   glyphs (18px), each on a 32px transparent seat — the discs' size — that takes
+   the network's own colour on hover (1877f2, 1d9bf0, 0a66c2: literals for the
+   same reason a logo is) and green while a copied link is held. */
+.jp-hero-share {
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px; border-radius: 8px;
+  background: rgba(0, 0, 0, .82); border: 1px solid hsla(0, 0%, 100%, .16);
+  box-shadow: 0 4px 18px rgba(0,0,0,.34);
+}
 .jp-hero-share-btn {
-  width: 32px; height: 32px; padding: 0; border-radius: 8px; cursor: pointer;
+  width: 32px; height: 32px; padding: 0; border-radius: 6px; cursor: pointer;
   display: grid; place-items: center;
-  background: rgba(10, 11, 16, .78); border: 1px solid hsla(0, 0%, 100%, .22); color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.45);
-  transition: background .2s, border-color .2s, color .2s, transform .1s;
+  background: transparent; border: 0; color: #fff;
+  transition: background .2s, color .2s, transform .1s;
 }
 .jp-hero-share-btn svg { width: 18px; height: 18px; display: block; }
-.jp-hero-share-btn:hover { color: #fff; border-color: hsla(0, 0%, 100%, .35); transform: translateY(-1px); }
+.jp-hero-share-btn:hover { color: #fff; background: hsla(0, 0%, 100%, .12); transform: translateY(-1px); }
 .jp-hero-share-btn:active { transform: translateY(0); }
-.jp-hero-share-btn.share-facebook:hover { background: #1877f2; border-color: #1877f2; }
-.jp-hero-share-btn.share-twitter:hover  { background: #1d9bf0; border-color: #1d9bf0; }
-.jp-hero-share-btn.share-linkedin:hover { background: #0a66c2; border-color: #0a66c2; }
-.jp-hero-share-btn.share-copy:hover { background: var(--brand-accent); border-color: var(--brand-accent); color: #04233d; }
-.jp-hero-share-btn.copied, .jp-hero-share-btn.copied:hover { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.jp-hero-share-btn.share-facebook:hover { background: #1877f2; }
+.jp-hero-share-btn.share-twitter:hover  { background: #1d9bf0; }
+.jp-hero-share-btn.share-linkedin:hover { background: #0a66c2; }
+.jp-hero-share-btn.share-copy:hover { background: var(--brand-accent); color: #04233d; }
+.jp-hero-share-btn.copied, .jp-hero-share-btn.copied:hover { background: #2e7d32; color: #fff; }
 
 /* The admin's framing arrows: kJubilee's flat red discs (.img-nudge), under the
    code — or under the share row while it is open — with the right edges
