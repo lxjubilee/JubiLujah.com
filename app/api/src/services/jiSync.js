@@ -140,7 +140,8 @@ export async function provisionUserToJI({ email, password, displayName, role, em
     password,
     role: role || 'user',                 // JI role enum (user|admin|guest)
     emailVerified: emailVerified === true,
-    sourcePlatform: 'jubilujah',
+    // JI's platform key for this site (see config.jiLogin.source) — not the brand name.
+    sourcePlatform: config.jiLogin.source,
   };
   if (displayName) payload.displayName = displayName;
 

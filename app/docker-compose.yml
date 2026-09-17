@@ -16,7 +16,7 @@ services:
     environment:
       POSTGRES_USER: jubilee
       POSTGRES_PASSWORD: jubilee_dev_pw
-      POSTGRES_DB: jubilujah
+      POSTGRES_DB: jubileepraise
     ports:
       - "5432:5432"
     volumes:

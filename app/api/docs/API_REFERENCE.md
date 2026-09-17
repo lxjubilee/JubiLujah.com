@@ -594,7 +594,7 @@ Three helpers implement the `ji` path:
 | `config.jiSync.clientSecret` | `JI_SERVICE_CLIENT_SECRET` | `''` |
 | `config.jiSync.checkEmailTimeoutMs` | `JI_CHECK_EMAIL_TIMEOUT_MS` | `4000` |
 | `config.jiLogin.baseUrl` | `JI_LOGIN_BASE` ‖ `JI_API_BASE` | `https://api.jubileeinspire.com` |
-| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubilujah` |
+| `config.jiLogin.source` | `JI_LOGIN_SOURCE` | `jubilujah` — JI's registered platform key for this site, not the brand; jiSync sends it as `sourcePlatform` too |
 
 `jiSyncEnabled()` = both `clientId` **and** `clientSecret` non-empty (`services/jiSync.js:34`).
 
@@ -620,7 +620,7 @@ The result object is returned to the client verbatim as the `jiSync` field of th
 
 #### `provisionUserToJI({email, password, displayName, role, emailVerified})`
 
-`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform:'jubileepraise'}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubilujah` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
+`POST {base}/api/auth/admin/provision-user` with `{email, password, role: role||'user', emailVerified: emailVerified===true, sourcePlatform: config.jiLogin.source}` (+ `displayName` when truthy). Requires the `admin.provision` scope on the `jubilujah` client at JI. Returns `{ok:true, created:true}` on **201**, `{ok:false, conflict:true}` on **409**, `{ok:false, skipped:true}` when disabled, `{ok:false, status}` / `{ok:false, error}` otherwise. Only called from `selfHealJiLogin`.
 
 #### `checkEmailOnJI(email)` — pre-signup gate
 
@@ -4193,7 +4193,7 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePra
 
 | Service | Image / build | Ports | Notes |
 |---|---|---|---|
-| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubilujah`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
+| `postgres` | `postgres:16-alpine` | 5432:5432 | user/pw/db = `jubilee` / `jubilee_dev_pw` / `jubileepraise`; named volume `jubilee_pgdata`; healthcheck `pg_isready` every 5 s ×10 |
 | `mock-oidc` | build `./mock-oidc` (node:20-alpine) | 4010:4010 | env: `MOCK_OIDC_PORT/ISSUER`, `OIDC_CLIENT_ID/SECRET`, `OIDC_REDIRECT_URI` |
 
 ⚠️ **Two ops traps in the compose init path:**
@@ -4207,7 +4207,7 @@ There is a **second, unrelated** `package.json` at the repo root (`W:\JubileePra
 
 | Variable | Default in example | Purpose |
 |---|---|---|
-| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah` | Postgres DSN. Prod alternative (commented) points at `jubilujah_app@94.72.120.231/jubilujah`. |
+| `DATABASE_URL` | `postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise` | Postgres DSN. The `jubileepraise` database is a clone of `jubilujah` (2026-09-17, `db/clone-jubilujah.sh` + migration 0035). Prod: `jubileepraise_app@localhost:5432/jubileepraise` on the VPS. |
 | `PGSSLMODE` | `disable` | Only the literal `require` turns on TLS, and then without cert validation (`db.js:11`). |
 | `API_PORT` | `4000` | Express listen port. |
 | `NODE_ENV` | `development` | Drives default log level and general env gating. |

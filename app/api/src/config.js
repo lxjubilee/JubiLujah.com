@@ -45,7 +45,9 @@ export const config = {
     ? (process.env.AUTH_LOGIN_MODE || '').toLowerCase()
     : 'local'),
 
-  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubilujah'),
+  // The JubileePraise database — cloned from `jubilujah` (schema + data) on
+  // 2026-09-17 by db/clone-jubilujah.sh, then rebranded by migration 0035.
+  databaseUrl: required('DATABASE_URL', 'postgres://jubilee:jubilee_dev_pw@localhost:5432/jubileepraise'),
 
   corsOrigins: (process.env.CORS_ORIGIN || 'http://localhost:3000')
     .split(',').map((s) => s.trim()).filter(Boolean),
@@ -75,10 +77,11 @@ export const config = {
   },
 
   // Outbound email (password reset + login OTP). Transport is auto-selected:
-  // Mailgun when MAILGUN_API_KEY + MAILGUN_DOMAIN are set, else SendGrid when
+  // Mailgun when MAILGUN_API_KEY + MAILGUN_DOMAIN are set, else the Mailgun SMTP
+  // relay when SMTP_USER + SMTP_PASS are set, else SendGrid when
   // SENDGRID_API_KEY is set, else a dev/log transport that just logs the
   // link/code instead of sending — so the flows are testable with no provider.
-  // EMAIL_PROVIDER ('mailgun' | 'sendgrid' | 'log') forces one explicitly.
+  // EMAIL_PROVIDER ('mailgun' | 'smtp' | 'sendgrid' | 'log') forces one explicitly.
   // NOTE: `from` must be on the Mailgun sending domain (jubileepraise.com) or Mailgun
   // rejects the message / it fails SPF+DKIM alignment.
   email: {
@@ -89,6 +92,17 @@ export const config = {
       domain: process.env.MAILGUN_DOMAIN || '',
       // US region = https://api.mailgun.net (default); EU = https://api.eu.mailgun.net
       apiBase: (process.env.MAILGUN_API_BASE || 'https://api.mailgun.net').replace(/\/$/, ''),
+    },
+    // Mailgun SMTP relay (the same sending domain, over SMTP instead of the HTTP
+    // API). Used when EMAIL_PROVIDER=smtp, or automatically when no Mailgun API
+    // key is set but SMTP_USER + SMTP_PASS are. The transport lazy-loads
+    // nodemailer, so the API boots without it while the relay is unused.
+    smtp: {
+      host: process.env.SMTP_HOST || 'smtp.mailgun.org',
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: String(process.env.SMTP_SECURE || '').toLowerCase() === 'true',   // true => implicit TLS (465)
+      user: process.env.SMTP_USER || '',
+      pass: process.env.SMTP_PASS || '',
     },
     from: process.env.EMAIL_FROM || 'JubileePraise <noreply@jubileepraise.com>',
     resetTtlMinutes: Number(process.env.PASSWORD_RESET_TTL_MIN || 60),
@@ -135,7 +149,10 @@ export const config = {
   // Inbound credential delegation -> JubileeInspire (the mirror of jiSync's outbound
   // push). Used only when loginMode === 'ji': /api/auth/signin forwards email+password
   // +cfTurnstileToken to JI's /api/auth/login. `source` tags the request so JI knows
-  // which platform the login came from. See services/jiLogin.js.
+  // which platform the login came from (services/jiLogin.js); jiSync.js sends the
+  // same value as `sourcePlatform` when it provisions. It is JI's PLATFORM KEY for
+  // this site — registered in JI's own platform table as 'jubilujah' — so it stays
+  // 'jubilujah' until JI registers 'jubileepraise' (DECISIONS D-2026-09-03-1).
   jiLogin: {
     baseUrl: (process.env.JI_LOGIN_BASE || process.env.JI_API_BASE || 'https://api.jubileeinspire.com').replace(/\/$/, ''),
     source: process.env.JI_LOGIN_SOURCE || 'jubilujah',
@@ -147,11 +164,15 @@ export const config = {
   // client_secret -> short-lived bearer). JubileePraise stays the SESSION authority: it
   // verifies at the SSO, upserts the returned user, and mints its own tokens. `site`
   // tags which family site the identity is signing in on. See services/ssoClient.js.
+  //
+  // The client is JubileePraise's OWN registration at the SSO — `jubileepraise`,
+  // with a secret generated for it on 2026-09-17. The old `jubilujah` client stays
+  // registered there for the old brand; nothing here uses it any more.
   sso: {
     baseUrl: (process.env.SSO_API_BASE || 'https://sso.jubileeinspire.com').replace(/\/$/, ''),
-    clientId: process.env.SSO_CLIENT_ID || 'jubilujah',
+    clientId: process.env.SSO_CLIENT_ID || 'jubileepraise',
     clientSecret: process.env.SSO_CLIENT_SECRET || '',
-    site: process.env.SSO_SITE || 'jubilujah',
+    site: process.env.SSO_SITE || 'jubileepraise',
   },
 
   // ---- Subscriptions & billing ---------------------------------------------

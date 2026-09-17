@@ -594,6 +594,53 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-17 · BACKEND release: the `jubileepraise` database, api.jubileepraise.com, JubileePraise credentials (api AND db — web untouched)
+
+Run from HPC-CALEB (`caleb.inspire`, `~/.ssh/id_ed25519_jubilee_prod`) with **`deploy/release-api.sh`**, a
+staged runbook (`inspect` is read-only; every write phase needs `--confirm`). Decisions: DECISIONS.md
+D-2026-09-17-1 … -3. Timestamp `20260917-release` on every backup.
+
+- **DB:** a NEW database, `jubileepraise` (owner `jubileepraise_app`, owns all 85 tables), cloned from
+  `jubilujah` with `app/db/clone-jubilujah.sh` (`pg_dump -Fc` → `pg_restore --role`, TOC minus the extension
+  comments) and rebranded by `0035_jubileepraise_rebrand.sql`. Counts identical on both sides
+  (28 users · 20 credentials · 732 albums · 5,979 songs · 6,817 redirector tokens). **`jubilujah` was never
+  modified** and is the rollback. Two false starts left an empty shell behind; the script now reuses an
+  empty target instead of dropping it (`--force` is the only path that drops).
+- **API:** the whole of `api/src` shipped — the first time the rebrand reached prod's API. The prod-vs-repo
+  diff was read in full first: every prod-only line was an old brand string (the "Jubilujah.com" email
+  templates, `jubilujah-api` health/log names, CSV filenames, QR profile domain); no prod-only logic.
+  `nodemailer` 6.10.1 added to the shared root `node_modules` from its tarball (a workspace `npm install`
+  under the running web app was deliberately avoided). Health now reports `jubileepraise-api`.
+- **.env:** `DATABASE_URL` → jubileepraise; Turnstile pair confirmed; Mailgun key rotated and
+  `MAILGUN_DOMAIN`/`EMAIL_FROM` moved from jubilujah.com to jubileepraise.com; `SMTP_*` relay added;
+  `WEB_BASE_URL`/`REDIRECTOR_BASE_URL` → https://www.jubileepraise.com (new QR renders encode
+  `WWW.JUBILEEPRAISE.COM`). Backup `/var/www/.backup/env.bak-20260917-release`.
+- **nginx:** `/etc/nginx/sites-enabled/api.jubileepraise.com` → `127.0.0.1:4030`, modelled on
+  `api.jubilujah.com`. 🔴 **The origin certs in `/etc/ssl/cloudflare` are self-signed per host** (not
+  Cloudflare-issued; the zones run in Full mode) and `jubileepraise.com.crt` covers only apex + www, so the
+  API host got its own self-signed cert, exactly as `api.torahsings.com` has. `api.jubileepraise.com`
+  went from a Cloudflare 502 to 200.
+- **Restart:** `pm2 restart jubilujah-api --update-env`, healthy after 15 s at load ~14.
+- **Verified live:** `https://api.jubileepraise.com/health` 200 · SSO lookup through the API 200 ·
+  QR: `/api/redirector/qr/<token>.svg` 200 and `www.jubileepraise.com/r/<token>` 302 →
+  `/album?c=JEIM1001EN` · mobile update prompt now says JubileePraise (migrated data) · API holds one
+  connection on `jubileepraise`, none on `jubilujah`.
+- **SSO client swap — done, same day.** `jubileepraise` (secret sha256[0:16] `9c68dd8974117a40`) was
+  registered at `sso.jubileeinspire.com` by the owner (`SSO_SERVICE_CLIENTS` on 66.94.114.192; shell reads
+  of that box were refused from this session, so the owner did it by hand). Checked before touching prod:
+  `/service/token` 200, a bogus login with `site=jubileepraise` → `invalid_credentials` 401 (the site tag
+  is accepted), lookup 200. Then `deploy/release-api.sh ssoflip --confirm`: prod's `SSO_CLIENT_ID`/`SSO_SITE`
+  → `jubileepraise`, restart, healthy in ~10 s, zero `SSO token endpoint 401` lines, and a known account
+  looks up as `existsInSso:true` through api.jubileepraise.com. Backup
+  `/var/www/.backup/env.bak-20260917-release-pre-ssoflip`.
+
+**Rollback** (api + env; the database needs none):
+```bash
+$SSH $PROD "tar xzf /var/www/.backup/jubilujah-api-src-20260917-release.tgz -C /var/www/jubilujah.com && cp -p /var/www/.backup/env.bak-20260917-release /var/www/jubilujah.com/.env && pm2 restart jubilujah-api --update-env"
+# optional: rm /etc/nginx/sites-enabled/api.jubileepraise.com && nginx -t && systemctl reload nginx
+```
+`/var/www/.backup/jubilujah-20260917-release.dump` is a `pg_dump -Fc` of `jubilujah` taken before the clone.
+
 ### 2026-09-16 (late night) · admin Hero Image Preview, 1,071 album descriptions, Now Playing trimmed, kJubilee volume control
 
 Web `ONjYiXrZXwJV853bWaxrh → BwtmaZT1ovAWDnvxK9eg5` from commit `e6f56ae` (rollback

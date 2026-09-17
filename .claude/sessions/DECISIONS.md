@@ -857,3 +857,70 @@ footer sparks at half the opacity with a glitter layer, shown only while music i
 artist name raised 22px; admin framing arrows fixed so a saved position really is what every visitor
 sees. The owner's words "the coloring should be changed to update the…" were cut off mid-sentence;
 the sparks were left gold (the last complete instruction) pending clarification.
+
+## D-2026-09-17-1 · The API gets its OWN database, `jubileepraise`, cloned from `jubilujah` — supersedes D-2026-09-03-1
+
+Owner, 2026-09-17 (backend-only instruction): "Clone the database schema and data from Jubilujah DB.
+Create new database tables/references to fit JubileePraise. Connect this new database to the provided
+codebase." D-2026-09-03-1 had kept the API on `jubilujah` because a `jubileepraise` database did not
+exist; it now exists as a **clone** — `app/db/clone-jubilujah.sh` (`pg_dump -Fc | pg_restore
+--role=jubileepraise_app`, so every object has one owner, retiring the mixed-ownership landmine of
+2026-09-16) plus migration `0035_jubileepraise_rebrand.sql`, which rewrites only the DATA the API
+wrote under the old brand: `jubilujah|<email>` identity tags, the mobile update prompt, the
+"Welcome to Jubilujah" notification, the redirector demo asset, and any redirector URL on the site
+host. Not rewritten, on purpose: `cd.jubilujah.com` (the live CDN, no DNS for the new name), the
+JEIM1069 album and songs titled "Jubilujah", the app-store package ids, and the append-only logs.
+Dry-run on the workstation copy: 16 rows. The `jubilujah` database is left in place, unmodified, as
+the rollback. Schema itself needed nothing — no table, column or enum carries the old name.
+Code/config defaults moved with it: `config.js`, `docker-compose.yml`, `.env.example`, the docs.
+
+## D-2026-09-17-2 · JubileePraise authenticates to the SSO as its OWN client, `jubileepraise`
+
+Owner, same instruction: "Generate and configure a new SSO Client ID and Secret Key specifically for
+JubileePraise." Generated 2026-09-17 (`client_id=jubileepraise`, 32-byte hex secret, sha256[0:16]
+`9c68dd8974117a40`), set active in `app/.env` and as the code defaults in `config.js`; the staged
+2026-09-03 pair (`45d750e2…`) is retired. `SSO_SITE=jubileepraise` goes with it. The `jubilujah`
+client stays registered at the SSO for the old brand. **Registration at sso.jubileeinspire.com
+(66.94.114.192, `/home/gabe/ji-sso-prod`) is the gate:** until it is done a 401 `invalid_client`
+comes back — exactly the failure D-2026-09-03-1 diagnosed — so the release order is SSO first, API
+restart second (`deploy/release-api.sh`). `JI_LOGIN_SOURCE` / jiSync's `sourcePlatform` stay
+`jubilujah`: that is JI's platform-table key for this site, not a brand string (jiSync now reads it
+from config instead of a literal).
+
+## D-2026-09-17-3 · Credentials: Turnstile pair confirmed, Mailgun sending key rotated, SMTP relay added
+
+Owner-provided values, 2026-09-17, all verified live from the workstation without sending mail:
+Turnstile site key `0x4AAAAAAEu-eeLV_TGY4v14` + secret were already the active pair (siteverify
+accepts the secret); the Mailgun API key was replaced by the new sending key (domain
+`jubileepraise.com` reports `active`); the `noreply@jubileepraise.com` SMTP credentials
+(`smtp.mailgun.org:587`, AUTH OK) are new `SMTP_*` vars and a new `smtp` transport in
+`services/email.js` (nodemailer, lazy-loaded) — the Mailgun API stays the production transport,
+SMTP is the fallback. The email templates in the repo already say JubileePraise; what still says
+"Jubilujah" is PROD's copy of the API, which the rebrand never reached (PUBLISH.md 2026-09-14) — the
+fix is shipping `api/src`, which this release does. Backend only: no file under `app/web` changed.
+
+## D-2026-09-17-4 · Backend released to api.jubileepraise.com; the SSO client swap is the one open step
+
+Owner, 2026-09-17: "go and fully run it." Ran end to end from HPC-CALEB with `deploy/release-api.sh`
+(PUBLISH.md, 2026-09-17 entry): `jubileepraise` database live and serving the API, `api/src` shipped
+whole after reading the full prod-vs-repo diff (brand strings only), `.env` moved to the JubileePraise
+credentials, `api.jubileepraise.com` vhost with its own self-signed origin cert (the box's convention),
+API restarted and verified. **Not done:** registering the `jubileepraise` client at the SSO — every
+shell read of the SSO box was refused by the session's permission classifier, and editing an identity
+provider's registry without reading its `add-clients.js` first (the stored value may be a hash) was
+judged worse than leaving prod on the registered `jubilujah` client, which works. `ssoflip` is written
+and gated on a 200 from `/service/token`. Also learned, worth keeping: `tar`/`scp` treat `W:/…` as a
+remote host — use `/w/…` on this share; and a `pg_restore --role` cannot `COMMENT ON EXTENSION`, so
+the clone restores from a TOC list without those entries.
+
+## D-2026-09-17-5 · The SSO client swap closed — prod and the workstation both run as `jubileepraise`
+
+Owner registered the pair at the SSO themselves (same day) and said so; verified from here before the
+flip (token 200, `site=jubileepraise` accepted, lookup 200), then `ssoflip` moved prod. Supersedes the
+open step in D-2026-09-17-4. Nothing remains of the `jubilujah` client in this repo or in prod's
+`.env`; the SSO still has it registered for the old brand. The workstation API (localhost:4000) picked
+the new client up on its keep-warm refresh with no restart. Workstation setup chosen by the owner the
+same day: the local API uses the PRODUCTION `jubileepraise` database through the SSH tunnel on :5433
+(`jubileepraise_app`), because the local PostgreSQL 18's `jubilee` role cannot CREATE DATABASE; the
+web runs as a production build (`NEXT_DIST_DIR=.next-local`, `next start -p 3001`) because `next dev`'s
+watchers fail on the W: share.

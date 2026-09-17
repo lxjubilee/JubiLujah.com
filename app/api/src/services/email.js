@@ -7,19 +7,21 @@ import { logger } from '../logger.js';
 // styles + preheader) is shared across all three for a consistent look.
 //
 // Transport is chosen by env (see resolveProvider): Mailgun when MAILGUN_API_KEY
-// + MAILGUN_DOMAIN are set, else SendGrid when SENDGRID_API_KEY is set, else a
-// dev/log transport that just logs the message — so the whole flow is testable
-// with no provider configured. EMAIL_PROVIDER forces one explicitly. The SendGrid
-// SDK is lazy-imported so the API boots/builds without the dep when unused; the
-// Mailgun transport uses the global fetch (no extra dependency).
+// + MAILGUN_DOMAIN are set, else the Mailgun SMTP relay when SMTP_USER + SMTP_PASS
+// are set, else SendGrid when SENDGRID_API_KEY is set, else a dev/log transport
+// that just logs the message — so the whole flow is testable with no provider
+// configured. EMAIL_PROVIDER forces one explicitly. The SendGrid SDK and
+// nodemailer are lazy-imported so the API boots/builds without them when unused;
+// the Mailgun API transport uses the global fetch (no extra dependency).
 // ============================================================================
 
-// Explicit EMAIL_PROVIDER wins; otherwise prefer Mailgun when configured, then
-// SendGrid, else the dev/log transport.
+// Explicit EMAIL_PROVIDER wins; otherwise prefer the Mailgun API when configured,
+// then its SMTP relay, then SendGrid, else the dev/log transport.
 function resolveProvider() {
-  const { provider, mailgun, sendgridApiKey } = config.email;
-  if (provider === 'mailgun' || provider === 'sendgrid' || provider === 'log') return provider;
+  const { provider, mailgun, smtp, sendgridApiKey } = config.email;
+  if (['mailgun', 'smtp', 'sendgrid', 'log'].includes(provider)) return provider;
   if (mailgun.apiKey && mailgun.domain) return 'mailgun';
+  if (smtp.user && smtp.pass) return 'smtp';
   if (sendgridApiKey) return 'sendgrid';
   return 'log';
 }
@@ -83,6 +85,32 @@ async function sendViaMailgun({ to, subject, text, html }) {
   }
 }
 
+// Mailgun SMTP relay (smtp.mailgun.org, the noreply@jubileepraise.com mailbox
+// credentials). Same sending domain as the API transport, so SPF/DKIM alignment
+// is unchanged; Mailgun's tracking is off for SMTP unless enabled per domain.
+let smtpTransport = null;
+
+async function getSmtp() {
+  if (smtpTransport) return smtpTransport;
+  const mod = await import('nodemailer');                // lazy — optional dependency
+  const nodemailer = mod.default || mod;
+  const { host, port, secure, user, pass } = config.email.smtp;
+  smtpTransport = nodemailer.createTransport({ host, port, secure, auth: { user, pass } });
+  return smtpTransport;
+}
+
+async function sendViaSmtp({ to, subject, text, html }) {
+  const transport = await getSmtp();
+  await transport.sendMail({
+    from: config.email.from,
+    to: Array.isArray(to) ? to.join(',') : to,
+    subject,
+    text,
+    html,
+    headers: { 'X-Mailgun-Track': 'no', 'X-Mailgun-Track-Clicks': 'no', 'X-Mailgun-Track-Opens': 'no' },
+  });
+}
+
 async function send({ to, subject, text, html }) {
   const provider = resolveProvider();
   if (provider === 'log') {
@@ -92,6 +120,7 @@ async function send({ to, subject, text, html }) {
   }
   try {
     if (provider === 'mailgun') await sendViaMailgun({ to, subject, text, html });
+    else if (provider === 'smtp') await sendViaSmtp({ to, subject, text, html });
     else await sendViaSendgrid({ to, subject, text, html });
     logger.info({ to, subject, provider }, 'email sent');
   } catch (err) {
