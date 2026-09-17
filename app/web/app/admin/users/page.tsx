@@ -10,8 +10,14 @@ interface User {
   first_name: string | null;
   last_name: string | null;
   roles: string[];
+  is_active?: boolean;
   last_login_at: string | null;
 }
+
+// A role click does not save: it opens this confirm first, as kJubilee's Users
+// screen does. Admin opens this whole console, so this is the last place a
+// misread row is caught.
+interface PendingRole { u: User; role: string; grant: boolean }
 
 // The four admin-grantable roles. Every account also carries the baseline
 // "View & Play" right (the `viewer` role), which is always on and can never be
@@ -36,16 +42,40 @@ export default function AdminUsers() {
   const fail = (e: unknown, fallback: string) =>
     setErr(e instanceof ApiError ? e.message : fallback);
 
-  const toggleRole = async (u: User, role: string) => {
-    setMsg(null); setErr(null);
+  const [pending, setPending] = useState<PendingRole | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [pendingErr, setPendingErr] = useState<string | null>(null);
+
+  // Shown before the click; the API enforces both rules regardless.
+  const adminCount = users.filter((x) => x.roles.includes('admin') && x.is_active !== false).length;
+
+  const toggleRole = (u: User, role: string) => {
+    setMsg(null); setErr(null); setPendingErr(null);
+    setPending({ u, role, grant: !u.roles.includes(role) });
+  };
+
+  const applyRole = async () => {
+    if (!pending) return;
+    const { u, role, grant } = pending;
     const granted = u.roles.filter((r) => GRANTABLE_ROLES.some((g) => g.key === r));
-    const next = granted.includes(role) ? granted.filter((r) => r !== role) : [...granted, role];
+    const next = grant ? [...granted, role] : granted.filter((r) => r !== role);
+    setBusy(true); setPendingErr(null);
     try {
       await api.patch(`/api/admin/users/${u.id}/roles`, { roles: next });
+      setPending(null);
       flash(`Updated roles for ${u.display_name}`);
       load();
-    } catch (e) { fail(e, 'Failed to update roles'); }
+    } catch (e) {
+      setPendingErr(e instanceof ApiError ? e.message : 'Failed to update roles');
+    } finally { setBusy(false); }
   };
+
+  useEffect(() => {
+    if (!pending) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !busy) setPending(null); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [pending, busy]);
 
   const saveName = async (u: User, first: string, last: string) => {
     setMsg(null); setErr(null);
@@ -70,7 +100,7 @@ export default function AdminUsers() {
     <>
       <h2 className="section-title">Users &amp; roles</h2>
       <p className="section-sub">
-        Users are synced from JubileeInspire SSO on login. Every account has <strong>View &amp; Play</strong> rights, which can never be removed. Role and name changes here are shared across both platforms.
+        Users are synced from JubileeInspire SSO on login. Every account has <strong>View &amp; Play</strong> rights, which can never be removed. <strong>Admin</strong> opens this console. You cannot change your own roles, and the only admin cannot lose Admin. A role change is read from the database on every request, so it takes effect immediately.
       </p>
       {msg && <div className="notice" style={{ borderColor: 'var(--success)' }}>{msg}</div>}
       {err && <div className="notice" style={{ borderColor: 'var(--accent)' }}>{err}</div>}
@@ -84,6 +114,7 @@ export default function AdminUsers() {
               key={u.id}
               u={u}
               isSelf={me?.id === u.id}
+              onlyAdmin={u.roles.includes('admin') && adminCount <= 1}
               onSaveName={saveName}
               onToggleRole={toggleRole}
               onRemove={remove}
@@ -92,9 +123,60 @@ export default function AdminUsers() {
           {users.length === 0 && <tr><td colSpan={5} className="muted">No users yet.</td></tr>}
         </tbody>
       </table>
+
+      {pending && (
+        <div
+          role="presentation"
+          onClick={() => { if (!busy) setPending(null); }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 2000, padding: 16,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'rgba(0, 0, 0, 0.6)',
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="jp-role-confirm"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%', maxWidth: 420, padding: '22px 24px',
+              background: 'var(--surface)', color: 'var(--ink)',
+              border: '1px solid var(--line)', borderRadius: 10,
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5)',
+            }}
+          >
+            <h3 id="jp-role-confirm" style={{ margin: '0 0 8px', fontSize: 17 }}>Switch role?</h3>
+            <p style={{ margin: '0 0 18px', fontSize: 14, overflowWrap: 'anywhere' }}>
+              {pending.u.display_name || pending.u.email} · <strong>{roleLabel(pending.role)}</strong>
+              {pending.grant ? ' off → on' : ' on → off'}
+            </p>
+            {pendingErr && (
+              <p style={{ margin: '-6px 0 16px', fontSize: 13, color: 'var(--accent)' }}>{pendingErr}</p>
+            )}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              <button style={btnStyle} onClick={() => setPending(null)} disabled={busy}>Cancel</button>
+              <button
+                style={{
+                  ...btnStyle,
+                  color: pending.grant ? 'var(--ink)' : 'var(--accent)',
+                  borderColor: pending.grant ? 'var(--accent-gold)' : 'var(--accent)',
+                  opacity: busy ? 0.6 : 1,
+                }}
+                onClick={applyRole}
+                disabled={busy}
+              >
+                {busy ? 'Switching…' : 'Switch'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
+
+const roleLabel = (key: string) => GRANTABLE_ROLES.find((r) => r.key === key)?.label ?? key;
 
 const inputStyle: React.CSSProperties = {
   width: 110, padding: '5px 8px', fontSize: 12,
@@ -108,10 +190,11 @@ const btnStyle: React.CSSProperties = {
 };
 
 function UserRow({
-  u, isSelf, onSaveName, onToggleRole, onRemove,
+  u, isSelf, onlyAdmin, onSaveName, onToggleRole, onRemove,
 }: {
   u: User;
   isSelf: boolean;
+  onlyAdmin: boolean;
   onSaveName: (u: User, first: string, last: string) => void;
   onToggleRole: (u: User, role: string) => void;
   onRemove: (u: User) => void;
@@ -154,12 +237,27 @@ function UserRow({
           >
             ✓ View &amp; Play · always on
           </span>
-          {GRANTABLE_ROLES.map((r) => (
-            <label key={r.key} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12 }}>
-              <input type="checkbox" checked={u.roles.includes(r.key)} onChange={() => onToggleRole(u, r.key)} />
-              {r.label}
-            </label>
-          ))}
+          {GRANTABLE_ROLES.map((r) => {
+            // The two rules the API enforces anyway, shown before the click.
+            const why = isSelf ? 'You cannot change your own roles.'
+              : r.key === 'admin' && onlyAdmin ? 'The only admin cannot lose Admin.'
+              : undefined;
+            return (
+              <label
+                key={r.key}
+                title={why}
+                style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, opacity: why ? 0.55 : 1 }}
+              >
+                <input
+                  type="checkbox"
+                  checked={u.roles.includes(r.key)}
+                  disabled={Boolean(why)}
+                  onChange={() => onToggleRole(u, r.key)}
+                />
+                {r.label}
+              </label>
+            );
+          })}
         </div>
       </td>
       <td>

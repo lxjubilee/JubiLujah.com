@@ -91,15 +91,36 @@ router.delete('/users/:id', ah(async (req, res) => {
 
 // Grant/revoke roles. The request carries the desired grantable-role set; the
 // baseline `viewer` (view + play) is always forced on and can never be removed.
+//
+// Two rules (owner, 2026-09-16), kept here rather than trusted to the page:
+// nobody changes their own roles, and the last active admin cannot lose Admin.
+// The admin check runs under a transaction-scoped advisory lock, so two admins
+// removing each other's Admin at the same moment cannot both succeed.
 const rolesSchema = z.object({ roles: z.array(z.enum(GRANTABLE_ROLES)).max(GRANTABLE_ROLES.length) });
 router.patch('/users/:id/roles', validate(rolesSchema), ah(async (req, res) => {
   const { id } = req.params;
   if (!isUuid(id)) throw new HttpError(400, 'invalid user id');
+  if (id === req.auth.user.id) throw new HttpError(400, 'You cannot change your own roles.');
   const want = new Set(['viewer', ...req.body.roles]);
 
   await withTransaction(async (client) => {
+    await client.query(`SELECT pg_advisory_xact_lock(hashtext('identity.user_roles:admin'))`);
+    const found = await client.query('SELECT 1 FROM identity.users WHERE id = $1', [id]);
+    if (found.rowCount === 0) throw new HttpError(404, 'user not found');
     const existing = await client.query('SELECT role FROM identity.user_roles WHERE user_id = $1', [id]);
     const have = new Set(existing.rows.map((r) => r.role));
+    if (have.has('admin') && !want.has('admin')) {
+      const others = await client.query(
+        `SELECT COUNT(*)::int AS n
+           FROM identity.user_roles ur
+           JOIN identity.users u ON u.id = ur.user_id
+          WHERE ur.role = 'admin' AND ur.user_id <> $1 AND u.is_active`,
+        [id]
+      );
+      if (others.rows[0].n < 1) {
+        throw new HttpError(409, 'This is the only admin. Make someone else an admin first.');
+      }
+    }
     for (const role of want) {
       if (!have.has(role)) {
         await client.query(
@@ -115,7 +136,7 @@ router.patch('/users/:id/roles', validate(rolesSchema), ah(async (req, res) => {
     await client.query(
       `INSERT INTO identity.audit_log (actor_user_id, action, target_type, target_id, payload)
          VALUES ($1, 'role.set', 'user', $2, $3)`,
-      [req.auth.user.id, id, JSON.stringify({ roles: [...want] })]
+      [req.auth.user.id, id, JSON.stringify({ from: [...have].sort(), roles: [...want] })]
     );
   });
   res.json({ user_id: id, roles: [...want] });
