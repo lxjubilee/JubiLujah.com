@@ -594,6 +594,18 @@ running Step 2b again.
 > override it — prod's API is on **:4030**, not :4000. **Do not remove that override without
 > checking the redirector.** Flagged 2026-08-28, not changed.
 
+### 2026-09-17 (late night) · the QR share popup is a small bubble with a pointer (web only)
+
+Web `u70DMdA0x4T000wgvZ9cD → DL8YwtZxjzwSI_grg4IOQ` from commit `472cff3`, rollback
+`/var/www/jubilujah.com/web/.next.bak-20260917-082840` (21 MB). `.next` only, one CSS file changed
+(`globals.css` `.jp-hero-share*`). Prod's BUILD_ID matched the entry below before shipping; no foreign
+uncommitted files. Origin 200 in 15 s. Popup 86 × 26 with 12px glyphs and a 16 × 8 caret centred under the
+plate (was 152 × 44); admin arrows now drop 186 → 222. Verified live on the album banner; 6 routes 200.
+
+```bash
+$SSH $PROD "cd /var/www/jubilujah.com/web && rm -rf .next && mv .next.bak-20260917-082840 .next && pm2 restart jubilujah-web --update-env"
+```
+
 ### 2026-09-17 (night) · share box under the hero QR, backstage arrows, 15px under the title (web only)
 
 Web `eaHiOWJWfrKwnu33aCxjj → u70DMdA0x4T000wgvZ9cD` from commit `927d1d8`, rollback

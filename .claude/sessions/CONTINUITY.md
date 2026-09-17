@@ -37,7 +37,7 @@ another artist's album reloads the whole document and kills the footer player (d
 - **Never `git checkout <branch>` in this tree.** This morning it half-rewrote 1,250 files and left 13
   directories in Windows delete-pending for hours. Push with `git push origin <branch>:main`.
 - `next dev` does not work on the W: share (watchers fail); build with `NEXT_DIST_DIR=.next-<x>` and
-  `next start`. Local web is on :3001 (PID 11292, serving `app/.wt-hero/app/web/.next-pub2`), local API on
+  `next start`. Local web is on :3001 (PID 11292, serving `app/.wt-hero/app/web/.next-pub4`), local API on
   :4000 (PID 28268, current code). `.env.local` for the web lives in the main tree; copy it into a worktree.
 - `SSO_CLIENT_ID=jubileepraise` is registered at the SSO and active on prod and locally; `jubilujah`
   is no longer used anywhere in this repo. `JI_LOGIN_SOURCE` stays `jubilujah` on purpose (JI's key).
